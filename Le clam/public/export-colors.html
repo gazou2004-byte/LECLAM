@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+<style>
+    body { font-family: system-ui, sans-serif; background: #111; color: #eee; padding: 2rem; max-width: 900px; }
+    h1 { color: #d9c4a0; margin-bottom: 1.5rem; }
+    h2 { color: #d9c4a0; margin: 1.5rem 0 .5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .05em; }
+    h3 { color: #b0a090; margin: 1rem 0 .4rem; font-size: .85rem; }
+    .grid { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: .8rem; }
+    .swatch { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+    .swatch-box { width: 64px; height: 36px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); }
+    .swatch-label { font-size: .6rem; color: #aaa; text-align: center; max-width: 70px; }
+    .swatch-value { font-size: .68rem; color: #fff; font-weight: 700; }
+    .empty { color: #555; font-size: .85rem; font-style: italic; }
+    .override { border: 1.5px solid #86efac !important; }
+    .override-label { color: #86efac !important; }
+    textarea { width: 100%; background: #1a1a1a; color: #d9c4a0; border: 1px solid #444; border-radius: 6px; padding: .6rem; font-size: .72rem; margin-top: 1rem; font-family: monospace; }
+    button { background: #3e2a14; color: #d9c4a0; border: 1px solid #d9c4a0; border-radius: 6px; padding: .5rem 1.2rem; cursor: pointer; font-size: .85rem; margin-top: .5rem; }
+    button:hover { background: #d9c4a0; color: #3e2a14; }
+    hr { border: none; border-top: 1px solid #2a2a2a; margin: 1.5rem 0; }
+    .legend { font-size: .7rem; color: #86efac; margin-bottom: 1rem; }
+  </style></head>
+<body>
+  <h1>🎨 Couleurs actuelles — Le Clam</h1>
+  <p class="legend">Les couleurs avec un contour vert ont été modifiées via le panneau admin.</p>
+
+  <div id="output"></div>
+
+  <hr>
+  <h2>Données brutes à copier-coller ici</h2>
+  <textarea id="raw" rows="8" readonly></textarea>
+  <br><button onclick="copyRaw()">📋 Tout copier</button>
+
+  <script>
+    const SLIDE_KEY = 'leclam_slide_colors';
+    const PAGE_KEY  = 'leclam_page_colors';
+
+    // ── Couleurs CSS actuelles (synchronisées avec style.css) ──
+    const CSS_COLORS = {
+      plaisir: {
+        navbarBg:     '#b00804',
+        searchBg:     '#b00804',
+        cardBg:       '#ddc8f0',
+        filterActive: '#ED2939',
+        footerBg:     '#b00804',
+        btnBg:        '#cc0000',
+        btnText:      '#fff',
+      },
+      malin: {
+        navbarBg:     '#1a1a2e',
+        searchBg:     '#1a1a2e',
+        cardBg:       '#e4e7fe',
+        filterActive: '#FFE500',
+        footerBg:     '#1a1a2e',
+        btnBg:        '#FFE500',
+        btnText:      '#0a0a1a',
+      },
+      bebe: {
+        navbarBg:     '#d36e87',
+        searchBg:     '#d36e87',
+        cardBg:       '#f9bdd0',
+        filterActive: '#FF85A2',
+        footerBg:     '#d36e87',
+        btnBg:        '#FF85A2',
+        btnText:      '#fff',
+      },
+    };
+
+    const slides = JSON.parse(localStorage.getItem(SLIDE_KEY) || '{}');
+    const pages  = JSON.parse(localStorage.getItem(PAGE_KEY)  || '{}');
+
+    const cats = [
+      { id: 'plaisir', label: '💋 Plaisir' },
+      { id: 'malin',   label: '🧠 Malin'   },
+      { id: 'bebe',    label: '🍼 Bébé'    },
+    ];
+
+    function swatch(color, label, overridden) {
+      return `<div class="swatch">
+        <div class="swatch-box ${overridden ? 'override' : ''}" style="background:${color}"></div>
+        <span class="swatch-label ${overridden ? 'override-label' : ''}">${label}</span>
+        <span class="swatch-value">${color}</span>
+      </div>`;
+    }
+
+    let html = '';
+
+    cats.forEach(({ id, label }) => {
+      const css    = CSS_COLORS[id];
+      const pSaved = pages[id]  || {};
+      const sSaved = slides[id] || {};
+
+      const navbar  = pSaved.navbarBg     || css.navbarBg;
+      const search  = pSaved.searchC1     || css.searchBg;
+      const card    = pSaved.cardC1       || css.cardBg;
+      const filter  = pSaved.filterActive || css.filterActive;
+      const footer  = pSaved.footerBg     || css.footerBg;
+      const btn     = pSaved.btnBg        || css.btnBg;
+
+      html += `<h2>${label}</h2><div class="grid">`;
+      html += swatch(navbar, 'Navbar',         !!(pSaved.navbarBg));
+      html += swatch(search, 'Recherche',      !!(pSaved.searchC1));
+      html += swatch(card,   'Cartes',         !!(pSaved.cardC1));
+      html += swatch(filter, 'Filtre actif',   !!(pSaved.filterActive));
+      html += swatch(footer, 'Footer',         !!(pSaved.footerBg));
+      html += swatch(btn,    'Bouton Ajouter', !!(pSaved.btnBg));
+      if (sSaved.c1) {
+        html += swatch(sSaved.c1, 'Slide carousel', true);
+      }
+      html += '</div>';
+    });
+
+    document.getElementById('output').innerHTML = html;
+
+    const raw = JSON.stringify({ slides, pages, css: CSS_COLORS }, null, 2);
+    document.getElementById('raw').value = raw;
+
+    function copyRaw() {
+      const ta = document.getElementById('raw');
+      ta.select();
+      document.execCommand('copy');
+      document.querySelector('button').textContent = '✓ Copié !';
+      setTimeout(() => document.querySelector('button').textContent = '📋 Tout copier', 2000);
+    }
+  </script>
+</body>
+</html>

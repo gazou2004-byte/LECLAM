@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+<body>
+<script>
+(async () => {
+  try {
+    const res = await fetch('/api/auth/localhost');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Échec');
+    localStorage.setItem('leclam_token', data.token);
+    localStorage.setItem('leclam_csrf', data.csrfToken);
+    localStorage.setItem('leclam_user', JSON.stringify(data.user));
+    location.href = 'admin.html';
+  } catch (e) {
+    const p = document.createElement('p');
+    p.style.cssText = 'font-family:sans-serif;padding:2rem;color:#c00';
+    p.textContent = 'Erreur connexion auto : ' + e.message;
+    const a = document.createElement('a');
+    a.href = 'login.html';
+    a.textContent = 'Connexion manuelle';
+    p.appendChild(document.createElement('br'));
+    p.appendChild(a);
+    document.body.replaceChildren(p);
+  }
+})();
+</script>
+</body>
+</html>

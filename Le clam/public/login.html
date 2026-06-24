@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: #faf9f7; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+
+    .auth-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.1);
+      padding: 2.4rem 2.8rem;
+      max-width: 420px;
+      width: 100%;
+      box-sizing: border-box;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+
+    .auth-logo { text-align: center; margin-bottom: 1.8rem; }
+
+    .auth-tabs {
+      display: flex;
+      background: #f4f4f4;
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+    }
+    .auth-tab {
+      flex: 1; text-align: center;
+      padding: .55rem; border-radius: 8px;
+      font-size: .85rem; font-weight: 600;
+      cursor: pointer; color: #888;
+      transition: all .2s; border: none; background: none;
+    }
+    .auth-tab.active { background: #fff; color: #1a1a1a; box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+
+    .auth-form { display: none; flex-direction: column; gap: .9rem; }
+    .auth-form.visible { display: flex; }
+
+    label { font-size: .8rem; font-weight: 600; color: #555; margin-bottom: .2rem; display: block; }
+    .field { display: flex; flex-direction: column; min-width: 0; }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: .7rem .9rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: .9rem; font-family: inherit; color: #222;
+      transition: border-color .2s; background: #fff;
+    }
+    input:focus { outline: none; border-color: #d9c4a0; }
+    .pass-wrap { display: flex; align-items: center; gap: .4rem; }
+    .pass-wrap input { flex: 1; min-width: 0; }
+    .pass-toggle {
+      flex-shrink: 0;
+      width: 2.2rem; height: 2.2rem;
+      display: flex; align-items: center; justify-content: center;
+      background: #f5f5f5; border: 1.5px solid #e0e0e0; border-radius: 8px;
+      cursor: pointer; font-size: 1rem; color: #888;
+      transition: background .15s, color .15s;
+    }
+    .pass-toggle:hover { background: #ece8e0; color: #3e2a14; }
+
+    .auth-btn {
+      padding: .85rem;
+      background: #3e2a14; color: #d9c4a0;
+      border: none; border-radius: 50px;
+      font-size: .95rem; font-weight: 700;
+      cursor: pointer; transition: background .2s, transform .15s;
+      margin-top: .3rem;
+    }
+    .auth-btn:hover  { background: #2a1c0d; transform: translateY(-2px); }
+    .auth-btn:active { transform: translateY(0); }
+    .auth-btn:disabled { background: #ccc; cursor: default; transform: none; }
+
+    .auth-error {
+      background: #fde8e8; color: #c0392b;
+      padding: .6rem .9rem; border-radius: 8px;
+      font-size: .82rem; display: none;
+    }
+    .auth-error.visible { display: block; }
+
+    .auth-back {
+      text-align: center; margin-top: 1rem;
+      font-size: .82rem; color: #888;
+    }
+    .auth-back a { color: #a0856a; font-weight: 600; text-decoration: none; }
+
+    /* ── Séparateur "ou" ── */
+    .auth-sep {
+      display: flex; align-items: center; gap: .75rem;
+      margin: 1.1rem 0; color: #ccc; font-size: .78rem; font-weight: 600;
+    }
+    .auth-sep::before, .auth-sep::after {
+      content: ''; flex: 1; height: 1px; background: #efefef;
+    }
+
+    /* ── Boutons sociaux ── */
+    .social-btns { display: flex; flex-direction: column; gap: .55rem; }
+    .social-btn {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .7rem 1rem; border-radius: 50px;
+      border: 1.5px solid #e0e0e0; background: #fff;
+      font-size: .88rem; font-weight: 600; color: #222;
+      cursor: pointer; transition: background .15s, border-color .15s;
+      font-family: inherit; width: 100%;
+    }
+    .social-btn:hover { background: #f5f5f5; border-color: #ccc; }
+    .social-btn svg, .social-btn img { flex-shrink: 0; }
+    .social-btn span { flex: 1; text-align: center; }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      body { padding: 1.2rem; align-items: flex-start; }
+      .auth-card { padding: 1.8rem 1.4rem; border-radius: 14px; max-height: none; }
+    }
+
+    @media (max-width: 360px) {
+      body { padding: .75rem; }
+      .auth-card { padding: 1.4rem 1rem; }
+      .auth-tab { font-size: .78rem; padding: .45rem; }
+      .auth-btn { font-size: .88rem; }
+      /* Grille CP/Ville → colonne */
+      div[style*="grid-template-columns:1fr 1fr"] { display: flex !important; flex-direction: column; gap: .6rem; }
+    }
+  </style></head>
+<body>
+<div class="auth-card">
+
+  <div class="auth-logo">
+    <a href="index.html">
+      <svg width="52" height="52" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="96" fill="#d9c4a0"/>
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/>
+        <text x="84" y="132" font-family="serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">A</text>
+        <text x="116" y="104" font-family="serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">L</text>
+        <text x="84"  y="106" font-family="serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">C</text>
+        <text x="100" y="165" font-family="serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Tabs -->
+  <div class="auth-tabs">
+    <button class="auth-tab active" onclick="switchTab('login')" data-i18n="auth.login_title">Se connecter</button>
+    <button class="auth-tab"        onclick="switchTab('register')" data-i18n="auth.register_title">Créer un compte</button>
+  </div>
+
+  <!-- Connexion client -->
+  <form class="auth-form visible" id="formLogin" onsubmit="login(event)">
+    <div class="auth-error" id="loginError"></div>
+    <div class="field">
+      <label data-i18n="auth.email">E-mail</label>
+      <input type="email" id="loginEmail" placeholder="votre@email.fr" required autocomplete="email">
+    </div>
+    <div class="field">
+      <label data-i18n="auth.password">Mot de passe</label>
+      <div class="pass-wrap">
+        <input type="password" id="loginPass" placeholder="••••••••" required autocomplete="current-password">
+        <button type="button" class="pass-toggle" data-target="loginPass" aria-label="Afficher le mot de passe" onclick="var i=document.getElementById('loginPass');var s=i.type==='password';i.type=s?'text':'password';this.style.color=s?'#3e2a14':'#aaa';">👁</button>
+      </div>
+    </div>
+    <button type="submit" class="auth-btn" id="loginBtn" data-i18n="auth.login_btn">Se connecter</button>
+  </form>
+
+  <!-- Inscription client -->
+  <form class="auth-form" id="formRegister" onsubmit="register(event)">
+    <div class="auth-error" id="registerError"></div>
+    <div class="field">
+      <label data-i18n="auth.name">Prénom et nom</label>
+      <input type="text" id="regName" placeholder="Marie Dupont" required autocomplete="name">
+    </div>
+    <div class="field">
+      <label data-i18n="auth.email">E-mail</label>
+      <input type="email" id="regEmail" placeholder="votre@email.fr" required autocomplete="email">
+    </div>
+    <div class="field">
+      <label data-i18n="auth.password">Mot de passe</label>
+      <div class="pass-wrap">
+        <input type="password" id="regPass" placeholder="8 caractères minimum" required minlength="8" autocomplete="new-password">
+        <button type="button" class="pass-toggle" data-target="regPass" aria-label="Afficher le mot de passe" onclick="var i=document.getElementById('regPass');var s=i.type==='password';i.type=s?'text':'password';this.style.color=s?'#3e2a14':'#aaa';">👁</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Date de naissance <span style="font-weight:400;color:#bbb">(facultatif — pour votre cadeau d'anniversaire 🎁)</span></label>
+      <input type="date" id="regBirthday" autocomplete="bday">
+    </div>
+    <button type="submit" class="auth-btn" id="registerBtn" data-i18n="auth.register_btn">Créer mon compte</button>
+  </form>
+
+  <!-- Séparateur -->
+  <div class="auth-sep">ou continuer avec</div>
+
+  <!-- Boutons sociaux -->
+  <div class="social-btns" id="socialBtns">
+    <button class="social-btn" onclick="socialLogin('google')">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.5 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.1 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/><path fill="#FBBC05" d="M10.6 28.6A14.5 14.5 0 019.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.1A23.9 23.9 0 000 24c0 3.8.9 7.5 2.5 10.7l8.1-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.2 1.5-5 2.3-8.4 2.3-6.2 0-11.5-3.6-13.4-9l-8.1 6.1C6.6 42.6 14.6 48 24 48z"/></svg>
+      <span>Continuer avec Google</span>
+    </button>
+    <button class="social-btn" onclick="socialLogin('apple')" style="background:#000;color:#fff;border-color:#000">
+      <svg width="18" height="18" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.7C46.1 794.9 0 666.4 0 541.3 0 307.4 159 145 318.6 145c73 0 134.5 48.7 179 48.7 43.8 0 112.8-51.3 195.4-51.3 31.3 0 108.4 2.6 168.1 97.3z"/><path d="M545.5 90c27.9-35.5 48.1-85.4 48.1-135.4 0-6.5-.5-13-.7-16.1C547.5 4.5 529 2.3 512 7c-61.4 23.4-106.3 78-106.3 144.3 0 7.4.9 14.6 2.2 21.8 3.4.1 6.9.4 10.4.4 30.3.1 75.5-17 127.2-83.5z"/></svg>
+      <span>Continuer avec Apple</span>
+    </button>
+    <button class="social-btn" onclick="socialLogin('facebook')" style="background:#1877F2;color:#fff;border-color:#1877F2">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      <span>Continuer avec Facebook</span>
+    </button>
+  </div>
+
+  <div id="socialError" style="display:none;background:#fde8e8;color:#c0392b;padding:.6rem .9rem;border-radius:8px;font-size:.82rem;margin-top:.8rem"></div>
+
+  <p class="auth-back"><a href="index.html">← Retour à la boutique</a></p>
+
+
+</div>
+
+<script>
+  /* Valide le redirect : interdit les URLs absolues et protocol-relative (protection open-redirect) */
+  function safeRedirect(raw, fallback) {
+    if (!raw) return fallback;
+    if (/^(https?:)?\/\//i.test(raw) || /^[a-z][a-z0-9+\-.]*:/i.test(raw)) return fallback;
+    return raw;
+  }
+
+  (async function() {
+    const _rawRedirect = new URLSearchParams(location.search).get('redirect');
+    const redirect = safeRedirect(_rawRedirect, null);
+
+    /* Auto-login localhost : plus besoin de saisir les identifiants admin */
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      try {
+        const r = await fetch('/api/auth/localhost', { credentials: 'same-origin' });
+        const d = await r.json();
+        if (d.ok && ['admin','owner'].includes(d.user.role)) {
+          localStorage.setItem('leclam_token', d.token);
+          localStorage.setItem('leclam_csrf',  d.csrfToken);
+          localStorage.setItem('leclam_user',  JSON.stringify(d.user));
+          location.href = redirect || 'admin.html';
+          return;
+        }
+      } catch { /* serveur injoignable, continue vers le formulaire */ }
+    }
+
+    /* Déjà connecté ? Rediriger directement */
+    const token = localStorage.getItem('leclam_token');
+    if (!token) return;
+    fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token }, credentials: 'same-origin' })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.ok) location.href = redirect || 'index.html';
+        else { localStorage.removeItem('leclam_token'); localStorage.removeItem('leclam_csrf'); }
+      })
+      .catch(function() { /* serveur injoignable, reste sur login */ });
+  })();
+
+  function switchTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach((t, i) =>
+      t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1))
+    );
+    document.getElementById('formLogin').classList.toggle('visible',    tab === 'login');
+    document.getElementById('formRegister').classList.toggle('visible', tab === 'register');
+  }
+
+  function showError(id, msg) {
+    const el = document.getElementById(id);
+    el.textContent = msg; el.classList.add('visible');
+  }
+  function hideError(id) { document.getElementById(id).classList.remove('visible'); }
+
+  /* Stocke le token et le csrfToken après authentification réussie */
+  function connectUser(user, token, csrfToken, defaultRedirect, extraData) {
+    if (token)     localStorage.setItem('leclam_token',    token);
+    if (csrfToken) localStorage.setItem('leclam_csrf',     csrfToken);
+    localStorage.setItem('leclam_user', JSON.stringify({
+      name: user.name, email: user.email, role: user.role || 'user',
+      ...(extraData || {}),
+    }));
+    const redirect = safeRedirect(new URLSearchParams(location.search).get('redirect'), null) || defaultRedirect || 'index.html';
+    location.href = redirect;
+  }
+
+  async function login(e) {
+    e.preventDefault();
+    hideError('loginError');
+    const btn   = document.getElementById('loginBtn');
+    const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+    const pass  = document.getElementById('loginPass').value;
+    btn.disabled = true; btn.textContent = I18n.t('auth.loading_login');
+
+    try {
+      const res  = await fetch('/api/auth/login', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ email, password: pass }),
+      });
+      const data = await res.json();
+      if (data.ok) { connectUser(data.user, data.token, data.csrfToken); return; }
+      showError('loginError', data.error || I18n.t('auth.error_credentials'));
+    } catch {
+      showError('loginError', I18n.t('auth.error_server'));
+    } finally {
+      btn.disabled = false; btn.textContent = I18n.t('auth.login_btn');
+    }
+  }
+
+  async function register(e) {
+    e.preventDefault();
+    hideError('registerError');
+    const btn   = document.getElementById('registerBtn');
+    const name     = document.getElementById('regName').value.trim();
+    const email    = document.getElementById('regEmail').value.toLowerCase().trim();
+    const pass     = document.getElementById('regPass').value;
+    const birthday = document.getElementById('regBirthday')?.value || '';
+    btn.disabled = true; btn.textContent = I18n.t('auth.loading_register');
+
+    try {
+      const res  = await fetch('/api/auth/register', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ name, email, password: pass, birthday: birthday || undefined }),
+      });
+      const data = await res.json();
+      if (data.ok) { connectUser(data.user, data.token, data.csrfToken, undefined, { needsAddress: true }); return; }
+      showError('registerError', data.error || I18n.t('auth.error_register'));
+    } catch {
+      showError('registerError', I18n.t('auth.error_server'));
+    } finally {
+      btn.disabled = false; btn.textContent = I18n.t('auth.register_btn');
+    }
+  }
+
+  /* ── Login fédéré ── */
+  function _socialError(msg) {
+    const el = document.getElementById('socialError');
+    el.textContent = msg; el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 5000);
+  }
+
+  async function _sendSocialToken(provider, token, extraData) {
+    const res  = await fetch('/api/auth/social', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ provider, token, ...(extraData || {}) }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      connectUser(data.user, data.token, data.csrfToken, undefined, data.user.isNew ? { needsAddress: true } : {});
+    } else {
+      _socialError(data.error || I18n.t('auth.error_social'));
+    }
+  }
+
+  function socialLogin(provider) {
+    if (provider === 'google')   _googleLogin();
+    if (provider === 'apple')    _appleLogin();
+    if (provider === 'facebook') _facebookLogin();
+  }
+
+  /* ── Google ── */
+  function _googleLogin() {
+    if (!window.google) { _socialError('SDK Google non chargé.'); return; }
+    google.accounts.id.initialize({
+      client_id: window._GOOGLE_CLIENT_ID,
+      callback: async (resp) => {
+        await _sendSocialToken('google', resp.credential);
+      },
+      ux_mode: 'popup',
+    });
+    google.accounts.id.prompt();
+  }
+
+  /* ── Apple ── */
+  function _appleLogin() {
+    if (!window.AppleID) { _socialError('SDK Apple non chargé.'); return; }
+    AppleID.auth.init({
+      clientId: window._APPLE_CLIENT_ID,
+      scope: 'name email',
+      redirectURI: window.location.origin + '/api/auth/social/apple-callback',
+      usePopup: true,
+    });
+    AppleID.auth.signIn().then(async (resp) => {
+      await _sendSocialToken('apple', resp.authorization.id_token, {
+        name: resp.user ? ((resp.user.name?.firstName || '') + ' ' + (resp.user.name?.lastName || '')).trim() : '',
+        email: resp.user?.email || '',
+      });
+    }).catch(err => {
+      if (err.error !== 'popup_closed_by_user') _socialError('Connexion Apple annulée.');
+    });
+  }
+
+  /* ── Facebook ── */
+  function _facebookLogin() {
+    if (!window.FB) { _socialError('SDK Facebook non chargé.'); return; }
+    FB.login(function(resp) {
+      if (resp.authResponse) {
+        FB.api('/me', { fields: 'name,email' }, async (me) => {
+          await _sendSocialToken('facebook', resp.authResponse.accessToken, { name: me.name, email: me.email });
+        });
+      }
+    }, { scope: 'public_profile,email' });
+  }
+
+  /* ── Init SDKs après chargement ── */
+  window.onGoogleLibraryLoad = function() {};
+  window.fbAsyncInit = function() {
+    if (!window._FACEBOOK_APP_ID) return;
+    FB.init({ appId: window._FACEBOOK_APP_ID, cookie: true, xfbml: false, version: 'v19.0' });
+  };
+
+</script>
+
+  <!-- SDK Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <!-- SDK Apple Sign In -->
+  <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js" async></script>
+  <!-- SDK Facebook -->
+  <script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
+
+  <!-- Config OAuth (injectée par le serveur) -->
+  <script src="/api/auth/social-config.js"></script>
+
+  <script src="js/features.js"></script>
+  <script>
+  (async function() {
+    const SUPPORTED = ['fr','en','es','de','it'];
+    const saved = localStorage.getItem('leclam_lang');
+    const browser = (navigator.language||'').slice(0,2).toLowerCase();
+    const lang = SUPPORTED.includes(saved) ? saved : SUPPORTED.includes(browser) ? browser : 'fr';
+    try {
+      const r = await fetch('/locales/' + lang + '.json');
+      const tr = await r.json();
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const parts = el.dataset.i18n.split('.');
+        const val = parts.reduce((o,k) => (o&&k in o?o[k]:undefined), tr);
+        if (typeof val === 'string') el.textContent = val;
+      });
+      if (tr.meta?.login?.title) document.title = tr.meta.login.title;
+    } catch {}
+  })();
+  </script>
+</body>
+</html>

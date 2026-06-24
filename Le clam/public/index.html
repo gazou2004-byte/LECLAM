@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Clam — 4 univers, 1 adresse</title>
+  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></head>
+<body class="page-accueil">
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║         NAVIGATION          ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu" data-i18n="nav.menu" data-i18n-attr="aria-label">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║       HERO CAROUSEL         ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <section class="hero">
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Slides générées automatiquement depuis js/slides-config.js -->
+      </div><!-- /carousel-track -->
+
+      <button class="c-btn c-prev" id="prevBtn" aria-label="Précédent" data-i18n="nav.prev" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="c-btn c-next" id="nextBtn" aria-label="Suivant" data-i18n="nav.next" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+
+      <div class="c-dots" id="cDots">
+        <button class="dot active" data-index="0"></button>
+        <button class="dot" data-index="1"></button>
+        <button class="dot" data-index="2"></button>
+        <button class="dot" data-index="3"></button>
+      </div>
+
+      <div class="c-progress"><div class="c-progress-bar" id="progressBar"></div></div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║         GARANTIES           ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <section class="garanties-section">
+    <div class="garanties-grid">
+      <div class="garantie">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h4 data-i18n="home.delivery_title">Livraison rapide</h4><p data-i18n="home.delivery_text">Commande traitée en 24h. Délai variable selon le pays de livraison.</p>
+      </div>
+      <div class="garantie">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4 data-i18n="home.payment_title">Paiement sécurisé</h4><p data-i18n="home.payment_text">CB, PayPal, Apple Pay. 100% sécurisé par Stripe.</p>
+      </div>
+      <div class="garantie">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+        <h4 data-i18n="home.returns_title">Retours faciles</h4><p data-i18n="home.returns_text">30 jours pour changer d'avis. Sans questions.</p>
+      </div>
+      <div class="garantie">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4 data-i18n="home.support_title">Support 7j/7</h4><p data-i18n="home.support_text">Une question ? Notre équipe répond en moins de 2h.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║            FOOTER           ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo-link"><svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <nav class="footer-links-flat">
+        <a href="faq.html" data-i18n="footer.faq">FAQ</a>
+        <a href="livraison.html" data-i18n="footer.delivery">Livraison</a>
+        <a href="retours.html" data-i18n="footer.returns">Retours</a>
+        <a href="contact.html" data-i18n="footer.contact">Contact</a>
+        <span class="footer-sep">|</span>
+        <a href="cgv.html" data-i18n="footer.cgv">CGV</a>
+        <a href="mentions-legales.html" data-i18n="footer.legal">Mentions légales</a>
+        <a href="confidentialite.html" data-i18n="footer.privacy">Confidentialité</a>
+        <a href="cookies.html" data-i18n="footer.cookies">Cookies</a>
+      </nav>
+      <div class="footer-end">
+        <div class="socials">
+          <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 000 12.68 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+        <span class="footer-copy" data-i18n="footer.copy">© 2026 Le Clam. Tous droits réservés.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer" data-i18n="cart.close" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div></div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <script src="js/slides-config.js?v=4"></script>
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+<style>
+    body { font-family: system-ui, sans-serif; background: #f4f4f4; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+    .box { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,.12); }
+    .icon { font-size: 3rem; margin-bottom: 1rem; }
+    h1 { font-size: 1.1rem; color: #1a1a1a; margin-bottom: .5rem; }
+    p  { font-size: .88rem; color: #888; margin-bottom: 1.5rem; line-height: 1.5; }
+    .btn { display: inline-block; padding: .75rem 2rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 50px; font-size: .9rem; font-weight: 700; cursor: pointer; font-family: inherit; text-decoration: none; }
+    .ok { color: #16a34a; font-weight: 700; font-size: 1rem; display: none; margin-top: 1rem; }
+  </style></head>
+<body>
+<div class="box">
+  <div class="icon">🗑️</div>
+  <h1>Effacer toutes les commandes</h1>
+  <p>Supprime toutes les commandes clients, notifications, retours SAV et commandes fournisseurs enregistrés en local.</p>
+  <button class="btn" onclick="reset()">Tout effacer</button>
+  <div class="ok" id="ok">✅ Fait ! Toutes les commandes ont été supprimées.</div>
+</div>
+<script>
+function reset() {
+  localStorage.removeItem('leclam_orders');
+  localStorage.removeItem('leclam_admin_notifs');
+  localStorage.removeItem('leclam_sav');
+  localStorage.removeItem('leclam_fournisseur_orders');
+  document.querySelector('.btn').style.display = 'none';
+  document.getElementById('ok').style.display = 'block';
+}
+</script>
+</body>
+</html>

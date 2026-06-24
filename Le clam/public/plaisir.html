@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plaisir — Le Clam</title>
+  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></head>
+<body class="page-plaisir">
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cat-hero cat-hero-plaisir" style="position:relative;overflow:hidden;">
+    <img src="plaisir/hero%20plaisir%20lips.png?v=5" class="cat-hero-float-img" alt="">
+    <div class="slide-particles">
+      <span class="p" style="top:10%;left:5%;--dur:7s;--delay:0s">◆</span>
+      <span class="p" style="top:55%;left:5%;--dur:9s;--delay:-2s">◇</span>
+      <span class="p" style="top:10%;left:30%;--dur:8s;--delay:-1s">◆</span>
+      <span class="p" style="top:55%;left:27%;--dur:10s;--delay:-3s">◇</span>
+      <span class="p" style="top:32%;left:45%;--dur:6s;--delay:-4s">▲</span>
+      <span class="p" style="top:32%;left:14%;--dur:11s;--delay:-.5s">◆</span>
+      <span class="p" style="top:15%;right:8%;--dur:8s;--delay:-1s">◇</span>
+      <span class="p" style="top:60%;right:6%;--dur:10s;--delay:-3s">▲</span>
+      <span class="p" style="top:38%;right:10%;--dur:7s;--delay:-2s">◆</span>
+    </div>
+    <div class="cat-hero-content">
+      <div class="slide-badges">
+      </div>
+      <h1 class="slide-title-plaisir" data-i18n="cat.plaisir_title">Plaisir</h1>
+      <p class="cat-hero-desc" data-i18n="cat.plaisir_desc">Seul ou à deux, vous trouverez tout pour vos plaisirs.</p>
+    </div>
+  </section>
+
+  <!-- FILTRES -->
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <button class="f-btn f-btn-tout active" data-filter="all" data-i18n="filters.all">Tout</button>
+      <button class="f-btn" data-filter="duo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> <span data-i18n="filters_plaisir.duo">Duo</span> <span class="f-arrow">▾</span></button>
+      <button class="f-btn" data-filter="soloclub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> <span data-i18n="filters_plaisir.soloclub">SoloClub</span> <span class="f-arrow">▾</span></button>
+      <button class="f-btn" data-filter="indispensable"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> <span data-i18n="filters_plaisir.indispensable">Indispensable</span></button>
+      <button class="f-btn" data-filter="petitprix"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> <span data-i18n="filters_plaisir.petitprix">Petit prix</span></button>
+      <button class="f-btn" data-filter="lots"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> <span data-i18n="filters_plaisir.lots">Lots</span></button>
+      <button class="f-btn" data-filter="autre"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> <span data-i18n="filters_plaisir.autre">Autre</span></button>
+    </div>
+  </div>
+
+  <!-- RECHERCHE + TRI -->
+  <div class="search-bar-wrap">
+    <div class="search-row">
+      <div class="search-inner">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un produit…" data-i18n-ph="search.placeholder" autocomplete="off">
+        <button class="search-clear" id="searchClear" aria-label="Effacer" data-i18n="search.clear" data-i18n-attr="aria-label" style="display:none">✕</button>
+      </div>
+      <div class="sort-inner" id="sortInner">
+        <svg class="sort-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+        <select class="sort-inner-select" id="sortSelect" onchange="onSortChange(this)">
+          <option value="" data-i18n="filters.sort_label">Trier par</option>
+          <option value="price-asc" data-i18n="filters.sort_price_asc">Prix ↑</option>
+          <option value="price-desc" data-i18n="filters.sort_price_desc">Prix ↓</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUITS -->
+  <!-- NOTE DROPSHIPPING: Les produits ci-dessous sont des données fictives.
+       Pour l'intégration DSers/AliExpress :
+       1. Créez un compte sur https://www.dsers.com
+       2. Connectez votre boutique via l'API DSers (clé API dans server.js)
+       3. Endpoint: GET https://openapi.dsers.com/openapi/v1/product/list
+       4. Remplacez les mock products par des appels fetch('/api/products?category=plaisir')
+  -->
+  <section class="products-wrap">
+    <div class="container">
+      <div class="products-top">
+        <h2 data-i18n="cat.plaisir_products">Nos produits Plaisir</h2>
+        <span class="prod-count">76 articles</span>
+      </div>
+      <p class="search-no-results" data-i18n="filters.search_no_results">Aucun produit ne correspond à votre recherche.</p>
+      <div class="products-grid">
+
+        <!-- Carte demande produit -->
+        <div class="p-card p-card-request" data-id="" data-price="0" data-filter="duo,soloclub,indispensable" style="cursor:default">
+          <div class="p-img" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:#ddc8f0;min-height:180px;padding:1.2rem">
+            <div style="width:56px;height:56px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(160,48,78,.2)">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a0304e" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:.88rem;font-weight:800;color:#a0304e;line-height:1.3" data-i18n="cat.request_tagline">C'est vous qui choisissez</div>
+              <div style="font-size:.72rem;color:#c06080;margin-top:.2rem;font-weight:500" data-i18n="cat.request_sub">On trouve le produit que vous voulez</div>
+            </div>
+          </div>
+          <div class="p-info">
+            <div class="p-name" style="font-size:.95rem" data-i18n="cat.request_name">Demande sur mesure</div>
+            <div class="p-sub" data-i18n="cat.request_desc">Photo · Description · On le source pour vous</div>
+            <div class="p-foot">
+              <div style="font-size:.75rem;color:#a0856a;font-weight:600" data-i18n="cat.request_free">Gratuit · Réponse sous 48h</div>
+              <a href="messages.html" class="atc-btn" style="text-decoration:none;display:inline-flex;align-items:center" data-i18n="cat.request_btn">Demander →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo-link"><svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <nav class="footer-links-flat">
+        <a href="faq.html" data-i18n="footer.faq">FAQ</a>
+        <a href="livraison.html" data-i18n="footer.delivery">Livraison</a>
+        <a href="retours.html" data-i18n="footer.returns">Retours</a>
+        <a href="contact.html" data-i18n="footer.contact">Contact</a>
+        <span class="footer-sep">|</span>
+        <a href="cgv.html" data-i18n="footer.cgv">CGV</a>
+        <a href="mentions-legales.html" data-i18n="footer.legal">Mentions légales</a>
+        <a href="confidentialite.html" data-i18n="footer.privacy">Confidentialité</a>
+        <a href="cookies.html" data-i18n="footer.cookies">Cookies</a>
+      </nav>
+      <div class="footer-end">
+        <div class="socials">
+          <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 000 12.68 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+        <span class="footer-copy" data-i18n="footer.copy">© 2026 Le Clam. Tous droits réservés.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div></div>
+    <div class="cart-foot" id="cartFoot" style="display:none">
+      <div class="cart-total"><span>Total</span><span class="total-price" id="totalPrice">0,00 €</span></div>
+      <button class="checkout-btn" id="checkoutBtn">Commander →</button>
+    </div>
+  </aside>
+
+      <script src="js/products-data.js"></script>
+      <script src="js/products-render.js"></script>
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+
+<!-- Vérification de majorité -->
+<div id="age-gate" style="
+  display:none;
+  position:fixed;inset:0;z-index:99999;
+  background:rgba(10,5,0,.92);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;
+">
+  <div style="
+    background:#1a0f08;
+    border:1px solid #5a3e28;
+    border-radius:20px;
+    padding:2.8rem 2.4rem;
+    max-width:420px;width:90%;
+    text-align:center;
+    box-shadow:0 24px 80px rgba(0,0,0,.7);
+  ">
+    <div style="margin-bottom:1rem"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#d9c4a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <h2 style="font-family:'Playfair Display',serif;color:#d9c4a0;font-size:1.45rem;font-weight:700;margin:0 0 .6rem">Contenu réservé aux adultes</h2>
+    <p id="age-msg" style="color:#a89070;font-size:.88rem;line-height:1.6;margin:0 0 1.8rem"></p>
+    <div style="display:flex;flex-direction:column;gap:.75rem">
+      <button id="age-yes" style="
+        padding:.85rem;background:#c0392b;color:#fff;
+        border:none;border-radius:50px;font-size:.95rem;
+        font-weight:700;cursor:pointer;font-family:inherit;
+        transition:background .2s;
+      " onmouseover="this.style.background='#a93226'" onmouseout="this.style.background='#c0392b'">
+      </button>
+      <button id="age-no" style="
+        padding:.7rem;background:transparent;color:#a89070;
+        border:1px solid #5a3e28;border-radius:50px;font-size:.85rem;
+        font-weight:600;cursor:pointer;font-family:inherit;
+        transition:opacity .2s;
+      " onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+        Non, me ramener à l'accueil
+      </button>
+    </div>
+    <p id="age-legal" style="color:#5a3e28;font-size:.68rem;margin:1.2rem 0 0;line-height:1.5"></p>
+  </div>
+</div>
+
+<script>
+(function() {
+  /* Âge légal par pays (code langue → {age, pays}) */
+  const AGE_MAP = {
+    'fr':    { age: 18, pays: 'France / Belgique / Luxembourg' },
+    'fr-FR': { age: 18, pays: 'France' },
+    'fr-BE': { age: 18, pays: 'Belgique' },
+    'fr-LU': { age: 18, pays: 'Luxembourg' },
+    'fr-CH': { age: 18, pays: 'Suisse' },
+    'de':    { age: 18, pays: 'Allemagne / Autriche / Suisse' },
+    'de-DE': { age: 18, pays: 'Allemagne' },
+    'de-AT': { age: 18, pays: 'Autriche' },
+    'de-CH': { age: 18, pays: 'Suisse' },
+    'it':    { age: 18, pays: 'Italie' },
+    'it-IT': { age: 18, pays: 'Italie' },
+    'es':    { age: 18, pays: 'Espagne' },
+    'es-ES': { age: 18, pays: 'Espagne' },
+    'pt':    { age: 18, pays: 'Portugal' },
+    'pt-PT': { age: 18, pays: 'Portugal' },
+    'pt-BR': { age: 18, pays: 'Brésil' },
+    'nl':    { age: 18, pays: 'Pays-Bas' },
+    'nl-NL': { age: 18, pays: 'Pays-Bas' },
+    'nl-BE': { age: 18, pays: 'Belgique' },
+    'en':    { age: 18, pays: 'votre pays' },
+    'en-GB': { age: 18, pays: 'Royaume-Uni' },
+    'en-US': { age: 18, pays: 'États-Unis' },
+    'en-CA': { age: 18, pays: 'Canada' },
+    'en-AU': { age: 18, pays: 'Australie' },
+    'zh':    { age: 18, pays: 'Chine' },
+    'zh-CN': { age: 18, pays: 'Chine' },
+    'zh-TW': { age: 18, pays: 'Taïwan' },
+    'ja':    { age: 18, pays: 'Japon' },
+    'ja-JP': { age: 18, pays: 'Japon' },
+    'ko':    { age: 19, pays: 'Corée du Sud' },
+    'ko-KR': { age: 19, pays: 'Corée du Sud' },
+  };
+
+  const KEY     = 'leclam_age_ok';
+  const EXPIRES = 60 * 60 * 1000; /* 1 heure */
+  const gate    = document.getElementById('age-gate');
+
+  /* Détecter l'âge légal selon la locale */
+  const lang    = navigator.language || navigator.languages?.[0] || 'fr';
+  const info    = AGE_MAP[lang] || AGE_MAP[lang.split('-')[0]] || { age: 18, pays: 'votre pays' };
+  const age     = info.age;
+  const pays    = info.pays;
+
+  function calcAge(birthday) {
+    const b = new Date(birthday);
+    const t = new Date();
+    let a = t.getFullYear() - b.getFullYear();
+    if (t.getMonth() < b.getMonth() || (t.getMonth() === b.getMonth() && t.getDate() < b.getDate())) a--;
+    return a;
+  }
+
+  /* Compte client connecté */
+  try {
+    const u = JSON.parse(localStorage.getItem('leclam_user') || 'null');
+    if (u && u.email) {
+      if (u.birthday && calcAge(u.birthday) >= age) {
+        /* Majeur confirmé → accès direct */
+        return;
+      }
+      /* Mineur ou sans anniversaire → porte affichée */
+    }
+  } catch {}
+
+  /* Non connecté : cache 1h */
+  const stored = localStorage.getItem(KEY);
+  if (stored && Date.now() - parseInt(stored, 10) < EXPIRES) return;
+
+  /* Remplir les textes */
+  document.getElementById('age-msg').innerHTML =
+    'Cette section contient des produits destinés exclusivement aux personnes majeures.<br>' +
+    'En <strong style="color:#d9c4a0">' + pays + '</strong>, l\'âge légal est de ' +
+    '<strong style="color:#d9c4a0">' + age + ' ans</strong>.<br>Avez-vous ' + age + ' ans ou plus ?';
+
+  document.getElementById('age-yes').textContent = 'Oui, j\'ai ' + age + ' ans ou plus →';
+
+  document.getElementById('age-legal').textContent =
+    'En cliquant « Oui », vous confirmez avoir ' + age + ' ans ou plus selon la législation de ' +
+    pays + ' et acceptez les conditions d\'accès à ce contenu.';
+
+  /* Masquer tout le contenu — seule la porte est visible */
+  document.querySelectorAll('body > *:not(#age-gate)').forEach(el => el.style.visibility = 'hidden');
+  gate.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('age-yes').addEventListener('click', function() {
+    localStorage.setItem(KEY, Date.now().toString());
+    gate.style.display = 'none';
+    document.body.style.overflow = '';
+    document.querySelectorAll('body > *:not(#age-gate)').forEach(el => el.style.visibility = '');
+  });
+
+  document.getElementById('age-no').addEventListener('click', function() {
+    window.location.href = 'index.html';
+  });
+})();
+</script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

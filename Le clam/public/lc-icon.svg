@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="96" fill="#d9c4a0"/>
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/>
+  <text x="118" y="130" font-family="'Spectral',Georgia,serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text>
+  <text x="82" y="132" font-family="'EB Garamond',Georgia,serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text>
+  <text x="116" y="104" font-family="'Spectral',Georgia,serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text>
+  <text x="84" y="106" font-family="'EB Garamond',Georgia,serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text>
+  <line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/>
+  <text x="100" y="165" font-family="'EB Garamond',Georgia,serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text>
+</svg>

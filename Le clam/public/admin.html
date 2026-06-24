@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Le Clam</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f4f4f4; color: #222; min-height: 100vh; }
+
+    .top-bar {
+      background: #3e2a14; color: #d9c4a0;
+      padding: .85rem 2rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .top-bar a {
+      color: #d9c4a0; text-decoration: none; font-size: .85rem; font-weight: 600;
+      display: flex; align-items: center; gap: .4rem;
+      padding: .35rem .75rem; border-radius: 6px;
+      border: 1px solid rgba(217,196,160,.3); transition: background .15s;
+    }
+    .top-bar a:hover { background: rgba(255,255,255,.12); }
+    .top-bar h1 { font-size: 1.05rem; font-weight: 700; flex: 1; }
+
+    .page { padding: 2rem 1.5rem 0; }
+    #commandesWrap { padding: 0 1.5rem 3rem; }
+    #tilePanel { padding: 0 1.5rem 3rem; }
+
+    /* ── Tuiles ── */
+    .nav-sticky-wrap {
+      position: sticky;
+      top: var(--topbar-h, 52px);
+      z-index: 90;
+      background: #f4f4f4;
+      padding: .6rem 0 .5rem;
+      margin: -1rem 0 1.2rem;
+    }
+    .nav-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+    }
+    .nav-card {
+      background: #fff; border: 1.5px solid #e8e8e8; border-radius: 10px;
+      padding: .45rem .9rem; color: #1a1a1a;
+      display: flex; flex-direction: row; align-items: center; gap: .45rem;
+      cursor: pointer; font-family: inherit;
+      transition: box-shadow .15s, border-color .15s, background .15s;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.09); border-color: #b0956e; }
+    .nav-card.active { border-color: #3e2a14; background: #faf5ed; }
+    .nav-card .nav-icon  { font-size: 1.15rem; line-height: 1; }
+    .nav-card .nav-label { font-size: .82rem; font-weight: 700; }
+    .nav-card .nav-sub   { display: none; }
+
+    /* Pastille non-lus sur la nav card Messages */
+    .nav-msg-n {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #ef4444; color: #fff;
+      font-size: .6rem; font-weight: 700;
+      min-width: 16px; height: 16px;
+      border-radius: 20px; padding: 0 4px;
+      line-height: 1; margin-left: .35rem;
+      vertical-align: middle;
+    }
+
+    /* ── Panneau iframe auto-hauteur ── */
+    #tilePanel { display: none; }
+    #tilePanel.open { display: block; }
+    #tileFrame {
+      width: 100%; border: none; display: block;
+      background: #fff;
+    }
+
+
+    .card { background: #fff; border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; border: 1px solid #e5e5e5; }
+    .card h2 { font-size: .95rem; font-weight: 700; color: #3e2a14; margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+
+    label { font-size: .82rem; font-weight: 600; color: #555; display: block; margin-bottom: .3rem; }
+    input, select {
+      width: 100%; padding: .5rem .7rem; border: 1.5px solid #ddd; border-radius: 8px;
+      font-size: .9rem; margin-bottom: .8rem; font-family: inherit; outline: none; transition: border-color .15s;
+    }
+    input:focus, select:focus { border-color: #3e2a14; }
+    .row { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .row > * { flex: 1; min-width: 180px; }
+
+    button.btn-primary { background: #c0392b; color: #fff; padding: .55rem 1.1rem; border: none; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+    button.btn-success { background: #27ae60; color: #fff; padding: .55rem 1.1rem; border: none; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+    button.btn-info    { background: #2980b9; color: #fff; padding: .55rem 1.1rem; border: none; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+    button.btn-sm { padding: .3rem .7rem; font-size: .78rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+    th { text-align: left; padding: .4rem .6rem; background: #faf9f7; border-bottom: 2px solid #e8e8e8; color: #888; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
+    td { padding: .55rem .6rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fdfcfb; }
+
+    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .7rem; font-weight: 700; }
+    .badge-pending   { background: #fef3cd; color: #856404; }
+    .badge-delivered { background: #d1e7dd; color: #0f5132; }
+    .token-link { font-size: .75rem; color: #2980b9; word-break: break-all; text-decoration: none; }
+    .token-link:hover { text-decoration: underline; }
+    .used { opacity: .45; text-decoration: line-through; }
+
+    #msg { padding: .6rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: .85rem; display: none; }
+    #msg.ok  { background: #d1e7dd; color: #0f5132; display: block; }
+    #msg.err { background: #f8d7da; color: #842029; display: block; }
+
+    @media (max-width: 700px) {
+      .top-bar { padding: .7rem 1rem; }
+      .page { padding: 1.2rem 1rem 0; }
+      #commandesWrap, #tilePanel { padding-left: 1rem; padding-right: 1rem; }
+      .nav-grid { gap: .35rem; }
+      .row { flex-direction: column; }
+
+    }
+
+    /* ── Commandes ── */
+
+    /* Toolbar recherche + filtres */
+    .cmd-toolbar {
+      display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+      margin-bottom: 1rem;
+      background: #fff; border: 1.5px solid #e8e8e8; border-radius: 14px;
+      padding: .75rem 1rem;
+    }
+    .cmd-search-wrap { position: relative; flex: 1; min-width: 180px; }
+    .cmd-search-wrap svg { position: absolute; left: .65rem; top: 50%; transform: translateY(-50%); color: #bbb; pointer-events: none; }
+    .cmd-search {
+      width: 100%; padding: .42rem .75rem .42rem 2.1rem;
+      border: 1.5px solid #e0e0e0; border-radius: 9px; font-size: .83rem;
+      font-family: inherit; outline: none; transition: border-color .15s; margin: 0;
+    }
+    .cmd-search:focus { border-color: #3e2a14; }
+    .cmd-chips { display: flex; gap: .35rem; flex-wrap: wrap; }
+    .cmd-chip {
+      padding: .28rem .7rem; border-radius: 20px; font-size: .72rem; font-weight: 700;
+      border: 1.5px solid #e0e0e0; background: #fafafa; color: #888; cursor: pointer;
+      transition: all .12s; white-space: nowrap;
+    }
+    .cmd-chip:hover { border-color: #aaa; color: #333; }
+    .cmd-chip.on { border-color: #3e2a14; background: #3e2a14; color: #fff; }
+    .cmd-sort {
+      padding: .3rem .65rem; border: 1.5px solid #e0e0e0; border-radius: 9px;
+      font-size: .78rem; font-family: inherit; outline: none; margin: 0;
+      cursor: pointer; background: #fafafa; color: #555; width: auto; min-width: 0;
+    }
+
+    /* Stats */
+    .cmd-stats { display: flex; gap: .75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .cmd-stat {
+      flex: 1; min-width: 110px; background: #fff;
+      border: 1.5px solid #e8e8e8; border-radius: 12px; padding: .8rem 1rem;
+    }
+    .cmd-stat-lbl { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #aaa; }
+    .cmd-stat-val { font-size: 1.5rem; font-weight: 800; margin-top: .15rem; }
+
+    /* Section */
+    .cmd-section { margin-bottom: 1.2rem; }
+    .cmd-section-head {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .8rem; font-weight: 700; color: #666;
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: .5rem; padding: 0 .2rem;
+    }
+    .cmd-section-count {
+      background: #e8e8e8; color: #555; border-radius: 20px;
+      padding: .1rem .5rem; font-size: .7rem; font-weight: 700;
+    }
+    .cmd-section-head .btn-info { margin-left: auto; font-size: .72rem; }
+
+    /* Carte commande */
+    .cmd-card {
+      background: #fff; border: 1.5px solid #e8e8e8; border-radius: 12px;
+      overflow: hidden; margin-bottom: .5rem; transition: box-shadow .15s;
+    }
+    .cmd-card:hover { box-shadow: 0 3px 14px rgba(0,0,0,.07); }
+
+    /* Ligne compacte toujours visible */
+    .cmd-row {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .7rem 1rem; cursor: pointer; user-select: none; flex-wrap: wrap;
+    }
+    .cmd-row:hover { background: #fafaf8; }
+    .cmd-id   { font-weight: 700; font-size: .75rem; color: #3e2a14; font-family: monospace; flex-shrink: 0; }
+    .cmd-date { font-size: .72rem; color: #bbb; flex-shrink: 0; min-width: 68px; }
+    .cmd-client { flex: 1; font-size: .75rem; color: #666; min-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cmd-preview { font-size: .72rem; color: #aaa; flex: 1; min-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cmd-total { font-weight: 700; font-size: .88rem; color: #1a1a1a; flex-shrink: 0; }
+    .cmd-badge { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .66rem; font-weight: 700; flex-shrink: 0; }
+    .cmd-chevron { font-size: .7rem; color: #bbb; flex-shrink: 0; transition: transform .18s; margin-left: .2rem; }
+    .cmd-card.open .cmd-chevron { transform: rotate(180deg); }
+
+    /* Détail déplié */
+    .cmd-detail { display: none; border-top: 1px solid #f0f0f0; }
+    .cmd-card.open .cmd-detail { display: block; }
+
+    /* Items */
+    .cmd-items { padding: .65rem 1rem; border-bottom: 1px solid #f0f0f0; }
+    .cmd-order-item {
+      display: flex; align-items: center; gap: .6rem; font-size: .8rem;
+      padding: .25rem 0; border-bottom: 1px solid #f7f7f7;
+    }
+    .cmd-order-item:last-child { border-bottom: none; }
+    .cmd-thumb {
+      width: 32px; height: 32px; border-radius: 6px; flex-shrink: 0;
+      background: #f4f4f4; display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; overflow: hidden;
+    }
+    .cmd-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cmd-iname  { flex: 1; font-weight: 500; color: #222; }
+    .cmd-iqty   { color: #aaa; font-size: .72rem; }
+    .cmd-iprice { font-weight: 600; color: #1a1a1a; font-size: .78rem; }
+
+    /* Timeline horizontale */
+    .cmd-timeline {
+      display: flex; align-items: flex-start; padding: .75rem 1rem;
+      background: #fafaf9; border-bottom: 1px solid #f0f0f0; gap: 0;
+    }
+    .tl-step { display: flex; flex-direction: column; align-items: center; gap: .25rem; flex-shrink: 0; }
+    .tl-dot {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .68rem; border: 2px solid #e5e5e5; background: #f9f9f9; color: #ccc;
+    }
+    .tl-dot.done   { background: #d1fae5; border-color: #86efac; color: #065f46; }
+    .tl-dot.active { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
+    .tl-lbl { font-size: .6rem; font-weight: 600; color: #ccc; text-align: center; max-width: 52px; line-height: 1.2; }
+    .tl-lbl.done   { color: #065f46; }
+    .tl-lbl.active { color: #1d4ed8; }
+    .tl-line { flex: 1; height: 2px; background: #e5e5e5; margin-top: 11px; min-width: 8px; }
+    .tl-line.done { background: #86efac; }
+
+    /* Contrôles admin */
+    .cmd-admin {
+      display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+      padding: .6rem 1rem; background: #faf5ed;
+    }
+    .adm-lbl { font-size: .72rem; font-weight: 600; color: #7a5c2e; flex-shrink: 0; }
+    .cmd-admin select, .cmd-admin input[type=text] {
+      padding: .28rem .5rem; border: 1.5px solid #ddd; border-radius: 8px;
+      font-size: .77rem; font-family: inherit; width: auto;
+      min-width: 130px; margin-bottom: 0; outline: none; transition: border-color .15s;
+    }
+    .cmd-admin select:focus, .cmd-admin input[type=text]:focus { border-color: #3e2a14; }
+    .cmd-admin .btn-success { margin-left: auto; }
+    .cmd-avis-line { padding: .5rem 1rem; background: #f9fffe; font-size: .77rem; }
+
+    .cmd-totals {
+      margin-top: .45rem; padding-top: .35rem; border-top: 1px solid #f0f0f0; font-size: .77rem;
+    }
+    .cmd-totals-row { display: flex; justify-content: space-between; padding: .12rem 0; color: #888; }
+    .cmd-totals-row.total { font-weight: 700; color: #1a1a1a; padding-top: .25rem; }
+
+    .cmd-empty { text-align: center; padding: 2rem; color: #bbb; font-size: .875rem; }
+
+    /* Pagination passées */
+    .cmd-loadmore {
+      display: block; width: 100%; padding: .6rem; margin-top: .4rem;
+      background: #f5f5f5; border: none; border-radius: 10px;
+      font-size: .8rem; font-weight: 600; color: #666; cursor: pointer;
+      font-family: inherit; transition: background .15s;
+    }
+    .cmd-loadmore:hover { background: #ebebeb; }
+
+    @media (max-width: 600px) {
+      .cmd-preview { display: none; }
+      .cmd-admin { flex-direction: column; align-items: flex-start; }
+      .cmd-admin .btn-success { margin-left: 0; }
+      .tl-lbl { max-width: 40px; font-size: .56rem; }
+    }
+
+    /* ── Porte de connexion admin ── */
+    #adminGate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #1e140a;
+      display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    #adminGate.hidden { display: none; }
+    .gate-card {
+      background: #2c1f10; border-radius: 20px;
+      padding: 2.4rem 2.6rem; max-width: 380px; width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,0,.55);
+      border: 1px solid rgba(217,196,160,.12);
+    }
+    .gate-logo {
+      text-align: center; margin-bottom: 1.8rem;
+    }
+    .gate-logo svg { opacity: .9; }
+    .gate-title {
+      font-size: 1.1rem; font-weight: 800; color: #d9c4a0;
+      text-align: center; margin-bottom: .35rem;
+    }
+    .gate-sub {
+      font-size: .78rem; color: #7a6045; text-align: center; margin-bottom: 1.8rem;
+    }
+    .gate-field { margin-bottom: 1rem; }
+    .gate-field label {
+      display: block; font-size: .75rem; font-weight: 700;
+      color: #a0856a; margin-bottom: .4rem; text-transform: uppercase; letter-spacing: .05em;
+    }
+    .gate-field input {
+      width: 100%; padding: .7rem .95rem;
+      background: #1a0f07; border: 1.5px solid rgba(217,196,160,.18);
+      border-radius: 10px; color: #d9c4a0;
+      font-size: .92rem; font-family: inherit; outline: none;
+      transition: border-color .15s; margin: 0;
+    }
+    .gate-field input:focus { border-color: #b0956e; }
+    .gate-field input::placeholder { color: #5a3f25; }
+    .gate-btn {
+      width: 100%; padding: .85rem; margin-top: .5rem;
+      background: #b0956e; color: #1a0f07;
+      border: none; border-radius: 50px;
+      font-size: .95rem; font-weight: 800; cursor: pointer;
+      font-family: inherit; transition: background .15s, transform .12s;
+    }
+    .gate-btn:hover  { background: #c4a87e; transform: translateY(-1px); }
+    .gate-btn:active { transform: translateY(0); }
+    .gate-btn:disabled { background: #5a3f25; color: #3a2912; cursor: default; transform: none; }
+    .gate-error {
+      background: rgba(192,57,43,.18); color: #f1948a;
+      border: 1px solid rgba(192,57,43,.3);
+      border-radius: 8px; padding: .55rem .8rem;
+      font-size: .8rem; margin-top: .75rem; display: none; text-align: center;
+    }
+    .gate-error.visible { display: block; }
+    .gate-back {
+      text-align: center; margin-top: 1.4rem;
+      font-size: .78rem; color: #5a3f25;
+    }
+    .gate-back a { color: #7a6045; text-decoration: none; font-weight: 600; }
+    .gate-back a:hover { color: #a0856a; }
+
+    /* Cache le contenu admin tant que non connecté */
+    #adminContent { display: none; }
+    #adminContent.visible { display: block; }
+
+  </style></head>
+<body>
+
+<!-- ── Porte de connexion ── -->
+<div id="adminGate">
+  <div class="gate-card">
+    <div class="gate-logo">
+      <svg width="48" height="48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="96" fill="#3e2a14"/>
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#d9c4a0" stroke-width="1" opacity=".5"/>
+        <text x="84"  y="106" font-family="serif" font-size="74" fill="none" stroke="#d9c4a0" stroke-width="0.7" text-anchor="middle" opacity=".7">C</text>
+        <text x="116" y="104" font-family="serif" font-size="68" fill="none" stroke="#d9c4a0" stroke-width="0.7" text-anchor="middle" opacity=".7">L</text>
+        <text x="84"  y="132" font-family="serif" font-size="68" fill="none" stroke="#d9c4a0" stroke-width="0.7" text-anchor="middle" opacity=".7">A</text>
+      </svg>
+    </div>
+    <div class="gate-title">Espace Admin</div>
+    <div class="gate-sub">Accès réservé à l'équipe Le Clam</div>
+    <form onsubmit="adminLogin(event)">
+      <div class="gate-field">
+        <label>E-mail</label>
+        <input type="email" id="gateEmail" placeholder="votre@email.fr" required autocomplete="email">
+      </div>
+      <div class="gate-field">
+        <label>Mot de passe</label>
+        <input type="password" id="gatePass" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="gate-btn" id="gateBtn">Accéder au tableau de bord</button>
+      <div class="gate-error" id="gateError"></div>
+    </form>
+    <div class="gate-back"><a href="index.html">← Retour à la boutique</a></div>
+  </div>
+</div>
+
+<!-- ── Contenu admin (caché jusqu'à connexion) ── -->
+<div id="adminContent">
+
+<div class="top-bar">
+  <a href="index.html">← Accueil</a>
+  <h1>🏠 Admin — Le Clam</h1>
+  <span id="adminWelcome" style="margin-left:auto;font-size:.78rem;color:#a0856a"></span>
+  <button onclick="adminLogout()" style="background:rgba(255,255,255,.08);border:1px solid rgba(217,196,160,.25);color:#d9c4a0;padding:.3rem .75rem;border-radius:6px;font-size:.78rem;cursor:pointer;font-family:inherit">Déconnexion</button>
+</div>
+
+<div class="page">
+<div id="msg"></div>
+
+<!-- ── Tuiles navigation ── -->
+<div class="nav-sticky-wrap">
+<div class="nav-grid">
+  <button class="nav-card" data-tile="commandes" onclick="openTile('commandes')">
+    <span class="nav-icon">📋</span>
+    <span class="nav-label">Commandes</span>
+    <span class="nav-sub">Suivi &amp; livraisons</span>
+  </button>
+  <button class="nav-card" data-tile="fournisseurs" onclick="openTile('fournisseurs','fournisseur.html')">
+    <span class="nav-icon">🏭</span>
+    <span class="nav-label">Fournisseurs</span>
+    <span class="nav-sub">Gestion &amp; analyse</span>
+  </button>
+  <button class="nav-card" data-tile="transport" onclick="openTile('transport','transport.html')">
+    <span class="nav-icon">🚚</span>
+    <span class="nav-label">Transport</span>
+    <span class="nav-sub">Tarifs &amp; zones</span>
+  </button>
+  <button class="nav-card" data-tile="tva" onclick="openTile('tva','tva.html')">
+    <span class="nav-icon">📊</span>
+    <span class="nav-label">Analyse &amp; Stats</span>
+    <span class="nav-sub">TVA · CA · Marge · Stats commandes</span>
+  </button>
+  <button class="nav-card" data-tile="frais" onclick="openTile('frais','frais-paiement.html')">
+    <span class="nav-icon">💳</span>
+    <span class="nav-label">Frais paiement</span>
+    <span class="nav-sub">PayPal · Stripe · …</span>
+  </button>
+  <button class="nav-card" data-tile="remises" onclick="openTile('remises','remises.html')">
+    <span class="nav-icon">🏷️</span>
+    <span class="nav-label">Remises</span>
+    <span class="nav-sub">Codes promo &amp; ventes flash</span>
+  </button>
+  <button class="nav-card" data-tile="bundles" onclick="openTile('bundles','bundle-creator.html')">
+    <span class="nav-icon">📦</span>
+    <span class="nav-label">Bundles</span>
+    <span class="nav-sub">Packs &amp; offres groupées</span>
+  </button>
+
+  <button class="nav-card" id="maintenanceCard" data-tile="maintenance" onclick="openTile('maintenance')">
+    <span class="nav-icon">🔧</span>
+    <span class="nav-label">Maintenance</span>
+    <span class="nav-sub" id="maintenanceSub">Site en ligne</span>
+  </button>
+</div><!-- /nav-grid -->
+</div><!-- /nav-sticky-wrap -->
+
+<!-- ── Panneaux inline : Commandes + Messages ── -->
+<div id="commandesWrap">
+
+  <!-- Commandes -->
+  <div id="commandesPanel">
+
+    <!-- Toolbar -->
+    <div class="cmd-toolbar">
+      <div class="cmd-search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="cmd-search" id="cmdSearch" type="text" placeholder="Rechercher par ID, email, produit…" oninput="setCmdFilter('q', this.value)">
+      </div>
+      <div class="cmd-chips">
+        <button class="cmd-chip on"  id="chip-all"              onclick="setCmdFilter('status','all')">Toutes</button>
+        <button class="cmd-chip"     id="chip-pending_payment"  onclick="setCmdFilter('status','pending_payment')">En attente</button>
+        <button class="cmd-chip"     id="chip-pending_virement" onclick="setCmdFilter('status','pending_virement')">Virement</button>
+        <button class="cmd-chip"     id="chip-pending_crypto"   onclick="setCmdFilter('status','pending_crypto')">Crypto</button>
+        <button class="cmd-chip"     id="chip-confirmed"        onclick="setCmdFilter('status','confirmed')">Payée</button>
+        <button class="cmd-chip"     id="chip-processing"       onclick="setCmdFilter('status','processing')">Préparation</button>
+        <button class="cmd-chip"     id="chip-shipped"          onclick="setCmdFilter('status','shipped')">Expédiée</button>
+        <button class="cmd-chip"     id="chip-delivered"        onclick="setCmdFilter('status','delivered')">Livrée</button>
+        <button class="cmd-chip"     id="chip-cancelled"        onclick="setCmdFilter('status','cancelled')">Annulée</button>
+      </div>
+      <select class="cmd-sort" id="cmdSort" onchange="setCmdFilter('sort', this.value)">
+        <option value="desc">Plus récente</option>
+        <option value="asc">Plus ancienne</option>
+        <option value="total_desc">Total ↓</option>
+        <option value="total_asc">Total ↑</option>
+      </select>
+      <button class="btn-info btn-sm" onclick="loadOrders()">↺ Actualiser</button>
+      <button class="btn-info btn-sm" onclick="exportCSV()" style="background:#1a6b3c;color:#fff;border-color:#1a6b3c" title="Télécharger toutes les commandes en CSV">⬇ CSV commandes</button>
+      <button class="btn-info btn-sm" onclick="exportInvoicesCSV()" style="background:#7c3aed;color:#fff;border-color:#7c3aed" title="Télécharger toutes les factures en CSV">⬇ CSV factures</button>
+      <button class="btn-info btn-sm" onclick="exportInvoicesZIP()" style="background:#c2410c;color:#fff;border-color:#c2410c" title="Télécharger tous les PDF en ZIP">⬇ ZIP PDF</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="cmd-stats">
+      <div class="cmd-stat"><div class="cmd-stat-lbl">En attente</div><div class="cmd-stat-val" id="cStatPendingVal" style="color:#d97706">—</div></div>
+      <div class="cmd-stat"><div class="cmd-stat-lbl">Confirmées</div><div class="cmd-stat-val" id="cStatEnCoursVal" style="color:#2980b9">—</div></div>
+      <div class="cmd-stat"><div class="cmd-stat-lbl">Livrées</div><div class="cmd-stat-val" id="cStatTermineesVal" style="color:#27ae60">—</div></div>
+      <div class="cmd-stat"><div class="cmd-stat-lbl">Total encaissé</div><div class="cmd-stat-val" id="cStatTotalVal" style="color:#1a1a1a;font-size:1.2rem">—</div></div>
+    </div>
+
+    <!-- En cours -->
+    <div class="cmd-section" id="sectionEnCours">
+      <div class="cmd-section-head">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        En cours
+        <span class="cmd-section-count" id="cntEnCours">0</span>
+      </div>
+      <div id="ordersEnCours"><div class="cmd-empty">Chargement…</div></div>
+    </div>
+
+    <!-- Passées -->
+    <div class="cmd-section" id="sectionTerminees">
+      <div class="cmd-section-head">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Passées
+        <span class="cmd-section-count" id="cntTerminees">0</span>
+      </div>
+      <div id="ordersTerminees"><div class="cmd-empty">Chargement…</div></div>
+    </div>
+
+  </div><!-- /commandesPanel -->
+
+</div><!-- /commandesWrap -->
+
+<!-- ── Panneau Maintenance ── -->
+<div id="maintenanceWrap" style="display:none;max-width:520px;margin:1.5rem auto">
+  <div style="background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(62,42,20,.08);padding:1.8rem 2rem;border:1.5px solid #ede8e0">
+    <h2 style="font-size:1.1rem;color:#3e2a14;margin-bottom:1.2rem;font-family:'Playfair Display',serif">🔧 Mode maintenance</h2>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem">
+      <div>
+        <div style="font-weight:600;color:#1a1a1a;margin-bottom:.2rem">État du site</div>
+        <div id="maintenanceStatus" style="font-size:.85rem;color:#27ae60;font-weight:600">● En ligne</div>
+      </div>
+      <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer">
+        <div style="position:relative;width:48px;height:26px">
+          <input type="checkbox" id="maintenanceToggle" onchange="toggleMaintenance()" style="opacity:0;width:0;height:0;position:absolute">
+          <span id="maintenanceThumb" style="position:absolute;inset:0;background:#e0e0e0;border-radius:13px;transition:background .2s;cursor:pointer"></span>
+          <span id="maintenanceDot" style="position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.2);transition:transform .2s"></span>
+        </div>
+        <span id="maintenanceToggleLabel" style="font-size:.85rem;font-weight:600;color:#666">Inactif</span>
+      </label>
+    </div>
+
+    <div style="margin-bottom:1.2rem">
+      <label style="display:block;font-size:.8rem;font-weight:600;color:#555;margin-bottom:.4rem">Message affiché aux visiteurs</label>
+      <textarea id="maintenanceMsg" rows="3" placeholder="Nous revenons bientôt. Merci de votre patience."
+        style="width:100%;box-sizing:border-box;padding:.7rem .9rem;border:1.5px solid #e0e0e0;border-radius:10px;font-size:.88rem;font-family:inherit;color:#222;resize:vertical;line-height:1.5"></textarea>
+    </div>
+
+    <button onclick="saveMaintenance()" style="background:#3e2a14;color:#d9c4a0;border:none;border-radius:50px;padding:.75rem 2rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s">
+      Enregistrer
+    </button>
+    <span id="maintenanceSaved" style="margin-left:.8rem;font-size:.82rem;color:#27ae60;display:none">✓ Enregistré</span>
+
+    <div style="margin-top:1.2rem;padding:.75rem .9rem;background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;font-size:.78rem;color:#92400e;line-height:1.5">
+      ⚠ En mode maintenance, les visiteurs voient la page de fermeture. Les admins ont toujours accès au site.
+    </div>
+
+    <div style="margin-top:1rem">
+      <a href="/maintenance.html" target="_blank" style="display:inline-flex;align-items:center;gap:.45rem;background:#f5f0e8;color:#3e2a14;border:1.5px solid #d9c4a0;border-radius:50px;padding:.55rem 1.2rem;font-size:.82rem;font-weight:600;text-decoration:none;font-family:inherit">
+        👁 Voir l'aperçu client
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── Panneau iframe ── -->
+<div id="tilePanel">
+  <iframe id="tileFrame" title="Contenu"></iframe>
+</div>
+
+</div><!-- /page -->
+
+<script>
+let _frameObserver = null;
+
+function openTile(key, url) {
+  sessionStorage.setItem('leclam_admin_tile', JSON.stringify({ key, url: url || null }));
+  document.querySelectorAll('.nav-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.nav-card[data-tile="${key}"]`)?.classList.add('active');
+
+  const cmdWrap  = document.getElementById('commandesWrap');
+  const tilePanel = document.getElementById('tilePanel');
+  const frame    = document.getElementById('tileFrame');
+
+  const maintWrap = document.getElementById('maintenanceWrap');
+
+  if (key === 'maintenance') {
+    tilePanel.classList.remove('open');
+    cmdWrap.style.display = 'none';
+    if (maintWrap) { maintWrap.style.display = ''; loadMaintenanceState(); maintWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    return;
+  }
+  if (maintWrap) maintWrap.style.display = 'none';
+
+  if (!url) {
+    tilePanel.classList.remove('open');
+    cmdWrap.style.display = '';
+    loadOrders();
+    cmdWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+
+  cmdWrap.style.display = 'none';
+  tilePanel.classList.add('open');
+
+  if (frame.dataset.current === url) {
+    tilePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+
+  frame.style.height = '400px';
+  frame.dataset.current = url;
+  if (_frameObserver) { _frameObserver.disconnect(); _frameObserver = null; }
+
+  frame.onload = function () {
+    const resize = () => {
+      try {
+        const h = frame.contentDocument.documentElement.scrollHeight;
+        if (h > 0) frame.style.height = h + 'px';
+      } catch(e) {}
+    };
+    resize();
+    try {
+      _frameObserver = new ResizeObserver(resize);
+      _frameObserver.observe(frame.contentDocument.body);
+    } catch(e) {}
+    tilePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+  frame.src = url + '?embed=1';
+}
+
+
+async function updateAdminMsgBadge() {
+  try {
+    const token = localStorage.getItem('leclam_token') || '';
+    if (!token) return;
+    const res = await fetch('/api/admin/threads', { headers: { 'Authorization': 'Bearer ' + token } });
+    const data = await res.json();
+    if (!data.ok) return;
+    const count = (data.threads || []).reduce((s, t) =>
+      s + (t.messages || []).filter(m => m.from === 'client' && !m.readByAdmin).length, 0);
+    localStorage.setItem('leclam_admin_thread_unread', String(count));
+    const badge = document.getElementById('adminMsgBadge');
+    if (!badge) return;
+    badge.textContent = count > 9 ? '9+' : count;
+    badge.style.display = count > 0 ? '' : 'none';
+  } catch {}
+}
+updateAdminMsgBadge();
+setInterval(updateAdminMsgBadge, 30000);
+window.addEventListener('storage', e => {
+  if (e.key === 'leclam_admin_thread_unread') updateAdminMsgBadge();
+});
+
+function adminHeaders() {
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+}
+
+function escHtml(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function msg(text, type = 'ok') {
+  const el = document.getElementById('msg');
+  el.textContent = text; el.className = type;
+  setTimeout(() => el.style.display = 'none', 4000);
+}
+
+const STATUS_LABEL = {
+  pending_payment:  { label: 'Paiement en attente', bg: '#fef3cd', color: '#856404' },
+  pending_virement: { label: 'Virement en attente', bg: '#fff7ed', color: '#9a3412' },
+  pending_crypto:   { label: 'Crypto en attente',   bg: '#f0fdf4', color: '#166534' },
+  confirmed:        { label: 'Payée / À préparer',  bg: '#dcfce7', color: '#166534' },
+  processing:       { label: 'En préparation',      bg: '#dbeafe', color: '#1d4ed8' },
+  shipped:          { label: 'Expédiée',            bg: '#ede9fe', color: '#6d28d9' },
+  delivered:        { label: 'Livrée',              bg: '#d1e7dd', color: '#0f5132' },
+  cancelled:        { label: 'Annulée',             bg: '#fee2e2', color: '#991b1b' },
+};
+
+const STATUS_ORDER = { cancelled: -1, pending_payment: 0, pending_virement: 0, pending_crypto: 0, confirmed: 1, processing: 2, shipped: 3, delivered: 4 };
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function fmtDateLong(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+/* ── État global commandes ── */
+let _allOrders    = [];
+let _tokensCache  = {};
+let _invoicesCache = {}; /* orderId → invoice */
+let _cmdFilter   = { q: '', status: 'all', sort: 'desc' };
+let _passedPage  = 1;
+const PASSEES_PER_PAGE = 30;
+
+/* ── Filtres ── */
+function setCmdFilter(key, val) {
+  _cmdFilter[key] = val;
+  if (key === 'status') {
+    document.querySelectorAll('.cmd-chip').forEach(c => c.classList.remove('on'));
+    const chip = document.getElementById('chip-' + val);
+    if (chip) chip.classList.add('on');
+  }
+  _passedPage = 1;
+  renderOrders();
+}
+
+function _applyFilters(orders) {
+  let res = orders;
+  if (_cmdFilter.status !== 'all') {
+    res = res.filter(o => o.status === _cmdFilter.status);
+  }
+  const q = _cmdFilter.q.toLowerCase().trim();
+  if (q) {
+    res = res.filter(o =>
+      (o.id || '').toLowerCase().includes(q) ||
+      (o.email || '').toLowerCase().includes(q) ||
+      (o.items || []).some(i => (i.name || '').toLowerCase().includes(q))
+    );
+  }
+  if (_cmdFilter.sort === 'asc')        res = res.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  else if (_cmdFilter.sort === 'total_desc') res = res.slice().sort((a, b) => (b.total||0) - (a.total||0));
+  else if (_cmdFilter.sort === 'total_asc')  res = res.slice().sort((a, b) => (a.total||0) - (b.total||0));
+  else res = res.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  return res;
+}
+
+/* ── Timeline ── */
+function renderMiniTimeline(order) {
+  if (order.status === 'cancelled') {
+    return `<div class="cmd-timeline"><span style="color:#c0392b;font-size:.76rem;font-weight:600">✕ Commande annulée</span></div>`;
+  }
+  const steps = ['Confirmée', 'Préparation', 'Expédiée', 'Livrée'];
+  const cur = STATUS_ORDER[order.status] ?? 0;
+  let html = '<div class="cmd-timeline">';
+  steps.forEach((label, i) => {
+    const done = i < cur, active = i === cur, dc = done ? 'done' : active ? 'active' : '';
+    html += `<div class="tl-step"><div class="tl-dot ${dc}">${done ? '✓' : active ? '●' : '○'}</div><div class="tl-lbl ${dc}">${label}</div></div>`;
+    if (i < steps.length - 1) html += `<div class="tl-line ${done ? 'done' : ''}"></div>`;
+  });
+  return html + '</div>';
+}
+
+/* ── Carte commande ── */
+function renderOrderCard(order, startOpen) {
+  const si    = STATUS_LABEL[order.status] || { label: order.status, bg: '#f0f0f0', color: '#555' };
+  const badge = `<span class="cmd-badge" style="background:${si.bg};color:${si.color}">${si.label}</span>`;
+  const isActive = order.status !== 'delivered' && order.status !== 'cancelled';
+
+  /* Ligne compacte */
+  const preview = (order.items || []).map(i => i.name).join(', ');
+  const row = `
+    <div class="cmd-row" onclick="toggleCard('${order.id}')">
+      <span class="cmd-id">${order.id}</span>
+      <span class="cmd-date">${fmtDate(order.createdAt)}</span>
+      <span class="cmd-client">${order.email || '—'}</span>
+      <span class="cmd-preview">${preview}</span>
+      ${badge}
+      <span class="cmd-total">${(order.total||0).toFixed(2).replace('.',',')} €</span>
+      <span class="cmd-chevron">▾</span>
+    </div>`;
+
+  /* Détail : items */
+  const items = (order.items || []).map(i => `
+    <div class="cmd-order-item">
+      <div class="cmd-thumb">${i.img ? `<img src="${i.img}" alt="">` : `<span>${i.emoji||'📦'}</span>`}</div>
+      <span class="cmd-iname">${i.name}</span>
+      <span class="cmd-iqty">× ${i.qty}</span>
+      <span class="cmd-iprice">${((i.price||0)*i.qty).toFixed(2).replace('.',',')} €</span>
+    </div>`).join('');
+
+  const shipping = order.shipping || 0;
+  const discount = order.discount || 0;
+  const subtotal = (order.total||0) - shipping + discount;
+
+  /* Mode de paiement lisible */
+  const pmLabels = { stripe_card:'💳 Carte', virement:'🏦 Virement', apple_pay:'🍎 Apple Pay', paypal:'🅿 PayPal' };
+  const pmLabel  = pmLabels[order.paymentMethod] || (order.paymentMethod?.startsWith('crypto_') ? '₿ Crypto' : order.paymentMethod || '—');
+
+  /* Info paiement spécifique (ref virement / hash crypto) */
+  let pmExtra = '';
+  if (order.paymentMethod === 'virement' && order.virementRef)
+    pmExtra = `<span style="font-size:.72rem;color:#78350f;background:#fef3c7;padding:.1rem .45rem;border-radius:5px;font-family:monospace">${escHtml(order.virementRef)}</span>`;
+  if (order.paymentMethod?.startsWith('crypto_') && order.coin)
+    pmExtra = `<span style="font-size:.72rem;color:#065f46;background:#d1fae5;padding:.1rem .45rem;border-radius:5px">${escHtml(order.coin)}${order.txHash ? ' · ' + escHtml(order.txHash.slice(0,12)) + '…' : ''}</span>`;
+
+  /* Adresse livraison */
+  const addr = order.shippingAddress;
+  const addrHtml = addr ? `<div style="margin-top:.5rem;font-size:.76rem;color:#555;line-height:1.6">
+    📍 ${[addr.rue, addr.zip, addr.city, addr.country].filter(Boolean).map(escHtml).join(' · ')}
+  </div>` : '';
+
+  const totalsHtml = `<div class="cmd-totals">
+    <div class="cmd-totals-row" style="font-size:.76rem;color:#888"><span>Mode paiement</span><span style="display:flex;align-items:center;gap:.4rem">${pmLabel} ${pmExtra}</span></div>
+    ${shipping > 0 ? `
+      <div class="cmd-totals-row"><span>Sous-total articles</span><span>${subtotal.toFixed(2).replace('.',',')} €</span></div>
+      <div class="cmd-totals-row"><span>Livraison</span><span>${shipping.toFixed(2).replace('.',',')} €</span></div>` : ''}
+    ${discount > 0 ? `<div class="cmd-totals-row" style="color:#16a34a"><span>Réduction parrain</span><span>−${discount.toFixed(2).replace('.',',')} €</span></div>` : ''}
+    <div class="cmd-totals-row total"><span>Total TTC</span><span>${(order.total||0).toFixed(2).replace('.',',')} €</span></div>
+  </div>${addrHtml}`;
+
+  /* Contrôles admin */
+  let adminCtrl = '';
+  if (isActive) {
+    /* pending_* et delivered exclus du select — pending via bouton admin, delivered via bouton "Marquer livré" (emails satisfaction) */
+    const PENDING_STATUSES = new Set(['pending_payment', 'pending_virement', 'pending_crypto']);
+    const opts = Object.entries(STATUS_LABEL)
+      .filter(([k]) => k !== 'cancelled' && k !== 'delivered' && (!PENDING_STATUSES.has(k) || k === order.status))
+      .map(([k,v]) => `<option value="${k}" ${order.status===k?'selected':''}>${v.label}</option>`).join('');
+    const tracking = (order.status === 'shipped' || order.status === 'processing')
+      ? `<span class="adm-lbl">N° suivi</span><input type="text" placeholder="1Z999AA…" value="${order.trackingNumber||''}" onblur="updateTracking('${order.id}',this.value)" style="min-width:130px">`
+      : '';
+    adminCtrl = `<div class="cmd-admin">
+      <span class="adm-lbl">Statut</span>
+      <select onchange="updateOrderStatus('${order.id}',this.value)">${opts}</select>
+      ${tracking}
+      <button class="btn-success btn-sm" onclick="deliver('${order.id}')">📬 Marquer livré</button>
+    </div>`;
+  } else {
+    const tokenEntry = Object.entries(_tokensCache).find(([,t]) => t.orderId === order.id);
+    const avisHtml = tokenEntry
+      ? (tokenEntry[1].used
+          ? '<span style="color:#27ae60;font-weight:600;font-size:.76rem">✓ Avis reçu</span>'
+          : `<a style="color:#2980b9;font-weight:600;font-size:.76rem;text-decoration:none" href="/avis.html?token=${tokenEntry[0]}" target="_blank">↗ Lien avis</a>`)
+      : '';
+    adminCtrl = `<div class="cmd-avis-line" style="display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#aaa;font-size:.75rem">${order.deliveredAt ? 'Livré le ' + fmtDateLong(order.deliveredAt) : ''}</span>
+      ${avisHtml}
+    </div>`;
+  }
+
+  /* Section facture */
+  const inv = _invoicesCache[order.id];
+  const invoiceHtml = inv
+    ? `<div style="margin-top:.85rem;padding:.75rem 1rem;background:#faf5ed;border-radius:10px;border:1px solid #e8dcc8">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+          <div>
+            <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#9a7a50">Facture</span><br>
+            <span style="font-weight:700;font-size:.88rem;color:#3e2a14">${inv.invoiceNumber}</span>
+            <span style="font-size:.75rem;color:#888;margin-left:.5rem">${new Date(inv.createdAt).toLocaleDateString('fr-FR')}</span>
+            <span style="font-size:.72rem;padding:.1rem .45rem;background:#d1fae5;color:#065f46;border-radius:20px;margin-left:.4rem;font-weight:700">✓ Payée</span>
+          </div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+            ${inv.pdfAvailable ? `<a href="${inv.pdfUrl}" target="_blank" style="font-size:.75rem;padding:.3rem .7rem;background:#3e2a14;color:#d9c4a0;border-radius:6px;text-decoration:none;font-weight:600">⬇ PDF</a>` : ''}
+            <button onclick="regenInvoice('${order.id}')" style="font-size:.75rem;padding:.3rem .7rem;background:#fff;color:#3e2a14;border:1px solid #c8b89a;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">↺ Regénérer</button>
+            <button onclick="resendInvoice('${order.id}')" style="font-size:.75rem;padding:.3rem .7rem;background:#fff;color:#2563eb;border:1px solid #bfdbfe;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">✉ Renvoyer</button>
+            <button onclick="copyInvoiceNum('${inv.invoiceNumber}')" style="font-size:.75rem;padding:.3rem .7rem;background:#fff;color:#555;border:1px solid #e0e0e0;border-radius:6px;cursor:pointer;font-family:inherit">⧉</button>
+          </div>
+        </div>
+        <div style="margin-top:.5rem;font-size:.74rem;color:#888;display:flex;gap:1.2rem;flex-wrap:wrap">
+          <span>HT : <strong>${inv.totals?.productsHT?.toFixed(2).replace('.',',')} €</strong></span>
+          <span>TVA : <strong>${inv.totals?.tvaAmount?.toFixed(2).replace('.',',')} €</strong></span>
+          <span>TTC : <strong>${inv.totals?.totalTTC?.toFixed(2).replace('.',',')} €</strong></span>
+        </div>
+      </div>`
+    : ((['confirmed','processing','shipped','delivered'].includes(order.status))
+        ? `<div style="margin-top:.85rem;padding:.6rem 1rem;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+            <span style="font-size:.78rem;color:#92400e">⚠ Aucune facture générée</span>
+            <button onclick="regenInvoice('${order.id}')" style="font-size:.75rem;padding:.3rem .7rem;background:#c2410c;color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">Générer</button>
+          </div>`
+        : '');
+
+  return `<div class="cmd-card${startOpen ? ' open' : ''}" id="card-${order.id}">
+    ${row}
+    <div class="cmd-detail">
+      <div class="cmd-items">${items}${totalsHtml}</div>
+      ${renderMiniTimeline(order)}
+      ${adminCtrl}
+      ${invoiceHtml}
+    </div>
+  </div>`;
+}
+
+function toggleCard(id) {
+  document.getElementById('card-' + id)?.classList.toggle('open');
+}
+
+/* ── Rendu des listes ── */
+function renderOrders() {
+  const filtered = _applyFilters(_allOrders);
+  const isFiltered = _cmdFilter.q || _cmdFilter.status !== 'all';
+
+  const enCours   = filtered.filter(o => o.status !== 'delivered' && o.status !== 'cancelled');
+  const terminees = filtered.filter(o => o.status === 'delivered' || o.status === 'cancelled');
+
+  document.getElementById('cntEnCours').textContent   = enCours.length;
+  document.getElementById('cntTerminees').textContent = terminees.length;
+
+  /* Section en cours : toutes ouvertes par défaut */
+  const elEC = document.getElementById('ordersEnCours');
+  if (enCours.length) {
+    elEC.innerHTML = enCours.map(o => renderOrderCard(o, true)).join('');
+  } else {
+    elEC.innerHTML = `<div class="cmd-empty">${isFiltered ? 'Aucun résultat' : 'Aucune commande en cours'}</div>`;
+  }
+
+  /* Section passées : compactes, paginées */
+  const elT   = document.getElementById('ordersTerminees');
+  const page  = terminees.slice(0, _passedPage * PASSEES_PER_PAGE);
+  const reste = terminees.length - page.length;
+  if (terminees.length) {
+    elT.innerHTML = page.map(o => renderOrderCard(o, false)).join('');
+    if (reste > 0) {
+      elT.innerHTML += `<button class="cmd-loadmore" onclick="_passedPage++;renderOrders()">Charger ${Math.min(reste, PASSEES_PER_PAGE)} de plus (${reste} restantes) ↓</button>`;
+    }
+  } else {
+    elT.innerHTML = `<div class="cmd-empty">${isFiltered ? 'Aucun résultat' : 'Aucune commande passée'}</div>`;
+  }
+}
+
+/* ── Chargement initial ── */
+async function loadOrders() {
+  _passedPage = 1;
+  document.getElementById('ordersEnCours').innerHTML  = '<div class="cmd-empty">Chargement…</div>';
+  document.getElementById('ordersTerminees').innerHTML = '<div class="cmd-empty">Chargement…</div>';
+
+  const [resO, resT, resI] = await Promise.all([
+    fetch('/api/orders', { headers: adminHeaders() }),
+    fetch('/api/admin/tokens', { headers: adminHeaders() }),
+    fetch('/api/admin/invoices', { headers: adminHeaders() }),
+  ]);
+  const dataO = await resO.json();
+  const dataT = resT.ok ? await resT.json() : { ok: false };
+  const dataI = resI.ok ? await resI.json() : { ok: false };
+  _tokensCache = dataT.ok ? dataT.tokens : {};
+  if (dataI.ok) {
+    _invoicesCache = {};
+    (dataI.invoices || []).forEach(inv => { _invoicesCache[inv.orderId] = inv; });
+  }
+
+  if (!dataO.ok) {
+    document.getElementById('ordersEnCours').innerHTML = '<div class="cmd-empty">Erreur de chargement</div>';
+    return;
+  }
+
+  _allOrders = dataO.orders;
+
+  /* Stats globales (indépendantes des filtres) */
+  const PENDING_ST  = new Set(['pending_payment','pending_virement','pending_crypto']);
+  const CA_STATUSES = new Set(['confirmed','processing','shipped','delivered']);
+  const allPending  = _allOrders.filter(o => PENDING_ST.has(o.status));
+  const allEC       = _allOrders.filter(o => o.status === 'confirmed' || o.status === 'processing' || o.status === 'shipped');
+  const allDel      = _allOrders.filter(o => o.status === 'delivered');
+  const totalEnc    = _allOrders.filter(o => CA_STATUSES.has(o.status)).reduce((s, o) => s + (o.total||0), 0);
+  document.getElementById('cStatPendingVal').textContent   = allPending.length;
+  document.getElementById('cStatEnCoursVal').textContent   = allEC.length;
+  document.getElementById('cStatTermineesVal').textContent = allDel.length;
+  document.getElementById('cStatTotalVal').textContent     = totalEnc.toFixed(2).replace('.', ',') + ' €';
+
+  renderOrders();
+}
+
+/* ── Actions factures ── */
+async function regenInvoice(orderId) {
+  try {
+    const res  = await fetch(`/api/admin/orders/${orderId}/invoice/regen`, { method: 'POST', headers: adminHeaders(), body: '{}' });
+    const data = await res.json();
+    if (data.ok) { msg('✓ Facture générée : ' + data.invoice?.invoiceNumber); loadOrders(); }
+    else msg('✗ ' + (data.error || 'Erreur'), 'err');
+  } catch { msg('✗ Serveur inaccessible', 'err'); }
+}
+
+async function resendInvoice(orderId) {
+  try {
+    const res  = await fetch(`/api/admin/orders/${orderId}/invoice/resend`, { method: 'POST', headers: adminHeaders(), body: '{}' });
+    const data = await res.json();
+    if (data.ok) msg('✉ Email facture renvoyé');
+    else msg('✗ ' + (data.error || 'Erreur'), 'err');
+  } catch { msg('✗ Serveur inaccessible', 'err'); }
+}
+
+function copyInvoiceNum(num) {
+  navigator.clipboard?.writeText(num).then(() => msg('✓ Copié : ' + num)).catch(() => msg(num));
+}
+
+function exportInvoicesCSV() {
+  const y = new Date().getFullYear();
+  window.open(`/api/admin/invoices/export-csv?year=${y}`, '_blank');
+}
+
+async function exportInvoicesZIP() {
+  const y = new Date().getFullYear();
+  const url = `/api/admin/invoices/export-zip?year=${y}`;
+  try {
+    const res = await fetch(url, { headers: adminHeaders() });
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      msg('✗ ' + (d.error || 'Aucun PDF disponible pour cette période'), 'err');
+      return;
+    }
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `Factures_${y}.zip`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  } catch (e) {
+    msg('✗ Erreur export ZIP : ' + e.message, 'err');
+  }
+}
+
+async function deliver(orderId) {
+  try {
+    const res  = await fetch(`/api/admin/orders/${orderId}/deliver`, { method: 'POST', headers: adminHeaders(), body: '{}' });
+    const data = await res.json();
+    if (data.ok) { msg('📬 ' + data.message); loadOrders(); }
+    else msg('✗ ' + data.error, 'err');
+  } catch { msg('✗ Serveur inaccessible', 'err'); }
+}
+
+async function updateOrderStatus(orderId, status) {
+  try {
+    const res  = await fetch(`/api/admin/orders/${orderId}/status`, {
+      method: 'PATCH', headers: adminHeaders(), body: JSON.stringify({ status }),
+    });
+    const data = await res.json();
+    if (data.ok) { msg('Statut mis à jour'); loadOrders(); }
+    else msg('✗ ' + (data.error||'Erreur'), 'err');
+  } catch { msg('✗ Serveur inaccessible', 'err'); }
+}
+
+async function updateTracking(orderId, trackingNumber) {
+  if (!trackingNumber) return;
+  try {
+    const res  = await fetch(`/api/admin/orders/${orderId}/tracking`, {
+      method: 'POST', headers: adminHeaders(), body: JSON.stringify({ trackingNumber }),
+    });
+    const data = await res.json();
+    if (data.ok) msg('N° suivi enregistré');
+    else msg('✗ ' + (data.error||'Erreur'), 'err');
+  } catch { msg('✗ Serveur inaccessible', 'err'); }
+}
+
+/* ── Auth gate ── */
+async function adminLogin(e) {
+  e.preventDefault();
+  const btn   = document.getElementById('gateBtn');
+  const email = document.getElementById('gateEmail').value.toLowerCase().trim();
+  const pass  = document.getElementById('gatePass').value;
+  const err   = document.getElementById('gateError');
+  err.classList.remove('visible');
+  btn.disabled = true; btn.textContent = 'Connexion…';
+
+  try {
+    const res  = await fetch('/api/auth/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ email, password: pass }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      const role = data.user?.role || '';
+      if (role !== 'admin' && role !== 'owner') {
+        err.textContent = 'Accès réservé aux administrateurs.';
+        err.classList.add('visible');
+        btn.disabled = false; btn.textContent = 'Accéder au tableau de bord';
+        return;
+      }
+      localStorage.setItem('leclam_token', data.token);
+      if (data.csrfToken) localStorage.setItem('leclam_csrf', data.csrfToken);
+      localStorage.setItem('leclam_user', JSON.stringify({ name: data.user.name, email: data.user.email, role }));
+      showAdmin(data.user);
+    } else {
+      err.textContent = data.error || 'Identifiants incorrects.';
+      err.classList.add('visible');
+      btn.disabled = false; btn.textContent = 'Accéder au tableau de bord';
+    }
+  } catch {
+    err.textContent = 'Serveur inaccessible. Vérifiez que npm start est lancé.';
+    err.classList.add('visible');
+    btn.disabled = false; btn.textContent = 'Accéder au tableau de bord';
+  }
+}
+
+function showAdmin(user) {
+  document.getElementById('adminGate').classList.add('hidden');
+  document.getElementById('adminContent').classList.add('visible');
+  const w = document.getElementById('adminWelcome');
+  if (w && user?.name) w.textContent = 'Bonjour, ' + user.name;
+
+  /* Restaure la dernière tuile ouverte */
+  try {
+    const last = JSON.parse(sessionStorage.getItem('leclam_admin_tile') || 'null');
+    if (last?.key) { openTile(last.key, last.url || undefined); return; }
+  } catch {}
+  loadOrders();
+}
+
+/* ── Maintenance ── */
+async function loadMaintenanceState() {
+  try {
+    const r = await fetch('/api/maintenance');
+    const d = await r.json();
+    _applyMaintenanceUI(d.active, d.message || '');
+  } catch {}
+}
+
+function _applyMaintenanceUI(active, message) {
+  const toggle = document.getElementById('maintenanceToggle');
+  const thumb  = document.getElementById('maintenanceThumb');
+  const dot    = document.getElementById('maintenanceDot');
+  const label  = document.getElementById('maintenanceToggleLabel');
+  const status = document.getElementById('maintenanceStatus');
+  const sub    = document.getElementById('maintenanceSub');
+  const card   = document.getElementById('maintenanceCard');
+
+  if (toggle) toggle.checked = active;
+  if (thumb)  thumb.style.background  = active ? '#c0392b' : '#e0e0e0';
+  if (dot)    dot.style.transform     = active ? 'translateX(22px)' : 'translateX(0)';
+  if (label)  label.textContent       = active ? 'Actif' : 'Inactif';
+  if (status) { status.textContent = active ? '● Maintenance' : '● En ligne'; status.style.color = active ? '#c0392b' : '#27ae60'; }
+  if (sub)    sub.textContent         = active ? 'Site fermé' : 'Site en ligne';
+  if (card)   card.style.borderColor  = active ? '#c0392b' : '';
+  const msgEl = document.getElementById('maintenanceMsg');
+  if (msgEl && message) msgEl.value = message;
+}
+
+function toggleMaintenance() {
+  const active = document.getElementById('maintenanceToggle').checked;
+  _applyMaintenanceUI(active, document.getElementById('maintenanceMsg')?.value || '');
+  saveMaintenance();
+}
+
+async function saveMaintenance() {
+  const active  = document.getElementById('maintenanceToggle').checked;
+  const message = document.getElementById('maintenanceMsg')?.value.trim() || '';
+  try {
+    const r = await fetch('/api/admin/maintenance', {
+      method: 'POST', headers: { ...adminHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ active, message }),
+    });
+    const d = await r.json();
+    if (d.ok) {
+      _applyMaintenanceUI(d.maintenance.active, d.maintenance.message);
+      const saved = document.getElementById('maintenanceSaved');
+      if (saved) { saved.style.display = 'inline'; setTimeout(() => saved.style.display = 'none', 2500); }
+    }
+  } catch {}
+}
+
+function exportCSV() {
+  const orders = _allOrders || [];
+  if (!orders.length) { alert('Aucune commande à exporter.'); return; }
+
+  const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+
+  const rows = [
+    ['ID', 'Date', 'Email', 'Statut', 'Articles', 'Livraison (€)', 'Total (€)', 'Moyen paiement', 'Adresse', 'CP', 'Ville', 'Pays'].join(';')
+  ];
+
+  for (const o of orders) {
+    const articles = (o.items || []).map(i => `${i.qty}x ${i.name || i.id}`).join(' | ');
+    const addr = o.shippingAddress || {};
+    rows.push([
+      esc(o.id),
+      esc(o.createdAt ? new Date(o.createdAt).toLocaleDateString('fr-FR') : ''),
+      esc(o.email),
+      esc(o.status),
+      esc(articles),
+      esc((o.shipping ?? 0).toFixed(2)),
+      esc((o.total ?? 0).toFixed(2)),
+      esc(o.paymentMethod || ''),
+      esc(addr.rue || addr.street || ''),
+      esc(addr.cp  || addr.zip   || ''),
+      esc(addr.ville || addr.city || ''),
+      esc(addr.pays || addr.country || 'France'),
+    ].join(';'));
+  }
+
+  const bom  = '﻿';
+  const blob = new Blob([bom + rows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().slice(0, 10);
+  a.href     = url;
+  a.download = `leclam-commandes-${date}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function adminLogout() {
+  localStorage.removeItem('leclam_token');
+  localStorage.removeItem('leclam_csrf');
+  localStorage.removeItem('leclam_user');
+  document.getElementById('adminContent').classList.remove('visible');
+  document.getElementById('adminGate').classList.remove('hidden');
+  document.getElementById('gateEmail').value = '';
+  document.getElementById('gatePass').value  = '';
+  document.getElementById('gateError').classList.remove('visible');
+  document.getElementById('gateBtn').textContent = 'Accéder au tableau de bord';
+}
+
+/* Réajuste l'iframe quand le contenu change */
+window.addEventListener('message', e => {
+  if (e.data?.type === 'iframeResize') {
+    const frame = document.getElementById('tileFrame');
+    if (frame && e.data.h > 0) frame.style.height = e.data.h + 'px';
+  }
+});
+
+/* Hauteur top-bar pour sticky nav */
+function _setTopbarH() {
+  const h = document.querySelector('.top-bar')?.offsetHeight || 52;
+  document.documentElement.style.setProperty('--topbar-h', h + 'px');
+}
+window.addEventListener('resize', _setTopbarH);
+document.addEventListener('DOMContentLoaded', _setTopbarH);
+
+/* ── Init : connexion automatique ── */
+(async () => {
+  /* 0. Auto-login localhost (aucun mot de passe requis en local) */
+  try {
+    const res  = await fetch('/api/auth/localhost', { credentials: 'same-origin' });
+    const data = await res.json();
+    if (data.ok && (data.user?.role === 'admin' || data.user?.role === 'owner')) {
+      localStorage.setItem('leclam_token', data.token);
+      if (data.csrfToken) localStorage.setItem('leclam_csrf', data.csrfToken);
+      showAdmin(data.user); return;
+    }
+  } catch { /* pas en local */ }
+
+  /* 1. Token valide en localStorage ? */
+  const token = localStorage.getItem('leclam_token');
+  if (token) {
+    try {
+      const res  = await fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token }, credentials: 'same-origin' });
+      const data = await res.json();
+      if (data.ok && (data.user?.role === 'admin' || data.user?.role === 'owner')) {
+        showAdmin(data.user); return;
+      }
+      localStorage.removeItem('leclam_token');
+    } catch { /* serveur lent — tenter le refresh */ }
+  }
+
+  /* 2. Refresh token (cookie 30 jours) → nouveau token silencieux */
+  try {
+    const res  = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'same-origin' });
+    const data = await res.json();
+    if (data.ok && (data.user?.role === 'admin' || data.user?.role === 'owner')) {
+      localStorage.setItem('leclam_token', data.token);
+      if (data.csrfToken) localStorage.setItem('leclam_csrf', data.csrfToken);
+      showAdmin(data.user); return;
+    }
+  } catch { /* pas de cookie valide */ }
+
+  /* 3. Aucune session — afficher la porte */
+})();
+</script>
+
+</div><!-- /adminContent -->
+</body>
+</html>

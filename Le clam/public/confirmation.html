@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande confirmée — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .confirm-page {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .confirm-page { padding: calc(84px + 44px + 1.5rem) 1rem 3rem; }
+      .confirm-card { padding: 1.8rem 1.2rem; border-radius: 16px; }
+    }
+    @media (max-width: 480px) {
+      .confirm-page { padding: calc(70px + 1rem) .75rem 2.5rem; }
+      .confirm-card { padding: 1.5rem 1rem; border-radius: 14px; }
+    }
+
+    .confirm-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 48px rgba(0,0,0,.1);
+    }
+
+    /* ── Animation ── */
+    .confirm-anim {
+      width: 80px;
+      height: 80px;
+      background: #d1fae5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 1.5rem;
+      animation: popIn .4s cubic-bezier(.175,.885,.32,1.275) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .confirm-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #1a1a1a;
+      margin-bottom: .6rem;
+    }
+    .confirm-card .sub {
+      color: #777;
+      font-size: .9rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* ── Section générique ── */
+    .confirm-section {
+      background: #f9f9f7;
+      border-radius: 14px;
+      margin-bottom: 1.2rem;
+      text-align: left;
+      overflow: hidden;
+    }
+    .confirm-section-head {
+      padding: .7rem 1.2rem;
+      border-bottom: 1px solid #efefed;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #888;
+    }
+    .confirm-section-body { padding: .8rem 1.2rem; }
+
+    /* ── Items commandés ── */
+    .confirm-item {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .55rem 0;
+      border-bottom: 1px solid #efede9;
+    }
+    .confirm-item:last-child { border-bottom: none; }
+    .ci-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      background: #ede9e2;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      overflow: hidden;
+    }
+    .ci-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .ci-info { flex: 1; min-width: 0; }
+    .ci-name {
+      font-size: .875rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ci-qty { font-size: .78rem; color: #999; margin-top: .1rem; }
+    .ci-price { font-size: .875rem; font-weight: 700; color: #1a1a1a; flex-shrink: 0; }
+
+    /* ── Récap financier ── */
+    .confirm-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: .875rem;
+      padding: .28rem 0;
+      color: #555;
+    }
+    .confirm-row strong { color: #1a1a1a; }
+    .confirm-row.shipping-row { color: #777; }
+    .confirm-row.total-row {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1a1a1a;
+      border-top: 1px solid #e8e6e2;
+      margin-top: .5rem;
+      padding-top: .6rem;
+    }
+
+    /* ── Adresse ── */
+    .confirm-addr {
+      font-size: .875rem;
+      color: #444;
+      line-height: 1.6;
+    }
+    .confirm-addr strong { color: #1a1a1a; display: block; margin-bottom: .15rem; }
+
+    /* ── Étapes ── */
+    .confirm-steps {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .confirm-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      font-size: .75rem;
+      color: #999;
+      max-width: 80px;
+      text-align: center;
+    }
+    .confirm-step .step-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .confirm-step:nth-child(2) .step-icon { background: #fef9c3; border-color: #fde047; }
+    .confirm-step:nth-child(3) .step-icon { background: #eff6ff; border-color: #93c5fd; }
+
+    /* ── Actions ── */
+    .confirm-actions { display: flex; flex-direction: column; gap: .75rem; }
+    .btn-primary {
+      display: block;
+      padding: .9rem;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .9rem;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #333; transform: translateY(-2px); }
+    .btn-secondary {
+      display: block;
+      padding: .8rem;
+      border: 1.5px solid #e0e0e0;
+      color: #555;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .875rem;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: #1a1a1a; color: #1a1a1a; }
+
+    .confirm-email-note {
+      font-size: .78rem;
+      color: #aaa;
+      margin-top: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* ── Séparateur entre sections et steps ── */
+    .confirm-divider { height: .8rem; }
+  </style></head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="confirm-page">
+    <div class="confirm-card">
+      <div class="confirm-anim">✓</div>
+
+      <h1 data-i18n="checkout.success_title">Commande confirmée !</h1>
+      <p class="sub" data-i18n="checkout.success_sub">Merci pour votre commande. Vous recevrez un email de confirmation.</p>
+
+      <!-- Articles commandés -->
+      <div class="confirm-section" id="confirmItems" style="display:none">
+        <div class="confirm-section-head" data-i18n="orders.items">Articles commandés</div>
+        <div class="confirm-section-body" id="confirmItemsList"></div>
+      </div>
+
+      <!-- Récap financier + infos -->
+      <div class="confirm-section" id="confirmDetail">
+        <div class="confirm-section-head" data-i18n="checkout.order_summary">Récapitulatif</div>
+        <div class="confirm-section-body" id="confirmDetailBody">
+          <!-- rempli par JS -->
+        </div>
+      </div>
+
+      <!-- Adresse de livraison -->
+      <div class="confirm-section" id="confirmAddressSection" style="display:none">
+        <div class="confirm-section-head" data-i18n="checkout.address">Livraison à</div>
+        <div class="confirm-section-body">
+          <div class="confirm-addr" id="confirmAddr"></div>
+        </div>
+      </div>
+
+      <div class="confirm-divider"></div>
+
+      <div class="confirm-steps">
+        <div class="confirm-step">
+          <div class="step-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <span>Commande<br>confirmée</span>
+        </div>
+        <div class="confirm-step">
+          <div class="step-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <span>En cours de<br>préparation</span>
+        </div>
+        <div class="confirm-step">
+          <div class="step-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <span>Livraison<br>5–10 jours</span>
+        </div>
+      </div>
+
+      <div class="confirm-actions">
+        <a href="mes-commandes.html" class="btn-primary" data-i18n="checkout.track_order">Suivre mes commandes</a>
+        <a href="index.html" class="btn-secondary" data-i18n="checkout.continue_shopping">← Continuer mes achats</a>
+      </div>
+
+      <p class="confirm-email-note" id="emailNote"></p>
+    </div>
+  </main>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+  <script>
+    const params  = new URLSearchParams(location.search);
+    const userObj = JSON.parse(localStorage.getItem('leclam_user') || '{}');
+
+    function fmtDate(iso) {
+      return new Date(iso).toLocaleDateString(I18n.locale || 'fr-FR', { day:'numeric', month:'long', year:'numeric' });
+    }
+    function fmtPrice(n) {
+      return Number(n).toFixed(2).replace('.', ',') + ' €';
+    }
+
+    function renderItems(items) {
+      if (!items || !items.length) return;
+      const section = document.getElementById('confirmItems');
+      const list    = document.getElementById('confirmItemsList');
+      section.style.display = '';
+      list.innerHTML = items.map(item => {
+        const thumb = item.img
+          ? `<img src="${item.img}" alt="${item.name}">`
+          : `<span>${item.emoji || '📦'}</span>`;
+        return `<div class="confirm-item">
+          <div class="ci-thumb">${thumb}</div>
+          <div class="ci-info">
+            <div class="ci-name">${item.name}</div>
+            <div class="ci-qty">${I18n.t('checkout.qty_label')}&nbsp;: ${item.qty}</div>
+          </div>
+          <div class="ci-price">${fmtPrice(item.price * item.qty)}</div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderSummary(orderId, createdAt, total, shipping) {
+      const date         = createdAt ? new Date(createdAt) : new Date();
+      const deliveryDate = new Date(date);
+      deliveryDate.setDate(date.getDate() + 10);
+
+      const body = document.getElementById('confirmDetailBody');
+      const rows = [
+        [I18n.t('checkout.order_num'), orderId],
+        [I18n.t('checkout.date_label'), fmtDate(date.toISOString())],
+        [I18n.t('checkout.estimated_delivery'), I18n.t('checkout.before_date') + fmtDate(deliveryDate.toISOString())],
+      ];
+
+      let html = rows.map(([l, v]) =>
+        `<div class="confirm-row"><span>${l}</span><strong>${v}</strong></div>`
+      ).join('');
+
+      if (shipping != null && Number(shipping) > 0) {
+        html += `<div class="confirm-row shipping-row"><span>${I18n.t("checkout.shipping")}</span><span>${fmtPrice(shipping)}</span></div>`;
+      } else if (shipping != null && Number(shipping) === 0) {
+        html += `<div class="confirm-row shipping-row"><span>${I18n.t("checkout.shipping")}</span><span style="color:#16a34a;font-weight:600">${I18n.t("checkout.free")}</span></div>`;
+      }
+
+      html += `<div class="confirm-row total-row"><span>${I18n.t("checkout.total_paid")}</span><span>${fmtPrice(total)}</span></div>`;
+      body.innerHTML = html;
+    }
+
+    function renderAddress(addr) {
+      if (!addr) return;
+      const { firstName, lastName, line1, line2, zip, city, country } = addr;
+      if (!line1 && !city) return;
+      const section = document.getElementById('confirmAddressSection');
+      const el      = document.getElementById('confirmAddr');
+      section.style.display = '';
+      el.innerHTML = `
+        <strong>${[firstName, lastName].filter(Boolean).join(' ') || ''}</strong>
+        ${[line1, line2, [zip, city].filter(Boolean).join(' '), country].filter(Boolean).join('<br>')}
+      `;
+    }
+
+    let _lastOrder = null;
+
+    function renderConfirm(order) {
+      _lastOrder = order;
+      renderItems(order.items);
+      renderSummary(order.id, order.createdAt, order.total, order.shipping);
+      renderAddress(order.shippingAddress);
+
+      if (userObj.email || order.email) {
+        const email = order.email || userObj.email;
+        document.getElementById('emailNote').textContent = I18n.t('checkout.email_sent').replace('{{email}}', email);
+      }
+    }
+
+    /* Re-render les labels traduits une fois que I18n a chargé */
+    document.addEventListener('i18nApplied', () => {
+      if (_lastOrder) renderSummary(_lastOrder.id, _lastOrder.createdAt, _lastOrder.total, _lastOrder.shipping);
+    });
+
+    function findLocalOrder(id) {
+      try {
+        const orders = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+        return orders.find(o => o.id === id) || null;
+      } catch { return null; }
+    }
+
+    const token = localStorage.getItem('leclam_token') || '';
+    const csrf  = localStorage.getItem('leclam_csrf')  || '';
+    const hdrs  = { 'Content-Type':'application/json', 'Authorization':'Bearer '+token, 'X-CSRF-Token':csrf };
+
+    /* ── Cas 1 : retour Stripe Checkout ── */
+    const stripeSession = params.get('stripe_session');
+
+    /* ── Cas 2 : retour PayPal ── */
+    const paypalToken = params.get('token'); // PayPal passe ?token=ORDRE_ID dans l'URL
+
+    /* ── Cas 3 : retour direct (virement, crypto, Apple Pay) ── */
+    const directId    = params.get('id');
+    const directTotal = params.get('total');
+
+    /* ── Cas 1b : retour Stripe Payment Elements après 3D Secure ── */
+    const paymentIntentId = params.get('payment_intent');
+    const redirectStatus  = params.get('redirect_status');
+
+    if (paymentIntentId && redirectStatus === 'succeeded') {
+      const pending = (() => { try { return JSON.parse(sessionStorage.getItem('_stripe_pending') || '{}'); } catch { return {}; } })();
+      fetch('/api/orders/confirm', {
+        method:  'POST',
+        headers: hdrs,
+        body:    JSON.stringify({ paymentIntentId, items: pending.items || [], customerEmail: pending.email || '', shippingAddress: pending.shippingAddress || null, parrainCode: pending.parrainCode || null }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.ok) {
+            localStorage.removeItem('leclam_cart');
+            sessionStorage.removeItem('_stripe_pending');
+          }
+          renderConfirm({ id: data.ok ? data.orderId : paymentIntentId, total: data.total || pending.total || 0 });
+        })
+        .catch(() => renderConfirm({ id: paymentIntentId, total: pending.total || 0 }));
+
+    } else if (paymentIntentId && redirectStatus && redirectStatus !== 'succeeded') {
+      /* 3DS échoué ou annulé — on redirige vers paiement.html */
+      sessionStorage.removeItem('_stripe_pending');
+      location.href = 'paiement.html?stripe_error=' + encodeURIComponent(redirectStatus);
+
+    } else if (stripeSession) {
+      fetch('/api/stripe/verify-session', { method:'POST', headers:hdrs, body:JSON.stringify({ sessionId:stripeSession }) })
+        .then(r => r.json())
+        .then(data => {
+          if (data.ok) {
+            localStorage.removeItem('leclam_cart');
+            renderConfirm({ id: data.orderId, total: data.total });
+          } else {
+            renderConfirm({ id: stripeSession, total: 0 });
+            document.getElementById('emailNote').textContent = I18n.t('checkout.payment_received');
+          }
+        })
+        .catch(() => renderConfirm({ id: stripeSession, total: 0 }));
+
+    } else if (paypalToken) {
+      fetch('/api/paypal/capture-order', { method:'POST', headers:hdrs, body:JSON.stringify({ token: paypalToken }) })
+        .then(r => r.json())
+        .then(data => {
+          if (data.ok) {
+            localStorage.removeItem('leclam_cart');
+            renderConfirm({ id: data.orderId, total: data.total });
+          } else {
+            renderConfirm({ id: paypalToken, total: 0 });
+            document.getElementById('emailNote').textContent = I18n.t('checkout.paypal_processing');
+          }
+        })
+        .catch(() => renderConfirm({ id: paypalToken, total: 0 }));
+
+    } else if (directId) {
+      const saved = findLocalOrder(directId);
+      localStorage.removeItem('leclam_cart');
+      renderConfirm(saved || { id: directId, total: directTotal || 0 });
+      if (params.get('method') === 'virement') {
+        const ref = saved?.virementRef || '';
+        document.getElementById('emailNote').textContent = I18n.t('checkout.virement_pending').replace('{{ref}}', ref ? I18n.t('checkout.virement_ref_part').replace('{{ref}}', ref) : '');
+      } else if (params.get('method') === 'crypto') {
+        document.getElementById('emailNote').textContent = I18n.t('checkout.crypto_pending');
+      }
+
+    } else {
+      /* Aucun paramètre reconnu — accès direct sans paiement */
+      location.replace('index.html');
+    }
+  </script>
+</body>
+</html>

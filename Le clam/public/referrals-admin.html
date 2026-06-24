@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parrainage — Admin Le Clam</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #f8f5f0; color: #1a1a1a; padding: 1.5rem; }
+    h2 { font-size: 1.1rem; color: #3e2a14; margin-bottom: 1.2rem; font-weight: 700; }
+    .kpi-row { display: flex; gap: .8rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+    .kpi { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: 1rem 1.3rem; flex: 1; min-width: 130px; }
+    .kpi-n { font-size: 1.7rem; font-weight: 900; color: #3e2a14; }
+    .kpi-l { font-size: .72rem; color: #888; margin-top: .1rem; }
+    .ref-list { display: flex; flex-direction: column; gap: .65rem; }
+    .ref-card { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 1rem; }
+    .ref-code { font-family: monospace; font-size: 1.1rem; font-weight: 900; color: #3e2a14; min-width: 140px; }
+    .ref-body { flex: 1; min-width: 0; }
+    .ref-name { font-weight: 700; font-size: .9rem; }
+    .ref-email { font-size: .75rem; color: #888; }
+    .ref-badge { background: #3e2a14; color: #d9c4a0; font-size: .72rem; font-weight: 700; padding: .25rem .7rem; border-radius: 20px; white-space: nowrap; }
+    .empty { text-align: center; color: #bbb; padding: 2.5rem; font-size: .88rem; }
+  </style></head>
+<body>
+
+<h2>🤝 Stats Parrainage</h2>
+
+<div class="kpi-row" id="kpiRow">
+  <div class="kpi"><div class="kpi-n" id="kpiTotal">—</div><div class="kpi-l">Codes créés</div></div>
+  <div class="kpi"><div class="kpi-n" id="kpiUses">—</div><div class="kpi-l">Parrainages réalisés</div></div>
+  <div class="kpi"><div class="kpi-n" id="kpiDisc">—</div><div class="kpi-l">Bons distribués (€)</div></div>
+</div>
+
+<div class="ref-list" id="refList"><div class="empty">Chargement…</div></div>
+
+<script>
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  const heads = { 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+
+  async function load() {
+    try {
+      const r = await fetch('/api/admin/referrals', { headers: heads });
+      const d = await r.json();
+      if (!d.ok) { document.getElementById('refList').innerHTML = '<div class="empty">Erreur de chargement.</div>'; return; }
+
+      const refs = d.referrals || [];
+      const totalUses = refs.reduce((s, r) => s + r.uses, 0);
+      document.getElementById('kpiTotal').textContent = refs.length;
+      document.getElementById('kpiUses').textContent  = totalUses;
+      document.getElementById('kpiDisc').textContent  = (totalUses * 10) + ' €'; /* 5 parrain + 5 filleul */
+
+      if (!refs.length) {
+        document.getElementById('refList').innerHTML = '<div class="empty">Aucun code parrain créé pour l'instant.</div>';
+        return;
+      }
+      document.getElementById('refList').innerHTML = refs.map(r => `
+        <div class="ref-card">
+          <div class="ref-code">${r.code}</div>
+          <div class="ref-body">
+            <div class="ref-name">${r.ownerName || '—'}</div>
+            <div class="ref-email">${r.ownerEmail}</div>
+          </div>
+          <div class="ref-badge">${r.uses} filleul${r.uses > 1 ? 's' : ''}</div>
+        </div>
+      `).join('');
+    } catch {
+      document.getElementById('refList').innerHTML = '<div class="empty">Erreur réseau.</div>';
+    }
+  }
+
+  load();
+
+  window.addEventListener('load', () => {
+    const send = () => window.parent?.postMessage({ type: 'iframeResize' }, '*');
+    send(); setTimeout(send, 500); setTimeout(send, 1500);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics — Le Clam</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #f8f5f0; color: #1a1a1a; padding: 1.5rem; }
+
+    h2 { font-size: 1.15rem; color: #3e2a14; margin-bottom: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; }
+
+    /* Période */
+    .period-bar { display: flex; gap: .4rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+    .period-btn { padding: .4rem .9rem; border: 1.5px solid #e0d5c5; border-radius: 20px; background: #fff; font-size: .8rem; font-weight: 600; color: #666; cursor: pointer; font-family: inherit; transition: all .18s; }
+    .period-btn.active { background: #3e2a14; color: #d9c4a0; border-color: #3e2a14; }
+
+    /* KPI */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.6rem; }
+    .kpi { background: #fff; border-radius: 14px; padding: 1.1rem 1.2rem; border: 1.5px solid #ede8e0; }
+    .kpi-label { font-size: .75rem; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: .04em; margin-bottom: .4rem; }
+    .kpi-val   { font-size: 1.6rem; font-weight: 800; color: #1a1a1a; line-height: 1; }
+    .kpi-sub   { font-size: .72rem; color: #bbb; margin-top: .3rem; }
+    .kpi-trend { font-size: .78rem; font-weight: 700; margin-top: .3rem; }
+    .up   { color: #16a34a; }
+    .down { color: #dc2626; }
+
+    /* Charts */
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
+
+    .chart-box { background: #fff; border-radius: 14px; padding: 1.2rem; border: 1.5px solid #ede8e0; }
+    .chart-box.wide { grid-column: 1 / -1; }
+    .chart-title { font-size: .82rem; font-weight: 700; color: #3e2a14; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .04em; }
+
+    /* Top produits */
+    .top-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .top-item { display: flex; align-items: center; gap: .7rem; font-size: .83rem; }
+    .top-rank { width: 20px; font-weight: 800; color: #c8a87a; font-size: .75rem; flex-shrink: 0; }
+    .top-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #333; font-weight: 600; }
+    .top-bar-wrap { width: 80px; height: 6px; background: #f0ebe3; border-radius: 3px; flex-shrink: 0; }
+    .top-bar  { height: 100%; background: #3e2a14; border-radius: 3px; }
+    .top-qty  { font-weight: 700; color: #3e2a14; font-size: .78rem; width: 30px; text-align: right; flex-shrink: 0; }
+
+    /* Table commandes récentes */
+    .recent-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    .recent-table th { text-align: left; font-weight: 700; color: #999; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; padding: .4rem .6rem; border-bottom: 1.5px solid #f0ebe3; }
+    .recent-table td { padding: .55rem .6rem; border-bottom: 1px solid #f8f5f0; color: #333; }
+    .recent-table tr:last-child td { border-bottom: none; }
+    .badge-status { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .7rem; font-weight: 700; }
+    .s-processing { background: #dbeafe; color: #1d4ed8; }
+    .s-shipped    { background: #ede9fe; color: #6d28d9; }
+    .s-delivered  { background: #dcfce7; color: #15803d; }
+    .s-cancelled  { background: #fee2e2; color: #dc2626; }
+    .s-pending_payment { background: #fef9c3; color: #a16207; }
+    .s-pending_virement { background: #fef9c3; color: #a16207; }
+    .s-pending_sepa     { background: #fef9c3; color: #a16207; }
+    .s-pending_crypto   { background: #f3e8ff; color: #7c3aed; }
+
+    .empty { text-align: center; color: #bbb; padding: 2rem; font-size: .85rem; }
+  </style></head>
+<body>
+
+<div class="period-bar">
+  <button class="period-btn" onclick="setPeriod(7)"   id="p7">7 jours</button>
+  <button class="period-btn active" onclick="setPeriod(30)"  id="p30">30 jours</button>
+  <button class="period-btn" onclick="setPeriod(90)"  id="p90">90 jours</button>
+  <button class="period-btn" onclick="setPeriod(365)" id="p365">1 an</button>
+  <button class="period-btn" onclick="setPeriod(0)"   id="p0">Tout</button>
+</div>
+
+<!-- KPIs -->
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-label">Chiffre d'affaires</div><div class="kpi-val" id="kCA">—</div><div class="kpi-sub" id="kCASub"></div></div>
+  <div class="kpi"><div class="kpi-label">Commandes</div><div class="kpi-val" id="kNb">—</div><div class="kpi-sub" id="kNbSub"></div></div>
+  <div class="kpi"><div class="kpi-label">Panier moyen</div><div class="kpi-val" id="kAvg">—</div><div class="kpi-sub"></div></div>
+  <div class="kpi"><div class="kpi-label">Livraisons</div><div class="kpi-val" id="kDel">—</div><div class="kpi-sub" id="kDelSub"></div></div>
+  <div class="kpi"><div class="kpi-label">Annulées</div><div class="kpi-val" id="kCan">—</div><div class="kpi-sub" id="kCanSub"></div></div>
+</div>
+
+<!-- Graphiques -->
+<div class="charts-grid">
+  <div class="chart-box wide">
+    <div class="chart-title">Chiffre d'affaires</div>
+    <canvas id="chartCA" height="80"></canvas>
+  </div>
+  <div class="chart-box">
+    <div class="chart-title">Statuts des commandes</div>
+    <canvas id="chartStatus" height="180"></canvas>
+  </div>
+  <div class="chart-box">
+    <div class="chart-title">Moyens de paiement</div>
+    <canvas id="chartPayment" height="180"></canvas>
+  </div>
+</div>
+
+<div class="charts-grid">
+  <div class="chart-box">
+    <div class="chart-title">Top 8 produits</div>
+    <ul class="top-list" id="topList"><li class="empty">Chargement…</li></ul>
+  </div>
+  <div class="chart-box">
+    <div class="chart-title">Dernières commandes</div>
+    <table class="recent-table">
+      <thead><tr><th>ID</th><th>Email</th><th>Total</th><th>Statut</th><th>Date</th></tr></thead>
+      <tbody id="recentBody"><tr><td colspan="5" class="empty">Chargement…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  let _period = 30;
+  let _orders = [];
+  let _chartCA, _chartStatus, _chartPayment;
+
+  const fmt = n => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+  const fmtSmall = n => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+  const STATUS_LABELS = { processing:'Préparation', shipped:'Expédiée', delivered:'Livrée', cancelled:'Annulée', pending_payment:'En attente', pending_virement:'Virement', pending_sepa:'SEPA', pending_crypto:'Crypto' };
+  const PAY_LABELS    = { stripe_card:'Carte', paypal:'PayPal', crypto_BTC:'Bitcoin', crypto_ETH:'Ethereum', crypto_USDT:'USDT', crypto_SOL:'Solana', virement:'Virement', sepa_debit:'SEPA', apple_pay:'Apple Pay' };
+
+  function setPeriod(days) {
+    _period = days;
+    document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('p' + days)?.classList.add('active');
+    render();
+  }
+
+  function filterOrders(orders) {
+    if (!_period) return orders;
+    const since = Date.now() - _period * 864e5;
+    return orders.filter(o => new Date(o.createdAt).getTime() >= since);
+  }
+
+  async function load() {
+    const token = localStorage.getItem('leclam_token') || '';
+    const csrf  = localStorage.getItem('leclam_csrf')  || '';
+    try {
+      const r = await fetch('/api/orders', { headers: { 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf } });
+      const d = await r.json();
+      _orders = (d.orders || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    } catch { _orders = []; }
+    render();
+  }
+
+  function render() {
+    const filtered = filterOrders(_orders);
+    const paid = filtered.filter(o => !['cancelled','pending_payment'].includes(o.status));
+
+    /* KPIs */
+    const ca  = paid.reduce((s, o) => s + (o.total || 0), 0);
+    const avg = paid.length ? ca / paid.length : 0;
+    const del = filtered.filter(o => o.status === 'delivered').length;
+    const can = filtered.filter(o => o.status === 'cancelled').length;
+
+    document.getElementById('kCA').textContent  = fmt(ca);
+    document.getElementById('kNb').textContent  = filtered.length;
+    document.getElementById('kAvg').textContent = fmtSmall(avg);
+    document.getElementById('kDel').textContent = del;
+    document.getElementById('kCan').textContent = can;
+    document.getElementById('kCASub').textContent  = paid.length + ' commandes payées';
+    document.getElementById('kNbSub').textContent  = 'dont ' + paid.length + ' payées';
+    document.getElementById('kDelSub').textContent = paid.length ? Math.round(del / paid.length * 100) + '% livrées' : '';
+    document.getElementById('kCanSub').textContent = filtered.length ? Math.round(can / filtered.length * 100) + '% annulées' : '';
+
+    renderCA(paid);
+    renderStatus(filtered);
+    renderPayment(paid);
+    renderTop(paid);
+    renderRecent(filtered);
+  }
+
+  function renderCA(orders) {
+    const days = _period || 30;
+    const buckets = {};
+    const now = Date.now();
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date(now - i * 864e5);
+      const key = d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+      buckets[key] = 0;
+    }
+    for (const o of orders) {
+      const key = new Date(o.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+      if (key in buckets) buckets[key] += (o.total || 0);
+    }
+    const labels = Object.keys(buckets);
+    const data   = Object.values(buckets);
+
+    if (_chartCA) _chartCA.destroy();
+    _chartCA = new Chart(document.getElementById('chartCA'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{ label: 'CA (€)', data, fill: true,
+          backgroundColor: 'rgba(62,42,20,.07)', borderColor: '#3e2a14', borderWidth: 2,
+          pointRadius: days <= 30 ? 3 : 0, pointBackgroundColor: '#3e2a14', tension: .35 }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: v => fmt(v) } }, x: { ticks: { maxTicksLimit: 8 } } } }
+    });
+  }
+
+  function renderStatus(orders) {
+    const counts = {};
+    for (const o of orders) counts[o.status] = (counts[o.status] || 0) + 1;
+    const labels = Object.keys(counts).map(s => STATUS_LABELS[s] || s);
+    const data   = Object.values(counts);
+    const colors = ['#3e2a14','#c8a87a','#27ae60','#e74c3c','#f39c12','#2980b9','#8e44ad','#95a5a6'];
+
+    if (_chartStatus) _chartStatus.destroy();
+    _chartStatus = new Chart(document.getElementById('chartStatus'), {
+      type: 'doughnut',
+      data: { labels, datasets: [{ data, backgroundColor: colors.slice(0, data.length), borderWidth: 0 }] },
+      options: { plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }, cutout: '60%' }
+    });
+  }
+
+  function renderPayment(orders) {
+    const counts = {};
+    for (const o of orders) {
+      const pm = o.paymentMethod || 'inconnu';
+      counts[pm] = (counts[pm] || 0) + 1;
+    }
+    const labels = Object.keys(counts).map(p => PAY_LABELS[p] || p);
+    const data   = Object.values(counts);
+    const colors = ['#1a6b3c','#003087','#F7931A','#627EEA','#26A17B','#9945FF','#3e2a14','#1d4ed8','#000'];
+
+    if (_chartPayment) _chartPayment.destroy();
+    _chartPayment = new Chart(document.getElementById('chartPayment'), {
+      type: 'doughnut',
+      data: { labels, datasets: [{ data, backgroundColor: colors.slice(0, data.length), borderWidth: 0 }] },
+      options: { plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }, cutout: '60%' }
+    });
+  }
+
+  function renderTop(orders) {
+    const qty = {};
+    for (const o of orders) {
+      for (const item of (o.items || [])) {
+        const name = item.name || item.id;
+        qty[name] = (qty[name] || 0) + (item.qty || 1);
+      }
+    }
+    const sorted = Object.entries(qty).sort((a, b) => b[1] - a[1]).slice(0, 8);
+    const max    = sorted[0]?.[1] || 1;
+    const ul     = document.getElementById('topList');
+    if (!sorted.length) { ul.innerHTML = '<li class="empty">Aucune donnée</li>'; return; }
+    ul.innerHTML = sorted.map(([name, q], i) => `
+      <li class="top-item">
+        <span class="top-rank">${i + 1}</span>
+        <span class="top-name" title="${name}">${name}</span>
+        <span class="top-bar-wrap"><span class="top-bar" style="width:${Math.round(q/max*100)}%"></span></span>
+        <span class="top-qty">${q}</span>
+      </li>`).join('');
+  }
+
+  function renderRecent(orders) {
+    const tbody = document.getElementById('recentBody');
+    const slice = orders.slice(0, 10);
+    if (!slice.length) { tbody.innerHTML = '<tr><td colspan="5" class="empty">Aucune commande</td></tr>'; return; }
+    tbody.innerHTML = slice.map(o => {
+      const cls = 's-' + (o.status || 'pending_payment');
+      const lbl = STATUS_LABELS[o.status] || o.status || '—';
+      const date = o.createdAt ? new Date(o.createdAt).toLocaleDateString('fr-FR') : '—';
+      const id   = (o.id || '').slice(0, 12);
+      return `<tr>
+        <td style="font-family:monospace;font-size:.75rem;color:#888">${id}</td>
+        <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.email || '—'}</td>
+        <td style="font-weight:700">${fmtSmall(o.total || 0)}</td>
+        <td><span class="badge-status ${cls}">${lbl}</span></td>
+        <td style="color:#aaa">${date}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  load();
+
+  /* Notifier l'admin parent pour l'auto-hauteur iframe */
+  window.addEventListener('load', () => {
+    const send = () => window.parent?.postMessage({ type: 'iframeResize' }, '*');
+    send(); setTimeout(send, 600); setTimeout(send, 1500);
+  });
+</script>
+</body>
+</html>

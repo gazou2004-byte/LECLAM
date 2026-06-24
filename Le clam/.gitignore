@@ -1,0 +1,38 @@
+# Dépendances
+node_modules/
+
+# Environnement (clés API, secrets)
+.env
+.env.local
+.env.*.local
+
+# Données runtime (commandes, users, sessions, factures)
+data/orders.json
+data/users.json
+data/sessions.json
+data/tokens.json
+data/messages.json
+data/threads.json
+data/invoices.json
+data/invoice-counter.json
+data/avoir-counter.json
+data/avoirs.json
+data/vouchers.json
+data/referrals.json
+data/ratings.json
+data/flash-sales.json
+data/bundles.json
+data/abandoned-carts.json
+data/remises.json
+data/push-subscriptions.json
+data/invoices/
+data/logs/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Éditeurs
+.vscode/
+*.swp
+*.swo

@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fournisseurs — Le Clam Admin</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f4f4f4; color: #222; min-height: 100vh; }
+
+    /* ── Header ── */
+    .top-bar {
+      background: #3e2a14; color: #d9c4a0;
+      padding: .85rem 2rem;
+      display: flex; align-items: center; gap: 1rem;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .top-bar a {
+      color: #d9c4a0; text-decoration: none; font-size: .85rem; font-weight: 600;
+      display: flex; align-items: center; gap: .4rem;
+      padding: .35rem .75rem; border-radius: 6px;
+      border: 1px solid rgba(217,196,160,.3);
+      transition: background .15s;
+    }
+    .top-bar a:hover { background: rgba(255,255,255,.12); }
+    .top-bar h1 { font-size: 1.05rem; font-weight: 700; flex: 1; }
+
+    /* ── Layout ── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── Stats ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      background: #fff; border-radius: 12px; padding: .8rem 1rem;
+      border: 1.5px solid #e8e8e8;
+      display: flex; flex-direction: column; gap: .15rem;
+    }
+    .stat-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #aaa; }
+    .stat-value { font-size: 1.5rem; font-weight: 800; color: #1a1a1a; margin-top: .1rem; }
+    .stat-sub   { font-size: .72rem; color: #888; }
+
+    /* ── Section title ── */
+    .section-title {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: #aaa; margin-bottom: .75rem;
+    }
+
+    /* ── Gestion fournisseurs ── */
+    .suppliers-panel {
+      background: #fff; border-radius: 14px; border: 1px solid #e8e8e8;
+      padding: .9rem 1.2rem; margin-bottom: 2rem;
+    }
+    .suppliers-panel-top {
+      display: flex; align-items: center; gap: .75rem; margin-bottom: .6rem; flex-wrap: wrap;
+    }
+    .suppliers-panel-top h2 { font-size: .88rem; font-weight: 700; flex: 1; }
+    .btn-add-sup {
+      padding: .38rem .9rem; background: #3e2a14; color: #d9c4a0;
+      border: none; border-radius: 7px; font-size: .8rem; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: opacity .15s;
+    }
+    .btn-add-sup:hover { opacity: .85; }
+
+    .sup-list {
+      border: 1px solid #ede8e0;
+      border-radius: 8px;
+    }
+    .sup-list:empty { display: none; }
+    .sup-chip {
+      display: flex; align-items: center; gap: .15rem;
+      padding: .18rem .3rem .18rem .6rem;
+      break-inside: avoid;
+      font-size: .78rem; color: #3e2a14;
+      border-bottom: 1px solid #f0ece5;
+      transition: background .1s;
+    }
+    .sup-chip:hover { background: #faf5ee; }
+    .sup-num { font-size: .68rem; color: #c0a882; min-width: 1.2rem; flex-shrink: 0; }
+    .sup-chip input {
+      border: none; background: transparent; font-family: inherit;
+      font-size: .78rem; font-weight: 600; color: #3e2a14;
+      outline: none; flex: 1; min-width: 0; padding: 0;
+    }
+    .sup-chip-sep { color: #ddd; font-size: .75rem; flex-shrink: 0; user-select: none; }
+    .sup-chip-email {
+      border: none; background: transparent; font-family: inherit;
+      font-size: .73rem; color: #3e2a14; outline: none;
+      min-width: 0; width: 160px; padding: 0; flex-shrink: 0;
+    }
+    .sup-chip-email::placeholder { color: #c0c8d8; font-style: italic; }
+    .sup-chip-email:focus { background: #f0f6ff; border-radius: 4px; padding: 0 .25rem; width: 200px; }
+    .sup-chip-edit {
+      background: none; border: none; cursor: pointer; color: #c0a882;
+      font-size: .65rem; padding: .1rem .18rem; border-radius: 3px;
+      font-family: inherit; opacity: 0; transition: opacity .12s;
+      flex-shrink: 0; line-height: 1;
+    }
+    .sup-chip:hover .sup-chip-edit { opacity: 1; }
+    .sup-chip-edit:hover { background: #e8dfc9; color: #3e2a14; }
+    .sup-chip-del {
+      background: none; border: none; cursor: pointer; color: #ccc;
+      font-size: .78rem; padding: .1rem .15rem; line-height: 1; border-radius: 3px;
+      transition: color .12s; opacity: 0; flex-shrink: 0;
+    }
+    .sup-chip:hover .sup-chip-del { opacity: 1; }
+    .sup-chip-del:hover { color: #c0392b; }
+    .sup-chip-tva {
+      font-size: .62rem; font-weight: 700; padding: .12rem .4rem; border-radius: 20px;
+      border: 1.5px solid #e0d8cc; background: #faf8f5; color: #bbb;
+      cursor: pointer; font-family: inherit; flex-shrink: 0; line-height: 1;
+      transition: all .15s; white-space: nowrap;
+    }
+    .sup-chip-tva.tva-on { background: #dcfce7; border-color: #86efac; color: #16a34a; }
+    .sup-chip-tva:hover { border-color: #c8b89a; }
+
+    /* ── TVA livraison dans la table ── */
+    .livraison-sel {
+      border: 1px solid #ede8e0; background: #faf8f5;
+      font-size: .68rem; color: #7a6550; border-radius: 4px;
+      padding: .1rem .2rem; cursor: pointer; font-family: inherit;
+      max-width: 120px; width: 100%; outline: none; margin-top: .3rem;
+      appearance: none; -webkit-appearance: none;
+    }
+    .livraison-sel:focus { border-color: #3e2a14; background: #fff; }
+    .livraison-sel.set { border-color: #3e2a14; background: #faf5ed; color: #3e2a14; }
+
+    .sup-add-row {
+      display: flex; gap: .5rem; align-items: center; margin-top: .8rem;
+    }
+    .sup-add-row input {
+      padding: .38rem .75rem; border: 1.5px solid #ddd; border-radius: 7px;
+      font-size: .83rem; font-family: inherit; flex: 1; max-width: 260px;
+      outline: none; transition: border-color .15s;
+    }
+    .sup-add-row input:focus { border-color: #3e2a14; }
+    .btn-sup-confirm {
+      padding: .38rem .85rem; background: #27ae60; color: #fff;
+      border: none; border-radius: 7px; font-size: .8rem; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    .btn-sup-cancel {
+      padding: .38rem .75rem; background: #f0f0f0; color: #555;
+      border: none; border-radius: 7px; font-size: .8rem; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    .sup-empty { font-size: .82rem; color: #aaa; font-style: italic; }
+
+    .sup-sort-bar {
+      display: flex; align-items: center; gap: .3rem; margin-bottom: .4rem; flex-wrap: wrap;
+    }
+    .sup-sort-label { font-size: .68rem; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-right: .1rem; }
+    .sup-sort-btn {
+      padding: .18rem .55rem; font-size: .72rem; font-weight: 600;
+      border: 1px solid #e0d8cc; border-radius: 20px; background: #faf8f5;
+      color: #7a6550; cursor: pointer; font-family: inherit;
+      transition: background .12s, border-color .12s, color .12s;
+    }
+    .sup-sort-btn:hover { background: #f0e8da; border-color: #c8b89a; }
+    .sup-sort-btn.active { background: #3e2a14; border-color: #3e2a14; color: #d9c4a0; }
+
+    /* ── Analyse par fournisseur ── */
+
+    /* ── Table produits ── */
+    .table-wrap { background: #fff; border-radius: 12px; border: 1.5px solid #e8e8e8; overflow: hidden; margin-bottom: 1.2rem; }
+    .table-toolbar {
+      display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem;
+      border-bottom: 1px solid #f0f0f0; flex-wrap: wrap; background: #fff;
+    }
+    .table-toolbar h2 { font-size: .88rem; font-weight: 700; flex: 1; color: #3e2a14; }
+    .search-f { padding: .4rem .8rem; border: 1px solid #ddd; border-radius: 6px; font-size: .83rem; width: 200px; }
+    .cat-filter { padding: .4rem .7rem; border: 1px solid #ddd; border-radius: 6px; font-size: .83rem; background: #fff; cursor: pointer; }
+    .save-all-btn {
+      padding: .42rem 1rem; background: #27ae60; color: #fff; border: none;
+      border-radius: 6px; font-size: .82rem; font-weight: 600; cursor: pointer; transition: opacity .15s;
+    }
+    .save-all-btn:hover { opacity: .85; }
+
+    table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+    th { text-align: left; padding: .4rem .75rem; background: #faf9f7; border-bottom: 2px solid #e8e8e8; color: #888; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+    td { padding: .6rem 1rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+
+    .prod-img { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; background: #eee; display: block; }
+    .prod-img-ph { width: 40px; height: 40px; border-radius: 6px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    .cat-badge { font-size: .68rem; font-weight: 700; padding: .15rem .5rem; border-radius: 20px; white-space: nowrap; }
+    .cat-bebe    { background: #ffeef5; color: #b04068; }
+    .cat-plaisir { background: #faf5ed; color: #3e2a14; }
+    .cat-malin   { background: #fdf4ff; color: #7e22ce; }
+
+    .f-select {
+      width: 100%; padding: .38rem .6rem; border: 1px solid #e0e0e0; border-radius: 6px;
+      font-size: .8rem; background: #fafafa; font-family: inherit;
+      cursor: pointer; outline: none; transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right .5rem center;
+      padding-right: 1.6rem;
+    }
+    .f-select:focus { border-color: #3e2a14; background-color: #fff; }
+    .f-select.assigned { border-color: #27ae60; background-color: #f0fff4; }
+    .f-select.saved-flash { border-color: #27ae60; background-color: #f0fff4; }
+
+    .price-cell { white-space: nowrap; }
+    .price-input {
+      width: 90px; padding: .28rem .45rem; border: 1.5px solid #e0e0e0; border-radius: 6px;
+      font-size: .83rem; font-weight: 600; font-family: inherit;
+      text-align: right; outline: none; transition: border-color .15s, background .15s;
+    }
+    .price-input:hover { border-color: #ccc; }
+    .price-input:focus { border-color: #3e2a14; background: #fffdf9; }
+    .price-input.saved-flash { border-color: #27ae60; background: #f0fff4; }
+
+    .cost-input {
+      width: 78px; padding: .28rem .45rem; border: 1.5px solid #e0d8c8; border-radius: 6px;
+      font-size: .83rem; font-weight: 600; font-family: inherit;
+      text-align: right; outline: none; transition: border-color .15s, background .15s;
+      background: #fff8f0;
+    }
+    .cost-input:hover { border-color: #ccc; }
+    .cost-input:focus { border-color: #3e2a14; background: #fffdf9; }
+    .cost-input.saved-flash { border-color: #27ae60; background: #f0fff4; }
+
+    .droits-input {
+      width: 58px; padding: .22rem .35rem; border: 1.5px dashed #d0c8b8; border-radius: 6px;
+      font-size: .74rem; font-family: inherit; text-align: right; outline: none;
+      background: #fdf8f0; color: #8a6540; margin-top: .25rem; display: block;
+      transition: border-color .15s, background .15s;
+    }
+    .droits-input:focus { border-color: #8b6914; border-style: solid; background: #fffdf9; }
+    .droits-input.saved-flash { border-color: #27ae60; background: #f0fff4; }
+
+    .coeff-input {
+      width: 58px; padding: .28rem .45rem; border: 1.5px solid #d8d0e8; border-radius: 6px;
+      font-size: .83rem; font-weight: 600; font-family: inherit;
+      text-align: right; outline: none; transition: border-color .15s, background .15s;
+      background: #f8f4ff;
+    }
+    .coeff-input:hover { border-color: #ccc; }
+    .coeff-input:focus { border-color: #3e2a14; background: #fffdf9; }
+    .coeff-input.saved-flash { border-color: #27ae60; background: #f0fff4; }
+
+    .margin-cell { white-space: nowrap; line-height: 1.3; }
+    .margin-pos { color: #16a34a; font-weight: 700; font-size: .83rem; }
+    .margin-neg { color: #dc2626; font-weight: 700; font-size: .83rem; }
+    .margin-none { color: #bbb; font-size: .83rem; }
+    .name-input {
+      width: 100%; border: 1.5px solid transparent; border-radius: 6px;
+      padding: .2rem .4rem; margin-bottom: .1rem; font-size: .83rem; font-weight: 700;
+      font-family: inherit; outline: none; background: transparent;
+      transition: border-color .15s, background .15s;
+    }
+    .name-input:hover { border-color: #e0e0e0; background: #fafafa; }
+    .name-input:focus { border-color: #3e2a14; background: #fffdf9; }
+    .name-input.saved-flash { border-color: #27ae60; background: #f0fff4; }
+
+    /* ── Dérouleur générique ── */
+    .collapsible-header { cursor: pointer; user-select: none; }
+    .collapsible-header:hover { background: #faf8f5 !important; }
+    .chevron {
+      margin-left: auto; flex-shrink: 0; color: #bbb;
+      transition: transform .22s ease;
+    }
+    .collapsed .chevron { transform: rotate(-90deg); }
+    .collapsible-body {
+      overflow: hidden;
+      transition: max-height .25s ease, opacity .2s ease;
+      max-height: 9999px; opacity: 1;
+    }
+    .collapsed .collapsible-body { max-height: 0 !important; opacity: 0; pointer-events: none; }
+
+    /* ── Section blocks ── */
+    .sec-block {
+      border-radius: 12px; margin-bottom: 1.2rem;
+      border: 1.5px solid #e8e8e8; overflow: hidden; background: #fff;
+    }
+    .sec-block-header {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .75rem 1rem; border-bottom: 1px solid #f0f0f0;
+      background: #fff;
+    }
+    .sec-block-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; background: #f4f4f4;
+    }
+    .sec-block-title { font-size: .88rem; font-weight: 700; color: #3e2a14; }
+    .sec-block-sub   { font-size: .75rem; color: #aaa; margin-top: .1rem; }
+    .sec-block-body  { background: #fff; }
+
+    .sec-op  { background: #fff; }
+    .sec-op .sec-block-icon    { background: #f4f4f4; color: #3e2a14; }
+    .sec-op .sec-block-title   { color: #3e2a14; }
+
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: #1a1a1a; color: #fff; padding: .65rem 1.2rem;
+      border-radius: 8px; font-size: .85rem; font-weight: 600;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .2s, transform .2s;
+      pointer-events: none; z-index: 9999;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    /* ── Pays select dans chip ── */
+    .sup-pays-sel {
+      border: 1px solid #ede8e0; background: #faf8f5;
+      font-size: .7rem; color: #7a6550; border-radius: 4px;
+      padding: .1rem .2rem; cursor: pointer; font-family: inherit;
+      max-width: 110px; outline: none; transition: border-color .15s;
+      appearance: none; -webkit-appearance: none; flex-shrink: 0;
+    }
+    .sup-pays-sel:focus { border-color: #3e2a14; background: #fff; }
+    .sup-pays-sel.set { border-color: #27ae60; background: #f0fff4; color: #166534; }
+
+    /* ── Section Les prix — inline ── */
+    .prix-toolbar {
+      display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+      margin-bottom: .85rem;
+    }
+    .prix-search-wrap { position: relative; flex: 1; min-width: 160px; }
+    .prix-search-wrap svg { position: absolute; left: .6rem; top: 50%; transform: translateY(-50%); color: #bbb; pointer-events: none; }
+    .prix-search {
+      width: 100%; padding: .38rem .7rem .38rem 2rem;
+      border: 1.5px solid #e0e0e0; border-radius: 9px; font-size: .82rem;
+      font-family: inherit; outline: none; transition: border-color .15s; margin: 0;
+    }
+    .prix-search:focus { border-color: #3e6bdc; }
+    .prix-chips { display: flex; gap: .35rem; flex-wrap: wrap; }
+    .prix-chip {
+      padding: .25rem .65rem; border-radius: 20px; font-size: .72rem; font-weight: 700;
+      border: 1.5px solid #e0e0e0; background: #fafafa; color: #888; cursor: pointer;
+      transition: all .12s; white-space: nowrap;
+    }
+    .prix-chip:hover { border-color: #aaa; color: #333; }
+    .prix-chip.on { border-color: #3e6bdc; background: #3e6bdc; color: #fff; }
+    .prix-chip.plaisir.on { border-color: #cc0000; background: #cc0000; }
+    .prix-chip.malin.on   { border-color: #b8a000; background: #FFE500; color: #333; }
+    .prix-chip.bebe.on    { border-color: #e8608a; background: #e8608a; color: #fff; }
+
+    .prix-sup-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .85rem; }
+    .prix-sup-chip {
+      display: flex; align-items: center; gap: .35rem;
+      padding: .22rem .6rem; border-radius: 20px; font-size: .75rem; font-weight: 600;
+      border: 1.5px solid #dbe4ff; background: #f0f4ff; color: #1e3a8a;
+      cursor: pointer; transition: all .12s; white-space: nowrap;
+    }
+    .prix-sup-chip:hover { background: #dbe4ff; }
+    .prix-sup-chip.on { border-color: #3e6bdc; background: #3e6bdc; color: #fff; }
+    .prix-sup-chip-count {
+      font-size: .65rem; background: rgba(0,0,0,.12); padding: .05rem .35rem;
+      border-radius: 20px;
+    }
+    .prix-sup-chip.none { border-color: #e8e8e8; background: #fafafa; color: #888; }
+    .prix-sup-chip.none:hover { background: #ebebeb; }
+    .prix-sup-chip.none.on { border-color: #666; background: #555; color: #fff; }
+
+    .prix-table-wrap {
+      border: 1px solid #eee; border-radius: 10px; overflow-x: auto;
+      margin-bottom: .85rem; -webkit-overflow-scrolling: touch;
+    }
+    .prix-table-wrap table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .prix-table-wrap thead th {
+      text-align: left; padding: .4rem .75rem; background: #faf9f7;
+      border-bottom: 2px solid #e8e8e8; color: #888;
+      font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap;
+    }
+    .prix-table-wrap tbody td { padding: .55rem .75rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    .prix-table-wrap tbody tr:last-child td { border-bottom: none; }
+    .prix-table-wrap tbody tr:hover td { background: #fafaf8; }
+
+    .prix-footer {
+      display: flex; justify-content: flex-end; gap: .65rem;
+      padding-top: .75rem; border-top: 1px solid #eee;
+    }
+    .prix-count { font-size: .78rem; color: #aaa; align-self: center; margin-right: auto; }
+
+
+    /* ══════════════════════════════════════
+       RESPONSIVE — 5 paliers
+       ══════════════════════════════════════ */
+
+    /* ≥ 3840px — 4K */
+    @media (min-width: 3840px) {
+      .page { max-width: 3200px; }
+      .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+      .kpi-grid   { grid-template-columns: repeat(8, 1fr); gap: 1.5rem; }
+    }
+    /* 2560–3839 — QHD */
+    @media (min-width: 2560px) and (max-width: 3839px) {
+      .page { max-width: 2400px; }
+      .kpi-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+    /* 1920–2559 — Full HD */
+    @media (min-width: 1920px) and (max-width: 2559px) {
+      .page { max-width: 1860px; }
+      .kpi-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    /* 1728–1919 — MacBook Pro 16" */
+    @media (min-width: 1728px) and (max-width: 1919px) {
+      .page { max-width: 1680px; }
+      .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    /* 1600–1727 — Écran large */
+    @media (min-width: 1600px) and (max-width: 1727px) {
+      .page { max-width: 1560px; }
+      .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    /* 1440–1599 — Bureau large */
+    @media (min-width: 1440px) and (max-width: 1599px) {
+      .page { max-width: 1400px; }
+      .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    /* 1366–1439 — Laptop courant */
+    @media (min-width: 1366px) and (max-width: 1439px) {
+      .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    /* 1280–1365 — MacBook Air */
+    @media (min-width: 1280px) and (max-width: 1365px) {
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    /* 1180–1279 — iPad Pro paysage */
+    @media (min-width: 1180px) and (max-width: 1279px) {
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    /* 1024–1179 — Tablette / petit laptop */
+    @media (min-width: 1024px) and (max-width: 1179px) {
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+      .table-toolbar { flex-wrap: wrap; }
+    }
+    /* 900–1023 — Tablette paysage */
+    @media (min-width: 900px) and (max-width: 1023px) {
+      .page { padding: 1.5rem 1.2rem; }
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); gap: .9rem; }
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+      .table-toolbar { flex-wrap: wrap; }
+      .search-f { flex: 1; min-width: 130px; }
+    }
+    /* 834–899 — iPad Pro portrait */
+    @media (min-width: 834px) and (max-width: 899px) {
+      .page { padding: 1.4rem 1.1rem; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: .85rem; }
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+      .table-toolbar { flex-wrap: wrap; }
+    }
+    /* 768–833 — iPad portrait */
+    @media (min-width: 768px) and (max-width: 833px) {
+      .page { padding: 1.3rem 1rem; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .table-toolbar { flex-wrap: wrap; }
+      .search-f { width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .page { padding: 1.2rem 1rem; }
+      .top-bar { padding: .75rem 1rem; }
+      .top-bar h1 { font-size: .9rem; }
+
+      /* Stats : 2 colonnes */
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: .7rem; }
+
+      /* KPI : 2 colonnes */
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
+      .kpi-val  { font-size: 1.25rem; }
+
+      /* Fournisseurs + CA : 1 colonne */
+
+      /* Table : scroll horizontal */
+      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { min-width: 800px; }
+
+      /* Toolbar : empile les contrôles */
+      .table-toolbar { flex-direction: column; align-items: stretch; gap: .55rem; }
+      .table-toolbar h2 { margin-bottom: .2rem; }
+      .search-f, .cat-filter { width: 100%; box-sizing: border-box; }
+      .save-all-btn { width: 100%; }
+
+      /* Liste fournisseurs responsive */
+      .sup-list { columns: 1; }
+
+      /* SAV : empile les lignes */
+
+
+      /* Barre de recherche fournisseurs */
+      #searchFourn { width: 100%; box-sizing: border-box; min-width: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: .55rem; }
+      .stat-value { font-size: 1.25rem; }
+
+      .kpi-grid { grid-template-columns: 1fr 1fr; gap: .55rem; }
+      .kpi-card { padding: .85rem 1rem; }
+      .kpi-val  { font-size: 1.1rem; }
+
+      .suppliers-panel { padding: .9rem 1rem; }
+      .suppliers-panel-top { flex-direction: column; align-items: flex-start; gap: .5rem; }
+      .btn-add-sup { width: 100%; text-align: center; }
+
+      .sup-add-row { flex-wrap: wrap; }
+      .sup-add-row input { width: 100%; max-width: none; }
+
+      table { min-width: 480px; font-size: .78rem; }
+      th, td { padding: .5rem .7rem; }
+
+    }
+
+    @media (max-width: 360px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .kpi-grid   { grid-template-columns: 1fr; }
+      .top-bar h1 { font-size: .95rem; }
+      .page { padding: .5rem; }
+      table { min-width: 420px; font-size: .74rem; }
+      th, td { padding: .4rem .5rem; }
+    }
+  </style></head>
+<body>
+
+<div class="top-bar">
+  <a href="admin.html">← Admin</a>
+  <h1 style="display:flex;align-items:center;gap:.45rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 002 2h16a2 2 0 002-2V8l-7 5V8l-7 5V4a2 2 0 00-2-2H4a2 2 0 00-2 2z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg> Gestion Fournisseurs</h1>
+  <span></span>
+</div>
+
+<div class="page">
+
+  <!-- ① Stats globales -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="stat-label">Produits total</div><div class="stat-value" id="statTotal">—</div></div>
+    <div class="stat-card"><div class="stat-label">Fournisseurs</div><div class="stat-value" id="statFournisseurs">—</div></div>
+    <div class="stat-card"><div class="stat-label">Sans fournisseur</div><div class="stat-value" id="statSans">—</div><div class="stat-sub">à assigner</div></div>
+    <div class="stat-card"><div class="stat-label">Valeur catalogue</div><div class="stat-value" id="statValeur">—</div></div>
+  </div>
+
+  <!-- ② Gestion de la liste des fournisseurs -->
+  <div class="section-title">Mes fournisseurs</div>
+  <div class="suppliers-panel" id="secFournisseurs">
+    <div class="suppliers-panel-top collapsible-header" onclick="toggleSection('secFournisseurs')">
+      <h2 style="display:flex;align-items:center;gap:.45rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Liste des fournisseurs <span id="secFournisseursBadge" style="font-size:.72rem;font-weight:600;color:#aaa;margin-left:.3rem"></span></h2>
+      <button class="btn-add-sup" onclick="event.stopPropagation();showAddRow()">+ Ajouter</button>
+      <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="collapsible-body">
+    <div class="sup-sort-bar">
+      <span class="sup-sort-label">Trier :</span>
+      <button class="sup-sort-btn active" onclick="setSupSort('default', this)">Ordre d'ajout</button>
+      <button class="sup-sort-btn" onclick="setSupSort('alpha', this)">A → Z</button>
+      <button class="sup-sort-btn" onclick="setSupSort('cat', this)">Par catégorie</button>
+    </div>
+    <div class="sup-list" id="supList"></div>
+    <div class="sup-add-row" id="supAddRow" style="display:none">
+      <input type="text" id="supAddInput" placeholder="Nom du fournisseur…" onkeydown="if(event.key==='Enter')confirmAdd();if(event.key==='Escape')cancelAdd()">
+      <input type="email" id="supAddEmail" placeholder="Email commandes (optionnel)" style="padding:.38rem .75rem;border:1.5px solid #ddd;border-radius:7px;font-size:.83rem;font-family:inherit;flex:1;max-width:240px;outline:none;transition:border-color .15s" onfocus="this.style.borderColor='#3e2a14'" onblur="this.style.borderColor='#ddd'" onkeydown="if(event.key==='Enter')confirmAdd();if(event.key==='Escape')cancelAdd()">
+      <select id="supAddPays" class="sup-pays-sel" style="max-width:140px;padding:.38rem .5rem;font-size:.82rem">
+        <option value="">Pays…</option>
+      </select>
+      <button class="btn-sup-confirm" onclick="confirmAdd()">Ajouter</button>
+      <button class="btn-sup-cancel" onclick="cancelAdd()">Annuler</button>
+    </div>
+    </div><!-- /collapsible-body -->
+  </div>
+
+  <!-- ③ Les prix -->
+  <div class="sec-block sec-op" id="secPrix">
+    <div class="sec-block-header collapsible-header" onclick="toggleSection('secPrix')" style="cursor:pointer">
+      <div class="sec-block-icon" style="font-size:1.3rem;font-weight:900;">€</div>
+      <div style="flex:1">
+        <div class="sec-block-title">Les prix</div>
+        <div class="sec-block-sub" id="prixSub">Tous les produits</div>
+      </div>
+      <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="collapsible-body"><div class="sec-block-body" style="padding:1.1rem 1.5rem">
+
+      <!-- Toolbar : recherche + catégories -->
+      <div class="prix-toolbar">
+        <div class="prix-search-wrap">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="prix-search" id="prixSearch" type="text" placeholder="Rechercher par nom, ID…" oninput="setPrixFilter('q',this.value)">
+        </div>
+        <div class="prix-chips">
+          <button class="prix-chip on"     id="pcat-all"     onclick="setPrixFilter('cat','')">Tous</button>
+          <button class="prix-chip plaisir" id="pcat-plaisir" onclick="setPrixFilter('cat','plaisir')">Plaisir</button>
+          <button class="prix-chip bebe"    id="pcat-bebe"    onclick="setPrixFilter('cat','bebe')">Bébé</button>
+          <button class="prix-chip malin"   id="pcat-malin"   onclick="setPrixFilter('cat','malin')">Malin</button>
+        </div>
+      </div>
+
+      <!-- Chips fournisseurs -->
+      <div class="prix-sup-row" id="assignBtnGrid">
+        <div style="color:#aaa;font-size:.82rem">Chargement…</div>
+      </div>
+
+      <!-- Tableau inline produits -->
+      <div class="prix-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:44px"></th>
+              <th>Produit (site)</th>
+              <th>Réf. fournisseur</th>
+              <th style="width:100px">Prix achat<br><span style="font-weight:400;text-transform:none;font-size:.65rem;color:#bbb">TTC si UE · HT si hors UE<br>+ % douane si hors UE</span></th>
+              <th style="width:72px">Coeff ×<br><span style="font-weight:400;text-transform:none;font-size:.65rem;color:#bbb">info seul.</span></th>
+              <th style="width:90px">Prix vente TTC</th>
+              <th style="width:110px">Marge nette<br><span style="font-weight:400;text-transform:none;font-size:.65rem;color:#bbb">HT − achat HT − port − Stripe</span></th>
+              <th style="width:64px">Stock</th>
+              <th style="width:84px">Poids (g)</th>
+              <th style="width:140px">Fournisseur</th>
+            </tr>
+          </thead>
+          <tbody id="prodTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Footer -->
+      <div class="prix-footer">
+        <span class="prix-count" id="prixCount"></span>
+        <button class="save-all-btn" style="background:#7c3aed;display:inline-flex;align-items:center;gap:.35rem" onclick="autoCoeff(40)" title="Calcule et applique le coefficient minimum pour atteindre 40% de marge nette sur chaque produit">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          Coeff → 40% marge min.
+        </button>
+        <button class="save-all-btn" style="background:#2563eb;display:inline-flex;align-items:center;gap:.35rem" onclick="exportCSV()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export CSV</button>
+        <button class="save-all-btn" style="display:inline-flex;align-items:center;gap:.35rem" onclick="saveAll();renderAssignButtons();toast('✓ Enregistré')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Enregistrer</button>
+      </div>
+
+    </div></div><!-- /sec-block-body /collapsible-body -->
+  </div>
+
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+if (new URLSearchParams(location.search).has('embed')) {
+  const _tb = document.querySelector('.top-bar'); if (_tb) _tb.style.display = 'none';
+  /* Notifie le parent de la hauteur réelle après chaque render */
+  const _notifyH = () => { try { window.parent.postMessage({ type: 'iframeResize', h: document.documentElement.scrollHeight }, '*'); } catch(e){} };
+  new MutationObserver(_notifyH).observe(document.body, { childList: true, subtree: true, attributes: false });
+  /* Supprime le padding/max-width internes en mode embed */
+  const _es = document.createElement('style');
+  _es.textContent = '.page,.top{padding-left:0!important;padding-right:0!important;max-width:none!important;margin:0!important}body{padding-left:0!important;padding-right:0!important;background:transparent!important}';
+  document.head.appendChild(_es);
+}
+const SUPPLIERS_KEY      = 'leclam_suppliers';
+const SUPPLIER_LIST_KEY  = 'leclam_supplier_list';
+const COSTS_KEY          = 'leclam_prod_costs';
+
+/* Poids représentatif au milieu de chaque tranche */
+const TIER_REP_G = [300, 750, 1500, 3500, 7000];
+
+let shippingConfig = {
+  tiers:  [
+    { maxG:   500, label: "Jusqu'à 500 g" },
+    { maxG:  1000, label: '500 g – 1 kg'  },
+    { maxG:  2000, label: '1 – 2 kg'      },
+    { maxG:  5000, label: '2 – 5 kg'      },
+    { maxG: Infinity, label: 'Plus de 5 kg'  },
+  ],
+  zones:  [
+    { key: 'fr', label: 'FR' }, { key: 'dom', label: 'DOM' },
+    { key: 'eu', label: 'UE' }, { key: 'int', label: 'Int.' },
+  ],
+  prices: [
+    [ 4.90,  8.90,  9.90, 14.90],
+    [ 6.90, 11.90, 13.90, 19.90],
+    [ 8.90, 14.90, 17.90, 24.90],
+    [12.90, 19.90, 24.90, 34.90],
+    [16.90, 24.90, 31.90, 44.90],
+  ],
+};
+
+function _tierIndexFor(weightG) {
+  const w = parseInt(weightG, 10) || 200;
+  for (let i = 0; i < shippingConfig.tiers.length; i++) {
+    if (w <= shippingConfig.tiers[i].maxG) return i;
+  }
+  return shippingConfig.tiers.length - 1;
+}
+
+function _tierOptions(weightG) {
+  const cur = _tierIndexFor(weightG);
+  return shippingConfig.tiers.map((t, i) => {
+    const prices = shippingConfig.prices[i] || [];
+    const priceStr = shippingConfig.zones.map((z, zi) => {
+      const p = prices[zi];
+      return p != null ? `${z.label} ${p.toFixed(2).replace('.', ',')}€` : '';
+    }).filter(Boolean).join(' · ');
+    return `<option value="${TIER_REP_G[i] ?? 7000}" ${i === cur ? 'selected' : ''}>${t.label} — ${priceStr}</option>`;
+  }).join('');
+}
+
+const TVA_PAYS = {
+  'France':       { flag: '🇫🇷', tva: 20,   ue: true  },
+  'Allemagne':    { flag: '🇩🇪', tva: 19,   ue: true  },
+  'Belgique':     { flag: '🇧🇪', tva: 21,   ue: true  },
+  'Espagne':      { flag: '🇪🇸', tva: 21,   ue: true  },
+  'Italie':       { flag: '🇮🇹', tva: 22,   ue: true  },
+  'Portugal':     { flag: '🇵🇹', tva: 23,   ue: true  },
+  'Pays-Bas':     { flag: '🇳🇱', tva: 21,   ue: true  },
+  'Pologne':      { flag: '🇵🇱', tva: 23,   ue: true  },
+  'Luxembourg':   { flag: '🇱🇺', tva: 17,   ue: true  },
+  'Chine':        { flag: '🇨🇳', tva: 13,   ue: false },
+  'USA':          { flag: '🇺🇸', tva: 0,    ue: false },
+  'Royaume-Uni':  { flag: '🇬🇧', tva: 20,   ue: false },
+  'Japon':        { flag: '🇯🇵', tva: 10,   ue: false },
+  'Canada':       { flag: '🇨🇦', tva: 5,    ue: false },
+  'Autre':        { flag: '🌍',  tva: null,  ue: false },
+};
+
+/* Correspondance code ISO → TVA (pour les commandes clients) */
+const TVA_BY_CODE = {
+  'FR': { name: 'France',        flag: '🇫🇷', tva: 20,   ue: true  },
+  'BE': { name: 'Belgique',      flag: '🇧🇪', tva: 21,   ue: true  },
+  'LU': { name: 'Luxembourg',    flag: '🇱🇺', tva: 17,   ue: true  },
+  'DE': { name: 'Allemagne',     flag: '🇩🇪', tva: 19,   ue: true  },
+  'IT': { name: 'Italie',        flag: '🇮🇹', tva: 22,   ue: true  },
+  'ES': { name: 'Espagne',       flag: '🇪🇸', tva: 21,   ue: true  },
+  'PT': { name: 'Portugal',      flag: '🇵🇹', tva: 23,   ue: true  },
+  'NL': { name: 'Pays-Bas',      flag: '🇳🇱', tva: 21,   ue: true  },
+  'PL': { name: 'Pologne',       flag: '🇵🇱', tva: 23,   ue: true  },
+  'CH': { name: 'Suisse',        flag: '🇨🇭', tva: 8.1,  ue: false },
+  'GB': { name: 'Royaume-Uni',   flag: '🇬🇧', tva: 20,   ue: false },
+  'US': { name: 'États-Unis',    flag: '🇺🇸', tva: 0,    ue: false },
+  'CA': { name: 'Canada',        flag: '🇨🇦', tva: 5,    ue: false },
+  'AU': { name: 'Australie',     flag: '🇦🇺', tva: 10,   ue: false },
+  'JP': { name: 'Japon',         flag: '🇯🇵', tva: 10,   ue: false },
+  'KR': { name: 'Corée du Sud',  flag: '🇰🇷', tva: 10,   ue: false },
+  'CN': { name: 'Chine',         flag: '🇨🇳', tva: 13,   ue: false },
+  'MX': { name: 'Mexique',       flag: '🇲🇽', tva: 16,   ue: false },
+  'BR': { name: 'Brésil',        flag: '🇧🇷', tva: 17,   ue: false },
+  'IN': { name: 'Inde',          flag: '🇮🇳', tva: 18,   ue: false },
+  'RU': { name: 'Russie',        flag: '🇷🇺', tva: 20,   ue: false },
+  'AR': { name: 'Argentine',     flag: '🇦🇷', tva: 21,   ue: false },
+  'MA': { name: 'Maroc',         flag: '🇲🇦', tva: 20,   ue: false },
+  'DZ': { name: 'Algérie',       flag: '🇩🇿', tva: 19,   ue: false },
+  'TN': { name: 'Tunisie',       flag: '🇹🇳', tva: 19,   ue: false },
+};
+
+function _paysOptions(selected) {
+  return '<option value="">Pays…</option>'
+    + Object.entries(TVA_PAYS).map(([p, d]) =>
+        `<option value="${p}" ${p === selected ? 'selected' : ''}>${d.flag} ${p}</option>`
+      ).join('');
+}
+
+/* ── Sections repliables ── */
+const COLLAPSE_KEY = 'leclam_fournisseur_collapsed';
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('collapsed');
+  const saved = JSON.parse(localStorage.getItem(COLLAPSE_KEY) || '{}');
+  saved[id] = el.classList.contains('collapsed');
+  localStorage.setItem(COLLAPSE_KEY, JSON.stringify(saved));
+  /* Badge fournisseurs visible même plié */
+  if (id === 'secFournisseurs') updateFournBadge();
+}
+function restoreCollapsedSections() {
+  const saved = JSON.parse(localStorage.getItem(COLLAPSE_KEY) || '{}');
+  Object.keys(saved).forEach(id => {
+    if (saved[id]) { const el = document.getElementById(id); if (el) el.classList.add('collapsed'); }
+  });
+}
+function updateFournBadge() {
+  const badge = document.getElementById('secFournisseursBadge');
+  if (badge) badge.textContent = supplierList.length ? `(${supplierList.length})` : '';
+}
+
+let allProducts  = [];
+let suppliers    = {};  /* { productId: supplierName } */
+let supplierList = [];  /* [{ id, name }] */
+let costs        = {};  /* { productId: { cost, coeff } } */
+
+/* ── Chargement ── */
+function loadData() {
+  try { suppliers = JSON.parse(localStorage.getItem(SUPPLIERS_KEY) || '{}'); } catch { suppliers = {}; }
+  try {
+    const raw = JSON.parse(localStorage.getItem(SUPPLIER_LIST_KEY) || 'null');
+    supplierList = Array.isArray(raw) ? raw : [];
+  } catch { supplierList = []; }
+  try { costs = JSON.parse(localStorage.getItem(COSTS_KEY) || '{}'); } catch { costs = {}; }
+
+  /* Migration : noms libres existants → ajouter à la liste si absents */
+  const existing = new Set(supplierList.map(s => s.name.toLowerCase()));
+  Object.values(suppliers).filter(Boolean).forEach(name => {
+    if (!existing.has(name.toLowerCase())) {
+      supplierList.push({ id: 'sup-' + Date.now() + Math.random(), name });
+      existing.add(name.toLowerCase());
+    }
+  });
+}
+
+/* ── Seed par défaut — appliqué si aucun fournisseur n'existe encore ── */
+const _DEFAULT_SUPPLIER_LIST = [
+  { id:'sup-amorelie',     name:'AMORELIE',              pays:'Allemagne' },
+  { id:'sup-bonai',        name:'BONAI',                 pays:'Chine'     },
+  { id:'sup-bijoux',       name:'Bijoux Indiscrets',     pays:'Espagne'   },
+  { id:'sup-easytoys',     name:'EasyToys',              pays:'Pays-Bas'  },
+  { id:'sup-fsg',          name:'Fifty Shades of Grey',  pays:'Royaume-Uni' },
+  { id:'sup-funfactory',   name:'Fun Factory',           pays:'Allemagne' },
+  { id:'sup-hotoctopuss',  name:'Hot Octopuss',          pays:'Royaume-Uni' },
+  { id:'sup-jejoue',       name:'Je Joue',               pays:'Royaume-Uni' },
+  { id:'sup-lelo',         name:'LELO',                  pays:'Autre'     },
+  { id:'sup-love2love',    name:'Love to Love',          pays:'France'    },
+  { id:'sup-lovehoney',    name:'Lovehoney',             pays:'Royaume-Uni' },
+  { id:'sup-puissante',    name:'Puissante',             pays:'France'    },
+  { id:'sup-satisfyer',    name:'Satisfyer',             pays:'Allemagne' },
+  { id:'sup-softparis',    name:'Soft Paris',            pays:'France'    },
+  { id:'sup-svakom',       name:'SVAKOM',                pays:'Chine'     },
+  { id:'sup-wevibe',       name:'We-Vibe',               pays:'Canada'    },
+  { id:'sup-womanizer',    name:'Womanizer',             pays:'Allemagne' },
+  { id:'sup-alphabetadv',  name:'Alphabet Adventures',   pays:'Autre'     },
+  { id:'sup-almaxi',       name:'Almaxi',                pays:'Chine'     },
+  { id:'sup-aituiui',      name:'AiTuiTui',              pays:'Chine'     },
+  { id:'sup-banasuper',    name:'Banasuper',             pays:'Chine'     },
+  { id:'sup-bisantos',     name:'BiSantos',              pays:'Autre'     },
+  { id:'sup-boso',         name:'Boso',                  pays:'Autre'     },
+  { id:'sup-caja',         name:'CAJA',                  pays:'Autre'     },
+  { id:'sup-crealign',     name:'Crea lign',             pays:'Autre'     },
+  { id:'sup-geeric',       name:'GeeRic',                pays:'Chine'     },
+  { id:'sup-hasbro',       name:'Hasbro',                pays:'USA'       },
+  { id:'sup-loyzico',      name:'Loyzico',               pays:'Chine'     },
+  { id:'sup-ludi',         name:'Ludi',                  pays:'France'    },
+  { id:'sup-lunii',        name:'Lunii',                 pays:'France'    },
+  { id:'sup-momcozy',      name:'Momcozy',               pays:'Chine'     },
+  { id:'sup-morphee',      name:'Mon Petit Morphée',     pays:'France'    },
+  { id:'sup-nuby',         name:'Nuby',                  pays:'USA'       },
+  { id:'sup-brightstarts', name:'Bright Starts',         pays:'USA'       },
+  { id:'sup-pabobo',       name:'Pabobo',                pays:'France'    },
+  { id:'sup-petitboum',    name:'Petit Boum',            pays:'France'    },
+  { id:'sup-suavinex',     name:'Suavinex',              pays:'Espagne'   },
+  { id:'sup-sundaymot',    name:'Sundaymot',             pays:'Chine'     },
+  { id:'sup-thedttoy',     name:'Thedttoy',              pays:'Chine'     },
+  { id:'sup-vtech',        name:'VTech',                 pays:'Chine'     },
+  { id:'sup-vicloon',      name:'Vicloon',               pays:'Chine'     },
+];
+
+const _DEFAULT_SUPPLIERS = {
+  /* ── Plaisir ── */
+  'plaisir-22':'Je Joue',         'plaisir-23':'Je Joue',
+  'plaisir-24':'Bijoux Indiscrets','plaisir-25':'Bijoux Indiscrets',
+  'plaisir-26':'Hot Octopuss',    'plaisir-27':'Hot Octopuss',    'plaisir-28':'Hot Octopuss',
+  'plaisir-29':'Hot Octopuss',
+  'plaisir-30':'Lovehoney',       'plaisir-31':'Lovehoney',       'plaisir-34':'Lovehoney',
+  'plaisir-32':'Womanizer',       'plaisir-51':'Womanizer',
+  'plaisir-33':'We-Vibe',
+  'plaisir-35':'Fifty Shades of Grey',
+  'plaisir-36':'LELO',            'plaisir-37':'LELO',            'plaisir-38':'LELO',
+  'plaisir-39':'LELO',            'plaisir-40':'LELO',            'plaisir-41':'LELO',
+  'plaisir-42':'AMORELIE',        'plaisir-43':'AMORELIE',        'plaisir-44':'AMORELIE',
+  'plaisir-45':'AMORELIE',        'plaisir-50':'AMORELIE',        'plaisir-57':'AMORELIE',
+  'plaisir-46':'EasyToys',        'plaisir-47':'EasyToys',        'plaisir-48':'EasyToys',
+  'plaisir-49':'EasyToys',        'plaisir-52':'EasyToys',        'plaisir-53':'EasyToys',
+  'plaisir-54':'EasyToys',        'plaisir-55':'EasyToys',
+  'plaisir-56':'SVAKOM',          'plaisir-58':'SVAKOM',
+  'plaisir-59':'Love to Love',    'plaisir-60':'Love to Love',
+  'plaisir-69':'Love to Love',    'plaisir-70':'Love to Love',    'plaisir-71':'Love to Love',
+  'plaisir-72':'Love to Love',    'plaisir-73':'Love to Love',    'plaisir-74':'Love to Love',
+  'plaisir-75':'Love to Love',    'plaisir-76':'Love to Love',
+  'plaisir-61':'Puissante',       'plaisir-62':'Puissante',       'plaisir-63':'Puissante',
+  'plaisir-64':'Soft Paris',      'plaisir-65':'Soft Paris',      'plaisir-66':'Soft Paris',
+  'plaisir-67':'Soft Paris',      'plaisir-68':'Soft Paris',
+  'plaisir-77':'BONAI',           'plaisir-78':'BONAI',           'plaisir-79':'BONAI',
+  'plaisir-80':'BONAI',
+  'plaisir-81':'Satisfyer',
+  'plaisir-82':'Fun Factory',     'plaisir-83':'Fun Factory',     'plaisir-84':'Fun Factory',
+  'plaisir-85':'Fun Factory',     'plaisir-86':'Fun Factory',
+  /* ── Bébé ── */
+  'bebe-1':'Alphabet Adventures',
+  'bebe-10':'Boso',
+  'bebe-38':'CAJA',
+  'bebe-39':'Suavinex',
+  'bebe-45':'Lunii',              'bebe-46':'Mon Petit Morphée',
+  'bebe-48':'Pabobo',
+  'bebe-70':'Loyzico',            'bebe-71':'Bright Starts',
+  'bebe-72':'Nuby',               'bebe-83':'Nuby',
+  'bebe-73':'Hasbro',
+  'bebe-74':'Thedttoy',
+  'bebe-75':'GeeRic',
+  'bebe-76':'Vicloon',
+  'bebe-77':'AiTuiTui',
+  'bebe-78':'Ludi',
+  'bebe-81':'Sundaymot',
+  'bebe-82':'VTech',
+  'bebe-84':'Almaxi',             'bebe-85':'Almaxi',
+  'bebe-86':'Momcozy',
+  'bebe-87':'Petit Boum',
+  'bebe-88':'Banasuper',
+  'bebe-89':'Crea lign',
+};
+
+/* Coefficients multiplicateurs typiques par marque (prix vente / coût achat).
+   Utilisés uniquement si aucun coût n'est encore saisi pour un produit. */
+const _DEFAULT_COEFF = {
+  /* ── Plaisir : marques premium ── */
+  'LELO':                2.2,
+  'Womanizer':           2.2,
+  'We-Vibe':             2.2,
+  'Hot Octopuss':        2.2,
+  'Fun Factory':         2.3,
+  'Bijoux Indiscrets':   2.4,
+  'Je Joue':             2.4,
+  'Fifty Shades of Grey':2.5,
+  'Satisfyer':           2.5,
+  /* ── Plaisir : marques mid/dropship ── */
+  'Lovehoney':           2.5,
+  'AMORELIE':            2.8,
+  'EasyToys':            2.8,
+  'Love to Love':        2.3,
+  'Puissante':           2.3,
+  'Soft Paris':          2.3,
+  'SVAKOM':              3.0,
+  'BONAI':               3.0,
+  /* ── Bébé : marques établies ── */
+  'VTech':               2.2,
+  'Hasbro':              2.2,
+  'Bright Starts':       2.2,
+  'Nuby':                2.3,
+  'Lunii':               2.0,
+  'Mon Petit Morphée':   2.0,
+  'Pabobo':              2.3,
+  'Ludi':                2.5,
+  'Petit Boum':          2.5,
+  'Suavinex':            2.5,
+  'Momcozy':             2.8,
+  'Alphabet Adventures': 2.8,
+  /* ── Bébé : marques dropship Chine ── */
+  'Thedttoy':   3.0, 'GeeRic':   3.0, 'Vicloon':   3.0,
+  'AiTuiTui':   3.0, 'Almaxi':   3.0, 'Loyzico':   3.0,
+  'Sundaymot':  3.0, 'Banasuper':3.0, 'Crea lign': 3.0,
+  'Boso':       2.8, 'CAJA':     2.8, 'BiSantos':  2.8,
+};
+
+/* ── Auto-complétion des coûts à partir des données existantes ── */
+function _autoFillCosts(source) {
+  if (!source || !source.length) return;
+  let changed = false;
+
+  source.forEach(p => {
+    if (!p.price || p.price <= 0) return;
+    if (!costs[p.id]) costs[p.id] = {};
+    const c = costs[p.id];
+
+    /* Cas 1 : coût ET coeff déjà renseignés → rien à faire */
+    if (c.cost > 0 && c.coeff > 0) return;
+
+    /* Cas 2 : coût connu, coeff manquant → dériver le coeff */
+    if (c.cost > 0 && !(c.coeff > 0)) {
+      c.coeff = Math.round((p.price / c.cost) * 100) / 100;
+      changed = true;
+      return;
+    }
+
+    /* Cas 3 : coeff connu, coût manquant → dériver le coût */
+    if (c.coeff > 0 && !(c.cost > 0)) {
+      c.cost = Math.round((p.price / c.coeff) * 100) / 100;
+      changed = true;
+      return;
+    }
+
+    /* Cas 4 : ni coût ni coeff → estimer depuis le coeff de la marque */
+    const supName = suppliers[p.id] || '';
+    const coeff   = _DEFAULT_COEFF[supName] || 2.5;
+    c.cost  = Math.round((p.price / coeff) * 100) / 100;
+    c.coeff = coeff;
+    changed = true;
+  });
+
+  if (changed) saveCosts();
+}
+
+function _seedDefaults() {
+  const anySupplier = supplierList.length > 0 || Object.keys(suppliers).length > 0;
+  /* Merge fournisseurs manquants dans la liste */
+  const existing = new Set(supplierList.map(s => s.name.toLowerCase()));
+  _DEFAULT_SUPPLIER_LIST.forEach(s => {
+    if (!existing.has(s.name.toLowerCase())) {
+      supplierList.push({ ...s });
+      existing.add(s.name.toLowerCase());
+    }
+  });
+  /* Merge assignments manquants */
+  Object.entries(_DEFAULT_SUPPLIERS).forEach(([id, name]) => {
+    if (!suppliers[id]) suppliers[id] = name;
+  });
+  if (!anySupplier) saveData();
+}
+
+function saveData() {
+  localStorage.setItem(SUPPLIERS_KEY,     JSON.stringify(suppliers));
+  localStorage.setItem(SUPPLIER_LIST_KEY, JSON.stringify(supplierList));
+}
+
+function saveCosts() {
+  localStorage.setItem(COSTS_KEY, JSON.stringify(costs));
+}
+
+const _SHIP_DEFAULTS = {
+  frPrice: 5.45,
+  weights: [
+    { maxKg: 0.25, coef: 1.00 },  // ≤ 250g  →  5,45 €
+    { maxKg: 0.50, coef: 1.15 },  // ≤ 500g  →  6,27 €
+    { maxKg: 0.75, coef: 1.24 },  // ≤ 750g  →  6,76 €
+    { maxKg: 1.00, coef: 1.31 },  // ≤ 1 kg  →  7,14 €
+    { maxKg: 2.00, coef: 1.55 },  // ≤ 2 kg  →  8,45 €
+    { maxKg: 5.00, coef: 2.10 },  // ≤ 5 kg  → 11,45 €
+    { maxKg: 10.0, coef: 2.99 },  // ≤ 10 kg → 16,30 €
+    { maxKg: 9999, coef: 5.15 },  // > 10 kg → 28,07 €
+  ],
+};
+
+function _shippingCostFor(id) {
+  let tcfg = null;
+  try { tcfg = JSON.parse(localStorage.getItem('leclam_shipping_v2') || 'null'); } catch {}
+  const weightG  = costs[id]?.weightG ?? 200;
+  const weightKg = weightG / 1000;
+  const frPrice  = tcfg?.countries?.find(x => x.code === 'FR')?.price ?? _SHIP_DEFAULTS.frPrice;
+  /* Toujours utiliser les tranches officielles (évite les anciennes configs) */
+  const tiers    = _SHIP_DEFAULTS.weights.slice().sort((a, b) => a.maxKg - b.maxKg);
+  const bracket  = tiers.find(w => weightKg <= w.maxKg) || tiers[tiers.length - 1];
+  return Math.round(frPrice * (bracket?.coef ?? 1) * 100) / 100;
+}
+
+function _marginHtml(id) {
+  const c = costs[id] || {};
+  if (!c.cost) return '<span class="margin-none">—</span>';
+
+  /* Prix de vente TTC — vrai prix produit (pas cost × coeff) */
+  const source = allProducts.length ? allProducts
+    : (() => { try { return JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { return []; } })();
+  const p = source.find(x => x.id === id);
+  const prixVenteTTC = p?.price ?? (c.coeff > 0 ? c.cost * c.coeff : 0);
+  if (!prixVenteTTC) return '<span class="margin-none">—</span>';
+
+  /* Zone fournisseur — auto-détectée depuis le pays (sans toggle manuel) */
+  const supName = suppliers[id] || '';
+  const sup     = supplierList.find(s => s.name === supName);
+  const payInfo = sup?.pays ? TVA_PAYS[sup.pays] : null;
+  const isUE    = payInfo?.ue === true;
+  const tvaPct  = payInfo?.tva ?? 0;
+
+  /* Coût HT réel :
+     UE   → facture TTC → on extrait le HT (TVA récupérable, neutre sur la marge)
+     Hors UE → facture déjà HT → pas d'ajustement */
+  const costHT = isUE && tvaPct > 0
+    ? c.cost / (1 + tvaPct / 100)
+    : c.cost;
+
+  /* Droits de douane (hors UE uniquement) */
+  const droitsPct = isUE ? 0 : (c.droitsDouane || 0);
+  const droitsHT  = costHT * droitsPct / 100;
+
+  /* Frais de port livraison client FR */
+  const shipCost = _shippingCostFor(id);
+
+  /* Frais Stripe : 1,4 % + 0,25 € (carte UE standard) */
+  const fraisStripe = Math.round((prixVenteTTC * 0.014 + 0.25) * 100) / 100;
+
+  /* Prix vente HT = ce que vous encaissez après reversement TVA à l'État */
+  const prixVenteHT = prixVenteTTC / 1.20;
+
+  /* Marge nette = PV HT − coût HT − douanes − port − Stripe */
+  const margeNette = prixVenteHT - costHT - droitsHT - shipCost - fraisStripe;
+  const pct = prixVenteHT > 0 ? Math.round(margeNette / prixVenteHT * 100) : 0;
+  const cls = margeNette >= 0 ? 'margin-pos' : 'margin-neg';
+
+  let html = `<span class="${cls}">${margeNette.toFixed(2).replace('.', ',')} €<br><small>${pct}%</small></span>`;
+  html += `<div style="font-size:.6rem;color:#aaa;line-height:1.55;margin-top:.15rem">`;
+  html += `PV HT ${prixVenteHT.toFixed(2).replace('.', ',')} €`;
+  html += ` · Achat HT ${costHT.toFixed(2).replace('.', ',')} €`;
+  if (droitsHT > 0) html += ` · Douane ${droitsHT.toFixed(2).replace('.', ',')} €`;
+  html += ` · Port ${shipCost.toFixed(2).replace('.', ',')} €`;
+  html += ` · Stripe ${fraisStripe.toFixed(2).replace('.', ',')} €`;
+  html += `</div>`;
+  if (sup?.pays) {
+    const zoneLabel = isUE
+      ? `🇪🇺 UE — facture TTC${tvaPct > 0 ? ` (TVA ${tvaPct}% récupérée)` : ''}`
+      : `🌍 Hors UE — facture HT${droitsPct > 0 ? ` + ${droitsPct}% douane` : ''}`;
+    html += `<div style="font-size:.6rem;color:#9a8070;margin-top:.05rem">${zoneLabel}</div>`;
+  }
+  return html;
+}
+
+let _supSortMode = 'default';
+
+function setSupSort(mode, btn) {
+  _supSortMode = mode;
+  document.querySelectorAll('.sup-sort-btn').forEach(b => b.classList.toggle('active', b === btn));
+  renderSupList();
+}
+
+/* Catégorie principale d'un fournisseur — utilise le préfixe de l'ID produit (fiable sans allProducts) */
+function _supPrimaryCat(name) {
+  const cats = { plaisir: 0, malin: 0, bebe: 0 };
+  Object.entries(suppliers).forEach(([id, sup]) => {
+    if (sup !== name) return;
+    const prefix = id.split('-')[0];
+    if (prefix in cats) { cats[prefix]++; return; }
+    const p = allProducts.find(x => x.id === id);
+    if (p && p.cat in cats) cats[p.cat]++;
+  });
+  const top = Object.entries(cats).sort((a, b) => b[1] - a[1])[0];
+  return top && top[1] > 0 ? top[0] : 'zzz';
+}
+
+const _catOrder  = { plaisir: 0, malin: 1, bebe: 2, zzz: 3 };
+const _catLabels = [
+  { key: 'plaisir', label: 'Plaisir' },
+  { key: 'malin',   label: 'Malin'   },
+  { key: 'bebe',    label: 'Bébé'    },
+  { key: 'zzz',     label: '— Non assigné' },
+];
+
+/* ── Rendu liste fournisseurs ── */
+function renderSupList() {
+  const el = document.getElementById('supList');
+  if (supplierList.length === 0) {
+    el.innerHTML = '<div style="padding:.5rem .75rem;font-size:.78rem;color:#aaa;font-style:italic">Aucun fournisseur. Cliquez sur « + Ajouter » pour commencer.</div>';
+    return;
+  }
+
+  const indexed = supplierList.map((s, i) => ({ s, i }));
+
+  if (_supSortMode === 'alpha') {
+    indexed.sort((a, b) => a.s.name.localeCompare(b.s.name, 'fr', { sensitivity: 'base' }));
+    let rank = 1;
+    el.innerHTML = indexed.map(({ s, i }) => _supChipHtml(s, i, rank++)).join('');
+    return;
+  }
+
+  if (_supSortMode === 'cat') {
+    /* Grouper par catégorie */
+    const groups = {};
+    _catLabels.forEach(c => { groups[c.key] = []; });
+    indexed.forEach(entry => {
+      const cat = _supPrimaryCat(entry.s.name);
+      (groups[cat] || groups['zzz']).push(entry);
+    });
+    _catLabels.forEach(c => groups[c.key].sort((a, b) => a.s.name.localeCompare(b.s.name, 'fr', { sensitivity: 'base' })));
+
+    const HEADER = key => `<div style="padding:.22rem .6rem;font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a08060;background:#faf5ee;border-bottom:1px solid #f0ece5;border-top:1px solid #f0ece5">${_catLabels.find(c=>c.key===key).label}</div>`;
+    const EMPTY  = `<div style="padding:.28rem .6rem .28rem 1.6rem;font-size:.73rem;color:#ccc;font-style:italic">Aucun</div>`;
+
+    let rank = 1;
+    el.innerHTML = _catLabels.map(({ key }) => {
+      const items = groups[key];
+      return HEADER(key) + (items.length ? items.map(({ s, i }) => _supChipHtml(s, i, rank++)).join('') : EMPTY);
+    }).join('');
+    return;
+  }
+
+  /* Ordre d'ajout (défaut) */
+  el.innerHTML = indexed.map(({ s, i }, rank) => _supChipHtml(s, i, rank + 1)).join('');
+}
+
+function _supChipHtml(s, i, rank) {
+  const paysInfo = s.pays ? TVA_PAYS[s.pays] : null;
+  return `<div class="sup-chip" data-idx="${i}">
+    <span class="sup-num">${rank}.</span>
+    <input type="text" value="${escHtml(s.name)}" data-idx="${i}"
+      onblur="renameSup(${i}, this.value)"
+      onkeydown="if(event.key==='Enter')this.blur()">
+    <span class="sup-chip-sep">·</span>
+    <input type="email" class="sup-chip-email" value="${escHtml(s.email || '')}"
+      placeholder="email commandes…"
+      onblur="updateSupEmail(${i}, this.value)"
+      onkeydown="if(event.key==='Enter')this.blur()"
+      title="Email pour passer les commandes">
+    <select class="sup-pays-sel ${s.pays ? 'set' : ''}" onchange="updateSupPays(${i}, this.value)" title="Pays fournisseur">
+      ${_paysOptions(s.pays || '')}
+    </select>
+    <button class="sup-chip-del" onclick="deleteSup(${i})" title="Supprimer">✕</button>
+  </div>`;
+}
+
+function showAddRow() {
+  document.getElementById('supAddRow').style.display = 'flex';
+  document.getElementById('supAddInput').value = '';
+  document.getElementById('supAddPays').innerHTML = _paysOptions('');
+  document.getElementById('supAddInput').focus();
+}
+
+function cancelAdd() {
+  document.getElementById('supAddRow').style.display = 'none';
+}
+
+function confirmAdd() {
+  const input = document.getElementById('supAddInput');
+  const name  = input.value.trim();
+  if (!name) return;
+  if (supplierList.some(s => s.name.toLowerCase() === name.toLowerCase())) {
+    toast('Ce fournisseur existe déjà');
+    return;
+  }
+  const pays  = document.getElementById('supAddPays').value;
+  const email = (document.getElementById('supAddEmail')?.value || '').trim();
+  supplierList.push({ id: 'sup-' + Date.now(), name, pays, email });
+  saveData();
+  renderSupList();
+  updateSupSelects();
+  cancelAdd();
+  renderStats();
+  updateFournBadge();
+  toast('✓ Fournisseur ajouté : ' + name + (pays ? ' (' + pays + ')' : ''));
+}
+
+function updateSupEmail(idx, email) {
+  const trimmed = email.trim();
+  if (trimmed === (supplierList[idx].email || '')) return;
+  supplierList[idx].email = trimmed;
+  saveData();
+  toast(trimmed ? '✓ Email enregistré : ' + trimmed : 'Email supprimé');
+}
+
+function updateSupPays(idx, pays) {
+  supplierList[idx].pays = pays;
+  saveData();
+  const sel = document.querySelector(`.sup-chip[data-idx="${idx}"] .sup-pays-sel`);
+  if (sel) sel.classList.toggle('set', !!pays);
+  _refreshVisibleMargins();
+  toast(pays ? `✓ Pays : ${TVA_PAYS[pays]?.flag || ''} ${pays}` : 'Pays supprimé');
+}
+
+function toggleTvaAchat(idx) {
+  supplierList[idx].tvaAchat = !supplierList[idx].tvaAchat;
+  saveData();
+  renderSupList();
+  _refreshVisibleMargins();
+  const s = supplierList[idx];
+  const tvaRate = s.pays && TVA_PAYS[s.pays]?.tva != null ? ` (${TVA_PAYS[s.pays].tva}%)` : '';
+  toast(s.tvaAchat ? `✓ TVA achat activée${tvaRate} pour ${s.name}` : `TVA achat désactivée pour ${s.name}`);
+}
+
+function _refreshVisibleMargins() {
+  document.querySelectorAll('.margin-cell[id^="margin-"]').forEach(cell => {
+    const id = cell.id.replace('margin-', '');
+    cell.innerHTML = _marginHtml(id)
+      + `<select class="livraison-sel ${costs[id]?.paysLivraison ? 'set' : ''}" data-id="${id}" onchange="onPaysLivraisonChange(this)" title="Pays de livraison (TVA vente)">${_paysOptions(costs[id]?.paysLivraison || '')}</select>`;
+  });
+}
+
+function onPaysLivraisonChange(sel) {
+  const id = sel.dataset.id;
+  if (!costs[id]) costs[id] = {};
+  costs[id].paysLivraison = sel.value;
+  saveCosts();
+  sel.classList.toggle('set', !!sel.value);
+  const cell = document.getElementById('margin-' + id);
+  if (cell) cell.innerHTML = _marginHtml(id)
+    + `<select class="livraison-sel ${sel.value ? 'set' : ''}" data-id="${id}" onchange="onPaysLivraisonChange(this)" title="Pays de livraison (TVA vente)">${_paysOptions(sel.value)}</select>`;
+}
+
+
+function renameSup(idx, newName) {
+  const trimmed = newName.trim();
+  if (!trimmed || trimmed === supplierList[idx].name) return;
+  const old = supplierList[idx].name;
+  supplierList[idx].name = trimmed;
+  /* Mettre à jour les assignations produits */
+  Object.keys(suppliers).forEach(id => {
+    if (suppliers[id] === old) suppliers[id] = trimmed;
+  });
+  saveData();
+  renderSupList();
+  updateSupSelects();
+  renderStats();
+  toast('✓ Renommé : ' + trimmed);
+}
+
+function deleteSup(idx) {
+  const name = supplierList[idx].name;
+  const count = Object.values(suppliers).filter(v => v === name).length;
+  if (count > 0 && !confirm(`"${name}" est assigné à ${count} produit(s). Supprimer quand même ?`)) return;
+  /* Désassigner les produits */
+  Object.keys(suppliers).forEach(id => { if (suppliers[id] === name) suppliers[id] = ''; });
+  supplierList.splice(idx, 1);
+  saveData();
+  renderSupList();
+  updateSupSelects();
+  renderStats();
+  updateFournBadge();
+  toast('Fournisseur supprimé');
+}
+
+/* ── Mettre à jour tous les selects de la table ── */
+function updateSupSelects() {
+  document.querySelectorAll('.f-select').forEach(sel => {
+    const id   = sel.dataset.id;
+    const curr = suppliers[id] || '';
+    sel.innerHTML = supOptions(curr);
+    sel.classList.toggle('assigned', !!curr);
+  });
+  renderAssignButtons();
+}
+
+function supOptions(selected) {
+  return '<option value="">— Non assigné —</option>'
+    + supplierList.map(s => `<option value="${escHtml(s.name)}" ${s.name === selected ? 'selected' : ''}>${escHtml(s.name)}</option>`).join('');
+}
+
+/* ── Parser produits ── */
+async function parseProducts(url, cat) {
+  try {
+    const res  = await fetch(url);
+    const text = await res.text();
+    const doc  = new DOMParser().parseFromString(text, 'text/html');
+    return Array.from(doc.querySelectorAll('.p-card:not(.p-card-request)')).map(card => {
+      const img = card.querySelector('.p-gallery-track img, .p-img img');
+      return {
+        id:    card.dataset.id,
+        name:  card.querySelector('.p-name')?.textContent?.trim() || '—',
+        price: parseFloat(card.dataset.price) || 0,
+        cat,
+        img:   img ? img.getAttribute('src') : null,
+      };
+    }).filter(p => p.id);
+  } catch { return []; }
+}
+
+function fmt(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ── Stats ── */
+function renderStats() {
+  const source   = allProducts.length
+    ? allProducts
+    : (() => { try { return JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { return []; } })();
+  const suppData = (() => { try { return JSON.parse(localStorage.getItem(SUPPLIERS_KEY) || '{}'); } catch { return {}; } })();
+  const sans   = source.filter(p => !suppData[p.id]).length;
+  const valeur = source.reduce((s, p) => s + p.price, 0);
+  document.getElementById('statTotal').textContent        = source.length;
+  document.getElementById('statFournisseurs').textContent = supplierList.length;
+  document.getElementById('statSans').textContent         = sans;
+  document.getElementById('statValeur').textContent       = fmt(valeur);
+}
+
+/* ── Boutons fournisseurs (assignation) ── */
+function renderAssignButtons() {
+  const suppData = (() => { try { return JSON.parse(localStorage.getItem(SUPPLIERS_KEY) || '{}'); } catch { return {}; } })();
+  const source   = allProducts.length ? allProducts
+    : (() => { try { return JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { return []; } })();
+
+  const counts = {};
+  let unassigned = 0;
+  source.forEach(p => {
+    const s = suppData[p.id] || suppliers[p.id] || '';
+    if (s) counts[s] = (counts[s] || 0) + 1;
+    else unassigned++;
+  });
+
+  const grid = document.getElementById('assignBtnGrid');
+  if (!grid) return;
+  const activeSup = _prixFilter.sup;
+  /* Chip "Tous" */
+  let html = `<button class="prix-sup-chip${activeSup === null ? ' on' : ''}" onclick="setPrixFilter('sup',null)">
+    Tous <span class="prix-sup-chip-count">${source.length}</span>
+  </button>`;
+  html += supplierList.map(s => {
+    const count = counts[s.name] || 0;
+    if (!count && activeSup !== s.name) return '';
+    const flag  = s.pays ? (TVA_PAYS[s.pays]?.flag || '') + ' ' : '';
+    const on    = activeSup === s.name ? ' on' : '';
+    return `<button class="prix-sup-chip${on}" data-sup="${escHtml(s.name)}" onclick="setPrixFilter('sup',this.dataset.sup)">
+      ${flag}${escHtml(s.name)} <span class="prix-sup-chip-count">${count}</span>
+    </button>`;
+  }).join('');
+  if (unassigned > 0) {
+    const on = activeSup === '' ? ' on none' : ' none';
+    html += `<button class="prix-sup-chip${on}" data-sup="" onclick="setPrixFilter('sup',this.dataset.sup)">
+      — Non assigné <span class="prix-sup-chip-count">${unassigned}</span>
+    </button>`;
+  }
+  grid.innerHTML = html || '<div style="color:#aaa;font-size:.82rem">Aucun fournisseur — ajoutez-en un ci-dessus.</div>';
+}
+
+/* ── État filtre prix ── */
+let _prixFilter = { q: '', cat: '', sup: null };
+
+function setPrixFilter(key, val) {
+  _prixFilter[key] = val;
+  if (key === 'cat') {
+    document.querySelectorAll('.prix-chip').forEach(c => c.classList.remove('on'));
+    const chip = document.getElementById('pcat-' + (val || 'all'));
+    if (chip) chip.classList.add('on');
+  }
+  renderAssignButtons();
+  filterTable();
+}
+
+/* Compat : openAssignModal appelé depuis le bouton "Éditer les prix" de l'analyse */
+function openAssignModal(name) {
+  setPrixFilter('sup', name === undefined ? null : name);
+  document.querySelector('.sec-block.sec-op')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function closeAssignModal() { setPrixFilter('sup', null); }
+
+/* ── Table produits (inline) ── */
+function renderTable() {
+  renderAssignButtons();
+  filterTable();
+}
+
+function _buildRow(p, assigned) {
+  let stocks = {};
+  try { stocks = JSON.parse(localStorage.getItem('leclam_stocks') || '{}'); } catch {}
+  const stockVal = stocks[p.id] != null ? parseInt(stocks[p.id], 10) : '';
+  const isLowStock  = stockVal !== '' && stockVal > 0 && stockVal < 3;
+  const isNoStock   = stockVal !== '' && stockVal <= 0;
+  const rowBg = isNoStock ? 'background:#fff5f5' : isLowStock ? 'background:#fffbeb' : '';
+  const stockStyle = `width:52px;padding:.3rem .4rem;border:1.5px solid ${isNoStock ? '#fca5a5' : isLowStock ? '#fcd34d' : '#e0e0e0'};border-radius:7px;font-size:.8rem;font-family:inherit;text-align:center`;
+  return `<tr data-id="${p.id}" data-cat="${p.cat}" data-f="${escHtml((assigned||'(Sans fournisseur)').toLowerCase())}" style="${rowBg}">
+    <td>${p.img ? `<img class="prod-img" src="${p.img}">` : `<div class="prod-img-ph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>`}</td>
+    <td><input type="text" class="name-input" data-id="${p.id}" value="${escHtml(p.name)}" onchange="onNameChange(this)"><br><span style="font-size:.7rem;color:#bbb">${p.id}</span></td>
+
+    <td><input type="text" class="supref-input" data-id="${p.id}" value="${escHtml(costs[p.id]?.supRef||'')}" placeholder="Réf. / nom fournisseur…" onchange="onSupRefChange(this)" style="width:100%;padding:.3rem .45rem;border:1.5px solid #e0e0e0;border-radius:7px;font-size:.78rem;font-family:inherit;outline:none" onfocus="this.style.borderColor='#3e2a14'" onblur="this.style.borderColor='#e0e0e0'"></td>
+    <td class="price-cell">
+      <input type="number" class="cost-input" data-id="${p.id}" value="${costs[p.id]?.cost??''}" min="0" step="0.01" placeholder="0,00" onchange="onCostChange(this)">
+      <input type="number" class="droits-input" data-id="${p.id}" value="${costs[p.id]?.droitsDouane??''}" min="0" max="100" step="0.5" placeholder="0 % douane" title="Droits de douane % (hors UE uniquement)" onchange="onDroitsChange(this)">
+    </td>
+    <td class="price-cell"><input type="number" class="coeff-input" data-id="${p.id}" value="${costs[p.id]?.coeff??''}" min="1" step="0.1"  placeholder="×"    onchange="onCoeffChange(this)"></td>
+    <td class="price-cell"><input type="number" class="price-input" data-id="${p.id}" value="${p.price.toFixed(2)}"        min="0" step="0.01"              onchange="onPriceChange(this)"></td>
+    <td class="margin-cell" id="margin-${p.id}">${_marginHtml(p.id)}</td>
+    <td class="price-cell">
+      <input type="number" class="stock-input" data-id="${p.id}" value="${stockVal}" min="0" step="1" placeholder="—"
+        title="${isNoStock ? 'Rupture' : isLowStock ? 'Stock faible' : 'Stock'}"
+        style="${stockStyle}"
+        onchange="onStockChange(this)">
+      ${isNoStock ? '<div style="font-size:.62rem;color:#dc2626;font-weight:700;margin-top:.1rem">Rupture</div>' : isLowStock ? '<div style="font-size:.62rem;color:#d97706;font-weight:700;margin-top:.1rem">Faible</div>' : ''}
+    </td>
+    <td class="price-cell">
+      <select class="weight-select" data-id="${p.id}" onchange="onTierChange(this)"
+        style="width:100%;padding:.3rem .4rem;border:1.5px solid #e0e0e0;border-radius:7px;font-size:.75rem;font-family:inherit;color:#222;background:#fff;cursor:pointer">
+        ${_tierOptions(costs[p.id]?.weightG ?? p.weightG ?? 200)}
+      </select>
+    </td>
+    <td><select class="f-select ${assigned?'assigned':''}" data-id="${p.id}" onchange="onAssign(this)">${supOptions(assigned)}</select></td>
+  </tr>`;
+}
+
+function _tableSource() {
+  return allProducts.length ? allProducts
+    : (() => { try { return JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { return []; } })();
+}
+
+
+function onSupRefChange(input) {
+  const id = input.dataset.id;
+  if (!costs[id]) costs[id] = {};
+  costs[id].supRef = input.value.trim();
+  saveCosts();
+  input.style.borderColor = '#27ae60';
+  setTimeout(() => input.style.borderColor = '#e0e0e0', 1000);
+}
+
+function onAssign(sel) {
+  const id  = sel.dataset.id;
+  /* Utiliser le nom exact depuis supplierList pour éviter les écarts de casse */
+  const raw = sel.value;
+  const match = supplierList.find(s => s.name.toLowerCase() === raw.toLowerCase());
+  const val = match ? match.name : raw;
+  suppliers[id] = val;
+  saveData();
+  sel.classList.toggle('assigned', !!val);
+  /* Flash vert */
+  sel.classList.add('saved-flash');
+  setTimeout(() => sel.classList.remove('saved-flash'), 1200);
+  /* Mettre à jour le data-f pour le filtre */
+  sel.closest('tr').dataset.f = (val || '(Sans fournisseur)').toLowerCase();
+  renderStats();
+}
+
+function saveAll() {
+  document.querySelectorAll('.f-select').forEach(sel => {
+    suppliers[sel.dataset.id] = sel.value;
+    sel.classList.toggle('assigned', !!sel.value);
+  });
+  document.querySelectorAll('.price-input').forEach(input => {
+    const id = input.dataset.id;
+    const val = parseFloat(input.value);
+    if (!isNaN(val) && val >= 0) {
+      const p = allProducts.find(x => x.id === id);
+      if (p) p.price = val;
+    }
+  });
+  document.querySelectorAll('.name-input').forEach(input => {
+    const id = input.dataset.id;
+    const val = input.value.trim();
+    if (val) {
+      const p = allProducts.find(x => x.id === id);
+      if (p) p.name = val;
+    }
+  });
+  document.querySelectorAll('.supref-input').forEach(input => {
+    const id = input.dataset.id;
+    if (!costs[id]) costs[id] = {};
+    costs[id].supRef = input.value.trim();
+  });
+  document.querySelectorAll('.cost-input').forEach(input => {
+    const id = input.dataset.id;
+    if (!costs[id]) costs[id] = {};
+    const val = parseFloat(input.value);
+    if (!isNaN(val)) costs[id].cost = val;
+  });
+  document.querySelectorAll('.coeff-input').forEach(input => {
+    const id = input.dataset.id;
+    if (!costs[id]) costs[id] = {};
+    const val = parseFloat(input.value);
+    if (!isNaN(val)) costs[id].coeff = val;
+  });
+  document.querySelectorAll('.droits-input').forEach(input => {
+    const id = input.dataset.id;
+    if (!costs[id]) costs[id] = {};
+    const val = parseFloat(input.value);
+    costs[id].droitsDouane = isNaN(val) ? 0 : Math.min(100, Math.max(0, val));
+  });
+  document.querySelectorAll('.weight-select').forEach(sel => {
+    const id = sel.dataset.id;
+    if (!costs[id]) costs[id] = {};
+    const val = parseInt(sel.value, 10);
+    if (!isNaN(val) && val >= 0) costs[id].weightG = val;
+  });
+  /* Stocks */
+  let stocks = {};
+  try { stocks = JSON.parse(localStorage.getItem('leclam_stocks') || '{}'); } catch {}
+  document.querySelectorAll('.stock-input').forEach(input => {
+    const id  = input.dataset.id;
+    const val = input.value.trim();
+    if (val === '') delete stocks[id];
+    else stocks[id] = Math.max(0, parseInt(val, 10) || 0);
+  });
+  localStorage.setItem('leclam_stocks', JSON.stringify(stocks));
+  saveCosts();
+  saveData();
+  saveProducts();
+  renderStats();
+  toast('✓ Tout enregistré');
+}
+
+function onPriceChange(input) {
+  const id  = input.dataset.id;
+  const val = parseFloat(input.value);
+  if (isNaN(val) || val < 0) return;
+  const p = allProducts.find(x => x.id === id);
+  if (!p) return;
+  p.price = val;
+  saveProducts();
+  input.classList.add('saved-flash');
+  setTimeout(() => input.classList.remove('saved-flash'), 1200);
+  renderStats();
+}
+
+function _applyCoeff(id) {
+  const c = costs[id] || {};
+  if (!c.cost || !c.coeff) return;
+
+  /* Coeff toujours appliqué sur le HT → prix vente TTC = costHT × coeff × 1,20 */
+  const supName = suppliers[id] || '';
+  const sup     = supplierList.find(s => s.name === supName);
+  const payInfo = sup?.pays ? TVA_PAYS[sup.pays] : null;
+  const isUE    = payInfo?.ue === true;
+  const tvaPct  = payInfo?.tva ?? 0;
+  const costHT  = isUE && tvaPct > 0 ? c.cost / (1 + tvaPct / 100) : c.cost;
+
+  const newPrice = Math.round(costHT * c.coeff * 1.20 * 100) / 100;
+
+  const priceInput = document.querySelector(`.price-input[data-id="${id}"]`);
+  if (priceInput) {
+    priceInput.value = newPrice.toFixed(2);
+    priceInput.classList.add('saved-flash');
+    setTimeout(() => priceInput.classList.remove('saved-flash'), 1200);
+  }
+  const p = allProducts.find(x => x.id === id);
+  if (p) { p.price = newPrice; saveProducts(); }
+}
+
+function onCostChange(input) {
+  const id = input.dataset.id;
+  if (!costs[id]) costs[id] = {};
+  costs[id].cost = parseFloat(input.value) || 0;
+  saveCosts();
+  _applyCoeff(id);
+  const cell = document.getElementById('margin-' + id);
+  if (cell) cell.innerHTML = _marginHtml(id);
+  input.classList.add('saved-flash');
+  setTimeout(() => input.classList.remove('saved-flash'), 1200);
+}
+
+function onDroitsChange(input) {
+  const id = input.dataset.id;
+  if (!costs[id]) costs[id] = {};
+  const val = parseFloat(input.value);
+  costs[id].droitsDouane = isNaN(val) ? 0 : Math.min(100, Math.max(0, val));
+  saveCosts();
+  const cell = document.getElementById('margin-' + id);
+  if (cell) cell.innerHTML = _marginHtml(id);
+  input.classList.add('saved-flash');
+  setTimeout(() => input.classList.remove('saved-flash'), 1200);
+}
+
+function onCoeffChange(input) {
+  const id = input.dataset.id;
+  if (!costs[id]) costs[id] = {};
+  costs[id].coeff = parseFloat(input.value) || 0;
+  saveCosts();
+  _applyCoeff(id);
+  const cell = document.getElementById('margin-' + id);
+  if (cell) cell.innerHTML = _marginHtml(id);
+  input.classList.add('saved-flash');
+  setTimeout(() => input.classList.remove('saved-flash'), 1200);
+}
+
+function onNameChange(input) {
+  const id  = input.dataset.id;
+  const val = input.value.trim();
+  if (!val) return;
+  const p = allProducts.find(x => x.id === id);
+  if (!p || p.name === val) return;
+  p.name = val;
+  saveProducts();
+  input.classList.add('saved-flash');
+  setTimeout(() => input.classList.remove('saved-flash'), 1200);
+}
+
+function onTierChange(select) {
+  const id = select.dataset.id;
+  const w  = parseInt(select.value, 10) || 200;
+  if (!costs[id]) costs[id] = {};
+  costs[id].weightG = w;
+  saveCosts();
+
+  select.style.borderColor = '#27ae60';
+  select.style.background  = '#f0fff4';
+  setTimeout(() => { select.style.borderColor = ''; select.style.background = ''; }, 1200);
+
+  /* Sync serveur si disponible */
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  fetch(`/api/admin/products/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf },
+    body: JSON.stringify({ weightG: w }),
+  }).catch(() => {});
+}
+
+function onStockChange(input) {
+  const id  = input.dataset.id;
+  const val = input.value.trim();
+  let stocks = {};
+  try { stocks = JSON.parse(localStorage.getItem('leclam_stocks') || '{}'); } catch {}
+  if (val === '') {
+    delete stocks[id];
+  } else {
+    stocks[id] = Math.max(0, parseInt(val, 10) || 0);
+  }
+  localStorage.setItem('leclam_stocks', JSON.stringify(stocks));
+  /* Mettre à jour la couleur de la ligne */
+  const n = val === '' ? null : parseInt(val, 10);
+  const tr = input.closest('tr');
+  if (tr) {
+    tr.style.background = n === null ? '' : n <= 0 ? '#fff5f5' : n < 3 ? '#fffbeb' : '';
+  }
+  input.style.borderColor = n === null ? '' : n <= 0 ? '#fca5a5' : n < 3 ? '#fcd34d' : '#27ae60';
+  setTimeout(() => { input.style.borderColor = ''; }, 1500);
+}
+
+function saveProducts() {
+  localStorage.setItem('leclam_all_products', JSON.stringify(allProducts));
+}
+
+function filterTable() {
+  const q   = _prixFilter.q.toLowerCase().trim();
+  const cat = _prixFilter.cat;
+  const sup = _prixFilter.sup;
+
+  const suppData = (() => { try { return JSON.parse(localStorage.getItem(SUPPLIERS_KEY) || '{}'); } catch { return {}; } })();
+  const source   = _tableSource();
+  const tbody    = document.getElementById('prodTable');
+  if (!tbody) return;
+
+  if (!source.length) {
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:2rem;color:#bbb;font-size:.85rem">⚠️ Lancez le serveur pour charger les produits</td></tr>`;
+    return;
+  }
+
+  const rows = source.filter(p => {
+    const assigned = suppData[p.id] || suppliers[p.id] || '';
+    const matchSup = sup === null ? true : sup === '' ? !assigned : assigned === sup;
+    const matchCat = !cat || p.cat === cat;
+    const matchQ   = !q || p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q);
+    return matchSup && matchCat && matchQ;
+  });
+
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:2rem;color:#bbb;font-size:.85rem">Aucun produit trouvé</td></tr>`;
+  } else {
+    tbody.innerHTML = rows.map(p => _buildRow(p, suppData[p.id] || suppliers[p.id] || '')).join('');
+  }
+
+  /* Compteur + sous-titre */
+  const cnt = document.getElementById('prixCount');
+  if (cnt) cnt.textContent = `${rows.length} produit${rows.length > 1 ? 's' : ''}`;
+  const sub = document.getElementById('prixSub');
+  if (sub) {
+    const parts = [];
+    if (cat) parts.push(cat.charAt(0).toUpperCase() + cat.slice(1));
+    if (sup !== null) parts.push(sup === '' ? 'Non assignés' : sup);
+    if (q) parts.push(`"${q}"`);
+    sub.textContent = parts.length ? parts.join(' · ') : 'Tous les produits';
+  }
+}
+
+function autoCoeff(targetMarginPct) {
+  const target = targetMarginPct / 100;
+  const source = _tableSource();
+  const prodList = source.length ? source
+    : (() => { try { return JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { return []; } })();
+
+  let updated = 0, skipped = 0;
+
+  prodList.forEach(p => {
+    const c = costs[p.id] || {};
+    if (!c.cost || c.cost <= 0) { skipped++; return; }
+
+    /* Zone fournisseur */
+    const supName = suppliers[p.id] || '';
+    const sup     = supplierList.find(s => s.name === supName);
+    const payInfo = sup?.pays ? TVA_PAYS[sup.pays] : null;
+    const isUE    = payInfo?.ue === true;
+    const tvaPct  = payInfo?.tva ?? 0;
+    const costHT  = isUE && tvaPct > 0 ? c.cost / (1 + tvaPct / 100) : c.cost;
+
+    /* Droits de douane */
+    const droitsPct = isUE ? 0 : (c.droitsDouane || 0);
+    const droitsHT  = costHT * droitsPct / 100;
+
+    /* Frais de port */
+    const shipCost = _shippingCostFor(p.id);
+
+    /* Coefficient minimum :
+       tauxMarge = (pvHT × 0.9832 − totalCosts) / pvHT >= target
+       → pvHT >= totalCosts / (0.9832 − target)
+       → coeff >= totalCosts / (costHT × (0.9832 − target))           */
+    const totalCosts = costHT + droitsHT + shipCost + 0.25;
+    const divisor    = costHT * (0.9832 - target);
+    if (divisor <= 0) { skipped++; return; }
+    const coeffMin = totalCosts / divisor;
+
+    /* Arrondi au dixième supérieur */
+    const newCoeff = Math.ceil(coeffMin * 10) / 10;
+
+    if (!costs[p.id]) costs[p.id] = {};
+    costs[p.id].coeff = newCoeff;
+
+    /* Met à jour le prix de vente TTC */
+    const newPriceTTC = Math.round(costHT * newCoeff * 1.20 * 100) / 100;
+    const prod = allProducts.find(x => x.id === p.id);
+    if (prod) prod.price = newPriceTTC;
+
+    updated++;
+  });
+
+  saveCosts();
+  saveProducts();
+  renderTable();
+  toast(`✓ ${updated} produit${updated > 1 ? 's' : ''} ajusté${updated > 1 ? 's' : ''} — ${skipped} sans prix d'achat`);
+}
+
+function exportCSV() {
+  /* Lecture des données */
+  let prods = allProducts;
+  if (!prods || !prods.length) {
+    try { prods = JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { prods = []; }
+  }
+  let c = costs;
+  if (!c || !Object.keys(c).length) {
+    try { c = JSON.parse(localStorage.getItem('leclam_costs') || localStorage.getItem('leclam_prod_costs') || '{}'); } catch { c = {}; }
+  }
+  let sup = suppliers;
+  if (!sup || !Object.keys(sup).length) {
+    try { sup = JSON.parse(localStorage.getItem('leclam_suppliers') || '{}'); } catch { sup = {}; }
+  }
+  let stk = {};
+  try { stk = JSON.parse(localStorage.getItem('leclam_stocks') || '{}'); } catch {}
+
+  const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const fmtNum = v => v != null && !isNaN(v) ? Number(v).toFixed(2).replace('.', ',') : '';
+
+  const header = ['ID','Nom site','Catégorie','Réf. fournisseur','Prix vente TTC','Prix achat (fact.)','Coeff','Prix achat HT','Prix vente HT','Droits douane %','Frais port','Frais Stripe','Marge nette €','Taux marge %','Stock','Fournisseur','Zone','Poids(g)'];
+  const rows = prods.map(p => {
+    const cd  = c[p.id] || {};
+    const prixAchat  = cd.cost  != null ? cd.cost  : '';
+    const coeff      = cd.coeff != null ? cd.coeff : '';
+    const prixVente  = p.price  != null ? p.price  : '';
+    const supName2   = sup[p.id] || '';
+    const supObj     = supplierList.find(s => s.name === supName2);
+    const payInfo2   = supObj?.pays ? TVA_PAYS[supObj.pays] : null;
+    const isUE2      = payInfo2?.ue === true;
+    const tvaPct2    = payInfo2?.tva ?? 0;
+    let marge = '', tauxMarge = '', costHT2 = '', pvHT2 = '', droitsE = '', portE = '', stripeE = '';
+    if (cd.cost != null && p.price != null) {
+      const _costHT = isUE2 && tvaPct2 > 0 ? cd.cost / (1 + tvaPct2 / 100) : cd.cost;
+      const _droitsPct = isUE2 ? 0 : (cd.droitsDouane || 0);
+      const _droitsHT = _costHT * _droitsPct / 100;
+      const _pvTTC = p.price;
+      const _pvHT  = _pvTTC / 1.20;
+      const _stripe = Math.round((_pvTTC * 0.014 + 0.25) * 100) / 100;
+      let _ship = 0;
+      try { _ship = _shippingCostFor(p.id); } catch {}
+      const _marge = _pvHT - _costHT - _droitsHT - _ship - _stripe;
+      marge = fmtNum(_marge);
+      tauxMarge = _pvHT > 0 ? Math.round(_marge / _pvHT * 100) + '%' : '';
+      costHT2 = fmtNum(_costHT);
+      pvHT2   = fmtNum(_pvHT);
+      droitsE = fmtNum(_droitsHT);
+      portE   = fmtNum(_ship);
+      stripeE = fmtNum(_stripe);
+    }
+    const stock      = stk[p.id] != null ? stk[p.id] : '';
+    const fournisseur = sup[p.id] || '';
+    const poids      = cd.weightG != null ? cd.weightG : (p.weightG != null ? p.weightG : '');
+    const supObj2    = supplierList.find(s => s.name === fournisseur);
+    const zone       = supObj2?.pays ? (TVA_PAYS[supObj2.pays]?.ue ? 'UE' : 'Hors UE') : '';
+    return [
+      esc(p.id),
+      esc(p.name),
+      esc(p.category || p.cat || ''),
+      esc(c[p.id]?.supRef || ''),
+      esc(fmtNum(prixVente)),
+      esc(fmtNum(prixAchat)),
+      esc(coeff !== '' ? String(coeff).replace('.', ',') : ''),
+      esc(costHT2),
+      esc(pvHT2),
+      esc(cd.droitsDouane > 0 ? cd.droitsDouane + '%' : ''),
+      esc(portE),
+      esc(stripeE),
+      esc(marge),
+      esc(tauxMarge),
+      esc(stock),
+      esc(fournisseur),
+      esc(zone),
+      esc(poids),
+    ].join(';');
+  });
+
+  const csv = '﻿' + [header.map(esc).join(';'), ...rows].join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'produits-leclam.csv';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('CSV téléchargé (' + prods.length + ' produits)');
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+/* ── Init ── */
+(async () => {
+  /* Synchronise tranches de poids ET prix France dans localStorage */
+  try {
+    const sc = JSON.parse(localStorage.getItem('leclam_shipping_v2') || 'null');
+    if (sc?.countries) {
+      sc.weights = JSON.parse(JSON.stringify(_SHIP_DEFAULTS.weights));
+      const fr = sc.countries.find(c => c.code === 'FR');
+      if (fr) fr.price = _SHIP_DEFAULTS.frPrice;
+      localStorage.setItem('leclam_shipping_v2', JSON.stringify(sc));
+    }
+  } catch {}
+
+  loadData();
+  _seedDefaults();
+  restoreCollapsedSections();
+  updateFournBadge();
+  renderSupList();
+  renderAssignButtons();
+
+  /* Charger la config livraison (tranches × zones) en parallèle */
+  fetch('/api/shipping-config')
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (d?.ok && d.tiers && d.zones && d.prices) {
+        shippingConfig = d;
+        /* Re-rendre les selects déjà dans le DOM */
+        document.querySelectorAll('.weight-select').forEach(sel => {
+          const weightG = costs[sel.dataset.id]?.weightG ?? 200;
+          sel.innerHTML = _tierOptions(weightG);
+        });
+      }
+    }).catch(() => {});
+
+  /* Charger depuis le cache pour affichage immédiat */
+  const cached = (() => { try { return JSON.parse(localStorage.getItem('leclam_all_products') || '[]'); } catch { return []; } })();
+  if (cached.length) {
+    allProducts = cached;
+    _autoFillCosts(allProducts);
+    renderStats(); renderTable();
+  }
+
+  /* Puis tenter le fetch (nécessite le serveur) */
+  const [plaisir, bebe, malin] = await Promise.all([
+    parseProducts('plaisir.html', 'plaisir'),
+    parseProducts('bebe.html',    'bebe'),
+    parseProducts('malin.html',   'malin'),
+  ]);
+  const fresh = [...plaisir, ...bebe, ...malin];
+  if (fresh.length) {
+    allProducts = fresh;
+    localStorage.setItem('leclam_all_products', JSON.stringify(allProducts));
+    _autoFillCosts(allProducts);
+    renderStats(); renderTable();
+  } else {
+    document.getElementById('prodTable').innerHTML =
+      '<tr><td colspan="9" style="text-align:center;padding:2rem;color:#bbb;font-size:.85rem">⚠️ Lance le serveur (<code>npm start</code>) pour afficher les produits</td></tr>';
+  }
+})();
+</script>
+  <script src="js/features.js"></script>
+</body>
+</html>

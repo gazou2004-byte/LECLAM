@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détail commande — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .detail-page { max-width: 700px; margin: 0 auto; padding: 6rem 1.5rem 4rem; }
+
+    .detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      transition: color .15s;
+    }
+    .detail-back:hover { color: #1a1a1a; }
+
+    .detail-page h1 { font-family: 'Playfair Display', serif; font-size: 1.7rem; margin-bottom: .2rem; color: #1a1a1a; }
+    .detail-meta { font-size: .85rem; color: #999; margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+    .order-status {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .25rem .75rem;
+      border-radius: 20px;
+    }
+    .status-delivered   { background: #d1fae5; color: #065f46; }
+    .status-confirmed   { background: #dcfce7; color: #166534; }
+    .status-processing  { background: #dbeafe; color: #1d4ed8; }
+    .status-shipped     { background: #e0f2fe; color: #0369a1; }
+    .status-pending     { background: #fef3c7; color: #92400e; }
+    .status-cancelled   { background: #fee2e2; color: #991b1b; }
+
+    /* Section card */
+    .detail-section {
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+    }
+    .section-head {
+      padding: .9rem 1.4rem;
+      border-bottom: 1px solid #f0f0f0;
+      font-weight: 700;
+      font-size: .875rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-body { padding: 1.2rem 1.4rem; }
+
+    /* Items */
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-size: .875rem;
+      padding: .4rem 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .order-item:last-child { border-bottom: none; }
+    .order-item .thumb {
+      width: 48px; height: 48px; border-radius: 7px; flex-shrink: 0;
+      background: #f4f4f4; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; overflow: hidden;
+    }
+    .order-item .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .order-item .name { flex: 1; font-weight: 500; }
+    .order-item .qty  { color: #999; font-size: .8rem; }
+    .order-item .price { font-weight: 600; }
+
+    /* Totaux */
+    .totals-row { display: flex; justify-content: space-between; font-size: .875rem; padding: .3rem 0; color: #666; }
+    .totals-row.grand { font-weight: 700; font-size: 1rem; color: #1a1a1a; border-top: 1px solid #eee; margin-top: .4rem; padding-top: .6rem; }
+
+    /* Suivi timeline */
+    .tracking-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+    .tracking-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      position: relative;
+      padding-bottom: 1.4rem;
+    }
+    .tracking-step:last-child { padding-bottom: 0; }
+    .step-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      border: 2px solid #e5e5e5;
+      background: #f9f9f9;
+      color: #ccc;
+      flex-shrink: 0;
+    }
+    .step-dot.done { background: #d1fae5; border-color: #86efac; color: #065f46; }
+    .step-dot.active { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
+    .step-line {
+      width: 2px;
+      flex: 1;
+      background: #e5e5e5;
+      min-height: 24px;
+      margin: 2px 0;
+    }
+    .step-line.done { background: #86efac; }
+    .tracking-step:last-child .step-line { display: none; }
+
+    .step-info { padding-top: .35rem; }
+    .step-label { font-weight: 600; font-size: .875rem; color: #1a1a1a; }
+    .step-label.muted { color: #bbb; font-weight: 500; }
+    .step-date  { font-size: .78rem; color: #999; margin-top: .1rem; }
+
+    /* Actions */
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      width: 100%;
+      padding: .85rem 1rem;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 12px;
+      background: #fff;
+      font-family: inherit;
+      font-size: .875rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color .18s, background .18s;
+      margin-bottom: .7rem;
+      text-decoration: none;
+    }
+    .action-btn:last-child { margin-bottom: 0; }
+    .action-btn:hover { border-color: #1a1a1a; background: #fafafa; }
+    .action-btn.danger { color: #c0392b; border-color: #fecaca; }
+    .action-btn.danger:hover { background: #fff5f5; border-color: #f87171; }
+    .action-btn .btn-icon { font-size: 1.2rem; }
+    .action-btn .btn-arrow { margin-left: auto; color: #bbb; }
+
+    /* Modal contact */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.4);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+      display: none;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.8rem;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 16px 64px rgba(0,0,0,.2);
+    }
+    .modal-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; }
+    .modal-field { margin-bottom: .9rem; }
+    .modal-field label { display: block; font-size: .8rem; font-weight: 600; color: #555; margin-bottom: .3rem; }
+    .modal-field textarea, .modal-field select {
+      width: 100%; padding: .7rem .9rem;
+      border: 1.5px solid #e0e0e0; border-radius: 10px;
+      font-size: .9rem; font-family: inherit; color: #222;
+      resize: vertical;
+    }
+    .modal-field textarea:focus, .modal-field select:focus { outline: none; border-color: #1a1a1a; }
+    .modal-actions { display: flex; gap: .7rem; margin-top: 1.2rem; }
+    .modal-send {
+      flex: 1; padding: .8rem; background: #1a1a1a; color: #fff;
+      border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
+      font-family: inherit; font-size: .9rem;
+    }
+    .modal-cancel {
+      padding: .8rem 1.2rem; border: 1.5px solid #e0e0e0;
+      border-radius: 50px; background: none; cursor: pointer;
+      font-family: inherit; font-size: .875rem; color: #666;
+    }
+
+    .cancel-reason-opt {
+      width: 100%; text-align: left; padding: .65rem 1rem;
+      background: #f5f5f5; border: 1.5px solid #e5e5e5; border-radius: 10px;
+      font-family: inherit; font-size: .875rem; cursor: pointer; transition: all .15s;
+    }
+    .cancel-reason-opt:hover { background: #ede8e0; border-color: #c8b89a; }
+    .cancel-reason-opt.selected { background: #fee2e2; border-color: #fca5a5; color: #991b1b; font-weight: 600; }
+
+    .not-found {
+      text-align: center; padding: 4rem 2rem; color: #999;
+    }
+    .not-found a { color: #1a1a1a; font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .detail-page { padding: 5rem 1.2rem 3rem; }
+    }
+    @media (max-width: 480px) {
+      .detail-page { padding: 4.5rem 1rem 2.5rem; }
+      .detail-page h1 { font-size: 1.4rem; }
+      .section-head { padding: .75rem 1rem; font-size: .82rem; }
+      .section-body { padding: .9rem 1rem; }
+      .modal-card { padding: 1.3rem; border-radius: 14px; }
+      .modal-actions { flex-direction: column; }
+      .modal-send, .modal-cancel { width: 100%; }
+    }
+    @media (max-width: 360px) {
+      .detail-page { padding: 4rem .75rem 2rem; }
+      .order-item .thumb { width: 40px; height: 40px; font-size: 1.1rem; }
+      .action-btn { padding: .7rem .85rem; font-size: .82rem; }
+    }
+  </style></head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="detail-page" id="detailPage">
+    <!-- rempli par JS -->
+  </main>
+
+  <!-- Modal contact / question -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-card">
+      <h3 style="display:flex;align-items:center;gap:.45rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> <span data-i18n="orders.contact_modal_title">Contacter le support</span></h3>
+      <div class="modal-field">
+        <label data-i18n="orders.subject_label">Sujet</label>
+        <select id="contactSubject">
+          <option value="livraison" data-i18n="orders.delivery_issue">Question sur ma livraison</option>
+          <option value="modification" data-i18n="orders.change_order">Modifier ma commande</option>
+          <option value="remboursement" data-i18n="orders.refund_request">Demande de remboursement</option>
+          <option value="autre" data-i18n="orders.other">Autre</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label data-i18n="orders.message_label">Message</label>
+        <textarea id="contactMessage" rows="5" data-i18n-ph="orders.message_placeholder" placeholder="Décrivez votre demande…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-cancel" onclick="closeModal()" data-i18n="account.cancel">Annuler</button>
+        <button class="modal-send" onclick="sendContact()" data-i18n="orders.send_btn">Envoyer →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal annulation -->
+  <div class="modal-overlay" id="cancelModal">
+    <div class="modal-card">
+      <h3 style="display:flex;align-items:center;gap:.45rem;margin-bottom:1rem">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        Pourquoi annulez-vous ?
+      </h3>
+      <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem">
+        <button class="cancel-reason-opt" data-reason="J'ai changé d'avis" onclick="selectCancelReason(this,false)">J'ai changé d'avis</button>
+        <button class="cancel-reason-opt" data-reason="Délai de livraison trop long" onclick="selectCancelReason(this,false)">Délai de livraison trop long</button>
+        <button class="cancel-reason-opt" data-reason="J'ai trouvé moins cher ailleurs" onclick="selectCancelReason(this,false)">J'ai trouvé moins cher ailleurs</button>
+        <button class="cancel-reason-opt" data-reason="Erreur dans ma commande (mauvais produit ou quantité)" onclick="selectCancelReason(this,false)">Erreur dans ma commande (mauvais produit ou quantité)</button>
+        <button class="cancel-reason-opt" data-reason="__autre__" onclick="selectCancelReason(this,true)">Autre…</button>
+      </div>
+      <div id="cancelReasonOther" style="display:none;margin-bottom:1rem">
+        <textarea id="cancelReasonOtherText" rows="2" placeholder="Précisez votre raison…" style="width:100%;box-sizing:border-box;border:1.5px solid #e0e0e0;border-radius:10px;padding:.6rem .8rem;font-family:inherit;font-size:.875rem;resize:none"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-cancel" onclick="closeCancelModal()">Retour</button>
+        <button id="confirmCancelBtn" onclick="confirmCancel()" style="flex:1;padding:.8rem;background:#dc2626;color:#fff;border:none;border-radius:50px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.9rem">Confirmer l'annulation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer" data-i18n="cart.close" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="opacity:.35"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div>
+    </div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+  <script>
+    const userRaw = localStorage.getItem('leclam_user');
+    if (!userRaw) { location.href = 'login.html'; }
+
+    const user   = JSON.parse(userRaw);
+    const token  = localStorage.getItem('leclam_token') || '';
+    const csrf   = localStorage.getItem('leclam_csrf')  || '';
+    const params = new URLSearchParams(location.search);
+    const orderId = params.get('id');
+    let _loadedOrder = null; /* stocke l'objet commande chargé (API ou localStorage) */
+
+    if (!orderId) { location.href = 'mes-commandes.html'; }
+
+    function fmtDate(iso) {
+      const loc = (typeof I18n !== 'undefined' ? I18n.locale : 'fr') || 'fr';
+      return new Date(iso).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function statusInfo(s) {
+      const map = {
+        delivered:        [I18n.t('orders.status_delivered'),        'status-delivered'],
+        confirmed:        ['Paiement confirmé',                       'status-confirmed'],
+        processing:       [I18n.t('orders.status_processing'),       'status-processing'],
+        shipped:          [I18n.t('orders.status_shipped'),          'status-shipped'],
+        pending_payment:  [I18n.t('orders.status_pending_payment'),  'status-pending'],
+        pending_virement: ['Virement en attente',                     'status-pending'],
+        pending_crypto:   ['Crypto en attente',                       'status-pending'],
+        cancelled:        [I18n.t('orders.status_cancelled'),        'status-cancelled'],
+      };
+      return map[s] || [I18n.t('orders.ongoing'), 'status-pending'];
+    }
+
+    /* ── Timeline de suivi ── */
+    function renderTracking(order) {
+      const steps = [
+        { key: 'confirmed',  label: I18n.t('orders.step_confirmed'),     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' },
+        { key: 'processing', label: I18n.t('orders.status_processing'),  icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>' },
+        { key: 'shipped',    label: I18n.t('orders.status_shipped'),     icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>' },
+        { key: 'delivered',  label: I18n.t('orders.status_delivered'),   icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
+      ];
+      const order_idx = {
+        cancelled:       -1,
+        pending_payment:  0,
+        processing:       1,
+        shipped:          2,
+        delivered:        3,
+      };
+      const cur = order_idx[order.status] ?? 0;
+
+      if (order.status === 'cancelled') {
+        return `<div style="text-align:center;padding:1rem;color:#c0392b;font-weight:600;display:flex;align-items:center;justify-content:center;gap:.4rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> ${I18n.t('orders.cancelled_notice')}</div>`;
+      }
+
+      return `<div class="tracking-steps">` + steps.map((step, i) => {
+        const done   = i < cur;
+        const active = i === cur;
+        const dotCls = done ? 'done' : active ? 'active' : '';
+        const lineCls= done ? 'done' : '';
+        const lblCls = (!done && !active) ? 'muted' : '';
+        let dateStr  = '';
+        if (i === 0) dateStr = fmtDate(order.createdAt);
+        if (i === 3 && order.deliveredAt) dateStr = fmtDate(order.deliveredAt);
+        if (i === 2 && order.shippedAt)   dateStr = fmtDate(order.shippedAt);
+
+        return `
+          <div class="tracking-step">
+            <div class="step-dot-wrap">
+              <div class="step-dot ${dotCls}">${done ? '✓' : step.icon}</div>
+              <div class="step-line ${lineCls}"></div>
+            </div>
+            <div class="step-info">
+              <div class="step-label ${lblCls}">${step.label}</div>
+              ${dateStr ? `<div class="step-date">${dateStr}</div>` : ''}
+              ${active && i === 2 && order.trackingNumber ? `<div class="step-date">${I18n.t('orders.tracking_num_label')} <strong>${order.trackingNumber}</strong></div>` : ''}
+            </div>
+          </div>`;
+      }).join('') + `</div>`;
+    }
+
+    /* ── Actions selon statut ── */
+    function renderActions(order) {
+      const actions = [];
+
+      if (['pending_payment','pending_virement','pending_crypto','confirmed'].includes(order.status)) {
+        actions.push(`
+          <button class="action-btn" onclick="modifyOrder()">
+            <span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+            <span>Modifier ma commande</span>
+            <span class="btn-arrow">›</span>
+          </button>`);
+        actions.push(`
+          <button class="action-btn danger" onclick="openCancelModal()">
+            <span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+            <span>Annuler la commande</span>
+            <span class="btn-arrow">›</span>
+          </button>`);
+      } else if (order.status === 'processing') {
+        actions.push(`
+          <div style="padding:.75rem 1rem;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;font-size:.82rem;color:#92400e">
+            ⚠ Votre commande est en cours de préparation — l'annulation n'est plus possible en ligne. Contactez-nous si besoin.
+          </div>`);
+      }
+
+      if (order.status === 'shipped' && order.trackingNumber) {
+        actions.push(`
+          <a class="action-btn" href="#" onclick="alert(I18n.t('orders.tracking_number')+' : ${order.trackingNumber}');return false">
+            <span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span>${I18n.t('orders.track_delivery')}</span>
+            <span class="btn-arrow">›</span>
+          </a>`);
+      }
+
+      if (order.status === 'delivered') {
+        actions.push(`
+          <a class="action-btn" href="avis.html">
+            <span class="btn-icon">⭐</span>
+            <span>${I18n.t('orders.leave_review')}</span>
+            <span class="btn-arrow">›</span>
+          </a>`);
+      }
+
+      if (order.status !== 'cancelled' && order.status !== 'pending_payment') {
+        actions.push(`
+          <button class="action-btn" onclick="openModal()">
+            <span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+            <span>${I18n.t('orders.contact_support')}</span>
+            <span class="btn-arrow">›</span>
+          </button>`);
+      }
+
+      return actions.join('') || `<p style="color:#999;font-size:.875rem">${I18n.t('orders.no_actions')}</p>`;
+    }
+
+    /* ── Rendu principal ── */
+    function renderOrder(order) {
+      _loadedOrder = order;
+      const [label, cls] = statusInfo(order.status);
+      const subtotal = order.total - (order.shipping || 0);
+      const shipping = order.shipping || 0;
+
+      document.title = I18n.t('orders.page_title', {id: order.id});
+      document.getElementById('detailPage').innerHTML = `
+        <a class="detail-back" href="mes-commandes.html">${I18n.t('orders.back')}</a>
+
+        <h1>${I18n.t('orders.detail_title')}</h1>
+        <div class="detail-meta">
+          <span>${order.id}</span>
+          <span>•</span>
+          <span>${fmtDate(order.createdAt)}</span>
+          <span>•</span>
+          <span class="order-status ${cls}">${label}</span>
+        </div>
+
+        <!-- Articles -->
+        <div class="detail-section">
+          <div class="section-head" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> ${I18n.t('orders.items_ordered')}</div>
+          <div class="section-body">
+            ${(order.items || []).map(i => `
+              <div class="order-item">
+                <div class="thumb">
+                  ${i.img ? `<img src="${i.img}" alt="${i.name}">` : `<span>${i.emoji || '📦'}</span>`}
+                </div>
+                <span class="name">${i.name}</span>
+                <span class="qty">× ${i.qty}</span>
+                <span class="price">${((i.price || 0) * i.qty).toFixed(2).replace('.', ',')} €</span>
+              </div>
+            `).join('')}
+            <div style="margin-top:1rem;border-top:1px solid #f0f0f0;padding-top:.8rem">
+              ${shipping > 0 ? `<div class="totals-row"><span>${I18n.t('orders.subtotal')}</span><span>${subtotal.toFixed(2).replace('.', ',')} €</span></div>
+              <div class="totals-row"><span>${I18n.t('orders.shipping_cost')}</span><span>${shipping.toFixed(2).replace('.', ',')} €</span></div>` : ''}
+              <div class="totals-row grand"><span>${I18n.t('orders.total_ttc')}</span><span>${(order.total || 0).toFixed(2).replace('.', ',')} €</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suivi -->
+        <div class="detail-section">
+          <div class="section-head" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> ${I18n.t('orders.tracking_title')}</div>
+          <div class="section-body">
+            ${renderTracking(order)}
+            <p style="font-size:.78rem;color:#bbb;margin-top:1rem">${I18n.t('orders.estimated_delivery')} ${I18n.t('orders.estimated_days')}</p>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="detail-section">
+          <div class="section-head" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg> ${I18n.t('orders.actions_title')}</div>
+          <div class="section-body">
+            ${renderActions(order)}
+          </div>
+        </div>
+      `;
+    }
+
+    /* ── Ouvre le modal d'annulation ── */
+    function openCancelModal() {
+      document.getElementById('cancelModal').classList.add('open');
+    }
+    function closeCancelModal() {
+      document.getElementById('cancelModal').classList.remove('open');
+      document.querySelectorAll('.cancel-reason-opt').forEach(el => el.classList.remove('selected'));
+      document.getElementById('cancelReasonOther').style.display = 'none';
+      document.getElementById('cancelReasonOtherText').value = '';
+    }
+
+    function selectCancelReason(el, showOther) {
+      document.querySelectorAll('.cancel-reason-opt').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('cancelReasonOther').style.display = showOther ? 'block' : 'none';
+    }
+
+    async function confirmCancel() {
+      const selected = document.querySelector('.cancel-reason-opt.selected');
+      if (!selected) { alert('Veuillez choisir une raison.'); return; }
+      let reason = selected.dataset.reason;
+      if (reason === '__autre__') {
+        const txt = document.getElementById('cancelReasonOtherText').value.trim();
+        reason = txt || 'Autre';
+      }
+      const btn = document.getElementById('confirmCancelBtn');
+      btn.disabled = true; btn.textContent = 'Annulation…';
+      try {
+        const r = await fetch(`/api/orders/${encodeURIComponent(orderId)}/cancel`, {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+          body: JSON.stringify({ reason }),
+        });
+        const d = await r.json();
+        if (!d.ok) { alert(d.error || 'Erreur lors de l\'annulation.'); btn.disabled = false; btn.textContent = 'Confirmer l\'annulation'; return; }
+        /* Mise à jour localStorage */
+        const stored = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+        const idx = stored.findIndex(o => o.id === orderId);
+        if (idx > -1) { stored[idx].status = 'cancelled'; localStorage.setItem('leclam_orders', JSON.stringify(stored)); }
+        closeCancelModal();
+        location.reload();
+      } catch { btn.disabled = false; btn.textContent = 'Confirmer l\'annulation'; alert('Erreur réseau, réessayez.'); }
+    }
+
+    /* ── Modification (remet les articles dans le panier) ── */
+    async function modifyOrder() {
+      if (!confirm('Votre commande sera annulée et vos articles replacés dans le panier pour que vous puissiez la modifier. Si le nouveau total est inférieur, un avoir vous sera automatiquement émis. Continuer ?')) return;
+      const orderData = _loadedOrder || {};
+
+      if (_loadedOrder?._serverSynced) {
+        /* Commande connue du serveur → cancel officiel + avoir possible */
+        try {
+          const r = await fetch(`/api/orders/${encodeURIComponent(orderId)}/cancel`, {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+            body: JSON.stringify({ reason: 'Modification de la commande' }),
+          });
+          const d = await r.json();
+          if (!d.ok) { alert(d.error || 'Erreur, réessayez.'); return; }
+        } catch { alert('Erreur réseau, réessayez.'); return; }
+        localStorage.setItem('leclam_modification', JSON.stringify({
+          originalOrderId: orderId, originalTotal: orderData.total || 0,
+        }));
+      } else {
+        /* Commande locale uniquement → pas de cancel serveur, pas d'avoir */
+        localStorage.removeItem('leclam_modification');
+      }
+
+      /* Mise à jour localStorage + remise des articles dans le panier */
+      const stored = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+      const idx = stored.findIndex(o => o.id === orderId);
+      if (idx > -1) { stored[idx].status = 'cancelled'; localStorage.setItem('leclam_orders', JSON.stringify(stored)); }
+      const cartItems = (orderData.items || []).map(i => ({
+        id: i.id, name: i.name, price: i.price, qty: i.qty,
+        emoji: i.emoji || '📦', img: i.img || null,
+      }));
+      if (cartItems.length) localStorage.setItem('leclam_cart', JSON.stringify(cartItems));
+      location.href = 'paiement.html';
+    }
+
+    /* ── Contact modal ── */
+    function openModal()  { document.getElementById('contactModal').classList.add('open'); }
+    function closeModal() { document.getElementById('contactModal').classList.remove('open'); }
+
+    function sendContact() {
+      const msg = document.getElementById('contactMessage').value.trim();
+      if (!msg) { alert(I18n.t('messages.error_no_text')); return; }
+      /* Ici : POST /api/contact → email support */
+      closeModal();
+      const banner = document.createElement('div');
+      banner.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:.8rem 1.5rem;border-radius:12px;font-size:.875rem;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+      banner.textContent = I18n.t('orders.sent_success');
+      document.body.appendChild(banner);
+      setTimeout(() => banner.remove(), 4000);
+    }
+
+    document.getElementById('contactModal')?.addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    /* ── Chargement de la commande ── */
+    async function loadOrder() {
+      let order = null;
+
+      /* 1. Chercher localement */
+      const localOrders = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+      order = localOrders.find(o => o.id === orderId) || null;
+
+      /* 2. Essayer l'API — source de vérité */
+      let serverSynced = false;
+      try {
+        const res  = await fetch(`/api/orders/${encodeURIComponent(orderId)}`, {
+          headers: { 'Authorization': 'Bearer ' + token },
+        });
+        const data = await res.json();
+        if (data.ok) { order = { ...(order || {}), ...data.order }; serverSynced = true; }
+      } catch { /* serveur off */ }
+      if (order) order._serverSynced = serverSynced;
+
+      if (!order) {
+        document.getElementById('detailPage').innerHTML = `
+          <div class="not-found">
+            <div style="margin-bottom:1rem"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+            <p>${I18n.t('orders.not_found')}</p>
+            <p style="margin-top:1rem"><a href="mes-commandes.html">${I18n.t('orders.back')}</a></p>
+          </div>`;
+        return;
+      }
+
+      renderOrder(order);
+    }
+
+    let _loadDone = false;
+    function _startLoad() {
+      if (_loadDone) return; _loadDone = true;
+      loadOrder().then(() => {
+        /* Ouvre automatiquement le modal d'annulation si ?cancel=1 dans l'URL */
+        if (new URLSearchParams(location.search).get('cancel') === '1') openCancelModal();
+      });
+    }
+    document.addEventListener('i18nApplied', _startLoad, { once: true });
+    setTimeout(() => _startLoad(), 600);
+  </script>
+</body>
+</html>

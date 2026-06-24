@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aide & Demandes — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {}
+
+    .aide-page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 4rem;
+    }
+
+    .aide-page h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #1a1a1a;
+      margin-bottom: .3rem;
+    }
+    .aide-page .sub { color: #999; font-size: .9rem; margin-bottom: 2.5rem; }
+
+    /* Cartes rapides */
+    .quick-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .quick-card {
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 16px;
+      padding: 1.4rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .18s, box-shadow .18s, transform .15s;
+      display: block;
+    }
+    .quick-card:hover {
+      border-color: #1a1a1a;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .quick-card .qc-icon { font-size: 2rem; margin-bottom: .6rem; }
+    .quick-card .qc-label { font-weight: 700; font-size: .875rem; color: #1a1a1a; }
+    .quick-card .qc-sub   { font-size: .75rem; color: #aaa; margin-top: .25rem; }
+
+    /* Formulaire de demande produit */
+    .request-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      margin-bottom: 2rem;
+    }
+    .request-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: .4rem;
+      color: #1a1a1a;
+    }
+    .request-card .rc-sub { font-size: .85rem; color: #999; margin-bottom: 1.6rem; }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      margin-bottom: 1.1rem;
+    }
+    .form-field label {
+      font-size: .8rem;
+      font-weight: 600;
+      color: #555;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      padding: .72rem .95rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 11px;
+      font-size: .9rem;
+      font-family: inherit;
+      color: #222;
+      background: #fff;
+      transition: border-color .18s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: #1a1a1a;
+    }
+    .form-field textarea { resize: vertical; min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    .submit-btn {
+      width: 100%;
+      padding: .95rem;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: .4rem;
+      transition: background .2s, transform .15s;
+    }
+    .submit-btn:hover { background: #333; transform: translateY(-2px); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { background: #ccc; cursor: default; transform: none; }
+
+    .success-banner {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1.5px solid #86efac;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: .9rem;
+      display: none;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+    .success-banner.visible { display: flex; }
+
+    /* FAQ accordion */
+    .faq-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      color: #1a1a1a;
+    }
+    .faq-item {
+      border: 1.5px solid #e8e8e8;
+      border-radius: 12px;
+      margin-bottom: .7rem;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.2rem;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .875rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      text-align: left;
+      transition: background .15s;
+      gap: 1rem;
+    }
+    .faq-question:hover { background: #fafaf7; }
+    .faq-arrow { font-size: .75rem; color: #aaa; flex-shrink: 0; transition: transform .2s; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease, padding .25s;
+      font-size: .875rem;
+      color: #555;
+      line-height: 1.7;
+      padding: 0 1.2rem;
+      background: #fafaf7;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding: .9rem 1.2rem; }
+  </style></head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="aide-page">
+    <h1 style="display:flex;align-items:center;gap:.45rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg> <span data-i18n="aide.title">Aide &amp; Demandes</span></h1>
+    <p class="sub" data-i18n="aide.sub">Besoin d'un produit spécifique ? Une question ? On est là.</p>
+
+    <!-- Raccourcis -->
+    <div class="quick-cards">
+      <a href="livraison.html" class="quick-card">
+        <div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="qc-label" data-i18n="aide.qc_delivery">Livraison</div>
+        <div class="qc-sub" data-i18n="aide.qc_delivery_sub">Délais & frais</div>
+      </a>
+      <a href="retours.html" class="quick-card">
+        <div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div>
+        <div class="qc-label" data-i18n="aide.qc_returns">Retours</div>
+        <div class="qc-sub" data-i18n="aide.qc_returns_sub">30 jours sans questions</div>
+      </a>
+      <a href="mes-commandes.html" class="quick-card">
+        <div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div class="qc-label" data-i18n="aide.qc_orders">Mes commandes</div>
+        <div class="qc-sub" data-i18n="aide.qc_orders_sub">Suivi & modification</div>
+      </a>
+      <a href="contact.html" class="quick-card">
+        <div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="qc-label" data-i18n="aide.qc_contact">Contact</div>
+        <div class="qc-sub" data-i18n="aide.qc_contact_sub">Réponse sous 2h</div>
+      </a>
+    </div>
+
+    <!-- Formulaire demande produit -->
+    <div class="request-card">
+      <h2 style="display:flex;align-items:center;gap:.4rem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> <span data-i18n="aide.request_title">Demander un produit spécifique</span></h2>
+      <p class="rc-sub" data-i18n="aide.request_sub">Vous cherchez un article introuvable sur le site ? Décrivez-le nous, nous ferons notre possible pour le sourcer.</p>
+
+      <form id="requestForm" onsubmit="submitRequest(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="aide.label_name">Votre prénom</label>
+            <input type="text" id="reqName" placeholder="Marie" required>
+          </div>
+          <div class="form-field">
+            <label data-i18n="aide.label_email">Votre e-mail</label>
+            <input type="email" id="reqEmail" placeholder="marie@email.fr" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label data-i18n="aide.label_category">Catégorie</label>
+          <select id="reqCategory">
+            <option value="" data-i18n="aide.category_choose">— Choisir —</option>
+            <option value="plaisir" data-i18n="aide.cat_plaisir">Plaisir (Made in France)</option>
+            <option value="malin" data-i18n="aide.cat_malin">Malin (Gadgets TikTok)</option>
+            <option value="bebe" data-i18n="aide.cat_bebe">Bébé (Occasion &amp; neuf)</option>
+            <option value="autre" data-i18n="messages.subject_other">Autre</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label data-i18n="aide.label_desc">Description du produit</label>
+          <textarea id="reqDescription" placeholder="Décrivez le produit que vous recherchez : modèle, couleur, budget, usage prévu…" required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label data-i18n="aide.label_budget">Budget indicatif (optionnel)</label>
+          <input type="text" id="reqBudget" placeholder="Ex : 20–40 €">
+        </div>
+
+        <button type="submit" class="submit-btn" id="reqBtn" data-i18n="aide.submit_btn">Envoyer ma demande →</button>
+      </form>
+
+      <div class="success-banner" id="successBanner" data-i18n="aide.success_request">
+        Demande envoyée ! Nous vous répondrons sous 48h à votre adresse e-mail.
+      </div>
+    </div>
+
+    <!-- Offre commerciale -->
+    <div class="request-card">
+      <h2 style="display:flex;align-items:center;gap:.4rem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span data-i18n="aide.offre_title">Offre commerciale</span></h2>
+      <p class="rc-sub" data-i18n="aide.offre_sub">Vous avez vu un produit ailleurs et voulez qu'on le trouve pour vous ? Envoyez-nous une photo, on le source pour vous !</p>
+
+      <form id="offreForm" onsubmit="submitOffre(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="aide.label_name">Votre prénom</label>
+            <input type="text" id="offreName" placeholder="Marie" required>
+          </div>
+          <div class="form-field">
+            <label data-i18n="aide.label_email">Votre e-mail</label>
+            <input type="email" id="offreEmail" placeholder="marie@email.fr" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label><span data-i18n="aide.label_photo">Photo du produit</span> <span style="font-weight:400;color:#bbb" data-i18n="aide.photo_optional">(optionnel)</span></label>
+          <input type="file" id="offrePhoto" accept="image/*" style="padding:.5rem .6rem;cursor:pointer">
+          <div id="offrePreview" style="margin-top:.5rem;display:none">
+            <img id="offrePreviewImg" src="" alt="aperçu" style="max-width:160px;max-height:120px;border-radius:10px;object-fit:cover;border:1.5px solid #e0e0e0">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label data-i18n="aide.label_desc">Description du produit</label>
+          <textarea id="offreDesc" placeholder="Décrivez ce que vous cherchez : où vous l'avez vu, couleur, usage, budget…" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="offreBtn" data-i18n="aide.submit_btn">Envoyer ma demande →</button>
+      </form>
+
+      <div class="success-banner" id="offreBanner" data-i18n="aide.success_offre">
+        Demande envoyée ! On recherche votre produit et on vous répond sous 48h.
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <h2 data-i18n="aide.faq_title">Questions fréquentes</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="aide.faq_q1">Combien de temps pour la livraison ?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" data-i18n="aide.faq_a1">Les commandes sont traitées sous 24h. La livraison prend ensuite 5 à 10 jours ouvrés selon votre adresse et le produit. Vous recevrez un email de confirmation avec un numéro de suivi dès l'expédition.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="aide.faq_q2">Est-ce que je peux retourner un article ?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" data-i18n="aide.faq_a2">Oui ! Vous disposez de 30 jours après réception pour retourner tout article non utilisé dans son emballage d'origine. Le remboursement est effectué sous 5 à 7 jours ouvrés après réception de votre retour.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="aide.faq_q3">Comment fonctionne la section Bébé ?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" data-i18n="aide.faq_a3">La section Bébé propose des articles de seconde main et neufs sélectionnés manuellement. Les articles sont en stock limité (souvent 1 exemplaire). Dès qu'il est vendu, il est retiré automatiquement. Vous pouvez nous soumettre des articles via ce formulaire si vous cherchez quelque chose de précis.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="aide.faq_q4">Comment puis-je modifier ou annuler ma commande ?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" data-i18n="aide.faq_a4">Vous pouvez modifier ou annuler votre commande depuis la page "Mes commandes" tant qu'elle n'a pas encore été expédiée. Une fois expédiée, contactez notre support via la page de détail de votre commande.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="aide.faq_q5">Est-ce que mes paiements sont sécurisés ?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" data-i18n="aide.faq_a5">Oui, tous les paiements sont traités via Stripe, l'un des systèmes de paiement les plus sécurisés au monde. Vos coordonnées bancaires ne sont jamais stockées sur nos serveurs.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer" data-i18n="cart.close" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div>
+    </div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+  <script>
+    /* Pré-remplir les formulaires si connecté */
+    const userRaw = localStorage.getItem('leclam_user');
+    if (userRaw) {
+      try {
+        const u = JSON.parse(userRaw);
+        const first = u.name?.split(' ')[0] || '';
+        document.getElementById('reqName').value    = first;
+        document.getElementById('reqEmail').value   = u.email || '';
+        document.getElementById('offreName').value  = first;
+        document.getElementById('offreEmail').value = u.email || '';
+      } catch {}
+    }
+
+    /* FAQ accordion */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* Envoi du formulaire texte */
+    async function submitRequest(e) {
+      e.preventDefault();
+      const btn = document.getElementById('reqBtn');
+      btn.disabled = true;
+      btn.textContent = I18n.t('aide.sending');
+
+      const payload = {
+        name:        document.getElementById('reqName').value,
+        email:       document.getElementById('reqEmail').value,
+        category:    document.getElementById('reqCategory').value,
+        description: document.getElementById('reqDescription').value,
+        budget:      document.getElementById('reqBudget').value,
+      };
+
+      try {
+        await fetch('/api/aide', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
+      } catch { /* off */ }
+
+      /* Stocker localement pour l'admin */
+      const req = {
+        id:          'req-' + Date.now(),
+        product:     payload.description.slice(0, 60),
+        ...payload,
+        createdAt:   new Date().toISOString(),
+      };
+      const reqs = JSON.parse(localStorage.getItem('leclam_product_requests') || '[]');
+      reqs.unshift(req);
+      localStorage.setItem('leclam_product_requests', JSON.stringify(reqs));
+      if (typeof notifyAdmin === 'function') notifyAdmin('new_request', req);
+      if (typeof updateNavBadge === 'function') updateNavBadge();
+
+      document.getElementById('requestForm').reset();
+      document.getElementById('successBanner').classList.add('visible');
+      btn.disabled = false;
+      btn.textContent = I18n.t('aide.submit_btn');
+
+      /* Remettre email/nom si connecté */
+      if (userRaw) {
+        try {
+          const u = JSON.parse(userRaw);
+          document.getElementById('reqName').value  = u.name?.split(' ')[0] || '';
+          document.getElementById('reqEmail').value = u.email || '';
+        } catch {}
+      }
+    }
+
+    /* Aperçu photo */
+    document.getElementById('offrePhoto').addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) { document.getElementById('offrePreview').style.display = 'none'; return; }
+      const reader = new FileReader();
+      reader.onload = ev => {
+        document.getElementById('offrePreviewImg').src = ev.target.result;
+        document.getElementById('offrePreview').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    /* Envoi offre commerciale */
+    async function submitOffre(e) {
+      e.preventDefault();
+      const btn = document.getElementById('offreBtn');
+      btn.disabled = true;
+      btn.textContent = I18n.t('aide.sending');
+
+      const file = document.getElementById('offrePhoto').files[0];
+      let photoB64 = null;
+      if (file) {
+        photoB64 = await new Promise(res => {
+          const reader = new FileReader();
+          reader.onload = ev => res(ev.target.result);
+          reader.readAsDataURL(file);
+        });
+      }
+
+      const req = {
+        id:          'off-' + Date.now(),
+        product:     'Offre commerciale',
+        name:        document.getElementById('offreName').value,
+        email:       document.getElementById('offreEmail').value,
+        description: document.getElementById('offreDesc').value,
+        photo:       photoB64,
+        category:    'offre',
+        createdAt:   new Date().toISOString(),
+      };
+
+      const reqs = JSON.parse(localStorage.getItem('leclam_product_requests') || '[]');
+      reqs.unshift(req);
+      localStorage.setItem('leclam_product_requests', JSON.stringify(reqs));
+      if (typeof notifyAdmin === 'function') notifyAdmin('new_request', req);
+      if (typeof updateNavBadge === 'function') updateNavBadge();
+
+      document.getElementById('offreForm').reset();
+      document.getElementById('offrePreview').style.display = 'none';
+      document.getElementById('offreBanner').classList.add('visible');
+      btn.disabled = false;
+      btn.textContent = I18n.t('aide.submit_btn');
+
+      /* Remettre email/nom si connecté */
+      const ur = localStorage.getItem('leclam_user');
+      if (ur) {
+        try {
+          const u = JSON.parse(ur);
+          document.getElementById('offreName').value  = u.name?.split(' ')[0] || '';
+          document.getElementById('offreEmail').value = u.email || '';
+        } catch {}
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parrainage — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <style>
+    .para-hero { background: linear-gradient(135deg, #3e2a14 0%, #6b4423 100%); color: #d9c4a0; padding: 3rem 1.5rem 2.5rem; text-align: center; }
+    .para-hero h1 { font-size: 2rem; font-weight: 900; margin-bottom: .5rem; letter-spacing: -0.5px; }
+    .para-hero p { font-size: 1rem; opacity: .8; max-width: 480px; margin: 0 auto; }
+    .para-wrap { max-width: 640px; margin: 2rem auto; padding: 0 1.2rem 4rem; }
+    .para-card { background: #fff; border-radius: 16px; border: 1.5px solid #ede8e0; padding: 1.8rem; margin-bottom: 1.4rem; }
+    .para-card h2 { font-size: 1rem; font-weight: 700; color: #3e2a14; margin-bottom: 1.2rem; }
+    .code-box { background: #f5f0e8; border-radius: 12px; padding: 1.4rem; text-align: center; margin-bottom: 1rem; }
+    .code-val { font-size: 2rem; font-weight: 900; color: #3e2a14; letter-spacing: 3px; margin-bottom: .3rem; font-family: monospace; }
+    .code-sub { font-size: .78rem; color: #a0856a; }
+    .share-row { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+    .share-btn { padding: .55rem 1.2rem; border-radius: 50px; font-size: .82rem; font-weight: 700; cursor: pointer; font-family: inherit; border: none; transition: opacity .15s; }
+    .share-btn:hover { opacity: .85; }
+    .share-copy  { background: #3e2a14; color: #d9c4a0; }
+    .share-wa    { background: #25d366; color: #fff; }
+    .share-mail  { background: #e8608a; color: #fff; }
+    .steps { display: flex; flex-direction: column; gap: .9rem; }
+    .step-row { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; background: #3e2a14; color: #d9c4a0; font-weight: 900; font-size: .85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-txt strong { display: block; font-size: .88rem; color: #1a1a1a; }
+    .step-txt span { font-size: .78rem; color: #777; }
+    .stat-row { display: flex; gap: 1rem; }
+    .stat-box { flex: 1; background: #f5f0e8; border-radius: 12px; padding: 1rem; text-align: center; }
+    .stat-n { font-size: 1.8rem; font-weight: 900; color: #3e2a14; }
+    .stat-l { font-size: .72rem; color: #888; margin-top: .1rem; }
+    .login-prompt { background: #fff; border-radius: 16px; border: 1.5px solid #ede8e0; padding: 2.5rem; text-align: center; }
+    .login-prompt p { color: #555; margin-bottom: 1.2rem; }
+    .btn-login { display: inline-block; padding: .75rem 2rem; background: #3e2a14; color: #d9c4a0; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: .9rem; }
+    .promos-list { display: flex; flex-direction: column; gap: .6rem; }
+    .promo-item { background: #f5f0e8; border-radius: 10px; padding: .8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .promo-code { font-family: monospace; font-weight: 700; font-size: .95rem; color: #3e2a14; }
+    .promo-badge { background: #3e2a14; color: #d9c4a0; font-size: .7rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px; }
+  </style></head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">LE CLAM</a>
+    <div class="nav-links">
+      <a href="plaisir.html" class="nav-link plaisir-link">Plaisir</a>
+      <a href="malin.html"   class="nav-link malin-link">Malin</a>
+      <a href="bebe.html"    class="nav-link bebe-link">Bébé</a>
+    </div>
+    <div class="nav-actions">
+      <a href="mon-compte.html" class="nav-btn account-btn" id="navAccount">Mon compte</a>
+      <button class="nav-btn cart-btn" onclick="Cart.open()">🛒 <span id="cartCount">0</span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="para-hero">
+  <h1 data-i18n="referral.hero_title">🤝 Parrainez vos proches</h1>
+  <p data-i18n="referral.hero_sub">Vous gagnez 5 € · Votre filleul gagne 5 € · Tout le monde est content</p>
+</div>
+
+<div class="para-wrap">
+
+  <!-- Connecté -->
+  <div id="loggedInSection" style="display:none">
+    <div class="para-card">
+      <h2 data-i18n="referral.your_code">Votre code parrain</h2>
+      <div class="code-box">
+        <div class="code-val" id="myCode">...</div>
+        <div class="code-sub" data-i18n="referral.code_sub">Partagez ce code — votre filleul bénéficie de −5 € sur sa 1ère commande</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn share-copy" id="copyBtn" onclick="copyCode()" data-i18n="referral.copy_code">📋 Copier le code</button>
+        <button class="share-btn share-wa"   onclick="shareWhatsApp()">WhatsApp</button>
+        <button class="share-btn share-mail" onclick="shareMail()">Email</button>
+      </div>
+    </div>
+
+    <div class="para-card">
+      <h2 data-i18n="referral.your_stats">Vos stats</h2>
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-n" id="statUses">0</div>
+          <div class="stat-l" data-i18n="referral.referrals_count">Filleuls parrainés</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n" id="statGains">0 €</div>
+          <div class="stat-l" data-i18n="referral.rewards_earned">Bons gagnés</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para-card" id="promoSection" style="display:none">
+      <h2 data-i18n="referral.your_vouchers">Vos bons de parrainage</h2>
+      <div class="promos-list" id="promosList"></div>
+    </div>
+  </div>
+
+  <!-- Non connecté -->
+  <div id="loggedOutSection" style="display:none">
+    <div class="login-prompt">
+      <div style="font-size:2.5rem;margin-bottom:.8rem">🔐</div>
+      <p data-i18n="referral.login_prompt">Connectez-vous pour obtenir votre code parrain personnel et suivre vos parrainages.</p>
+      <a href="login.html?redirect=parrainage.html" class="btn-login" data-i18n="auth.login_btn">Se connecter</a>
+    </div>
+  </div>
+
+  <!-- Comment ça marche -->
+  <div class="para-card" style="margin-top:1.4rem">
+    <h2 data-i18n="referral.how_it_works">Comment ça marche ?</h2>
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-txt">
+          <strong data-i18n="referral.step1_title">Partagez votre code</strong>
+          <span data-i18n="referral.step1_text">Envoyez votre code à un ami par WhatsApp, SMS, email…</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-txt">
+          <strong data-i18n="referral.step2_title">Votre ami commande</strong>
+          <span data-i18n="referral.step2_text">Il entre votre code lors de sa commande et profite de −5 €</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-txt">
+          <strong data-i18n="referral.step3_title">Vous recevez votre récompense</strong>
+          <span data-i18n="referral.step3_text">Un bon de −5 € est ajouté à votre compte automatiquement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Cart drawer -->
+<div class="cart-overlay" id="cartOverlay" onclick="Cart.close()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header"><span>Mon panier</span><button onclick="Cart.close()">✕</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">Total : <strong id="cartTotal">0,00 €</strong></div>
+    <a href="paiement.html" class="btn-checkout">Commander →</a>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  const _token = localStorage.getItem('leclam_token') || '';
+  const _user  = JSON.parse(localStorage.getItem('leclam_user') || 'null');
+
+  if (_user && _token) {
+    document.getElementById('loggedInSection').style.display = 'block';
+    document.getElementById('navAccount').textContent = _user.name?.split(' ')[0] || 'Mon compte';
+    loadMyCode();
+    loadMyPromos();
+  } else {
+    document.getElementById('loggedOutSection').style.display = 'block';
+  }
+
+  async function loadMyCode() {
+    try {
+      const r = await fetch('/api/referral/my-code', { headers: { 'Authorization': 'Bearer ' + _token } });
+      const d = await r.json();
+      if (!d.ok) return;
+      document.getElementById('myCode').textContent = d.code;
+      document.getElementById('statUses').textContent = d.uses;
+      document.getElementById('statGains').textContent = (d.uses * 5) + ' €';
+    } catch {}
+  }
+
+  async function loadMyPromos() {
+    try {
+      const csrf = localStorage.getItem('leclam_csrf') || '';
+      const r = await fetch('/api/messages', { headers: { 'Authorization': 'Bearer ' + _token, 'X-CSRF-Token': csrf } });
+      const d = await r.json();
+      const promos = (d.messages || []).filter(m => m.type === 'promo' && m.promoCode);
+      if (!promos.length) return;
+      document.getElementById('promoSection').style.display = 'block';
+      document.getElementById('promosList').innerHTML = promos.map(p => `
+        <div class="promo-item">
+          <div>
+            <div class="promo-code">${escHtml(String(p.promoCode||''))}</div>
+            <div style="font-size:.72rem;color:#888;margin-top:.1rem">${escHtml(String(p.title||''))}</div>
+          </div>
+          <div class="promo-badge">−${escHtml(String(p.promoAmount||0))} €</div>
+        </div>
+      `).join('');
+    } catch {}
+  }
+
+  function copyCode() {
+    const code = document.getElementById('myCode').textContent;
+    const btn  = document.getElementById('copyBtn');
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = I18n.t('referral.copy_code_done');
+      setTimeout(() => btn.textContent = I18n.t('referral.copy_code'), 2000);
+    });
+  }
+
+  function shareWhatsApp() {
+    const code = document.getElementById('myCode').textContent;
+    const msg  = encodeURIComponent(I18n.t('referral.share_wa_msg', {code}));
+    window.open('https://wa.me/?text=' + msg, '_blank');
+  }
+
+  function shareMail() {
+    const code = document.getElementById('myCode').textContent;
+    const sub  = encodeURIComponent(I18n.t('referral.share_mail_sub'));
+    const body = encodeURIComponent(I18n.t('referral.share_mail_body', {code}));
+    window.location.href = `mailto:?subject=${sub}&body=${body}`;
+  }
+</script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

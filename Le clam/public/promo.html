@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codes promo — Le Clam Admin</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f4f4f4; color: #222; padding: 2rem; max-width: 760px; margin: 0 auto; }
+
+    .top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+    .btn-back { display: inline-flex; align-items: center; gap: .45rem; padding: .5rem 1.1rem; background: #3e2a14; color: #d9c4a0; border-radius: 8px; text-decoration: none; font-size: .85rem; font-weight: 600; transition: opacity .15s; }
+    .btn-back:hover { opacity: .85; }
+
+    h1 { font-size: 1.2rem; font-weight: 800; color: #1a1a1a; }
+    .page-sub { font-size: .78rem; color: #888; margin-top: .15rem; }
+
+    .card { background: #fff; border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; border: 1px solid #e5e5e5; }
+    .card-title { font-size: .95rem; font-weight: 700; color: #3e2a14; margin-bottom: 1rem; display: flex; align-items: center; gap: .4rem; }
+
+    /* Tableau */
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    thead th {
+      text-align: left; padding: .5rem .75rem;
+      background: #fafafa; color: #888;
+      font-size: .72rem; text-transform: uppercase; letter-spacing: .05em;
+      border-bottom: 2px solid #eee;
+    }
+    tbody td { padding: .55rem .75rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafafa; }
+
+    /* Inputs dans la table */
+    .td-input {
+      padding: .38rem .55rem; border: 1.5px solid #ddd; border-radius: 7px;
+      font-size: .85rem; font-family: inherit; color: #222;
+      outline: none; transition: border-color .15s; background: #fff;
+    }
+    .td-input:focus { border-color: #3e2a14; }
+    .td-input.code { width: 140px; text-transform: uppercase; font-weight: 700; letter-spacing: .04em; }
+    .td-input.value { width: 80px; text-align: right; }
+
+    select.td-input { cursor: pointer; width: 90px; }
+
+    /* Toggle actif */
+    .toggle-wrap { display: flex; align-items: center; gap: .5rem; }
+    .toggle { position: relative; display: inline-block; width: 36px; height: 20px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: #ddd;
+      border-radius: 20px; cursor: pointer; transition: background .2s;
+    }
+    .slider::before {
+      content: ''; position: absolute;
+      width: 14px; height: 14px; left: 3px; bottom: 3px;
+      background: #fff; border-radius: 50%; transition: transform .2s;
+    }
+    .toggle input:checked + .slider { background: #27ae60; }
+    .toggle input:checked + .slider::before { transform: translateX(16px); }
+    .toggle-label { font-size: .78rem; color: #888; }
+
+    /* Bouton supprimer */
+    .btn-del {
+      background: none; border: none; cursor: pointer;
+      color: #ccc; font-size: 1rem; padding: .2rem .4rem;
+      line-height: 1; border-radius: 5px; transition: color .15s;
+    }
+    .btn-del:hover { color: #c0392b; }
+
+    /* Bouton ajouter */
+    .btn-add {
+      padding: .48rem 1rem; background: #f0f0f0; color: #333;
+      border: none; border-radius: 8px; font-size: .83rem; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: background .15s;
+    }
+    .btn-add:hover { background: #e4e4e4; }
+
+    /* Empty state */
+    .empty-msg { color: #bbb; font-size: .85rem; font-style: italic; padding: .5rem 0; }
+
+    /* Actions bas de page */
+    .page-actions { display: flex; align-items: center; gap: 1rem; margin-top: .4rem; flex-wrap: wrap; }
+    .btn-save { padding: .55rem 1.4rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 8px; font-size: .88rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+    .btn-save:hover { opacity: .85; }
+
+    #msg { font-size: .82rem; font-weight: 600; color: #16a34a; display: none; }
+    #msg.visible { display: block; }
+
+    /* Badge type */
+    .badge-pct { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .72rem; font-weight: 700; background: #eef2ff; color: #3730a3; }
+    .badge-flat { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .72rem; font-weight: 700; background: #fdf4ff; color: #7e22ce; }
+
+    /* Aperçu */
+    .preview-card {
+      background: #faf5ee; border: 1.5px solid #e8dfc8; border-radius: 10px;
+      padding: .9rem 1.1rem; margin-top: 1rem; font-size: .83rem; color: #6b5035;
+    }
+    .preview-card strong { color: #3e2a14; }
+    .preview-empty { font-size: .82rem; color: #bbb; font-style: italic; }
+
+    @media (max-width: 600px) {
+      body { padding: 1.2rem 1rem; }
+      table { font-size: .78rem; }
+      thead th, tbody td { padding: .45rem .5rem; }
+      .td-input.code { width: 110px; }
+      .td-input.value { width: 64px; }
+      select.td-input { width: 76px; }
+      .page-actions { flex-direction: column; align-items: flex-start; }
+      .btn-save { width: 100%; text-align: center; }
+    }
+  </style></head>
+<body>
+
+<div class="top">
+  <a href="admin.html" class="btn-back">← Admin</a>
+  <div>
+    <h1 style="display:flex;align-items:center;gap:.45rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg> Codes promo</h1>
+    <p class="page-sub">Gestion des codes de réduction — stockés localement</p>
+  </div>
+</div>
+
+<!-- Tableau des codes promo -->
+<div class="card">
+  <div class="card-title" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Liste des codes</div>
+  <table id="promoTable">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Type</th>
+        <th>Valeur</th>
+        <th>Actif</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="promoBody">
+      <!-- rempli par JS -->
+    </tbody>
+  </table>
+  <div id="emptyMsg" class="empty-msg" style="display:none;margin-top:.7rem">Aucun code promo. Cliquez sur "+ Ajouter un code".</div>
+  <div style="margin-top:.9rem">
+    <button class="btn-add" onclick="addRow()">+ Ajouter un code</button>
+  </div>
+</div>
+
+<!-- Aperçu -->
+<div class="card">
+  <div class="card-title" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Aperçu des codes actifs</div>
+  <div id="previewWrap"><div class="preview-empty">Aucun code actif pour l'instant.</div></div>
+</div>
+
+<div class="page-actions">
+  <button class="btn-save" onclick="saveAll()">Enregistrer</button>
+  <span id="msg">✓ Codes enregistrés et actifs dans la boutique</span>
+</div>
+
+<script>
+if (new URLSearchParams(location.search).has('embed')) {
+  const _tb = document.querySelector('.top-bar'); if (_tb) _tb.style.display = 'none';
+  const _notifyH = () => { try { window.parent.postMessage({ type: 'iframeResize', h: document.documentElement.scrollHeight }, '*'); } catch(e){} };
+  new MutationObserver(_notifyH).observe(document.body, { childList: true, subtree: true, attributes: false });
+  /* Supprime le padding/max-width internes en mode embed */
+  const _es = document.createElement('style');
+  _es.textContent = '.page,.top{padding-left:0!important;padding-right:0!important;max-width:none!important;margin:0!important}body{padding-left:0!important;padding-right:0!important;background:transparent!important}';
+  document.head.appendChild(_es);
+}
+const STORAGE_KEY = 'leclam_promo_codes';
+
+/* ── Données en mémoire : tableau de {code, type, value, active} ── */
+let promos = [];
+
+/* ── Chargement initial ── */
+function loadPromos() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (raw && typeof raw === 'object') {
+      /* Format objet : { CODE: { type, value, active? }, … } */
+      promos = Object.entries(raw).map(([code, d]) => ({
+        code,
+        type:   d.type   || 'percent',
+        value:  d.value  ?? 0,
+        active: d.active !== false,  /* actif par défaut */
+      }));
+    }
+  } catch { promos = []; }
+}
+
+/* ── Rendu du tableau ── */
+function render() {
+  const tbody = document.getElementById('promoBody');
+  const emptyMsg = document.getElementById('emptyMsg');
+
+  if (promos.length === 0) {
+    tbody.innerHTML = '';
+    emptyMsg.style.display = 'block';
+    renderPreview();
+    return;
+  }
+  emptyMsg.style.display = 'none';
+
+  tbody.innerHTML = promos.map((p, i) => `
+    <tr>
+      <td>
+        <input
+          class="td-input code"
+          type="text"
+          value="${escHtml(p.code)}"
+          placeholder="CODE"
+          oninput="promos[${i}].code = this.value.trim().toUpperCase(); this.value = this.value.toUpperCase();"
+        >
+      </td>
+      <td>
+        <select class="td-input" onchange="promos[${i}].type = this.value; renderPreview()">
+          <option value="percent" ${p.type === 'percent' ? 'selected' : ''}>% remise</option>
+          <option value="flat"    ${p.type === 'flat'    ? 'selected' : ''}>€ remise</option>
+        </select>
+      </td>
+      <td>
+        <input
+          class="td-input value"
+          type="number"
+          min="0"
+          step="${p.type === 'percent' ? '1' : '0.01'}"
+          value="${p.value}"
+          oninput="promos[${i}].value = parseFloat(this.value) || 0; renderPreview()"
+        >
+        <span style="font-size:.78rem;color:#aaa;margin-left:.2rem">${p.type === 'percent' ? '%' : '€'}</span>
+      </td>
+      <td>
+        <label class="toggle">
+          <input type="checkbox" ${p.active ? 'checked' : ''} onchange="promos[${i}].active = this.checked; renderPreview()">
+          <span class="slider"></span>
+        </label>
+      </td>
+      <td>
+        <button class="btn-del" onclick="deleteRow(${i})" title="Supprimer">✕</button>
+      </td>
+    </tr>
+  `).join('');
+
+  renderPreview();
+}
+
+/* ── Aperçu codes actifs ── */
+function renderPreview() {
+  const wrap = document.getElementById('previewWrap');
+  const actifs = promos.filter(p => p.active && p.code.trim() !== '');
+  if (actifs.length === 0) {
+    wrap.innerHTML = '<div class="preview-empty">Aucun code actif pour l\'instant.</div>';
+    return;
+  }
+  wrap.innerHTML = actifs.map(p => {
+    const label = p.type === 'percent'
+      ? `−${p.value} %`
+      : `−${p.value.toFixed(2).replace('.', ',')} €`;
+    return `<div class="preview-card">
+      <strong>${escHtml(p.code)}</strong>
+      &nbsp;→&nbsp; <span class="${p.type === 'percent' ? 'badge-pct' : 'badge-flat'}">${p.type === 'percent' ? '% remise' : '€ remise'}</span>
+      &nbsp;<strong>${label}</strong>
+    </div>`;
+  }).join('');
+}
+
+/* ── Ajout d'une ligne vide ── */
+function addRow() {
+  promos.push({ code: '', type: 'percent', value: 10, active: true });
+  render();
+  /* Focus sur le dernier champ code */
+  const inputs = document.querySelectorAll('.td-input.code');
+  if (inputs.length) inputs[inputs.length - 1].focus();
+}
+
+/* ── Suppression ── */
+function deleteRow(i) {
+  promos.splice(i, 1);
+  render();
+}
+
+/* ── Sauvegarde ── */
+function saveAll() {
+  /* Construire l'objet { CODE: { type, value } } — seuls les codes actifs sont transmis à app.js */
+  const all = {};
+  promos.forEach(p => {
+    const code = p.code.trim().toUpperCase();
+    if (!code) return;
+    all[code] = { type: p.type, value: p.value };
+    if (!p.active) all[code]._inactive = true;
+  });
+
+  /* On stocke TOUS les codes (actifs ou non) dans l'objet,
+     app.js ne merge que ce qui est dans la clé.
+     Pour désactiver un code côté app.js on le supprime de l'objet. */
+  const forAppJs = {};
+  promos.forEach(p => {
+    const code = p.code.trim().toUpperCase();
+    if (!code || !p.active) return;
+    forAppJs[code] = { type: p.type, value: p.value };
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(forAppJs));
+
+  /* Aussi sauvegarder l'état complet (actifs + inactifs) pour l'UI */
+  localStorage.setItem(STORAGE_KEY + '_ui', JSON.stringify(
+    promos.map(p => ({ ...p, code: p.code.trim().toUpperCase() }))
+  ));
+
+  const msg = document.getElementById('msg');
+  msg.classList.add('visible');
+  setTimeout(() => msg.classList.remove('visible'), 3000);
+}
+
+/* ── Utilitaire ── */
+function escHtml(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Init ── */
+(function init() {
+  /* Priorité : état UI complet (avec inactifs) */
+  try {
+    const uiData = JSON.parse(localStorage.getItem(STORAGE_KEY + '_ui') || 'null');
+    if (Array.isArray(uiData) && uiData.length > 0) {
+      promos = uiData;
+      render();
+      return;
+    }
+  } catch {}
+  /* Sinon charger depuis le format objet (codes actifs seulement) */
+  loadPromos();
+  render();
+})();
+</script>
+</body>
+</html>

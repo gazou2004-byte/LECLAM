@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages clients — Le Clam Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .msgs-page { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+    /* ── Header ── */
+    .page-header { margin-bottom: 2rem; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 700; color: #1a1a1a; margin-bottom: .25rem; }
+    .page-header-sub { display: flex; align-items: center; gap: .8rem; font-size: .82rem; color: #c0b0a0; flex-wrap: wrap; }
+    .page-header-sub a { color: #9c8570; text-decoration: none; font-weight: 600; }
+    .page-header-sub a:hover { color: #3e2a14; }
+
+    /* ── Topbar ── */
+    .msg-topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .main-tabs { display: flex; gap: .3rem; background: #f5f0e8; border-radius: 12px; padding: .3rem; }
+    .main-tab {
+      display: flex; align-items: center; gap: .5rem; padding: .4rem .95rem; border-radius: 8px;
+      border: none; font-size: .79rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: #9c8570; font-family: inherit; transition: all .18s; white-space: nowrap;
+    }
+    .main-tab:hover { color: #3e2a14; background: rgba(62,42,20,.06); }
+    .main-tab.active { background: #3e2a14; color: #d9c4a0; }
+    .tab-n { font-size: .63rem; font-weight: 700; padding: .08rem .38rem; border-radius: 20px; min-width: 18px; text-align: center; line-height: 1.4; background: #e8dfd4; color: #9c8570; }
+    .main-tab.active .tab-n { background: rgba(255,255,255,.22); color: #d9c4a0; }
+    .tab-n-blue  { background: #dbeafe; color: #1d4ed8; }
+    .tab-n-red   { background: #fee2e2; color: #dc2626; }
+    .main-tab.active .tab-n-blue, .main-tab.active .tab-n-red { opacity: .9; }
+
+    .topbar-actions { display: flex; gap: .5rem; }
+    .btn-action {
+      display: flex; align-items: center; gap: .4rem; padding: .5rem 1.1rem; border-radius: 9px;
+      font-size: .79rem; font-weight: 600; font-family: inherit; cursor: pointer;
+      transition: all .15s; white-space: nowrap; border: 1.5px solid transparent;
+    }
+    .btn-compose { background: #3e2a14; color: #d9c4a0; border-color: #3e2a14; }
+    .btn-compose:hover { background: #2a1c0d; border-color: #2a1c0d; }
+    .btn-group { background: linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color: #fff; box-shadow: 0 1px 3px rgba(79,70,229,.35); }
+    .btn-group:hover { background: linear-gradient(135deg,#4338ca 0%,#6d28d9 100%); }
+
+    /* ── Card grid ── */
+    .threads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; align-items: start; }
+
+    /* ── Thread card ── */
+    .thread-card {
+      border: 1.5px solid #ede8e0; border-top: 4px solid #ede8e0;
+      border-radius: 12px; background: #fff; cursor: pointer;
+      padding: 1rem 1.1rem .9rem; display: flex; flex-direction: column; gap: .65rem;
+      box-shadow: 0 1px 4px rgba(62,42,20,.06); transition: box-shadow .22s, transform .18s;
+    }
+    .thread-card:hover { box-shadow: 0 8px 28px rgba(62,42,20,.13); transform: translateY(-2px); }
+    .card-top { display: flex; align-items: flex-start; gap: .75rem; }
+    .card-av {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .76rem; font-weight: 800; flex-shrink: 0; font-family: 'Inter', sans-serif;
+    }
+    .card-info { flex: 1; min-width: 0; }
+    .card-client { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-bottom: .15rem; }
+    .card-client-name { font-weight: 700; font-size: .86rem; color: #111827; }
+    .badge-unread {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 18px; height: 18px; padding: 0 .3rem;
+      background: #2563eb; color: #fff; border-radius: 20px;
+      font-size: .59rem; font-weight: 800; flex-shrink: 0; line-height: 1;
+    }
+    .badge-urgent {
+      font-size: .59rem; font-weight: 800; background: #fef2f2; color: #dc2626;
+      border: 1px solid #fca5a5; padding: .1rem .42rem; border-radius: 20px;
+      white-space: nowrap; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .card-subj { font-size: .8rem; color: #374151; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: .12rem; }
+    .card-preview { font-size: .75rem; color: #9ca3af; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-tags { display: flex; gap: .25rem; flex-wrap: wrap; margin-top: .3rem; }
+    .thread-tag { padding: .1rem .4rem; border-radius: 4px; font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+    .tag-support       { background: #ede9fe; color: #6d28d9; }
+    .tag-commande      { background: #cffafe; color: #0e7490; }
+    .tag-remboursement { background: #fee2e2; color: #991b1b; }
+    .tag-livraison     { background: #dcfce7; color: #166534; }
+    .tag-fidelite      { background: #fef3c7; color: #92400e; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding-top: .35rem; border-top: 1px solid #f5f0e8; }
+    .card-date { font-size: .69rem; color: #c0b0a0; }
+    .msg-status { font-size: .65rem; font-weight: 700; padding: .18rem .58rem; border-radius: 20px; white-space: nowrap; border: 1px solid transparent; }
+    .st-open   { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+    .st-closed { background: #f9fafb; color: #6b7280; border-color: #e5e7eb; }
+
+    /* ── Modal overlay ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(20,10,5,.5);
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+      z-index: 9000; display: none; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+
+    /* ── Conversation modal ── */
+    .conv-modal {
+      background: #fff; border-radius: 20px;
+      width: 100%; max-width: 600px; max-height: 90vh;
+      display: flex; flex-direction: column;
+      box-shadow: 0 32px 90px rgba(0,0,0,.28); overflow: hidden;
+      animation: modalIn .22s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform: scale(.96) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
+
+    /* Modal head */
+    .modal-head {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .9rem 1.1rem; border-bottom: 1px solid #f0ece6;
+      background: linear-gradient(135deg, #fafaf8 0%, #f5f0e8 100%); flex-shrink: 0;
+    }
+    .modal-av {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .73rem; font-weight: 800; flex-shrink: 0; font-family: 'Inter', sans-serif;
+    }
+    .modal-head-info { flex: 1; min-width: 0; }
+    .modal-head-name { font-weight: 700; font-size: .88rem; color: #1a1a1a; display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+    .modal-head-subj { font-size: .75rem; color: #9c8570; margin-top: .08rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .modal-close-btn {
+      width: 32px; height: 32px; border-radius: 8px; background: rgba(62,42,20,.08);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #9c8570; transition: background .13s, color .13s; flex-shrink: 0;
+    }
+    .modal-close-btn:hover { background: rgba(62,42,20,.15); color: #3e2a14; }
+
+    /* Chat */
+    .chat-msgs {
+      flex: 1; overflow-y: auto; padding: 1.1rem 1.1rem .8rem;
+      display: flex; flex-direction: column; gap: .5rem;
+      background: #fafaf8;
+      scrollbar-width: thin; scrollbar-color: #ddd6c8 transparent;
+    }
+    .day-sep { text-align: center; font-size: .62rem; color: #c4b5a0; padding: .35rem 0; position: relative; }
+    .day-sep::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid #f0ece6; }
+    .day-sep span { background: #fafaf8; padding: 0 .8rem; position: relative; }
+    .brow { display: flex; gap: .4rem; align-items: flex-end; max-width: 75%; }
+    .brow.self { flex-direction: row-reverse; margin-left: auto; }
+    .bav-sm {
+      width: 26px; height: 26px; border-radius: 50%;
+      font-size: .57rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .bav-admin { background: #3e2a14; color: #d9c4a0; }
+    .binner { display: flex; flex-direction: column; }
+    .brow.self .binner { align-items: flex-end; }
+    .bubble { padding: .55rem .9rem; border-radius: 14px; font-size: .84rem; line-height: 1.55; word-break: break-word; }
+    .bubble-client { background: #fff; color: #1a1a1a; border: 1px solid #ede8e0; border-bottom-left-radius: 4px; }
+    .bubble-admin  { background: #3e2a14; color: #f0e8d8; border-bottom-right-radius: 4px; }
+    .btime { font-size: .6rem; color: #c0b0a0; margin-top: .18rem; padding: 0 .2rem; }
+    .bcheck { font-size: .65rem; color: #22c55e; }
+
+    /* Admin action bar */
+    .admin-bar {
+      display: flex; align-items: center; gap: .35rem; flex-wrap: wrap;
+      padding: .6rem .9rem; border-top: 1px solid #f0ece6; border-bottom: 1px solid #f0ece6;
+      background: #fafaf8; flex-shrink: 0;
+    }
+    .abar-btn {
+      display: inline-flex; align-items: center; gap: .28rem; padding: .28rem .7rem;
+      border-radius: 7px; font-size: .71rem; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all .13s; white-space: nowrap; border: 1.5px solid; line-height: 1;
+    }
+    .abar-urgent-off { border-color: #fde68a; background: #fffbeb; color: #b45309; }
+    .abar-urgent-off:hover { background: #fef3c7; }
+    .abar-urgent-on  { border-color: #fca5a5; background: #fef2f2; color: #dc2626; }
+    .abar-urgent-on:hover  { background: #fee2e2; }
+    .abar-close  { border-color: #bfdbfe; background: #eff6ff; color: #1d4ed8; }
+    .abar-close:hover  { background: #dbeafe; }
+    .abar-reopen { border-color: #a7f3d0; background: #f0fdf4; color: #15803d; }
+    .abar-reopen:hover { background: #dcfce7; }
+    .abar-delete { border-color: #fca5a5; background: #fff; color: #dc2626; }
+    .abar-delete:hover { background: #fef2f2; }
+    .abar-sep { flex: 1; min-width: .25rem; }
+    .abar-tags-label { font-size: .67rem; font-weight: 600; color: #9ca3af; white-space: nowrap; }
+    .admin-tag-btn {
+      padding: .17rem .45rem; border-radius: 5px; font-size: .63rem; font-weight: 600;
+      border: 1.5px solid transparent; cursor: pointer; font-family: inherit; transition: all .12s;
+    }
+    .admin-tag-btn.tag-off { border-color: #e0d8cc; background: #fafaf8; color: #9c8570; }
+    .admin-tag-btn.tag-on.tag-support       { background: #ede9fe; color: #6d28d9; border-color: #c4b5fd; }
+    .admin-tag-btn.tag-on.tag-commande      { background: #cffafe; color: #0e7490; border-color: #a5f3fc; }
+    .admin-tag-btn.tag-on.tag-remboursement { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+    .admin-tag-btn.tag-on.tag-livraison     { background: #dcfce7; color: #166534; border-color: #86efac; }
+    .admin-tag-btn.tag-on.tag-fidelite      { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+
+    /* Reply zone */
+    .reply-area { border-top: 1px solid #f0ece6; background: #fafaf8; flex-shrink: 0; }
+    .reply-tpl-row {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .45rem .9rem 0; border-bottom: 1px solid #f5f0e8;
+    }
+    .reply-tpl-label { font-size: .69rem; font-weight: 600; color: #c0b0a0; white-space: nowrap; }
+    .reply-tpl-sel { font-size: .75rem; padding: .2rem .48rem; border: 1px solid #e0d8cc; border-radius: 6px; background: #fff; color: #3e2a14; cursor: pointer; outline: none; font-family: inherit; }
+    .reply-row { display: flex; gap: .5rem; align-items: flex-end; padding: .55rem .9rem .75rem; }
+    .reply-ta {
+      flex: 1; padding: .58rem .82rem; border: 1.5px solid #e0d8cc; border-radius: 10px;
+      font-size: .84rem; font-family: inherit; color: #222; resize: none;
+      min-height: 40px; max-height: 120px; outline: none; transition: border-color .15s; line-height: 1.5; background: #fff;
+    }
+    .reply-ta:focus { border-color: #3e2a14; box-shadow: none; }
+    .reply-btn {
+      width: 40px; height: 40px; border-radius: 50%; background: #3e2a14; color: #d9c4a0;
+      border: none; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background .13s;
+    }
+    .reply-btn:hover { background: #2a1c0d; }
+    .reply-btn:disabled { opacity: .5; cursor: default; }
+    .closed-bar {
+      display: flex; align-items: center; gap: .5rem; padding: .65rem .9rem;
+      border-top: 1px solid #f0ece6; background: #fafaf8; font-size: .79rem; color: #c0b0a0;
+    }
+    .closed-bar button { padding: .24rem .7rem; background: #fff; color: #3e2a14; border: 1px solid #e0d8cc; border-radius: 6px; font-size: .76rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .12s; }
+    .closed-bar button:hover { background: #f5f0e8; }
+
+    /* ── Compose views ── */
+    .compose-wrap { margin-top: 1rem; }
+    .compose-back {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .8rem; font-weight: 600; color: #6b7280; cursor: pointer;
+      margin-bottom: 1.1rem; background: none; border: none; font-family: inherit; padding: 0; transition: color .13s;
+    }
+    .compose-back:hover { color: #3e2a14; }
+    .compose-card { background: #fff; border: 1.5px solid #ede8e0; border-radius: 14px; padding: 1.6rem 1.8rem; box-shadow: 0 2px 8px rgba(62,42,20,.06); }
+    .compose-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: #1a1a1a; }
+    .compose-subtitle { font-size: .79rem; color: #c0b0a0; margin-top: .2rem; margin-bottom: 1.4rem; }
+    .cfield { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1.1rem; }
+    .cfield label { font-size: .69rem; font-weight: 700; color: #9c8570; text-transform: uppercase; letter-spacing: .07em; }
+    .cfield input, .cfield textarea, .cfield select {
+      padding: .65rem .9rem; border: 1.5px solid #e0d8cc; border-radius: 9px;
+      font-size: .875rem; font-family: inherit; color: #222; background: #fff; outline: none;
+      transition: border-color .15s; appearance: none;
+    }
+    .cfield input:focus, .cfield textarea:focus, .cfield select:focus { border-color: #3e2a14; box-shadow: none; }
+    .cfield textarea { min-height: 120px; resize: vertical; line-height: 1.65; }
+    .cfield select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .9rem center; padding-right: 2.2rem; }
+    .compose-actions { display: flex; gap: .7rem; margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid #f5f0e8; }
+    .btn-submit { padding: .65rem 1.5rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 9px; font-size: .875rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: background .15s; }
+    .btn-submit:hover { background: #2a1c0d; }
+    .btn-submit:disabled { opacity: .6; cursor: default; }
+    .btn-submit.indigo { background: linear-gradient(135deg,#4f46e5,#7c3aed); color: #fff; }
+    .btn-submit.indigo:hover { background: linear-gradient(135deg,#4338ca,#6d28d9); }
+    .btn-cancel-link { padding: .65rem 1rem; background: transparent; color: #9c8570; border: 1.5px solid #e0d8cc; border-radius: 9px; font-size: .875rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: all .13s; }
+    .btn-cancel-link:hover { border-color: #c0b0a0; color: #3e2a14; }
+
+    /* Group compose specifics */
+    .grp-type-row { display: flex; gap: 1.2rem; }
+    .grp-type-row label { display: flex; align-items: center; gap: .4rem; font-size: .85rem; color: #3e2a14; font-weight: 500; cursor: pointer; }
+    .grp-type-row input[type=radio] { accent-color: #3e2a14; }
+    .grp-recipients { max-height: 200px; overflow-y: auto; border: 1.5px solid #e0d8cc; border-radius: 9px; background: #fff; scrollbar-width: thin; scrollbar-color: #ddd6c8 transparent; }
+    .grp-recipient { display: flex; align-items: center; gap: .55rem; padding: .48rem .85rem; border-bottom: 1px solid #f5f0e8; cursor: pointer; font-size: .82rem; color: #1a1a1a; transition: background .1s; }
+    .grp-recipient:last-child { border-bottom: none; }
+    .grp-recipient:hover { background: #f5f0e8; }
+    .grp-recipient input { accent-color: #3e2a14; flex-shrink: 0; }
+    .grp-recipient-av { width: 26px; height: 26px; border-radius: 50%; font-size: .62rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .seg-option { position: relative; }
+    .seg-option input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
+    .seg-label { display: flex; flex-direction: column; padding: .7rem .9rem; border: 2px solid #e0d8cc; border-radius: 10px; cursor: pointer; transition: border-color .13s, background .13s; }
+    .seg-option input:checked + .seg-label { border-color: #3e2a14; background: #fdf8f2; }
+    .seg-label-title { font-weight: 700; font-size: .82rem; color: #1a1a1a; }
+    .seg-label-desc  { font-size: .71rem; color: #9c8570; margin-top: .15rem; }
+
+    /* ── Empty state ── */
+    .empty-state { text-align: center; padding: 4rem 2rem; grid-column: 1 / -1; }
+    .empty-icon { width: 52px; height: 52px; border-radius: 14px; background: #f5f0e8; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+    .empty-state p { font-size: .88rem; color: #c0b0a0; margin: 0; }
+
+    /* ── Toast ── */
+    #toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); background: #111827; color: #fff; padding: .6rem 1.3rem; border-radius: 9px; font-size: .82rem; font-weight: 500; z-index: 9999; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .2s; box-shadow: 0 4px 16px rgba(0,0,0,.25); }
+    #toast.show { opacity: 1; }
+
+    /* ── Confirm modal ── */
+    .confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 9100; display: none; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+    .confirm-overlay.open { display: flex; }
+    .confirm-box { background: #fff; border-radius: 16px; padding: 1.75rem; max-width: 380px; width: 92%; box-shadow: 0 25px 60px rgba(0,0,0,.2); }
+    .confirm-title { font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: .45rem; }
+    .confirm-body  { font-size: .84rem; color: #6b7280; line-height: 1.55; margin-bottom: 1.2rem; }
+    .confirm-actions { display: flex; gap: .5rem; justify-content: flex-end; }
+    .confirm-btn { padding: .48rem 1rem; border-radius: 8px; font-size: .82rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .confirm-btn.cancel { border: 1.5px solid #e5e7eb; background: #fff; color: #6b7280; }
+    .confirm-btn.cancel:hover { background: #f9fafb; }
+    .confirm-btn.ok { border: none; background: #dc2626; color: #fff; }
+    .confirm-btn.ok:hover { background: #b91c1c; }
+
+    @media (max-width: 640px) {
+      .msgs-page { padding: 1.5rem 1rem 3rem; }
+      .msg-topbar { flex-direction: column; align-items: flex-start; gap: .75rem; }
+      .topbar-actions { width: 100%; }
+      .topbar-actions .btn-action { flex: 1; justify-content: center; }
+      .main-tabs { width: 100%; overflow-x: auto; }
+      .threads-grid { grid-template-columns: 1fr; }
+      .conv-modal { max-height: 95vh; }
+      .admin-bar { gap: .25rem; }
+      .compose-card { padding: 1.2rem 1.1rem; }
+    }
+    @media (max-width: 400px) {
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .conv-modal { border-radius: 18px 18px 0 0; max-height: 92vh; }
+    }
+  </style></head>
+<body class="page-neutre">
+
+  <script src="js/app.js"></script>
+
+  <main class="msgs-page">
+    <div class="page-header">
+      <h1>Messages clients</h1>
+      <div class="page-header-sub">
+        <a href="index.html">← Accueil</a>
+        <span>·</span>
+        <span id="totalCount">—</span>
+      </div>
+    </div>
+    <div id="mainContent"></div>
+  </main>
+
+  <!-- Conversation modal -->
+  <div class="modal-overlay" id="convModal">
+    <div class="conv-modal">
+      <div class="modal-head"  id="modalHead"></div>
+      <div class="chat-msgs"   id="modalChat"></div>
+      <div class="admin-bar"   id="modalAdminBar"></div>
+      <div class="reply-area"  id="modalReply"></div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <div class="confirm-overlay" id="confirmModal">
+    <div class="confirm-box">
+      <div class="confirm-title"   id="confirmTitle"></div>
+      <div class="confirm-body"    id="confirmBody"></div>
+      <div class="confirm-actions">
+        <button class="confirm-btn cancel" onclick="document.getElementById('confirmModal').classList.remove('open')">Annuler</button>
+        <button class="confirm-btn ok"     id="confirmOk">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  if (new URLSearchParams(location.search).has('embed')) {
+    const _notifyH = () => { try { window.parent.postMessage({type:'iframeResize',h:document.documentElement.scrollHeight},'*'); } catch(e){} };
+    new MutationObserver(_notifyH).observe(document.body,{childList:true,subtree:true,attributes:false});
+    const _es = document.createElement('style');
+    _es.textContent = '.msgs-page{padding-top:1rem!important;max-width:none!important;margin:0!important}body{background:transparent!important}';
+    document.head.appendChild(_es);
+  }
+
+  (function () {
+    'use strict';
+
+    /* ── Auth guard ── */
+    const _raw = localStorage.getItem('leclam_user');
+    if (!_raw) { location.href='index.html'; return; }
+    const _me = JSON.parse(_raw);
+    if (_me.role!=='admin' && _me.role!=='owner') { location.href='messages.html'; return; }
+
+    /* ── State ── */
+    let _tab     = 'all';
+    let _view    = 'list';
+    let _openId  = null;
+    let _threads = [];
+
+    const SVG_SEND  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
+    const SVG_BACK  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+    const SVG_NEW   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
+    const SVG_GROUP = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>`;
+    const SVG_CLOSE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+
+    /* ── API ── */
+    function _hdrs() { return { ...authHeaders(), 'Content-Type':'application/json' }; }
+    async function _get(url)          { try{return await(await fetch(url,{headers:_hdrs()})).json();}catch{return{ok:false};} }
+    async function _post(url,body)    { try{return await(await fetch(url,{method:'POST',headers:_hdrs(),body:JSON.stringify(body)})).json();}catch{return{ok:false};} }
+    async function _patch(url,body={}) { try{return await(await fetch(url,{method:'PATCH',headers:_hdrs(),body:JSON.stringify(body)})).json();}catch{return{ok:false};} }
+    async function _del(url)          { try{return await(await fetch(url,{method:'DELETE',headers:_hdrs()})).json();}catch{return{ok:false};} }
+
+    /* ── Utils ── */
+    function _esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+    function _initials(name,email) {
+      if (name&&name.trim()) { const p=name.trim().split(' '); return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase(); }
+      return (email||'?')[0].toUpperCase();
+    }
+    function _ago(iso) {
+      if (!iso) return '';
+      const d=new Date(iso),diff=(Date.now()-d)/1000;
+      if (diff<60)     return 'à l\'instant';
+      if (diff<3600)   return Math.floor(diff/60)+'min';
+      if (diff<86400)  return d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+      if (diff<172800) return 'Hier';
+      return d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+    }
+    function _full(iso) { return new Date(iso).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+    function _unreadAdmin(t) { return (t.messages||[]).filter(m=>m.from==='client'&&!m.readByAdmin).length; }
+    function _syncAdminBadge() {
+      const n = _threads.reduce((s,t)=>s+_unreadAdmin(t),0);
+      localStorage.setItem('leclam_admin_thread_unread',String(n));
+      if(typeof updateNavBadge==='function') updateNavBadge();
+    }
+    function _getThread(id)  { return _threads.find(t=>t.id===id)||null; }
+    function _uid()          { return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+
+    /* 8-colour hash avatars */
+    const _AVP = [
+      ['#dbeafe','#1d4ed8'],['#dcfce7','#15803d'],['#fce7f3','#be185d'],
+      ['#ede9fe','#6d28d9'],['#ffedd5','#c2410c'],['#cffafe','#0e7490'],
+      ['#fef3c7','#92400e'],['#e0f2fe','#0369a1']
+    ];
+    function _avStyle(str) {
+      let h=0; for(const c of (str||'?')) h=(h*31+c.charCodeAt(0))&7;
+      return `background:${_AVP[h][0]};color:${_AVP[h][1]}`;
+    }
+
+    /* Card top border colour */
+    function _accent(t) {
+      if (t.priority==='urgent')   return '#ef4444';
+      if (_unreadAdmin(t)>0)       return '#3b82f6';
+      if (t.status==='closed')     return '#d1d5db';
+      return '#10b981';
+    }
+
+    function _toast(msg) {
+      const el=document.getElementById('toast');
+      el.textContent=msg; el.classList.add('show');
+      setTimeout(()=>el.classList.remove('show'),3000);
+    }
+    function _confirm(title,body,cb) {
+      document.getElementById('confirmTitle').textContent=title;
+      document.getElementById('confirmBody').textContent=body;
+      document.getElementById('confirmModal').classList.add('open');
+      document.getElementById('confirmOk').onclick=()=>{
+        document.getElementById('confirmModal').classList.remove('open'); cb();
+      };
+    }
+    function _tpls()  { try{return JSON.parse(localStorage.getItem('leclam_templates')||'[]');}catch{return[];} }
+    function _logBcast(e) { const log=JSON.parse(localStorage.getItem('leclam_broadcast_log')||'[]'); log.push(e); localStorage.setItem('leclam_broadcast_log',JSON.stringify(log)); }
+
+    /* ══════════════════════════════════════════
+       RENDER GRID
+    ══════════════════════════════════════════ */
+    function _render() {
+      const mc = document.getElementById('mainContent');
+      if (_view==='compose-individual') { mc.innerHTML=_composeIndividualHtml(); return; }
+      if (_view==='compose-group')      { mc.innerHTML=_composeGroupHtml(); _populateGroupRecipients(); return; }
+
+      const all    = _threads;
+      const unread = all.filter(t=>_unreadAdmin(t)>0);
+      const urgent = all.filter(t=>t.priority==='urgent');
+      const closed = all.filter(t=>t.status==='closed');
+      const list   = _tab==='unread'?unread : _tab==='urgent'?urgent : _tab==='closed'?closed : all;
+
+      const tc = document.getElementById('totalCount');
+      if (tc) tc.textContent = all.length+' conversation'+(all.length!==1?'s':'');
+
+      mc.innerHTML = `
+        <div class="msg-topbar">
+          <div class="main-tabs">
+            <button class="main-tab${_tab==='all'?   ' active':''}" onclick="_switchTab('all')">
+              Tous <span class="tab-n tab-n-gray">${all.length}</span>
+            </button>
+            <button class="main-tab${_tab==='unread'?' active':''}" onclick="_switchTab('unread')">
+              Non lus <span class="tab-n tab-n-blue">${unread.length}</span>
+            </button>
+            <button class="main-tab${_tab==='urgent'?' active':''}" onclick="_switchTab('urgent')">
+              Urgents <span class="tab-n tab-n-red">${urgent.length}</span>
+            </button>
+            <button class="main-tab${_tab==='closed'?' active':''}" onclick="_switchTab('closed')">
+              Résolus <span class="tab-n tab-n-gray">${closed.length}</span>
+            </button>
+          </div>
+          <div class="topbar-actions">
+            <button class="btn-action btn-compose" onclick="_showCompose('individual')">${SVG_NEW} Nouveau</button>
+            <button class="btn-action btn-group"   onclick="_showCompose('group')">${SVG_GROUP} Message groupé</button>
+          </div>
+        </div>
+        <div class="threads-grid">
+          ${list.length ? list.map(_cardHtml).join('') : _emptyHtml()}
+        </div>`;
+    }
+
+    function _cardHtml(t) {
+      const unread = _unreadAdmin(t);
+      const closed = t.status==='closed';
+      const urgent = t.priority==='urgent';
+      const tags   = t.tags||[];
+      const last   = (t.messages||[]).slice(-1)[0];
+      const prev   = last?(last.from==='admin'?'← '+last.text:last.text):'';
+      const client = t.userName||t.userId||'?';
+      const inits  = _initials(t.userName,t.userId);
+      const accent = _accent(t);
+      const tagsHtml = tags.length
+        ? `<div class="card-tags">${tags.map(tag=>`<span class="thread-tag tag-${tag}">${tag}</span>`).join('')}</div>` : '';
+
+      return `<div class="thread-card" id="tc-${t.id}"
+                   style="border-top-color:${accent}"
+                   onclick="_openModal('${t.id}')">
+        <div class="card-top">
+          <div class="card-av" style="${_avStyle(client)}">${inits}</div>
+          <div class="card-info">
+            <div class="card-client">
+              <span class="card-client-name">${_esc(client)}</span>
+              ${unread>0?`<span class="badge-unread">${unread}</span>`:''}
+              ${urgent?'<span class="badge-urgent">Urgent</span>':''}
+            </div>
+            <div class="card-subj">${_esc(t.subject||'(sans sujet)')}</div>
+            <div class="card-preview">${_esc(prev).slice(0,90)}${prev.length>90?'…':''}</div>
+            ${tagsHtml}
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-date">${_ago(t.updatedAt)}</span>
+          <span class="msg-status ${closed?'st-closed':'st-open'}">${closed?'Résolu':'En cours'}</span>
+        </div>
+      </div>`;
+    }
+
+    function _emptyHtml() {
+      const labels={all:'conversation',unread:'message non lu',urgent:'fil urgent',closed:'conversation résolue'};
+      return `<div class="empty-state">
+        <div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <p>Aucune ${labels[_tab]||'conversation'} pour le moment.</p>
+      </div>`;
+    }
+
+    /* ══════════════════════════════════════════
+       MODAL
+    ══════════════════════════════════════════ */
+    function _buildBubbles(msgs, clientStr) {
+      let html='', lastDay='';
+      msgs.forEach(m=>{
+        const ts=m.at||m.ts||'';
+        const day=ts?new Date(ts).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}):'';
+        if(day&&day!==lastDay){html+=`<div class="day-sep"><span>${day}</span></div>`;lastDay=day;}
+        const isAdmin=m.from==='admin';
+        const check=isAdmin?(m.readByClient?`<span class="bcheck">✓✓</span>`:`<span style="color:#bbb;font-size:.65rem">✓</span>`):'';
+        const avStyle=isAdmin?'background:#1e293b;color:#94a3b8':_avStyle(clientStr);
+        const inits=isAdmin?'Adm':_initials('',clientStr);
+        html+=`<div class="brow${isAdmin?' self':''}">
+          <div class="bav-sm" style="${avStyle}">${inits}</div>
+          <div class="binner">
+            <div class="bubble ${isAdmin?'bubble-admin':'bubble-client'}">${_esc(m.text||'').replace(/\n/g,'<br>')}</div>
+            <div class="btime">${ts?_full(ts):''} ${check}</div>
+          </div>
+        </div>`;
+      });
+      if(!html) html='<div style="text-align:center;color:#9ca3af;font-size:.8rem;padding:2rem">Aucun message.</div>';
+      return html;
+    }
+
+    function _populateModal(t) {
+      const id     = t.id;
+      const closed = t.status==='closed';
+      const urgent = t.priority==='urgent';
+      const client = t.userName||t.userId||'?';
+      const inits  = _initials(t.userName,t.userId);
+      const unread = _unreadAdmin(t);
+      const tags   = t.tags||[];
+
+      /* Head */
+      document.getElementById('modalHead').innerHTML = `
+        <div class="modal-av" style="${_avStyle(client)}">${inits}</div>
+        <div class="modal-head-info">
+          <div class="modal-head-name">
+            ${_esc(client)}
+            ${unread>0?`<span class="badge-unread">${unread}</span>`:''}
+            ${urgent?'<span class="badge-urgent">Urgent</span>':''}
+            <span class="msg-status ${closed?'st-closed':'st-open'}" style="font-size:.62rem">${closed?'Résolu':'En cours'}</span>
+          </div>
+          <div class="modal-head-subj">${_esc(t.subject||'(sans sujet)')}</div>
+        </div>
+        <button class="modal-close-btn" onclick="_closeModal()">${SVG_CLOSE}</button>`;
+
+      /* Chat */
+      const chatEl = document.getElementById('modalChat');
+      chatEl.innerHTML = _buildBubbles(t.messages||[], client);
+
+      /* Admin action bar */
+      const tagBtns = ['support','commande','remboursement','livraison','fidelite'].map(tag=>{
+        const on = tags.includes(tag);
+        return `<button class="admin-tag-btn ${on?'tag-on tag-'+tag:'tag-off'}"
+                        onclick="event.stopPropagation();_toggleTag('${id}','${tag}')">${tag}</button>`;
+      }).join('');
+      document.getElementById('modalAdminBar').innerHTML = `
+        <button class="abar-btn ${urgent?'abar-urgent-on':'abar-urgent-off'}" onclick="_togglePriority('${id}')">
+          ${urgent?'🔴 Urgent':'🟡 Normal'}
+        </button>
+        <button class="abar-btn ${closed?'abar-reopen':'abar-close'}" onclick="_toggleClose('${id}')">
+          ${closed?'↩ Réouvrir':'✓ Clore'}
+        </button>
+        <button class="abar-btn abar-delete" onclick="_deleteThread('${id}')">🗑</button>
+        <div class="abar-sep"></div>
+        <span class="abar-tags-label">Tags :</span>
+        ${tagBtns}`;
+
+      /* Reply zone */
+      const tpls = _tpls();
+      const tplRow = tpls.length
+        ? `<div class="reply-tpl-row">
+            <span class="reply-tpl-label">Modèle :</span>
+            <select class="reply-tpl-sel" onchange="_applyTpl(this.value)">
+              <option value="">— choisir —</option>
+              ${tpls.map(tp=>`<option value="${tp.id}">${_esc(tp.name)}</option>`).join('')}
+            </select>
+          </div>` : '';
+      document.getElementById('modalReply').innerHTML = closed
+        ? `<div class="closed-bar">
+            <span>Conversation close.</span>
+            <button onclick="_toggleClose('${id}')">Réouvrir</button>
+          </div>`
+        : `<div class="reply-area" style="border:none;padding:0">
+            ${tplRow}
+            <div class="reply-row">
+              <textarea class="reply-ta" id="modal-rta" placeholder="Répondre au client…" rows="1"
+                onkeydown="if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();_doReply('${id}')}"
+                oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+              <button class="reply-btn" id="modal-rbtn" onclick="_doReply('${id}')" title="Ctrl+↵">${SVG_SEND}</button>
+            </div>
+          </div>`;
+
+      setTimeout(()=>{ chatEl.scrollTop=chatEl.scrollHeight; },50);
+      if(!closed) setTimeout(()=>{ const ta=document.getElementById('modal-rta'); if(ta) ta.focus(); },80);
+    }
+
+    function _afterAction(id) {
+      _render();
+      const t=_getThread(id);
+      if (t && _openId===id && document.getElementById('convModal').classList.contains('open')) {
+        _populateModal(t);
+      }
+    }
+
+    window._openModal = function(id) {
+      _openId = id;
+      const t = _getThread(id);
+      if (!t) return;
+      /* Mark as read */
+      if ((t.messages||[]).some(m=>m.from==='client'&&!m.readByAdmin)) {
+        _patch('/api/admin/threads/'+id+'/read');
+        t.messages.forEach(m=>{ if(m.from==='client') m.readByAdmin=true; });
+        _syncAdminBadge();
+      }
+      _populateModal(t);
+      document.getElementById('convModal').classList.add('open');
+    };
+
+    window._closeModal = function() {
+      document.getElementById('convModal').classList.remove('open');
+      _openId=null;
+      if (_view==='list') _render();
+    };
+
+    /* ── Reply ── */
+    window._doReply = async function(threadId) {
+      const ta   = document.getElementById('modal-rta');
+      const btn  = document.getElementById('modal-rbtn');
+      const text = (ta?ta.value:'').trim();
+      if (!text) return;
+      if (btn) btn.disabled=true;
+      const d = await _post('/api/admin/threads/'+threadId+'/reply',{text});
+      if (btn) btn.disabled=false;
+      if (d.ok) {
+        const t=_getThread(threadId);
+        if(t){t.messages.push(d.message);t.updatedAt=d.message.at;}
+        _afterAction(threadId);
+        _toast('Message envoyé');
+      } else { _toast('Erreur : '+(d.error||'envoi impossible')); }
+    };
+
+    window._applyTpl = function(tplId) {
+      if (!tplId) return;
+      const tpl=_tpls().find(t=>t.id===tplId);
+      if (!tpl) return;
+      const ta=document.getElementById('modal-rta');
+      if (ta) { ta.value=tpl.body; ta.focus(); }
+    };
+
+    /* ── Admin actions ── */
+    window._togglePriority = async function(id) {
+      const t=_getThread(id); if(!t) return;
+      const newP=t.priority==='urgent'?'normal':'urgent';
+      const d=await _patch('/api/admin/threads/'+id,{priority:newP});
+      if(!d.ok){_toast('Erreur');return;}
+      t.priority=d.thread.priority; t.updatedAt=d.thread.updatedAt;
+      _afterAction(id);
+      _toast(newP==='urgent'?'Marqué urgent':'Priorité normale');
+    };
+
+    window._toggleClose = async function(id) {
+      const t=_getThread(id); if(!t) return;
+      const newS=t.status==='closed'?'open':'closed';
+      const d=await _patch('/api/admin/threads/'+id,{status:newS});
+      if(!d.ok){_toast('Erreur');return;}
+      t.status=d.thread.status; t.updatedAt=d.thread.updatedAt;
+      _afterAction(id);
+      _toast(newS==='closed'?'Conversation close':'Conversation réouverte');
+    };
+
+    window._deleteThread = function(id) {
+      _confirm('Supprimer la conversation','Cette action est irréversible.',async()=>{
+        const d=await _del('/api/admin/threads/'+id);
+        if(!d.ok){_toast('Erreur suppression');return;}
+        _threads=_threads.filter(t=>t.id!==id);
+        if(_openId===id){ document.getElementById('convModal').classList.remove('open'); _openId=null; }
+        _render(); _toast('Conversation supprimée');
+      });
+    };
+
+    window._toggleTag = async function(threadId,tag) {
+      const t=_getThread(threadId); if(!t) return;
+      const tags=[...(t.tags||[])];
+      const idx=tags.indexOf(tag);
+      if(idx>=0) tags.splice(idx,1); else tags.push(tag);
+      const d=await _patch('/api/admin/threads/'+threadId,{tags});
+      if(!d.ok){_toast('Erreur');return;}
+      t.tags=d.thread.tags;
+      _afterAction(threadId);
+    };
+
+    /* ── Tab / view actions ── */
+    window._switchTab = function(tab) { _tab=tab; _openId=null; document.getElementById('convModal').classList.remove('open'); _render(); };
+    window._showCompose = function(type) { document.getElementById('convModal').classList.remove('open'); _openId=null; _view='compose-'+type; _render(); };
+    window._cancelCompose = function() { _view='list'; _render(); };
+
+    /* ── Compose individual ── */
+    function _composeIndividualHtml() {
+      return `<div class="compose-wrap">
+        <button class="compose-back" onclick="location.href='admin.html'">${SVG_BACK} Retour à l'accueil</button>
+        <div class="compose-card">
+          <div class="compose-title">Nouveau message</div>
+          <div class="compose-subtitle">Envoyer un message direct à un client</div>
+          <div class="cfield"><label>Email du client *</label><input type="email" id="ci-email" placeholder="client@exemple.com"></div>
+          <div class="cfield"><label>Nom</label><input type="text" id="ci-name" placeholder="Prénom Nom"></div>
+          <div class="cfield">
+            <label>Catégorie</label>
+            <select id="ci-cat">
+              <option value="">— Aucune —</option>
+              <option value="support">Support</option>
+              <option value="commande">Commande</option>
+              <option value="remboursement">Remboursement</option>
+              <option value="livraison">Livraison</option>
+              <option value="fidelite">Fidélité</option>
+            </select>
+          </div>
+          <div class="cfield"><label>Sujet *</label><input type="text" id="ci-subject" placeholder="ex : Votre commande #1234"></div>
+          <div class="cfield"><label>Message *</label><textarea id="ci-body" placeholder="Bonjour,&#10;&#10;…"></textarea></div>
+          <div class="compose-actions">
+            <button class="btn-submit" id="btnIndiv" onclick="_submitIndividual()">Envoyer</button>
+            <button class="btn-cancel-link" onclick="_cancelCompose()">Annuler</button>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    /* ── Compose group ── */
+    function _composeGroupHtml() {
+      return `<div class="compose-wrap">
+        <button class="compose-back" onclick="location.href='admin.html'">${SVG_BACK} Retour à l'accueil</button>
+        <div class="compose-card">
+          <div class="compose-title">Message groupé</div>
+          <div class="compose-subtitle">Envoyer un message à plusieurs clients (thread privé par destinataire)</div>
+          <div class="cfield">
+            <label>Type d'envoi</label>
+            <div class="grp-type-row">
+              <label><input type="radio" name="grptype" value="manual" checked onchange="_onGrpTypeChange()"> Sélection manuelle</label>
+              <label><input type="radio" name="grptype" value="segment" onchange="_onGrpTypeChange()"> Par segment</label>
+            </div>
+          </div>
+          <div class="cfield" id="grp-manual-section">
+            <label>Destinataires</label>
+            <div class="grp-recipients" id="grp-recipients"><div style="padding:.7rem;color:#9ca3af;font-size:.82rem">Chargement…</div></div>
+          </div>
+          <div class="cfield" id="grp-segment-section" style="display:none">
+            <label>Segment</label>
+            <div class="seg-grid">
+              <div class="seg-option"><input type="radio" name="seg" id="seg-all" value="all" checked>
+                <label class="seg-label" for="seg-all"><span class="seg-label-title">Tous les clients</span><span class="seg-label-desc">Toute la base</span></label></div>
+              <div class="seg-option"><input type="radio" name="seg" id="seg-vip" value="vip">
+                <label class="seg-label" for="seg-vip"><span class="seg-label-title">VIP</span><span class="seg-label-desc">≥ 3 conversations</span></label></div>
+              <div class="seg-option"><input type="radio" name="seg" id="seg-recent" value="recent">
+                <label class="seg-label" for="seg-recent"><span class="seg-label-title">Récents</span><span class="seg-label-desc">Actifs ces 7 derniers jours</span></label></div>
+              <div class="seg-option"><input type="radio" name="seg" id="seg-inactive" value="inactive">
+                <label class="seg-label" for="seg-inactive"><span class="seg-label-title">Inactifs</span><span class="seg-label-desc">Silencieux depuis 30 j</span></label></div>
+            </div>
+          </div>
+          <div class="cfield"><label>Sujet *</label><input type="text" id="cg-subject" placeholder="ex : Nouveauté chez Le Clam !"></div>
+          <div class="cfield"><label>Message *</label><textarea id="cg-body" placeholder="Bonjour,&#10;&#10;…"></textarea></div>
+          <div class="compose-actions">
+            <button class="btn-submit indigo" id="btnGroup" onclick="_submitGroup()">Envoyer</button>
+            <button class="btn-cancel-link" onclick="_cancelCompose()">Annuler</button>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    window._onGrpTypeChange = function() {
+      const type=document.querySelector('input[name=grptype]:checked')?.value;
+      const manual=document.getElementById('grp-manual-section');
+      const segment=document.getElementById('grp-segment-section');
+      if(!manual||!segment) return;
+      manual.style.display  = type==='manual'  ? '':'none';
+      segment.style.display = type==='segment' ? '':'none';
+    };
+
+    function _populateGroupRecipients() {
+      const el=document.getElementById('grp-recipients');
+      if(!el) return;
+      const emails=[...new Set(_threads.map(t=>t.userId).filter(Boolean))];
+      if(!emails.length){el.innerHTML='<div style="padding:.7rem;color:#9ca3af;font-size:.8rem">Aucun client dans la base.</div>';return;}
+      el.innerHTML=emails.map(email=>{
+        const t=_threads.find(x=>x.userId===email);
+        const name=t?.userName||email;
+        return `<label class="grp-recipient">
+          <input type="checkbox" name="grp-rcpt" value="${_esc(email)}">
+          <div class="grp-recipient-av" style="${_avStyle(name)}">${_initials(name,email)}</div>
+          <span>${_esc(name)} <span style="color:#9ca3af;font-size:.72rem">${_esc(email)}</span></span>
+        </label>`;
+      }).join('');
+    }
+
+    window._submitIndividual = async function() {
+      const email   = (document.getElementById('ci-email')?.value||'').trim();
+      const name    = (document.getElementById('ci-name')?.value||'').trim();
+      const cat     = document.getElementById('ci-cat')?.value||'';
+      const subject = (document.getElementById('ci-subject')?.value||'').trim();
+      const body    = (document.getElementById('ci-body')?.value||'').trim();
+      if(!email){_toast('Email requis');return;}
+      if(!subject||!body){_toast('Sujet et message requis');return;}
+      const btn=document.getElementById('btnIndiv');
+      if(btn){btn.disabled=true;btn.textContent='Envoi…';}
+      const d=await _post('/api/admin/threads/send',{userId:email,userName:name||email,subject,text:body});
+      if(btn){btn.disabled=false;btn.textContent='Envoyer';}
+      if(!d.ok){_toast('Erreur : '+(d.error||'inconnu'));return;}
+      if(cat&&d.thread) await _patch('/api/admin/threads/'+d.thread.id,{tags:[cat]});
+      await _loadThreads();
+      _view='list'; _openId=d.thread?.id||null; _render();
+      if(_openId) _openModal(_openId);
+      _toast('Message envoyé à '+(name||email));
+    };
+
+    window._submitGroup = async function() {
+      const type    = document.querySelector('input[name=grptype]:checked')?.value||'manual';
+      const subject = (document.getElementById('cg-subject')?.value||'').trim();
+      const body    = (document.getElementById('cg-body')?.value||'').trim();
+      if(!subject||!body){_toast('Sujet et message requis');return;}
+      let targets=[], segment='group';
+      if(type==='manual'){
+        targets=[...document.querySelectorAll('input[name=grp-rcpt]:checked')].map(c=>c.value);
+        if(!targets.length){_toast('Sélectionnez au moins un destinataire');return;}
+      } else {
+        segment=document.querySelector('input[name=seg]:checked')?.value||'all';
+        const now=Date.now(),sevenD=7*86400000,thirtyD=30*86400000;
+        const cmap={};
+        _threads.forEach(t=>{
+          if(!t.userId)return;
+          if(!cmap[t.userId])cmap[t.userId]={count:0,last:0};
+          cmap[t.userId].count++;
+          const ts=t.updatedAt?new Date(t.updatedAt).getTime():0;
+          if(ts>cmap[t.userId].last)cmap[t.userId].last=ts;
+        });
+        targets=Object.keys(cmap).filter(email=>{
+          const c=cmap[email];
+          if(segment==='all')      return true;
+          if(segment==='vip')      return c.count>=3;
+          if(segment==='recent')   return (now-c.last)<sevenD;
+          if(segment==='inactive') return (now-c.last)>=thirtyD;
+          return true;
+        });
+        if(!targets.length){_toast('Aucun client dans ce segment');return;}
+      }
+      const btn=document.getElementById('btnGroup');
+      if(btn){btn.disabled=true;btn.textContent='Envoi…';}
+      const d=await _post('/api/admin/threads/send-bulk',{userIds:targets,subject,text:body});
+      if(btn){btn.disabled=false;btn.textContent='Envoyer';}
+      if(!d.ok){_toast('Erreur : '+(d.error||'inconnu'));return;}
+      _logBcast({id:_uid(),subject,body,segment,ts:Date.now(),sentTo:d.created});
+      await _loadThreads();
+      _view='list'; _render();
+      _toast(`Message envoyé à ${d.created} client(s)`);
+    };
+
+    /* Close modal on overlay click */
+    document.getElementById('convModal').addEventListener('click', function(e) {
+      if (e.target===this) _closeModal();
+    });
+
+    /* ══════════════════════════════════════════
+       LOAD + AUTO-REFRESH
+    ══════════════════════════════════════════ */
+    async function _loadThreads() {
+      const d=await _get('/api/admin/threads');
+      if(d.ok) { _threads=d.threads; _syncAdminBadge(); }
+    }
+
+    async function _init() {
+      await _loadThreads();
+      _render();
+      setInterval(async()=>{
+        await _loadThreads();
+        if(_view==='list') _render();
+        if(_openId && document.getElementById('convModal').classList.contains('open')) {
+          const t=_getThread(_openId); if(t) _populateModal(t);
+        }
+      },30000);
+    }
+
+    _init();
+  })();
+  </script>
+</body>
+</html>

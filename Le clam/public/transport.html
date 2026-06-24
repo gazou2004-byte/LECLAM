@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transport — Le Clam</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f4f4f4; color: #222; padding: 2rem; max-width: 720px; margin: 0 auto; }
+
+    .top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+    .btn-back { display: inline-flex; align-items: center; gap: .45rem; padding: .5rem 1.1rem; background: #3e2a14; color: #d9c4a0; border-radius: 8px; text-decoration: none; font-size: .85rem; font-weight: 600; }
+
+    .card { background: #fff; border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; border: 1px solid #e5e5e5; }
+    .card h2 { font-size: .95rem; font-weight: 700; color: #3e2a14; margin-bottom: 1rem; display: flex; align-items: center; gap: .4rem; }
+
+    label { font-size: .78rem; font-weight: 600; color: #555; display: block; margin-bottom: .28rem; }
+    input[type="number"], input[type="text"], select {
+      padding: .55rem .8rem; border: 1.5px solid #ddd; border-radius: 8px;
+      font-size: .88rem; font-family: inherit; color: #222; background: #fff;
+      outline: none; transition: border-color .18s;
+    }
+    input:focus, select:focus { border-color: #3e2a14; }
+
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .8rem; }
+
+    button { padding: .55rem 1.2rem; border: none; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; transition: opacity .15s; font-family: inherit; }
+    button:hover { opacity: .85; }
+    .btn-save    { background: #3e2a14; color: #d9c4a0; }
+    .btn-add     { background: #f0f0f0; color: #333; font-size: .8rem; padding: .4rem .85rem; }
+    .btn-del     { background: none; border: none; color: #ccc; cursor: pointer; font-size: 1rem; padding: .2rem .4rem; }
+    .btn-del:hover { color: #c0392b; }
+
+    /* Tableau pays */
+    .country-table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+    .country-table th { text-align: left; padding: .4rem .6rem; background: #f8f8f8; color: #888; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 2px solid #eee; }
+    .country-table td { padding: .45rem .6rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    .country-table tr:last-child td { border-bottom: none; }
+    .country-table input { width: 90px; padding: .4rem .6rem; }
+    .country-table select { width: 100%; padding: .4rem .6rem; }
+    .flag { font-size: 1.1rem; margin-right: .3rem; }
+
+    /* Tableau poids */
+    .weight-table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+    .weight-table th { text-align: left; padding: .4rem .6rem; background: #f8f8f8; color: #888; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 2px solid #eee; }
+    .weight-table td { padding: .45rem .6rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    .weight-table tr:last-child td { border-bottom: none; }
+    .weight-table input { width: 80px; padding: .4rem .6rem; }
+
+    /* Simulateur */
+    .simulator { background: #faf8f5; border: 1.5px solid #e8e0d0; border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem; }
+    .sim-result { font-size: 1.2rem; font-weight: 700; color: #3e2a14; margin-top: .7rem; }
+    .sim-detail { font-size: .78rem; color: #999; margin-top: .2rem; }
+
+    #msg { margin-top: .8rem; font-size: .82rem; font-weight: 600; color: #16a34a; display: none; }
+    #msg.visible { display: block; }
+
+    /* ── Responsive ── */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .country-table { min-width: 480px; }
+    .weight-table  { min-width: 380px; }
+
+    @media (max-width: 768px) {
+      body { padding: 1.2rem; }
+      .top { flex-direction: column; align-items: flex-start; gap: .5rem; }
+      .row2 { grid-template-columns: 1fr; }
+      .row3 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: .8rem .75rem; }
+      .card { padding: 1rem .9rem; }
+      .row3 { grid-template-columns: 1fr; }
+      .card h2 { font-size: .88rem; }
+      .simulator { padding: .8rem .9rem; }
+      .country-table input { width: 70px; }
+      .country-table input[type="text"] { width: 110px; }
+    }
+
+    @media (max-width: 360px) {
+      body { padding: .6rem .5rem; }
+      .card { padding: .85rem .7rem; }
+      button.btn-save { width: 100%; }
+      .sim-result { font-size: 1rem; }
+    }
+  </style></head>
+<body>
+
+<div class="top">
+  <a href="admin.html" class="btn-back">← Admin</a>
+  <div>
+    <h1 style="font-size:1.2rem;display:flex;align-items:center;gap:.45rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frais de transport</h1>
+    <p style="font-size:.78rem;color:#888;margin-top:.15rem">Tarifs par pays et par poids</p>
+  </div>
+</div>
+
+<!-- Tarifs par pays -->
+<div class="card">
+  <h2 style="display:flex;align-items:center;gap:.45rem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> Tarifs par pays</h2>
+  <div class="table-scroll">
+  <table class="country-table">
+    <thead><tr><th>Pays</th><th>Prix de base (€)</th><th>Délai estimé</th><th></th></tr></thead>
+    <tbody id="countryBody"></tbody>
+  </table>
+  </div>
+  <button class="btn-add" style="margin-top:.8rem" onclick="addCountryRow()">+ Ajouter un pays</button>
+</div>
+
+<!-- Tranches de poids -->
+<div class="card">
+  <h2 style="display:flex;align-items:center;gap:.45rem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg> Tranches de poids</h2>
+  <p style="font-size:.78rem;color:#999;margin-bottom:.9rem">Le coefficient s'applique au prix du pays. Ex : 1,5 = +50%.</p>
+  <div class="table-scroll">
+  <table class="weight-table">
+    <thead><tr><th>Poids max (kg)</th><th>Libellé</th><th>Coefficient</th><th></th></tr></thead>
+    <tbody id="weightBody"></tbody>
+  </table>
+  </div>
+  <button class="btn-add" style="margin-top:.8rem" onclick="addWeightRow()">+ Ajouter une tranche</button>
+</div>
+
+<!-- Simulateur -->
+<div class="card">
+  <h2 style="display:flex;align-items:center;gap:.45rem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="9" y1="12" x2="9.01" y2="12"/><line x1="13" y1="12" x2="13.01" y2="12"/><line x1="17" y1="12" x2="17.01" y2="12"/><line x1="9" y1="16" x2="9.01" y2="16"/><line x1="13" y1="16" x2="13.01" y2="16"/><line x1="17" y1="16" x2="17.01" y2="16"/></svg> Simulateur</h2>
+  <div class="row2">
+    <div>
+      <label>Pays de destination</label>
+      <select id="simCountry" style="width:100%" onchange="simulate()"></select>
+    </div>
+    <div>
+      <label>Poids du colis (kg)</label>
+      <input type="number" id="simWeight" min="0.1" step="0.1" value="0.5" style="width:100%" oninput="simulate()">
+    </div>
+  </div>
+  <div class="simulator">
+    <div class="sim-result" id="simResult">—</div>
+    <div class="sim-detail" id="simDetail"></div>
+  </div>
+</div>
+
+<!-- Seuil automatique -->
+<div class="card" style="border-color:#e8dfd0;background:#faf5ed">
+  <h2 style="display:flex;align-items:center;gap:.45rem;color:#3e2a14">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    Seuil de livraison offerte — calcul automatique
+  </h2>
+  <p style="font-size:.78rem;color:#7a6045;margin-bottom:1rem">
+    Seuil optimal = frais de port ÷ taux de marge. En dessous, tu offres plus que tu ne gagnes.
+  </p>
+  <div class="row3" style="align-items:end;margin-bottom:1rem">
+    <div>
+      <label>Taux de marge moyen (%)</label>
+      <input type="number" id="marginRate" min="1" max="99" step="1" value="" placeholder="ex : 35"
+        oninput="previewThresholds()" style="border-color:#c8b89a">
+      <div style="font-size:.72rem;color:#9a7a55;margin-top:.3rem" id="marginHint"></div>
+    </div>
+    <div>
+      <label>Poids moyen d'une commande (kg)</label>
+      <input type="number" id="avgWeight" min="0.1" step="0.1" value="0.5" placeholder="ex : 0.8"
+        oninput="previewThresholds()" style="border-color:#c8b89a">
+      <div style="font-size:.72rem;color:#9a7a55;margin-top:.3rem" id="weightHint"></div>
+    </div>
+    <div>
+      <button class="btn-save" onclick="applyThresholds()" style="width:100%">Appliquer les seuils</button>
+    </div>
+  </div>
+  <div id="thresholdPreview"></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:1rem;margin-top:.4rem">
+  <button class="btn-save" onclick="saveAll()">Enregistrer tout</button>
+  <span id="msg">✓ Enregistré</span>
+</div>
+
+<script>
+if (new URLSearchParams(location.search).has('embed')) {
+  const _tb = document.querySelector('.top-bar'); if (_tb) _tb.style.display = 'none';
+  const _notifyH = () => { try { window.parent.postMessage({ type: 'iframeResize', h: document.documentElement.scrollHeight }, '*'); } catch(e){} };
+  new MutationObserver(_notifyH).observe(document.body, { childList: true, subtree: true, attributes: false });
+  /* Supprime le padding/max-width internes en mode embed */
+  const _es = document.createElement('style');
+  _es.textContent = '.page,.top{padding-left:0!important;padding-right:0!important;max-width:none!important;margin:0!important}body{padding-left:0!important;padding-right:0!important;background:transparent!important}';
+  document.head.appendChild(_es);
+}
+const COUNTRIES = [
+  { code:'FR', flag:'🇫🇷', name:'France' },
+  { code:'BE', flag:'🇧🇪', name:'Belgique' },
+  { code:'LU', flag:'🇱🇺', name:'Luxembourg' },
+  { code:'CH', flag:'🇨🇭', name:'Suisse' },
+  { code:'DE', flag:'🇩🇪', name:'Allemagne' },
+  { code:'IT', flag:'🇮🇹', name:'Italie' },
+  { code:'ES', flag:'🇪🇸', name:'Espagne' },
+  { code:'PT', flag:'🇵🇹', name:'Portugal' },
+  { code:'NL', flag:'🇳🇱', name:'Pays-Bas' },
+  { code:'GB', flag:'🇬🇧', name:'Royaume-Uni' },
+  { code:'US', flag:'🇺🇸', name:'États-Unis' },
+  { code:'CN', flag:'🇨🇳', name:'Chine' },
+];
+
+const DEFAULTS = {
+  countries: [
+    { code:'FR', price: 5.45, threshold: 60,   delay:'2–3 jours ouvrés'   },
+    { code:'BE', price: 8.95, threshold: null,  delay:'3–5 jours ouvrés'   },
+    { code:'LU', price: 8.95, threshold: null,  delay:'3–5 jours ouvrés'   },
+    { code:'DE', price: 8.95, threshold: null,  delay:'3–5 jours ouvrés'   },
+    { code:'NL', price: 8.95, threshold: null,  delay:'3–5 jours ouvrés'   },
+    { code:'ES', price: 9.95, threshold: null,  delay:'4–6 jours ouvrés'   },
+    { code:'IT', price: 9.95, threshold: null,  delay:'4–6 jours ouvrés'   },
+    { code:'PT', price: 9.95, threshold: null,  delay:'4–7 jours ouvrés'   },
+    { code:'CH', price:11.45, threshold: null,  delay:'4–7 jours ouvrés'   },
+    { code:'GB', price:11.45, threshold: null,  delay:'5–8 jours ouvrés'   },
+    { code:'US', price:15.45, threshold: null,  delay:'8–14 jours ouvrés'  },
+    { code:'CN', price:13.95, threshold: null,  delay:'10–18 jours ouvrés' },
+  ],
+  weights: [
+    { maxKg: 0.25, label:'≤ 250 g',  coef: 1.00 },  // FR 5,45 €
+    { maxKg: 0.50, label:'≤ 500 g',  coef: 1.15 },  // FR 6,27 €
+    { maxKg: 0.75, label:'≤ 750 g',  coef: 1.24 },  // FR 6,76 €
+    { maxKg: 1.00, label:'≤ 1 kg',   coef: 1.31 },  // FR 7,14 €
+    { maxKg: 2.00, label:'≤ 2 kg',   coef: 1.55 },  // FR 8,45 €
+    { maxKg: 5.00, label:'≤ 5 kg',   coef: 2.10 },  // FR 11,45 €
+    { maxKg: 10.0, label:'≤ 10 kg',  coef: 2.99 },  // FR 16,30 €
+    { maxKg: 9999, label:'> 10 kg',  coef: 5.15 },  // FR 28,07 €
+  ]
+};
+
+let cfg = JSON.parse(JSON.stringify(DEFAULTS));
+try {
+  const saved = JSON.parse(localStorage.getItem('leclam_shipping_v2') || 'null');
+  if (saved && saved.countries && saved.weights) {
+    /* Mise à jour automatique des tranches de poids */
+    saved.weights = JSON.parse(JSON.stringify(DEFAULTS.weights));
+    /* Synchronise les prix pays : conserve les pays personnalisés, met à jour les prix par défaut */
+    DEFAULTS.countries.forEach(def => {
+      const existing = saved.countries.find(c => c.code === def.code);
+      if (existing) existing.price = def.price;
+      else saved.countries.push(JSON.parse(JSON.stringify(def)));
+    });
+    cfg = saved;
+  }
+} catch {}
+/* Sauvegarde immédiate */
+localStorage.setItem('leclam_shipping_v2', JSON.stringify(cfg));
+
+function countryInfo(code) {
+  return COUNTRIES.find(c => c.code === code) || { code, flag:'', name: code };
+}
+
+function renderCountries() {
+  const tbody = document.getElementById('countryBody');
+  tbody.innerHTML = cfg.countries.map((c, i) => {
+    const info = countryInfo(c.code);
+    return `<tr>
+      <td>
+        <select onchange="cfg.countries[${i}].code=this.value;renderSimCountry()" style="width:100%;padding:.4rem .6rem;border:1.5px solid #ddd;border-radius:8px;font-size:.85rem;font-family:inherit">
+          ${COUNTRIES.map(cc => `<option value="${cc.code}" ${cc.code===c.code?'selected':''}>${cc.flag} ${cc.name}</option>`).join('')}
+          <option value="${c.code}" ${!COUNTRIES.find(cc=>cc.code===c.code)?'selected':''} style="display:${!COUNTRIES.find(cc=>cc.code===c.code)?'':'none'}">${c.code}</option>
+        </select>
+      </td>
+      <td><input type="number" min="0" step="0.01" value="${c.price.toFixed(2)}" onchange="cfg.countries[${i}].price=parseFloat(this.value)||0;simulate()"> €</td>
+      <td><input type="text" value="${c.delay ?? ''}" placeholder="ex: 3–5 jours"
+        style="width:130px;padding:.4rem .6rem;border:1.5px solid #dde8dd;border-radius:8px;font-size:.82rem;font-family:inherit;background:#f7fbf7"
+        onchange="cfg.countries[${i}].delay=this.value.trim()||null"></td>
+      <td><button class="btn-del" onclick="cfg.countries.splice(${i},1);renderCountries();renderSimCountry()">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function addCountryRow() {
+  const used = cfg.countries.map(c => c.code);
+  const next = COUNTRIES.find(c => !used.includes(c.code));
+  cfg.countries.push({ code: next ? next.code : 'FR', price: 4.90 });
+  renderCountries();
+  renderSimCountry();
+}
+
+function renderWeights() {
+  const tbody = document.getElementById('weightBody');
+  tbody.innerHTML = cfg.weights.map((w, i) => `<tr>
+    <td><input type="number" min="0.1" step="0.1" value="${w.maxKg >= 9999 ? '' : w.maxKg}" placeholder="∞" onchange="cfg.weights[${i}].maxKg=parseFloat(this.value)||9999;simulate()"></td>
+    <td><input type="text" value="${w.label}" style="width:120px" onchange="cfg.weights[${i}].label=this.value"></td>
+    <td><input type="number" min="0.01" step="0.01" value="${w.coef.toFixed(2)}" onchange="cfg.weights[${i}].coef=parseFloat(this.value)||1;simulate()"></td>
+    <td><button class="btn-del" onclick="cfg.weights.splice(${i},1);renderWeights();simulate()">✕</button></td>
+  </tr>`).join('');
+}
+
+function addWeightRow() {
+  cfg.weights.push({ maxKg: 9999, label: 'Autre', coef: 1.0 });
+  renderWeights();
+}
+
+function renderSimCountry() {
+  const sel = document.getElementById('simCountry');
+  const prev = sel.value;
+  sel.innerHTML = cfg.countries.map(c => {
+    const info = countryInfo(c.code);
+    return `<option value="${c.code}" ${c.code===prev?'selected':''}>${info.flag} ${info.name}</option>`;
+  }).join('');
+  simulate();
+}
+
+function simulate() {
+  const code   = document.getElementById('simCountry').value;
+  const weight = parseFloat(document.getElementById('simWeight').value) || 0.5;
+  const country = cfg.countries.find(c => c.code === code);
+  if (!country) { document.getElementById('simResult').textContent = '—'; return; }
+
+  const sorted = cfg.weights.slice().sort((a, b) => a.maxKg - b.maxKg);
+  const bracket = sorted.find(w => weight <= w.maxKg) || sorted[sorted.length - 1];
+  const price = Math.round(country.price * (bracket ? bracket.coef : 1) * 100) / 100;
+
+  document.getElementById('simResult').textContent = price.toFixed(2).replace('.', ',') + ' €';
+  document.getElementById('simDetail').textContent =
+    `${countryInfo(code).name} : ${country.price.toFixed(2).replace('.',',')} € × ${bracket ? bracket.coef : 1} (${bracket ? bracket.label : '?'})`;
+}
+
+function saveAll() {
+  localStorage.setItem('leclam_shipping_v2', JSON.stringify(cfg));
+  /* Compat avec l'ancien format */
+  const fr = cfg.countries.find(c => c.code === 'FR');
+  if (fr) localStorage.setItem('leclam_shipping', JSON.stringify({ base: fr.price, coef: 1 }));
+  const msg = document.getElementById('msg');
+  msg.classList.add('visible');
+  setTimeout(() => msg.classList.remove('visible'), 2500);
+}
+
+/* ── Seuil automatique ── */
+function _avgMarginFromStorage() {
+  try {
+    const costs    = JSON.parse(localStorage.getItem('leclam_prod_costs') || '{}');
+    const products = JSON.parse(localStorage.getItem('leclam_all_products') || '[]');
+    let totalCA = 0, totalMarge = 0;
+    products.forEach(p => {
+      const c = costs[p.id];
+      if (!c || !c.cost || !p.price) return;
+      const sell = parseFloat(p.price);
+      const buy  = parseFloat(c.cost);
+      if (!sell || sell <= buy) return;
+      totalCA    += sell;
+      totalMarge += (sell - buy);
+    });
+    return totalCA > 0 ? Math.round((totalMarge / totalCA) * 100) : null;
+  } catch { return null; }
+}
+
+function _weightCoef(kg) {
+  const sorted = cfg.weights.slice().sort((a, b) => a.maxKg - b.maxKg);
+  const bracket = sorted.find(w => kg <= w.maxKg) || sorted[sorted.length - 1];
+  return bracket || { coef: 1, label: '?' };
+}
+
+function previewThresholds() {
+  const rate   = parseFloat(document.getElementById('marginRate').value) / 100;
+  const avgKg  = parseFloat(document.getElementById('avgWeight').value) || 0.5;
+  const el     = document.getElementById('thresholdPreview');
+  const wHint  = document.getElementById('weightHint');
+  if (!rate || rate <= 0 || rate > 1) { el.innerHTML = ''; return; }
+
+  const bracket = _weightCoef(avgKg);
+  wHint.textContent = `Tranche appliquée : ${bracket.label} (×${bracket.coef})`;
+
+  const rows = cfg.countries.map(c => {
+    const effectivePrice = Math.round(c.price * bracket.coef * 100) / 100;
+    const seuil = Math.ceil(effectivePrice / rate);
+    return `<tr>
+      <td style="padding:.4rem .6rem;font-size:.82rem">${c.code}</td>
+      <td style="padding:.4rem .6rem;font-size:.82rem;color:#888">${c.price.toFixed(2)} € × ${bracket.coef} = ${effectivePrice.toFixed(2)} €</td>
+      <td style="padding:.4rem .6rem;font-size:.82rem;font-weight:700;color:#3e2a14">${seuil} €</td>
+      <td style="padding:.4rem .6rem;font-size:.72rem;color:#aaa">actuel : ${c.threshold != null ? c.threshold + ' €' : '—'}</td>
+    </tr>`;
+  }).join('');
+  el.innerHTML = `<table style="width:100%;border-collapse:collapse;margin-top:.5rem">
+    <thead><tr>
+      <th style="text-align:left;padding:.3rem .6rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#9a7a55;border-bottom:1px solid #e8dfd0">Pays</th>
+      <th style="text-align:left;padding:.3rem .6rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#9a7a55;border-bottom:1px solid #e8dfd0">Port effectif</th>
+      <th style="text-align:left;padding:.3rem .6rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#9a7a55;border-bottom:1px solid #e8dfd0">Seuil proposé</th>
+      <th style="text-align:left;padding:.3rem .6rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#9a7a55;border-bottom:1px solid #e8dfd0">Actuel</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function applyThresholds() {
+  const rate  = parseFloat(document.getElementById('marginRate').value) / 100;
+  const avgKg = parseFloat(document.getElementById('avgWeight').value) || 0.5;
+  if (!rate || rate <= 0 || rate > 1) return;
+  const bracket = _weightCoef(avgKg);
+  cfg.countries.forEach(c => {
+    const effectivePrice = Math.round(c.price * bracket.coef * 100) / 100;
+    c.threshold = Math.ceil(effectivePrice / rate);
+  });
+  renderCountries();
+  previewThresholds();
+  saveAll();
+}
+
+/* Init */
+renderCountries();
+renderWeights();
+renderSimCountry();
+
+/* Pré-remplir le taux de marge depuis les données produits */
+const _autoRate = _avgMarginFromStorage();
+if (_autoRate) {
+  document.getElementById('marginRate').value = _autoRate;
+  document.getElementById('marginHint').textContent = `Calculé depuis tes ${Object.keys(JSON.parse(localStorage.getItem('leclam_prod_costs')||'{}')).length} produits avec coût renseigné`;
+  previewThresholds();
+}
+</script>
+  <script src="js/features.js"></script>
+</body>
+</html>

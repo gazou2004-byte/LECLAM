@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réinitialisation — Le Clam</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f4f4f4; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1.5rem; }
+    .card { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; max-width: 420px; width: 100%; box-shadow: 0 4px 32px rgba(0,0,0,.1); text-align: center; }
+    .icon { font-size: 3rem; margin-bottom: 1rem; }
+    h1 { font-size: 1.3rem; font-weight: 800; color: #1a1a1a; margin-bottom: .5rem; }
+    p { font-size: .88rem; color: #666; line-height: 1.6; margin-bottom: 1.5rem; }
+    .list { text-align: left; background: #f8f8f8; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+    .list li { font-size: .8rem; color: #555; line-height: 1.8; list-style: none; }
+    .list li::before { content: "✓ "; color: #16a34a; font-weight: 700; }
+    .btn-reset { width: 100%; padding: .85rem; background: #dc2626; color: #fff; border: none; border-radius: 10px; font-size: .95rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+    .btn-reset:hover { opacity: .88; }
+    .btn-back { display: inline-block; margin-top: 1rem; font-size: .82rem; color: #888; text-decoration: none; }
+    .btn-back:hover { color: #3e2a14; }
+    #done { display: none; }
+    #done .icon { color: #16a34a; }
+  </style></head>
+<body>
+  <div class="card">
+    <div id="confirm">
+      <div class="icon">🗑</div>
+      <h1>Réinitialiser toutes les données</h1>
+      <p>Cette action efface toutes les données locales du navigateur (panier, historique, config transport, stocks, fournisseurs, commandes…).</p>
+      <ul class="list">
+        <li>Panier & code promo</li>
+        <li>Config transport (prix, seuils, délais)</li>
+        <li>Stocks produits</li>
+        <li>Fournisseurs & coûts</li>
+        <li>Historique navigation</li>
+        <li>Commandes & notifications admin</li>
+        <li>Produits en cache</li>
+        <li>Consentement cookies</li>
+      </ul>
+      <p style="font-size:.78rem;color:#dc2626;font-weight:600">⚠️ Irréversible — les données serveur (orders.json, etc.) doivent être réinitialisées séparément.</p>
+      <button class="btn-reset" onclick="doReset()">Tout effacer</button>
+      <br>
+      <a href="index.html" class="btn-back">← Annuler</a>
+    </div>
+
+    <div id="done">
+      <div class="icon">✓</div>
+      <h1 style="color:#16a34a">Données effacées</h1>
+      <p>Toutes les données locales ont été supprimées. Le site repart de zéro.</p>
+      <a href="index.html" style="display:inline-block;margin-top:1rem;padding:.7rem 1.8rem;background:#3e2a14;color:#d9c4a0;border-radius:8px;text-decoration:none;font-weight:700;font-size:.88rem">Retour à l'accueil</a>
+    </div>
+  </div>
+
+  <script>
+    const KEYS = [
+      'leclam_cart',
+      'leclam_promo',
+      'leclam_user',
+      'leclam_token',
+      'leclam_csrf',
+      'leclam_shipping',
+      'leclam_shipping_v2',
+      'leclam_stocks',
+      'leclam_browse_history',
+      'leclam_history',
+      'leclam_admin_notifs',
+      'leclam_all_products',
+      'leclam_suppliers',
+      'leclam_supplier_list',
+      'leclam_costs',
+      'leclam_orders',
+      'leclam_fournisseur_orders',
+      'leclam_cookie_consent',
+      'leclam_messages',
+      'leclam_lang',
+    ];
+
+    function doReset() {
+      KEYS.forEach(k => localStorage.removeItem(k));
+      document.getElementById('confirm').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

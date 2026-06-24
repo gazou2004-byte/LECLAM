@@ -1,0 +1,25 @@
+{
+  "name": "Le Clam",
+  "short_name": "Le Clam",
+  "description": "Boutique e-commerce — Plaisir, Malin & Bébé",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf9f7",
+  "theme_color": "#3e2a14",
+  "orientation": "portrait-primary",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='96' fill='%23d9c4a0'/><text y='1.1em' font-size='100' x='50'>🐚</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping"],
+  "shortcuts": [
+    { "name": "Plaisir",  "url": "/plaisir.html",  "description": "Catégorie Plaisir" },
+    { "name": "Malin",    "url": "/malin.html",    "description": "Catégorie Malin"   },
+    { "name": "Bébé",     "url": "/bebe.html",     "description": "Catégorie Bébé"    }
+  ]
+}

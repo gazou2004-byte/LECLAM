@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bundles — Le Clam</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #f8f5f0; color: #1a1a1a; padding: 1.5rem; }
+    h2 { font-size: 1.1rem; color: #3e2a14; margin-bottom: 1.2rem; font-weight: 700; }
+    .form-box { background: #fff; border-radius: 14px; border: 1.5px solid #ede8e0; padding: 1.4rem 1.6rem; margin-bottom: 1.5rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    @media (max-width: 580px) { .form-grid { grid-template-columns: 1fr; } }
+    .field { display: flex; flex-direction: column; gap: .3rem; }
+    .field.wide { grid-column: 1 / -1; }
+    label { font-size: .75rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .04em; }
+    input, select { padding: .6rem .85rem; border: 1.5px solid #e0e0e0; border-radius: 9px; font-size: .88rem; font-family: inherit; color: #222; background: #fff; transition: border-color .18s; }
+    input:focus, select:focus { outline: none; border-color: #3e2a14; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .5rem; max-height: 240px; overflow-y: auto; padding: .5rem; border: 1.5px solid #e0e0e0; border-radius: 9px; background: #fafaf8; }
+    .prod-check { display: flex; align-items: center; gap: .45rem; font-size: .8rem; cursor: pointer; padding: .3rem .4rem; border-radius: 6px; transition: background .15s; }
+    .prod-check:hover { background: #f5f0e8; }
+    .prod-check input { width: 15px; height: 15px; accent-color: #3e2a14; cursor: pointer; flex-shrink: 0; }
+    .btn-primary { margin-top: 1rem; padding: .7rem 1.8rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 50px; font-size: .9rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .2s; }
+    .btn-primary:hover { background: #2a1c0d; }
+    .btn-primary:disabled { background: #ccc; cursor: default; }
+    .err { color: #c0392b; font-size: .8rem; margin-top: .5rem; display: none; }
+
+    /* Liste bundles */
+    .bundle-list { display: flex; flex-direction: column; gap: .75rem; }
+    .bundle-card { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: 1rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .bundle-card.inactive { opacity: .55; }
+    .bundle-pct { font-size: 1.4rem; font-weight: 900; color: #3e2a14; min-width: 52px; text-align: center; flex-shrink: 0; line-height: 1; }
+    .bundle-pct small { display: block; font-size: .65rem; font-weight: 600; color: #888; margin-top: .1rem; }
+    .bundle-body { flex: 1; min-width: 0; }
+    .bundle-name { font-weight: 700; font-size: .95rem; margin-bottom: .25rem; }
+    .bundle-products { font-size: .75rem; color: #555; margin-bottom: .3rem; }
+    .bundle-date { font-size: .72rem; color: #bbb; }
+    .bundle-actions { display: flex; gap: .5rem; flex-shrink: 0; align-items: flex-start; }
+    .btn-toggle { padding: .35rem .75rem; border: 1.5px solid #d9c4a0; color: #3e2a14; background: #fff; border-radius: 8px; font-size: .75rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .15s; }
+    .btn-toggle.off { border-color: #bbb; color: #888; }
+    .btn-toggle:hover { background: #f5f0e8; }
+    .btn-del { padding: .35rem .75rem; background: #fff; border: 1.5px solid #fca5a5; color: #dc2626; border-radius: 8px; font-size: .75rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .btn-del:hover { background: #fef2f2; }
+    .empty { text-align: center; color: #bbb; padding: 2.5rem; font-size: .88rem; }
+    .cat-tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .5rem; }
+    .cat-tab { padding: .3rem .75rem; border: 1.5px solid #e0e0e0; border-radius: 20px; background: #fff; font-size: .78rem; font-weight: 600; color: #666; cursor: pointer; font-family: inherit; transition: all .15s; }
+    .cat-tab.active { background: #3e2a14; color: #d9c4a0; border-color: #3e2a14; }
+  </style></head>
+<body>
+
+<div class="form-box">
+  <h2>📦 Nouveau pack produits</h2>
+  <div class="form-grid">
+    <div class="field wide">
+      <label>Nom du pack</label>
+      <input type="text" id="bName" placeholder="Ex : Pack Bien-être · Duo Malin · Coffret Bébé">
+    </div>
+    <div class="field">
+      <label>Remise sur le pack (%)</label>
+      <input type="number" id="bDiscount" min="1" max="80" placeholder="15">
+    </div>
+    <div class="field">
+      <label>Filtrer par catégorie</label>
+      <select id="bCat" onchange="loadBundleProducts()">
+        <option value="plaisir">Plaisir</option>
+        <option value="malin">Malin</option>
+        <option value="bebe">Bébé</option>
+        <option value="all">Tous</option>
+      </select>
+    </div>
+    <div class="field wide">
+      <label>Produits du pack (sélectionnez ≥ 2)</label>
+      <div class="products-grid" id="bundleProductsGrid">
+        <div style="color:#bbb;font-size:.82rem;padding:.5rem">Chargement…</div>
+      </div>
+    </div>
+  </div>
+  <div class="err" id="bErr"></div>
+  <button class="btn-primary" onclick="createBundle()" id="bBtn">Créer le pack</button>
+</div>
+
+<h2>Packs actifs</h2>
+<div class="bundle-list" id="bundleList"><div class="empty">Chargement…</div></div>
+
+<script>
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  const heads = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+
+  let _allProds = [];
+
+  async function loadBundleProducts() {
+    const cat  = document.getElementById('bCat').value;
+    const grid = document.getElementById('bundleProductsGrid');
+    grid.innerHTML = '<div style="color:#bbb;font-size:.82rem;padding:.5rem">Chargement…</div>';
+    try {
+      const url = cat === 'all' ? '/api/products' : '/api/products?category=' + cat;
+      const r   = await fetch(url);
+      const d   = await r.json();
+      _allProds = d.products || [];
+      grid.innerHTML = _allProds.length
+        ? _allProds.map(p => `
+            <label class="prod-check">
+              <input type="checkbox" value="${p.id}" data-name="${p.name}" data-price="${p.price}" data-emoji="${p.emoji||'📦'}">
+              ${p.emoji || ''} ${p.name} <span style="color:#bbb;margin-left:.3rem">${p.price?.toFixed(2).replace('.',',')} €</span>
+            </label>`).join('')
+        : '<div style="color:#bbb;font-size:.82rem;padding:.5rem">Aucun produit</div>';
+    } catch { grid.innerHTML = '<div style="color:#c00;font-size:.82rem;padding:.5rem">Erreur</div>'; }
+  }
+
+  async function createBundle() {
+    const errEl    = document.getElementById('bErr');
+    errEl.style.display = 'none';
+    const name     = document.getElementById('bName').value.trim();
+    const discount = parseInt(document.getElementById('bDiscount').value, 10);
+    const checked  = [...document.querySelectorAll('#bundleProductsGrid input:checked')];
+    const productIds = checked.map(i => i.value);
+
+    if (!name)                       return showBErr('Donnez un nom au pack.');
+    if (!discount || discount < 1 || discount > 80) return showBErr('Remise invalide (1–80%).');
+    if (productIds.length < 2)       return showBErr('Sélectionnez au moins 2 produits.');
+
+    const btn = document.getElementById('bBtn');
+    btn.disabled = true; btn.textContent = 'Création…';
+    try {
+      const r = await fetch('/api/admin/bundles', {
+        method: 'POST', headers: heads,
+        body: JSON.stringify({ name, discount, productIds }),
+      });
+      const d = await r.json();
+      if (!d.ok) return showBErr(d.error || 'Erreur');
+      document.getElementById('bName').value = '';
+      document.getElementById('bDiscount').value = '';
+      document.querySelectorAll('#bundleProductsGrid input').forEach(i => i.checked = false);
+      loadBundles();
+    } catch { showBErr('Erreur réseau.'); }
+    finally { btn.disabled = false; btn.textContent = 'Créer le pack'; }
+  }
+
+  function showBErr(msg) {
+    const el = document.getElementById('bErr');
+    el.textContent = msg; el.style.display = 'block';
+    document.getElementById('bBtn').disabled = false;
+    document.getElementById('bBtn').textContent = 'Créer le pack';
+  }
+
+  async function toggleBundle(id, current) {
+    await fetch('/api/admin/bundles/' + id, {
+      method: 'PATCH', headers: heads,
+      body: JSON.stringify({ active: !current }),
+    });
+    loadBundles();
+  }
+
+  async function deleteBundle(id) {
+    if (!confirm('Supprimer ce pack définitivement ?')) return;
+    await fetch('/api/admin/bundles/' + id, { method: 'DELETE', headers: heads });
+    loadBundles();
+  }
+
+  async function loadBundles() {
+    const r = await fetch('/api/admin/bundles', { headers: heads });
+    const d = await r.json();
+    const bundles = (d.bundles || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const list = document.getElementById('bundleList');
+    if (!bundles.length) { list.innerHTML = '<div class="empty">Aucun pack créé.</div>'; return; }
+    list.innerHTML = bundles.map(b => {
+      const date = new Date(b.createdAt).toLocaleDateString('fr-FR');
+      return `<div class="bundle-card ${b.active === false ? 'inactive' : ''}">
+        <div class="bundle-pct">−${b.discount}%<small>remise</small></div>
+        <div class="bundle-body">
+          <div class="bundle-name">${b.name}</div>
+          <div class="bundle-products">${b.productIds.length} produit(s) : ${b.productIds.join(', ')}</div>
+          <div class="bundle-date">Créé le ${date}</div>
+        </div>
+        <div class="bundle-actions">
+          <button class="btn-toggle ${b.active === false ? 'off' : ''}" onclick="toggleBundle('${b.id}', ${b.active !== false})">
+            ${b.active === false ? '▶ Activer' : '⏸ Pause'}
+          </button>
+          <button class="btn-del" onclick="deleteBundle('${b.id}')">Suppr.</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  loadBundleProducts();
+  loadBundles();
+
+  window.addEventListener('load', () => {
+    const send = () => window.parent?.postMessage({ type: 'iframeResize' }, '*');
+    send(); setTimeout(send, 500); setTimeout(send, 1500);
+  });
+</script>
+</body>
+</html>

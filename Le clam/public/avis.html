@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donner mon avis — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: #faf9f7; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+
+    .avis-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.1);
+      padding: 2.5rem 2.8rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .avis-logo { margin-bottom: 1.5rem; }
+
+    .avis-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: #1a1a1a;
+      margin-bottom: .4rem;
+    }
+
+    .avis-product {
+      font-size: .9rem;
+      color: #888;
+      margin-bottom: 2rem;
+    }
+
+    /* Étoiles cliquables */
+    .star-picker {
+      display: flex;
+      justify-content: center;
+      gap: .4rem;
+      margin-bottom: 1.8rem;
+      flex-direction: row-reverse; /* CSS-only hover trick */
+    }
+
+    .star-picker input { display: none; }
+
+    .star-picker label {
+      font-size: 2.8rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: color .15s, transform .15s;
+      line-height: 1;
+    }
+
+    /* Surbrillance au survol (sélectionne vers la droite grâce à row-reverse) */
+    .star-picker label:hover,
+    .star-picker label:hover ~ label,
+    .star-picker input:checked ~ label {
+      color: #f5a623;
+      transform: scale(1.15);
+    }
+
+    .avis-comment {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      padding: .85rem 1rem;
+      font-size: .9rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 90px;
+      color: #333;
+      transition: border-color .2s;
+      margin-bottom: 1.4rem;
+    }
+    .avis-comment:focus { outline: none; border-color: #f5a623; }
+
+    .avis-submit {
+      width: 100%;
+      padding: .9rem;
+      background: #c0392b;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .avis-submit:hover  { background: #a93226; transform: translateY(-2px); }
+    .avis-submit:active { transform: translateY(0); }
+    .avis-submit:disabled { background: #ccc; cursor: default; transform: none; }
+
+    /* États */
+    .avis-state { display: none; flex-direction: column; align-items: center; gap: 1rem; }
+    .avis-state.visible { display: flex; }
+    .avis-icon { font-size: 3.5rem; }
+    .avis-state h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #1a1a1a; }
+    .avis-state p  { color: #888; font-size: .9rem; }
+    .avis-state a  { color: #c0392b; font-weight: 600; text-decoration: none; }
+
+    #formSection { transition: opacity .3s; }
+  </style></head>
+<body>
+
+<div class="avis-card">
+
+  <!-- Logo -->
+  <div class="avis-logo">
+    <a href="index.html">
+      Le Clam
+    </a>
+  </div>
+
+  <!-- Formulaire -->
+  <div id="formSection">
+    <h1 data-i18n="review.title">Votre avis</h1>
+    <p class="avis-product" id="productName" data-i18n="review.loading">Chargement…</p>
+
+    <div class="star-picker" id="starPicker">
+      <input type="radio" name="rating" id="s5" value="5"><label for="s5" title="5 étoiles">★</label>
+      <input type="radio" name="rating" id="s4" value="4"><label for="s4" title="4 étoiles">★</label>
+      <input type="radio" name="rating" id="s3" value="3"><label for="s3" title="3 étoiles">★</label>
+      <input type="radio" name="rating" id="s2" value="2"><label for="s2" title="2 étoiles">★</label>
+      <input type="radio" name="rating" id="s1" value="1"><label for="s1" title="1 étoile">★</label>
+    </div>
+
+    <textarea class="avis-comment" id="comment" data-i18n-ph="review.comment_ph" placeholder="Un commentaire ? (facultatif)"></textarea>
+
+    <button class="avis-submit" id="submitBtn" disabled data-i18n="review.submit_btn">Envoyer mon avis</button>
+  </div>
+
+  <!-- Succès -->
+  <div class="avis-state" id="stateSuccess">
+    <div class="avis-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3e2a14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+    <h2 data-i18n="review.success_title">Merci !</h2>
+    <p data-i18n="review.success_text">Votre note a été prise en compte. Elle sera visible sur la fiche produit.</p>
+    <a href="index.html" data-i18n="review.back">← Retour à la boutique</a>
+  </div>
+
+  <!-- Déjà utilisé -->
+  <div class="avis-state" id="stateUsed">
+    <div class="avis-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3e2a14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <h2 data-i18n="review.used_title">Déjà soumis</h2>
+    <p data-i18n="review.used_text">Vous avez déjà donné votre avis pour ce produit.</p>
+    <a href="index.html" data-i18n="review.back">← Retour à la boutique</a>
+  </div>
+
+  <!-- Invalide -->
+  <div class="avis-state" id="stateInvalid">
+    <div class="avis-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <h2 data-i18n="review.invalid_title">Lien invalide</h2>
+    <p data-i18n="review.invalid_text">Ce lien est expiré ou incorrect.</p>
+    <a href="index.html" data-i18n="review.back">← Retour à la boutique</a>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  const params  = new URLSearchParams(location.search);
+  const token   = params.get('token');
+
+  const formSection   = document.getElementById('formSection');
+  const productNameEl = document.getElementById('productName');
+  const submitBtn     = document.getElementById('submitBtn');
+  const starPicker    = document.getElementById('starPicker');
+
+  function showState(id) {
+    formSection.style.display = 'none';
+    document.getElementById(id).classList.add('visible');
+  }
+
+  // Valider le token
+  if (!token) {
+    showState('stateInvalid');
+  } else {
+    fetch(`/api/review/check?token=${token}`)
+      .then(r => r.json())
+      .then(data => {
+        if (!data.ok) {
+          showState(data.error.includes('déjà') ? 'stateUsed' : 'stateInvalid');
+          return;
+        }
+        productNameEl.textContent = data.productName || (typeof I18n !== 'undefined' ? I18n.t('review.product_default') : 'Produit commandé');
+      })
+      .catch(() => showState('stateInvalid'));
+  }
+
+  // Activer le bouton quand une étoile est cochée
+  starPicker.addEventListener('change', () => {
+    submitBtn.disabled = false;
+  });
+
+  // Soumission
+  submitBtn.addEventListener('click', async () => {
+    const rating  = document.querySelector('input[name="rating"]:checked')?.value;
+    const comment = document.getElementById('comment').value;
+    if (!rating) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = typeof I18n !== 'undefined' ? I18n.t('review.sending') : 'Envoi…';
+
+    try {
+      const res  = await fetch('/api/review', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token, rating, comment }),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        showState('stateSuccess');
+      } else {
+        showState(data.error?.includes('déjà') ? 'stateUsed' : 'stateInvalid');
+      }
+    } catch {
+      submitBtn.disabled   = false;
+      submitBtn.textContent = typeof I18n !== 'undefined' ? I18n.t('review.submit_btn') : 'Envoyer mon avis';
+      alert(typeof I18n !== 'undefined' ? I18n.t('review.error_network') : 'Erreur réseau, réessayez.');
+    }
+  });
+</script>
+
+</body>
+</html>

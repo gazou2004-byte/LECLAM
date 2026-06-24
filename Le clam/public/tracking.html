@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suivi de colis — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <style>
+    .tracking-page { max-width: 640px; margin: 0 auto; padding: calc(var(--nav-h) + 2rem) 1.5rem 4rem; }
+
+    /* Formulaire recherche */
+    .search-box { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(62,42,20,.08); border: 1.5px solid #ede8e0; padding: 1.6rem; margin-bottom: 1.5rem; }
+    .search-box h1 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #3e2a14; margin-bottom: .3rem; }
+    .search-box p  { font-size: .85rem; color: #888; margin-bottom: 1.2rem; }
+    .search-row { display: flex; gap: .6rem; }
+    .search-row input { flex: 1; padding: .7rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: .9rem; font-family: inherit; color: #222; }
+    .search-row input:focus { outline: none; border-color: #3e2a14; }
+    .search-row select { padding: .7rem .9rem; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: .85rem; font-family: inherit; color: #555; background: #fff; }
+    .search-row button { padding: .7rem 1.4rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 10px; font-size: .88rem; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
+    .search-row button:hover { background: #2a1c0d; }
+    @media (max-width: 500px) { .search-row { flex-wrap: wrap; } .search-row input, .search-row select, .search-row button { width: 100%; } }
+
+    /* Résultat */
+    .result-box { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(62,42,20,.08); border: 1.5px solid #ede8e0; overflow: hidden; display: none; }
+    .result-box.visible { display: block; }
+
+    .result-head { background: linear-gradient(135deg, #fafaf8, #f5f0e8); padding: 1.2rem 1.6rem; border-bottom: 1.5px solid #ede8e0; }
+    .result-num { font-size: .75rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .3rem; }
+    .result-carrier { display: flex; align-items: center; gap: .6rem; }
+    .carrier-logo { font-size: 1.5rem; }
+    .carrier-name { font-weight: 700; font-size: 1rem; color: #3e2a14; }
+    .carrier-link { margin-left: auto; font-size: .8rem; font-weight: 700; color: #fff; background: #3e2a14; padding: .35rem .85rem; border-radius: 20px; text-decoration: none; white-space: nowrap; }
+    .carrier-link:hover { background: #2a1c0d; }
+
+    /* Étapes */
+    .steps-wrap { padding: 1.6rem; }
+    .step-list { position: relative; padding-left: 2rem; }
+    .step-list::before { content: ''; position: absolute; left: .65rem; top: .5rem; bottom: .5rem; width: 2px; background: #f0ebe3; }
+
+    .step { position: relative; padding-bottom: 1.4rem; }
+    .step:last-child { padding-bottom: 0; }
+    .step-dot { position: absolute; left: -1.95rem; top: .1rem; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #e0d5c5; background: #fff; z-index: 1; transition: all .3s; }
+    .step.done  .step-dot { background: #3e2a14; border-color: #3e2a14; }
+    .step.current .step-dot { background: #c8a87a; border-color: #3e2a14; box-shadow: 0 0 0 4px rgba(62,42,20,.12); width: 16px; height: 16px; left: -2rem; top: .05rem; }
+    .step-label { font-weight: 700; font-size: .88rem; color: #bbb; margin-bottom: .15rem; }
+    .step.done  .step-label { color: #3e2a14; }
+    .step.current .step-label { color: #1a1a1a; }
+    .step-desc { font-size: .78rem; color: #bbb; }
+    .step.done .step-desc, .step.current .step-desc { color: #888; }
+    .step-date { font-size: .72rem; color: #c8a87a; font-weight: 600; margin-top: .1rem; }
+
+    /* Badge statut */
+    .status-badge { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .85rem; border-radius: 20px; font-size: .8rem; font-weight: 700; margin-top: .6rem; }
+    .badge-processing { background: #dbeafe; color: #1d4ed8; }
+    .badge-shipped    { background: #ede9fe; color: #6d28d9; }
+    .badge-delivered  { background: #dcfce7; color: #15803d; }
+    .badge-pending    { background: #fef9c3; color: #a16207; }
+    .badge-cancelled  { background: #fee2e2; color: #dc2626; }
+
+    .err-box { background: #fde8e8; color: #c0392b; padding: .8rem 1.1rem; border-radius: 10px; font-size: .85rem; display: none; margin-top: .8rem; }
+    .err-box.visible { display: block; }
+    .back-link { display: inline-flex; align-items: center; gap: .35rem; color: #a0856a; font-size: .82rem; font-weight: 600; text-decoration: none; margin-bottom: 1rem; }
+    .back-link:hover { color: #3e2a14; }
+  </style></head>
+<body class="page-neutre">
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <svg width="38" height="38" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><text x="84" y="132" font-family="serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">A</text><text x="116" y="104" font-family="serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">L</text><text x="84" y="106" font-family="serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">C</text></svg>
+    </a>
+    <div class="nav-links">
+      <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+      <a href="malin.html"   class="nav-link" data-cat="malin"><span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+      <a href="bebe.html"    class="nav-link" data-cat="bebe"><span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+    </div>
+    <div class="nav-actions">
+      <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="tracking-page">
+  <a href="mes-commandes.html" class="back-link">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span data-i18n="orders.title">Mes commandes</span>
+  </a>
+
+  <div class="search-box">
+    <h1>📍 <span data-i18n="tracking.title">Suivi de colis</span></h1>
+    <p data-i18n="tracking.enter_number">Entrez votre numéro de suivi pour connaître l'état de votre livraison.</p>
+    <div class="search-row">
+      <input type="text" id="trackNum" placeholder="Ex : 6A12345678901, 1Z999AA…" autocomplete="off" data-i18n-ph="tracking.placeholder">
+      <select id="trackCarrier">
+        <option value="auto" data-i18n="tracking.auto">Détection auto</option>
+        <option value="colissimo" data-i18n="tracking.colissimo">Colissimo</option>
+        <option value="mondialrelay" data-i18n="tracking.mondial_relay">Mondial Relay</option>
+        <option value="chronopost" data-i18n="tracking.chronopost">Chronopost</option>
+        <option value="laposte" data-i18n="tracking.la_poste">La Poste</option>
+        <option value="dhl" data-i18n="tracking.dhl">DHL</option>
+        <option value="ups" data-i18n="tracking.ups">UPS</option>
+        <option value="fedex" data-i18n="tracking.fedex">FedEx</option>
+      </select>
+      <button onclick="trackPackage()" data-i18n="tracking.track_btn">Suivre</button>
+    </div>
+    <div class="err-box" id="trackErr"></div>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-head">
+      <div class="result-num" id="resNum"></div>
+      <div class="result-carrier">
+        <span class="carrier-logo" id="resLogo"></span>
+        <span class="carrier-name" id="resCarrier"></span>
+        <span class="status-badge" id="resBadge"></span>
+        <a class="carrier-link" id="resLink" href="#" target="_blank" rel="noopener" data-i18n="tracking.see_on_site">Voir sur le site →</a>
+      </div>
+    </div>
+    <div class="steps-wrap">
+      <div class="step-list" id="stepList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CARRIERS = {
+  colissimo:    { name: 'Colissimo',    logo: '🟡', url: n => `https://www.laposte.fr/outils/suivre-vos-envois?code=${n}`,          detect: n => /^[67][A-Z]\d{11}$/.test(n.replace(/\s/g,'')) },
+  mondialrelay: { name: 'Mondial Relay', logo: '🟠', url: n => `https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=${n}`, detect: n => /^\d{8,11}$/.test(n.replace(/\s/g,'')) },
+  chronopost:   { name: 'Chronopost',   logo: '🔵', url: n => `https://www.chronopost.fr/tracking-no-cms/suivi-page?listeNumerosLT=${n}`, detect: n => /^[A-Z]{2}\d{9}[A-Z]{2}$/.test(n.replace(/\s/g,'')) },
+  laposte:      { name: 'La Poste',     logo: '🟡', url: n => `https://www.laposte.fr/outils/suivre-vos-envois?code=${n}`,          detect: n => /^[A-Z]{2}\d{9}[A-Z]{2}$/.test(n.replace(/\s/g,'')) },
+  dhl:          { name: 'DHL',          logo: '🟥', url: n => `https://www.dhl.com/fr-fr/home/tracking/tracking-express.html?submit=1&tracking-id=${n}`, detect: n => /^\d{10,11}$/.test(n.replace(/\s/g,'')) },
+  ups:          { name: 'UPS',          logo: '🟤', url: n => `https://www.ups.com/track?loc=fr_FR&tracknum=${n}`,                  detect: n => /^1Z[A-Z0-9]{16}$/.test(n.replace(/\s/g,'')) },
+  fedex:        { name: 'FedEx',        logo: '🟣', url: n => `https://www.fedex.com/fedextrack/?trknbr=${n}`,                      detect: n => /^\d{12,15}$/.test(n.replace(/\s/g,'')) },
+};
+
+const STATUS_STEPS = {
+  pending:    0,
+  processing: 1,
+  shipped:    2,
+  transit:    3,
+  delivered:  4,
+};
+
+function getStepsDef() {
+  return [
+    { key: 'pending',    label: I18n.t('tracking.step_pending_label'),    desc: I18n.t('tracking.step_pending_desc') },
+    { key: 'processing', label: I18n.t('tracking.step_processing_label'), desc: I18n.t('tracking.step_processing_desc') },
+    { key: 'shipped',    label: I18n.t('tracking.step_shipped_label'),    desc: I18n.t('tracking.step_shipped_desc') },
+    { key: 'transit',    label: I18n.t('tracking.step_transit_label'),    desc: I18n.t('tracking.step_transit_desc') },
+    { key: 'delivered',  label: I18n.t('tracking.step_delivered_label'),  desc: I18n.t('tracking.step_delivered_desc') },
+  ];
+}
+
+function getBadge() {
+  return {
+    pending:    ['badge-pending',    I18n.t('tracking.badge_pending')],
+    processing: ['badge-processing', I18n.t('tracking.badge_processing')],
+    shipped:    ['badge-shipped',    I18n.t('tracking.badge_shipped')],
+    transit:    ['badge-shipped',    I18n.t('tracking.badge_transit')],
+    delivered:  ['badge-delivered',  I18n.t('tracking.badge_delivered')],
+    cancelled:  ['badge-cancelled',  I18n.t('tracking.badge_cancelled')],
+  };
+}
+
+function detectCarrier(num) {
+  for (const [key, c] of Object.entries(CARRIERS)) {
+    if (c.detect(num)) return key;
+  }
+  return null;
+}
+
+async function trackPackage() {
+  const rawNum  = document.getElementById('trackNum').value.trim();
+  const selCar  = document.getElementById('trackCarrier').value;
+  const errEl   = document.getElementById('trackErr');
+  errEl.classList.remove('visible');
+
+  if (!rawNum) { errEl.textContent = I18n.t('tracking.enter_number_err'); errEl.classList.add('visible'); return; }
+
+  /* Cherche dans les commandes de l'utilisateur connecté */
+  const token = localStorage.getItem('leclam_token') || '';
+  let order = null;
+
+  if (token) {
+    try {
+      const r = await fetch('/api/orders/mine', { headers: { 'Authorization': 'Bearer ' + token } });
+      const d = await r.json();
+      order = (d.orders || []).find(o => o.trackingNumber && o.trackingNumber.toLowerCase() === rawNum.toLowerCase());
+    } catch {}
+  }
+
+  /* Détection transporteur */
+  const carKey  = selCar !== 'auto' ? selCar : (detectCarrier(rawNum) || 'colissimo');
+  const carrier = CARRIERS[carKey];
+
+  /* Affichage */
+  document.getElementById('resNum').textContent     = I18n.t('tracking.tracking_num') + ' ' + rawNum;
+  document.getElementById('resLogo').textContent    = carrier.logo;
+  document.getElementById('resCarrier').textContent = carrier.name;
+  document.getElementById('resLink').href           = carrier.url(rawNum);
+
+  /* Statut */
+  let currentStep = 2; /* shipped par défaut si on a juste un numéro */
+  let dates = {};
+  if (order) {
+    const map = { pending:0, processing:1, shipped:2, delivered:4, cancelled:4 };
+    currentStep = map[order.status] ?? 2;
+    if (order.createdAt)  dates.pending    = new Date(order.createdAt).toLocaleDateString(I18n.locale || 'fr-FR',{day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'});
+    if (order.shippedAt)  dates.shipped    = new Date(order.shippedAt).toLocaleDateString(I18n.locale || 'fr-FR',{day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'});
+    if (order.deliveredAt)dates.delivered  = new Date(order.deliveredAt).toLocaleDateString(I18n.locale || 'fr-FR',{day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'});
+    if (order.status === 'shipped') currentStep = 3; /* show "en transit" */
+  }
+
+  const BADGE = getBadge();
+  const [badgeCls, badgeLbl] = BADGE[order?.status || 'shipped'] || BADGE.shipped;
+  const badge = document.getElementById('resBadge');
+  badge.className = 'status-badge ' + badgeCls;
+  badge.textContent = badgeLbl;
+
+  /* Steps */
+  const STEPS_DEF = getStepsDef();
+  const stepsToShow = order?.status === 'cancelled'
+    ? [...STEPS_DEF.slice(0,2), { key:'cancelled', label: I18n.t('tracking.step_cancelled_label'), desc: I18n.t('tracking.step_cancelled_desc') }]
+    : STEPS_DEF;
+
+  document.getElementById('stepList').innerHTML = stepsToShow.map((s, i) => {
+    const isDone    = i < currentStep;
+    const isCurrent = i === currentStep;
+    const cls = isDone ? 'done' : isCurrent ? 'current' : '';
+    const dateStr = dates[s.key] ? `<div class="step-date">${dates[s.key]}</div>` : '';
+    return `<div class="step ${cls}">
+      <div class="step-dot"></div>
+      <div class="step-label">${s.label}</div>
+      <div class="step-desc">${s.desc}</div>
+      ${dateStr}
+    </div>`;
+  }).join('');
+
+  document.getElementById('resultBox').classList.add('visible');
+  document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+/* Pré-remplissage depuis l'URL (?num=XXX&carrier=colissimo) */
+(function() {
+  const p = new URLSearchParams(location.search);
+  const num = p.get('num') || p.get('tracking');
+  const car = p.get('carrier');
+  if (num) {
+    document.getElementById('trackNum').value = num;
+    if (car && document.querySelector(`#trackCarrier option[value="${car}"]`)) {
+      document.getElementById('trackCarrier').value = car;
+    }
+    trackPackage();
+  }
+})();
+
+document.getElementById('trackNum').addEventListener('keydown', e => {
+  if (e.key === 'Enter') trackPackage();
+});
+</script>
+
+<script src="js/app.js"></script>
+</body>
+</html>

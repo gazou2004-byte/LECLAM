@@ -1,0 +1,15 @@
+tondomaine.fr {
+    # HTTPS automatique via Let's Encrypt (aucune config SSL manuelle)
+    reverse_proxy localhost:3000
+
+    # Logs d'accès
+    log {
+        output file /var/log/caddy/leclam-access.log
+        format json
+    }
+}
+
+# Redirection www → sans www (ou l'inverse selon ta préférence)
+www.tondomaine.fr {
+    redir https://tondomaine.fr{uri} 301
+}

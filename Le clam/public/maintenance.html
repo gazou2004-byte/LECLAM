@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance — Le Clam</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f5f0e8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 48px rgba(62,42,20,.12);
+      padding: 3rem 2.8rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+    .logo {
+      margin-bottom: 1.8rem;
+    }
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    h1 {
+      font-size: 1.6rem;
+      color: #3e2a14;
+      margin-bottom: .75rem;
+      font-weight: 700;
+    }
+    p {
+      color: #7a6652;
+      font-size: .95rem;
+      line-height: 1.7;
+      margin-bottom: .6rem;
+    }
+    .message {
+      background: #f5f0e8;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.4rem 0;
+      color: #3e2a14;
+      font-size: .9rem;
+      line-height: 1.6;
+      border-left: 4px solid #d9c4a0;
+      text-align: left;
+    }
+    .back {
+      margin-top: 1.6rem;
+      font-size: .8rem;
+      color: #bbb;
+    }
+    .progress {
+      width: 100%;
+      height: 4px;
+      background: #ede8e0;
+      border-radius: 2px;
+      margin: 1.4rem 0 .4rem;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(90deg, #3e2a14, #c8a87a);
+      border-radius: 2px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .5; }
+    }
+    @media (max-width: 480px) {
+      .card { padding: 2rem 1.4rem; border-radius: 14px; }
+    }
+  </style></head>
+<body>
+<div class="card">
+  <div class="logo">
+    <svg width="52" height="52" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="96" fill="#d9c4a0"/>
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/>
+      <text x="84" y="132" font-family="serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">A</text>
+      <text x="116" y="104" font-family="serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">L</text>
+      <text x="84"  y="106" font-family="serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" opacity="0.5">C</text>
+      <text x="100" y="165" font-family="serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text>
+    </svg>
+  </div>
+
+  <span class="icon">🔧</span>
+  <h1 data-i18n="maintenance.title">Site en maintenance</h1>
+  <p data-i18n="maintenance.body">Nous effectuons des améliorations pour mieux vous servir.</p>
+
+  <div class="message" id="maintenanceMsg">
+    Nous serons de retour très bientôt. Merci de votre patience.
+  </div>
+
+  <div class="progress"><div class="progress-bar"></div></div>
+
+  <p class="back"><span data-i18n="maintenance.contact">Une question urgente ?</span> <a href="mailto:contact@leclam.eu" style="color:#a0856a">contact@leclam.eu</a></p>
+</div>
+
+<script>
+  fetch('/api/maintenance')
+    .then(r => r.json())
+    .then(d => {
+      if (d.message) document.getElementById('maintenanceMsg').textContent = d.message;
+      if (!d.active) location.href = '/index.html';
+    })
+    .catch(() => {});
+
+  /* Bouton retour admin intégré dans la carte si aperçu client actif */
+  (function() {
+    const adminToken = localStorage.getItem('leclam_admin_backup_token');
+    const clientMode = localStorage.getItem('leclam_view_mode') === 'client';
+    if (!adminToken && !clientMode) return;
+    const btn = document.createElement('button');
+    btn.onclick = retourAdmin;
+    btn.textContent = '↩ Retour admin';
+    btn.style.cssText = 'margin-top:1.4rem;background:#3e2a14;color:#d9c4a0;border:none;' +
+      'border-radius:50px;padding:.6rem 1.6rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:serif';
+    document.querySelector('.card').appendChild(btn);
+  })();
+
+  async function retourAdmin() {
+    const t = localStorage.getItem('leclam_admin_backup_token');
+    const c = localStorage.getItem('leclam_admin_backup_csrf');
+    const u = localStorage.getItem('leclam_admin_backup_user');
+    if (t) localStorage.setItem('leclam_token', t);
+    if (c) localStorage.setItem('leclam_csrf',  c);
+    if (u) localStorage.setItem('leclam_user',  u);
+    localStorage.removeItem('leclam_admin_backup_token');
+    localStorage.removeItem('leclam_admin_backup_csrf');
+    localStorage.removeItem('leclam_admin_backup_user');
+    localStorage.removeItem('leclam_admin_backup_page');
+    localStorage.removeItem('leclam_view_mode');
+    try { await fetch('/api/admin/restore-admin', { method: 'POST', headers: { 'Authorization': 'Bearer ' + (t || '') } }); } catch {}
+    location.href = 'admin.html';
+  }
+</script>
+<script>
+(async function() {
+  const SUPPORTED = ['fr','en','es','de','it'];
+  const saved = localStorage.getItem('leclam_lang');
+  const browser = (navigator.language||'').slice(0,2).toLowerCase();
+  const lang = SUPPORTED.includes(saved) ? saved : SUPPORTED.includes(browser) ? browser : 'fr';
+  try {
+    const r = await fetch('/locales/' + lang + '.json');
+    const tr = await r.json();
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const parts = el.dataset.i18n.split('.');
+      const val = parts.reduce((o,k) => (o&&k in o?o[k]:undefined), tr);
+      if (typeof val === 'string') el.textContent = val;
+    });
+    if (tr.meta?.maintenance?.title) document.title = tr.meta.maintenance.title;
+  } catch {}
+})();
+</script>
+</body>
+</html>

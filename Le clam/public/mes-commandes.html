@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commandes — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .orders-page { max-width: 860px; margin: 0 auto; padding: 6rem 1.5rem 4rem; }
+    .orders-page h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: .3rem; color: #1a1a1a; }
+    .page-sub { color: #999; font-size: .9rem; margin-bottom: 2rem; }
+
+    /* ── Tabs ── */
+    .main-tabs { display:flex; gap:.35rem; margin-bottom:1.8rem; margin-top:2rem; flex-wrap:wrap; }
+    .main-tab {
+      display:flex; align-items:center; gap:.45rem;
+      padding:.55rem 1.2rem; border-radius:50px;
+      border:1.5px solid #e0e0e0; font-size:.83rem; font-weight:600;
+      cursor:pointer; background:#fff; color:#666; font-family:inherit;
+      transition:all .18s;
+    }
+    .main-tab:hover { border-color:#3e2a14; color:#3e2a14; }
+    .main-tab.active { background:#3e2a14; border-color:#3e2a14; color:#d9c4a0; }
+    .tab-n {
+      background:#e5e5e5; color:#666; font-size:.65rem; font-weight:700;
+      padding:.1rem .4rem; border-radius:20px; min-width:18px; text-align:center;
+    }
+    .main-tab.active .tab-n { background:rgba(255,255,255,.25); color:#fff; }
+
+    /* ── Client list (admin) ── */
+    .client-card {
+      border:1.5px solid #e8e8e8; border-radius:14px; margin-bottom:.8rem;
+      overflow:hidden; cursor:pointer; transition:border-color .18s, box-shadow .18s;
+    }
+    .client-card:hover { border-color:#3e2a14; box-shadow:0 4px 20px rgba(0,0,0,.07); }
+    .client-head {
+      display:flex; align-items:center; gap:1rem;
+      padding:.85rem 1.2rem; background:#fafaf9;
+    }
+    .client-avatar {
+      width:42px; height:42px; border-radius:50%;
+      background:linear-gradient(135deg,#d9c4a0,#a0856a);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; font-weight:700; color:#3e2a14; flex-shrink:0;
+    }
+    .client-info { flex:1; min-width:0; }
+    .client-email { font-weight:700; font-size:.875rem; color:#1a1a1a; }
+    .client-meta  { font-size:.76rem; color:#999; margin-top:.1rem; }
+    .client-stats { display:flex; gap:1.2rem; align-items:center; flex-shrink:0; }
+    .stat-pill {
+      text-align:center; font-size:.73rem; color:#666;
+      background:#f0f0ee; padding:.3rem .75rem; border-radius:20px;
+    }
+    .stat-pill strong { display:block; font-size:.9rem; color:#1a1a1a; }
+    .client-arrow { color:#bbb; font-size:1.1rem; margin-left:.3rem; transition:transform .2s; }
+    .client-card.open .client-arrow { transform:rotate(90deg); }
+
+    /* ── Client detail panel ── */
+    .client-detail {
+      display:none; padding:1.2rem; border-top:1px solid #f0f0f0;
+      background:#fff;
+    }
+    .client-card.open .client-detail { display:block; }
+
+    .detail-section { margin-bottom:1.2rem; }
+    .detail-section h4 { font-size:.78rem; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:.07em; margin-bottom:.65rem; }
+
+    /* ── Notify client ── */
+    .notify-box {
+      background:#fafaf7; border:1.5px solid #e8e8e0; border-radius:12px;
+      padding:1rem; margin-top:.8rem;
+    }
+    .notify-box label { font-size:.78rem; font-weight:600; color:#666; display:block; margin-bottom:.4rem; }
+    .notify-row { display:flex; gap:.6rem; }
+    .notify-input {
+      flex:1; padding:.6rem .85rem; border:1.5px solid #e0e0e0; border-radius:8px;
+      font-size:.85rem; font-family:inherit; color:#222;
+    }
+    .notify-input:focus { outline:none; border-color:#d9c4a0; }
+    .notify-btn {
+      padding:.6rem 1.1rem; background:#3e2a14; color:#d9c4a0;
+      border:none; border-radius:8px; font-size:.82rem; font-weight:700;
+      cursor:pointer; font-family:inherit; transition:background .2s; white-space:nowrap;
+    }
+    .notify-btn:hover { background:#2a1c0d; }
+    .notify-ok { font-size:.78rem; color:#16a34a; margin-top:.4rem; display:none; }
+
+    /* ── Order mini-cards ── */
+    .mini-order {
+      display:flex; align-items:center; gap:.8rem;
+      padding:.65rem .9rem; border-radius:10px; border:1.5px solid #f0f0f0;
+      margin-bottom:.5rem; font-size:.83rem;
+    }
+    .mini-order .o-id   { font-family:monospace; font-size:.72rem; color:#bbb; flex:1; }
+    .mini-order .o-items{ flex:2; color:#555; }
+    .mini-order .o-total{ font-weight:700; color:#1a1a1a; white-space:nowrap; }
+
+    /* ── Comment zone ── */
+    .comment-zone { margin-top:.5rem; }
+    .comment-input {
+      width:100%; padding:.6rem .85rem; border:1.5px solid #e0e0e0; border-radius:8px;
+      font-size:.83rem; font-family:inherit; color:#222; resize:vertical; min-height:60px;
+      box-sizing:border-box;
+    }
+    .comment-input:focus { outline:none; border-color:#d9c4a0; }
+    .comment-save {
+      margin-top:.4rem; padding:.4rem .9rem; background:#f0f0ee;
+      border:1.5px solid #e0e0e0; border-radius:8px; font-size:.78rem; font-weight:600;
+      cursor:pointer; font-family:inherit; transition:background .18s;
+    }
+    .comment-save:hover { background:#e5e5e2; }
+    .comment-saved { font-size:.75rem; color:#16a34a; margin-left:.5rem; display:none; }
+
+    /* ── Fournisseur ── */
+    .supplier-card {
+      border:1.5px solid #e8e8e8; border-radius:14px; margin-bottom:.8rem; overflow:hidden;
+      cursor:pointer; transition:border-color .18s, box-shadow .18s;
+    }
+    .supplier-card:hover { border-color:#3e2a14; box-shadow:0 4px 20px rgba(0,0,0,.07); }
+    .supplier-head {
+      display:flex; align-items:center; gap:1rem;
+      padding:.85rem 1.2rem; background:#fafaf9; border-bottom:1px solid #f0f0f0;
+    }
+    .supplier-icon { font-size:1.6rem; flex-shrink:0; }
+    .supplier-name { font-weight:700; font-size:.9rem; color:#1a1a1a; }
+    .supplier-ref  { font-size:.74rem; color:#bbb; font-family:monospace; }
+    .supplier-detail { display:none; padding:1.2rem; background:#fff; }
+    .supplier-card.open .supplier-detail { display:block; }
+    .supplier-card.open .client-arrow { transform:rotate(90deg); }
+
+    .track-row {
+      display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem;
+    }
+    .track-input {
+      flex:1; padding:.6rem .85rem; border:1.5px solid #e0e0e0; border-radius:8px;
+      font-size:.85rem; font-family:inherit; color:#222;
+    }
+    .track-input:focus { outline:none; border-color:#d9c4a0; }
+    .track-btn {
+      padding:.6rem 1rem; background:#f0f0ee; border:1.5px solid #e0e0e0;
+      border-radius:8px; font-size:.8rem; font-weight:600; cursor:pointer;
+      font-family:inherit; transition:background .18s; white-space:nowrap;
+    }
+    .track-btn:hover { background:#e0e0dc; }
+    .track-link { font-size:.8rem; color:#3e2a14; font-weight:600; text-decoration:none; }
+    .track-link:hover { text-decoration:underline; }
+
+    .help-btns { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.4rem; }
+    .help-btn {
+      padding:.45rem .95rem; border:1.5px solid #e0e0e0; border-radius:20px;
+      font-size:.78rem; font-weight:600; cursor:pointer; font-family:inherit;
+      background:#fff; color:#555; text-decoration:none;
+      transition:background .15s, border-color .15s;
+    }
+    .help-btn:hover { background:#f5f5f5; border-color:#1a1a1a; color:#1a1a1a; }
+
+    .supplier-add-btn {
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      width:100%; padding:.7rem; border:2px dashed #e0e0e0; border-radius:14px;
+      background:none; font-size:.85rem; font-weight:600; color:#bbb;
+      cursor:pointer; font-family:inherit; transition:border-color .2s, color .2s;
+      margin-top:.3rem;
+    }
+    .supplier-add-btn:hover { border-color:#3e2a14; color:#3e2a14; }
+
+    /* ── Status badge ── */
+    .order-status {
+      font-size:.7rem; font-weight:700;
+      padding:.22rem .65rem; border-radius:20px; white-space:nowrap;
+    }
+    .status-delivered  { background:#d1fae5; color:#065f46; }
+    .status-confirmed  { background:#dcfce7; color:#166534; }
+    .status-processing { background:#dbeafe; color:#1d4ed8; }
+    .status-shipped    { background:#e0f2fe; color:#0369a1; }
+    .status-pending    { background:#fef3c7; color:#92400e; }
+    .status-cancelled  { background:#fee2e2; color:#991b1b; }
+
+    /* ── Client orders (regular) ── */
+    .order-card {
+      border:1.5px solid #e8e8e8; border-radius:14px; overflow:hidden;
+      margin-bottom:1rem; cursor:pointer; transition:border-color .18s, box-shadow .18s;
+      text-decoration:none; display:block; color:inherit;
+    }
+    .order-card:hover { border-color:#1a1a1a; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+    .order-head {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 1.2rem; background:#fafaf9; border-bottom:1px solid #e8e8e8;
+      flex-wrap:wrap; gap:.5rem;
+    }
+    .order-id   { font-size:.73rem; color:#999; font-family:monospace; }
+    .order-date { font-size:.8rem; color:#999; margin-top:.1rem; }
+    .order-total{ font-weight:700; font-size:.95rem; }
+    .order-arrow{ color:#bbb; font-size:1.1rem; }
+    .order-items{ padding:.8rem 1.2rem; display:flex; flex-direction:column; gap:.45rem; }
+    .order-item { display:flex; align-items:center; gap:.65rem; font-size:.875rem; }
+    .order-item .emoji { font-size:1.2rem; }
+    .order-item .item-thumb { width:44px; height:44px; object-fit:cover; border-radius:8px; flex-shrink:0; }
+    .order-item .qty   { color:#999; font-size:.8rem; }
+
+    .empty-state { text-align:center; padding:4rem 2rem; color:#999; }
+    .empty-state .icon { font-size:3rem; margin-bottom:1rem; }
+    .empty-state a { color:#3e2a14; font-weight:600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .orders-page { padding: 5rem 1rem 3rem; }
+      .orders-page h1 { font-size: 1.5rem; }
+
+      .main-tabs { gap: .25rem; }
+      .main-tab  { padding: .45rem .85rem; font-size: .78rem; }
+
+      .client-head { padding: .75rem 1rem; gap: .65rem; }
+      .client-avatar { width: 36px; height: 36px; font-size: .95rem; }
+      .client-stats { gap: .6rem; }
+      .stat-pill { padding: .25rem .55rem; font-size: .68rem; }
+      .stat-pill strong { font-size: .82rem; }
+
+      .notify-row { flex-direction: column; }
+      .notify-btn { width: 100%; }
+
+      .order-head { padding: .75rem 1rem; }
+      .order-items { padding: .75rem 1rem; }
+
+      .mini-order { flex-wrap: wrap; gap: .4rem; }
+      .mini-order .o-items { width: 100%; }
+
+      .supplier-head { padding: .75rem 1rem; gap: .65rem; }
+      .track-row { flex-wrap: wrap; }
+      .track-input { width: 100%; }
+      .track-btn { width: 100%; }
+
+      #adminTabBar { top: 72px; }
+      #adminTabsInner { padding: .5rem 1rem; gap: .25rem; }
+    }
+
+    @media (max-width: 400px) {
+      .client-stats { display: none; }
+      .order-id, .order-date { font-size: .68rem; }
+    }
+  </style></head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Barre sticky admin (Clients / Fournisseur) — masquée pour les clients -->
+  <div id="adminTabBar" style="display:none; position:sticky; top:82px; z-index:100; background:#f7f6f3; border-bottom:1.5px solid #e8e8e0; min-height:52px;">
+    <div id="adminTabsInner" style="max-width:860px; margin:0 auto; display:flex; align-items:center; gap:.35rem; flex-wrap:wrap; padding:.6rem 1.5rem; min-height:52px;"></div>
+  </div>
+
+  <main class="orders-page">
+    <h1 id="pageTitle">Commandes</h1>
+    <p class="page-sub" id="pageSub">Chargement…</p>
+    <div id="pushBanner" style="display:none;margin-bottom:1rem;background:#f5f0e8;border:1.5px solid #d9c4a0;border-radius:12px;padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <span style="font-size:.85rem;color:#3e2a14;font-weight:600">🔔 Recevez une notification quand votre colis est expédié</span>
+      <button id="pushBtn" onclick="subscribePush()" style="padding:.45rem 1.1rem;background:#3e2a14;color:#d9c4a0;border:none;border-radius:50px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Activer</button>
+    </div>
+    <div id="mainTabs" class="main-tabs" style="display:none"></div>
+    <div id="mainContent"></div>
+  </main>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer" data-i18n="cart.close" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div></div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+  <script>
+  let user;
+  try { user = JSON.parse(localStorage.getItem('leclam_user') || ''); } catch {}
+  if (!user) { location.href = 'login.html'; }
+  const token = localStorage.getItem('leclam_token') || '';
+  const isAdmin = user.role === 'admin' || user.role === 'owner';
+  /* isClientView() est défini dans app.js (leclam_view_mode === 'client') */
+
+  let currentTab     = 'clients';
+  let currentFourTab = 'encours';
+  let allOrders      = [];
+  let _invoicesMap   = {}; /* orderId → invoice */
+  let adminMode      = null; /* déclarer explicitement pour éviter pollution globale */
+  let _initCalled    = false;
+
+  /* ──────────────────────────────────────────
+     HELPERS
+  ────────────────────────────────────────── */
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return isNaN(d) ? '—' : d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+  }
+  function statusInfo(s) {
+    return ({
+      delivered:        ['Livrée',              'status-delivered'],
+      confirmed:        ['Confirmée',           'status-confirmed'],
+      processing:       ['En préparation',      'status-processing'],
+      shipped:          ['Expédiée',            'status-shipped'],
+      pending_payment:  ['En attente',          'status-pending'],
+      pending_virement: ['Virement en attente', 'status-pending'],
+      pending_crypto:   ['Crypto en attente',   'status-pending'],
+      pending:          ['En attente',          'status-pending'],
+      cancelled:        ['Annulée',             'status-cancelled'],
+    }[s] || ['En cours','status-pending']);
+  }
+  function initials(email) {
+    return (email || '?')[0].toUpperCase();
+  }
+  function getComments() {
+    try { return JSON.parse(localStorage.getItem('leclam_client_comments') || '{}'); } catch { return {}; }
+  }
+  function saveComments(c) { localStorage.setItem('leclam_client_comments', JSON.stringify(c)); }
+  function getSuppliers() {
+    try {
+      const raw = JSON.parse(localStorage.getItem('leclam_supplier_orders') || '[]');
+      return Array.isArray(raw) ? raw : [];
+    } catch { return []; }
+  }
+  function saveSuppliers(s) { localStorage.setItem('leclam_supplier_orders', JSON.stringify(s)); }
+
+  /* ──────────────────────────────────────────
+     SWITCH TAB
+  ────────────────────────────────────────── */
+  function switchTab(tab) {
+    adminMode  = 'admin';
+    currentTab = tab;
+    document.querySelectorAll('#adminTabsInner .main-tab').forEach(t =>
+      t.classList.toggle('active', t.dataset.tab === tab)
+    );
+    document.getElementById('pageTitle').textContent = 'Commandes';
+    document.getElementById('pageSub').textContent   = 'Gestion admin';
+    document.getElementById('mainTabs').style.display = 'none';
+    document.getElementById('mainContent').innerHTML  = '';
+    if (tab === 'clients')     renderClients();
+    if (tab === 'fournisseur') renderFournisseur();
+  }
+
+
+  /* ──────────────────────────────────────────
+     ADMIN — CLIENTS
+  ────────────────────────────────────────── */
+  function renderClients() {
+    const content = document.getElementById('mainContent');
+    const byEmail = {};
+    allOrders.forEach(o => {
+      const k = o.email || 'inconnu';
+      if (!byEmail[k]) byEmail[k] = { email: k, orders: [], total: 0 };
+      byEmail[k].orders.push(o);
+      byEmail[k].total += o.total || 0;
+    });
+    const clients = Object.values(byEmail).sort((a,b) => {
+      const la = Math.max(...a.orders.map(o => new Date(o.createdAt)));
+      const lb = Math.max(...b.orders.map(o => new Date(o.createdAt)));
+      return lb - la;
+    });
+
+    if (!clients.length) {
+      content.innerHTML = `<div class="empty-state"><div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><p>Aucune commande client pour l'instant.</p></div>`;
+      return;
+    }
+
+    const comments = getComments();
+    content.innerHTML = clients.map((c, idx) => {
+      const ACTIVE   = ['pending','pending_payment','pending_virement','pending_crypto','processing','shipped'];
+      const FINISHED = ['delivered','cancelled'];
+      const encours  = c.orders.filter(o => ACTIVE.includes(o.status)).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+      const passees  = c.orders.filter(o => FINISHED.includes(o.status)).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+      const comment  = comments[c.email] || '';
+      return `
+      <div class="client-card" id="cc-${idx}">
+        <div class="client-head" onclick="toggleClient(${idx})">
+          <div class="client-avatar">${initials(c.email)}</div>
+          <div class="client-info">
+            <div class="client-email">${c.email}</div>
+            <div class="client-meta">${c.orders.length} commande${c.orders.length>1?'s':''} · ${encours.length>0?`<strong style="color:#1d4ed8">${encours.length} en cours</strong>`:'tout livré'}</div>
+          </div>
+          <div class="client-stats">
+            <div class="stat-pill"><strong>${c.total.toFixed(2).replace('.',',')} €</strong>total</div>
+            <div class="stat-pill"><strong>${c.orders.length}</strong>cmdes</div>
+          </div>
+          <span class="client-arrow">›</span>
+        </div>
+        <div class="client-detail">
+
+          <!-- Tabs En cours / Passées -->
+          <div class="main-tabs" style="margin-bottom:1rem">
+            <button class="main-tab active" id="ctab-${idx}-encours" onclick="switchClientTab(${idx},'encours')">
+              En cours <span class="tab-n">${encours.length}</span>
+            </button>
+            <button class="main-tab" id="ctab-${idx}-passees" onclick="switchClientTab(${idx},'passees')">
+              Passées <span class="tab-n">${passees.length}</span>
+            </button>
+          </div>
+          <div id="corders-${idx}">
+            ${clientOrdersHtml(encours, 'encours')}
+          </div>
+
+          <!-- Commentaire interne -->
+          <div class="detail-section" style="margin-top:1rem">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Note interne</h4>
+            <div class="comment-zone">
+              <textarea class="comment-input" id="cmt-${idx}" placeholder="Note sur ce client (visible uniquement par vous)…">${comment}</textarea>
+              <div style="display:flex;align-items:center">
+                <button class="comment-save" onclick="saveComment('${c.email}',${idx})">Enregistrer</button>
+                <span class="comment-saved" id="cmtsaved-${idx}">✓ Sauvegardé</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifier le client -->
+          <div class="detail-section">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Informer le client</h4>
+            <div class="notify-box">
+              <label>Message à envoyer</label>
+              <div class="notify-row">
+                <input type="text" class="notify-input" id="notif-${idx}" placeholder="Ex : Votre commande a été expédiée…">
+                <button class="notify-btn" onclick="notifyClient('${c.email}',${idx})">Envoyer →</button>
+              </div>
+              <div class="notify-ok" id="notifok-${idx}">✓ Message envoyé</div>
+            </div>
+          </div>
+
+        </div>
+      </div>`;
+    }).join('');
+
+    /* stocker les commandes par idx pour switchClientTab */
+    window._clientOrders = {};
+    clients.forEach((c, idx) => {
+      const ACTIVE   = ['pending','pending_payment','pending_virement','pending_crypto','processing','shipped'];
+      const FINISHED = ['delivered','cancelled'];
+      window._clientOrders[idx] = {
+        encours: c.orders.filter(o => ACTIVE.includes(o.status)).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)),
+        passees: c.orders.filter(o => FINISHED.includes(o.status)).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)),
+      };
+    });
+  }
+
+  function clientOrdersHtml(orders, tab) {
+    if (!orders.length) {
+      return `<div style="text-align:center;padding:1.5rem;color:#bbb;font-size:.85rem">
+        ${tab==='encours'?'Aucune commande en cours.':'Aucune commande passée.'}
+      </div>`;
+    }
+    if (tab === 'encours') {
+      return orders.map(o => {
+        const [label,cls] = statusInfo(o.status);
+        const isDone = ['delivered','cancelled'].includes(o.status);
+        const adminBtns = !isDone ? `
+          <div style="display:flex;gap:.3rem;flex-wrap:wrap;padding:.5rem 1.2rem .7rem">
+            ${o.status !== 'processing' ? `<button class="help-btn" style="font-size:.7rem;padding:.28rem .6rem" onclick="updateOrderStatus('${o.id}','processing')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg> En préparation</button>` : ''}
+            ${o.status !== 'shipped'    ? `<button class="help-btn" style="font-size:.7rem;padding:.28rem .6rem" onclick="updateOrderStatus('${o.id}','shipped')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Expédiée</button>` : ''}
+            <button class="help-btn" style="font-size:.7rem;padding:.28rem .6rem;color:#065f46;border-color:#86efac" onclick="updateOrderStatus('${o.id}','delivered')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Livrée</button>
+          </div>` : '';
+        return `<div class="order-card" style="cursor:default;margin-bottom:.8rem">
+          <div class="order-head">
+            <div><div class="order-id">${o.id}</div><div class="order-date">${fmtDate(o.createdAt)}</div></div>
+            <span class="order-status ${cls}">${label}</span>
+            <span class="order-total">${(o.total||0).toFixed(2).replace('.',',')} €</span>
+          </div>
+          <div class="order-items">
+            ${(o.items||[]).map(i=>`<div class="order-item">${i.img?`<img class="item-thumb" src="${i.img}" alt="${i.name}">` :`<span class="emoji">${i.emoji||'📦'}</span>`}<span>${i.name}</span><span class="qty">×${i.qty}</span></div>`).join('')}
+          </div>
+          ${miniTracking(o)}
+          ${adminBtns}
+        </div>`;
+      }).join('');
+    }
+    return orders.map(o => {
+      const [label,cls] = statusInfo(o.status);
+      return `<div class="order-card" style="cursor:default;margin-bottom:.8rem">
+        <div class="order-head">
+          <div><div class="order-id">${o.id}</div><div class="order-date">${fmtDate(o.createdAt)}</div></div>
+          <span class="order-status ${cls}">${label}</span>
+          <span class="order-total">${(o.total||0).toFixed(2).replace('.',',')} €</span>
+        </div>
+        <div class="order-items">
+          ${(o.items||[]).map(i=>`<div class="order-item">${i.img?`<img class="item-thumb" src="${i.img}" alt="${i.name}">` :`<span class="emoji">${i.emoji||'📦'}</span>`}<span>${i.name}</span><span class="qty">×${i.qty}</span></div>`).join('')}
+        </div>
+        ${miniTracking(o)}
+      </div>`;
+    }).join('');
+  }
+
+  function switchClientTab(idx, tab) {
+    ['encours','passees'].forEach(t => {
+      document.getElementById(`ctab-${idx}-${t}`)?.classList.toggle('active', t === tab);
+    });
+    const orders = (window._clientOrders[idx] || {})[tab] || [];
+    document.getElementById(`corders-${idx}`).innerHTML = clientOrdersHtml(orders, tab);
+  }
+
+  function miniOrder(o) {
+    const [label, cls] = statusInfo(o.status);
+    const items = (o.items||[]).map(i => i.img
+      ? `<img src="${i.img}" alt="${i.name}" style="width:32px;height:32px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:4px"> ${i.name} ×${i.qty}`
+      : `${i.emoji||'📦'} ${i.name} ×${i.qty}`
+    ).join('  ');
+    const isDone = ['delivered','cancelled'].includes(o.status);
+    const adminBtns = isAdmin && !isDone ? `
+      <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.35rem">
+        ${o.status !== 'processing' ? `<button class="help-btn" style="font-size:.7rem;padding:.28rem .6rem" onclick="event.stopPropagation();updateOrderStatus('${o.id}','processing')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg> En préparation</button>` : ''}
+        ${o.status !== 'shipped'    ? `<button class="help-btn" style="font-size:.7rem;padding:.28rem .6rem" onclick="event.stopPropagation();updateOrderStatus('${o.id}','shipped')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Expédiée</button>` : ''}
+        <button class="help-btn" style="font-size:.7rem;padding:.28rem .6rem;color:#065f46;border-color:#86efac" onclick="event.stopPropagation();updateOrderStatus('${o.id}','delivered')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Livrée</button>
+      </div>` : '';
+    return `<div class="mini-order" style="${isAdmin && !isDone ? 'flex-direction:column;align-items:flex-start;gap:.2rem' : ''}">
+      <div style="display:flex;align-items:center;gap:.8rem;width:100%">
+        <div class="o-id">${o.id}</div>
+        <div class="o-items">${items || '—'}</div>
+        <span class="order-status ${cls}">${label}</span>
+        <div class="o-total">${(o.total||0).toFixed(2).replace('.',',')} €</div>
+      </div>
+      ${adminBtns}
+    </div>`;
+  }
+
+  async function updateOrderStatus(orderId, newStatus) {
+    /* Mise à jour via l'API → déclenche les emails automatiques */
+    try {
+      const r = await fetch(`/api/admin/orders/${encodeURIComponent(orderId)}/status`, {
+        method:  'PATCH',
+        headers: authHeaders(),
+        body:    JSON.stringify({ status: newStatus }),
+      });
+      const d = await r.json();
+      if (d.ok) {
+        allOrders = allOrders.map(o => o.id === orderId ? { ...o, status: newStatus } : o);
+        /* Sync localStorage */
+        const stored = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+        const idx = stored.findIndex(o => o.id === orderId);
+        if (idx !== -1) { stored[idx].status = newStatus; localStorage.setItem('leclam_orders', JSON.stringify(stored)); }
+        renderClients();
+        return;
+      }
+    } catch { /* fallback ci-dessous */ }
+
+    /* Fallback localStorage si serveur inaccessible */
+    const stored = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+    const idx = stored.findIndex(o => o.id === orderId);
+    if (idx === -1) return;
+    stored[idx].status = newStatus;
+    localStorage.setItem('leclam_orders', JSON.stringify(stored));
+    allOrders = allOrders.map(o => o.id === orderId ? { ...o, status: newStatus } : o);
+    renderClients();
+  }
+
+  async function cancelOrder(orderId) {
+    /* Redirige vers la page de détail qui propose les raisons d'annulation */
+    location.href = `commande.html?id=${encodeURIComponent(orderId)}&cancel=1`;
+  }
+
+  async function modifyOrder(orderId) {
+    if (!confirm('Les articles de cette commande seront replacés dans votre panier pour modification. Continuer ?')) return;
+    const csrf = localStorage.getItem('leclam_csrf') || '';
+    const order = (window._userEncours || []).find(o => o.id === orderId);
+
+    if (order?._serverSynced) {
+      /* Commande connue du serveur → cancel officiel + avoir possible */
+      try {
+        const r = await fetch(`/api/orders/${encodeURIComponent(orderId)}/cancel`, {
+          method: 'POST',
+          headers: { ...authHeaders(), 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+          body: JSON.stringify({ reason: 'Modification de la commande' }),
+          credentials: 'same-origin',
+        });
+        const d = await r.json();
+        if (!d.ok) { alert(d.error || 'Impossible de modifier cette commande.'); return; }
+      } catch { alert('Erreur réseau. Réessayez.'); return; }
+      localStorage.setItem('leclam_modification', JSON.stringify({
+        originalOrderId: orderId, originalTotal: order?.total || 0,
+      }));
+    } else {
+      /* Commande locale uniquement → pas de cancel serveur, pas d'avoir */
+      localStorage.removeItem('leclam_modification');
+    }
+
+    /* Marque annulée dans localStorage + remet les articles dans le panier */
+    const stored = JSON.parse(localStorage.getItem('leclam_orders') || '[]');
+    const idx = stored.findIndex(o => o.id === orderId);
+    if (idx !== -1) { stored[idx].status = 'cancelled'; localStorage.setItem('leclam_orders', JSON.stringify(stored)); }
+    if (order?.items?.length) {
+      const cartItems = order.items.map(i => ({
+        id: i.id, name: i.name, price: i.price, qty: i.qty,
+        emoji: i.emoji || '📦', img: i.img || null,
+      }));
+      localStorage.setItem('leclam_cart', JSON.stringify(cartItems));
+    }
+    location.href = 'paiement.html';
+  }
+
+  function toggleClient(idx) {
+    const card = document.getElementById('cc-'+idx);
+    card.classList.toggle('open');
+  }
+
+  function saveComment(email, idx) {
+    const val = document.getElementById('cmt-'+idx).value;
+    const comments = getComments();
+    comments[email] = val;
+    saveComments(comments);
+    const ok = document.getElementById('cmtsaved-'+idx);
+    ok.style.display = 'inline';
+    setTimeout(() => { ok.style.display = 'none'; }, 2000);
+  }
+
+  function notifyClient(email, idx) {
+    const msg = document.getElementById('notif-'+idx).value.trim();
+    if (!msg) return;
+    const msgs = JSON.parse(localStorage.getItem('leclam_messages') || '[]');
+    msgs.unshift({
+      id: 'adm-' + Date.now(),
+      email,
+      type: 'system',
+      title: 'Message de Le Clam',
+      text: msg,
+      read: false,
+      createdAt: new Date().toISOString(),
+    });
+    localStorage.setItem('leclam_messages', JSON.stringify(msgs));
+    fetch('/api/messages/broadcast', {
+      method:'POST',
+      headers: authHeaders(),
+      credentials: 'same-origin',
+      body: JSON.stringify({ title:'Message de Le Clam', text:msg, type:'system' }),
+    }).catch(()=>{});
+    document.getElementById('notif-'+idx).value = '';
+    const ok = document.getElementById('notifok-'+idx);
+    ok.style.display = 'block';
+    setTimeout(() => { ok.style.display = 'none'; }, 2500);
+  }
+
+  /* ──────────────────────────────────────────
+     ADMIN — FOURNISSEUR
+  ────────────────────────────────────────── */
+  function renderFournisseur() {
+    const content = document.getElementById('mainContent');
+    const all  = getSuppliers();
+    const DONE = ['delivered','cancelled'];
+    const encours = all.reduce((acc,s,i) => { if (!DONE.includes(s.status||'pending')) acc.push({...s,_i:i}); return acc; }, []);
+    const passees = all.reduce((acc,s,i) => { if ( DONE.includes(s.status||'pending')) acc.push({...s,_i:i}); return acc; }, []);
+    const list = currentFourTab === 'encours' ? encours : passees;
+
+    content.innerHTML = `
+      <div class="main-tabs" style="margin-bottom:1.2rem">
+        <button class="main-tab ${currentFourTab==='encours'?'active':''}" onclick="switchFourTab('encours')">
+          En cours <span class="tab-n">${encours.length}</span>
+        </button>
+        <button class="main-tab ${currentFourTab==='passees'?'active':''}" onclick="switchFourTab('passees')">
+          Passées <span class="tab-n">${passees.length}</span>
+        </button>
+      </div>
+      ${list.length ? list.map(s => supplierCardHtml(s, s._i)).join('') : '<div class="empty-state"><div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 002 2h16a2 2 0 002-2V8l-7 5V8l-7 5V4a2 2 0 00-2-2H4a2 2 0 00-2 2v16z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg></div><p>Aucune commande ici.</p></div>'}
+      <button class="supplier-add-btn" onclick="addSupplier()">+ Ajouter une commande fournisseur</button>`;
+  }
+
+  function switchFourTab(tab) {
+    currentFourTab = tab;
+    renderFournisseur();
+  }
+
+  function supplierCardHtml(s, idx) {
+    return `
+      <div class="supplier-card" id="sc-${idx}">
+        <div class="supplier-head" onclick="toggleSupplier(${idx})">
+          <div class="supplier-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 002 2h16a2 2 0 002-2V8l-7 5V8l-7 5V4a2 2 0 00-2-2H4a2 2 0 00-2 2v16z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg></div>
+          <div style="flex:1;min-width:0">
+            <div class="supplier-name">${s.siteName || s.productName || s.name}</div>
+            <div class="supplier-ref">${s.name}${s.ref ? ' · ' + s.ref : ''}</div>
+          </div>
+          <span class="order-status ${statusInfo(s.status||'pending')[1]}">${statusInfo(s.status||'pending')[0]}</span>
+          <div class="client-stats" style="margin-left:.5rem">
+            <div class="stat-pill"><strong>${(s.amount||0).toFixed(2).replace('.',',')} €</strong>montant</div>
+          </div>
+          <span class="client-arrow" style="margin-left:.5rem">›</span>
+        </div>
+        <div class="supplier-detail">
+
+          <!-- Produit & identité -->
+          <div class="detail-section">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/><path d="M8 7V5a2 2 0 014 0"/></svg> Produit</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+              <div>
+                <label style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem">Nom fournisseur</label>
+                <input type="text" class="track-input" id="spname-${idx}" value="${s.productName||''}" placeholder="Ex : Blue Widget Pro">
+              </div>
+              <div>
+                <label style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem">Nom sur mon site</label>
+                <input type="text" class="track-input" id="ssname-${idx}" value="${s.siteName||''}" placeholder="Ex : Bracelet Élégance">
+              </div>
+            </div>
+            <div style="margin-top:.5rem">
+              <label style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem">Email de commande fournisseur</label>
+              <div class="track-row" style="margin-bottom:0">
+                <input type="email" class="track-input" id="semail-${idx}" value="${s.email||''}" placeholder="commandes@fournisseur.com">
+                ${s.email ? `<a class="track-link" href="mailto:${s.email}">Envoyer →</a>` : ''}
+              </div>
+            </div>
+            <div style="margin-top:.55rem">
+              <button class="comment-save" onclick="saveSupplierInfo(${idx})">Enregistrer</button>
+              <span class="comment-saved" id="sinfosaved-${idx}">✓ Sauvegardé</span>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Articles commandés</h4>
+            <div style="font-size:.85rem;color:#555;line-height:1.7">${s.items || '<em style="color:#bbb">Aucun détail renseigné</em>'}</div>
+          </div>
+          <div class="detail-section">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Suivi de livraison</h4>
+            <div class="track-row">
+              <input type="text" class="track-input" id="track-${idx}" value="${s.tracking||''}" placeholder="N° de suivi (ex : JD000000000000000000)">
+              <button class="track-btn" onclick="saveTracking(${idx})">Enregistrer</button>
+              ${s.tracking ? `<a class="track-link" href="tracking.html?num=${encodeURIComponent(s.tracking)}">📍 Suivre mon colis →</a>` : ''}
+            </div>
+            <div style="font-size:.78rem;color:#bbb">Date commande : ${s.orderedAt ? fmtDate(s.orderedAt) : '—'} &nbsp;·&nbsp; Livraison estimée : ${s.eta || '—'}</div>
+          </div>
+          <div class="detail-section">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg> Actions</h4>
+            <div class="help-btns">
+              <button class="help-btn" onclick="changeStatus(${idx},'processing')">✓ Marquer en préparation</button>
+              <button class="help-btn" onclick="changeStatus(${idx},'shipped')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Marquer expédiée</button>
+              <button class="help-btn" onclick="changeStatus(${idx},'delivered')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Marquer livrée</button>
+              <button class="help-btn" style="color:#ef4444;border-color:#fca5a5" onclick="deleteSupplier(${idx})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg> Supprimer</button>
+            </div>
+          </div>
+          <div class="detail-section">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Note</h4>
+            <textarea class="comment-input" id="snote-${idx}" placeholder="Note interne fournisseur…">${s.note||''}</textarea>
+            <div style="display:flex;align-items:center;margin-top:.4rem">
+              <button class="comment-save" onclick="saveSupplierNote(${idx})">Enregistrer</button>
+              <span class="comment-saved" id="snotesaved-${idx}">✓ Sauvegardé</span>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function toggleSupplier(idx) {
+    document.getElementById('sc-'+idx).classList.toggle('open');
+  }
+
+  function saveTracking(idx) {
+    const s = getSuppliers();
+    s[idx].tracking = document.getElementById('track-'+idx).value.trim();
+    saveSuppliers(s);
+    renderFournisseur();
+  }
+
+  function changeStatus(idx, status) {
+    const s = getSuppliers();
+    s[idx].status = status;
+    saveSuppliers(s);
+    renderFournisseur();
+  }
+
+  function deleteSupplier(idx) {
+    if (!confirm('Supprimer cette commande fournisseur ?')) return;
+    const s = getSuppliers();
+    s.splice(idx, 1);
+    saveSuppliers(s);
+    renderFournisseur();
+  }
+
+  function saveSupplierNote(idx) {
+    const s = getSuppliers();
+    s[idx].note = document.getElementById('snote-'+idx).value;
+    saveSuppliers(s);
+    const ok = document.getElementById('snotesaved-'+idx);
+    ok.style.display = 'inline';
+    setTimeout(() => { ok.style.display='none'; }, 2000);
+  }
+
+  function saveSupplierInfo(idx) {
+    const s = getSuppliers();
+    s[idx].productName = document.getElementById('spname-'+idx).value.trim();
+    s[idx].siteName    = document.getElementById('ssname-'+idx).value.trim();
+    s[idx].email       = document.getElementById('semail-'+idx).value.trim();
+    saveSuppliers(s);
+    const ok = document.getElementById('sinfosaved-'+idx);
+    ok.style.display = 'inline';
+    setTimeout(() => { ok.style.display='none'; renderFournisseur(); }, 1500);
+  }
+
+  function addSupplier() {
+    const name = prompt('Nom du fournisseur :');
+    if (!name) return;
+    const email       = prompt('Email de commande fournisseur :') || '';
+    const productName = prompt('Nom du produit (chez le fournisseur) :') || '';
+    const siteName    = prompt('Nom affiché sur mon site :') || '';
+    const ref         = prompt('Référence / ID commande :') || '';
+    const items       = prompt('Articles commandés :') || '';
+    const amount      = parseFloat(prompt('Montant (€) :') || '0');
+    const eta         = prompt('Date de livraison estimée :') || '';
+    const s = getSuppliers();
+    s.unshift({ name, email, productName, siteName, ref, items, amount, eta, status:'pending', orderedAt:new Date().toISOString(), tracking:'', note:'' });
+    saveSuppliers(s);
+    renderFournisseur();
+  }
+
+  /* ──────────────────────────────────────────
+     CLIENT NORMAL — Mes commandes
+  ────────────────────────────────────────── */
+  function renderUserOrders(orders) {
+    const ACTIVE   = ['pending_payment','pending_virement','pending_crypto','confirmed','processing','shipped','pending'];
+    const FINISHED = ['delivered','cancelled'];
+    const encours  = orders.filter(o => ACTIVE.includes(o.status));
+    const passees  = orders.filter(o => FINISHED.includes(o.status));
+
+    const tabsEl = document.getElementById('mainTabs');
+    tabsEl.style.display = 'flex';
+    tabsEl.innerHTML = `
+      <button class="main-tab active" data-tab="encours" onclick="showUserTab('encours',this)">
+        ${I18n.t('orders.ongoing')} <span class="tab-n">${encours.length}</span>
+      </button>
+      <button class="main-tab" data-tab="passees" onclick="showUserTab('passees',this)">
+        ${I18n.t('orders.past')} <span class="tab-n">${passees.length}</span>
+      </button>
+      <button class="main-tab" data-tab="parrainage" onclick="showUserTab('parrainage',this)">
+        🤝 ${I18n.t('referral.title')}
+      </button>`;
+
+    window._userEncours = encours;
+    window._userPassees = passees;
+    showUserTab('encours', tabsEl.querySelector('[data-tab="encours"]'));
+  }
+
+  function orderCardHtml(o) {
+    const [label,cls] = statusInfo(o.status);
+    const inv = _invoicesMap[o.id];
+    const invoiceSection = inv
+      ? `<div style="padding:.6rem 1.2rem .8rem;border-top:1px solid #f0ece5;background:#faf5ed">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem">
+            <div style="font-size:.78rem;color:#3e2a14">
+              🧾 <strong>${inv.invoiceNumber}</strong>
+              <span style="color:#888;font-size:.72rem;margin-left:.4rem">${new Date(inv.createdAt).toLocaleDateString('fr-FR')}</span>
+            </div>
+            ${inv.pdfAvailable
+              ? `<a href="${inv.pdfUrl}" target="_blank" rel="noopener"
+                  onclick="event.stopPropagation()"
+                  style="font-size:.75rem;padding:.28rem .75rem;background:#3e2a14;color:#d9c4a0;border-radius:6px;text-decoration:none;font-weight:700;white-space:nowrap">
+                  ⬇ Télécharger la facture
+                </a>`
+              : `<span style="font-size:.73rem;color:#aaa">PDF en cours de génération</span>`}
+          </div>
+        </div>`
+      : '';
+    const CANCELLABLE = ['pending_payment','pending_virement','pending_crypto','confirmed'];
+    const cancelBtn = CANCELLABLE.includes(o.status)
+      ? `<div style="padding:.5rem 1.2rem .7rem;border-top:1px solid #f0ece5;display:flex;gap:.5rem;flex-wrap:wrap">
+           <button onclick="event.stopPropagation();modifyOrder('${o.id}')" style="font-size:.75rem;padding:.3rem .9rem;background:#f5f0e8;border:1.5px solid #d9c4a0;color:#3e2a14;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">
+             ✏ Modifier
+           </button>
+           <button onclick="event.stopPropagation();location.href='commande.html?id=${encodeURIComponent(o.id)}&cancel=1'" style="font-size:.75rem;padding:.3rem .9rem;background:none;border:1.5px solid #fca5a5;color:#dc2626;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">
+             Annuler
+           </button>
+         </div>`
+      : o.status === 'processing'
+        ? `<div style="padding:.5rem 1.2rem .7rem;border-top:1px solid #f0ece5">
+             <span style="font-size:.73rem;color:#92400e">⚠ En cours de préparation — annulation impossible. Contactez-nous si besoin.</span>
+           </div>`
+        : '';
+    return `<div class="order-card" style="cursor:default">
+      <a href="commande.html?id=${encodeURIComponent(o.id)}" style="text-decoration:none;display:block">
+        <div class="order-head">
+          <div><div class="order-id">${o.id}</div><div class="order-date">${fmtDate(o.createdAt)}</div></div>
+          <span class="order-status ${cls}">${label}</span>
+          <span class="order-total">${(o.total||0).toFixed(2).replace('.',',')} €</span>
+          <span class="order-arrow">›</span>
+        </div>
+        <div class="order-items">
+          ${(o.items||[]).map(i=>`<div class="order-item">${i.img ? `<img class="item-thumb" src="${i.img}" alt="${i.name}">` : `<span class="emoji">${i.emoji||'📦'}</span>`}<span>${i.name}</span><span class="qty">×${i.qty}</span></div>`).join('')}
+        </div>
+      </a>
+      ${cancelBtn}
+      ${invoiceSection}
+    </div>`;
+  }
+
+  function miniTracking(order) {
+    const steps = [
+      { key: 'confirmed',  label: I18n.t('orders.status_pending_payment')||'Confirmée', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' },
+      { key: 'processing', label: I18n.t('orders.status_processing'), icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>' },
+      { key: 'shipped',    label: I18n.t('orders.status_shipped'), icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>' },
+      { key: 'delivered',  label: I18n.t('orders.status_delivered'), icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
+    ];
+    const idx = { pending_payment:0, pending:0, pending_virement:0, pending_crypto:0, processing:1, shipped:2, delivered:3 };
+    const cur = idx[order.status] ?? 0;
+    return `<div style="display:flex;align-items:center;gap:0;padding:.8rem 1.2rem .9rem;border-top:1px solid #f0f0f0;background:#fafaf9">
+      ${steps.map((s,i) => {
+        const done   = i < cur;
+        const active = i === cur;
+        const dotBg  = done ? '#d1fae5' : active ? '#dbeafe' : '#f0f0f0';
+        const dotClr = done ? '#065f46' : active ? '#1d4ed8' : '#bbb';
+        const dotBdr = done ? '#86efac' : active ? '#93c5fd' : '#e0e0e0';
+        const lineBg = done ? '#86efac' : '#e5e5e5';
+        return `
+          <div style="display:flex;align-items:center;flex:${i<steps.length-1?'1':'0'}">
+            <div title="${s.label}" style="width:28px;height:28px;border-radius:50%;background:${dotBg};border:2px solid ${dotBdr};color:${dotClr};display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;font-weight:700">
+              ${done ? '✓' : s.icon}
+            </div>
+            ${i < steps.length-1 ? `<div style="flex:1;height:2px;background:${lineBg}"></div>` : ''}
+          </div>`;
+      }).join('')}
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:0 1.2rem .7rem;font-size:.7rem;color:#999">
+      ${steps.map(s => `<span>${s.label}</span>`).join('')}
+    </div>
+    ${order.trackingNumber ? `<div style="padding:.5rem 1.2rem .8rem;font-size:.78rem;color:#0369a1">
+      ${I18n.t('orders.tracking_number')} : <strong>${order.trackingNumber}</strong>
+      <a href="tracking.html?num=${encodeURIComponent(order.trackingNumber)}" style="margin-left:.6rem;color:#3e2a14;font-weight:700">📍 ${I18n.t('checkout.track_order')} →</a>
+    </div>` : ''}`;
+  }
+
+  function showUserTab(tab, btn) {
+    document.querySelectorAll('#mainTabs .main-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    if (tab === 'parrainage') {
+      document.getElementById('mainContent').innerHTML = `
+        <div style="max-width:520px">
+          <div style="background:#fff;border-radius:14px;border:1.5px solid #ede8e0;padding:1.5rem;margin-bottom:1rem">
+            <div style="font-size:.78rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.8rem">${I18n.t('referral.your_code')}</div>
+            <div id="paraCode" style="font-family:monospace;font-size:1.8rem;font-weight:900;color:#3e2a14;letter-spacing:3px;margin-bottom:.4rem">…</div>
+            <div style="font-size:.78rem;color:#a0856a;margin-bottom:1rem">${I18n.t('referral.benefit')}</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <button onclick="navigator.clipboard.writeText(document.getElementById('paraCode').textContent).then(()=>{this.textContent='✅ '+I18n.t('orders.copied');setTimeout(()=>this.textContent='📋 '+I18n.t('orders.copy_ref'),2000)})" style="padding:.5rem 1rem;background:#3e2a14;color:#d9c4a0;border:none;border-radius:50px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit">📋 ${I18n.t('orders.copy_ref')}</button>
+              <a href="parrainage.html" style="padding:.5rem 1rem;background:#f5f0e8;color:#3e2a14;border-radius:50px;font-size:.8rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center">${I18n.t('referral.share')} →</a>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:1.5px solid #ede8e0;padding:1.2rem">
+            <div style="font-size:.78rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.6rem">${I18n.t('referral.count')}</div>
+            <div id="paraUses" style="font-size:2rem;font-weight:900;color:#3e2a14">0</div>
+            <div style="font-size:.75rem;color:#888">${I18n.t('referral.title')} · <span id="paraGains">0 €</span></div>
+          </div>
+        </div>`;
+      const tkn = localStorage.getItem('leclam_token') || '';
+      fetch('/api/referral/my-code', { headers: { 'Authorization': 'Bearer ' + tkn } })
+        .then(r => r.json()).then(d => {
+          if (!d.ok) return;
+          document.getElementById('paraCode').textContent  = d.code;
+          document.getElementById('paraUses').textContent  = d.uses;
+          document.getElementById('paraGains').textContent = (d.uses * 5) + ' €';
+        }).catch(() => {});
+      return;
+    }
+
+    const orders = tab === 'encours' ? window._userEncours : window._userPassees;
+    if (!orders.length) {
+      document.getElementById('mainContent').innerHTML = `<div class="empty-state"><div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <p>${tab==='encours'?I18n.t('orders.empty_ongoing'):I18n.t('orders.empty_past')}</p>
+        <p style="margin-top:.8rem"><a href="index.html">${I18n.t('orders.discover')}</a></p>
+      </div>`;
+      return;
+    }
+    if (tab === 'encours') {
+      document.getElementById('mainContent').innerHTML = orders.map(o => {
+        const [label,cls] = statusInfo(o.status);
+        const inv = _invoicesMap[o.id];
+        const invoiceSection = inv
+          ? `<div style="padding:.6rem 1.2rem .8rem;border-top:1px solid #f0ece5;background:#faf5ed">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem">
+                <div style="font-size:.78rem;color:#3e2a14">
+                  🧾 <strong>${inv.invoiceNumber}</strong>
+                  <span style="color:#888;font-size:.72rem;margin-left:.4rem">${new Date(inv.createdAt).toLocaleDateString('fr-FR')}</span>
+                </div>
+                ${inv.pdfAvailable
+                  ? `<a href="${inv.pdfUrl}" target="_blank" rel="noopener"
+                      onclick="event.stopPropagation()"
+                      style="font-size:.75rem;padding:.28rem .75rem;background:#3e2a14;color:#d9c4a0;border-radius:6px;text-decoration:none;font-weight:700;white-space:nowrap">
+                      ⬇ Télécharger la facture
+                    </a>`
+                  : `<span style="font-size:.73rem;color:#aaa">PDF en cours de génération</span>`}
+              </div>
+            </div>`
+          : '';
+        return `<div class="order-card" style="cursor:default">
+          <a href="commande.html?id=${encodeURIComponent(o.id)}" style="text-decoration:none;color:inherit;display:block">
+            <div class="order-head">
+              <div><div class="order-id">${o.id}</div><div class="order-date">${fmtDate(o.createdAt)}</div></div>
+              <span class="order-status ${cls}">${label}</span>
+              <span class="order-total">${(o.total||0).toFixed(2).replace('.',',')} €</span>
+              <span class="order-arrow">›</span>
+            </div>
+            <div class="order-items">
+              ${(o.items||[]).map(i=>`<div class="order-item">${i.img?`<img class="item-thumb" src="${i.img}" alt="${i.name}">` :`<span class="emoji">${i.emoji||'📦'}</span>`}<span>${i.name}</span><span class="qty">×${i.qty}</span></div>`).join('')}
+            </div>
+          </a>
+          ${miniTracking(o)}
+          ${invoiceSection}
+        </div>`;
+      }).join('');
+    } else {
+      document.getElementById('mainContent').innerHTML = orders.map(orderCardHtml).join('');
+    }
+  }
+
+  /* ──────────────────────────────────────────
+     INIT
+  ────────────────────────────────────────── */
+  async function init() {
+    /* ── Vue admin → redirection vers le hub admin ── */
+    if (isAdmin && !isClientView()) {
+      location.replace('admin.html');
+      return;
+    }
+
+    /* ── Vue client (client normal OU admin en mode client) ── */
+    document.getElementById('pageTitle').textContent = I18n.t('orders.title');
+    document.getElementById('pageSub').textContent   = `Bonjour ${user.name.split(' ')[0]}`;
+
+    /* Commandes locales (fallback affichage seulement — pas d'actions serveur) */
+    let orders = JSON.parse(localStorage.getItem('leclam_orders') || '[]')
+      .filter(o => !o.email || o.email === user.email)
+      .map(o => ({ ...o, _serverSynced: false }));
+    try {
+      const r = await fetch('/api/orders/mine', { headers:{'Authorization':'Bearer '+token} });
+      const d = await r.json();
+      if (d.ok) {
+        /* Les commandes serveur sont la source de vérité — elles écrasent les données locales */
+        const serverIds = new Set(d.orders.map(o => o.id));
+        const localOnly = orders.filter(o => !serverIds.has(o.id));
+        orders = [...d.orders.map(o => ({ ...o, _serverSynced: true })), ...localOnly];
+      }
+    } catch {}
+    /* Charger les factures du client */
+    try {
+      const ri = await fetch('/api/invoices/mine', { headers:{'Authorization':'Bearer '+token} });
+      if (ri.ok) {
+        const di = await ri.json();
+        if (di.ok) { _invoicesMap = {}; (di.invoices||[]).forEach(inv => { _invoicesMap[inv.orderId] = inv; }); }
+      }
+    } catch {}
+    orders.sort((a,b) => new Date(b.createdAt)-new Date(a.createdAt));
+    renderUserOrders(orders);
+  }
+
+  document.addEventListener('i18nApplied', () => { if (!_initCalled) { _initCalled = true; init(); } }, { once: true });
+  /* Fallback si i18nApplied ne se déclenche pas (ex : session déjà chargée) */
+  setTimeout(() => { if (!_initCalled) { _initCalled = true; init(); } }, 600);
+  </script>
+  <script src="js/chatbot.js"></script>
+  <script>
+  /* ── Notifications push ── */
+  (async function initPush() {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
+    const banner = document.getElementById('pushBanner');
+    const btn    = document.getElementById('pushBtn');
+    if (!user || !token) return;
+
+    /* Déjà autorisé → cacher la bannière */
+    if (Notification.permission === 'granted') {
+      banner.style.display = 'none';
+      ensureSubscribed();
+      return;
+    }
+    if (Notification.permission === 'denied') return; /* bloqué → ne rien afficher */
+
+    banner.style.display = 'flex';
+
+    async function ensureSubscribed() {
+      try {
+        const reg = await navigator.serviceWorker.ready;
+        const existing = await reg.pushManager.getSubscription();
+        if (existing) return; /* déjà abonné */
+        const vr = await fetch('/api/push/vapid-public');
+        const vd = await vr.json();
+        const sub = await reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(vd.publicKey),
+        });
+        await fetch('/api/push/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': localStorage.getItem('leclam_csrf') || '' },
+          body: JSON.stringify({ subscription: sub.toJSON() }),
+        });
+      } catch {}
+    }
+
+    window.subscribePush = async function () {
+      btn.textContent = '…';
+      btn.disabled = true;
+      try {
+        const perm = await Notification.requestPermission();
+        if (perm === 'granted') {
+          await ensureSubscribed();
+          banner.style.display = 'none';
+        } else {
+          btn.textContent = 'Bloqué';
+        }
+      } catch {
+        btn.textContent = 'Erreur';
+      }
+    };
+
+    function urlBase64ToUint8Array(base64String) {
+      const padding = '='.repeat((4 - base64String.length % 4) % 4);
+      const base64  = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+      const raw     = atob(base64);
+      return Uint8Array.from([...raw].map(c => c.charCodeAt(0)));
+    }
+  })();
+  </script>
+</body>
+</html>

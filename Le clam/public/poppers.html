@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poppers — Le Clam</title>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></head>
+<body class="page-plaisir">
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html"  class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"    class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"     class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+        <a href="poppers.html"  class="nav-link active">             <span class="nav-dot"></span>Poppers</a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cat-hero cat-hero-plaisir" style="position:relative;overflow:hidden;background:linear-gradient(135deg,#1a0a1e 0%,#2d1040 50%,#1a0a1e 100%);">
+    <div class="slide-particles">
+      <span class="p" style="top:15%;left:8%;--dur:7s;--delay:0s">◆</span>
+      <span class="p" style="top:60%;left:6%;--dur:9s;--delay:-2s">◇</span>
+      <span class="p" style="top:20%;left:35%;--dur:8s;--delay:-1s">▲</span>
+      <span class="p" style="top:55%;left:30%;--dur:10s;--delay:-3s">◆</span>
+      <span class="p" style="top:35%;right:12%;--dur:7s;--delay:-2s">◇</span>
+      <span class="p" style="top:65%;right:8%;--dur:9s;--delay:-1s">▲</span>
+    </div>
+    <div class="cat-hero-content">
+      <h1 class="slide-title-plaisir" style="font-size:clamp(2.5rem,7vw,5rem)">Poppers</h1>
+      <p class="cat-hero-desc" data-i18n="poppers.hero_desc">Sélection premium · Livraison discrète · Qualité garantie</p>
+    </div>
+  </section>
+
+  <!-- FILTRES -->
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <button class="f-btn f-btn-tout active" data-filter="all" data-i18n="filters.all">Tout</button>
+      <button class="f-btn" data-filter="fort" data-i18n="filters_poppers.fort">Fort</button>
+      <button class="f-btn" data-filter="doux" data-i18n="filters_poppers.doux">Doux</button>
+      <button class="f-btn" data-filter="premium" data-i18n="filters_poppers.premium">Premium</button>
+      <button class="f-btn" data-filter="lot" data-i18n="filters_poppers.lot">Lots</button>
+    </div>
+  </div>
+
+  <!-- RECHERCHE + TRI -->
+  <div class="search-bar-wrap">
+    <div class="search-row">
+      <div class="search-inner">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un produit…" autocomplete="off" data-i18n-ph="search.placeholder">
+        <button class="search-clear" id="searchClear" aria-label="Effacer" data-i18n="search.clear" data-i18n-attr="aria-label" style="display:none">✕</button>
+      </div>
+      <div class="sort-inner" id="sortInner">
+        <svg class="sort-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+        <select class="sort-inner-select" id="sortSelect" onchange="onSortChange(this)">
+          <option value="" data-i18n="filters.sort_label">Trier par</option>
+          <option value="price-asc" data-i18n="filters.sort_price_asc">Prix ↑</option>
+          <option value="price-desc" data-i18n="filters.sort_price_desc">Prix ↓</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUITS -->
+  <section class="products-wrap">
+    <div class="container">
+      <div class="products-top">
+        <h2 data-i18n="poppers.section_title">Nos Poppers</h2>
+        <span class="prod-count" id="prodCount">0 articles</span>
+      </div>
+      <p class="search-no-results" data-i18n="filters.search_no_results">Aucun produit ne correspond à votre recherche.</p>
+      <div class="products-grid" id="productsGrid">
+
+        <!-- Ajouter les produits poppers ici -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DRAWER PANIER -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+      <button class="checkout-btn" onclick="window.location.href='paiement.html'">Commander →</button>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+
+  <!-- ── Vérification de majorité ── -->
+  <div id="age-gate" style="
+    display:none;
+    position:fixed;inset:0;z-index:99999;
+    background:rgba(10,4,20,.95);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;
+  ">
+    <div style="
+      background:#120820;
+      border:1px solid #6b3fa0;
+      border-radius:20px;
+      padding:2.8rem 2.4rem;
+      max-width:420px;width:90%;
+      text-align:center;
+      box-shadow:0 24px 80px rgba(0,0,0,.8);
+    ">
+      <div style="margin-bottom:.8rem"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#d9c4a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <h2 data-i18n="poppers.adult_title" style="font-family:'Playfair Display',serif;color:#d9c4a0;font-size:1.4rem;font-weight:700;margin:0 0 .6rem">Accès réservé aux adultes</h2>
+      <p id="age-msg" style="color:#a89070;font-size:.88rem;line-height:1.65;margin:0 0 1.8rem"></p>
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <button id="age-yes" style="
+          padding:.85rem;background:#7c3aed;color:#fff;
+          border:none;border-radius:50px;font-size:.95rem;
+          font-weight:700;cursor:pointer;font-family:inherit;
+          transition:background .2s;
+        " onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
+        </button>
+        <button id="age-no" style="
+          padding:.7rem;background:transparent;color:#a89070;
+          border:1px solid #6b3fa0;border-radius:50px;font-size:.85rem;
+          font-weight:600;cursor:pointer;font-family:inherit;
+          transition:opacity .2s;
+        " onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+          <span data-i18n="poppers.age_no">Non, me ramener à l'accueil</span>
+        </button>
+      </div>
+      <p id="age-legal" style="color:#4a2d6a;font-size:.68rem;margin:1.2rem 0 0;line-height:1.5"></p>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    const AGE_MAP = {
+      'fr': { age: 18, pays: 'France / Belgique / Luxembourg' },
+      'fr-FR': { age: 18, pays: 'France' },
+      'fr-BE': { age: 18, pays: 'Belgique' },
+      'fr-LU': { age: 18, pays: 'Luxembourg' },
+      'fr-CH': { age: 18, pays: 'Suisse' },
+      'de':    { age: 18, pays: 'Allemagne / Autriche / Suisse' },
+      'it':    { age: 18, pays: 'Italie' },
+      'es':    { age: 18, pays: 'Espagne' },
+      'nl':    { age: 18, pays: 'Pays-Bas' },
+      'en':    { age: 18, pays: 'votre pays' },
+      'en-GB': { age: 18, pays: 'Royaume-Uni' },
+      'en-US': { age: 18, pays: 'États-Unis' },
+      'ko':    { age: 19, pays: 'Corée du Sud' },
+    };
+
+    const KEY     = 'leclam_age_poppers';  /* clé séparée de plaisir.html */
+    const EXPIRES = 60 * 60 * 1000;        /* 1 heure */
+    const gate    = document.getElementById('age-gate');
+
+    const lang = navigator.language || navigator.languages?.[0] || 'fr';
+    const info = AGE_MAP[lang] || AGE_MAP[lang.split('-')[0]] || { age: 18, pays: 'votre pays' };
+    const age  = info.age;
+    const pays = info.pays;
+
+    function calcAge(birthday) {
+      const b = new Date(birthday), t = new Date();
+      let a = t.getFullYear() - b.getFullYear();
+      if (t.getMonth() < b.getMonth() || (t.getMonth() === b.getMonth() && t.getDate() < b.getDate())) a--;
+      return a;
+    }
+
+    /* 1. Compte client connecté avec date de naissance → accès direct */
+    try {
+      const u = JSON.parse(localStorage.getItem('leclam_user') || 'null');
+      if (u && u.birthday && calcAge(u.birthday) >= age) return;
+    } catch {}
+
+    /* 2. Sans compte : cache 1h */
+    const stored = localStorage.getItem(KEY);
+    if (stored && Date.now() - parseInt(stored, 10) < EXPIRES) return;
+
+    /* 3. Afficher la porte (textes traduits via I18n après i18nApplied) */
+    function _showGate() {
+      const _t = k => (typeof I18n !== 'undefined') ? I18n.t(k) : k;
+      const tpl = s => s.replace(/\{\{age\}\}/g, age).replace(/\{\{country\}\}/g, pays);
+      document.getElementById('age-msg').innerHTML   = tpl(_t('poppers.age_msg'));
+      document.getElementById('age-yes').textContent = tpl(_t('poppers.age_yes'));
+      document.getElementById('age-legal').textContent = tpl(_t('poppers.age_legal'));
+      document.querySelectorAll('body > *:not(#age-gate)').forEach(el => el.style.visibility = 'hidden');
+      gate.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (typeof I18n !== 'undefined' && I18n.locale) {
+      _showGate();
+    } else {
+      document.addEventListener('i18nApplied', _showGate, { once: true });
+      /* Fallback si i18nApplied ne se déclenche jamais */
+      setTimeout(_showGate, 600);
+    }
+
+    document.getElementById('age-yes').addEventListener('click', function() {
+      localStorage.setItem(KEY, Date.now().toString());
+      gate.style.display = 'none';
+      document.body.style.overflow = '';
+      document.querySelectorAll('body > *:not(#age-gate)').forEach(el => el.style.visibility = '');
+    });
+
+    document.getElementById('age-no').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  })();
+  </script>
+
+</body>
+</html>

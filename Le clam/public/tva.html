@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyse &amp; Stats — Le Clam</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f5f4f1; color: #1a1a1a; min-height: 100vh; }
+
+    /* ── Layout ── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+    .page-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .5rem 1rem; background: #3e2a14; color: #d9c4a0;
+      border-radius: 8px; text-decoration: none; font-size: .83rem; font-weight: 600;
+      transition: opacity .15s;
+    }
+    .back-btn:hover { opacity: .8; }
+    .page-header h1 { font-size: 1.6rem; font-weight: 800; color: #1a1a1a; }
+    .page-header p  { font-size: .85rem; color: #888; margin-top: .15rem; }
+
+    /* ── Onglets ── */
+    .tabs { display: flex; gap: .3rem; margin-bottom: 1.75rem; border-bottom: 2px solid #e8e8e8; padding-bottom: 0; flex-wrap: wrap; }
+    .tab {
+      padding: .55rem 1.25rem; border: none; background: none; font-family: inherit;
+      font-size: .88rem; font-weight: 700; color: #888; cursor: pointer;
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+      transition: color .15s, border-color .15s;
+    }
+    .tab:hover { color: #3e2a14; }
+    .tab.active { color: #3e2a14; border-bottom-color: #3e2a14; }
+
+    /* ── KPI Cards ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .kpi-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 700px) { .kpi-grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .kpi-grid-3 { grid-template-columns: 1fr; } }
+    .kpi-divider {
+      grid-column: 1/-1; display: flex; align-items: center; gap: .6rem;
+      font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      color: #b0a090; margin: .2rem 0 -.1rem;
+    }
+    .kpi-divider hr { flex: 1; border: none; border-top: 1.5px dashed #e5e0d8; }
+    .kpi {
+      background: #fff; border-radius: 14px; padding: 1.2rem 1.4rem;
+      border: 1.5px solid #e8e8e8;
+    }
+    .kpi-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #aaa; margin-bottom: .4rem; }
+    .kpi-value { font-size: 1.55rem; font-weight: 800; color: #1a1a1a; }
+    .kpi-sub   { font-size: .75rem; color: #aaa; margin-top: .2rem; }
+    .kpi.accent-green  { border-color: #d1fae5; background: #f0fdf4; }
+    .kpi.accent-green .kpi-value { color: #15803d; }
+    .kpi.accent-blue   { border-color: #dbeafe; background: #eff6ff; }
+    .kpi.accent-blue .kpi-value  { color: #1d4ed8; }
+    .kpi.accent-orange { border-color: #fed7aa; background: #fff7ed; }
+    .kpi.accent-orange .kpi-value { color: #c2410c; }
+    .kpi.accent-red    { border-color: #fecaca; background: #fef2f2; }
+    .kpi.accent-red .kpi-value   { color: #dc2626; }
+    .kpi.accent-dark   { border-color: #3e2a14; background: #3e2a14; }
+    .kpi.accent-dark .kpi-label  { color: #a0856a; }
+    .kpi.accent-dark .kpi-value  { color: #d9c4a0; }
+    .kpi.accent-dark .kpi-sub    { color: #8a7055; }
+
+    /* ── Sections ── */
+    .section { background: #fff; border-radius: 16px; border: 1.5px solid #e8e8e8; margin-bottom: 1.5rem; overflow: hidden; }
+    .section-head {
+      padding: 1rem 1.4rem; border-bottom: 1px solid #f0f0f0;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem;
+    }
+    .section-head h2 { font-size: .95rem; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: .5rem; }
+    .section-body { padding: 1.2rem 1.4rem; }
+    /* ── Sections repliables ── */
+    .section-head.collapsible-head { cursor: pointer; user-select: none; }
+    .section-head.collapsible-head:hover { background: #fafafa; }
+    .section-chevron { margin-left: .5rem; flex-shrink: 0; color: #bbb; transition: transform .22s ease; }
+    .collapsed .section-chevron { transform: rotate(-90deg); }
+    .collapsible-section-body { overflow: hidden; transition: max-height .28s ease, opacity .2s ease; max-height: 9999px; opacity: 1; }
+    .collapsed .collapsible-section-body { max-height: 0 !important; opacity: 0; pointer-events: none; }
+
+    /* ── Filtre période ── */
+    .period-tabs { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .period-tab {
+      padding: .35rem .85rem; border: 1.5px solid #e5e5e5; border-radius: 20px;
+      font-size: .78rem; font-weight: 600; color: #666; background: none;
+      cursor: pointer; font-family: inherit; transition: all .15s;
+    }
+    .period-tab.active { border-color: #3e2a14; background: #3e2a14; color: #d9c4a0; }
+
+    /* ── Tables ── */
+    .tva-table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+    .tva-table th {
+      text-align: left; padding: .5rem .8rem;
+      background: #faf9f7; border-bottom: 2px solid #e8e8e8;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: #888; white-space: nowrap;
+    }
+    .tva-table th.num, .tva-table td.num { text-align: right; }
+    .tva-table td { padding: .55rem .8rem; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+    .tva-table tr:last-child td { border-bottom: none; }
+    .tva-table tr:hover td { background: #fdfcfb; }
+    .tva-table .total-row td { font-weight: 700; background: #faf9f7; border-top: 2px solid #e8e8e8; }
+    .tva-table .exempt-row td { color: #999; font-style: italic; }
+
+    .flag { font-size: 1.05rem; margin-right: .3rem; }
+    .badge-zone {
+      display: inline-block; font-size: .65rem; font-weight: 700;
+      padding: .15rem .5rem; border-radius: 20px; margin-left: .4rem;
+    }
+    .badge-ue     { background: #dbeafe; color: #1d4ed8; }
+    .badge-export { background: #f3f4f6; color: #6b7280; }
+
+    .amount-pos { color: #15803d; font-weight: 600; }
+    .amount-neg { color: #dc2626; font-weight: 600; }
+    .amount-neu { color: #1a1a1a; font-weight: 600; }
+
+    /* ── TVA déductible saisie ── */
+    .ded-grid { display: grid; grid-template-columns: 1fr 1fr auto auto auto; gap: .6rem .8rem; align-items: end; }
+    .ded-grid label { font-size: .72rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .04em; display: block; margin-bottom: .25rem; }
+    .ded-grid input, .ded-grid select {
+      width: 100%; padding: .5rem .7rem; border: 1.5px solid #e0e0e0; border-radius: 8px;
+      font-size: .85rem; font-family: inherit; color: #222; outline: none;
+      transition: border-color .15s;
+    }
+    .ded-grid input:focus, .ded-grid select:focus { border-color: #3e2a14; }
+    .btn-add {
+      padding: .5rem 1rem; background: #3e2a14; color: #d9c4a0;
+      border: none; border-radius: 8px; font-size: .83rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap; font-family: inherit;
+      transition: opacity .15s; align-self: end;
+    }
+    .btn-add:hover { opacity: .8; }
+    .btn-del {
+      padding: .3rem .6rem; background: #fee2e2; color: #dc2626;
+      border: none; border-radius: 6px; font-size: .78rem; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: opacity .15s;
+    }
+    .btn-del:hover { opacity: .8; }
+
+    /* ── Balance finale ── */
+    .balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .balance-line {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .6rem 0; border-bottom: 1px solid #f0f0f0; font-size: .88rem;
+    }
+    .balance-line:last-child { border-bottom: none; }
+    .balance-line.grand {
+      font-weight: 800; font-size: 1rem; padding-top: .8rem; margin-top: .2rem;
+      border-top: 2px solid #e8e8e8; border-bottom: none;
+    }
+
+    /* ── Toggle TVA fournisseur ── */
+    .tva-toggle {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .22rem .65rem; border-radius: 20px; font-size: .72rem; font-weight: 700;
+      border: 1.5px solid #e0d8cc; background: #f5f5f5; color: #bbb;
+      cursor: pointer; font-family: inherit; transition: all .15s; white-space: nowrap;
+    }
+    .tva-toggle.on { background: #dcfce7; border-color: #86efac; color: #16a34a; }
+    .tva-toggle:hover { border-color: #b0a090; }
+    .sup-tva-row.off td { color: #bbb; }
+    .sup-tva-row.off td:first-child { color: #999; }
+
+    /* ── Onglet Fournisseurs ── */
+    .fourn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: .85rem; margin-bottom: 1.5rem; }
+    .fourn-card {
+      background: #fff; border-radius: 14px; border: 1.5px solid #e8e8e8;
+      padding: 1.1rem 1.3rem; display: flex; flex-direction: column; gap: .4rem;
+      transition: box-shadow .15s;
+    }
+    .fourn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .fourn-card-name { font-size: .95rem; font-weight: 800; color: #1a1a1a; display: flex; align-items: center; gap: .5rem; }
+    .fourn-card-meta { font-size: .75rem; color: #888; }
+    .fourn-card-kpis { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .2rem; }
+    .fourn-kpi { font-size: .72rem; font-weight: 700; padding: .18rem .55rem; border-radius: 20px; }
+    .fourn-kpi-ca   { background: #f0fdf4; color: #15803d; border: 1px solid #d1fae5; }
+    .fourn-kpi-prod { background: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+    .fourn-kpi-marge { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+    .fourn-bar-track { height: 5px; background: #f0f0f0; border-radius: 3px; margin-top: .4rem; }
+    .fourn-bar-fill  { height: 100%; background: #3e2a14; border-radius: 3px; transition: width .4s ease; }
+
+    /* ── Onglet CA — KPI cards ── */
+    .ca-kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: .9rem; margin-bottom: 2rem; }
+    .ca-kpi {
+      background: #fff; border-radius: 14px; border: 1.5px solid #e8e8e8;
+      padding: 1.1rem 1.3rem; display: flex; flex-direction: column; gap: .15rem;
+    }
+    .ca-kpi-icon { font-size: 1.1rem; margin-bottom: .1rem; }
+    .ca-kpi-lbl  { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #aaa; }
+    .ca-kpi-val  { font-size: 1.5rem; font-weight: 800; color: #1a1a1a; line-height: 1.1; }
+    .ca-kpi-sub  { font-size: .75rem; color: #888; margin-top: .1rem; }
+    .ca-kpi.ca-accent { background: #3e2a14; border-color: #3e2a14; }
+    .ca-kpi.ca-accent .ca-kpi-lbl { color: #a0856a; }
+    .ca-kpi.ca-accent .ca-kpi-val { color: #d9c4a0; }
+    .ca-kpi.ca-accent .ca-kpi-sub { color: #8a7055; }
+    .evo-up   { color: #16a34a; font-weight: 700; }
+    .evo-down { color: #dc2626; font-weight: 700; }
+    .evo-neut { color: #888; }
+
+    /* ── Onglet Marge — Pareto ── */
+    .pareto-wrap { background: #fff; border-radius: 14px; border: 1.5px solid #e8e8e8; overflow: hidden; }
+    .pareto-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .75rem 1.1rem; border-bottom: 1px solid #f0f0f0; background: #fafaf8;
+    }
+    .pareto-stat { font-size: .78rem; color: #888; }
+    .pareto-stat strong { color: #f59e0b; font-weight: 800; }
+    .pareto-row {
+      display: flex; align-items: center; gap: .7rem;
+      padding: .5rem 1.1rem; border-bottom: 1px solid #f5f5f5; transition: background .12s;
+    }
+    .pareto-row:last-child { border-bottom: none; }
+    .pareto-row:hover { background: #fdfcfb; }
+    .pareto-row.is-top { background: #fffbf2; border-left: 3px solid #f59e0b; }
+    .pareto-row.is-top:hover { background: #fff8e8; }
+    .pareto-row.is-rest { opacity: .55; }
+    .pareto-rank { font-size: .72rem; font-weight: 800; color: #ccc; width: 1.4rem; text-align: center; flex-shrink: 0; }
+    .pareto-row.is-top .pareto-rank { color: #f59e0b; }
+    .pareto-name { flex: 1; min-width: 0; }
+    .pareto-name b { display: block; font-size: .82rem; font-weight: 600; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pareto-name span { font-size: .68rem; color: #aaa; }
+    .pareto-bar-track { width: 90px; height: 5px; background: #f0f0f0; border-radius: 3px; flex-shrink: 0; }
+    .pareto-bar-fill  { height: 100%; border-radius: 3px; background: #e0d5c5; }
+    .pareto-row.is-top .pareto-bar-fill { background: #f59e0b; }
+    .pareto-ca  { font-size: .82rem; font-weight: 700; color: #1a1a1a; white-space: nowrap; width: 4.5rem; text-align: right; flex-shrink: 0; }
+    .pareto-pct { font-size: .7rem; font-weight: 700; color: #ccc; width: 2.8rem; text-align: right; flex-shrink: 0; }
+    .pareto-row.is-top .pareto-pct { color: #f59e0b; }
+    .pareto-divider {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .35rem 1.1rem; background: #fffbf0; border-bottom: 1px solid #fde68a;
+    }
+    .pareto-divider span { font-size: .68rem; font-weight: 800; color: #d97706; text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; }
+    .pareto-divider hr { flex: 1; border: none; border-top: 1px dashed #fcd34d; }
+
+    .cat-badge { font-size: .68rem; font-weight: 700; padding: .12rem .45rem; border-radius: 20px; white-space: nowrap; display: inline-block; }
+    .cat-bebe    { background: #ffeef5; color: #b04068; }
+    .cat-plaisir { background: #eef2ff; color: #3730a3; }
+    .cat-malin   { background: #fdf4ff; color: #7e22ce; }
+
+    /* ── Empty state ── */
+    .empty { text-align: center; padding: 2.5rem; color: #aaa; font-size: .88rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .ded-grid { grid-template-columns: 1fr 1fr; }
+      .ded-grid .btn-add { grid-column: 1/-1; }
+      .balance-grid { grid-template-columns: 1fr; }
+      .tva-table { font-size: .78rem; }
+      .tva-table th, .tva-table td { padding: .4rem .5rem; }
+      .fourn-grid { grid-template-columns: 1fr; }
+      .ca-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .pareto-bar-track { width: 50px; }
+    }
+    @media (max-width: 480px) {
+      .ca-kpi-grid { grid-template-columns: 1fr 1fr; }
+      .tabs { gap: .2rem; }
+      .tab { padding: .45rem .85rem; font-size: .8rem; }
+    }
+  </style></head>
+<body>
+
+<div class="page">
+
+  <div class="page-header">
+    <a href="admin.html" class="back-btn">← Admin</a>
+    <div>
+      <h1 style="display:flex;align-items:center;gap:.45rem">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analyse
+      </h1>
+      <p id="periodLabel">Chargement des données…</p>
+    </div>
+    <div class="period-tabs" style="margin-left:auto" id="periodTabsWrap">
+      <button class="period-tab" onclick="setPeriod('month')">Ce mois</button>
+      <button class="period-tab" onclick="setPeriod('quarter')">Ce trimestre</button>
+      <button class="period-tab" onclick="setPeriod('year')">Cette année</button>
+      <button class="period-tab active" onclick="setPeriod('all')">Tout</button>
+    </div>
+  </div>
+
+  <!-- Onglets de navigation -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('tva')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.35rem;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      TVA
+    </button>
+    <button class="tab" onclick="showTab('fournisseur')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.35rem;vertical-align:-2px"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      Fournisseurs
+    </button>
+    <button class="tab" onclick="showTab('ca')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.35rem;vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      CA
+    </button>
+    <button class="tab" onclick="showTab('marge')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.35rem;vertical-align:-2px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Marge
+    </button>
+    <button class="tab" onclick="showTab('stats')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.35rem;vertical-align:-2px"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Stats commandes
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ONGLET TVA
+  ══════════════════════════════════════ -->
+  <div id="tab-tva">
+
+    <!-- KPI -->
+    <div class="kpi-grid-3" id="kpiGridTVA" style="margin-bottom:2rem">
+
+      <!-- Ventes -->
+      <div class="kpi-divider" style="color:#3e2a14"><span>Ventes</span><hr></div>
+
+      <div class="kpi accent-dark">
+        <div class="kpi-label">CA TTC total</div>
+        <div class="kpi-value" id="kpiCaTTC">—</div>
+        <div class="kpi-sub" id="kpiCaTTCSub">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">CA HT total</div>
+        <div class="kpi-value" id="kpiCaHT">—</div>
+        <div class="kpi-sub">Ventes hors TVA</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">TVA collectée totale</div>
+        <div class="kpi-value" id="kpiCollectee">—</div>
+        <div class="kpi-sub" id="kpiCollecteeSub">—</div>
+      </div>
+
+      <!-- Achats -->
+      <div class="kpi-divider" style="color:#15803d"><span>Achats</span><hr></div>
+
+      <div class="kpi accent-blue">
+        <div class="kpi-label">Total achats HT</div>
+        <div class="kpi-value" id="kpiAchatHT">—</div>
+        <div class="kpi-sub">Base déductible fournisseurs</div>
+      </div>
+      <div class="kpi accent-green">
+        <div class="kpi-label">TVA déductible</div>
+        <div class="kpi-value" id="kpiDeductible">—</div>
+        <div class="kpi-sub">Fournisseurs + autres achats</div>
+      </div>
+      <div class="kpi accent-orange">
+        <div class="kpi-label">TVA nette à reverser</div>
+        <div class="kpi-value" id="kpiNette">—</div>
+        <div class="kpi-sub" id="kpiNetteSub">—</div>
+      </div>
+
+      <!-- Pour le JS existant — éléments masqués conservés -->
+      <span id="kpiUE" style="display:none"></span>
+      <span id="kpiUESub" style="display:none"></span>
+
+    </div>
+
+    <!-- TVA collectée par pays -->
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> TVA collectée par pays</h2>
+        <span style="font-size:.78rem;color:#aaa">Basé sur les commandes reçues</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tva-table">
+          <thead><tr>
+            <th>Pays client</th><th>Zone</th><th>Déclaration</th>
+            <th class="num">Commandes</th><th class="num">CA TTC</th>
+            <th class="num">CA HT</th><th class="num">Taux</th>
+            <th class="num">TVA collectée</th>
+          </tr></thead>
+          <tbody id="tvaBody"><tr><td colspan="8" class="empty">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TVA déductible fournisseurs -->
+    <div class="section" id="secTvaFourn">
+      <div class="section-head collapsible-head" onclick="toggleTvaSection('secTvaFourn')">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> TVA déductible — Achats fournisseurs</h2>
+        <span style="display:flex;align-items:center;gap:.6rem">
+          <span style="font-size:.78rem;color:#aaa">🇫🇷 France → déductible · 🇪🇺 UE → autoliquidation · 🌍 Hors UE → aucune</span>
+          <svg class="section-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </div>
+      <div class="collapsible-section-body">
+        <div style="overflow-x:auto">
+          <table class="tva-table">
+            <thead><tr>
+              <th>Fournisseur</th><th>Pays</th><th>Régime TVA</th>
+              <th class="num">Produits</th><th class="num">Total achats HT</th>
+              <th class="num">Taux</th><th class="num">TVA déductible</th>
+              <th style="text-align:center">Activer</th>
+            </tr></thead>
+            <tbody id="supTvaBody"><tr><td colspan="8" class="empty">Chargement…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TVA déductible manuelle -->
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg> TVA déductible — Achats &amp; frais</h2>
+        <span style="font-size:.78rem;color:#aaa">Saisie manuelle · stocké en local</span>
+      </div>
+      <div class="section-body">
+        <div class="ded-grid" style="margin-bottom:1.2rem">
+          <div>
+            <label>Libellé</label>
+            <input type="text" id="dedLabel" placeholder="Achats fournisseur avril…">
+          </div>
+          <div>
+            <label>Pays fournisseur</label>
+            <select id="dedCountry">
+              <option value="FR">🇫🇷 France (20%)</option>
+              <option value="BE">🇧🇪 Belgique (21%)</option>
+              <option value="DE">🇩🇪 Allemagne (19%)</option>
+              <option value="IT">🇮🇹 Italie (22%)</option>
+              <option value="ES">🇪🇸 Espagne (21%)</option>
+              <option value="NL">🇳🇱 Pays-Bas (21%)</option>
+              <option value="PT">🇵🇹 Portugal (23%)</option>
+              <option value="LU">🇱🇺 Luxembourg (17%)</option>
+            </select>
+          </div>
+          <div>
+            <label>Montant HT (€)</label>
+            <input type="number" id="dedHT" placeholder="1 200,00" min="0" step="0.01">
+          </div>
+          <div>
+            <label>TVA (€) — calculée auto</label>
+            <input type="number" id="dedTVA" placeholder="240,00" min="0" step="0.01" readonly style="background:#f9f9f7;color:#888">
+          </div>
+          <div>
+            <button class="btn-add" onclick="addDeductible()">+ Ajouter</button>
+          </div>
+        </div>
+        <table class="tva-table" id="dedTable">
+          <thead><tr>
+            <th>Libellé</th><th>Pays</th><th class="num">Taux</th>
+            <th class="num">Montant HT</th><th class="num">TVA déductible</th><th></th>
+          </tr></thead>
+          <tbody id="dedBody">
+            <tr><td colspan="6" class="empty">Aucune entrée. Ajoutez vos factures fournisseurs.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Balance TVA -->
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg> Balance TVA</h2>
+      </div>
+      <div class="section-body">
+        <div class="balance-grid">
+          <div>
+            <div class="balance-line"><span>TVA collectée (UE)</span><span class="amount-pos" id="balCollecteeUE">0,00 €</span></div>
+            <div class="balance-line"><span>TVA collectée (France uniquement)</span><span class="amount-pos" id="balCollecteeFR">0,00 €</span></div>
+            <div class="balance-line"><span>Ventes export (exonérées)</span><span style="color:#999" id="balExport">0,00 €</span></div>
+          </div>
+          <div>
+            <div class="balance-line"><span>TVA déductible fournisseurs</span><span class="amount-neg" id="balSupTva">0,00 €</span></div>
+            <div class="balance-line"><span>TVA déductible autres achats</span><span class="amount-neg" id="balDeductible">0,00 €</span></div>
+            <div class="balance-line grand"><span>TVA nette à reverser</span><span id="balNette">0,00 €</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-tva -->
+
+  <!-- ══════════════════════════════════════
+       ONGLET FOURNISSEURS
+  ══════════════════════════════════════ -->
+  <div id="tab-fournisseur" style="display:none">
+
+    <div class="kpi-grid" id="kpiFourn">
+      <div class="kpi"><div class="kpi-label">Fournisseurs actifs</div><div class="kpi-value" id="fournCount">—</div><div class="kpi-sub" id="fournProdsSub">—</div></div>
+      <div class="kpi accent-green"><div class="kpi-label">CA total</div><div class="kpi-value" id="fournCA">—</div><div class="kpi-sub" id="fournCASub">—</div></div>
+      <div class="kpi accent-orange"><div class="kpi-label">Marge brute</div><div class="kpi-value" id="fournMarge">—</div><div class="kpi-sub" id="fournMargeSub">—</div></div>
+      <div class="kpi accent-dark"><div class="kpi-label">Coefficient moyen</div><div class="kpi-value" id="fournCoeff">—</div><div class="kpi-sub">Prix vente / prix achat</div></div>
+    </div>
+
+    <!-- Alertes fournisseurs -->
+    <div id="fournAlertes" style="display:none;margin-bottom:1.5rem"></div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Fournisseurs</h2>
+        <span style="font-size:.78rem;color:#aaa">CA et marge sur les commandes</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tva-table">
+          <thead><tr>
+            <th>Fournisseur</th><th>Pays</th>
+            <th class="num">Produits</th>
+            <th class="num">CA</th><th class="num">Part CA</th>
+            <th class="num">Marge</th><th class="num">Taux</th>
+            <th class="num">Coeff. ×</th>
+          </tr></thead>
+          <tbody id="fournTableBody"><tr><td colspan="8" class="empty">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tab-fournisseur -->
+
+  <!-- ══════════════════════════════════════
+       ONGLET CA
+  ══════════════════════════════════════ -->
+  <div id="tab-ca" style="display:none">
+
+    <div class="ca-kpi-grid" id="caKpiGrid">
+      <div class="empty" style="grid-column:1/-1">Chargement…</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> CA par catégorie</h2>
+        <span style="font-size:.78rem;color:#aaa">Basé sur les commandes</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tva-table">
+          <thead><tr>
+            <th>Catégorie</th>
+            <th class="num">Commandes</th><th class="num">Unités</th>
+            <th class="num">CA TTC</th><th class="num">Part</th>
+          </tr></thead>
+          <tbody id="caCatBody"><tr><td colspan="5" class="empty">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> Top clients</h2>
+        <span style="font-size:.78rem;color:#aaa">Par CA sur toute la période</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tva-table">
+          <thead><tr>
+            <th>Client</th>
+            <th class="num">Commandes</th>
+            <th class="num">CA total</th>
+            <th class="num">Panier moyen</th>
+          </tr></thead>
+          <tbody id="caClientBody"><tr><td colspan="4" class="empty">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tab-ca -->
+
+  <!-- ══════════════════════════════════════
+       ONGLET MARGE
+  ══════════════════════════════════════ -->
+  <div id="tab-marge" style="display:none">
+
+    <div class="kpi-grid" style="margin-bottom:2rem" id="margeKpiGrid">
+      <div class="kpi"><div class="kpi-label">CA total</div><div class="kpi-value" id="margeCA">—</div><div class="kpi-sub" id="margeCASub">—</div></div>
+      <div class="kpi accent-green"><div class="kpi-label">Marge brute</div><div class="kpi-value" id="margeBrute">—</div><div class="kpi-sub" id="margeBruteSub">—</div></div>
+      <div class="kpi accent-orange"><div class="kpi-label">Taux de marge</div><div class="kpi-value" id="margeTaux">—</div><div class="kpi-sub">CA - prix achat</div></div>
+      <div class="kpi accent-blue"><div class="kpi-label">Produits avec coût</div><div class="kpi-value" id="margeProds">—</div><div class="kpi-sub">prix achat renseigné</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Top produits — Loi 20/80</h2>
+        <span class="pareto-stat" id="paretoHeadStat">—</span>
+      </div>
+      <div class="pareto-wrap" style="border:none;border-radius:0">
+        <div id="paretoBody">
+          <div class="empty">Chargement…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Marge par catégorie</h2>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tva-table">
+          <thead><tr>
+            <th>Catégorie</th>
+            <th class="num">Produits</th><th class="num">CA</th>
+            <th class="num">Coût achats</th><th class="num">Marge</th>
+            <th class="num">Taux marge</th>
+          </tr></thead>
+          <tbody id="margeCatBody"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tab-marge -->
+
+  <!-- ══════════════════════════════════════
+       ONGLET STATS COMMANDES
+  ══════════════════════════════════════ -->
+  <div id="tab-stats" style="display:none">
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.2rem" id="statsPeriodBar">
+      <button class="period-tab" onclick="setStatsPeriod(7)">7 jours</button>
+      <button class="period-tab active" onclick="setStatsPeriod(30)">30 jours</button>
+      <button class="period-tab" onclick="setStatsPeriod(90)">90 jours</button>
+      <button class="period-tab" onclick="setStatsPeriod(365)">1 an</button>
+      <button class="period-tab" onclick="setStatsPeriod(0)">Tout</button>
+    </div>
+
+    <!-- KPIs -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.85rem;margin-bottom:1.2rem">
+      <div class="section" style="margin:0;padding:1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem">CA encaissé</div>
+        <div style="font-size:1.5rem;font-weight:800" id="sCA">—</div>
+        <div style="font-size:.72rem;color:#bbb;margin-top:.2rem" id="sCASub"></div>
+      </div>
+      <div class="section" style="margin:0;padding:1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem">Commandes</div>
+        <div style="font-size:1.5rem;font-weight:800" id="sNb">—</div>
+        <div style="font-size:.72rem;color:#bbb;margin-top:.2rem" id="sNbSub"></div>
+      </div>
+      <div class="section" style="margin:0;padding:1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem">Panier moyen</div>
+        <div style="font-size:1.5rem;font-weight:800" id="sAvg">—</div>
+      </div>
+      <div class="section" style="margin:0;padding:1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem">Livrées</div>
+        <div style="font-size:1.5rem;font-weight:800" id="sDel">—</div>
+        <div style="font-size:.72rem;color:#bbb;margin-top:.2rem" id="sDelSub"></div>
+      </div>
+      <div class="section" style="margin:0;padding:1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem">Annulées</div>
+        <div style="font-size:1.5rem;font-weight:800" id="sCan">—</div>
+        <div style="font-size:.72rem;color:#bbb;margin-top:.2rem" id="sCanSub"></div>
+      </div>
+    </div>
+
+    <!-- Graphique CA -->
+    <div class="section" style="margin-bottom:1rem">
+      <div class="section-head"><h2>📈 Chiffre d'affaires</h2></div>
+      <div class="section-body"><canvas id="statsChartCA" height="70"></canvas></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div class="section" style="margin:0">
+        <div class="section-head"><h2>🔵 Statuts</h2></div>
+        <div class="section-body"><canvas id="statsChartStatus" height="180"></canvas></div>
+      </div>
+      <div class="section" style="margin:0">
+        <div class="section-head"><h2>💳 Paiements</h2></div>
+        <div class="section-body"><canvas id="statsChartPay" height="180"></canvas></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="section" style="margin:0">
+        <div class="section-head"><h2>🏆 Top produits</h2></div>
+        <div class="section-body"><ul id="sTopList" style="list-style:none;display:flex;flex-direction:column;gap:.5rem"></ul></div>
+      </div>
+      <div class="section" style="margin:0">
+        <div class="section-head"><h2>🕐 Dernières commandes</h2></div>
+        <div class="section-body" style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:.78rem">
+            <thead><tr style="color:#999;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em">
+              <th style="text-align:left;padding:.3rem .5rem;border-bottom:1.5px solid #f0f0f0">ID</th>
+              <th style="text-align:left;padding:.3rem .5rem;border-bottom:1.5px solid #f0f0f0">Email</th>
+              <th style="text-align:right;padding:.3rem .5rem;border-bottom:1.5px solid #f0f0f0">Total</th>
+              <th style="text-align:left;padding:.3rem .5rem;border-bottom:1.5px solid #f0f0f0">Statut</th>
+              <th style="text-align:left;padding:.3rem .5rem;border-bottom:1.5px solid #f0f0f0">Date</th>
+            </tr></thead>
+            <tbody id="sRecentBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Paniers abandonnés -->
+    <div class="section" style="margin-top:1rem">
+      <div class="section-head"><h2>🛒 Paniers abandonnés (&gt;24h)</h2></div>
+      <div class="section-body">
+        <div id="abandonedList" style="font-size:.82rem;color:#bbb">Chargement…</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-stats -->
+
+</div>
+
+<script>
+if (new URLSearchParams(location.search).has('embed')) {
+  const _tb = document.querySelector('.top-bar'); if (_tb) _tb.style.display = 'none';
+  const _notifyH = () => { try { window.parent.postMessage({ type: 'iframeResize', h: document.documentElement.scrollHeight }, '*'); } catch(e){} };
+  new MutationObserver(_notifyH).observe(document.body, { childList: true, subtree: true, attributes: false });
+  /* Supprime le padding/max-width internes en mode embed */
+  const _es = document.createElement('style');
+  _es.textContent = '.page,.top{padding-left:0!important;padding-right:0!important;max-width:none!important;margin:0!important}body{padding-left:0!important;padding-right:0!important;background:transparent!important}';
+  document.head.appendChild(_es);
+}
+
+const TVA_COLLAPSE_KEY = 'leclam_tva_collapsed';
+function toggleTvaSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('collapsed');
+  const saved = JSON.parse(localStorage.getItem(TVA_COLLAPSE_KEY) || '{}');
+  saved[id] = el.classList.contains('collapsed');
+  localStorage.setItem(TVA_COLLAPSE_KEY, JSON.stringify(saved));
+}
+function restoreTvaSections() {
+  const saved = JSON.parse(localStorage.getItem(TVA_COLLAPSE_KEY) || '{}');
+  Object.keys(saved).forEach(id => {
+    if (saved[id]) { const el = document.getElementById(id); if (el) el.classList.add('collapsed'); }
+  });
+}
+
+function adminHeaders() {
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+}
+
+/* ── Onglets ── */
+function showTab(name) {
+  ['tva','fournisseur','ca','marge','stats'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? '' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach((btn, i) => {
+    btn.classList.toggle('active', ['tva','fournisseur','ca','marge','stats'][i] === name);
+  });
+  const periodWrap = document.getElementById('periodTabsWrap');
+  if (periodWrap) periodWrap.style.display = name === 'tva' ? '' : 'none';
+  if (name === 'fournisseur' && !document.getElementById('fournTableBody').dataset.loaded) renderFournisseur();
+  if (name === 'ca')    renderCA();
+  if (name === 'marge') renderMarge();
+  if (name === 'stats') { loadStats(); loadAbandonedCarts(); }
+}
+
+/* ── Stats commandes ── */
+let _statsOrders = null, _statsPeriod = 30;
+let _sChartCA, _sChartStatus, _sChartPay;
+
+const _fmt  = n => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+const _fmtS = n => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(n);
+const _STATUS_LBL = {processing:'Préparation',shipped:'Expédiée',delivered:'Livrée',cancelled:'Annulée',pending_payment:'En attente',pending_virement:'Virement',pending_sepa:'SEPA',pending_crypto:'Crypto'};
+const _PAY_LBL    = {stripe_card:'Carte',paypal:'PayPal',crypto_BTC:'Bitcoin',crypto_ETH:'Ethereum',crypto_USDT:'USDT',crypto_SOL:'Solana',virement:'Virement',sepa_debit:'SEPA',apple_pay:'Apple Pay'};
+
+function setStatsPeriod(days) {
+  _statsPeriod = days;
+  document.querySelectorAll('#statsPeriodBar .period-tab').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('#statsPeriodBar .period-tab');
+  const idx  = [7,30,90,365,0].indexOf(days);
+  if (btns[idx]) btns[idx].classList.add('active');
+  renderStats();
+}
+
+async function loadAbandonedCarts() {
+  const el = document.getElementById('abandonedList');
+  if (!el) return;
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  try {
+    const r = await fetch('/api/admin/abandoned-carts', { headers: { 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf } });
+    const d = await r.json();
+    const carts = d.carts || [];
+    if (!carts.length) { el.innerHTML = '<span style="color:#bbb">Aucun panier abandonné détecté pour l\'instant.</span>'; return; }
+    el.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:.8rem">
+      <thead><tr style="color:#999;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em">
+        <th style="text-align:left;padding:.3rem .6rem;border-bottom:1.5px solid #f0f0f0">Email</th>
+        <th style="text-align:left;padding:.3rem .6rem;border-bottom:1.5px solid #f0f0f0">Articles</th>
+        <th style="text-align:right;padding:.3rem .6rem;border-bottom:1.5px solid #f0f0f0">Total</th>
+        <th style="text-align:left;padding:.3rem .6rem;border-bottom:1.5px solid #f0f0f0">Abandonné le</th>
+        <th style="text-align:left;padding:.3rem .6rem;border-bottom:1.5px solid #f0f0f0">Relance</th>
+      </tr></thead>
+      <tbody>${carts.map(c => `<tr>
+        <td style="padding:.5rem .6rem;border-bottom:1px solid #f8f5f0">${c.email}</td>
+        <td style="padding:.5rem .6rem;border-bottom:1px solid #f8f5f0;color:#555">${(c.items||[]).map(i=>`${i.emoji||'📦'} ${i.name} x${i.qty}`).join(', ')}</td>
+        <td style="padding:.5rem .6rem;border-bottom:1px solid #f8f5f0;font-weight:700;text-align:right">${(c.total||0).toFixed(2)} €</td>
+        <td style="padding:.5rem .6rem;border-bottom:1px solid #f8f5f0;color:#aaa">${new Date(c.savedAt).toLocaleDateString('fr-FR')}</td>
+        <td style="padding:.5rem .6rem;border-bottom:1px solid #f8f5f0">${c.reminderSentAt ? '<span style="color:#16a34a;font-weight:600">✓ Envoyée</span>' : '<span style="color:#f59e0b;font-weight:600">En attente</span>'}</td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+  } catch { el.innerHTML = '<span style="color:#c00">Erreur de chargement</span>'; }
+}
+
+async function loadStats() {
+  if (_statsOrders) { renderStats(); return; }
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  try {
+    const r = await fetch('/api/orders', { headers: {'Authorization':'Bearer '+token,'X-CSRF-Token':csrf} });
+    const d = await r.json();
+    _statsOrders = (d.orders || []).sort((a,b) => new Date(b.createdAt)-new Date(a.createdAt));
+  } catch { _statsOrders = []; }
+  renderStats();
+}
+
+function _filterStats(orders) {
+  if (!_statsPeriod) return orders;
+  const since = Date.now() - _statsPeriod * 864e5;
+  return orders.filter(o => new Date(o.createdAt).getTime() >= since);
+}
+
+function renderStats() {
+  const filtered = _filterStats(_statsOrders || []);
+  const paid = filtered.filter(o => !['cancelled','pending_payment'].includes(o.status));
+  const ca   = paid.reduce((s,o) => s+(o.total||0), 0);
+  const avg  = paid.length ? ca/paid.length : 0;
+  const del  = filtered.filter(o => o.status==='delivered').length;
+  const can  = filtered.filter(o => o.status==='cancelled').length;
+
+  document.getElementById('sCA').textContent   = _fmt(ca);
+  document.getElementById('sNb').textContent   = filtered.length;
+  document.getElementById('sAvg').textContent  = _fmtS(avg);
+  document.getElementById('sDel').textContent  = del;
+  document.getElementById('sCan').textContent  = can;
+  document.getElementById('sCASub').textContent  = paid.length+' payées';
+  document.getElementById('sNbSub').textContent  = 'dont '+paid.length+' payées';
+  document.getElementById('sDelSub').textContent = paid.length ? Math.round(del/paid.length*100)+'% livrées' : '';
+  document.getElementById('sCanSub').textContent = filtered.length ? Math.round(can/filtered.length*100)+'% annulées' : '';
+
+  /* Graphique CA */
+  const days = _statsPeriod || 30;
+  const buckets = {};
+  const now = Date.now();
+  for (let i=days-1;i>=0;i--) {
+    const k = new Date(now-i*864e5).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});
+    buckets[k] = 0;
+  }
+  paid.forEach(o => { const k=new Date(o.createdAt).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'}); if(k in buckets) buckets[k]+=(o.total||0); });
+  if (_sChartCA) _sChartCA.destroy();
+  _sChartCA = new Chart(document.getElementById('statsChartCA'),{
+    type:'line',
+    data:{labels:Object.keys(buckets),datasets:[{label:'CA (€)',data:Object.values(buckets),fill:true,backgroundColor:'rgba(62,42,20,.07)',borderColor:'#3e2a14',borderWidth:2,pointRadius:days<=30?3:0,tension:.35}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>_fmt(v)}},x:{ticks:{maxTicksLimit:8}}}}
+  });
+
+  /* Donut statuts */
+  const sCounts={};
+  filtered.forEach(o=>sCounts[o.status]=(sCounts[o.status]||0)+1);
+  if (_sChartStatus) _sChartStatus.destroy();
+  _sChartStatus = new Chart(document.getElementById('statsChartStatus'),{
+    type:'doughnut',
+    data:{labels:Object.keys(sCounts).map(s=>_STATUS_LBL[s]||s),datasets:[{data:Object.values(sCounts),backgroundColor:['#3e2a14','#c8a87a','#27ae60','#e74c3c','#f39c12','#2980b9','#8e44ad','#95a5a6'],borderWidth:0}]},
+    options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},cutout:'60%'}
+  });
+
+  /* Donut paiements */
+  const pCounts={};
+  paid.forEach(o=>{const pm=o.paymentMethod||'inconnu';pCounts[pm]=(pCounts[pm]||0)+1;});
+  if (_sChartPay) _sChartPay.destroy();
+  _sChartPay = new Chart(document.getElementById('statsChartPay'),{
+    type:'doughnut',
+    data:{labels:Object.keys(pCounts).map(p=>_PAY_LBL[p]||p),datasets:[{data:Object.values(pCounts),backgroundColor:['#1a6b3c','#003087','#F7931A','#627EEA','#26A17B','#9945FF','#3e2a14','#1d4ed8'],borderWidth:0}]},
+    options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},cutout:'60%'}
+  });
+
+  /* Top produits */
+  const qty={};
+  paid.forEach(o=>(o.items||[]).forEach(i=>{const n=i.name||i.id;qty[n]=(qty[n]||0)+(i.qty||1);}));
+  const sorted=Object.entries(qty).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max=sorted[0]?.[1]||1;
+  document.getElementById('sTopList').innerHTML = sorted.length
+    ? sorted.map(([n,q],i)=>`<li style="display:flex;align-items:center;gap:.6rem;font-size:.8rem"><span style="width:18px;font-weight:800;color:#c8a87a;font-size:.72rem">${i+1}</span><span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600">${n}</span><span style="width:70px;height:5px;background:#f0ebe3;border-radius:3px;flex-shrink:0"><span style="display:block;height:100%;width:${Math.round(q/max*100)}%;background:#3e2a14;border-radius:3px"></span></span><span style="font-weight:700;color:#3e2a14;font-size:.75rem;width:25px;text-align:right">${q}</span></li>`).join('')
+    : '<li style="color:#bbb;font-size:.82rem">Aucune donnée</li>';
+
+  /* Commandes récentes */
+  const STATUS_COLORS = {processing:'#dbeafe:#1d4ed8',shipped:'#ede9fe:#6d28d9',delivered:'#dcfce7:#15803d',cancelled:'#fee2e2:#dc2626',pending_payment:'#fef9c3:#a16207',pending_virement:'#fef9c3:#a16207',pending_sepa:'#fef9c3:#a16207',pending_crypto:'#f3e8ff:#7c3aed'};
+  document.getElementById('sRecentBody').innerHTML = (_statsOrders||[]).slice(0,10).map(o=>{
+    const [bg,col]=(STATUS_COLORS[o.status]||'#f3f4f6:#6b7280').split(':');
+    return `<tr>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #f8f5f0;font-family:monospace;font-size:.72rem;color:#999">${(o.id||'').slice(0,10)}</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #f8f5f0;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.email||'—'}</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #f8f5f0;text-align:right;font-weight:700">${_fmtS(o.total||0)}</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #f8f5f0"><span style="background:${bg};color:${col};font-size:.68rem;font-weight:700;padding:.12rem .45rem;border-radius:20px">${_STATUS_LBL[o.status]||o.status}</span></td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #f8f5f0;color:#aaa;font-size:.75rem">${o.createdAt?new Date(o.createdAt).toLocaleDateString('fr-FR'):'—'}</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="5" style="text-align:center;color:#bbb;padding:1.5rem">Aucune commande</td></tr>';
+}
+
+/* ── TVA Rates ──
+   Ventes : taux du pays de destination (régime OSS B2C depuis juil. 2021)
+   France = DGFiP  |  UE hors France = OSS  |  Hors UE = exonéré export
+   Achats : seule la TVA FR (20%) est directement déductible.
+            Achats UE B2B → autoliquidation (déclaré des deux côtés, net 0).
+            Achats hors UE → aucune TVA UE déductible. ── */
+const TVA_RATES = {
+  /* France */
+  FR: 0.20,
+  /* UE — OSS */
+  AT: 0.20, BE: 0.21, BG: 0.20, CY: 0.19, CZ: 0.21,
+  DE: 0.19, DK: 0.25, EE: 0.22, ES: 0.21, FI: 0.25,
+  GR: 0.24, HR: 0.25, HU: 0.27, IE: 0.23, IT: 0.22,
+  LT: 0.21, LU: 0.17, LV: 0.21, MT: 0.18, NL: 0.21,
+  PL: 0.23, PT: 0.23, RO: 0.19, SE: 0.25, SI: 0.22, SK: 0.20,
+};
+/* Pour les achats fournisseurs — uniquement les pays UE + France */
+const TVA_RATE_BY_NAME = {
+  'France': 0.20,
+  /* UE B2B : autoliquidation (flag achat_ue) */
+  'Allemagne': 0.19, 'Belgique': 0.21, 'Espagne': 0.21,
+  'Italie': 0.22, 'Portugal': 0.23, 'Pays-Bas': 0.21, 'Luxembourg': 0.17,
+  'Autriche': 0.20, 'Pologne': 0.23, 'Suède': 0.25,
+  /* Hors UE : TVA non déductible en France */
+  'Royaume-Uni': null, 'Suisse': null, 'Chine': null,
+  'Canada': null, 'États-Unis': null, 'Japon': null,
+  'Corée du Sud': null, 'Autre': null,
+};
+const TVA_FLAG_BY_NAME = {
+  'France':'🇫🇷', 'Allemagne':'🇩🇪', 'Belgique':'🇧🇪', 'Espagne':'🇪🇸',
+  'Italie':'🇮🇹', 'Portugal':'🇵🇹', 'Pays-Bas':'🇳🇱', 'Luxembourg':'🇱🇺',
+  'Royaume-Uni':'🇬🇧', 'Suisse':'🇨🇭', 'Chine':'🇨🇳', 'Canada':'🇨🇦',
+  'États-Unis':'🇺🇸', 'Japon':'🇯🇵', 'Corée du Sud':'🇰🇷', 'Autre':'🌐',
+};
+const COUNTRY_FLAGS = {
+  FR:'🇫🇷', BE:'🇧🇪', LU:'🇱🇺', DE:'🇩🇪', IT:'🇮🇹', ES:'🇪🇸', PT:'🇵🇹', NL:'🇳🇱',
+  AT:'🇦🇹', BG:'🇧🇬', CY:'🇨🇾', CZ:'🇨🇿', DK:'🇩🇰', EE:'🇪🇪', FI:'🇫🇮',
+  GR:'🇬🇷', HR:'🇭🇷', HU:'🇭🇺', IE:'🇮🇪', LT:'🇱🇹', LV:'🇱🇻', MT:'🇲🇹',
+  PL:'🇵🇱', RO:'🇷🇴', SE:'🇸🇪', SI:'🇸🇮', SK:'🇸🇰',
+  CH:'🇨🇭', GB:'🇬🇧', US:'🇺🇸', CA:'🇨🇦', AU:'🇦🇺', JP:'🇯🇵', KR:'🇰🇷', CN:'🇨🇳',
+  MX:'🇲🇽', BR:'🇧🇷', IN:'🇮🇳', RU:'🇷🇺', AR:'🇦🇷', MA:'🇲🇦', DZ:'🇩🇿', TN:'🇹🇳',
+};
+const COUNTRY_NAMES = {
+  FR:'France', BE:'Belgique', LU:'Luxembourg', DE:'Allemagne', IT:'Italie',
+  ES:'Espagne', PT:'Portugal', NL:'Pays-Bas',
+  AT:'Autriche', BG:'Bulgarie', CY:'Chypre', CZ:'Tchéquie', DK:'Danemark',
+  EE:'Estonie', FI:'Finlande', GR:'Grèce', HR:'Croatie', HU:'Hongrie',
+  IE:'Irlande', LT:'Lituanie', LV:'Lettonie', MT:'Malte', PL:'Pologne',
+  RO:'Roumanie', SE:'Suède', SI:'Slovénie', SK:'Slovaquie',
+  CH:'Suisse', GB:'Royaume-Uni', US:'États-Unis', CA:'Canada',
+  AU:'Australie', JP:'Japon', KR:'Corée du Sud', CN:'Chine',
+  MX:'Mexique', BR:'Brésil', IN:'Inde', RU:'Russie',
+  AR:'Argentine', MA:'Maroc', DZ:'Algérie', TN:'Tunisie',
+};
+
+const fmt    = v => v.toFixed(2).replace('.', ',') + ' €';
+const fmtPct = r => r != null ? (r * 100).toFixed(0) + ' %' : '—';
+const escH   = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+let allOrders    = [];
+let allProducts  = [];
+let supplierList = [];
+let suppMap      = {};
+let costsMap     = {};
+let currentPeriod = 'all';
+
+/* ── Chargement données ── */
+function loadLocalData() {
+  try { supplierList = JSON.parse(localStorage.getItem('leclam_supplier_list') || '[]'); } catch { supplierList = []; }
+  try { suppMap      = JSON.parse(localStorage.getItem('leclam_suppliers')      || '{}'); } catch { suppMap = {}; }
+  try { costsMap     = JSON.parse(localStorage.getItem('leclam_prod_costs') || localStorage.getItem('leclam_costs') || '{}'); } catch { costsMap = {}; }
+  try { allProducts  = JSON.parse(localStorage.getItem('leclam_all_products')   || '[]'); } catch { allProducts = []; }
+}
+
+async function loadOrders() {
+  let serverOrders = [];
+  try {
+    const res  = await fetch('/api/orders', { headers: adminHeaders(), credentials: 'same-origin' });
+    const data = await res.json();
+    if (data.ok) serverOrders = data.orders;
+  } catch (_) {}
+  allOrders = serverOrders;
+  renderTVA();
+}
+
+/* ── Filtre période ── */
+function setPeriod(p) {
+  currentPeriod = p;
+  document.querySelectorAll('.period-tab').forEach(t => {
+    t.classList.toggle('active', t.textContent.trim() === { month:'Ce mois', quarter:'Ce trimestre', year:'Cette année', all:'Tout' }[p]);
+  });
+  renderTVA();
+}
+
+function filterByPeriod(orders) {
+  const now = new Date();
+  return orders.filter(o => {
+    const d = new Date(o.createdAt);
+    if (currentPeriod === 'month')   return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    if (currentPeriod === 'quarter') { const q = Math.floor(now.getMonth()/3); return Math.floor(d.getMonth()/3) === q && d.getFullYear() === now.getFullYear(); }
+    if (currentPeriod === 'year')    return d.getFullYear() === now.getFullYear();
+    return true;
+  });
+}
+
+function getPeriodLabel() {
+  const now = new Date();
+  const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  if (currentPeriod === 'month')   return `${months[now.getMonth()]} ${now.getFullYear()}`;
+  if (currentPeriod === 'quarter') return `T${Math.floor(now.getMonth()/3)+1} ${now.getFullYear()}`;
+  if (currentPeriod === 'year')    return `Année ${now.getFullYear()}`;
+  return 'Toutes périodes';
+}
+
+/* ════════════════════════════════════════
+   ONGLET TVA
+════════════════════════════════════════ */
+function renderTVA() {
+  const orders = filterByPeriod(allOrders);
+  const byCountry = {};
+  for (const o of orders) {
+    const country = o.shippingAddress?.country || 'FR';
+    if (!byCountry[country]) byCountry[country] = { count: 0, ttc: 0 };
+    byCountry[country].count++;
+    byCountry[country].ttc += o.total || 0;
+  }
+
+  let totalCollectee = 0, totalUE = 0, totalFR = 0, totalExportTtc = 0;
+  let totalCaTTC = 0, totalCaHT = 0;
+  const rows = [];
+  for (const [country, d] of Object.entries(byCountry).sort((a,b) => b[1].ttc - a[1].ttc)) {
+    const rate = TVA_RATES[country] ?? null;
+    const tva  = rate != null ? d.ttc * rate / (1 + rate) : 0;
+    const ht   = d.ttc - tva;
+    totalCollectee += tva;
+    totalCaTTC     += d.ttc;
+    totalCaHT      += ht;
+    if (rate != null) totalUE += tva;
+    if (country === 'FR') totalFR += tva;
+    if (rate == null) totalExportTtc += d.ttc;
+    rows.push({ country, rate, count: d.count, ttc: d.ttc, ht, tva });
+  }
+
+  const deductibles = loadDeductibles();
+  const supTvaData  = loadSupTvaData(orders);
+  const totalSupTva = supTvaData.reduce((s, d) => s + d.tva, 0);
+  const totalManTva = deductibles.reduce((s, e) => s + e.tva, 0);
+  const totalDed    = totalSupTva + totalManTva;
+  const nette       = totalCollectee - totalDed;
+
+  const totalAchatHTSup = supTvaData.filter(d => d.on).reduce((s, d) => s + d.totalHT, 0);
+  const totalAchatHTMan = deductibles.reduce((s, e) => s + e.ht, 0);
+  const totalAchatHT    = totalAchatHTSup + totalAchatHTMan;
+
+  renderSupTva(supTvaData);
+
+  const cmdLabel = orders.length + ' commande' + (orders.length !== 1 ? 's' : '');
+  document.getElementById('periodLabel').textContent     = getPeriodLabel() + ' · ' + cmdLabel;
+  document.getElementById('kpiCaTTC').textContent        = fmt(totalCaTTC);
+  document.getElementById('kpiCaTTCSub').textContent     = cmdLabel;
+  document.getElementById('kpiCaHT').textContent         = fmt(totalCaHT);
+  document.getElementById('kpiCollectee').textContent    = fmt(totalCollectee);
+  document.getElementById('kpiCollecteeSub').textContent = totalCaTTC > 0 ? (totalCollectee / totalCaTTC * 100).toFixed(1) + '% du TTC' : '—';
+  document.getElementById('kpiAchatHT').textContent      = fmt(totalAchatHT);
+  document.getElementById('kpiDeductible').textContent   = fmt(totalDed);
+  document.getElementById('kpiNette').textContent        = fmt(Math.abs(nette));
+  document.getElementById('kpiNetteSub').textContent     = nette < 0 ? 'Crédit TVA' : 'À reverser';
+
+  const tbody = document.getElementById('tvaBody');
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="empty">Aucune commande sur cette période.</td></tr>';
+  } else {
+    const rowHtml = r => {
+      const isFR     = r.country === 'FR';
+      const isUE     = r.rate != null && !isFR;
+      const isExport = r.rate == null;
+      const zoneBadge = isFR
+        ? '<span class="badge-zone" style="background:#fff0f0;color:#c2410c">🇫🇷 France</span>'
+        : isUE
+          ? '<span class="badge-zone badge-ue">🇪🇺 UE</span>'
+          : '<span class="badge-zone badge-export">🌍 Export</span>';
+      const declBadge = isFR
+        ? '<span style="font-size:.72rem;color:#c2410c;font-weight:600">DGFiP</span>'
+        : isUE
+          ? '<span style="font-size:.72rem;color:#1d4ed8;font-weight:600">OSS</span>'
+          : '<span style="font-size:.72rem;color:#999">Exonéré</span>';
+      return `<tr class="${isExport ? 'exempt-row' : ''}">
+        <td><span class="flag">${COUNTRY_FLAGS[r.country] || ''}</span>${COUNTRY_NAMES[r.country] || r.country}</td>
+        <td>${zoneBadge}</td><td>${declBadge}</td>
+        <td class="num">${r.count}</td><td class="num">${fmt(r.ttc)}</td>
+        <td class="num">${fmt(r.ht)}</td><td class="num">${fmtPct(r.rate)}</td>
+        <td class="num ${r.tva > 0 ? 'amount-pos' : ''}">${r.tva > 0 ? fmt(r.tva) : '—'}</td>
+      </tr>`;
+    };
+    const totalTtc = rows.reduce((s, r) => s + r.ttc, 0);
+    const totalHt  = rows.reduce((s, r) => s + r.ht, 0);
+    const html = rows.map(rowHtml).join('') + `<tr class="total-row">
+      <td colspan="3">Total</td>
+      <td class="num">${rows.reduce((s, r) => s + r.count, 0)}</td>
+      <td class="num">${fmt(totalTtc)}</td><td class="num">${fmt(totalHt)}</td>
+      <td class="num">—</td><td class="num amount-pos">${fmt(totalCollectee)}</td>
+    </tr>`;
+    tbody.innerHTML = html;
+  }
+
+  document.getElementById('balCollecteeUE').textContent  = fmt(totalUE);
+  document.getElementById('balCollecteeFR').textContent  = fmt(totalFR);
+  document.getElementById('balExport').textContent       = fmt(totalExportTtc);
+  document.getElementById('balSupTva').textContent       = '− ' + fmt(totalSupTva);
+  document.getElementById('balDeductible').textContent   = '− ' + fmt(totalManTva);
+  const netteEl = document.getElementById('balNette');
+  netteEl.textContent = fmt(Math.abs(nette));
+  netteEl.className   = nette >= 0 ? 'amount-neg' : 'amount-pos';
+  if (nette < 0) netteEl.textContent = fmt(Math.abs(nette)) + ' (crédit)';
+
+  renderDeductibles();
+}
+
+/* ── TVA déductible saisie manuelle ── */
+const DED_KEY = 'leclam_tva_ded';
+function loadDeductibles() { try { return JSON.parse(localStorage.getItem(DED_KEY) || '[]'); } catch { return []; } }
+function saveDeductibles(list) { localStorage.setItem(DED_KEY, JSON.stringify(list)); }
+
+document.getElementById('dedHT').addEventListener('input', function() {
+  const ht = parseFloat(this.value) || 0;
+  const rate = TVA_RATES[document.getElementById('dedCountry').value] || 0;
+  document.getElementById('dedTVA').value = (ht * rate).toFixed(2);
+});
+document.getElementById('dedCountry').addEventListener('change', function() {
+  const ht   = parseFloat(document.getElementById('dedHT').value) || 0;
+  const rate = TVA_RATES[this.value] || 0;
+  document.getElementById('dedTVA').value = (ht * rate).toFixed(2);
+});
+
+function addDeductible() {
+  const label   = document.getElementById('dedLabel').value.trim();
+  const country = document.getElementById('dedCountry').value;
+  const ht      = parseFloat(document.getElementById('dedHT').value);
+  const tva     = parseFloat(document.getElementById('dedTVA').value);
+  if (!label) { document.getElementById('dedLabel').focus(); return; }
+  if (!ht || ht <= 0) { document.getElementById('dedHT').focus(); return; }
+  const list = loadDeductibles();
+  list.push({ id: Date.now(), label, country, ht, tva: tva || ht * (TVA_RATES[country] || 0) });
+  saveDeductibles(list);
+  document.getElementById('dedLabel').value = '';
+  document.getElementById('dedHT').value    = '';
+  document.getElementById('dedTVA').value   = '';
+  renderTVA();
+}
+
+function removeDeductible(id) {
+  saveDeductibles(loadDeductibles().filter(e => e.id !== id));
+  renderTVA();
+}
+
+function renderDeductibles() {
+  const list  = loadDeductibles();
+  const tbody = document.getElementById('dedBody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="empty">Aucune entrée. Ajoutez vos factures fournisseurs.</td></tr>';
+    return;
+  }
+  const total = list.reduce((s, e) => s + e.tva, 0);
+  let html = list.map(e => `<tr>
+    <td>${escH(e.label)}</td>
+    <td>${COUNTRY_FLAGS[e.country] || ''} ${COUNTRY_NAMES[e.country] || e.country}</td>
+    <td class="num">${fmtPct(TVA_RATES[e.country] || null)}</td>
+    <td class="num">${fmt(e.ht)}</td>
+    <td class="num amount-neg">${fmt(e.tva)}</td>
+    <td><button class="btn-del" onclick="removeDeductible(${e.id})">✕</button></td>
+  </tr>`).join('');
+  html += `<tr class="total-row"><td colspan="4">Total déductible</td><td class="num amount-neg">${fmt(total)}</td><td></td></tr>`;
+  tbody.innerHTML = html;
+}
+
+/* ── TVA fournisseurs (auto) ──
+   Régimes :
+   - 'fr'    : fournisseur français → TVA 20% directement déductible
+   - 'ue'    : fournisseur UE B2B → autoliquidation (net 0, info seulement)
+   - 'hors'  : hors UE (Chine, UK, Suisse…) → aucune TVA déductible ── */
+const EU_COUNTRIES_BY_NAME = new Set([
+  'Allemagne','Autriche','Belgique','Bulgarie','Chypre','Croatie','Danemark',
+  'Espagne','Estonie','Finlande','Grèce','Hongrie','Irlande','Italie',
+  'Lettonie','Lituanie','Luxembourg','Malte','Pays-Bas','Pologne',
+  'Portugal','Roumanie','Slovaquie','Slovénie','Suède','Tchéquie',
+]);
+
+function getSupRegime(pays) {
+  if (!pays) return 'hors';
+  if (pays === 'France') return 'fr';
+  if (EU_COUNTRIES_BY_NAME.has(pays)) return 'ue';
+  return 'hors';
+}
+
+function loadSupTvaData(orders) {
+  /* Calcule le COGS (coût d'achat) à partir des commandes réelles vendues */
+  const qtySold = {};
+  (orders || []).forEach(o => {
+    (o.items || []).forEach(item => {
+      qtySold[item.id] = (qtySold[item.id] || 0) + (item.qty || 1);
+    });
+  });
+
+  return supplierList
+    .filter(s => s.pays)
+    .map(s => {
+      const regime  = getSupRegime(s.pays);
+      const rate    = regime === 'fr' ? 0.20 : (TVA_RATE_BY_NAME[s.pays] || 0);
+      const prodIds = Object.entries(suppMap).filter(([, n]) => n === s.name).map(([id]) => id);
+      let totalHT = 0, noCost = 0;
+      prodIds.forEach(id => {
+        const c   = costsMap[id];
+        const ht  = c?.cost || 0;
+        const qty = qtySold[id] || 0;
+        if (!ht) noCost++;
+        totalHT += ht * qty;
+      });
+      const tvaDeductible = regime === 'fr' && s.tvaAchat ? totalHT * rate : 0;
+      return {
+        id: s.id, name: s.name, pays: s.pays,
+        flag: TVA_FLAG_BY_NAME[s.pays] || '',
+        regime, rate, products: prodIds.length, noCost,
+        totalHT,
+        tva: tvaDeductible,
+        on: !!s.tvaAchat,
+      };
+    })
+    .filter(d => d.products > 0)
+    .sort((a, b) => b.totalHT - a.totalHT);
+}
+
+function toggleSupTva(supId) {
+  const list = (() => { try { return JSON.parse(localStorage.getItem('leclam_supplier_list') || '[]'); } catch { return []; } })();
+  const idx  = list.findIndex(s => s.id === supId);
+  if (idx === -1) return;
+  list[idx].tvaAchat = !list[idx].tvaAchat;
+  localStorage.setItem('leclam_supplier_list', JSON.stringify(list));
+  loadLocalData();
+  renderTVA();
+}
+
+function renderSupTva(data) {
+  const tbody = document.getElementById('supTvaBody');
+  if (!data.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="empty">Aucun fournisseur avec produits associés.</td></tr>';
+    return;
+  }
+  const totalTva = data.reduce((s, d) => s + d.tva, 0);
+  const totalHT  = data.reduce((s, d) => s + d.totalHT, 0);
+
+  const regimeLabel = {
+    fr:   '<span style="font-size:.72rem;font-weight:700;color:#c2410c">🇫🇷 Déductible FR</span>',
+    ue:   '<span style="font-size:.72rem;font-weight:700;color:#1d4ed8">🇪🇺 Autoliquidation</span>',
+    hors: '<span style="font-size:.72rem;color:#aaa">🌍 Non applicable</span>',
+  };
+
+  let html = data.map(d => {
+    const noCostNote = d.noCost > 0
+      ? ` <span style="color:#f59e0b;font-size:.68rem" title="${d.noCost} produit(s) sans coût">⚠ ${d.noCost}</span>`
+      : '';
+    const canToggle = d.regime === 'fr';
+    const tvaCell   = d.regime === 'fr'
+      ? (d.on && d.tva > 0 ? `<span class="amount-neg">${fmt(d.tva)}</span>` : '<span style="color:#ccc">—</span>')
+      : (d.regime === 'ue'
+          ? `<span style="color:#888;font-size:.75rem">net 0</span>`
+          : '<span style="color:#ccc">—</span>');
+    const toggleCell = canToggle
+      ? `<button class="tva-toggle ${d.on ? 'on' : ''}" onclick="toggleSupTva('${d.id}')">${d.on ? '✓ Oui' : 'Non'}</button>`
+      : '<span style="color:#ccc;font-size:.75rem">—</span>';
+    return `<tr class="sup-tva-row ${d.on || !canToggle ? '' : 'off'}">
+      <td style="font-weight:600">${escH(d.name)}</td>
+      <td><span class="flag">${d.flag}</span>${escH(d.pays)}</td>
+      <td>${regimeLabel[d.regime]}</td>
+      <td class="num">${d.products}${noCostNote}</td>
+      <td class="num">${d.totalHT > 0 ? fmt(d.totalHT) : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${d.regime !== 'hors' ? (d.rate * 100).toFixed(0) + ' %' : '—'}</td>
+      <td class="num">${tvaCell}</td>
+      <td style="text-align:center">${toggleCell}</td>
+    </tr>`;
+  }).join('');
+  html += `<tr class="total-row">
+    <td colspan="4">Total achats HT</td>
+    <td class="num">${totalHT > 0 ? fmt(totalHT) : '—'}</td>
+    <td class="num">—</td>
+    <td class="num amount-neg">${totalTva > 0 ? fmt(totalTva) : '—'}</td>
+    <td></td>
+  </tr>`;
+  tbody.innerHTML = html;
+}
+
+/* ════════════════════════════════════════
+   ONGLET FOURNISSEURS
+════════════════════════════════════════ */
+function renderFournisseur() {
+  const active = allOrders.filter(o => o.status !== 'cancelled');
+
+  const map = {};
+  const _init = () => ({ count: 0, ca: 0, caUnits: 0, caCost: 0 });
+
+  allProducts.forEach(p => {
+    const f = suppMap[p.id] || '(Sans fournisseur)';
+    if (!map[f]) map[f] = _init();
+    map[f].count++;
+  });
+
+  active.forEach(o => {
+    (o.items || []).forEach(item => {
+      const sup = suppMap[item.id] || '(Sans fournisseur)';
+      if (!map[sup]) map[sup] = _init();
+      const qty  = item.qty || 1;
+      map[sup].ca      += (item.price || 0) * qty;
+      map[sup].caUnits += qty;
+      map[sup].caCost  += (costsMap[item.id]?.cost || 0) * qty;
+    });
+  });
+
+  const sorted = Object.entries(map)
+    .filter(([n]) => n !== '(Sans fournisseur)' || map[n].ca > 0)
+    .sort((a, b) => (b[1].ca - a[1].ca) || (b[1].value - a[1].value));
+
+  if (!sorted.length) {
+    document.getElementById('fournTableBody').innerHTML = '<tr><td colspan="8" class="empty">Aucun fournisseur avec des produits assignés.</td></tr>';
+    return;
+  }
+
+  const totalCA    = sorted.reduce((s, [, d]) => s + d.ca, 0);
+  const totalProds = sorted.reduce((s, [, d]) => s + d.count, 0);
+  const totalCost  = sorted.reduce((s, [, d]) => s + d.caCost, 0);
+  const totalUnits = sorted.reduce((s, [, d]) => s + d.caUnits, 0);
+  const totalMarge = totalCA - totalCost;
+
+  /* KPI fournisseur */
+  const realFourn = sorted.filter(([n]) => n !== '(Sans fournisseur)');
+  const margePct  = totalCA > 0 ? Math.round(totalMarge / totalCA * 100) : 0;
+  const coeff     = totalCost > 0 ? '×' + (totalCA / totalCost).toFixed(2) : '—';
+
+  document.getElementById('fournCount').textContent    = realFourn.length;
+  document.getElementById('fournProdsSub').textContent = totalProds + ' produits assignés';
+  document.getElementById('fournCA').textContent       = fmt(totalCA);
+  document.getElementById('fournCASub').textContent    = active.length + ' commandes';
+  document.getElementById('fournMarge').textContent    = fmt(totalMarge);
+  document.getElementById('fournMargeSub').textContent = margePct + '% du CA';
+  document.getElementById('fournCoeff').textContent    = coeff;
+
+  /* Alertes */
+  const alertesEl = document.getElementById('fournAlertes');
+  const alertes = [];
+  sorted.forEach(([name, data]) => {
+    const partCA = totalCA > 0 ? data.ca / totalCA : 0;
+    if (partCA >= 0.5 && data.ca > 0)
+      alertes.push({ type: 'warn', msg: `<strong>${escH(name)}</strong> représente ${Math.round(partCA*100)}% de votre CA — risque de dépendance fournisseur.` });
+  });
+  sorted.forEach(([name, data]) => {
+    const noCost = allProducts.filter(p => suppMap[p.id] === name && !(costsMap[p.id]?.cost > 0)).length;
+    if (noCost > 0)
+      alertes.push({ type: 'info', msg: `<strong>${escH(name)}</strong> : ${noCost} produit${noCost>1?'s':''} sans coût d'achat — marges et TVA incomplètes.` });
+  });
+  if (!alertes.length) {
+    alertesEl.style.display = 'none';
+  } else {
+    alertesEl.style.display = '';
+    alertesEl.innerHTML = alertes.map(a => `
+      <div style="display:flex;align-items:flex-start;gap:.6rem;padding:.7rem 1rem;border-radius:10px;margin-bottom:.5rem;font-size:.82rem;
+        background:${a.type==='warn'?'#fff7ed':'#eff6ff'};border:1.5px solid ${a.type==='warn'?'#fed7aa':'#dbeafe'}">
+        <span style="font-size:1rem;line-height:1.3">${a.type==='warn'?'⚠️':'ℹ️'}</span>
+        <span style="color:${a.type==='warn'?'#c2410c':'#1d4ed8'}">${a.msg}</span>
+      </div>`).join('');
+  }
+
+  document.getElementById('fournTableBody').dataset.loaded = '1';
+
+  const tableBody = document.getElementById('fournTableBody');
+  tableBody.innerHTML = sorted.map(([name, data]) => {
+    const partCA   = totalCA > 0 ? Math.round(data.ca / totalCA * 100) : 0;
+    const marge    = data.ca - data.caCost;
+    const margePct = data.ca > 0 ? Math.round(marge / data.ca * 100) : null;
+    const coeff    = data.caCost > 0 ? '×' + (data.ca / data.caCost).toFixed(2) : '—';
+    const pays     = supplierList.find(s => s.name === name)?.pays || '—';
+    const isConc   = partCA >= 50 && data.ca > 0;
+    return `<tr${isConc ? ' style="background:#fff7ed"' : ''}>
+      <td style="font-weight:600">${escH(name)}${isConc ? ' <span style="font-size:.65rem;color:#c2410c;font-weight:700">⚠</span>' : ''}</td>
+      <td>${pays !== '—' ? (TVA_FLAG_BY_NAME[pays] || '') + ' ' + pays : '—'}</td>
+      <td class="num">${data.count}</td>
+      <td class="num ${data.ca > 0 ? 'amount-pos' : ''}">${data.ca > 0 ? fmt(data.ca) : '—'}</td>
+      <td class="num"><span style="font-weight:700;color:${partCA>=50?'#c2410c':partCA>=30?'#d97706':'#888'}">${partCA > 0 ? partCA + '%' : '—'}</span></td>
+      <td class="num ${marge > 0 ? 'amount-pos' : marge < 0 ? 'amount-neg' : ''}">${data.ca > 0 ? fmt(marge) : '—'}</td>
+      <td class="num">${margePct !== null ? `<span style="color:${margePct<20?'#dc2626':margePct<40?'#d97706':'#15803d'};font-weight:700">${margePct}%</span>` : '—'}</td>
+      <td class="num" style="font-weight:700">${coeff}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ════════════════════════════════════════
+   ONGLET CA
+════════════════════════════════════════ */
+function renderCA() {
+  const active    = allOrders.filter(o => o.status !== 'cancelled');
+  const cancelled = allOrders.filter(o => o.status === 'cancelled');
+
+  const totalCA    = active.reduce((s, o) => s + (o.total || 0), 0);
+  const avgBasket  = active.length ? totalCA / active.length : 0;
+  const cancelRate = allOrders.length ? Math.round(cancelled.length / allOrders.length * 100) : 0;
+
+  const now            = new Date();
+  const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const thisMonth = active.filter(o => o.createdAt && new Date(o.createdAt) >= thisMonthStart);
+  const lastMonth = active.filter(o => o.createdAt && new Date(o.createdAt) >= lastMonthStart && new Date(o.createdAt) < thisMonthStart);
+  const caThisMonth = thisMonth.reduce((s, o) => s + (o.total || 0), 0);
+  const caLastMonth = lastMonth.reduce((s, o) => s + (o.total || 0), 0);
+  const caEvo   = caLastMonth ? Math.round((caThisMonth - caLastMonth) / caLastMonth * 100) : null;
+  const cmdEvo  = lastMonth.length ? Math.round((thisMonth.length - lastMonth.length) / lastMonth.length * 100) : null;
+
+  const emails   = new Set(allOrders.filter(o => o.email).map(o => o.email));
+  const repeated = [...emails].filter(e => active.filter(o => o.email === e).length >= 2).length;
+  const fidoRate = emails.size ? Math.round(repeated / emails.size * 100) : 0;
+
+  const fourWeeksAgo    = new Date(Date.now() - 28 * 86400000);
+  const recentOrders    = active.filter(o => o.createdAt && new Date(o.createdAt) >= fourWeeksAgo);
+  const weeklyVelocity  = (recentOrders.length / 4).toFixed(1);
+
+  function evo(pct) {
+    if (pct === null) return `<span class="evo-neut">nouveau</span>`;
+    if (pct > 0)  return `<span class="evo-up">↑ +${pct}%</span> vs mois dernier`;
+    if (pct < 0)  return `<span class="evo-down">↓ ${pct}%</span> vs mois dernier`;
+    return `<span class="evo-neut">= stable</span> vs mois dernier`;
+  }
+
+  const svg = d => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const cards = [
+    { accent: true, icon: svg('<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>'), lbl: 'CA total', val: fmt(totalCA), sub: active.length + ' commandes actives' },
+    { icon: svg('<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/>'), lbl: 'Panier moyen', val: fmt(avgBasket), sub: 'par commande' },
+    { icon: svg('<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>'), lbl: 'CA ce mois', val: fmt(caThisMonth), sub: evo(caEvo) },
+    { icon: svg('<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>'), lbl: 'Commandes ce mois', val: thisMonth.length, sub: evo(cmdEvo) },
+    { icon: svg('<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>'), lbl: 'Vélocité / semaine', val: weeklyVelocity, sub: 'commandes moy. sur 4 semaines' },
+    { icon: svg('<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'), lbl: "Taux d'annulation", val: cancelRate + '%', sub: cancelled.length + ' annulée' + (cancelled.length > 1 ? 's' : '') },
+    { icon: svg('<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/>'), lbl: 'Fidélisation', val: fidoRate + '%', sub: repeated + ' client' + (repeated > 1 ? 's' : '') + ' avec 2+ commandes' },
+    { icon: svg('<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>'), lbl: 'Clients uniques', val: emails.size, sub: repeated + ' fidèles · ' + (emails.size - repeated) + ' one-shot' },
+  ];
+
+  document.getElementById('caKpiGrid').innerHTML = cards.map(c => `
+    <div class="ca-kpi${c.accent ? ' ca-accent' : ''}">
+      <div class="ca-kpi-icon">${c.icon}</div>
+      <div class="ca-kpi-lbl">${c.lbl}</div>
+      <div class="ca-kpi-val">${c.val}</div>
+      <div class="ca-kpi-sub">${c.sub}</div>
+    </div>`).join('');
+
+  /* CA par catégorie */
+  const catCA  = {}, catOrders = {}, catUnits = {};
+  active.forEach(o => {
+    (o.items || []).forEach(item => {
+      const meta = allProducts.find(p => p.id === item.id);
+      const cat  = meta?.cat || 'autre';
+      catCA[cat]     = (catCA[cat]     || 0) + (item.price || 0) * (item.qty || 1);
+      catUnits[cat]  = (catUnits[cat]  || 0) + (item.qty || 1);
+      catOrders[cat] = catOrders[cat] ? new Set([...catOrders[cat], o.id]) : new Set([o.id]);
+    });
+  });
+  const totalCatCA = Object.values(catCA).reduce((s, v) => s + v, 0);
+  const catSorted  = Object.entries(catCA).sort((a, b) => b[1] - a[1]);
+  document.getElementById('caCatBody').innerHTML = catSorted.length
+    ? catSorted.map(([cat, ca]) => `<tr>
+        <td><span class="cat-badge cat-${cat}">${cat.charAt(0).toUpperCase() + cat.slice(1)}</span></td>
+        <td class="num">${catOrders[cat]?.size || 0}</td>
+        <td class="num">${catUnits[cat] || 0}</td>
+        <td class="num amount-pos">${fmt(ca)}</td>
+        <td class="num">${totalCatCA > 0 ? Math.round(ca / totalCatCA * 100) + '%' : '—'}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="5" class="empty">Aucune commande.</td></tr>';
+
+  /* Top clients */
+  const clientMap = {};
+  active.forEach(o => {
+    const k = o.email || o.id;
+    if (!clientMap[k]) clientMap[k] = { email: o.email || '—', orders: 0, ca: 0 };
+    clientMap[k].orders++;
+    clientMap[k].ca += o.total || 0;
+  });
+  const topClients = Object.values(clientMap).sort((a, b) => b.ca - a.ca).slice(0, 10);
+  document.getElementById('caClientBody').innerHTML = topClients.length
+    ? topClients.map(c => `<tr>
+        <td style="font-size:.8rem">${escH(c.email)}</td>
+        <td class="num">${c.orders}</td>
+        <td class="num amount-pos">${fmt(c.ca)}</td>
+        <td class="num">${fmt(c.ca / c.orders)}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="4" class="empty">Aucune commande.</td></tr>';
+}
+
+/* ════════════════════════════════════════
+   ONGLET MARGE
+════════════════════════════════════════ */
+function renderMarge() {
+  const active = allOrders.filter(o => o.status !== 'cancelled');
+
+  /* KPI marge globale */
+  let totalCA = 0, totalCost = 0;
+  active.forEach(o => {
+    totalCA += o.total || 0;
+    (o.items || []).forEach(item => {
+      totalCost += (costsMap[item.id]?.cost || 0) * (item.qty || 1);
+    });
+  });
+  const margeBrute = totalCA - totalCost;
+  const margePct   = totalCA > 0 ? Math.round(margeBrute / totalCA * 100) : 0;
+  const prodsWithCost = allProducts.filter(p => costsMap[p.id]?.cost > 0).length;
+
+  document.getElementById('margeCA').textContent       = fmt(totalCA);
+  document.getElementById('margeCASub').textContent    = active.length + ' commandes';
+  document.getElementById('margeBrute').textContent    = fmt(margeBrute);
+  document.getElementById('margeBruteSub').textContent = margePct + '% du CA';
+  document.getElementById('margeTaux').textContent     = margePct + '%';
+  document.getElementById('margeProds').textContent    = prodsWithCost + ' / ' + allProducts.length;
+
+  /* Pareto */
+  const prodMap = {};
+  active.forEach(o => {
+    (o.items || []).forEach(item => {
+      if (!prodMap[item.id]) {
+        const meta = allProducts.find(p => p.id === item.id);
+        prodMap[item.id] = { name: item.name || meta?.name || item.id, cat: meta?.cat || '—', revenue: 0, units: 0 };
+      }
+      prodMap[item.id].revenue += (item.price || 0) * (item.qty || 1);
+      prodMap[item.id].units   += item.qty || 1;
+    });
+  });
+
+  const sorted       = Object.values(prodMap).sort((a, b) => b.revenue - a.revenue);
+  const totalRevenue = sorted.reduce((s, p) => s + p.revenue, 0);
+  const container    = document.getElementById('paretoBody');
+
+  if (!sorted.length) {
+    container.innerHTML = '<div class="empty" style="padding:1.5rem">Aucune commande enregistrée.</div>';
+    document.getElementById('paretoHeadStat').innerHTML = '—';
+  } else {
+    let cumul = 0, threshold80idx = sorted.length - 1;
+    for (let i = 0; i < sorted.length; i++) {
+      cumul += sorted[i].revenue;
+      if (cumul / totalRevenue >= 0.8) { threshold80idx = i; break; }
+    }
+    const topCount = threshold80idx + 1;
+    document.getElementById('paretoHeadStat').innerHTML =
+      `<strong>${topCount} produit${topCount > 1 ? 's' : ''}</strong> font 80% du CA · ${fmt(totalRevenue)} total`;
+
+    const maxRev = sorted[0].revenue;
+    cumul = 0;
+    let html = '';
+    sorted.forEach((p, i) => {
+      cumul += p.revenue;
+      const cumulPct = totalRevenue ? Math.round(cumul / totalRevenue * 100) : 0;
+      const barPct   = Math.round(p.revenue / maxRev * 100);
+      const isTop    = i <= threshold80idx;
+      const medals   = ['1er', '2e', '3e'];
+      if (i === threshold80idx + 1)
+        html += `<div class="pareto-divider"><span>▲ 80 % du CA ci-dessus</span><hr></div>`;
+      html += `<div class="pareto-row ${isTop ? 'is-top' : 'is-rest'}">
+        <div class="pareto-rank">${medals[i] || i + 1}</div>
+        <div class="pareto-name">
+          <b>${escH(p.name)}</b>
+          <span>${p.units} vente${p.units > 1 ? 's' : ''} · <span class="cat-badge cat-${p.cat}" style="font-size:.6rem;padding:.08rem .4rem">${p.cat}</span></span>
+        </div>
+        <div class="pareto-bar-track"><div class="pareto-bar-fill" style="width:${barPct}%"></div></div>
+        <div class="pareto-ca">${fmt(p.revenue)}</div>
+        <div class="pareto-pct">${cumulPct}%</div>
+      </div>`;
+    });
+    container.innerHTML = html;
+  }
+
+  /* Marge par catégorie */
+  const catData = {};
+  allProducts.forEach(p => {
+    if (!catData[p.cat]) catData[p.cat] = { count: 0, ca: 0, cost: 0 };
+    catData[p.cat].count++;
+  });
+  active.forEach(o => {
+    (o.items || []).forEach(item => {
+      const meta = allProducts.find(p => p.id === item.id);
+      const cat  = meta?.cat || 'autre';
+      if (!catData[cat]) catData[cat] = { count: 0, ca: 0, cost: 0 };
+      catData[cat].ca   += (item.price || 0) * (item.qty || 1);
+      catData[cat].cost += (costsMap[item.id]?.cost || 0) * (item.qty || 1);
+    });
+  });
+  const catSorted = Object.entries(catData).sort((a, b) => b[1].ca - a[1].ca);
+  document.getElementById('margeCatBody').innerHTML = catSorted.length
+    ? catSorted.map(([cat, d]) => {
+        const marge    = d.ca - d.cost;
+        const margePct = d.ca > 0 ? Math.round(marge / d.ca * 100) : null;
+        return `<tr>
+          <td><span class="cat-badge cat-${cat}">${cat.charAt(0).toUpperCase() + cat.slice(1)}</span></td>
+          <td class="num">${d.count}</td>
+          <td class="num ${d.ca > 0 ? 'amount-pos' : ''}">${d.ca > 0 ? fmt(d.ca) : '—'}</td>
+          <td class="num">${d.cost > 0 ? fmt(d.cost) : '—'}</td>
+          <td class="num ${marge > 0 ? 'amount-pos' : marge < 0 ? 'amount-neg' : ''}">${d.ca > 0 ? fmt(marge) : '—'}</td>
+          <td class="num">${margePct !== null ? margePct + '%' : '—'}</td>
+        </tr>`;
+      }).join('')
+    : '<tr><td colspan="6" class="empty">Aucune donnée.</td></tr>';
+}
+
+/* ── Init ── */
+restoreTvaSections();
+loadLocalData();
+loadOrders();
+</script>
+</body>
+</html>

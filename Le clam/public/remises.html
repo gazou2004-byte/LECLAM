@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remises — Le Clam Admin</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #f8f5f0; color: #1a1a1a; padding: 1.5rem; }
+
+    /* ── Onglets ── */
+    .tabs { display: flex; gap: .4rem; margin-bottom: 1.5rem; }
+    .tab-btn { padding: .5rem 1.2rem; border: 1.5px solid #e0e0e0; border-radius: 50px; background: #fff; font-size: .85rem; font-weight: 600; color: #666; cursor: pointer; font-family: inherit; transition: all .15s; }
+    .tab-btn.active { background: #3e2a14; color: #d9c4a0; border-color: #3e2a14; }
+    .tab-panel { display: none; }
+    .tab-panel.visible { display: block; }
+
+    /* ── Partagés ── */
+    h2 { font-size: 1.05rem; color: #3e2a14; margin-bottom: 1.1rem; font-weight: 700; }
+    .form-box { background: #fff; border-radius: 14px; border: 1.5px solid #ede8e0; padding: 1.4rem 1.6rem; margin-bottom: 1.4rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    .field { display: flex; flex-direction: column; gap: .3rem; }
+    .field.wide { grid-column: 1 / -1; }
+    label { font-size: .75rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .04em; }
+    input[type=text], input[type=number], input[type=datetime-local], select {
+      padding: .6rem .85rem; border: 1.5px solid #e0e0e0; border-radius: 9px;
+      font-size: .88rem; font-family: inherit; color: #222; background: #fff; transition: border-color .18s;
+    }
+    input:focus, select:focus { outline: none; border-color: #3e2a14; }
+    .btn-primary { margin-top: 1rem; padding: .65rem 1.6rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 50px; font-size: .88rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .2s; }
+    .btn-primary:hover { background: #2a1c0d; }
+    .btn-primary:disabled { background: #ccc; cursor: default; }
+    .err { color: #c0392b; font-size: .78rem; margin-top: .5rem; display: none; }
+    .empty { text-align: center; color: #bbb; padding: 2rem; font-size: .85rem; }
+
+    /* ── Codes promo ── */
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    thead th { text-align: left; padding: .5rem .75rem; background: #fafafa; color: #888; font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; border-bottom: 2px solid #eee; }
+    tbody td { padding: .55rem .75rem; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+    .td-input { padding: .38rem .55rem; border: 1.5px solid #ddd; border-radius: 7px; font-size: .85rem; font-family: inherit; color: #222; outline: none; transition: border-color .15s; background: #fff; }
+    .td-input:focus { border-color: #3e2a14; }
+    .td-input.code { width: 140px; text-transform: uppercase; font-weight: 700; letter-spacing: .04em; }
+    .td-input.val  { width: 75px; text-align: right; }
+    select.td-input { cursor: pointer; width: 95px; }
+    .toggle { position: relative; display: inline-block; width: 36px; height: 20px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; background: #ddd; border-radius: 20px; cursor: pointer; transition: background .2s; }
+    .slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: transform .2s; }
+    .toggle input:checked + .slider { background: #27ae60; }
+    .toggle input:checked + .slider::before { transform: translateX(16px); }
+    .btn-del-sm { background: none; border: none; cursor: pointer; color: #ccc; font-size: 1rem; padding: .2rem .4rem; line-height: 1; border-radius: 5px; transition: color .15s; }
+    .btn-del-sm:hover { color: #c0392b; }
+    .btn-add { padding: .45rem .95rem; background: #f0f0f0; color: #333; border: none; border-radius: 8px; font-size: .82rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .15s; }
+    .btn-add:hover { background: #e4e4e4; }
+    .btn-save { padding: .55rem 1.4rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+    .btn-save:hover { opacity: .85; }
+    .save-ok { font-size: .8rem; font-weight: 600; color: #16a34a; display: none; margin-left: .5rem; }
+    .preview-card { background: #faf5ee; border: 1.5px solid #e8dfc8; border-radius: 10px; padding: .8rem 1rem; margin-bottom: .5rem; font-size: .83rem; color: #6b5035; }
+    .badge-pct { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .72rem; font-weight: 700; background: #eef2ff; color: #3730a3; }
+    .badge-flat { display: inline-block; padding: .15rem .5rem; border-radius: 20px; font-size: .72rem; font-weight: 700; background: #fdf4ff; color: #7e22ce; }
+
+    /* ── Flash sales ── */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: .5rem; max-height: 220px; overflow-y: auto; padding: .5rem; border: 1.5px solid #e0e0e0; border-radius: 9px; background: #fafaf8; }
+    .prod-check { display: flex; align-items: center; gap: .45rem; font-size: .8rem; cursor: pointer; padding: .3rem .4rem; border-radius: 6px; transition: background .15s; }
+    .prod-check:hover { background: #f5f0e8; }
+    .prod-check input { width: 15px; height: 15px; accent-color: #3e2a14; cursor: pointer; flex-shrink: 0; }
+    .sale-list { display: flex; flex-direction: column; gap: .75rem; }
+    .sale-card { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: .95rem 1.1rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .sale-card.active  { border-color: #86efac; background: #f0fdf4; }
+    .sale-card.pending { border-color: #fde68a; background: #fffbeb; }
+    .sale-card.expired { opacity: .5; }
+    .sale-badge { font-size: 1.3rem; font-weight: 900; color: #c0392b; flex-shrink: 0; min-width: 48px; text-align: center; line-height: 1; }
+    .sale-badge small { display: block; font-size: .63rem; font-weight: 600; color: #888; margin-top: .1rem; }
+    .sale-body { flex: 1; min-width: 0; }
+    .sale-name { font-weight: 700; font-size: .9rem; margin-bottom: .2rem; }
+    .sale-meta { font-size: .74rem; color: #888; margin-bottom: .25rem; }
+    .sale-st { font-size: .7rem; font-weight: 700; padding: .13rem .5rem; border-radius: 20px; display: inline-block; margin-bottom: .25rem; }
+    .st-active  { background: #dcfce7; color: #15803d; }
+    .st-pending { background: #fef9c3; color: #a16207; }
+    .st-expired { background: #f3f4f6; color: #9ca3af; }
+    .countdown { font-size: .75rem; font-weight: 700; color: #c0392b; }
+    .btn-del-red { padding: .32rem .7rem; background: #fff; border: 1.5px solid #fca5a5; color: #dc2626; border-radius: 8px; font-size: .73rem; font-weight: 700; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-del-red:hover { background: #fef2f2; }
+
+    /* ── Parrainage ── */
+    .kpi-row { display: flex; gap: .8rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+    .kpi { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: 1rem 1.3rem; flex: 1; min-width: 120px; }
+    .kpi-n { font-size: 1.7rem; font-weight: 900; color: #3e2a14; }
+    .kpi-l { font-size: .72rem; color: #888; margin-top: .1rem; }
+    .ref-list { display: flex; flex-direction: column; gap: .65rem; }
+    .ref-card { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 1rem; }
+    .ref-code { font-family: monospace; font-size: 1.05rem; font-weight: 900; color: #3e2a14; min-width: 130px; }
+    .ref-body { flex: 1; min-width: 0; }
+    .ref-name { font-weight: 700; font-size: .88rem; }
+    .ref-email { font-size: .74rem; color: #888; }
+    .ref-badge { background: #3e2a14; color: #d9c4a0; font-size: .72rem; font-weight: 700; padding: .22rem .65rem; border-radius: 20px; white-space: nowrap; }
+  </style></head>
+<body>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('codes', this)">🏷️ Codes promo</button>
+  <button class="tab-btn"        onclick="switchTab('flash', this)">⚡ Ventes flash</button>
+  <button class="tab-btn"        onclick="switchTab('parrainage', this)">🤝 Parrainage</button>
+</div>
+
+<!-- ══════════ ONGLET CODES PROMO ══════════ -->
+<div class="tab-panel visible" id="panel-codes">
+
+  <div class="form-box">
+    <h2>Codes de réduction</h2>
+    <table id="promoTable">
+      <thead>
+        <tr><th>Code</th><th>Type</th><th>Valeur</th><th>Actif</th><th></th></tr>
+      </thead>
+      <tbody id="promoBody"></tbody>
+    </table>
+    <div id="promoEmpty" style="display:none;color:#bbb;font-size:.83rem;font-style:italic;padding:.5rem 0">Aucun code. Cliquez sur "+ Ajouter".</div>
+    <div style="margin-top:.9rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <button class="btn-add" onclick="addPromoRow()">+ Ajouter un code</button>
+      <button class="btn-save" onclick="savePromos()">Enregistrer</button>
+      <span class="save-ok" id="promoMsg">✓ Enregistré</span>
+    </div>
+  </div>
+
+  <div class="form-box">
+    <h2>Codes actifs en boutique</h2>
+    <div id="previewWrap"><div style="color:#bbb;font-size:.82rem;font-style:italic">Aucun code actif.</div></div>
+  </div>
+
+</div>
+
+<!-- ══════════ ONGLET FLASH SALES ══════════ -->
+<div class="tab-panel" id="panel-flash">
+
+  <div class="form-box">
+    <h2>⚡ Nouvelle vente flash</h2>
+    <div class="form-grid">
+      <div class="field wide">
+        <label>Nom de l'offre</label>
+        <input type="text" id="fsName" placeholder="Ex : Soldes été · Malin −20%">
+      </div>
+      <div class="field">
+        <label>Remise (%)</label>
+        <input type="number" id="fsDiscount" min="1" max="90" placeholder="20">
+      </div>
+      <div class="field">
+        <label>Catégorie</label>
+        <select id="fsCat" onchange="loadFlashProducts()">
+          <option value="plaisir">Plaisir</option>
+          <option value="malin">Malin</option>
+          <option value="bebe">Bébé</option>
+          <option value="all">Tous les produits</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Début</label>
+        <input type="datetime-local" id="fsStart">
+      </div>
+      <div class="field">
+        <label>Fin</label>
+        <input type="datetime-local" id="fsEnd">
+      </div>
+      <div class="field wide">
+        <label>Produits ciblés</label>
+        <div class="products-grid" id="flashProdsGrid"><div style="color:#bbb;font-size:.82rem;padding:.5rem">Chargement…</div></div>
+      </div>
+    </div>
+    <div class="err" id="fsErr"></div>
+    <button class="btn-primary" onclick="createFlashSale()" id="fsBtn">Créer la vente flash</button>
+  </div>
+
+  <h2>Ventes flash</h2>
+  <div class="sale-list" id="saleList"><div class="empty">Chargement…</div></div>
+
+</div>
+
+<!-- ══════════ ONGLET PARRAINAGE ══════════ -->
+<div class="tab-panel" id="panel-parrainage">
+
+  <div class="kpi-row" id="kpiRow">
+    <div class="kpi"><div class="kpi-n" id="kpiTotal">—</div><div class="kpi-l">Codes créés</div></div>
+    <div class="kpi"><div class="kpi-n" id="kpiUses">—</div><div class="kpi-l">Parrainages réalisés</div></div>
+    <div class="kpi"><div class="kpi-n" id="kpiDisc">—</div><div class="kpi-l">Bons distribués (€)</div></div>
+  </div>
+
+  <div class="ref-list" id="refList"><div class="empty">Chargement…</div></div>
+
+</div>
+
+<script>
+  /* ═══════════════ COMMUN ═══════════════ */
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  const heads = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('visible'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('visible');
+    postResize();
+  }
+
+  function postResize() {
+    try { window.parent.postMessage({ type: 'iframeResize' }, '*'); } catch {}
+  }
+
+  function escHtml(s) {
+    return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ═══════════════ CODES PROMO ═══════════════ */
+  const STORAGE_KEY = 'leclam_promo_codes';
+  let promos = [];
+
+  function loadPromos() {
+    try {
+      const ui = JSON.parse(localStorage.getItem(STORAGE_KEY + '_ui') || 'null');
+      if (Array.isArray(ui) && ui.length) { promos = ui; return; }
+      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (raw && typeof raw === 'object') {
+        promos = Object.entries(raw).map(([code, d]) => ({
+          code, type: d.type || 'percent', value: d.value ?? 0, active: d.active !== false,
+        }));
+      }
+    } catch { promos = []; }
+  }
+
+  function renderPromos() {
+    const tbody = document.getElementById('promoBody');
+    const empty = document.getElementById('promoEmpty');
+    if (!promos.length) { tbody.innerHTML = ''; empty.style.display = 'block'; renderPreview(); return; }
+    empty.style.display = 'none';
+    tbody.innerHTML = promos.map((p, i) => `
+      <tr>
+        <td><input class="td-input code" type="text" value="${escHtml(p.code)}" placeholder="CODE"
+          oninput="promos[${i}].code=this.value.trim().toUpperCase();this.value=this.value.toUpperCase()"></td>
+        <td><select class="td-input" onchange="promos[${i}].type=this.value;renderPreview()">
+          <option value="percent" ${p.type==='percent'?'selected':''}>% remise</option>
+          <option value="flat"    ${p.type==='flat'?'selected':''}>€ remise</option>
+        </select></td>
+        <td><input class="td-input val" type="number" min="0" step="${p.type==='percent'?'1':'0.01'}" value="${p.value}"
+          oninput="promos[${i}].value=parseFloat(this.value)||0;renderPreview()">
+          <span style="font-size:.76rem;color:#aaa;margin-left:.2rem">${p.type==='percent'?'%':'€'}</span></td>
+        <td><label class="toggle"><input type="checkbox" ${p.active?'checked':''} onchange="promos[${i}].active=this.checked;renderPreview()">
+          <span class="slider"></span></label></td>
+        <td><button class="btn-del-sm" onclick="deletePromo(${i})">✕</button></td>
+      </tr>`).join('');
+    renderPreview();
+  }
+
+  function renderPreview() {
+    const wrap   = document.getElementById('previewWrap');
+    const actifs = promos.filter(p => p.active && p.code.trim());
+    if (!actifs.length) { wrap.innerHTML = '<div style="color:#bbb;font-size:.82rem;font-style:italic">Aucun code actif.</div>'; return; }
+    wrap.innerHTML = actifs.map(p => {
+      const lbl = p.type === 'percent' ? `−${p.value} %` : `−${Number(p.value).toFixed(2).replace('.',',')} €`;
+      return `<div class="preview-card"><strong>${escHtml(p.code)}</strong> &nbsp;→&nbsp;
+        <span class="${p.type==='percent'?'badge-pct':'badge-flat'}">${p.type==='percent'?'% remise':'€ remise'}</span>
+        &nbsp;<strong>${lbl}</strong></div>`;
+    }).join('');
+  }
+
+  function addPromoRow() {
+    promos.push({ code: '', type: 'percent', value: 10, active: true });
+    renderPromos();
+    const inputs = document.querySelectorAll('.td-input.code');
+    if (inputs.length) inputs[inputs.length-1].focus();
+    postResize();
+  }
+
+  function deletePromo(i) { promos.splice(i, 1); renderPromos(); postResize(); }
+
+  function savePromos() {
+    const forApp = {};
+    promos.forEach(p => {
+      const code = p.code.trim().toUpperCase();
+      if (!code || !p.active) return;
+      forApp[code] = { type: p.type, value: p.value };
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(forApp));
+    localStorage.setItem(STORAGE_KEY + '_ui', JSON.stringify(promos.map(p => ({ ...p, code: p.code.trim().toUpperCase() }))));
+    const msg = document.getElementById('promoMsg');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 2500);
+  }
+
+  /* ═══════════════ FLASH SALES ═══════════════ */
+  let _flashProds = [];
+
+  (function initDates() {
+    const now  = new Date();
+    const plus = new Date(now.getTime() + 24 * 3600000);
+    const toLocal = d => new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+    document.getElementById('fsStart').value = toLocal(now);
+    document.getElementById('fsEnd').value   = toLocal(plus);
+  })();
+
+  async function loadFlashProducts() {
+    const cat  = document.getElementById('fsCat').value;
+    const grid = document.getElementById('flashProdsGrid');
+    grid.innerHTML = '<div style="color:#bbb;font-size:.82rem;padding:.5rem">Chargement…</div>';
+    try {
+      const url = cat === 'all' ? '/api/products' : '/api/products?category=' + cat;
+      const r   = await fetch(url);
+      const d   = await r.json();
+      _flashProds = d.products || [];
+      grid.innerHTML = _flashProds.length
+        ? _flashProds.map(p => `<label class="prod-check"><input type="checkbox" value="${p.id}" checked>${p.emoji||''} ${p.name}</label>`).join('')
+        : '<div style="color:#bbb;font-size:.82rem;padding:.5rem">Aucun produit</div>';
+    } catch { grid.innerHTML = '<div style="color:#c00;font-size:.82rem;padding:.5rem">Erreur</div>'; }
+    postResize();
+  }
+
+  async function createFlashSale() {
+    const errEl = document.getElementById('fsErr');
+    errEl.style.display = 'none';
+    const name       = document.getElementById('fsName').value.trim();
+    const discount   = parseInt(document.getElementById('fsDiscount').value, 10);
+    const start      = document.getElementById('fsStart').value;
+    const end        = document.getElementById('fsEnd').value;
+    const productIds = [...document.querySelectorAll('#flashProdsGrid input:checked')].map(i => i.value);
+
+    if (!name)                         return showFsErr('Donnez un nom à l\'offre.');
+    if (!discount||discount<1||discount>90) return showFsErr('Remise invalide (1–90%).');
+    if (!start||!end)                  return showFsErr('Dates requises.');
+    if (new Date(end)<=new Date(start)) return showFsErr('La fin doit être après le début.');
+    if (!productIds.length)            return showFsErr('Sélectionnez au moins un produit.');
+
+    const btn = document.getElementById('fsBtn');
+    btn.disabled = true; btn.textContent = 'Création…';
+    try {
+      const r = await fetch('/api/admin/flash-sales', {
+        method: 'POST', headers: heads,
+        body: JSON.stringify({ name, discount, start: new Date(start).toISOString(), end: new Date(end).toISOString(), productIds }),
+      });
+      const d = await r.json();
+      if (!d.ok) return showFsErr(d.error || 'Erreur');
+      document.getElementById('fsName').value = '';
+      document.getElementById('fsDiscount').value = '';
+      loadFlashSales();
+    } catch { showFsErr('Erreur réseau.'); }
+    finally { btn.disabled = false; btn.textContent = 'Créer la vente flash'; }
+  }
+
+  function showFsErr(msg) {
+    const el = document.getElementById('fsErr');
+    el.textContent = msg; el.style.display = 'block';
+    document.getElementById('fsBtn').disabled = false;
+    document.getElementById('fsBtn').textContent = 'Créer la vente flash';
+  }
+
+  async function deleteFlashSale(id) {
+    if (!confirm('Supprimer cette vente flash ?')) return;
+    await fetch('/api/admin/flash-sales/' + id, { method: 'DELETE', headers: heads });
+    loadFlashSales();
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function countdown(endMs) {
+    const diff = endMs - Date.now();
+    if (diff <= 0) return null;
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    return h > 0 ? `⏳ ${h}h ${pad(m)}min` : `⏳ ${pad(m)}min ${pad(s)}s`;
+  }
+
+  async function loadFlashSales() {
+    const r = await fetch('/api/admin/flash-sales', { headers: heads });
+    const d = await r.json();
+    const sales = (d.sales || []).sort((a,b) => new Date(b.createdAt)-new Date(a.createdAt));
+    const list  = document.getElementById('saleList');
+    if (!sales.length) { list.innerHTML = '<div class="empty">Aucune vente flash créée.</div>'; return; }
+
+    const now = Date.now();
+    list.innerHTML = sales.map(s => {
+      const st  = new Date(s.start).getTime();
+      const en  = new Date(s.end).getTime();
+      const isA = now>=st && now<en, isP = now<st, isE = now>=en;
+      const cls = isA?'active':isP?'pending':'expired';
+      const stl = isA?'En cours':isP?'Programmée':'Expirée';
+      const stc = isA?'st-active':isP?'st-pending':'st-expired';
+      const fmt = iso => new Date(iso).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+      const cd  = isA ? (countdown(en)||'') : '';
+      return `<div class="sale-card ${cls}" id="sc-${s.id}">
+        <div class="sale-badge">−${s.discount}%<small>remise</small></div>
+        <div class="sale-body">
+          <div class="sale-name">${s.name}</div>
+          <span class="sale-st ${stc}">${stl}</span>
+          <div class="sale-meta">${fmt(s.start)} → ${fmt(s.end)}</div>
+          <div style="font-size:.73rem;color:#555">${s.productIds.length} produit(s)</div>
+          ${cd?`<div class="countdown" id="cd-${s.id}">${cd}</div>`:''}
+        </div>
+        <button class="btn-del-red" onclick="deleteFlashSale('${s.id}')">Supprimer</button>
+      </div>`;
+    }).join('');
+
+    sales.filter(s => Date.now()>=new Date(s.start) && Date.now()<new Date(s.end)).forEach(s => {
+      const el = document.getElementById('cd-'+s.id);
+      if (!el) return;
+      const iv = setInterval(() => {
+        const t = countdown(new Date(s.end).getTime());
+        if (!t) { clearInterval(iv); loadFlashSales(); return; }
+        el.textContent = t;
+      }, 1000);
+    });
+    postResize();
+  }
+
+  /* ═══════════════ PARRAINAGE ═══════════════ */
+  async function loadReferrals() {
+    try {
+      const r = await fetch('/api/admin/referrals', { headers: { 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf } });
+      const d = await r.json();
+      if (!d.ok) { document.getElementById('refList').innerHTML = '<div class="empty">Erreur de chargement.</div>'; return; }
+      const refs = d.referrals || [];
+      const totalUses = refs.reduce((s, r) => s + r.uses, 0);
+      document.getElementById('kpiTotal').textContent = refs.length;
+      document.getElementById('kpiUses').textContent  = totalUses;
+      document.getElementById('kpiDisc').textContent  = (totalUses * 10) + ' €';
+      if (!refs.length) { document.getElementById('refList').innerHTML = '<div class="empty">Aucun code parrain créé pour l\'instant.</div>'; return; }
+      document.getElementById('refList').innerHTML = refs.map(r => `
+        <div class="ref-card">
+          <div class="ref-code">${r.code}</div>
+          <div class="ref-body">
+            <div class="ref-name">${r.ownerName || '—'}</div>
+            <div class="ref-email">${r.ownerEmail}</div>
+          </div>
+          <div class="ref-badge">${r.uses} filleul${r.uses > 1 ? 's' : ''}</div>
+        </div>`).join('');
+    } catch { document.getElementById('refList').innerHTML = '<div class="empty">Erreur réseau.</div>'; }
+    postResize();
+  }
+
+  /* ═══════════════ INIT ═══════════════ */
+  loadPromos(); renderPromos();
+  loadFlashProducts(); loadFlashSales();
+  loadReferrals();
+
+  window.addEventListener('load', () => {
+    const send = () => window.parent?.postMessage({ type: 'iframeResize' }, '*');
+    send(); setTimeout(send, 500); setTimeout(send, 1500);
+  });
+  new MutationObserver(postResize).observe(document.body, { childList: true, subtree: true });
+</script>
+</body>
+</html>

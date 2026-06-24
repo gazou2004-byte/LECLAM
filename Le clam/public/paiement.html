@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement — Le Clam</title>
+  <!-- CSP gérée uniquement par l'en-tête HTTP serveur (pas de meta tag — évite les conflits) -->
+  <!-- Stripe.js : chargement synchrone pour Radar ; chargement dynamique en fallback si réseau lent -->
+  <script src="https://js.stripe.com/v3/" onerror="window._stripeLoadFailed=true"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {}
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .pay-page {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 5.5rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* ── Résumé commande ── */
+    .pay-summary {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.05), 0 1px 4px rgba(0,0,0,.04);
+      border: 1px solid rgba(0,0,0,.04);
+    }
+    .pay-summary h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      color: #1a1a1a;
+    }
+    .pay-items { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 1.5rem; }
+    .pay-item {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      font-size: .875rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid #f2ede6;
+    }
+    .pay-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .pay-item .pi-thumb {
+      width: 54px; height: 54px; border-radius: 10px; flex-shrink: 0;
+      background: #f6f2ec; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; overflow: hidden;
+      border: 1px solid #ede8e0;
+    }
+    .pay-item .pi-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pay-item .pi-name { flex: 1; font-weight: 500; color: #1a1a1a; line-height: 1.35; }
+    .pay-item .pi-qty  { background: #f0ebe3; color: #7a5c3a; font-size: .72rem; font-weight: 700; padding: .1rem .42rem; border-radius: 20px; white-space: nowrap; }
+    .pay-item .pi-price { font-weight: 700; white-space: nowrap; color: #1a1a1a; }
+
+    .pay-totals { border-top: 1px solid #eee; padding-top: 1rem; display: flex; flex-direction: column; gap: .35rem; }
+    .pay-line { display: flex; justify-content: space-between; font-size: .875rem; color: #666; }
+    .pay-grand { font-weight: 700; font-size: 1.12rem; color: #1a1a1a; margin-top: .4rem; padding-top: .6rem; border-top: 2px solid #e8e0d4; }
+    .pay-free { background: #dcfce7; color: #166534; font-weight: 700; font-size: .76rem; padding: .12rem .5rem; border-radius: 20px; }
+    .pay-tva  { font-size: .8rem; color: #aaa; font-style: italic; }
+
+    .pay-empty {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: #999;
+    }
+    .pay-empty a { color: #1a1a1a; font-weight: 600; }
+
+    /* ── Paiement ── */
+    .pay-form {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.05), 0 1px 4px rgba(0,0,0,.04);
+      border: 1px solid rgba(0,0,0,.04);
+      min-width: 0;
+      overflow: hidden;
+    }
+    .pay-form h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 1.4rem;
+      color: #1a1a1a;
+    }
+
+    /* Tabs de paiement */
+    .pay-tabs {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.6rem;
+      flex-wrap: wrap;
+    }
+    .pay-tab {
+      flex: 1;
+      min-width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .35rem;
+      padding: .75rem .5rem;
+      border: 2px solid #e5e5e5;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: .78rem;
+      font-weight: 600;
+      color: #666;
+      background: none;
+      transition: border-color .18s, color .18s, background .18s, transform .15s, box-shadow .15s;
+      font-family: inherit;
+    }
+    .pay-tab .tab-icon { display: flex; align-items: center; justify-content: center; gap: .2rem; height: 28px; }
+    .pay-tab .tab-icon svg, .pay-tab .tab-icon img { height: 22px; width: auto; }
+    .pay-tab.active {
+      border-color: #1a1a1a;
+      color: #1a1a1a;
+      background: #f9f9f7;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .pay-tab:hover:not(.tab-disabled):not(.active) {
+      border-color: #bbb;
+      color: #333;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(0,0,0,.06);
+    }
+    .pay-tab.tab-disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Logos cartes dans le champ numéro */
+    .card-logos { display: flex; gap: .35rem; align-items: center; margin-bottom: .6rem; }
+    .card-logos svg { height: 24px; width: auto; border-radius: 4px; }
+
+    /* Erreurs de validation */
+    .f-err { border-color: #ef4444 !important; background: #fff5f5 !important; }
+    .f-err-msg { display: none; font-size: .72rem; color: #dc2626; margin-top: .25rem; font-weight: 600; }
+    .f-err-msg.visible { display: block; }
+
+    /* Crypto */
+    .crypto-options { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-bottom: 1rem; }
+    .crypto-opt {
+      display: flex; align-items: center; gap: .5rem;
+      border: 2px solid #e5e5e5; border-radius: 10px;
+      padding: .6rem .75rem; cursor: pointer;
+      font-size: .8rem; font-weight: 600; color: #444;
+      background: none; font-family: inherit;
+      transition: border-color .18s, background .18s;
+    }
+    .crypto-opt.selected { border-color: #1a1a1a; background: #f9f9f7; color: #1a1a1a; }
+    .crypto-opt svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    /* Panneaux de paiement */
+    .pay-panel { display: none; }
+    .pay-panel.visible { display: block; }
+
+    /* PayPal */
+    .paypal-btn {
+      width: 100%;
+      padding: .9rem;
+      background: #FFC439;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #003087;
+      font-family: inherit;
+      transition: opacity .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .paypal-btn:hover { opacity: .9; }
+
+    /* Apple Pay */
+    .apple-btn {
+      width: 100%;
+      padding: .9rem;
+      background: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      font-family: inherit;
+      transition: opacity .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .apple-btn:hover { opacity: .85; }
+
+    /* Card form */
+    .card-field {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      margin-bottom: .9rem;
+    }
+    .card-field label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: #555;
+    }
+    .card-field input {
+      width: 100%;
+      padding: .7rem .9rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: .9rem;
+      font-family: inherit;
+      color: #222;
+      transition: border-color .18s;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .card-field { min-width: 0; }
+    .card-field input:focus { outline: none; border-color: #1a1a1a; box-shadow: 0 0 0 3px rgba(26, 26, 26, .07); }
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+
+
+    /* Bouton confirmation */
+    .confirm-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s, transform .15s;
+      margin-top: .4rem;
+    }
+    .confirm-btn:hover { background: #2a2a2a; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.22); }
+    .confirm-btn:active { transform: translateY(0); box-shadow: none; }
+    .confirm-btn:disabled { background: #ccc; cursor: default; transform: none; }
+
+    .pay-notice {
+      margin-top: 1.2rem;
+      padding: .75rem 1rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: #166534;
+    }
+
+    .pay-back {
+      display: block;
+      text-align: center;
+      margin-top: 1.4rem;
+      font-size: .82rem;
+      color: #999;
+    }
+    .pay-back a { color: #1a1a1a; font-weight: 600; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .pay-page {
+        grid-template-columns: 1fr;
+        padding: calc(84px + 44px + 1.2rem) 1rem 3rem;
+        gap: 1.2rem;
+      }
+      .card-row { grid-template-columns: 1fr; }
+      .pay-tabs { gap: .35rem; }
+      .pay-tab { min-width: 0; flex: 1; font-size: .72rem; padding: .55rem .3rem; }
+      .pay-summary, .pay-form { padding: 1.2rem; border-radius: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .pay-page { padding: calc(70px + 1rem) .75rem 2.5rem; gap: .9rem; }
+      .pay-summary, .pay-form { padding: 1rem .9rem; border-radius: 12px; }
+      .pay-summary h2, .pay-form h2 { font-size: 1.05rem; }
+      .crypto-options { grid-template-columns: 1fr; }
+      .addr-row-2 { grid-template-columns: 1fr; }
+      .pay-tabs { flex-wrap: nowrap; overflow-x: auto; gap: .25rem; }
+      .pay-tab { min-width: 80px; flex-shrink: 0; font-size: .7rem; padding: .5rem .25rem; }
+      .card-logos { flex-wrap: wrap; gap: .25rem; }
+      .pay-item .pi-thumb { width: 44px; height: 44px; font-size: 1.2rem; }
+      .confirm-btn { font-size: .88rem; padding: .85rem; }
+    }
+
+    @media (max-width: 360px) {
+      .pay-page { padding: calc(64px + .8rem) .5rem 2rem; }
+      .pay-summary, .pay-form { padding: .85rem .7rem; border-radius: 10px; }
+      .pay-tabs { gap: .2rem; }
+      .pay-tab { min-width: 70px; font-size: .65rem; padding: .45rem .2rem; }
+      .pay-grand { font-size: .95rem; }
+      .pay-line { font-size: .8rem; }
+    }
+
+    /* ── Indicateur d'étapes ── */
+    .pay-steps {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.8rem;
+    }
+    .pay-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .28rem;
+      flex-shrink: 0;
+    }
+    .step-num {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: #e8e0d4;
+      color: #a0856a;
+      font-size: .78rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .3s, color .3s;
+    }
+    .pay-step.active .step-num { background: #3e2a14; color: #fff; }
+    .pay-step.done   .step-num { background: #16a34a; color: #fff; }
+    .step-label {
+      font-size: .62rem;
+      font-weight: 700;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      white-space: nowrap;
+      transition: color .3s;
+    }
+    .pay-step.active .step-label { color: #3e2a14; }
+    .pay-step.done   .step-label { color: #16a34a; }
+    .step-connector {
+      flex: 1;
+      height: 2px;
+      background: #e8e0d4;
+      margin-bottom: 18px;
+      transition: background .3s;
+    }
+    .step-connector.done { background: #16a34a; }
+
+    /* ── Bouton retour étape ── */
+    .step-back {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .78rem; font-weight: 600; color: #a0856a;
+      background: none; border: none; cursor: pointer;
+      font-family: inherit; padding: 0; margin-bottom: 1rem;
+      transition: color .15s;
+    }
+    .step-back:hover { color: #3e2a14; }
+
+    /* ── Overlay traitement ── */
+    .pay-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem;
+    }
+    .pay-overlay.visible { display: flex; }
+    .overlay-ring {
+      width: 54px; height: 54px;
+      border: 3px solid #e8ddd0;
+      border-top-color: #3e2a14;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    .overlay-lbl { font-size: 1rem; font-weight: 700; color: #3e2a14; }
+    .overlay-sub { font-size: .78rem; color: #a0856a; margin-top: -.6rem; }
+
+    /* ── Carte adresse crypto marchand ── */
+    .crypto-addr-card {
+      background: #faf9f7;
+      border: 1.5px solid #e8ddd0;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin: .85rem 0 1rem;
+    }
+    .crypto-addr-label { font-size: .76rem; font-weight: 700; color: #555; margin-bottom: .4rem; display: block; }
+    .crypto-addr-row { display: flex; align-items: center; gap: .5rem; }
+    .crypto-addr-code {
+      flex: 1; font-size: .78rem; font-family: 'Courier New', monospace;
+      word-break: break-all; background: #f0ebe3;
+      padding: .45rem .6rem; border-radius: 8px; color: #1a1a1a;
+      border: 1px solid #e8ddd0; min-width: 0; line-height: 1.4;
+      text-decoration: none; display: block;
+      transition: background .15s, border-color .15s;
+    }
+    a.crypto-addr-code:hover { background: #e8ddd0; border-color: #c9a97a; color: #1a1a1a; }
+    .copy-btn {
+      flex-shrink: 0; padding: .4rem .7rem;
+      background: #3e2a14; color: #fff;
+      border: none; border-radius: 8px; font-size: .72rem;
+      font-weight: 700; cursor: pointer; font-family: inherit;
+      transition: background .15s;
+    }
+    .copy-btn:hover { background: #5c3f1e; }
+    .copy-btn.copied { background: #16a34a; }
+    .crypto-amount-line { font-size: .82rem; color: #555; margin-top: .55rem; }
+    .crypto-amount-line strong { color: #1a1a1a; }
+    .crypto-network-warn { font-size: .72rem; color: #a0856a; margin-top: .35rem; display: flex; align-items: flex-start; gap: .3rem; line-height: 1.45; }
+
+    .pay-error {
+      background: #fde8e8;
+      color: #c0392b;
+      padding: .6rem .9rem;
+      border-radius: 8px;
+      font-size: .82rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .pay-error.visible { display: block; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Adresse livraison ── */
+    .addr-section {
+      background: #faf9f7;
+      border-radius: 14px;
+      padding: .85rem 1rem;
+      margin-bottom: 1rem;
+      border: 1.5px solid #e8e0d4;
+    }
+    .addr-section h3 {
+      font-size: .82rem;
+      font-weight: 700;
+      color: #3e2a14;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: 0 0 .75rem;
+    }
+    .addr-confirm-row {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      cursor: pointer;
+    }
+    .addr-confirm-row input[type="checkbox"] {
+      width: 18px; height: 18px;
+      margin-top: 2px; flex-shrink: 0;
+      accent-color: #3e2a14;
+      cursor: pointer;
+    }
+    .addr-saved-text {
+      font-size: .88rem;
+      color: #333;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    .addr-saved-text span {
+      display: block;
+      font-size: .75rem;
+      color: #a0856a;
+      font-weight: 600;
+      margin-bottom: .2rem;
+    }
+    .addr-change-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      margin-top: .5rem;
+      font-size: .76rem;
+      color: #a0856a;
+      font-weight: 600;
+      cursor: pointer;
+      background: none; border: none;
+      font-family: inherit; padding: 0;
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .addr-change-link:hover { color: #3e2a14; }
+    .addr-fields { display: flex; flex-direction: column; gap: .45rem; margin-top: .65rem; }
+    .addr-field { display: flex; flex-direction: column; gap: .22rem; }
+    .addr-field label { font-size: .76rem; font-weight: 700; color: #555; }
+    .addr-field input, .addr-field select {
+      width: 100%; box-sizing: border-box;
+      padding: .62rem .85rem;
+      border: 1.5px solid #e0e0e0; border-radius: 10px;
+      font-size: .88rem; font-family: inherit; color: #222;
+      background: #fff; outline: none;
+      transition: border-color .18s;
+    }
+    .addr-field select {
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right .85rem center;
+      padding-right: 2.2rem;
+    }
+    .addr-field input:focus, .addr-field select:focus { border-color: #c9a97a; box-shadow: 0 0 0 3px rgba(201, 169, 122, .15); }
+    .addr-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .zip-hint { font-size: .68rem; color: #a0856a; margin-top: .1rem; min-height: .85rem; display: block; }
+
+    /* Carte adresse enregistrée */
+    .addr-saved-card {
+      display: flex; align-items: center; gap: .75rem;
+      background: #fff; border: 1.5px solid #d9c4a0; border-radius: 12px;
+      padding: .85rem 1rem; margin-bottom: .85rem; cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .addr-saved-card:hover { border-color: #3e2a14; background: #fdf9f5; }
+    .addr-saved-card.used  { border-color: #3e2a14; background: #fdf8ef; }
+    .addr-card-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .addr-card-text { flex: 1; min-width: 0; }
+    .addr-card-label { display: block; font-size: .68rem; font-weight: 700; color: #a0856a; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .15rem; }
+    .addr-card-rue  { display: block; font-size: .88rem; font-weight: 600; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .addr-card-rest { display: block; font-size: .78rem; color: #777; }
+    .addr-card-cta  { font-size: .75rem; font-weight: 700; color: #3e2a14; flex-shrink: 0; white-space: nowrap; }
+  </style></head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pay-page" id="payPage">
+
+    <!-- Colonne gauche : résumé -->
+    <section class="pay-summary">
+      <div id="modifBanner" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:.75rem 1rem;margin-bottom:1rem;font-size:.85rem;color:#92400e">
+        ✏ <strong>Modification de commande</strong> — vos articles ont été remplacés dans le panier.
+        Si le nouveau total est inférieur à l'ancien, un avoir vous sera automatiquement émis.
+        <div id="modifOrderRef" style="font-size:.78rem;margin-top:.3rem;color:#a16207"></div>
+      </div>
+      <h2 style="display:flex;align-items:center;gap:.5rem;font-family:'Playfair Display',serif;font-size:1.25rem;color:#1a1a1a">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3e2a14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span data-i18n="checkout.order_summary">Votre commande</span>
+      </h2>
+      <div class="pay-items" id="payItems"></div>
+      <div class="pay-totals" id="payTotals"></div>
+
+      <!-- Code parrain -->
+      <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #eee">
+        <div style="font-size:.78rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.45rem" data-i18n="checkout.promo_label">Code parrain / promo</div>
+        <div style="display:flex;gap:.5rem">
+          <input type="text" id="parrainInput" placeholder="Ex : MARIE-XZ8K" style="flex:1;padding:.55rem .85rem;border:1.5px solid #e0e0e0;border-radius:9px;font-size:.85rem;font-family:inherit">
+          <button onclick="applyParrainCode()" data-i18n="checkout.apply" style="padding:.55rem 1rem;background:#3e2a14;color:#d9c4a0;border:none;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Appliquer</button>
+        </div>
+        <div id="parrainMsg" style="font-size:.75rem;margin-top:.35rem;display:none"></div>
+      </div>
+    </section>
+
+    <!-- Colonne droite : paiement -->
+    <section class="pay-form">
+      <!-- Indicateur d'étapes -->
+      <div class="pay-steps">
+        <div class="pay-step active" id="stepDot1">
+          <div class="step-num">1</div>
+          <div class="step-label" data-i18n="checkout.step_delivery">Adresse</div>
+        </div>
+        <div class="step-connector" id="stepConn1"></div>
+        <div class="pay-step" id="stepDot2">
+          <div class="step-num">2</div>
+          <div class="step-label" data-i18n="checkout.step_payment">Paiement</div>
+        </div>
+        <div class="step-connector" id="stepConn2"></div>
+        <div class="pay-step" id="stepDot3">
+          <div class="step-num">3</div>
+          <div class="step-label" data-i18n="checkout.step_confirm">Confirmation</div>
+        </div>
+      </div>
+
+      <div class="pay-error" id="payError"></div>
+
+      <!-- ══ Étape 1 : Adresse de livraison ══ -->
+      <div id="formStep1">
+
+      <div class="addr-section" id="addrSection">
+        <h3 style="display:flex;align-items:center;gap:.42rem">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3e2a14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="checkout.address_title">Adresse de livraison</span>
+        </h3>
+        <div id="addrUseSavedRow" style="display:none;background:#faf7f2;border-radius:12px;padding:.7rem .95rem;margin-bottom:.85rem;border:1.5px solid #e8ddd0">
+          <div style="display:flex;align-items:flex-start;gap:.65rem">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a0856a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:.15rem;flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+                <div style="font-size:.82rem;font-weight:700;color:#3e2a14" data-i18n="checkout.saved_address">Adresse enregistrée</div>
+                <label style="display:flex;align-items:center;gap:.3rem;cursor:pointer;font-size:.72rem;color:#a0856a;font-weight:600">
+                  <input type="checkbox" id="addrUseSaved" checked onchange="onAddrCheckChange()" style="width:14px;height:14px;accent-color:#3e2a14;cursor:pointer;flex-shrink:0">
+                  <span data-i18n="checkout.use_saved">Utiliser</span>
+                </label>
+              </div>
+              <div id="addrSavedPreview" style="font-size:.78rem;color:#777;margin-top:.18rem;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
+              <button class="addr-change-link" onclick="document.getElementById('addrUseSaved').checked=false;onAddrCheckChange()">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <span data-i18n="checkout.edit_address">Modifier</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="addr-fields" id="addrFields">
+          <div class="addr-field">
+            <label id="lblCountry" data-i18n="checkout.country">Pays</label>
+            <select id="shipCountry" onchange="applyCountryConfig()">
+              <option value="FR">🇫🇷 France</option>
+              <option value="BE">🇧🇪 Belgique</option>
+              <option value="LU">🇱🇺 Luxembourg</option>
+              <option value="CH">🇨🇭 Suisse</option>
+              <option value="DE">🇩🇪 Allemagne</option>
+              <option value="IT">🇮🇹 Italie</option>
+              <option value="ES">🇪🇸 Espagne</option>
+              <option value="PT">🇵🇹 Portugal</option>
+              <option value="NL">🇳🇱 Pays-Bas</option>
+              <option value="GB">🇬🇧 Royaume-Uni</option>
+              <option value="US">🇺🇸 États-Unis</option>
+              <option value="CA">🇨🇦 Canada</option>
+              <option value="AU">🇦🇺 Australie</option>
+              <option value="JP">🇯🇵 Japon</option>
+              <option value="KR">🇰🇷 Corée du Sud</option>
+              <option value="CN">🇨🇳 Chine</option>
+              <option value="MX">🇲🇽 Mexique</option>
+              <option value="BR">🇧🇷 Brésil</option>
+              <option value="IN">🇮🇳 Inde</option>
+              <option value="RU">🇷🇺 Russie</option>
+              <option value="AR">🇦🇷 Argentine</option>
+              <option value="MA">🇲🇦 Maroc</option>
+              <option value="DZ">🇩🇿 Algérie</option>
+              <option value="TN">🇹🇳 Tunisie</option>
+            </select>
+          </div>
+          <div class="addr-field">
+            <label data-i18n="checkout.address_line">Rue et numéro</label>
+            <input type="text" id="shipRue" placeholder="12 rue des Lilas" autocomplete="street-address">
+            <span class="f-err-msg" id="err-shipRue"></span>
+          </div>
+          <div class="addr-row-2">
+            <div class="addr-field">
+              <label id="lblZip" data-i18n="checkout.postal">Code postal</label>
+              <input type="text" id="shipZip" placeholder="75001" autocomplete="postal-code" oninput="onZipInput()">
+              <span class="f-err-msg" id="err-shipZip"></span>
+            </div>
+            <div class="addr-field">
+              <label id="lblCity" data-i18n="checkout.city">Ville</label>
+              <input type="text" id="shipCity" placeholder="Paris" autocomplete="address-level2" list="shipCityList">
+              <datalist id="shipCityList"></datalist>
+              <span class="f-err-msg" id="err-shipCity"></span>
+            </div>
+          </div>
+          <div class="addr-field" id="stateField" style="display:none">
+            <label id="lblState" data-i18n="checkout.state_province">État / Province</label>
+            <input type="text" id="shipState" placeholder="California" autocomplete="address-level1">
+            <span class="f-err-msg" id="err-shipState"></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="confirm-btn" data-i18n="checkout.continue_payment" onclick="goToPayment()" style="margin-top:.8rem">
+        Continuer vers le paiement →
+      </button>
+      </div><!-- /formStep1 -->
+
+      <!-- ══ Étape 2 : Méthode de paiement ══ -->
+      <div id="formStep2" style="display:none">
+        <button class="step-back" onclick="backToAddress()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span data-i18n="checkout.back">← Retour</span>
+        </button>
+
+      <!-- Tabs -->
+      <div class="pay-tabs">
+        <!-- Carte bancaire -->
+        <button class="pay-tab active" data-method="card" onclick="switchMethod('card')">
+          <span class="tab-icon">
+            <svg viewBox="0 0 58 36" height="24" xmlns="http://www.w3.org/2000/svg" aria-label="Carte bancaire">
+              <rect width="58" height="36" rx="5" fill="#1a1f71"/>
+              <rect y="8" width="58" height="9" fill="rgba(0,0,0,.35)"/>
+              <rect x="5" y="21" width="12" height="9" rx="2" fill="#e8b84b"/>
+              <line x1="11" y1="21" x2="11" y2="30" stroke="#c49a2e" stroke-width="1.2"/>
+              <line x1="5" y1="25.5" x2="17" y2="25.5" stroke="#c49a2e" stroke-width="1.2"/>
+              <circle cx="42" cy="26" r="5" fill="#eb001b" opacity=".9"/>
+              <circle cx="50" cy="26" r="5" fill="#f79e1b" opacity=".9"/>
+              <path d="M46 22.3a5 5 0 010 7.4 5 5 0 010-7.4z" fill="#ff5f00"/>
+            </svg>
+          </span>
+        </button>
+        <!-- PayPal -->
+        <button class="pay-tab" data-method="paypal" onclick="switchMethod('paypal')">
+          <span class="tab-icon">
+            <svg viewBox="0 0 80 28" height="22" xmlns="http://www.w3.org/2000/svg" aria-label="PayPal">
+              <text x="0" y="21" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" font-style="italic" fill="#003087">Pay</text>
+              <text x="33" y="21" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" font-style="italic" fill="#009cde">Pal</text>
+            </svg>
+          </span>
+        </button>
+        <!-- Apple Pay -->
+        <button class="pay-tab" id="tab-apple" data-method="apple" onclick="switchMethod('apple')">
+          <span class="tab-icon">
+            <svg viewBox="0 0 60 28" height="26" xmlns="http://www.w3.org/2000/svg" aria-label="Apple Pay">
+              <rect width="60" height="28" rx="5" fill="#000"/>
+              <path fill="#fff" d="M13.5 6.8c.7-.9 1.2-2.1 1.1-3.3-1.1.05-2.3.7-3.1 1.6-.67.77-1.26 2.02-1.1 3.21 1.16.09 2.35-.6 3.1-1.51z"/>
+              <path fill="#fff" d="M10.7 8.5c-1.85.03-3.42 1.04-4.32 1.04-.91 0-2.3-.99-3.8-.96C.76 8.61-.7 9.58-.7 9.58c-1.85 3.2-.47 7.95 1.33 10.56.88 1.28 1.93 2.7 3.31 2.65 1.33-.06 1.83-.86 3.43-.86 1.6 0 2.05.86 3.46.83 1.43-.02 2.34-1.29 3.21-2.57 1.01-1.48 1.43-2.91 1.45-2.98-.03-.01-2.78-1.07-2.81-4.25-.02-2.66 2.17-3.93 2.27-3.99-1.25-1.83-3.17-2.03-3.84-2.07-.78-.07-1.62.26-2.41.63z"/>
+              <text x="20" y="19" font-family="-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="12" font-weight="500" fill="#fff">Pay</text>
+            </svg>
+          </span>
+        </button>
+        <!-- Crypto -->
+        <button class="pay-tab" data-method="crypto" onclick="switchMethod('crypto')">
+          <span class="tab-icon">
+            <svg viewBox="0 0 28 28" height="26" xmlns="http://www.w3.org/2000/svg" aria-label="Crypto">
+              <circle cx="14" cy="14" r="14" fill="#F7931A"/>
+              <path fill="#fff" d="M19.1 12.1c.26-1.7-.99-2.6-2.68-3.21l.55-2.18-1.33-.33-.53 2.13c-.35-.09-.71-.17-1.07-.25l.54-2.15-1.33-.33-.55 2.18c-.29-.07-.57-.13-.85-.2l-1.73-.43-.33 1.42s.99.23.97.24c.54.14.64.49.62.77l-1.49 5.97c-.07.17-.24.42-.63.33.01.02-.97-.24-.97-.24l-.67 1.52 1.63.41c.3.08.6.16.89.23l-.56 2.24 1.33.33.55-2.19c.37.1.72.19 1.07.28l-.55 2.18 1.33.33.56-2.23c2.32.44 4.06.26 4.79-1.84.59-1.69-.03-2.67-1.25-3.3.89-.21 1.56-.79 1.74-2zm-3.11 4.36c-.42 1.69-3.27.78-4.19.55l.75-3c.93.23 3.9.69 3.44 2.45zm.42-4.38c-.38 1.54-2.74.76-3.5.57l.68-2.73c.76.19 3.22.54 2.82 2.16z"/>
+            </svg>
+          </span>
+        </button>
+        <!-- Virement bancaire -->
+        <button class="pay-tab" data-method="virement" onclick="switchMethod('virement')">
+          <span class="tab-icon">
+            <svg viewBox="0 0 28 26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Virement bancaire">
+              <polygon points="14,1 27,8 1,8" fill="#3e2a14" opacity=".85"/>
+              <rect x="3" y="8" width="22" height="2" fill="#3e2a14" opacity=".85"/>
+              <rect x="4" y="10" width="2.5" height="10" rx="1" fill="#3e2a14" opacity=".75"/>
+              <rect x="8.5" y="10" width="2.5" height="10" rx="1" fill="#3e2a14" opacity=".75"/>
+              <rect x="13" y="10" width="2.5" height="10" rx="1" fill="#3e2a14" opacity=".75"/>
+              <rect x="17.5" y="10" width="2.5" height="10" rx="1" fill="#3e2a14" opacity=".75"/>
+              <rect x="22" y="10" width="2.5" height="10" rx="1" fill="#3e2a14" opacity=".75"/>
+              <rect x="2" y="20" width="24" height="2.5" rx="1" fill="#3e2a14" opacity=".85"/>
+              <rect x="0" y="23" width="28" height="2.5" rx="1" fill="#3e2a14"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- Panneau Carte — Stripe Payment Elements (formulaire intégré, jamais de données carte sur nos serveurs) -->
+      <div class="pay-panel visible" id="panel-card">
+        <div class="card-logos" style="margin-bottom:.9rem">
+          <svg height="26" viewBox="0 0 52 32" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="32" rx="4.5" fill="#fff" stroke="#e0ddd8" stroke-width=".8"/><text x="26" y="22" font-family="'Arial Black',Arial,sans-serif" font-size="18" font-weight="900" fill="#1a1f71" text-anchor="middle" font-style="italic" letter-spacing="-1.2">VISA</text></svg>
+          <svg height="26" viewBox="0 0 52 32" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="32" rx="4.5" fill="#fff" stroke="#e0ddd8" stroke-width=".8"/><circle cx="20" cy="16" r="9.5" fill="#EB001B"/><circle cx="32" cy="16" r="9.5" fill="#F79E1B"/><path d="M26 8.3a9.5 9.5 0 010 15.4 9.5 9.5 0 010-15.4z" fill="#FF5F00"/></svg>
+          <svg height="26" viewBox="0 0 52 32" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="32" rx="4.5" fill="#016FD0"/><text x="26" y="21" font-family="'Arial Black',Arial,sans-serif" font-size="9" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="1">AMEX</text></svg>
+        </div>
+
+        <!-- Skeleton chargement Stripe -->
+        <div id="stripe-loading" style="background:#f6f2ec;border-radius:12px;padding:1.2rem;margin-bottom:.85rem;text-align:center">
+          <div style="width:20px;height:20px;border:2.5px solid #d9c4a0;border-top-color:#8b6914;border-radius:50%;animation:spin .75s linear infinite;display:inline-block;vertical-align:middle;margin-right:.5rem"></div>
+          <span style="font-size:.82rem;color:#999;vertical-align:middle">Chargement du formulaire sécurisé…</span>
+        </div>
+
+        <!-- Container Stripe Payment Element -->
+        <div id="stripe-element-wrap" style="display:none;margin-bottom:.85rem">
+          <div id="payment-element"></div>
+        </div>
+
+        <!-- Stripe non configuré — affiché uniquement si les clés Stripe sont absentes du .env -->
+        <div id="stripe-fallback" style="display:none;background:#fef9f0;border:1.5px solid #f5d68a;border-radius:12px;padding:1rem 1.1rem;font-size:.82rem;color:#7a5c1a;margin-bottom:.85rem;line-height:1.6">
+          <strong>Paiement par carte temporairement indisponible.</strong><br>
+          Choisissez PayPal, virement bancaire ou contactez-nous à <a href="mailto:contact@leclam.eu" style="color:#7a5c1a;font-weight:600">contact@leclam.eu</a>.
+        </div>
+
+        <!-- Avertissement tentatives -->
+        <div id="stripe-attempts-warn" style="display:none;background:#fff7ed;border:1px solid #fed7aa;color:#92400e;padding:.55rem .85rem;border-radius:8px;font-size:.78rem;margin-bottom:.7rem;line-height:1.5"></div>
+
+        <!-- Erreur paiement -->
+        <div id="stripeError" style="display:none;background:#fde8e8;color:#c0392b;padding:.6rem .9rem;border-radius:8px;font-size:.82rem;margin-bottom:.7rem;line-height:1.45"></div>
+
+        <button class="confirm-btn" id="confirmBtn" onclick="submitStripePayment()" data-i18n="checkout.stripe_btn">
+          🔒 Payer par carte →
+        </button>
+
+        <!-- Compte à rebours blocage -->
+        <div id="stripe-lockout" style="display:none;text-align:center;font-size:.78rem;color:#c0392b;margin-top:.45rem;font-weight:600"></div>
+
+        <p style="font-size:.72rem;color:#aaa;text-align:center;margin-top:.65rem">Paiement 100 % sécurisé · 3D Secure activé · PCI DSS · Données chiffrées par Stripe</p>
+      </div>
+
+      <!-- Panneau PayPal — redirection vers paypal.com -->
+      <div class="pay-panel" id="panel-paypal">
+        <p style="font-size:.82rem;color:#666;margin-bottom:1rem;line-height:1.5" data-i18n="checkout.paypal_desc">
+          Vous serez redirigé vers PayPal pour vous connecter et confirmer le paiement en toute sécurité.
+        </p>
+        <div id="paypalError" style="display:none;background:#fde8e8;color:#c0392b;padding:.6rem .9rem;border-radius:8px;font-size:.82rem;margin-bottom:.7rem"></div>
+        <button class="confirm-btn paypal-btn" id="paypalBtn" onclick="redirectPaypal()" style="background:#FFC439;color:#003087;border:none">
+          <svg height="20" viewBox="0 0 100 32" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:.4rem"><text y="25" font-family="'Arial Black',Arial,sans-serif" font-size="24" font-weight="900" fill="#003087">Pay</text><text x="46" y="25" font-family="'Arial Black',Arial,sans-serif" font-size="24" font-weight="900" fill="#009cde">Pal</text></svg>
+          <span data-i18n="checkout.paypal_btn">Payer avec PayPal →</span>
+        </button>
+        <p style="font-size:.72rem;color:#aaa;margin-top:.8rem;text-align:center" data-i18n="checkout.paypal_note">Connexion sécurisée via PayPal — vos coordonnées bancaires ne nous sont pas communiquées.</p>
+      </div>
+
+      <!-- Panneau Apple Pay -->
+      <div class="pay-panel" id="panel-apple">
+        <div id="apple-pay-available">
+          <p style="font-size:.82rem;color:#666;margin-bottom:.85rem;line-height:1.5" data-i18n="checkout.apple_desc">
+            Confirmez votre paiement avec Face ID ou Touch ID directement depuis votre appareil Apple.
+          </p>
+          <div id="applePayError" style="display:none;background:#fde8e8;color:#c0392b;padding:.65rem .9rem;border-radius:10px;font-size:.82rem;margin-bottom:.85rem;line-height:1.5"></div>
+          <button class="apple-btn" id="apple-pay-btn" onclick="launchApplePay()">
+            <svg viewBox="0 0 20 24" height="20" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 8c-.1-2.8 2.3-4.2 2.4-4.3-1.3-1.9-3.3-2.2-4-2.2-1.7-.2-3.4 1-4.3 1-.9 0-2.3-1-3.7-.9-1.9 0-3.6 1.1-4.6 2.8C.4 8.1 2 14 4 17c1 1.4 2.1 3 3.6 2.9 1.4-.1 2-.9 3.7-.9 1.7 0 2.3.9 3.7.9 1.6 0 2.6-1.5 3.5-2.9 1.1-1.6 1.6-3.2 1.6-3.3-.1-.1-3-1.1-3-4.7z"/><path d="M13.6 2.6c.8-.9 1.3-2.3 1.2-3.6-1.1.1-2.5.8-3.3 1.7-.7.8-1.3 2.1-1.2 3.4 1.3.1 2.6-.6 3.3-1.5z"/></svg>
+            <span data-i18n="checkout.apple_btn">Payer avec Apple Pay</span>
+          </button>
+          <p style="font-size:.72rem;color:#aaa;text-align:center;margin-top:.7rem" data-i18n="checkout.apple_note">Nécessite Safari sur iPhone, iPad ou Mac avec Touch ID activé.</p>
+        </div>
+        <div id="apple-pay-unavailable" style="display:none">
+          <div style="text-align:center;padding:1.6rem 1.2rem;background:#f8f8f8;border-radius:14px">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:.7rem"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p style="font-size:.85rem;color:#555;margin:0 0 .35rem;font-weight:600" data-i18n="checkout.apple_unavailable_title">Apple Pay non disponible</p>
+            <p style="font-size:.78rem;color:#999;margin:0 0 1rem" data-i18n="checkout.apple_unavailable_desc">Apple Pay fonctionne uniquement sur Safari (iPhone, iPad, Mac).</p>
+            <div style="display:flex;gap:.5rem;justify-content:center">
+              <button onclick="switchMethod('card')" style="padding:.45rem .9rem;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit" data-i18n="checkout.card">Carte bancaire</button>
+              <button onclick="switchMethod('paypal')" style="padding:.45rem .9rem;background:#FFC439;color:#003087;border:none;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit" data-i18n="checkout.paypal">PayPal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Panneau Crypto / Virement -->
+      <div class="pay-panel" id="panel-crypto">
+        <p style="font-size:.82rem;color:#555;margin-bottom:.85rem;line-height:1.55" data-i18n="checkout.crypto_desc">
+          Sélectionnez votre crypto, puis envoyez le montant exact à notre adresse ci-dessous depuis votre propre wallet.
+        </p>
+        <div class="crypto-options">
+          <button class="crypto-opt selected" data-coin="BTC" onclick="selectCrypto(this,'BTC')">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#F7931A"/><path d="M16.5 10.3c.2-1.4-.8-2.1-2.2-2.6l.4-1.8-1.1-.3-.4 1.7-.9-.2.4-1.7-1.1-.3-.4 1.8c-.2-.1-.7-.2-.7-.2l-1.4-.4-.3 1.2s.8.2.8.2c.5.1.6.4.5.7l-1.2 5c-.1.3-.3.4-.7.3 0 0-.8-.2-.8-.2L7.5 15l1.4.3-.4 1.8 1.1.3.4-1.8.9.2-.4 1.8 1.1.3.4-1.8c2 .4 3.5.2 4.1-1.6.5-1.4 0-2.2-1-2.7.7-.2 1.3-.7 1.4-1.5zm-2.5 3.5c-.4 1.4-2.9.6-3.7.5l.7-2.7c.8.2 3.4.6 3 2.2zm.4-3.5c-.3 1.3-2.4.6-3.1.5l.6-2.5c.7.2 3 .5 2.5 2z" fill="#fff"/></svg>
+            Bitcoin
+          </button>
+          <button class="crypto-opt" data-coin="ETH" onclick="selectCrypto(this,'ETH')">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#627EEA"/><path d="M12 3.5v6.3l5.3 2.4L12 3.5z" fill="#fff" opacity=".6"/><path d="M12 3.5L6.7 12.2l5.3-2.4V3.5z" fill="#fff"/><path d="M12 16.5v4l5.3-7.4L12 16.5z" fill="#fff" opacity=".6"/><path d="M12 20.5v-4l-5.3-3.4L12 20.5z" fill="#fff"/><path d="M12 15.4l5.3-3.2-5.3-2.4v5.6z" fill="#fff" opacity=".2"/><path d="M6.7 12.2L12 15.4V9.8L6.7 12.2z" fill="#fff" opacity=".6"/></svg>
+            Ethereum
+          </button>
+          <button class="crypto-opt" data-coin="USDT" onclick="selectCrypto(this,'USDT')">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#26A17B"/><path d="M13.1 12.5v-.1c3.3-.2 5.8-.8 5.8-1.6s-2.5-1.4-5.8-1.6v-1h3.3V6.5H7.6v2.7H11v1c-3.3.2-5.8.8-5.8 1.6S7.7 13.2 11 13.4v4.8h2.1v-4.8c0-.1 0 .1 0-.1-.1 0-.1 0 0 0l.1.2h-.1v-.5c-.1 0 .1 0 0 0l-.1.2v.5h.1z" fill="#fff"/></svg>
+            USDT
+          </button>
+          <button class="crypto-opt" data-coin="SOL" onclick="selectCrypto(this,'SOL')">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#9945FF"/><path d="M7 15.5h8.5l1.5-1.5H8.5L7 15.5zm0-6h8.5L17 8H8.5L7 9.5zm1.5 3H17L15.5 11H7l1.5 1.5z" fill="#fff"/></svg>
+            Solana
+          </button>
+        </div>
+
+        <!-- Blocs statiques par crypto — affichés/masqués par selectCrypto() -->
+        <div id="crypto-info-BTC" class="crypto-addr-card">
+          <span class="crypto-addr-label" data-i18n="checkout.crypto_btc_label">Adresse Bitcoin (BTC) à créditer :</span>
+          <div class="crypto-addr-row">
+            <a class="crypto-addr-code" href="https://mempool.space/address/bc1q_REMPLACER_VOTRE_ADRESSE_BTC" target="_blank" rel="noopener noreferrer">bc1q_REMPLACER_VOTRE_ADRESSE_BTC</a>
+            <button class="copy-btn" onclick="copyCryptoAddr(this)" data-i18n="checkout.copy_btn">Copier</button>
+          </div>
+          <div class="crypto-network-warn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a0856a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span data-i18n="checkout.crypto_btc_warn">Réseau Bitcoin uniquement — tout autre réseau entraîne une perte définitive.</span>
+          </div>
+        </div>
+        <div id="crypto-info-ETH" class="crypto-addr-card" style="display:none">
+          <span class="crypto-addr-label" data-i18n="checkout.crypto_eth_label">Adresse Ethereum (ETH — ERC-20) à créditer :</span>
+          <div class="crypto-addr-row">
+            <a class="crypto-addr-code" href="https://etherscan.io/address/0x_REMPLACER_VOTRE_ADRESSE_ETH" target="_blank" rel="noopener noreferrer">0x_REMPLACER_VOTRE_ADRESSE_ETH</a>
+            <button class="copy-btn" onclick="copyCryptoAddr(this)" data-i18n="checkout.copy_btn">Copier</button>
+          </div>
+          <div class="crypto-network-warn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a0856a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span data-i18n="checkout.crypto_eth_warn">Réseau Ethereum (ERC-20) uniquement — n'utilisez pas BNB Smart Chain ou d'autres réseaux.</span>
+          </div>
+        </div>
+        <div id="crypto-info-USDT" class="crypto-addr-card" style="display:none">
+          <span class="crypto-addr-label" data-i18n="checkout.crypto_usdt_label">Adresse USDT Tron (TRC-20) à créditer :</span>
+          <div class="crypto-addr-row">
+            <a class="crypto-addr-code" href="https://tronscan.org/#/address/T_REMPLACER_VOTRE_ADRESSE_USDT" target="_blank" rel="noopener noreferrer">T_REMPLACER_VOTRE_ADRESSE_USDT</a>
+            <button class="copy-btn" onclick="copyCryptoAddr(this)" data-i18n="checkout.copy_btn">Copier</button>
+          </div>
+          <div class="crypto-network-warn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a0856a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span data-i18n="checkout.crypto_usdt_warn">Réseau Tron (TRC-20) uniquement — n'envoyez pas d'USDT ERC-20 ou BEP-20, les fonds seraient perdus.</span>
+          </div>
+        </div>
+        <div id="crypto-info-SOL" class="crypto-addr-card" style="display:none">
+          <span class="crypto-addr-label" data-i18n="checkout.crypto_sol_label">Adresse Solana (SOL) à créditer :</span>
+          <div class="crypto-addr-row">
+            <a class="crypto-addr-code" href="https://solscan.io/account/_REMPLACER_VOTRE_ADRESSE_SOL" target="_blank" rel="noopener noreferrer">_REMPLACER_VOTRE_ADRESSE_SOL</a>
+            <button class="copy-btn" onclick="copyCryptoAddr(this)" data-i18n="checkout.copy_btn">Copier</button>
+          </div>
+          <div class="crypto-network-warn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a0856a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span data-i18n="checkout.crypto_sol_warn">Réseau Solana uniquement — vérifiez bien le réseau avant d'envoyer.</span>
+          </div>
+        </div>
+
+        <div class="crypto-amount-line" style="margin-bottom:.85rem">
+          <span data-i18n="checkout.crypto_amount_label">Montant à envoyer :</span> <strong id="cryptoAmountEur">—</strong>
+          <span style="font-size:.72rem;color:#999;margin-left:.3rem" data-i18n="checkout.crypto_amount_note">(équivalent en crypto au taux du moment)</span>
+        </div>
+
+        <button class="confirm-btn" onclick="confirmCryptoOrder()" id="cryptoConfirmBtn" data-i18n="checkout.crypto_confirm_btn">
+          J'ai envoyé le paiement →
+        </button>
+        <p style="font-size:.72rem;color:#aaa;text-align:center;margin-top:.65rem;line-height:1.5" data-i18n="checkout.crypto_note">
+          Votre commande sera validée après confirmation sur la blockchain (généralement 10–60 minutes selon la crypto choisie).
+        </p>
+      </div>
+
+      <!-- Panneau Virement bancaire -->
+      <div class="pay-panel" id="panel-virement">
+        <p style="font-size:.82rem;color:#555;margin-bottom:1rem;line-height:1.55" data-i18n="checkout.virement_desc">
+          Effectuez votre virement aux coordonnées ci-dessous. Votre commande sera validée dès réception des fonds (1 à 3 jours ouvrés).
+        </p>
+
+        <div style="background:#f5f0e8;border:1.5px solid #d9c4a0;border-radius:14px;padding:1.1rem 1.2rem;margin-bottom:1rem">
+          <table style="width:100%;border-collapse:collapse;font-size:.84rem;line-height:2">
+            <tr>
+              <td style="color:#888;font-weight:600;padding-right:1rem;white-space:nowrap" data-i18n="checkout.virement_owner_label">Titulaire</td>
+              <td style="color:#1a1a1a;font-weight:700">Le Clam</td>
+            </tr>
+            <tr>
+              <td style="color:#888;font-weight:600;white-space:nowrap">IBAN</td>
+              <td style="color:#1a1a1a;font-weight:700;font-family:monospace;letter-spacing:.04em" id="viremIban">FR76 XXXX XXXX XXXX XXXX XXXX XXX</td>
+            </tr>
+            <tr>
+              <td style="color:#888;font-weight:600;white-space:nowrap">BIC</td>
+              <td style="color:#1a1a1a;font-weight:700;font-family:monospace" id="viremBic">XXXXXXXX</td>
+            </tr>
+            <tr>
+              <td style="color:#888;font-weight:600;white-space:nowrap" data-i18n="checkout.virement_bank_label">Banque</td>
+              <td style="color:#1a1a1a;font-weight:600">Crédit Agricole</td>
+            </tr>
+            <tr>
+              <td style="color:#888;font-weight:600;white-space:nowrap" data-i18n="checkout.virement_ref_label">Référence</td>
+              <td style="color:#3e2a14;font-weight:700" id="viremRef">—</td>
+            </tr>
+          </table>
+          <div style="display:flex;gap:.5rem;margin-top:.75rem">
+            <button class="copy-btn" onclick="copyVirementInfo()" style="flex:1;padding:.5rem;background:#3e2a14;color:#d9c4a0;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:inherit" data-i18n="checkout.virement_copy_btn">Copier les coordonnées</button>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:.5rem;background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:.75rem .9rem;margin-bottom:1rem;font-size:.78rem;color:#92400e;line-height:1.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.15rem"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span data-i18n="checkout.virement_warning">Indiquez impérativement la <strong>référence commande</strong> dans le libellé de votre virement pour accélérer le traitement.</span>
+        </div>
+
+        <button class="confirm-btn" onclick="confirmVirementOrder()" id="virementConfirmBtn" data-i18n="checkout.virement_confirm_btn">
+          J'ai effectué le virement →
+        </button>
+        <p style="font-size:.72rem;color:#aaa;text-align:center;margin-top:.65rem;line-height:1.5" data-i18n="checkout.virement_note">
+          Commande confirmée immédiatement. Expédition dès réception du paiement (1–3 jours ouvrés).
+        </p>
+      </div>
+
+      </div><!-- /formStep2 -->
+
+      <div class="pay-notice">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span data-i18n="checkout.secure">Paiement 100% sécurisé</span>
+        <span style="color:#bbf7d0;font-weight:400;margin:0 .15rem">·</span>
+        <span>SSL 256-bit</span>
+        <span style="color:#bbf7d0;font-weight:400;margin:0 .15rem">·</span>
+        <span data-i18n="checkout.encrypted">Données chiffrées</span>
+      </div>
+
+      <p class="pay-back"><a href="javascript:history.back()" data-i18n="checkout.back_to_cart">← Retour au panier</a></p>
+    </section>
+  </div>
+
+  <!-- Cart drawer (pour modifier le panier depuis cette page) -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer" data-i18n="cart.close" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p data-i18n="cart.empty">Votre panier est vide</p></div>
+    </div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <!-- Overlay traitement paiement -->
+  <div class="pay-overlay" id="payOverlay">
+    <div class="overlay-ring"></div>
+    <div class="overlay-lbl" data-i18n="checkout.processing_lbl">Paiement en cours…</div>
+    <div class="overlay-sub" data-i18n="checkout.processing_sub">Ne fermez pas cette fenêtre</div>
+  </div>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+  <script>
+    /* ── Retour 3DS échoué : afficher le message d'erreur ── */
+    (function() {
+      const stripeErr = new URLSearchParams(location.search).get('stripe_error');
+      if (!stripeErr) return;
+      history.replaceState(null, '', location.pathname); /* nettoie l'URL */
+      document.addEventListener('DOMContentLoaded', function() {
+        const errEl = document.getElementById('stripeError');
+        if (errEl) {
+          const msgs = { processing_error: 'Erreur lors du traitement 3D Secure.', failed: 'Authentification 3D Secure échouée. Vérifiez vos informations ou essayez une autre carte.' };
+          errEl.textContent = msgs[stripeErr] || 'Votre paiement n\'a pas pu être finalisé. Réessayez ou choisissez un autre moyen de paiement.';
+          errEl.style.display = '';
+        }
+        /* Revenir directement à l'étape de paiement */
+        const s1 = document.getElementById('formStep1');
+        const s2 = document.getElementById('formStep2');
+        if (s1) s1.style.display = 'none';
+        if (s2) s2.style.display = '';
+      });
+    })();
+
+    /* ── Adresse de livraison ── */
+    const COUNTRY_CFG = {
+      FR: { zip:'Code postal',  zipPh:'75001',      city:'Ville',        cityPh:'Paris' },
+      BE: { zip:'Code postal',  zipPh:'1000',       city:'Ville',        cityPh:'Bruxelles' },
+      LU: { zip:'Code postal',  zipPh:'1011',       city:'Ville',        cityPh:'Luxembourg' },
+      CH: { zip:'NPA',          zipPh:'1200',       city:'Localité',     cityPh:'Genève' },
+      DE: { zip:'Postleitzahl', zipPh:'10115',      city:'Stadt',        cityPh:'Berlin' },
+      IT: { zip:'CAP',          zipPh:'00100',      city:'Città',        cityPh:'Roma' },
+      ES: { zip:'Código postal',zipPh:'28001',      city:'Ciudad',       cityPh:'Madrid' },
+      PT: { zip:'Código postal',zipPh:'1000-001',   city:'Cidade',       cityPh:'Lisboa' },
+      NL: { zip:'Postcode',     zipPh:'1000 AA',    city:'Stad',         cityPh:'Amsterdam' },
+      GB: { zip:'Postcode',     zipPh:'SW1A 1AA',   city:'Town / City',  cityPh:'London' },
+      US: { zip:'ZIP Code',     zipPh:'10001',      city:'City',         cityPh:'New York',     state:'State',    statePh:'NY',  showState:true },
+      CA: { zip:'Postal Code',  zipPh:'K1A 0A6',   city:'City',         cityPh:'Ottawa',       state:'Province', statePh:'ON',  showState:true },
+      AU: { zip:'Postcode',     zipPh:'2000',       city:'Suburb / City',cityPh:'Sydney',       state:'State',    statePh:'NSW', showState:true },
+      JP: { zip:'郵便番号',      zipPh:'100-0001',   city:'市区町村',      cityPh:'東京都千代田区' },
+      KR: { zip:'우편번호',      zipPh:'03000',      city:'시/군/구',      cityPh:'서울특별시' },
+      CN: { zip:'邮政编码',      zipPh:'100000',     city:'城市',          cityPh:'北京市' },
+      MX: { zip:'Código postal',zipPh:'06600',      city:'Ciudad',       cityPh:'Ciudad de México' },
+      BR: { zip:'CEP',          zipPh:'01310-100',  city:'Cidade',       cityPh:'São Paulo',    state:'Estado',   statePh:'SP',  showState:true },
+      IN: { zip:'PIN Code',     zipPh:'110001',     city:'City',         cityPh:'New Delhi',    state:'State',    statePh:'Delhi', showState:true },
+      RU: { zip:'Индекс',       zipPh:'101000',     city:'Город',        cityPh:'Москва' },
+      AR: { zip:'Código postal',zipPh:'C1001',      city:'Ciudad',       cityPh:'Buenos Aires' },
+      MA: { zip:'Code postal',  zipPh:'10000',      city:'Ville',        cityPh:'Rabat' },
+      DZ: { zip:'Code postal',  zipPh:'16000',      city:'Ville',        cityPh:'Alger' },
+      TN: { zip:'Code postal',  zipPh:'1000',       city:'Ville',        cityPh:'Tunis' },
+    };
+
+    const ZIP_MAXLEN = {
+      FR:5, BE:4, LU:4, CH:4, DE:5, IT:5, ES:5, PT:8, NL:7,
+      GB:8, US:10, CA:7, AU:4, JP:8, KR:5, CN:6, MX:5,
+      BR:9, IN:6, RU:6, AR:8, MA:5, DZ:5, TN:4,
+    };
+
+    /* Taux de TVA par pays (null = export, TVA non applicable) */
+    const TVA_RATES = {
+      FR: 0.20, BE: 0.21, LU: 0.17, DE: 0.19, IT: 0.22,
+      ES: 0.21, PT: 0.23, NL: 0.21,
+      /* Hors UE — export, TVA française non collectée */
+      CH: null, GB: null, US: null, CA: null, AU: null,
+      JP: null, KR: null, CN: null, MX: null, BR: null,
+      IN: null, RU: null, AR: null, MA: null, DZ: null, TN: null,
+    };
+
+    function getCurrentCountry() {
+      const cb = document.getElementById('addrUseSaved');
+      if (cb && cb.checked) {
+        const raw  = localStorage.getItem('leclam_user');
+        const user = raw ? JSON.parse(raw) : null;
+        return (user && user.address && user.address.country) || 'FR';
+      }
+      return document.getElementById('shipCountry')?.value || 'FR';
+    }
+
+    function applyCountryConfig() {
+      const code = document.getElementById('shipCountry').value;
+      const cfg  = COUNTRY_CFG[code] || COUNTRY_CFG['FR'];
+      document.getElementById('lblZip').textContent  = cfg.zip;
+      document.getElementById('lblCity').textContent = cfg.city;
+      const zipEl = document.getElementById('shipZip');
+      zipEl.placeholder = cfg.zipPh;
+      zipEl.maxLength   = ZIP_MAXLEN[code] || 10;
+      document.getElementById('shipCity').placeholder = cfg.cityPh;
+      const stateField = document.getElementById('stateField');
+      if (cfg.showState) {
+        stateField.style.display = '';
+        document.getElementById('lblState').textContent  = cfg.state   || 'État';
+        document.getElementById('shipState').placeholder = cfg.statePh || '';
+      } else {
+        stateField.style.display = 'none';
+      }
+      /* Vider les suggestions quand le pays change */
+      document.getElementById('shipCityList').innerHTML = '';
+      renderSummary();
+    }
+
+    let _zipTimer = null;
+    async function onZipInput() {
+      clearTimeout(_zipTimer);
+      const zip     = document.getElementById('shipZip').value.trim();
+      const country = document.getElementById('shipCountry').value || 'FR';
+      const dl      = document.getElementById('shipCityList');
+      const cityEl  = document.getElementById('shipCity');
+      dl.innerHTML  = '';
+
+      const cities = await _fetchCitiesForZip(zip, country);
+      dl.innerHTML  = cities.map(c => `<option value="${c}">`).join('');
+      if (cities.length === 1 && !cityEl.value) cityEl.value = cities[0];
+    }
+
+    /* _fetchCitiesForZip est défini dans app.js et partagé */
+
+    /* Déclarés ici pour éviter la TDZ lors du premier appel à renderSummary()
+       depuis applyCountryConfig() → initAddr() */
+    let _parrainDiscount    = 0;
+    let _parrainCode        = '';
+    let _parrainFilleulCode = '';
+
+    /* Détection d'une modification de commande */
+    const _modifData      = JSON.parse(localStorage.getItem('leclam_modification') || 'null');
+    const _originalOrderId = _modifData?.originalOrderId || null;
+
+    (function initAddr() {
+      const raw  = localStorage.getItem('leclam_user');
+      const user = raw ? JSON.parse(raw) : null;
+      const addr = user && user.address;
+
+      if (addr && addr.country) {
+        const sel = document.getElementById('shipCountry');
+        if (sel) {
+          const opt = [...sel.options].find(o => o.value === addr.country);
+          if (opt) sel.value = addr.country;
+        }
+      }
+      applyCountryConfig();
+
+      if (addr && (addr.rue || addr.city)) {
+        const row = document.getElementById('addrUseSavedRow');
+        if (row) {
+          const preview = [addr.rue, [addr.zip, addr.city].filter(Boolean).join(' '), addr.country]
+            .filter(Boolean).join(', ');
+          document.getElementById('addrSavedPreview').textContent = preview;
+          row.style.display = '';
+          /* Masquer le formulaire par défaut (case cochée) */
+          document.getElementById('addrFields').style.display = 'none';
+        }
+      }
+    })();
+
+    function onAddrCheckChange() {
+      const checked = document.getElementById('addrUseSaved').checked;
+      document.getElementById('addrFields').style.display = checked ? 'none' : '';
+      renderSummary();
+    }
+
+    (function initSavedCard() {
+      const raw  = localStorage.getItem('leclam_user');
+      const user = raw ? JSON.parse(raw) : null;
+      const pm   = user && user.paymentMethods && user.paymentMethods.find(p => p.type === 'card');
+      if (!pm) return;
+
+      const row = document.getElementById('cardUseSavedRow');
+      if (row) {
+        document.getElementById('cardSavedPreview').textContent =
+          `${pm.brand || 'Carte'} •••• ${pm.last4}  ·  ${pm.expiry}  ·  ${pm.cardName || ''}`;
+        row.style.display = '';
+        _fillCardFields(pm);
+        document.getElementById('cardFields').style.display = 'none';
+      }
+    })();
+
+    function _fillCardFields(pm) {
+      const num = document.getElementById('cardNumber');
+      const nam = document.getElementById('cardName');
+      const exp = document.getElementById('cardExpiry');
+      /* Afficher uniquement les 4 derniers chiffres masqués — jamais le numéro complet */
+      if (num) num.placeholder = `•••• •••• •••• ${pm.last4 || '????'}`;
+      if (nam) nam.value = pm.cardName || '';
+      if (exp) exp.value = pm.expiry   || '';
+      /* CVV jamais pré-rempli — interdit PCI DSS */
+      document.getElementById('saveCardRow').style.display = 'none';
+    }
+
+    (function initSavedPaypal() {
+      const raw  = localStorage.getItem('leclam_user');
+      const user = raw ? JSON.parse(raw) : null;
+      const pm   = user && user.paymentMethods && user.paymentMethods.find(p => p.type === 'paypal');
+      if (!pm) return;
+      const row = document.getElementById('paypalUseSavedRow');
+      if (row) {
+        document.getElementById('paypalSavedPreview').textContent = pm.email || '';
+        row.style.display = '';
+      }
+    })();
+
+    function onPaypalCheckChange() {
+      /* PayPal redirige toujours vers PayPal — la case est informative */
+    }
+
+    (function initSavedCrypto() {
+      const raw  = localStorage.getItem('leclam_user');
+      const user = raw ? JSON.parse(raw) : null;
+      const pm   = user && user.paymentMethods && user.paymentMethods.find(p => p.type === 'crypto');
+      if (!pm) return;
+      const row = document.getElementById('cryptoUseSavedRow');
+      if (row) {
+        const w = pm.wallet || '';
+        const shortW = w.length > 12 ? w.slice(0,8) + '…' + w.slice(-4) : w;
+        document.getElementById('cryptoSavedPreview').textContent = (pm.coin || '') + ' · ' + shortW;
+        row.style.display = '';
+        _fillCryptoFields(pm);
+      }
+    })();
+
+    function _fillCryptoFields(pm) {
+      const wallet = document.getElementById('walletAddr');
+      if (wallet) wallet.value = pm.wallet || '';
+      if (pm.coin) {
+        document.querySelectorAll('.crypto-opt').forEach(b => {
+          const m = b.getAttribute('onclick').match(/'([A-Z]+)'/);
+          b.classList.toggle('selected', m && m[1] === pm.coin);
+        });
+      }
+    }
+
+    function onCryptoCheckChange() {
+      const checked = document.getElementById('cryptoUseSaved').checked;
+      if (checked) {
+        const raw  = localStorage.getItem('leclam_user');
+        const user = raw ? JSON.parse(raw) : null;
+        const pm   = user && user.paymentMethods && user.paymentMethods.find(p => p.type === 'crypto');
+        if (pm) _fillCryptoFields(pm);
+      } else {
+        const wallet = document.getElementById('walletAddr');
+        if (wallet) wallet.value = '';
+        document.querySelectorAll('.crypto-opt').forEach((b, i) => b.classList.toggle('selected', i === 0));
+      }
+    }
+
+    function onCardCheckChange() {
+      const checked = document.getElementById('cardUseSaved').checked;
+      const fields  = document.getElementById('cardFields');
+      const saveRow = document.getElementById('saveCardRow');
+      if (checked) {
+        fields.style.display = 'none';
+        saveRow.style.display = 'none';
+        const raw  = localStorage.getItem('leclam_user');
+        const user = raw ? JSON.parse(raw) : null;
+        const pm   = user && user.paymentMethods && user.paymentMethods.find(p => p.type === 'card');
+        if (pm) _fillCardFields(pm);
+      } else {
+        fields.style.display = '';
+        saveRow.style.display = '';
+        ['cardNumber','cardName','cardExpiry','cardCvv'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+      }
+    }
+
+    function getShippingAddress() {
+      const cb = document.getElementById('addrUseSaved');
+      if (cb && cb.checked) {
+        const raw  = localStorage.getItem('leclam_user');
+        const user = raw ? JSON.parse(raw) : null;
+        return user && user.address ? user.address : null;
+      }
+      return {
+        rue:     document.getElementById('shipRue')?.value.trim()     || '',
+        zip:     document.getElementById('shipZip')?.value.trim()     || '',
+        city:    document.getElementById('shipCity')?.value.trim()    || '',
+        state:   document.getElementById('shipState')?.value.trim()   || '',
+        country: document.getElementById('shipCountry')?.value        || 'FR',
+      };
+    }
+
+    /* ── Rediriger si panier vide ── */
+    if (Cart.count() === 0) {
+      document.getElementById('payPage').innerHTML = `
+        <div class="pay-empty" style="grid-column:1/-1;padding:6rem 2rem;text-align:center">
+          <div style="margin-bottom:1.2rem"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+          <p style="color:#666;margin-bottom:1rem">Votre panier est vide.</p>
+          <a href="index.html" style="color:#1a1a1a;font-weight:700">← Découvrir nos univers</a>
+        </div>`;
+    }
+
+    /* ── Code parrain / promo ── */
+
+    async function applyParrainCode() {
+      const input  = document.getElementById('parrainInput');
+      const msgEl  = document.getElementById('parrainMsg');
+      const code   = (input?.value || '').trim().toUpperCase();
+      if (!code) return;
+
+      msgEl.style.display = 'none';
+
+      /* Valider d'abord (public) */
+      try {
+        const rv = await fetch('/api/referral/validate', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code }),
+        });
+        const dv = await rv.json();
+        if (!dv.ok) {
+          msgEl.textContent = dv.error || 'Code invalide.';
+          msgEl.style.color = '#c0392b'; msgEl.style.display = 'block';
+          return;
+        }
+        _parrainCode    = code;
+        _parrainDiscount = 5;
+        msgEl.textContent = `✅ Code de ${dv.ownerName} accepté — −5 € appliqués !`;
+        msgEl.style.color = '#16a34a'; msgEl.style.display = 'block';
+        renderSummary();
+        if (input) input.disabled = true;
+        document.querySelector('[onclick="applyParrainCode()"]').disabled = true;
+      } catch {
+        msgEl.textContent = 'Erreur réseau.';
+        msgEl.style.color = '#c0392b'; msgEl.style.display = 'block';
+      }
+    }
+
+    /* ── Rendre le résumé de commande ── */
+    function renderSummary() {
+      const items    = Cart.items;
+      const subtotal = Cart.total();
+      const shipping = Cart.shipping();
+      const grand    = Math.max(0, subtotal + shipping - _parrainDiscount);
+
+      const itemsEl  = document.getElementById('payItems');
+      const totalsEl = document.getElementById('payTotals');
+      if (!itemsEl) return;
+
+      itemsEl.innerHTML = items.map(i => {
+        const tKey = 'products.' + i.id;
+        const tName = I18n.t(tKey);
+        const displayName = tName !== tKey ? tName : i.name;
+        return `
+        <div class="pay-item">
+          <div class="pi-thumb">
+            ${i.img ? `<img src="${i.img}" alt="${displayName}">` : `<span>${i.emoji || '📦'}</span>`}
+          </div>
+          <span class="pi-name">${displayName}</span>
+          <span class="pi-qty">× ${i.qty}</span>
+          <span class="pi-price">${fmtPrice(i.price * i.qty)}</span>
+        </div>`;
+      }).join('');
+
+      const country  = getCurrentCountry();
+      const tvaRate  = TVA_RATES.hasOwnProperty(country) ? TVA_RATES[country] : TVA_RATES['FR'];
+      const tvaLine  = tvaRate != null
+        ? `<div class="pay-line pay-tva"><span>${I18n.t('checkout.tva_label', { rate: Math.round(tvaRate * 100) })}</span><span>${fmtPrice(grand * tvaRate / (1 + tvaRate))}</span></div>`
+        : `<div class="pay-line pay-tva"><span>${I18n.t('checkout.tva_none')}</span><span>—</span></div>`;
+
+      totalsEl.innerHTML = `
+        <div class="pay-line"><span>${I18n.t('checkout.subtotal')}</span><span>${fmtPrice(subtotal)}</span></div>
+        <div class="pay-line">
+          <span style="display:flex;align-items:center;gap:.3rem">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            ${I18n.t('checkout.shipping')}
+          </span>
+          <span class="${shipping === 0 ? 'pay-free' : ''}">${shipping === 0 ? I18n.t('checkout.free') : fmtPrice(shipping)}</span>
+        </div>
+        ${_parrainDiscount > 0 ? `<div class="pay-line" style="color:#16a34a"><span>${I18n.t('checkout.godfather_code', { code: _parrainCode })}</span><span>−${fmtPrice(_parrainDiscount)}</span></div>` : ''}
+        ${tvaLine}
+        <div class="pay-line pay-grand"><span>${I18n.t('checkout.total')}</span><span>${fmtPrice(grand)}</span></div>
+      `;
+    }
+    renderSummary();
+    document.addEventListener('DOMContentLoaded', renderSummary);
+    document.addEventListener('i18nApplied', renderSummary);
+    document.addEventListener('DOMContentLoaded', _restoreCheckoutState);
+    /* Bannière modification */
+    document.addEventListener('DOMContentLoaded', () => {
+      if (_originalOrderId) {
+        document.getElementById('modifBanner').style.display = 'block';
+        document.getElementById('modifOrderRef').textContent = 'Commande d\'origine : ' + _originalOrderId;
+      }
+    });
+
+    /* ── Persistance état checkout (sessionStorage — survit au refresh) ── */
+    const _CS_KEY = 'leclam_checkout';
+
+    function _saveCheckoutState() {
+      try {
+        const useSaved = document.getElementById('addrUseSaved')?.checked;
+        sessionStorage.setItem(_CS_KEY, JSON.stringify({
+          step:     document.getElementById('formStep2').style.display !== 'none' ? 2 : 1,
+          method:   document.querySelector('.pay-tab.active')?.dataset.method || 'card',
+          useSaved: !!useSaved,
+          address:  useSaved ? null : {
+            country: document.getElementById('shipCountry')?.value || 'FR',
+            rue:     document.getElementById('shipRue')?.value     || '',
+            zip:     document.getElementById('shipZip')?.value     || '',
+            city:    document.getElementById('shipCity')?.value    || '',
+            state:   document.getElementById('shipState')?.value   || '',
+          },
+        }));
+      } catch {}
+    }
+
+    function _restoreCheckoutState() {
+      if (new URLSearchParams(location.search).get('stripe_error')) return;
+      try {
+        const raw = sessionStorage.getItem(_CS_KEY);
+        if (!raw) return;
+        const st = JSON.parse(raw);
+
+        /* Restaure les champs adresse (uniquement si pas d'adresse sauvegardée utilisée) */
+        if (!st.useSaved && st.address) {
+          const a = st.address;
+          const country = document.getElementById('shipCountry');
+          if (country && a.country) { country.value = a.country; applyCountryConfig(); }
+          if (a.rue   && document.getElementById('shipRue'))   document.getElementById('shipRue').value   = a.rue;
+          if (a.zip   && document.getElementById('shipZip'))   document.getElementById('shipZip').value   = a.zip;
+          if (a.city  && document.getElementById('shipCity'))  document.getElementById('shipCity').value  = a.city;
+          if (a.state && document.getElementById('shipState')) document.getElementById('shipState').value = a.state;
+        }
+
+        /* Restaure la méthode sélectionnée (sans déclencher initStripeElements prématurément) */
+        if (st.method) {
+          document.querySelectorAll('.pay-tab').forEach(t => t.classList.toggle('active', t.dataset.method === st.method));
+          document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('visible'));
+          const panel = document.getElementById('panel-' + st.method);
+          if (panel) panel.classList.add('visible');
+        }
+
+        /* Restaure l'étape */
+        if (st.step === 2) {
+          document.getElementById('formStep1').style.display = 'none';
+          document.getElementById('formStep2').style.display = '';
+          document.getElementById('stepDot1').classList.remove('active');
+          document.getElementById('stepDot1').classList.add('done');
+          document.getElementById('stepConn1').classList.add('done');
+          document.getElementById('stepDot2').classList.add('active');
+          const m = st.method || 'card';
+          if (m === 'card')   initStripeElements();
+          if (m === 'paypal') loadPayPalSDK().then(initPayPalButtons).catch(() => {});
+        }
+      } catch {}
+    }
+
+    /* ── Switcher de méthode de paiement ── */
+    function switchMethod(method) {
+      document.querySelectorAll('.pay-tab').forEach(t => t.classList.toggle('active', t.dataset.method === method));
+      document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('visible'));
+      document.getElementById('panel-' + method).classList.add('visible');
+      if (method === 'card') initStripeElements();
+      _saveCheckoutState();
+    }
+
+    /* ── Navigation entre étapes ── */
+    function goToPayment() {
+      if (!validateAddress()) {
+        document.querySelector('.f-err')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      document.getElementById('formStep1').style.display = 'none';
+      document.getElementById('formStep2').style.display = '';
+      document.getElementById('stepDot1').classList.remove('active');
+      document.getElementById('stepDot1').classList.add('done');
+      document.getElementById('stepConn1').classList.add('done');
+      document.getElementById('stepDot2').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const activeMethod = document.querySelector('.pay-tab.active')?.dataset.method || 'card';
+      if (activeMethod === 'card')   initStripeElements();
+      if (activeMethod === 'paypal') loadPayPalSDK().then(initPayPalButtons).catch(() => {});
+      _saveCheckoutState();
+    }
+
+    function backToAddress() {
+      document.getElementById('formStep2').style.display = 'none';
+      document.getElementById('formStep1').style.display = '';
+      document.getElementById('stepDot1').classList.add('active');
+      document.getElementById('stepDot1').classList.remove('done');
+      document.getElementById('stepConn1').classList.remove('done');
+      document.getElementById('stepDot2').classList.remove('active');
+      _saveCheckoutState();
+    }
+
+    function markStepDone() {
+      document.getElementById('stepDot2').classList.remove('active');
+      document.getElementById('stepDot2').classList.add('done');
+      document.getElementById('stepConn2').classList.add('done');
+      document.getElementById('stepDot3').classList.add('active');
+    }
+
+    /* ── Sélection crypto ── */
+    function selectCrypto(btn, coin) {
+      document.querySelectorAll('.crypto-opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      ['BTC','ETH','USDT','SOL'].forEach(c => {
+        const el = document.getElementById('crypto-info-' + c);
+        if (el) el.style.display = c === coin ? '' : 'none';
+      });
+    }
+
+    ['shipRue','shipZip','shipCity'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', () => fieldOk(id));
+    });
+
+    /* ── Validation ── */
+    const ZIP_RULES = {
+      FR:/^\d{5}$/,        BE:/^\d{4}$/,              LU:/^\d{4}$/,
+      CH:/^\d{4}$/,        DE:/^\d{5}$/,              IT:/^\d{5}$/,
+      ES:/^\d{5}$/,        PT:/^\d{4}(-\d{3})?$/,     NL:/^\d{4} ?[A-Z]{2}$/i,
+      GB:/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i,
+      US:/^\d{5}(-\d{4})?$/, CA:/^[A-Z]\d[A-Z] ?\d[A-Z]\d$/i,
+      AU:/^\d{4}$/,        JP:/^\d{3}-?\d{4}$/,       KR:/^\d{5}$/,
+      CN:/^\d{6}$/,        MX:/^\d{5}$/,              BR:/^\d{5}-?\d{3}$/,
+      IN:/^\d{6}$/,        RU:/^\d{6}$/,              AR:/^\d{4}$|^[A-Z]\d{4}[A-Z]{3}$/i,
+      MA:/^\d{5}$/,        DZ:/^\d{5}$/,              TN:/^\d{4}$/,
+    };
+    const STATE_REQUIRED = ['US','CA','AU','BR','IN'];
+
+    function fieldErr(id, msg) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('f-err');
+      const sp = document.getElementById('err-' + id);
+      if (sp) { sp.textContent = msg; sp.classList.add('visible'); }
+      return false;
+    }
+    function fieldOk(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('f-err');
+      const sp = document.getElementById('err-' + id);
+      if (sp) sp.classList.remove('visible');
+    }
+
+    function validateAddress() {
+      const useSaved = document.getElementById('addrUseSaved');
+      if (useSaved && useSaved.checked) return true;
+
+      let ok = true;
+      const rue     = document.getElementById('shipRue')?.value.trim()   || '';
+      const zip     = document.getElementById('shipZip')?.value.trim()   || '';
+      const city    = document.getElementById('shipCity')?.value.trim()  || '';
+      const state   = document.getElementById('shipState')?.value.trim() || '';
+      const country = document.getElementById('shipCountry')?.value      || 'FR';
+
+      /* Rue */
+      if (!rue)
+        ok = fieldErr('shipRue', 'Veuillez indiquer votre rue et numéro.');
+      else if (rue.length < 5)
+        ok = fieldErr('shipRue', 'Adresse trop courte (minimum 5 caractères).');
+      else if (!/\d/.test(rue))
+        ok = fieldErr('shipRue', 'Incluez le numéro de rue (ex : 12 rue des Lilas).');
+      else fieldOk('shipRue');
+
+      /* Code postal */
+      if (!zip) {
+        ok = fieldErr('shipZip', 'Code postal requis.');
+      } else {
+        const rule = ZIP_RULES[country];
+        if (rule && !rule.test(zip)) ok = fieldErr('shipZip', 'Format de code postal invalide pour ce pays.');
+        else fieldOk('shipZip');
+      }
+
+      /* Ville */
+      if (!city)
+        ok = fieldErr('shipCity', 'Veuillez indiquer votre ville.');
+      else if (city.length < 2)
+        ok = fieldErr('shipCity', 'Nom de ville trop court.');
+      else if (/^\d/.test(city))
+        ok = fieldErr('shipCity', 'Le nom de ville ne peut pas commencer par un chiffre.');
+      else fieldOk('shipCity');
+
+      /* État / Province (US, CA, AU, BR, IN) */
+      if (STATE_REQUIRED.includes(country) && !state)
+        ok = fieldErr('shipState', 'Ce champ est requis pour ce pays.');
+
+      return ok;
+    }
+
+    /* ── Helpers communs ── */
+    function _requireAddress() {
+      if (!validateAddress()) {
+        document.querySelector('.f-err')?.scrollIntoView({ behavior:'smooth', block:'center' });
+        return false;
+      }
+      return true;
+    }
+    function _authHdrs() {
+      return { 'Content-Type':'application/json', 'Authorization':'Bearer '+(localStorage.getItem('leclam_token')||''), 'X-CSRF-Token': localStorage.getItem('leclam_csrf')||'' };
+    }
+
+    /* Recalcul si panier modifié depuis le drawer */
+    const observer = new MutationObserver(renderSummary);
+    const cartItems = document.getElementById('cartItems');
+    if (cartItems) observer.observe(cartItems, { childList: true, subtree: true });
+
+    /* ══════════════════════════════════════════════════════════════════
+       STRIPE PAYMENT ELEMENTS — formulaire intégré avec 3D Secure / SCA
+       Aucune donnée carte ne passe par nos serveurs (tokenisation Stripe).
+       ══════════════════════════════════════════════════════════════════ */
+
+    let _stripe          = null;   /* instance Stripe.js */
+    let _stripeElements  = null;   /* Elements container */
+    let _elemMounted     = false;  /* guard init unique */
+    let _stripeFailures  = 0;      /* compteur local d'échecs */
+    let _lockoutUntil    = 0;      /* timestamp fin de blocage */
+    let _lockoutTimer    = null;
+
+    /* ── Init du Payment Element (appelé par switchMethod / goToPayment) ── */
+    async function initStripeElements() {
+      if (_elemMounted) return;
+      console.log('[Stripe] initStripeElements() start');
+
+      const loadingEl  = document.getElementById('stripe-loading');
+      const wrapEl     = document.getElementById('stripe-element-wrap');
+      const fallbackEl = document.getElementById('stripe-fallback');
+      const errEl      = document.getElementById('stripeError');
+      const btn        = document.getElementById('confirmBtn');
+
+      function _showFallback(msg, retryable) {
+        if (loadingEl) loadingEl.style.display = 'none';
+        if (!msg) {
+          /* Clé Stripe absente côté serveur — vraiment indisponible */
+          if (wrapEl)     wrapEl.style.display     = 'none';
+          if (fallbackEl) fallbackEl.style.display = '';
+          if (btn)        btn.style.display        = 'none';
+          if (errEl)      errEl.style.display      = 'none';
+        } else {
+          /* Extension / réseau / timeout — récupérable, checkout intact */
+          if (wrapEl)     wrapEl.style.display     = 'none';
+          if (fallbackEl) fallbackEl.style.display = 'none';
+          if (errEl) {
+            errEl.style.cssText = 'display:block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;padding:.65rem .9rem;border-radius:8px;font-size:.82rem;margin-bottom:.7rem;line-height:1.5';
+            errEl.innerHTML = msg + (retryable
+              ? ' <button onclick="_elemMounted=false;initStripeElements()" style="margin-left:.6rem;padding:.25rem .8rem;background:#3e2a14;color:#d9c4a0;border:none;border-radius:6px;font-size:.78rem;cursor:pointer;font-family:inherit;font-weight:600">↺ Réessayer</button>'
+              : '');
+          }
+        }
+      }
+
+      /* Charge Stripe.js dynamiquement si le chargement statique a échoué */
+      function _loadStripeJs() {
+        return new Promise((resolve, reject) => {
+          if (typeof Stripe !== 'undefined') { resolve(); return; }
+          console.log('[Stripe] Tentative chargement dynamique…');
+          const s = document.createElement('script');
+          s.src = 'https://js.stripe.com/v3/';
+          s.onload  = () => { console.log('[Stripe] Chargé OK (dynamique)'); resolve(); };
+          s.onerror = (e) => { console.error('[Stripe] Échec chargement dynamique', e); reject(e); };
+          document.head.appendChild(s);
+        });
+      }
+
+      /* Stripe.js absent — tentative de chargement dynamique */
+      if (typeof Stripe === 'undefined') {
+        console.warn('[Stripe] Script statique absent — typeof Stripe === undefined. _stripeLoadFailed =', window._stripeLoadFailed);
+        _loadStripeJs()
+          .then(() => { _elemMounted = false; initStripeElements(); })
+          .catch(() => {
+            /* Diagnostic fetch pour distinguer réseau vs blocage extension */
+            fetch('https://js.stripe.com/v3/', { method: 'HEAD', mode: 'no-cors' })
+              .then(() => {
+                console.warn('[Stripe] fetch no-cors OK → script probablement bloqué par extension/CSP');
+                _showFallback(
+                  'Le paiement par carte n\'a pas pu se charger. Vérifiez vos <strong>extensions de confidentialité / bloqueurs</strong> ou essayez en <strong>fenêtre privée</strong>.',
+                  true
+                );
+              })
+              .catch(() => {
+                console.error('[Stripe] fetch HEAD échoué → problème réseau ou firewall');
+                _showFallback(
+                  'Le paiement par carte n\'a pas pu se charger. Vérifiez votre connexion ou essayez en <strong>fenêtre privée</strong>.',
+                  true
+                );
+              });
+          });
+        return;
+      }
+      console.log('[Stripe] Script chargé statiquement ✓');
+
+      /* Timeout anti-blocage : si Stripe ne répond pas en 12 s, on bascule sur le fallback */
+      let _initDone = false;
+      const _initTimeout = setTimeout(() => {
+        if (!_initDone) _showFallback('Le paiement par carte est long à répondre. Vérifiez vos extensions ou essayez en <strong>fenêtre privée</strong>.', true);
+      }, 30000);
+
+      try {
+        /* 1. Récupère la clé publique */
+        const cfg = await fetch('/api/stripe/config').then(r => r.json());
+
+        /* Clé absente ou clé placeholder non remplacée */
+        const keyOk = cfg.ok && cfg.publishableKey &&
+                      /^pk_(test|live)_[A-Za-z0-9]{20,}$/.test(cfg.publishableKey);
+        if (!keyOk) {
+          clearTimeout(_initTimeout); _initDone = true;
+          _showFallback();
+          return;
+        }
+
+        _stripe = Stripe(cfg.publishableKey);
+
+        /* 2. Calcul montant (mode différé — PaymentIntent créé seulement au submit) */
+        const grand = Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0));
+
+        _stripeElements = _stripe.elements({
+          mode:               'payment',
+          amount:             Math.round(grand * 100),
+          currency:           'eur',
+          locale:             'fr',
+          paymentMethodTypes: ['card'],
+          appearance: {
+            theme: 'stripe',
+            variables: {
+              colorPrimary:     '#8b6914',
+              colorBackground:  '#ffffff',
+              colorText:        '#1a1a1a',
+              colorDanger:      '#c0392b',
+              fontFamily:       'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+              spacingUnit:      '4px',
+              borderRadius:     '10px',
+            },
+            rules: {
+              '.Input':        { border: '1.5px solid #d9c4a0', boxShadow: 'none' },
+              '.Input:focus':  { border: '1.5px solid #8b6914', boxShadow: '0 0 0 3px rgba(139,105,20,.12)' },
+              '.Input--invalid': { border: '1.5px solid #c0392b' },
+              '.Label':        { color: '#555', fontWeight: '500', fontSize: '13px' },
+              '.Error':        { fontSize: '12px', marginTop: '4px' },
+            },
+          },
+        });
+
+        /* 3. Crée le Payment Element */
+        const payEl = _stripeElements.create('payment', {
+          layout: { type: 'tabs', defaultCollapsed: false },
+          defaultValues: {
+            billingDetails: { email: (JSON.parse(localStorage.getItem('leclam_user') || '{}').email || '') },
+          },
+        });
+
+        /* Affiche le formulaire uniquement quand Stripe confirme qu'il est prêt */
+        payEl.on('ready', () => {
+          console.log('[Stripe] Payment Element prêt ✓');
+          clearTimeout(_initTimeout); _initDone = true;
+          _elemMounted = true;
+          if (loadingEl) loadingEl.style.display = 'none';
+          if (wrapEl)    wrapEl.style.display    = '';
+        });
+
+        /* Erreur de chargement de l'iframe Stripe (réseau, CSP, clé invalide) */
+        payEl.on('loaderror', (ev) => {
+          if (_elemMounted) return;
+          clearTimeout(_initTimeout); _initDone = true;
+          _stripeElements = null;
+          const msg = (ev && ev.error && ev.error.message) || null;
+          _showFallback(
+            'Le paiement par carte n\'a pas pu se charger.' + (msg ? ` (${msg})` : '') + ' Vérifiez vos <strong>extensions de confidentialité / bloqueurs</strong> ou essayez en <strong>fenêtre privée</strong>.',
+            true
+          );
+        });
+
+        payEl.mount('#payment-element');
+
+      } catch (err) {
+        clearTimeout(_initTimeout); _initDone = true;
+        _stripeElements = null;
+        _showFallback('Le paiement par carte n\'a pas pu se charger. Vérifiez vos <strong>extensions de confidentialité / bloqueurs</strong> ou essayez en <strong>fenêtre privée</strong>.', true);
+      }
+    }
+
+    /* ── Soumission du paiement ── */
+    async function submitStripePayment() {
+      if (_lockoutUntil > Date.now()) return; /* blocage actif */
+      if (Cart.count() === 0) return;
+      if (!_requireAddress()) return;
+
+      const btn   = document.getElementById('confirmBtn');
+      const errEl = document.getElementById('stripeError');
+      if (errEl) errEl.style.display = 'none';
+
+      if (!_stripeElements) {
+        /* Stripe non chargé — fallback rare */
+        if (errEl) { errEl.textContent = 'Le formulaire Stripe n\'est pas encore prêt. Patientez quelques secondes.'; errEl.style.display = ''; }
+        return;
+      }
+
+      if (btn) { btn.disabled = true; btn.textContent = 'Vérification…'; }
+
+      try {
+        /* ── Étape 1 : validation côté client (format carte, expiration, CVV) ── */
+        const { error: submitErr } = await _stripeElements.submit();
+        if (submitErr) {
+          _showCardError(submitErr.message);
+          if (btn) { btn.disabled = false; btn.textContent = '🔒 Payer par carte →'; }
+          return;
+        }
+
+        if (btn) btn.textContent = 'Préparation du paiement…';
+
+        /* ── Étape 2 : crée le PaymentIntent côté serveur (prix vérifié server-side) ── */
+        const userObj = JSON.parse(localStorage.getItem('leclam_user') || '{}');
+        const addr    = getShippingAddress();
+        const grand   = Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0));
+
+        const piResp = await fetch('/api/create-payment-intent', {
+          method:  'POST',
+          headers: _authHdrs(),
+          body:    JSON.stringify({ items: Cart.items, customerEmail: userObj.email || '', shippingAddress: addr, parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }),
+        }).then(r => r.json());
+
+        if (!piResp.ok) {
+          _showCardError(piResp.error || 'Erreur de paiement');
+          if (piResp.waitSec) _startLockout(piResp.waitSec);
+          if (btn) { btn.disabled = !!piResp.waitSec; btn.textContent = '🔒 Payer par carte →'; }
+          return;
+        }
+
+        if (btn) btn.textContent = 'Confirmation 3D Secure…';
+
+        /* Sauvegarde les données de commande pour le retour après 3DS */
+        sessionStorage.setItem('_stripe_pending', JSON.stringify({
+          items:           Cart.items,
+          email:           userObj.email || '',
+          shippingAddress: addr,
+          total:           grand,
+          parrainCode:     _parrainCode || null,
+        }));
+
+        /* ── Étape 3 : confirme (3DS géré automatiquement par Stripe.js) ── */
+        const { error, paymentIntent } = await _stripe.confirmPayment({
+          elements:      _stripeElements,
+          clientSecret:  piResp.clientSecret,
+          confirmParams: {
+            return_url: location.origin + '/confirmation.html',
+            payment_method_data: {
+              billing_details: {
+                email:   userObj.email || undefined,
+                address: {
+                  line1:       addr?.rue          || undefined,
+                  postal_code: addr?.zip          || undefined,
+                  city:        addr?.city         || undefined,
+                  country:     addr?.country      || 'FR',
+                },
+              },
+            },
+          },
+          redirect: 'if_required', /* reste sur la page si pas de 3DS */
+        });
+
+        if (error) {
+          /* Carte refusée, 3DS échoué, etc. */
+          _handleFailure(error.message, error.code);
+          if (btn) { btn.disabled = _lockoutUntil > Date.now(); btn.textContent = '🔒 Payer par carte →'; }
+          return;
+        }
+
+        /* Pas de redirection → paiement accepté sans 3DS */
+        if (paymentIntent && paymentIntent.status === 'succeeded') {
+          if (btn) btn.textContent = 'Finalisation…';
+          const confirmResp = await fetch('/api/orders/confirm', {
+            method:  'POST',
+            headers: _authHdrs(),
+            body:    JSON.stringify({ paymentIntentId: paymentIntent.id, items: Cart.items, customerEmail: userObj.email || '', shippingAddress: addr, parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }),
+          }).then(r => r.json());
+
+          const orderId = confirmResp.ok ? confirmResp.orderId : paymentIntent.id;
+          saveLocalOrder({ id: orderId, email: userObj.email || '', items: Cart.items, total: grand, shipping: Cart.shipping(), shippingAddress: addr, paymentMethod: 'stripe_card', status: 'processing', createdAt: new Date().toISOString() });
+          sessionStorage.removeItem('_stripe_pending');
+          Cart.clear(); sessionStorage.removeItem(_CS_KEY);
+          localStorage.removeItem('leclam_modification'); location.href = 'confirmation.html?id=' + encodeURIComponent(orderId) + '&total=' + encodeURIComponent(grand.toFixed(2));
+        }
+
+      } catch (err) {
+        if (errEl) { errEl.textContent = 'Erreur réseau. Vérifiez votre connexion et réessayez.'; errEl.style.display = ''; }
+        if (btn) { btn.disabled = false; btn.textContent = '🔒 Payer par carte →'; }
+      }
+    }
+
+    /* ── Gestion d'un échec de paiement ── */
+    function _handleFailure(msg, code) {
+      _showCardError(msg);
+      _stripeFailures++;
+
+      /* Signaler l'échec au serveur pour màj du compteur IP */
+      fetch('/api/stripe/report-failure', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ error: msg, code }),
+      }).then(r => r.json()).then(d => {
+        if (d.blocked && d.waitSec) _startLockout(d.waitSec);
+      }).catch(() => {});
+
+      /* Blocage côté client progressif : 0s, 15s, 30s, 60s, 5 min */
+      const delays = [0, 15, 30, 60, 300];
+      const delaySec = delays[Math.min(_stripeFailures - 1, delays.length - 1)];
+      if (delaySec > 0) _startLockout(delaySec);
+
+      /* Avertissement tentatives */
+      const warnEl = document.getElementById('stripe-attempts-warn');
+      if (warnEl && _stripeFailures >= 2) {
+        const remaining = Math.max(0, 5 - _stripeFailures);
+        warnEl.textContent = remaining > 0
+          ? `⚠️ ${_stripeFailures} tentative(s) échouée(s). Il vous reste ${remaining} essai(s) avant blocage temporaire.`
+          : '🔒 Nombre maximum de tentatives atteint. Accès temporairement suspendu pour votre sécurité.';
+        warnEl.style.display = '';
+      }
+    }
+
+    function _showCardError(msg) {
+      const el = document.getElementById('stripeError');
+      if (el) { el.textContent = msg; el.style.display = ''; }
+    }
+
+    /* ── Compte à rebours de blocage ── */
+    function _startLockout(seconds) {
+      if (_lockoutTimer) clearInterval(_lockoutTimer);
+      _lockoutUntil = Date.now() + seconds * 1000;
+
+      const btn    = document.getElementById('confirmBtn');
+      const countEl = document.getElementById('stripe-lockout');
+      if (btn) btn.disabled = true;
+
+      _lockoutTimer = setInterval(() => {
+        const rem = Math.ceil((_lockoutUntil - Date.now()) / 1000);
+        if (rem <= 0) {
+          clearInterval(_lockoutTimer); _lockoutTimer = null;
+          if (btn) btn.disabled = false;
+          if (countEl) countEl.style.display = 'none';
+          return;
+        }
+        if (countEl) {
+          countEl.style.display = '';
+          countEl.textContent   = `🔒 Réessayez dans ${rem > 60 ? Math.ceil(rem / 60) + ' min' : rem + 's'}`;
+        }
+      }, 1000);
+    }
+
+    /* Alias rétrocompat (goToPayment / switchMethod appellent redirectStripe dans les vieilles versions) */
+    window.redirectStripe = submitStripePayment;
+
+    /* ── PayPal Checkout (redirection) ── */
+    window.redirectPaypal = async function() {
+      if (Cart.count() === 0) return;
+      if (!_requireAddress()) return;
+      const btn   = document.getElementById('paypalBtn');
+      const errEl = document.getElementById('paypalError');
+      if (btn) { btn.disabled = true; btn.textContent = 'Redirection vers PayPal…'; }
+      if (errEl) errEl.style.display = 'none';
+      try {
+        const userObj = JSON.parse(localStorage.getItem('leclam_user') || '{}');
+        const res  = await fetch('/api/paypal/create-order', { method:'POST', headers:_authHdrs(), body: JSON.stringify({ items:Cart.items, customerEmail:userObj.email||'', shippingAddress:getShippingAddress(), parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }) });
+        const data = await res.json();
+        if (!data.ok || !data.url) throw new Error(data.error || 'PayPal non configuré');
+        location.href = data.url;
+      } catch (err) {
+        if (errEl) { errEl.textContent = err.message; errEl.style.display = ''; }
+        if (btn) { btn.disabled = false; btn.textContent = 'Payer avec PayPal →'; }
+      }
+    };
+
+    /* ── Apple Pay ──────────────────────────────────────────────────────────
+       Fonctionne sur iOS Safari / macOS Safari avec Touch ID ou Face ID.
+       Nécessite un domaine HTTPS vérifié auprès d'Apple en production.
+    ─────────────────────────────────────────────────────────────────────── */
+    (function initApplePayUI() {
+      const avail   = document.getElementById('apple-pay-available');
+      const unavail = document.getElementById('apple-pay-unavailable');
+      const tab     = document.getElementById('tab-apple');
+      const canUse  = window.ApplePaySession && ApplePaySession.canMakePayments();
+      if (avail)   avail.style.display   = canUse ? '' : 'none';
+      if (unavail) unavail.style.display = canUse ? 'none' : '';
+      if (tab && !canUse) tab.style.opacity = '.45';
+    })();
+
+    window.launchApplePay = function() {
+      if (!_stripe) {
+        _showApplePayError('Le module de paiement Stripe n\'est pas chargé. Utilisez carte bancaire ou PayPal.');
+        return;
+      }
+      if (Cart.count() === 0) return;
+      if (!_requireAddress()) return;
+
+      const grand     = Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0));
+      const items     = Cart.items;
+      const lineItems = items.map(i => ({ label: i.name, amount: (i.price * i.qty).toFixed(2) }));
+      const userObj   = JSON.parse(localStorage.getItem('leclam_user') || '{}');
+      const addr      = getShippingAddress();
+
+      if (!window.ApplePaySession) {
+        alert('Apple Pay n\'est disponible que sur Safari (iPhone, iPad, Mac).');
+        return;
+      }
+
+      const req = {
+        countryCode:           'FR',
+        currencyCode:          'EUR',
+        supportedNetworks:     ['visa', 'masterCard', 'amex'],
+        merchantCapabilities:  ['supports3DS'],
+        total:                 { label: 'Le Clam', amount: grand.toFixed(2) },
+        lineItems,
+      };
+
+      /* clientSecret pré-créé pendant la validation marchande (avant que l'utilisateur confirme) */
+      let _appleClientSecret = null;
+
+      const session = new ApplePaySession(3, req);
+
+      session.onvalidatemerchant = function(e) {
+        /* Valider le marchand ET créer le PaymentIntent Stripe en parallèle */
+        Promise.all([
+          fetch('/api/apple-pay/validate', {
+            method: 'POST', credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ validationURL: e.validationURL }),
+          }).then(r => r.json()),
+          fetch('/api/create-payment-intent', {
+            method: 'POST', headers: _authHdrs(),
+            body: JSON.stringify({ items: Cart.items, customerEmail: userObj.email || '', shippingAddress: addr, parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }),
+          }).then(r => r.json()),
+        ])
+        .then(([merchantData, piData]) => {
+          if (!merchantData?.merchantSession) {
+            session.abort();
+            _showApplePayError('Apple Pay n\'est pas encore configuré sur ce domaine. Utilisez carte ou PayPal.');
+            return;
+          }
+          if (!piData.ok) {
+            session.abort();
+            _showApplePayError(piData.error || 'Erreur de préparation du paiement. Utilisez carte ou PayPal.');
+            return;
+          }
+          _appleClientSecret = piData.clientSecret;
+          session.completeMerchantValidation(merchantData.merchantSession);
+        })
+        .catch(() => {
+          session.abort();
+          _showApplePayError('Apple Pay nécessite un certificat marchand Apple (HTTPS + configuration serveur). Utilisez carte bancaire ou PayPal.');
+        });
+      };
+
+      session.oncancel = function() { /* L'utilisateur a annulé — rien à faire */ };
+
+      session.onerror = function() {
+        _showApplePayError('Une erreur Apple Pay est survenue. Utilisez une autre méthode de paiement.');
+      };
+
+      /* onpaymentauthorized — déclenché après Face ID / Touch ID */
+      session.onpaymentauthorized = async function(e) {
+        if (!_appleClientSecret) {
+          session.completePayment(ApplePaySession.STATUS_FAILURE);
+          _showApplePayError('Erreur interne : PaymentIntent non prêt. Réessayez.');
+          return;
+        }
+        try {
+          /* Étape 1 : confirmer le paiement via Stripe avec le token Apple Pay */
+          const { error, paymentIntent } = await _stripe.confirmCardPayment(
+            _appleClientSecret,
+            { payment_method: { card: e.payment.token } }
+          );
+
+          if (error || paymentIntent?.status !== 'succeeded') {
+            session.completePayment(ApplePaySession.STATUS_FAILURE);
+            _showApplePayError(error?.message || 'Paiement Apple Pay refusé. Utilisez une autre méthode.');
+            return;
+          }
+
+          /* Étape 2 : enregistrer la commande (même endpoint que Stripe carte) */
+          const piId = _appleClientSecret.split('_secret_')[0];
+          const confirmResp = await fetch('/api/orders/confirm', {
+            method: 'POST', headers: _authHdrs(),
+            body: JSON.stringify({ paymentIntentId: piId, items: Cart.items, customerEmail: userObj.email || '', shippingAddress: addr, parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }),
+          }).then(r => r.json());
+
+          session.completePayment(ApplePaySession.STATUS_SUCCESS);
+          const orderId = confirmResp.ok ? confirmResp.orderId : piId;
+          saveLocalOrder({ id: orderId, email: userObj.email || '', items: Cart.items, total: grand, shipping: Cart.shipping(), shippingAddress: addr, paymentMethod: 'apple_pay', status: 'processing', createdAt: new Date().toISOString() });
+          document.getElementById('payOverlay')?.classList.add('visible');
+          markStepDone();
+          Cart.clear(); sessionStorage.removeItem(_CS_KEY);
+          localStorage.removeItem('leclam_modification'); location.href = 'confirmation.html?id=' + encodeURIComponent(orderId) + '&total=' + encodeURIComponent(grand.toFixed(2));
+
+        } catch {
+          session.completePayment(ApplePaySession.STATUS_FAILURE);
+          _showApplePayError('Erreur réseau lors du paiement. Utilisez carte ou PayPal.');
+        }
+      };
+
+      /* session.begin() DOIT être appelé dans le même tick que le geste utilisateur */
+      session.begin();
+    };
+
+    function _showApplePayError(msg) {
+      const el = document.getElementById('applePayError');
+      if (el) { el.textContent = msg; el.style.display = ''; }
+    }
+
+    /* ── Crypto / Virement ── */
+
+    function copyCryptoAddr(btn) {
+      const addr = btn?.closest('.crypto-addr-row')?.querySelector('.crypto-addr-code')?.textContent?.trim();
+      if (!addr) return;
+      const done = () => {
+        btn.textContent = 'Copié !'; btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2200);
+      };
+      navigator.clipboard ? navigator.clipboard.writeText(addr).then(done).catch(done) : (() => {
+        const ta = document.createElement('textarea');
+        ta.value = addr; ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); done();
+      })();
+    }
+
+    function confirmCryptoOrder() {
+      if (!_requireAddress()) return;
+      const btn = document.getElementById('cryptoConfirmBtn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Enregistrement…'; }
+      const coin    = document.querySelector('.crypto-opt.selected')?.dataset.coin || 'BTC';
+      const grand   = Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0));
+      const userObj = JSON.parse(localStorage.getItem('leclam_user') || '{}');
+      fetch('/api/orders/crypto', {
+        method: 'POST',
+        headers: _authHdrs(),
+        body: JSON.stringify({ items: Cart.items, customerEmail: userObj.email || '', shippingAddress: getShippingAddress(), coin, parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          const orderId = data.ok ? data.orderId : ('CRYPTO-' + Date.now());
+          saveLocalOrder({ id: orderId, email: userObj.email || '', items: Cart.items, total: grand, shipping: Cart.shipping(), shippingAddress: getShippingAddress(), paymentMethod: 'crypto_' + coin, status: 'pending_crypto', createdAt: new Date().toISOString() });
+          document.getElementById('payOverlay')?.classList.add('visible');
+          markStepDone();
+          Cart.clear(); sessionStorage.removeItem(_CS_KEY);
+          location.href = 'confirmation.html?id=' + encodeURIComponent(orderId) + '&total=' + encodeURIComponent(grand.toFixed(2)) + '&method=crypto';
+        })
+        .catch(() => {
+          const localId = 'CRYPTO-' + Date.now();
+          saveLocalOrder({ id: localId, email: userObj.email || '', items: Cart.items, total: grand, shipping: Cart.shipping(), shippingAddress: getShippingAddress(), paymentMethod: 'crypto_' + coin, status: 'pending_crypto', createdAt: new Date().toISOString() });
+          document.getElementById('payOverlay')?.classList.add('visible');
+          markStepDone();
+          Cart.clear(); sessionStorage.removeItem(_CS_KEY);
+          location.href = 'confirmation.html?id=' + encodeURIComponent(localId) + '&total=' + encodeURIComponent(grand.toFixed(2)) + '&method=crypto';
+        });
+    }
+
+    /* Montant affiché au chargement */
+    (function() {
+      const amountEl = document.getElementById('cryptoAmountEur');
+      if (amountEl) amountEl.textContent = fmtPrice(Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0))) + ' EUR';
+    })();
+
+
+    /* ── Virement bancaire ── */
+    (function() {
+      const ref = 'CLAM-' + Date.now().toString(36).toUpperCase();
+      const el  = document.getElementById('viremRef');
+      if (el) el.textContent = ref;
+      window._virementRef = ref;
+
+      /* Charger IBAN / BIC depuis le serveur */
+      fetch('/api/payment/bank-details')
+        .then(r => r.json())
+        .then(d => {
+          if (!d.ok) return;
+          const iban = document.getElementById('viremIban');
+          const bic  = document.getElementById('viremBic');
+          if (iban) iban.textContent = d.iban;
+          if (bic)  bic.textContent  = d.bic;
+        })
+        .catch(() => {/* coordonnées de secours déjà affichées dans le HTML */});
+    })();
+
+    function copyVirementInfo() {
+      const iban = document.getElementById('viremIban')?.textContent || '';
+      const bic  = document.getElementById('viremBic')?.textContent  || '';
+      const ref  = window._virementRef || '';
+      const grand = Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0));
+      const text = [
+        'Titulaire : Le Clam',
+        'IBAN : ' + iban,
+        'BIC : ' + bic,
+        'Banque : Crédit Agricole',
+        'Montant : ' + fmtPrice(grand),
+        'Référence : ' + ref,
+      ].join('\n');
+      const btn = document.querySelector('[onclick="copyVirementInfo()"]');
+      const _done = () => { if (btn) { btn.textContent = 'Copié !'; setTimeout(() => btn.textContent = 'Copier les coordonnées', 2000); } };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(_done).catch(() => {
+          const ta = document.createElement('textarea'); ta.value = text;
+          document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); _done();
+        });
+      } else {
+        const ta = document.createElement('textarea'); ta.value = text;
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); _done();
+      }
+    }
+
+    function confirmVirementOrder() {
+      if (!_requireAddress()) return;
+      const btn = document.getElementById('virementConfirmBtn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Enregistrement…'; }
+      const grand   = Math.max(0, Cart.total() + Cart.shipping() - (_parrainDiscount || 0));
+      const userObj = JSON.parse(localStorage.getItem('leclam_user') || '{}');
+      const ref     = window._virementRef;
+      fetch('/api/orders/virement', {
+        method: 'POST',
+        headers: _authHdrs(),
+        body: JSON.stringify({ items: Cart.items, customerEmail: userObj.email || '', shippingAddress: getShippingAddress(), virementRef: ref, parrainCode: _parrainCode || null, originalOrderId: _originalOrderId || undefined }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          const orderId = data.ok ? data.orderId : ('VIR-' + Date.now());
+          saveLocalOrder({ id: orderId, email: userObj.email || '', items: Cart.items, total: grand, shipping: Cart.shipping(), shippingAddress: getShippingAddress(), paymentMethod: 'virement', virementRef: ref, status: 'pending_virement', createdAt: new Date().toISOString() });
+          document.getElementById('payOverlay')?.classList.add('visible');
+          markStepDone();
+          Cart.clear(); sessionStorage.removeItem(_CS_KEY);
+          location.href = 'confirmation.html?id=' + encodeURIComponent(orderId) + '&total=' + encodeURIComponent(grand.toFixed(2)) + '&method=virement';
+        })
+        .catch(() => {
+          /* Fallback local si le serveur est injoignable */
+          const localId = 'VIR-' + Date.now();
+          saveLocalOrder({ id: localId, email: userObj.email || '', items: Cart.items, total: grand, shipping: Cart.shipping(), shippingAddress: getShippingAddress(), paymentMethod: 'virement', virementRef: ref, status: 'pending_virement', createdAt: new Date().toISOString() });
+          document.getElementById('payOverlay')?.classList.add('visible');
+          markStepDone();
+          Cart.clear(); sessionStorage.removeItem(_CS_KEY);
+          location.href = 'confirmation.html?id=' + encodeURIComponent(localId) + '&total=' + encodeURIComponent(grand.toFixed(2)) + '&method=virement';
+        });
+    }
+  </script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

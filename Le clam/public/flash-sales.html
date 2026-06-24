@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flash Sales — Le Clam</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #f8f5f0; color: #1a1a1a; padding: 1.5rem; }
+
+    h2 { font-size: 1.1rem; color: #3e2a14; margin-bottom: 1.2rem; font-weight: 700; }
+
+    /* Formulaire création */
+    .form-box { background: #fff; border-radius: 14px; border: 1.5px solid #ede8e0; padding: 1.4rem 1.6rem; margin-bottom: 1.5rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    .field { display: flex; flex-direction: column; gap: .3rem; }
+    .field.wide { grid-column: 1 / -1; }
+    label { font-size: .75rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .04em; }
+    input, select { padding: .6rem .85rem; border: 1.5px solid #e0e0e0; border-radius: 9px; font-size: .88rem; font-family: inherit; color: #222; background: #fff; transition: border-color .18s; }
+    input:focus, select:focus { outline: none; border-color: #3e2a14; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .5rem; max-height: 220px; overflow-y: auto; padding: .5rem; border: 1.5px solid #e0e0e0; border-radius: 9px; background: #fafaf8; }
+    .prod-check { display: flex; align-items: center; gap: .45rem; font-size: .8rem; cursor: pointer; padding: .3rem .4rem; border-radius: 6px; transition: background .15s; }
+    .prod-check:hover { background: #f5f0e8; }
+    .prod-check input { width: 15px; height: 15px; accent-color: #3e2a14; cursor: pointer; flex-shrink: 0; }
+    .btn-primary { margin-top: 1rem; padding: .7rem 1.8rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 50px; font-size: .9rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .2s; }
+    .btn-primary:hover { background: #2a1c0d; }
+    .btn-primary:disabled { background: #ccc; cursor: default; }
+    .err { color: #c0392b; font-size: .8rem; margin-top: .5rem; display: none; }
+
+    /* Liste */
+    .sale-list { display: flex; flex-direction: column; gap: .75rem; }
+    .sale-card { background: #fff; border-radius: 12px; border: 1.5px solid #ede8e0; padding: 1rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .sale-card.active  { border-color: #86efac; background: #f0fdf4; }
+    .sale-card.pending { border-color: #fde68a; background: #fffbeb; }
+    .sale-card.expired { opacity: .55; }
+    .sale-badge { font-size: 1.4rem; font-weight: 900; color: #c0392b; flex-shrink: 0; min-width: 52px; text-align: center; line-height: 1; }
+    .sale-badge small { display: block; font-size: .65rem; font-weight: 600; color: #888; margin-top: .1rem; }
+    .sale-body { flex: 1; min-width: 0; }
+    .sale-name { font-weight: 700; font-size: .95rem; margin-bottom: .25rem; }
+    .sale-meta { font-size: .76rem; color: #888; margin-bottom: .3rem; }
+    .sale-products { font-size: .75rem; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sale-status { font-size: .72rem; font-weight: 700; padding: .15rem .55rem; border-radius: 20px; display: inline-block; margin-bottom: .3rem; }
+    .status-active  { background: #dcfce7; color: #15803d; }
+    .status-pending { background: #fef9c3; color: #a16207; }
+    .status-expired { background: #f3f4f6; color: #9ca3af; }
+    .countdown { font-size: .78rem; font-weight: 700; color: #c0392b; margin-top: .2rem; }
+    .btn-del { padding: .35rem .75rem; background: #fff; border: 1.5px solid #fca5a5; color: #dc2626; border-radius: 8px; font-size: .75rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .15s; flex-shrink: 0; }
+    .btn-del:hover { background: #fef2f2; }
+    .empty { text-align: center; color: #bbb; padding: 2.5rem; font-size: .88rem; }
+  </style></head>
+<body>
+
+<div class="form-box">
+  <h2>⚡ Nouvelle vente flash</h2>
+  <div class="form-grid">
+    <div class="field wide">
+      <label>Nom de l'offre</label>
+      <input type="text" id="fsName" placeholder="Ex : Soldes été — Malin −20%">
+    </div>
+    <div class="field">
+      <label>Remise (%)</label>
+      <input type="number" id="fsDiscount" min="1" max="90" placeholder="20">
+    </div>
+    <div class="field">
+      <label>Catégorie</label>
+      <select id="fsCat" onchange="loadProducts()">
+        <option value="plaisir">Plaisir</option>
+        <option value="malin">Malin</option>
+        <option value="bebe">Bébé</option>
+        <option value="all">Tous les produits</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Début</label>
+      <input type="datetime-local" id="fsStart">
+    </div>
+    <div class="field">
+      <label>Fin</label>
+      <input type="datetime-local" id="fsEnd">
+    </div>
+    <div class="field wide">
+      <label>Produits ciblés</label>
+      <div class="products-grid" id="productsGrid"><div style="color:#bbb;font-size:.82rem;padding:.5rem">Chargement…</div></div>
+    </div>
+  </div>
+  <div class="err" id="fsErr"></div>
+  <button class="btn-primary" onclick="createSale()" id="fsBtn">Créer la vente flash</button>
+</div>
+
+<h2>Ventes flash</h2>
+<div class="sale-list" id="saleList"><div class="empty">Chargement…</div></div>
+
+<script>
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  const heads = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+
+  let _products = [];
+
+  /* Pré-remplir dates */
+  (function() {
+    const now  = new Date();
+    const plus = new Date(now.getTime() + 24 * 3600000);
+    const toLocal = d => new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+    document.getElementById('fsStart').value = toLocal(now);
+    document.getElementById('fsEnd').value   = toLocal(plus);
+  })();
+
+  async function loadProducts() {
+    const cat = document.getElementById('fsCat').value;
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = '<div style="color:#bbb;font-size:.82rem;padding:.5rem">Chargement…</div>';
+    try {
+      const url = cat === 'all' ? '/api/products' : '/api/products?category=' + cat;
+      const r   = await fetch(url);
+      const d   = await r.json();
+      _products = d.products || [];
+      grid.innerHTML = _products.length
+        ? _products.map(p => `
+            <label class="prod-check">
+              <input type="checkbox" value="${p.id}" checked>
+              ${p.emoji || ''} ${p.name}
+            </label>`).join('')
+        : '<div style="color:#bbb;font-size:.82rem;padding:.5rem">Aucun produit</div>';
+    } catch { grid.innerHTML = '<div style="color:#c00;font-size:.82rem;padding:.5rem">Erreur</div>'; }
+  }
+
+  async function createSale() {
+    const errEl = document.getElementById('fsErr');
+    errEl.style.display = 'none';
+    const name      = document.getElementById('fsName').value.trim();
+    const discount  = parseInt(document.getElementById('fsDiscount').value, 10);
+    const start     = document.getElementById('fsStart').value;
+    const end       = document.getElementById('fsEnd').value;
+    const productIds = [...document.querySelectorAll('#productsGrid input:checked')].map(i => i.value);
+
+    if (!name)              return showErr('Donnez un nom à l\'offre.');
+    if (!discount || discount < 1 || discount > 90) return showErr('Remise invalide (1–90%).');
+    if (!start || !end)     return showErr('Dates requises.');
+    if (new Date(end) <= new Date(start)) return showErr('La fin doit être après le début.');
+    if (!productIds.length) return showErr('Sélectionnez au moins un produit.');
+
+    const btn = document.getElementById('fsBtn');
+    btn.disabled = true; btn.textContent = 'Création…';
+    try {
+      const r = await fetch('/api/admin/flash-sales', {
+        method: 'POST', headers: heads,
+        body: JSON.stringify({ name, discount, start: new Date(start).toISOString(), end: new Date(end).toISOString(), productIds }),
+      });
+      const d = await r.json();
+      if (!d.ok) return showErr(d.error || 'Erreur');
+      document.getElementById('fsName').value = '';
+      document.getElementById('fsDiscount').value = '';
+      loadSales();
+    } catch { showErr('Erreur réseau.'); }
+    finally { btn.disabled = false; btn.textContent = 'Créer la vente flash'; }
+  }
+
+  function showErr(msg) {
+    const el = document.getElementById('fsErr');
+    el.textContent = msg; el.style.display = 'block';
+    document.getElementById('fsBtn').disabled = false;
+    document.getElementById('fsBtn').textContent = 'Créer la vente flash';
+  }
+
+  async function deleteSale(id) {
+    if (!confirm('Supprimer cette vente flash ?')) return;
+    await fetch('/api/admin/flash-sales/' + id, { method: 'DELETE', headers: heads });
+    loadSales();
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function countdown(endMs) {
+    const diff = endMs - Date.now();
+    if (diff <= 0) return null;
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    return h > 0 ? `⏳ ${h}h ${pad(m)}min restantes` : `⏳ ${pad(m)}min ${pad(s)}s restantes`;
+  }
+
+  async function loadSales() {
+    const r = await fetch('/api/admin/flash-sales', { headers: heads });
+    const d = await r.json();
+    const sales = (d.sales || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const list  = document.getElementById('saleList');
+    if (!sales.length) { list.innerHTML = '<div class="empty">Aucune vente flash créée.</div>'; return; }
+
+    const now = Date.now();
+    list.innerHTML = sales.map(s => {
+      const start = new Date(s.start).getTime();
+      const end   = new Date(s.end).getTime();
+      const isActive  = now >= start && now < end;
+      const isPending = now < start;
+      const isExpired = now >= end;
+      const cls    = isActive ? 'active' : isPending ? 'pending' : 'expired';
+      const stLbl  = isActive ? 'En cours' : isPending ? 'Programmée' : 'Expirée';
+      const stCls  = isActive ? 'status-active' : isPending ? 'status-pending' : 'status-expired';
+      const fmtDt  = iso => new Date(iso).toLocaleString('fr-FR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+      const cdText = isActive ? (countdown(end) || '') : '';
+      return `<div class="sale-card ${cls}" id="sc-${s.id}">
+        <div class="sale-badge">−${s.discount}%<small>remise</small></div>
+        <div class="sale-body">
+          <div class="sale-name">${s.name}</div>
+          <span class="sale-status ${stCls}">${stLbl}</span>
+          <div class="sale-meta">${fmtDt(s.start)} → ${fmtDt(s.end)}</div>
+          <div class="sale-products">${s.productIds.length} produit(s) : ${s.productIds.join(', ')}</div>
+          ${cdText ? `<div class="countdown" id="cd-${s.id}">${cdText}</div>` : ''}
+        </div>
+        <button class="btn-del" onclick="deleteSale('${s.id}')">Supprimer</button>
+      </div>`;
+    }).join('');
+
+    /* Countdowns live */
+    sales.filter(s => Date.now() >= new Date(s.start) && Date.now() < new Date(s.end)).forEach(s => {
+      const el = document.getElementById('cd-' + s.id);
+      if (!el) return;
+      const iv = setInterval(() => {
+        const t = countdown(new Date(s.end).getTime());
+        if (!t) { clearInterval(iv); loadSales(); return; }
+        el.textContent = t;
+      }, 1000);
+    });
+  }
+
+  loadProducts();
+  loadSales();
+
+  window.addEventListener('load', () => {
+    const send = () => window.parent?.postMessage({ type: 'iframeResize' }, '*');
+    send(); setTimeout(send, 500); setTimeout(send, 1500);
+  });
+</script>
+</body>
+</html>

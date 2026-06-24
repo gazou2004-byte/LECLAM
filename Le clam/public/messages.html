@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes messages — Le Clam</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .msgs-page { max-width: 960px; margin: 0 auto; padding: 6rem 1.5rem 4rem; }
+
+    /* ── Hero ── */
+    .page-hero { margin-bottom: 2rem; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: #1a1a1a; margin-bottom: .25rem; }
+    .page-hero-sub { color: #999; font-size: .88rem; }
+    .page-hero-sub a { color: #3e2a14; font-weight: 600; text-decoration: none; }
+    .page-hero-sub a:hover { text-decoration: underline; }
+
+    /* ── Topbar ── */
+    .msg-topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .main-tabs { display: flex; gap: .3rem; background: #f5f0e8; border-radius: 12px; padding: .3rem; }
+    .main-tab {
+      display: flex; align-items: center; gap: .45rem;
+      padding: .42rem 1rem; border-radius: 8px; border: none;
+      font-size: .8rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: #9c8570; font-family: inherit; transition: all .18s;
+    }
+    .main-tab:hover { color: #3e2a14; background: rgba(62,42,20,.06); }
+    .main-tab.active { background: #3e2a14; color: #d9c4a0; }
+    .tab-n { font-size: .65rem; font-weight: 700; padding: .08rem .4rem; border-radius: 20px; min-width: 18px; text-align: center; line-height: 1.4; background: #e8dfd4; color: #9c8570; }
+    .main-tab.active .tab-n { background: rgba(255,255,255,.22); color: #d9c4a0; }
+    .btn-new-msg {
+      display: flex; align-items: center; gap: .45rem; padding: .5rem 1.2rem; border-radius: 50px;
+      background: #3e2a14; color: #d9c4a0; border: none; font-size: .8rem; font-weight: 700;
+      font-family: inherit; cursor: pointer; transition: background .15s; white-space: nowrap;
+    }
+    .btn-new-msg:hover { background: #2a1c0d; }
+
+    /* ── Card grid ── */
+    .threads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1rem; align-items: start; }
+
+    /* ── Thread card ── */
+    .thread-card {
+      border: 1.5px solid #ede8e0; border-top: 4px solid #c8a87a;
+      border-radius: 14px; background: #fff; cursor: pointer;
+      padding: 1.1rem 1.15rem .95rem; display: flex; flex-direction: column; gap: .7rem;
+      box-shadow: 0 1px 4px rgba(62,42,20,.06);
+      transition: box-shadow .22s, transform .18s;
+    }
+    .thread-card:hover { box-shadow: 0 8px 32px rgba(62,42,20,.14); transform: translateY(-2px); }
+    .card-top { display: flex; align-items: flex-start; gap: .8rem; }
+    .card-av {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, #d9c4a0, #a07855);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 800; color: #3e2a14; flex-shrink: 0;
+      font-family: 'Playfair Display', serif; box-shadow: 0 2px 6px rgba(62,42,20,.18);
+    }
+    .card-info { flex: 1; min-width: 0; }
+    .card-subj { font-weight: 700; font-size: .9rem; color: #1a1a1a; display: flex; align-items: center; gap: .4rem; margin-bottom: .25rem; line-height: 1.3; }
+    .unread-dot { width: 8px; height: 8px; border-radius: 50%; background: #3e2a14; flex-shrink: 0; }
+    .card-preview { font-size: .77rem; color: #999; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding-top: .35rem; border-top: 1px solid #f5f0e8; }
+    .card-date { font-size: .7rem; color: #c0b0a0; }
+    .msg-status { font-size: .68rem; font-weight: 700; padding: .2rem .65rem; border-radius: 20px; white-space: nowrap; }
+    .st-open   { background: #d1fae5; color: #065f46; }
+    .st-closed { background: #f3f4f6; color: #9ca3af; }
+
+    /* ── Modal overlay ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(20,10,5,.5);
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+      z-index: 9000; display: none; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+
+    /* ── Conversation modal ── */
+    .conv-modal {
+      background: #fff; border-radius: 20px;
+      width: 100%; max-width: 580px; max-height: 88vh;
+      display: flex; flex-direction: column;
+      box-shadow: 0 32px 90px rgba(0,0,0,.28); overflow: hidden;
+      animation: modalIn .22s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform: scale(.96) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .modal-head {
+      display: flex; align-items: center; gap: .8rem;
+      padding: 1rem 1.2rem; border-bottom: 1px solid #f0ece6;
+      background: linear-gradient(135deg, #fafaf8 0%, #f5f0e8 100%); flex-shrink: 0;
+    }
+    .modal-av {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, #d9c4a0, #a07855);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 800; color: #3e2a14;
+      font-family: 'Playfair Display', serif; flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(62,42,20,.2);
+    }
+    .modal-head-info { flex: 1; min-width: 0; }
+    .modal-head-subj { font-weight: 700; font-size: .9rem; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .modal-head-status { font-size: .72rem; color: #9c8570; margin-top: .1rem; }
+    .modal-close-btn {
+      width: 32px; height: 32px; border-radius: 8px; background: rgba(62,42,20,.08);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #9c8570; transition: background .13s, color .13s; flex-shrink: 0;
+    }
+    .modal-close-btn:hover { background: rgba(62,42,20,.15); color: #3e2a14; }
+
+    /* ── Chat bubbles ── */
+    .chat-msgs {
+      flex: 1; overflow-y: auto; padding: 1.2rem 1.2rem .8rem;
+      display: flex; flex-direction: column; gap: .55rem;
+      scrollbar-width: thin; scrollbar-color: #ddd6c8 transparent;
+    }
+    .day-sep { text-align: center; font-size: .65rem; color: #c4b5a0; padding: .4rem 0; position: relative; }
+    .day-sep::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid #f0ece6; }
+    .day-sep span { background: #fff; padding: 0 .8rem; position: relative; }
+    .brow { display: flex; gap: .4rem; align-items: flex-end; max-width: 78%; }
+    .brow.self { flex-direction: row-reverse; margin-left: auto; }
+    .bav-sm { width: 28px; height: 28px; border-radius: 50%; font-size: .6rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .bav-lc { background: #d9c4a0; color: #3e2a14; }
+    .bav-me { background: #e8dfd4; color: #5a3e28; }
+    .binner { display: flex; flex-direction: column; }
+    .brow.self .binner { align-items: flex-end; }
+    .bubble { padding: .6rem .95rem; border-radius: 16px; font-size: .875rem; line-height: 1.55; word-break: break-word; }
+    .bubble-lc { background: #f4f0eb; color: #1a1a1a; border-bottom-left-radius: 4px; }
+    .bubble-me { background: #3e2a14; color: #f0e8d8; border-bottom-right-radius: 4px; }
+    .btime { font-size: .62rem; color: #c0b0a0; margin-top: .2rem; padding: 0 .2rem; }
+
+    /* ── Reply zone ── */
+    .reply-area { padding: .85rem 1.2rem 1rem; border-top: 1.5px solid #f0ece6; background: #fafaf8; flex-shrink: 0; }
+    .reply-row { display: flex; gap: .5rem; align-items: flex-end; }
+    .reply-ta {
+      flex: 1; padding: .6rem .85rem; border: 1.5px solid #e0d8cc; border-radius: 10px;
+      font-size: .875rem; font-family: inherit; color: #222; resize: none;
+      min-height: 42px; max-height: 120px; outline: none; transition: border-color .15s; line-height: 1.5; background: #fff;
+    }
+    .reply-ta:focus { border-color: #3e2a14; }
+    .reply-btn {
+      width: 40px; height: 40px; border-radius: 50%; background: #3e2a14; color: #d9c4a0;
+      border: none; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background .13s;
+    }
+    .reply-btn:hover { background: #2a1c0d; }
+    .reply-btn:disabled { opacity: .5; cursor: default; }
+    .closed-notice { padding: .8rem 1.2rem; font-size: .8rem; color: #aaa; text-align: center; }
+    .closed-notice a { color: #3e2a14; font-weight: 700; cursor: pointer; }
+
+    /* ── Compose card ── */
+    .compose-card { border: 1.5px solid #ede8e0; border-radius: 14px; padding: 1.4rem 1.5rem; background: #fff; }
+    .compose-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; }
+    .cfield { display: flex; flex-direction: column; gap: .3rem; margin-bottom: 1rem; }
+    .cfield label { font-size: .7rem; font-weight: 800; color: #9c8570; text-transform: uppercase; letter-spacing: .06em; }
+    .cfield select, .cfield textarea { padding: .65rem .95rem; border: 1.5px solid #e0d8cc; border-radius: 10px; font-size: .875rem; font-family: inherit; color: #222; background: #fff; outline: none; transition: border-color .15s; appearance: none; }
+    .cfield select:focus, .cfield textarea:focus { border-color: #3e2a14; }
+    .cfield textarea { min-height: 130px; resize: vertical; line-height: 1.65; }
+    .cfield select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .9rem center; padding-right: 2.2rem; }
+    .compose-actions { display: flex; gap: .6rem; margin-top: .5rem; }
+    .btn-submit { padding: .65rem 1.5rem; background: #3e2a14; color: #d9c4a0; border: none; border-radius: 10px; font-size: .875rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: background .15s; }
+    .btn-submit:hover { background: #2a1c0d; }
+    .btn-submit:disabled { opacity: .6; cursor: default; }
+    .btn-cancel { padding: .65rem 1rem; background: transparent; color: #9c8570; border: 1.5px solid #e0d8cc; border-radius: 10px; font-size: .875rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: all .13s; }
+    .btn-cancel:hover { border-color: #bbb; color: #444; }
+
+    /* ── Login wall ── */
+    .login-wall { text-align: center; padding: 4rem 2rem; color: #999; }
+    .login-wall h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #3e2a14; margin-bottom: .7rem; }
+    .login-wall p { font-size: .9rem; margin-bottom: 1.5rem; max-width: 300px; margin-left: auto; margin-right: auto; }
+    .btn-login { display: inline-flex; align-items: center; gap: .4rem; padding: .75rem 1.8rem; background: #3e2a14; color: #d9c4a0; border-radius: 10px; text-decoration: none; font-size: .9rem; font-weight: 700; font-family: inherit; border: none; cursor: pointer; }
+    .btn-login:hover { background: #2a1c0d; }
+
+    /* ── Empty state ── */
+    .empty-state { text-align: center; padding: 4rem 2rem; color: #999; grid-column: 1 / -1; }
+    .empty-state .icon { margin-bottom: 1rem; }
+    .empty-state p { font-size: .9rem; }
+
+    @media (max-width: 640px) {
+      .msgs-page { padding: 5rem 1rem 3rem; }
+      .page-hero h1 { font-size: 1.5rem; }
+      .msg-topbar { flex-direction: column; align-items: flex-start; }
+      .threads-grid { grid-template-columns: 1fr; }
+      .conv-modal { max-height: 95vh; }
+    }
+    @media (max-width: 400px) {
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .conv-modal { border-radius: 20px 20px 0 0; max-height: 92vh; }
+    }
+  </style></head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label" data-i18n="nav.cart">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav.identify">S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="msgs-page">
+    <div class="page-hero">
+      <h1 data-i18n="messages.title">Mes messages</h1>
+      <p class="page-hero-sub" id="pageSub"><span data-i18n="messages.service_client">Service client Le Clam</span> &nbsp;·&nbsp; <a href="index.html" data-i18n="messages.back_to_site">← Retour au site</a></p>
+    </div>
+    <div id="mainContent"></div>
+  </main>
+
+  <!-- Conversation modal -->
+  <div class="modal-overlay" id="convModal">
+    <div class="conv-modal">
+      <div class="modal-head" id="modalHead"></div>
+      <div class="chat-msgs"  id="modalChat"></div>
+      <div class="reply-area" id="modalReply"></div>
+    </div>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier" data-i18n="nav.cart" data-i18n-attr="aria-label">
+    <div class="cart-head">
+      <h3 data-i18n="cart.title">Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer" data-i18n="cart.close" data-i18n-attr="aria-label">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <script src="js/app.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    const SVG_SEND  = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
+    const SVG_CLOSE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+    const SVG_PLUS  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
+
+    let _threads = [];
+    let _tab     = 'open';
+    let _view    = 'list';
+    let _openId  = null;
+
+    /* ── Helpers ── */
+    function _esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function _ago(iso) {
+      if (!iso) return '';
+      const loc = (typeof I18n !== 'undefined' ? I18n.locale : 'fr') || 'fr';
+      const d = new Date(iso), diff = (Date.now()-d)/1000;
+      if (diff<60)     return I18n.t('time.just_now');
+      if (diff<3600)   return Math.floor(diff/60)+' '+I18n.t('time.min');
+      if (diff<86400)  return d.toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'});
+      if (diff<172800) return I18n.t('time.yesterday');
+      return d.toLocaleDateString(loc,{day:'numeric',month:'short'});
+    }
+    function _full(iso) {
+      const loc = (typeof I18n !== 'undefined' ? I18n.locale : 'fr') || 'fr';
+      return new Date(iso).toLocaleString(loc,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    }
+    function _unread(t) { return (t.messages||[]).filter(m=>m.from==='admin'&&!m.readByClient).length; }
+    function _syncUnreadBadge() {
+      const n = _threads.reduce((s,t)=>s+_unread(t),0);
+      localStorage.setItem('leclam_thread_unread',String(n));
+      if(typeof updateNavBadge==='function') updateNavBadge();
+    }
+    function _toast(msg) {
+      const el = document.createElement('div');
+      el.textContent = msg;
+      el.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:.6rem 1.3rem;border-radius:9px;font-size:.83rem;font-weight:600;z-index:9999;white-space:nowrap;';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 3500);
+    }
+
+    /* ── API ── */
+    function _hdrs() { return authHeaders(); }
+    async function _get(url)       { try{const r=await fetch(url,{headers:_hdrs()});return r.json();}catch{return{ok:false,error:'Serveur inaccessible.'};} }
+    async function _post(url,body) { try{const r=await fetch(url,{method:'POST',headers:_hdrs(),body:JSON.stringify(body)});return r.json();}catch{return{ok:false,error:'Serveur inaccessible.'};} }
+    async function _patch(url)     { try{const r=await fetch(url,{method:'PATCH',headers:_hdrs(),body:'{}'});return r.json();}catch{return{ok:false};} }
+
+    function _expired() {
+      localStorage.removeItem('leclam_token');
+      localStorage.removeItem('leclam_csrf');
+      localStorage.removeItem('leclam_user');
+      _renderLogin(I18n.t('messages.session_expired'));
+    }
+
+    /* Couleur bordure top carte */
+    function _cardAccent(t) {
+      if (_unread(t) > 0)        return '#3e2a14';
+      if (t.status === 'closed') return '#d1d5db';
+      return '#c8a87a';
+    }
+
+    /* ── Render grid ── */
+    function _render() {
+      const mc = document.getElementById('mainContent');
+      if (_view === 'compose') { mc.innerHTML = _composeHtml(); return; }
+
+      const open   = _threads.filter(t=>t.status!=='closed');
+      const closed = _threads.filter(t=>t.status==='closed');
+      const list   = _tab==='open' ? open : closed;
+
+      mc.innerHTML = `
+        <div class="msg-topbar">
+          <div class="main-tabs">
+            <button class="main-tab${_tab==='open'?' active':''}" onclick="_switchTab('open')">
+              ${I18n.t('messages.ongoing')} <span class="tab-n">${open.length}</span>
+            </button>
+            <button class="main-tab${_tab==='closed'?' active':''}" onclick="_switchTab('closed')">
+              ${I18n.t('messages.tab_resolved')} <span class="tab-n">${closed.length}</span>
+            </button>
+          </div>
+          <button class="btn-new-msg" onclick="_showCompose()">
+            ${SVG_PLUS} ${I18n.t('messages.new_message')}
+          </button>
+        </div>
+        <div class="threads-grid">
+          ${list.length ? list.map(_cardHtml).join('') : _emptyHtml()}
+        </div>`;
+    }
+
+    function _cardHtml(t) {
+      const u      = _unread(t);
+      const closed = t.status==='closed';
+      const last   = (t.messages||[]).slice(-1)[0];
+      const prev   = last ? (last.from==='client' ? I18n.t('messages.you')+' : '+last.text : last.text) : '';
+      const accent = _cardAccent(t);
+
+      return `<div class="thread-card" id="tc-${t.id}"
+                   style="border-top-color:${accent}"
+                   onclick="_openModal('${t.id}')">
+        <div class="card-top">
+          <div class="card-av">LC</div>
+          <div class="card-info">
+            <div class="card-subj">
+              ${u ? '<div class="unread-dot"></div>' : ''}
+              ${_esc(t.subject)}
+            </div>
+            <div class="card-preview">${_esc(prev)}</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-date">${_ago(t.updatedAt)}</span>
+          <span class="msg-status ${closed?'st-closed':'st-open'}">${closed?I18n.t('messages.resolved'):I18n.t('messages.ongoing')}</span>
+        </div>
+      </div>`;
+    }
+
+    function _emptyHtml() {
+      return `<div class="empty-state">
+        <div class="icon"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#d9c4a0" stroke-width="1.3"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <p>${_tab==='open'?I18n.t('messages.empty_ongoing'):I18n.t('messages.empty_resolved')}</p>
+        ${_tab==='open'?`<p style="margin-top:.75rem"><button class="btn-new-msg" style="margin:0 auto" onclick="_showCompose()">${SVG_PLUS} ${I18n.t('messages.new_message')}</button></p>`:''}
+      </div>`;
+    }
+
+    function _renderLogin(msg) {
+      document.getElementById('mainContent').innerHTML = `
+        <div class="login-wall">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#d9c4a0" stroke-width="1.3"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <h2>${I18n.t('messages.login_title')}</h2>
+          <p>${msg||I18n.t('messages.login_required')}</p>
+          <a href="login.html" class="btn-login">${I18n.t('auth.login_btn')}</a>
+        </div>`;
+    }
+
+    /* ── Modal ── */
+    function _buildBubbles(msgs) {
+      let html = '', lastDay = '';
+      msgs.forEach(m => {
+        const ts  = m.at||m.ts||'';
+        const day = ts ? new Date(ts).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}) : '';
+        if (day && day!==lastDay) { html+=`<div class="day-sep"><span>${day}</span></div>`; lastDay=day; }
+        const isMe = m.from==='client';
+        html += `<div class="brow${isMe?' self':''}">
+          <div class="bav-sm ${isMe?'bav-me':'bav-lc'}">${isMe?I18n.t('messages.you'):'LC'}</div>
+          <div class="binner">
+            <div class="bubble ${isMe?'bubble-me':'bubble-lc'}">${_esc(m.text||'').replace(/\n/g,'<br>')}</div>
+            <div class="btime">${ts?_full(ts):''}</div>
+          </div>
+        </div>`;
+      });
+      if (!html) html = `<div style="text-align:center;color:#ccc;font-size:.82rem;padding:1.5rem">${I18n.t('messages.empty')}</div>`;
+      return html;
+    }
+
+    function _populateModal(t) {
+      const id     = t.id;
+      const closed = t.status==='closed';
+
+      document.getElementById('modalHead').innerHTML = `
+        <div class="modal-av">LC</div>
+        <div class="modal-head-info">
+          <div class="modal-head-subj">${_esc(t.subject)}</div>
+          <div class="modal-head-status">${closed?I18n.t('messages.conv_resolved'):I18n.t('messages.ongoing')}</div>
+        </div>
+        <span class="msg-status ${closed?'st-closed':'st-open'}" style="flex-shrink:0">${closed?I18n.t('messages.resolved'):I18n.t('messages.ongoing')}</span>
+        <button class="modal-close-btn" onclick="_closeModal()">${SVG_CLOSE}</button>`;
+
+      const chatEl = document.getElementById('modalChat');
+      chatEl.innerHTML = _buildBubbles(t.messages||[]);
+
+      document.getElementById('modalReply').innerHTML = closed
+        ? `<div class="closed-notice">${I18n.t('messages.conv_resolved')}. <a onclick="_showCompose()">${I18n.t('messages.new_request')}</a></div>`
+        : `<div class="reply-row">
+            <textarea class="reply-ta" id="modal-rta" placeholder="${I18n.t('messages.reply_placeholder')}" rows="1"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();_doReply('${id}')}"
+              oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+            <button class="reply-btn" id="modal-rbtn" onclick="_doReply('${id}')" title="Envoyer">${SVG_SEND}</button>
+          </div>`;
+
+      setTimeout(()=>{ chatEl.scrollTop = chatEl.scrollHeight; }, 50);
+      if (!closed) setTimeout(()=>{ const ta=document.getElementById('modal-rta'); if(ta) ta.focus(); }, 80);
+    }
+
+    window._openModal = function(id) {
+      _openId = id;
+      const t = _threads.find(x=>x.id===id);
+      if (!t) return;
+      /* Mark as read */
+      if ((t.messages||[]).some(m=>m.from==='admin'&&!m.readByClient)) {
+        _patch('/api/threads/'+id+'/read');
+        t.messages.forEach(m=>{ if(m.from==='admin') m.readByClient=true; });
+        _syncUnreadBadge();
+      }
+      _populateModal(t);
+      document.getElementById('convModal').classList.add('open');
+    };
+
+    window._closeModal = function() {
+      document.getElementById('convModal').classList.remove('open');
+      _openId = null;
+      if (_view==='list') _render();
+    };
+
+    window._doReply = async function(threadId) {
+      const ta   = document.getElementById('modal-rta');
+      const btn  = document.getElementById('modal-rbtn');
+      const text = ta ? ta.value.trim() : '';
+      if (!text) return;
+      if (btn) btn.disabled = true;
+      const d = await _post('/api/threads/'+threadId+'/reply', {text});
+      if (btn) btn.disabled = false;
+      if (d.ok) {
+        const t = _threads.find(x=>x.id===threadId);
+        if (t) { t.messages.push(d.message); t.updatedAt = d.message.at; }
+        _populateModal(_threads.find(x=>x.id===threadId));
+      } else if (d.error==='Non connecté') {
+        _expired();
+      } else {
+        _toast(d.error||I18n.t('messages.error_send'));
+      }
+    };
+
+    /* ── Compose ── */
+    function _composeHtml() {
+      const open   = _threads.filter(t=>t.status!=='closed');
+      const closed = _threads.filter(t=>t.status==='closed');
+      return `
+        <div class="msg-topbar">
+          <div class="main-tabs">
+            <button class="main-tab${_tab==='open'?' active':''}" onclick="_switchTab('open')">
+              ${I18n.t('messages.ongoing')} <span class="tab-n">${open.length}</span>
+            </button>
+            <button class="main-tab${_tab==='closed'?' active':''}" onclick="_switchTab('closed')">
+              ${I18n.t('messages.tab_resolved')} <span class="tab-n">${closed.length}</span>
+            </button>
+          </div>
+        </div>
+        <div class="compose-card">
+          <div class="compose-title">${I18n.t('messages.new_message')}</div>
+          <div class="cfield">
+            <label>${I18n.t('messages.subject')}</label>
+            <select id="cSubject">
+              <option value="">${I18n.t('messages.choose_placeholder')}</option>
+              <option value="Question produit">${I18n.t('messages.subject_product')}</option>
+              <option value="Commande">${I18n.t('messages.subject_order')}</option>
+              <option value="Retour / remboursement">${I18n.t('messages.subject_return')}</option>
+              <option value="Livraison">${I18n.t('messages.subject_delivery')}</option>
+              <option value="Autre">${I18n.t('messages.subject_other')}</option>
+            </select>
+          </div>
+          <div class="cfield">
+            <label>${I18n.t('messages.your_msg')}</label>
+            <textarea id="cBody" placeholder="${I18n.t('messages.describe_placeholder')}"></textarea>
+          </div>
+          <div class="compose-actions">
+            <button class="btn-submit" id="btnSubmit" onclick="_submitCompose()">${I18n.t('messages.send')}</button>
+            <button class="btn-cancel" onclick="_cancelCompose()">${I18n.t('account.cancel')}</button>
+          </div>
+        </div>`;
+    }
+
+    /* ── Actions ── */
+    window._switchTab = function(tab) { _tab=tab; _view='list'; _closeModal(); _render(); };
+    window._showCompose = function() {
+      document.getElementById('convModal').classList.remove('open');
+      _openId=null; _view='compose'; _render();
+    };
+    window._cancelCompose = function() { _view='list'; _render(); };
+
+    window._submitCompose = async function() {
+      const subject = (document.getElementById('cSubject')?.value||'').trim();
+      const text    = (document.getElementById('cBody')?.value||'').trim();
+      if (!subject) { _toast(I18n.t('messages.error_no_subject')); return; }
+      if (!text)    { _toast(I18n.t('messages.error_no_text')); return; }
+      const btn = document.getElementById('btnSubmit');
+      if (btn) { btn.disabled=true; btn.textContent=I18n.t('messages.sending'); }
+      const d = await _post('/api/threads', {subject, text});
+      if (btn) { btn.disabled=false; btn.textContent=I18n.t('messages.send'); }
+      if (d.ok) {
+        _threads.unshift(d.thread);
+        _view='list'; _tab='open'; _render();
+        _openModal(d.thread.id);
+      } else if (d.error==='Non connecté') {
+        _expired();
+      } else {
+        _toast(I18n.t('messages.error_send')+' : '+(d.error||''));
+      }
+    };
+
+    /* Close modal on overlay click */
+    document.getElementById('convModal').addEventListener('click', function(e) {
+      if (e.target===this) _closeModal();
+    });
+
+    /* ── Init ── */
+    let _initDone = false;
+    async function init() {
+      if (_initDone) return;
+      _initDone = true;
+      const raw = localStorage.getItem('leclam_user');
+      if (!raw) { _renderLogin(); return; }
+
+      const _u = JSON.parse(raw);
+      if ((_u.role==='admin'||_u.role==='owner') && !isClientView()) {
+        location.replace('admin-messages.html'); return;
+      }
+
+      if (!localStorage.getItem('leclam_csrf') && localStorage.getItem('leclam_token')) {
+        try {
+          const r = await fetch('/api/auth/csrf', {credentials:'same-origin'});
+          const d = await r.json();
+          if (d.ok && d.csrfToken) localStorage.setItem('leclam_csrf', d.csrfToken);
+        } catch {}
+      }
+
+      const d = await _get('/api/threads');
+      if (!d.ok) {
+        if (d.error==='Non connecté') { _expired(); return; }
+        document.getElementById('mainContent').innerHTML = `
+          <div style="text-align:center;padding:3rem 1rem;color:#aaa;font-size:.9rem">
+            <p>${I18n.t('messages.load_error')}</p>
+            <button onclick="location.reload()" style="margin-top:1rem;padding:.5rem 1.2rem;background:#3e2a14;color:#d9c4a0;border:none;border-radius:8px;cursor:pointer;font-family:inherit">${I18n.t('messages.retry')}</button>
+          </div>`;
+        return;
+      }
+      _threads = d.threads;
+      _syncUnreadBadge();
+
+      const user = JSON.parse(raw);
+      const firstName = _esc(user.name?user.name.split(' ')[0]:'');
+      document.getElementById('pageSub').innerHTML =
+        `${I18n.t('messages.greeting', {name: firstName})} &nbsp;·&nbsp; <a href="index.html">${I18n.t('messages.back_to_site')}</a>`;
+
+      _render();
+      setInterval(async()=>{
+        const r = await _get('/api/threads');
+        if (r.ok) {
+          _threads = r.threads;
+          _syncUnreadBadge();
+          if (_view==='list') _render();
+          if (_openId && document.getElementById('convModal').classList.contains('open')) {
+            const t = _threads.find(x=>x.id===_openId);
+            if (t) _populateModal(t);
+          }
+        }
+      }, 30000);
+    }
+
+    document.addEventListener('i18nApplied', () => init(), { once: true });
+    setTimeout(() => { if (!_initDone) init(); }, 600);
+
+  })();
+  </script>
+</body>
+</html>

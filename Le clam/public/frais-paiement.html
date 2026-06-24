@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frais de paiement — Le Clam Admin</title>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f4f4f4; color: #222; min-height: 100vh; }
+
+    /* ── Header ── */
+    .top-bar {
+      background: #3e2a14; color: #d9c4a0;
+      padding: .85rem 2rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .top-bar a {
+      color: #d9c4a0; text-decoration: none; font-size: .85rem; font-weight: 600;
+      display: flex; align-items: center; gap: .4rem;
+      padding: .35rem .75rem; border-radius: 6px;
+      border: 1px solid rgba(217,196,160,.3);
+      transition: background .15s;
+    }
+    .top-bar a:hover { background: rgba(255,255,255,.12); }
+    .top-bar h1 { font-size: 1.05rem; font-weight: 700; flex: 1; }
+
+    /* ── Période ── */
+    .period-tabs { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .period-tab {
+      padding: .3rem .75rem; border: 1px solid rgba(217,196,160,.4); border-radius: 20px;
+      font-size: .75rem; font-weight: 600; color: #d9c4a0; background: none;
+      cursor: pointer; font-family: inherit; transition: all .15s;
+    }
+    .period-tab.active { background: rgba(255,255,255,.18); border-color: #d9c4a0; }
+
+    /* ── Layout ── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* ── KPI ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .kpi { background: #fff; border-radius: 14px; padding: 1.2rem 1.4rem; border: 1.5px solid #e8e8e8; }
+    .kpi-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #aaa; margin-bottom: .4rem; }
+    .kpi-value { font-size: 1.55rem; font-weight: 800; color: #1a1a1a; }
+    .kpi-sub   { font-size: .75rem; color: #aaa; margin-top: .2rem; }
+
+    /* ── Sections ── */
+    .section { background: #fff; border-radius: 16px; border: 1.5px solid #e8e8e8; margin-bottom: 1.5rem; overflow: hidden; }
+    .section-head {
+      padding: 1rem 1.4rem; border-bottom: 1px solid #f0f0f0;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem;
+    }
+    .section-head h2 { font-size: .95rem; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: .5rem; }
+    .section-body { padding: 1.2rem 1.4rem; }
+
+    /* ── Tableaux ── */
+    .pay-table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+    .pay-table th {
+      text-align: left; padding: .5rem .8rem;
+      background: #faf9f7; border-bottom: 2px solid #e8e8e8;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: #888; white-space: nowrap;
+    }
+    .pay-table th.num, .pay-table td.num { text-align: right; }
+    .pay-table td { padding: .55rem .8rem; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+    .pay-table tr:last-child td { border-bottom: none; }
+    .pay-table tr:hover td { background: #fdfcfb; }
+    .pay-table .total-row td { font-weight: 700; background: #faf9f7; border-top: 2px solid #e8e8e8; }
+    .amount-neg { color: #dc2626; font-weight: 600; }
+    .empty { text-align: center; padding: 2rem; color: #aaa; font-size: .88rem; }
+
+
+    /* ── Inputs taux perso ── */
+    .rate-input {
+      width: 76px; padding: .28rem .45rem; border: 1.5px solid #e0e0e0; border-radius: 6px;
+      font-size: .82rem; font-family: inherit; color: #222; text-align: right; outline: none;
+      transition: border-color .15s;
+    }
+    .rate-input:focus { border-color: #3e2a14; }
+    .btn-reset {
+      padding: .35rem .85rem; background: #f5f0e8; color: #7a5c3a;
+      border: 1.5px solid #e0d5c0; border-radius: 8px; font-size: .78rem; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: opacity .15s;
+    }
+    .btn-reset:hover { opacity: .75; }
+    .pay-exempt { color: #dc2626; font-weight: 700; }
+    .pay-ok     { color: #15803d; font-weight: 700; }
+
+
+    /* ── Note légale ── */
+    .pay-legal {
+      background: #fefce8; border: 1px solid #fde68a; border-radius: 10px;
+      padding: .8rem 1rem; font-size: .78rem; color: #92400e; margin-top: 1.2rem; line-height: 1.55;
+    }
+
+    @media (max-width: 700px) {
+      .top-bar { padding: .7rem 1rem; }
+      .dist-grid { grid-template-columns: 130px 1fr 44px; }
+      .pay-table { font-size: .76rem; }
+      .pay-table th, .pay-table td { padding: .4rem .5rem; }
+    }
+  </style></head>
+<body>
+
+<div class="top-bar">
+  <a href="admin.html">← Admin</a>
+  <h1>💳 Frais de paiement</h1>
+  <div class="period-tabs">
+    <button class="period-tab" onclick="setPeriod('month')">Ce mois</button>
+    <button class="period-tab" onclick="setPeriod('quarter')">Ce trimestre</button>
+    <button class="period-tab" onclick="setPeriod('year')">Cette année</button>
+    <button class="period-tab active" onclick="setPeriod('all')">Tout</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- KPI -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Commandes</div>
+      <div class="kpi-value" id="kpiOrders">—</div>
+      <div class="kpi-sub" id="kpiPeriod">—</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Volume TTC</div>
+      <div class="kpi-value" id="kpiVol">—</div>
+      <div class="kpi-sub" id="kpiPanier">—</div>
+    </div>
+    <div class="kpi" style="border-color:#ede9fe;background:#f5f3ff">
+      <div class="kpi-label">Frais estimés</div>
+      <div class="kpi-value" id="kpiFreis" style="color:#7c3aed">—</div>
+      <div class="kpi-sub" id="kpiFeisSub">Selon répartition</div>
+    </div>
+    <div class="kpi" style="border-color:#fce7f3;background:#fdf2f8">
+      <div class="kpi-label">% du CA TTC</div>
+      <div class="kpi-value" id="kpiPct" style="color:#be185d">—</div>
+      <div class="kpi-sub" id="kpiPctSub">—</div>
+    </div>
+  </div>
+
+  <!-- Frais réels par commande -->
+  <div class="section">
+    <div class="section-head">
+      <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Frais réels par mode</h2>
+      <span style="font-size:.78rem;color:#aaa" id="simLabel">—</span>
+    </div>
+    <div class="section-body">
+
+      <div id="unknownWrap" style="display:none;margin-bottom:1.2rem;padding:.75rem 1rem;background:#fefce8;border:1px solid #fde68a;border-radius:10px;font-size:.82rem;color:#92400e">
+        <strong id="unknownCount">—</strong> commande(s) sans mode de paiement enregistré —
+        mode par défaut appliqué :
+        <select id="defaultModeSelect" onchange="saveDefaultMode(this.value)" style="margin-left:.4rem;padding:.2rem .5rem;border:1px solid #e0d5c0;border-radius:6px;font-size:.82rem;font-family:inherit;background:#fff">
+          <option value="stripeue">💳 Carte UE (Stripe)</option>
+          <option value="stripext">💳 Carte hors UE</option>
+          <option value="paypal">🅿 PayPal</option>
+          <option value="apple">🍎 Apple Pay</option>
+          <option value="virement">🏦 Virement</option>
+        </select>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="pay-table">
+          <thead>
+            <tr>
+              <th>Mode de paiement</th>
+              <th class="num">Commandes</th>
+              <th class="num">Volume TTC</th>
+              <th class="num">Frais fixes</th>
+              <th class="num">Frais variables</th>
+              <th class="num">Total frais</th>
+              <th class="num">% du volume</th>
+            </tr>
+          </thead>
+          <tbody id="payTableBody">
+            <tr><td colspan="7" class="empty">Chargement…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pay-legal" style="margin-top:1.2rem">
+        ⚖️ <strong>Art. 261C-1° CGI</strong> — Les commissions PayPal, Stripe et Apple Pay sont
+        <strong>exonérées de TVA</strong> (services financiers hors France).
+        Ces frais réduisent votre <strong>résultat imposable</strong> mais
+        <strong>n'ouvrent aucun droit à déduction de TVA</strong>.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Taux par mode -->
+  <div class="section">
+    <div class="section-head">
+      <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Taux appliqués</h2>
+      <button class="btn-reset" onclick="resetPayRates()">↺ Réinitialiser</button>
+    </div>
+    <div class="section-body">
+      <div id="payRatesEditor"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+if (new URLSearchParams(location.search).has('embed')) {
+  const _tb = document.querySelector('.top-bar'); if (_tb) _tb.style.display = 'none';
+  const _notifyH = () => { try { window.parent.postMessage({ type: 'iframeResize', h: document.documentElement.scrollHeight }, '*'); } catch(e){} };
+  new MutationObserver(_notifyH).observe(document.body, { childList: true, subtree: true, attributes: false });
+  /* Supprime le padding/max-width internes en mode embed */
+  const _es = document.createElement('style');
+  _es.textContent = '.page,.top{padding-left:0!important;padding-right:0!important;max-width:none!important;margin:0!important}body{padding-left:0!important;padding-right:0!important;background:transparent!important}';
+  document.head.appendChild(_es);
+}
+function adminHeaders() {
+  const token = localStorage.getItem('leclam_token') || '';
+  const csrf  = localStorage.getItem('leclam_csrf')  || '';
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, 'X-CSRF-Token': csrf };
+}
+
+const PAY_MODES = [
+  { id: 'paypal',   label: 'PayPal',           icon: '🅿',  fixed: 0.35, rate: 0.034 },
+  { id: 'stripeue', label: 'Carte UE (Stripe)', icon: '💳', fixed: 0.25, rate: 0.014 },
+  { id: 'stripext', label: 'Carte hors UE',     icon: '💳', fixed: 0.25, rate: 0.029 },
+  { id: 'apple',    label: 'Apple Pay',         icon: '🍎', fixed: 0.25, rate: 0.014 },
+  { id: 'virement', label: 'Virement',          icon: '🏦', fixed: 0,    rate: 0     },
+  { id: 'crypto',   label: 'Crypto',            icon: '₿',  fixed: 0,    rate: 0.005 },
+];
+
+/* Mapping paymentMethod serveur → id PAY_MODES */
+const SERVER_MODE_MAP = {
+  stripe_card:      'stripeue',
+  stripe_card_intl: 'stripext',
+  paypal:           'paypal',
+  apple_pay:        'apple',
+  virement:         'virement',
+  crypto:           'crypto',
+};
+
+const PAY_RATES_KEY    = 'leclam_pay_rates';
+const DEFAULT_MODE_KEY = 'leclam_pay_default_mode';
+
+const fmt    = v => v.toFixed(2).replace('.', ',') + ' €';
+const fmtPct = v => v.toFixed(1).replace('.', ',') + ' %';
+
+let allOrders     = [];
+let currentPeriod = 'all';
+let payOrders     = [];
+
+function loadDefaultMode() {
+  return localStorage.getItem(DEFAULT_MODE_KEY) || 'stripeue';
+}
+function saveDefaultMode(val) {
+  localStorage.setItem(DEFAULT_MODE_KEY, val);
+  render();
+}
+
+function getOrderModeId(order) {
+  const pm = order.paymentMethod;
+  return pm ? (SERVER_MODE_MAP[pm] || null) : null;
+}
+
+/* ── Persistance taux ── */
+function loadPayRates() {
+  const defaults = {};
+  for (const m of PAY_MODES) defaults[m.id] = { fixed: m.fixed, rate: m.rate };
+  try {
+    const saved = JSON.parse(localStorage.getItem(PAY_RATES_KEY) || '{}');
+    return { ...defaults, ...saved };
+  } catch { return defaults; }
+}
+function savePayRates(r) { localStorage.setItem(PAY_RATES_KEY, JSON.stringify(r)); }
+
+/* ── Commandes ── */
+async function loadOrders() {
+  let serverOrders = [];
+  try {
+    const res  = await fetch('/api/orders', { headers: adminHeaders(), credentials: 'same-origin' });
+    const data = await res.json();
+    if (data.ok) serverOrders = data.orders;
+  } catch (_) {}
+  allOrders = serverOrders;
+  render();
+}
+
+/* ── Période ── */
+function setPeriod(p) {
+  currentPeriod = p;
+  document.querySelectorAll('.period-tab').forEach(t => {
+    t.classList.toggle('active', t.textContent.trim() === { month:'Ce mois', quarter:'Ce trimestre', year:'Cette année', all:'Tout' }[p]);
+  });
+  render();
+}
+
+function filterByPeriod(orders) {
+  const now = new Date();
+  return orders.filter(o => {
+    const d = new Date(o.createdAt);
+    if (currentPeriod === 'month')   return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    if (currentPeriod === 'quarter') return Math.floor(d.getMonth()/3) === Math.floor(now.getMonth()/3) && d.getFullYear() === now.getFullYear();
+    if (currentPeriod === 'year')    return d.getFullYear() === now.getFullYear();
+    return true;
+  });
+}
+
+function getPeriodLabel() {
+  const now = new Date();
+  const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  if (currentPeriod === 'month')   return `${months[now.getMonth()]} ${now.getFullYear()}`;
+  if (currentPeriod === 'quarter') return `T${Math.floor(now.getMonth()/3)+1} ${now.getFullYear()}`;
+  if (currentPeriod === 'year')    return `Année ${now.getFullYear()}`;
+  return 'Toutes périodes';
+}
+
+/* ── Render principal ── */
+function render() {
+  const orders   = filterByPeriod(allOrders);
+  payOrders      = orders;
+  const totalTtc = orders.reduce((s, o) => s + (o.total || 0), 0);
+  const panier   = orders.length ? totalTtc / orders.length : 0;
+  const label    = getPeriodLabel();
+
+  document.getElementById('kpiOrders').textContent = orders.length;
+  document.getElementById('kpiPeriod').textContent = label;
+  document.getElementById('kpiVol').textContent    = fmt(totalTtc);
+  document.getElementById('kpiPanier').textContent = 'Panier moyen ' + fmt(panier);
+  document.getElementById('simLabel').textContent  = label + ' · ' + orders.length + ' commande' + (orders.length !== 1 ? 's' : '');
+
+  /* Sync le select mode par défaut */
+  const sel = document.getElementById('defaultModeSelect');
+  if (sel) sel.value = loadDefaultMode();
+
+  renderRatesEditor();
+  calcPayFees(orders);
+}
+
+/* ── Calcul frais réels ── */
+function calcPayFees(orders) {
+  const rates       = loadPayRates();
+  const defaultMode = loadDefaultMode();
+  const byMode      = {};
+  let unknownCount  = 0;
+
+  for (const m of PAY_MODES) byMode[m.id] = { count: 0, vol: 0, fFix: 0, fVar: 0 };
+
+  for (const o of orders) {
+    const modeId = getOrderModeId(o);
+    const resolved = modeId || defaultMode;
+    if (!modeId) unknownCount++;
+    if (!byMode[resolved]) continue;
+    const total = o.total || 0;
+    const r = rates[resolved] || { fixed: 0, rate: 0 };
+    byMode[resolved].count++;
+    byMode[resolved].vol   += total;
+    byMode[resolved].fFix  += r.fixed;
+    byMode[resolved].fVar  += total * r.rate;
+  }
+
+  const totalTtc = orders.reduce((s, o) => s + (o.total || 0), 0);
+  const nOrders  = orders.length;
+  let totalFees  = 0, rows = '';
+
+  for (const m of PAY_MODES) {
+    const d = byMode[m.id];
+    if (d.count === 0) continue;
+    const fees = d.fFix + d.fVar;
+    totalFees += fees;
+    const pctVol = d.vol > 0 ? (fees / d.vol * 100) : 0;
+    rows += `<tr>
+      <td>${m.icon} ${m.label}</td>
+      <td class="num">${d.count}</td>
+      <td class="num">${fmt(d.vol)}</td>
+      <td class="num">${fmt(d.fFix)}</td>
+      <td class="num">${fmt(d.fVar)}</td>
+      <td class="num amount-neg">${fmt(fees)}</td>
+      <td class="num" style="color:#888">${fmtPct(pctVol)}</td>
+    </tr>`;
+  }
+  if (rows) {
+    const pctTot = totalTtc > 0 ? totalFees / totalTtc * 100 : 0;
+    rows += `<tr class="total-row">
+      <td colspan="5">Total frais</td>
+      <td class="num amount-neg">${fmt(totalFees)}</td>
+      <td class="num" style="color:#888">${fmtPct(pctTot)}</td>
+    </tr>`;
+  }
+  document.getElementById('payTableBody').innerHTML =
+    rows || '<tr><td colspan="7" class="empty">Aucune commande sur cette période.</td></tr>';
+
+  /* Bandeau commandes sans mode */
+  const wrap = document.getElementById('unknownWrap');
+  wrap.style.display = unknownCount > 0 ? '' : 'none';
+  document.getElementById('unknownCount').textContent = unknownCount;
+
+  const fraisParCmd = nOrders > 0 ? totalFees / nOrders : 0;
+  document.getElementById('kpiFreis').textContent   = fmt(totalFees);
+  document.getElementById('kpiFeisSub').textContent = nOrders > 0 ? fmt(fraisParCmd) + ' / commande' : '—';
+  const pctMarge = totalTtc > 0 ? totalFees / totalTtc * 100 : 0;
+  document.getElementById('kpiPct').textContent     = fmtPct(pctMarge);
+  document.getElementById('kpiPctSub').textContent  = totalFees > 0 ? fmt(totalFees) + ' sur ' + fmt(totalTtc) : '—';
+}
+
+/* ── Éditeur de taux (tableau unique éditable) ── */
+function renderRatesEditor() {
+  const rates  = loadPayRates();
+  const panier = payOrders.length
+    ? payOrders.reduce((s, o) => s + (o.total || 0), 0) / payOrders.length
+    : 50;
+  const exLabel = payOrders.length ? 'Panier moyen ' + fmt(panier) : 'Exemple 50 €';
+  let html = `<div style="overflow-x:auto">
+    <table class="pay-table">
+      <thead><tr>
+        <th>Mode</th>
+        <th class="num">Frais fixe (€)</th>
+        <th class="num">Taux variable (%)</th>
+        <th class="num">${exLabel}</th>
+      </tr></thead>
+      <tbody>`;
+  for (const m of PAY_MODES) {
+    const mFix  = rates[m.id]?.fixed ?? m.fixed;
+    const mRate = rates[m.id]?.rate  ?? m.rate;
+    const exAmt = mFix + panier * mRate;
+    html += `<tr>
+      <td>${m.icon} ${m.label}</td>
+      <td class="num">
+        <input class="rate-input" type="number" value="${mFix.toFixed(2)}" min="0" step="0.01"
+               oninput="updatePayRate('${m.id}','fixed',this.value)">
+      </td>
+      <td class="num">
+        <input class="rate-input" type="number" value="${(mRate * 100).toFixed(2)}" min="0" step="0.01"
+               oninput="updatePayRate('${m.id}','rate',this.value)">
+      </td>
+      <td class="num ${exAmt > 0 ? 'amount-neg' : ''}" id="ex_${m.id}">${exAmt > 0 ? fmt(exAmt) : '0,00 €'}</td>
+    </tr>`;
+  }
+  html += `</tbody></table></div>`;
+  document.getElementById('payRatesEditor').innerHTML = html;
+}
+
+function updatePayRate(id, field, value) {
+  const rates = loadPayRates();
+  if (!rates[id]) rates[id] = {};
+  rates[id][field] = field === 'rate'
+    ? (parseFloat(value) || 0) / 100
+    : (parseFloat(value) || 0);
+  savePayRates(rates);
+  const panier = payOrders.length
+    ? payOrders.reduce((s, o) => s + (o.total || 0), 0) / payOrders.length
+    : 50;
+  const mFix = rates[id].fixed ?? 0;
+  const mRate = rates[id].rate ?? 0;
+  const exEl = document.getElementById('ex_' + id);
+  if (exEl) {
+    const exAmt = mFix + panier * mRate;
+    exEl.textContent = exAmt > 0 ? fmt(exAmt) : '0,00 €';
+  }
+  calcPayFees(payOrders, loadPayDist());
+}
+
+function resetPayRates() {
+  localStorage.removeItem(PAY_RATES_KEY);
+  renderRatesEditor();
+  calcPayFees(payOrders, loadPayDist());
+}
+
+
+loadOrders();
+</script>
+</body>
+</html>
