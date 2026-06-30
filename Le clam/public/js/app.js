@@ -2773,16 +2773,18 @@ function initProductGalleries() {
   document.querySelectorAll('.p-gallery').forEach(gallery => {
     const track = gallery.querySelector('.p-gallery-track');
     if (!track) return;
-    const imgs = track.querySelectorAll('img');
+    const imgs = track.getElementsByTagName('img'); // live — se met à jour si un img est retiré du DOM
     if (imgs.length <= 1) return;
 
     const dots = gallery.querySelectorAll('.p-gal-dot');
     let current = 0;
 
     const goTo = idx => {
-      current = (idx + imgs.length) % imgs.length;
+      const len = imgs.length;
+      if (!len) return;
+      current = (idx + len) % len;
       track.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      gallery.querySelectorAll('.p-gal-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     };
 
     gallery.querySelector('.p-gal-prev')?.addEventListener('click', e => {

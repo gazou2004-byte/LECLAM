@@ -33,6 +33,17 @@ const VAPID_PUBLIC  = process.env.VAPID_PUBLIC  || 'BA-ReC5q3TOvyb7q4KVA7F89s-5_
 const VAPID_PRIVATE = process.env.VAPID_PRIVATE || '550QinlGC5MH1xXIYnCpWMlKYh2yGvI5syfFFuChBck';
 webpush.setVapidDetails('mailto:contact@leclam.eu', VAPID_PUBLIC, VAPID_PRIVATE);
 
+/* Informations légales du vendeur — utilisées sur les factures PDF */
+const SELLER = {
+  name:     process.env.SELLER_NAME     || 'Le Clam',
+  address:  process.env.SELLER_ADDRESS  || 'À COMPLÉTER',
+  zip:      process.env.SELLER_ZIP      || '',
+  city:     process.env.SELLER_CITY     || '',
+  country:  process.env.SELLER_COUNTRY  || 'France',
+  siret:    process.env.SELLER_SIRET    || 'À COMPLÉTER',
+  tvaIntra: process.env.SELLER_TVA_INTRA || 'À COMPLÉTER',
+};
+
 /* Durées de vie des tokens */
 const ACCESS_TOKEN_TTL  = 2  * 60 * 60 * 1000;  // 2 heures
 const REFRESH_TOKEN_TTL = 30 * 24 * 60 * 60 * 1000; // 30 jours
@@ -105,6 +116,7 @@ const PUSH_SUBS_FILE        = path.join(DATA_DIR, 'push-subscriptions.json');
 const INVOICES_FILE         = path.join(DATA_DIR, 'invoices.json');
 const INVOICE_COUNTER_FILE  = path.join(DATA_DIR, 'invoice-counter.json');
 const INVOICES_DIR          = path.join(DATA_DIR, 'invoices');
+const PRODUCTS_OVERRIDES_FILE = path.join(DATA_DIR, 'products-overrides.json');
 fs.mkdirSync(INVOICES_DIR, { recursive: true });
 const AVOIRS_FILE           = path.join(DATA_DIR, 'avoirs.json');
 const AVOIR_COUNTER_FILE    = path.join(DATA_DIR, 'avoir-counter.json');
@@ -834,7 +846,7 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
   res.json({ received: true });
 });
 
-app.use(express.json({ limit: '50kb' }));
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
 /* ── Rate limiting ── */
@@ -1731,6 +1743,19 @@ const PRODUCTS = {
   ],
 };
 
+/* Overrides admin persistés — { id: { champ: valeur, ... } } */
+let PRODUCTS_OVERRIDES = {};
+try { PRODUCTS_OVERRIDES = JSON.parse(fs.readFileSync(PRODUCTS_OVERRIDES_FILE, 'utf8')); } catch {}
+
+/* Applique les overrides au démarrage */
+for (const prods of Object.values(PRODUCTS)) {
+  for (const p of prods) {
+    if (PRODUCTS_OVERRIDES[p.id]) Object.assign(p, PRODUCTS_OVERRIDES[p.id]);
+  }
+}
+
+function persistProductOverrides() { saveJSON(PRODUCTS_OVERRIDES_FILE, PRODUCTS_OVERRIDES); }
+
 /* Tranches de frais de port selon le poids total du panier */
 /* ── Configuration livraison (tranches × zones) ── */
 const SHIPPING_CONFIG_FILE = path.join(DATA_DIR, 'shipping-config.json');
@@ -1815,6 +1840,11 @@ app.get('/api/products', (req, res) => {
   const prods = PRODUCTS[category];
   if (!prods) return res.status(404).json({ ok: false, error: `Catégorie inconnue: ${category}` });
   res.json({ ok: true, products: prods.map(p => ({ ...p, category })), total: prods.length });
+});
+
+/** GET /api/products/overrides — overrides admin pour le frontend */
+app.get('/api/products/overrides', (req, res) => {
+  res.json(PRODUCTS_OVERRIDES);
 });
 
 /** GET /api/products/:id */
@@ -2594,40 +2624,150 @@ app.patch('/api/admin/products/:id', (req, res) => {
   }
   if (!found) return res.status(404).json({ ok: false, error: 'Produit introuvable' });
 
-  const { weightG, price, oldPrice, stock, badge, name, emoji } = req.body;
+  const { weightG, price, oldPrice, stock, badge, name, emoji, images, desc } = req.body;
+  const changed = {};
 
   if (weightG !== undefined) {
     const w = Math.floor(Number(weightG));
     if (!isFinite(w) || w < 0 || w > 100000)
       return res.status(400).json({ ok: false, error: 'Poids invalide (0–100 000 g)' });
-    found.weightG = w;
+    found.weightG = w; changed.weightG = w;
   }
   if (price !== undefined) {
     const p = parseFloat(price);
     if (!isFinite(p) || p < 0 || p > 100000)
       return res.status(400).json({ ok: false, error: 'Prix invalide' });
-    found.price = p;
+    found.price = p; changed.price = p;
   }
   if (oldPrice !== undefined) {
-    found.oldPrice = isFinite(parseFloat(oldPrice)) ? parseFloat(oldPrice) : null;
+    const op = isFinite(parseFloat(oldPrice)) ? parseFloat(oldPrice) : null;
+    found.oldPrice = op; changed.oldPrice = op;
   }
   if (stock !== undefined) {
-    found.stock = Math.max(0, Math.floor(Number(stock) || 0));
+    const s = stock === null ? null : Math.max(0, Math.floor(Number(stock) || 0));
+    found.stock = s; changed.stock = s;
   }
   if (badge !== undefined) {
-    found.badge = badge ? sanitize(badge, 50) : null;
+    const b = badge ? sanitize(badge, 50) : null;
+    found.badge = b; changed.badge = b;
   }
   if (name !== undefined) {
     const n = sanitize(name, 200);
     if (!n) return res.status(400).json({ ok: false, error: 'Nom requis' });
-    found.name = n;
+    found.name = n; found.name_fr = n; changed.name = n; changed.name_fr = n;
   }
   if (emoji !== undefined) {
-    found.emoji = sanitize(emoji, 8);
+    const e = sanitize(emoji, 8);
+    found.emoji = e; changed.emoji = e;
   }
+  if (images !== undefined && Array.isArray(images)) {
+    found.images = images; changed.images = images;
+  }
+  if (desc !== undefined) {
+    const d = sanitize(desc, 2000);
+    found.desc = d; changed.desc = d;
+  }
+
+  /* Persiste les changements */
+  if (!PRODUCTS_OVERRIDES[id]) PRODUCTS_OVERRIDES[id] = {};
+  Object.assign(PRODUCTS_OVERRIDES[id], changed);
+  persistProductOverrides();
 
   writeLog('access', { event: 'product_updated', id, fields: Object.keys(req.body) });
   res.json({ ok: true, product: found });
+});
+
+/**
+ * POST /api/admin/products/:id/upload
+ * Upload une image produit encodée en base64 → sauvegarde dans public/uploads/
+ */
+app.post('/api/admin/products/:id/upload', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
+  const { id } = req.params;
+  if (!/^[a-zA-Z0-9_-]+$/.test(id))
+    return res.status(400).json({ ok: false, error: 'ID invalide' });
+
+  const { data, mimeType } = req.body;
+  if (!data || typeof data !== 'string')
+    return res.status(400).json({ ok: false, error: 'Image manquante (base64)' });
+
+  const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  const mime = mimeType || 'image/jpeg';
+  if (!allowed.includes(mime))
+    return res.status(400).json({ ok: false, error: 'Type non autorisé' });
+
+  const ext = mime === 'image/png' ? '.png' : mime === 'image/webp' ? '.webp' : mime === 'image/gif' ? '.gif' : '.jpg';
+  const base64Data = data.replace(/^data:image\/[a-z+]+;base64,/, '');
+  let buffer;
+  try { buffer = Buffer.from(base64Data, 'base64'); } catch {
+    return res.status(400).json({ ok: false, error: 'Données base64 invalides' });
+  }
+  if (buffer.length > 8 * 1024 * 1024)
+    return res.status(400).json({ ok: false, error: 'Image trop grande (max 8 Mo)' });
+
+  const uploadsDir = path.join(__dirname, 'public', 'uploads');
+  if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+
+  const safeName = `${id}_${Date.now()}${ext}`;
+  try { fs.writeFileSync(path.join(uploadsDir, safeName), buffer); } catch {
+    return res.status(500).json({ ok: false, error: 'Erreur sauvegarde fichier' });
+  }
+
+  writeLog('access', { event: 'image_uploaded', id, file: safeName, size: buffer.length });
+  res.json({ ok: true, url: `/uploads/${safeName}` });
+});
+
+/**
+ * POST /api/admin/products/:id/fetch-image
+ * Télécharge une image depuis une URL externe → sauvegarde dans public/uploads/
+ */
+app.post('/api/admin/products/:id/fetch-image', async (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
+  const { id } = req.params;
+  if (!/^[a-zA-Z0-9_-]+$/.test(id))
+    return res.status(400).json({ ok: false, error: 'ID invalide' });
+
+  const { url } = req.body;
+  if (!url || typeof url !== 'string')
+    return res.status(400).json({ ok: false, error: 'URL manquante' });
+
+  let parsed;
+  try { parsed = new URL(url); } catch {
+    return res.status(400).json({ ok: false, error: 'URL invalide' });
+  }
+  if (!['http:', 'https:'].includes(parsed.protocol))
+    return res.status(400).json({ ok: false, error: 'Protocole non autorisé' });
+  const blockedHosts = ['localhost', '127.0.0.1', '0.0.0.0', '::1'];
+  if (blockedHosts.includes(parsed.hostname))
+    return res.status(400).json({ ok: false, error: 'Hôte non autorisé' });
+
+  try {
+    const response = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    if (!response.ok) return res.status(400).json({ ok: false, error: `HTTP ${response.status} depuis l'URL` });
+
+    const contentType = response.headers.get('content-type') || '';
+    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    const mimeMatch = allowed.find(m => contentType.includes(m));
+    if (!mimeMatch) return res.status(400).json({ ok: false, error: 'L\'URL ne pointe pas vers une image valide' });
+
+    const ext = mimeMatch === 'image/png' ? '.png' : mimeMatch === 'image/webp' ? '.webp' : mimeMatch === 'image/gif' ? '.gif' : '.jpg';
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    if (buffer.length > 8 * 1024 * 1024)
+      return res.status(400).json({ ok: false, error: 'Image trop grande (max 8 Mo)' });
+
+    const uploadsDir = path.join(__dirname, 'public', 'uploads');
+    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+
+    const safeName = `${id}_${Date.now()}${ext}`;
+    fs.writeFileSync(path.join(uploadsDir, safeName), buffer);
+
+    writeLog('access', { event: 'image_fetched', id, url, file: safeName, size: buffer.length });
+    res.json({ ok: true, url: `/uploads/${safeName}` });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: 'Impossible de télécharger l\'image : ' + e.message });
+  }
 });
 
 /* ─────────────────────────────────────────
@@ -3815,18 +3955,21 @@ const PAYMENT_LABELS = {
   apple_pay:   'Apple Pay',
 };
 
-/* Calculs HT/TVA — TVA France 20% uniquement pour FR + DOM-TOM + UE (zone 0-2). Hors UE : 0% TVA */
+/* Calculs HT/TVA — TVA 20% sur produits ET livraison pour FR + DOM-TOM + UE. Hors UE : 0% TVA */
 function calcInvoiceTotals(order) {
   const discount         = order.discount || 0;
-  const productsTTC      = Math.round((order.total - (order.shipping || 0)) * 100) / 100;
+  const shipping         = order.shipping || 0;
+  const productsTTC      = Math.round((order.total - shipping) * 100) / 100;
   const zone             = _zoneIndex(order.shippingAddress?.country);
   const tvaRate          = zone <= 2 ? 1.20 : 1.00; /* Hors UE : exonéré TVA */
   const grossProductsTTC = Math.round((productsTTC + discount) * 100) / 100;
   const grossHT          = Math.round(grossProductsTTC / tvaRate * 100) / 100;
   const discountHT       = Math.round(discount / tvaRate * 100) / 100;
   const productsHT       = Math.round(productsTTC / tvaRate * 100) / 100;
-  const tvaAmount        = Math.round((productsTTC - productsHT) * 100) / 100;
-  return { grossHT, discountHT, productsHT, tvaAmount, productsTTC, discount, shipping: order.shipping || 0, totalTTC: order.total, tvaRate };
+  const shippingHT       = Math.round(shipping / tvaRate * 100) / 100;
+  /* TVA calculée sur le total TTC complet (produits + livraison) — assure l'équilibre de la facture */
+  const tvaAmount        = Math.round((order.total - productsHT - shippingHT) * 100) / 100;
+  return { grossHT, discountHT, productsHT, shippingHT, tvaAmount, productsTTC, discount, shipping, totalTTC: order.total, tvaRate };
 }
 
 /* Génération du PDF avec PDFKit */
@@ -3849,8 +3992,9 @@ async function generateInvoicePDF(invoice) {
     doc.fontSize(22).fillColor(BEIGE).font('Helvetica-Bold')
        .text('LE CLAM', 65, 65);
     doc.fontSize(9).fillColor(BEIGE).font('Helvetica')
-       .text('contact@leclam.eu  ·  leclam.eu', 65, 92)
-       .text('France', 65, 105);
+       .text('contact@leclam.eu  ·  leclam.eu', 65, 82)
+       .text(SELLER.address, 65, 94)
+       .text(`${SELLER.zip} ${SELLER.city}  ·  ${SELLER.country}`, 65, 106);
 
     const titleLabel = invoice.isModification ? 'FACTURE MODIFICATIVE' : 'FACTURE';
     doc.fontSize(invoice.isModification ? 13 : 18).fillColor(BEIGE).font('Helvetica-Bold')
@@ -3884,6 +4028,7 @@ async function generateInvoicePDF(invoice) {
       ...(invoice.originalOrderId       ? [['N° cmd originale', invoice.originalOrderId]]       : []),
       ['Date facture',  new Date(invoice.createdAt).toLocaleDateString('fr-FR')],
       ['Date paiement', invoice.paymentDate ? new Date(invoice.paymentDate).toLocaleDateString('fr-FR') : '—'],
+      ['Exigibilité TVA', invoice.paymentDate ? new Date(invoice.paymentDate).toLocaleDateString('fr-FR') : '—'],
       ['Mode paiement', PAYMENT_LABELS[invoice.paymentMethod] || invoice.paymentMethod || '—'],
     ];
     let ry = Y2 + 18;
@@ -3926,16 +4071,17 @@ async function generateInvoicePDF(invoice) {
 
     /* ── Totaux ── */
     const t = invoice.totals;
+    const shippingHT = t.shippingHT != null ? t.shippingHT : Math.round(t.shipping / (t.tvaRate || 1.20) * 100) / 100;
     const totRows = [
       ...(t.discount > 0 ? [
         ['Sous-total brut HT',      t.grossHT.toFixed(2).replace('.', ',')     + ' €', false],
         ['Remise (code parrain)',   '−' + t.discountHT.toFixed(2).replace('.', ',') + ' €', false],
       ] : []),
-      [t.discount > 0 ? 'Sous-total net HT' : 'Sous-total HT',
+      [t.discount > 0 ? 'Sous-total net HT' : 'Produits HT',
                                    t.productsHT.toFixed(2).replace('.', ',')  + ' €', false],
+      ['Livraison HT',             shippingHT.toFixed(2).replace('.', ',')    + ' €', false],
       [t.tvaRate <= 1.00 ? 'TVA (0% — hors UE)' : 'TVA (20%)',
                                    t.tvaAmount.toFixed(2).replace('.', ',')   + ' €', false],
-      ['Frais de livraison',       t.shipping.toFixed(2).replace('.', ',')    + ' €', false],
     ];
     totRows.forEach(([label, val]) => {
       doc.fontSize(9).fillColor(GRAY).font('Helvetica')
@@ -3968,7 +4114,14 @@ async function generateInvoicePDF(invoice) {
     doc.fontSize(8).fillColor(GRAY).font('Helvetica')
        .text('Merci pour votre commande ! Des questions ? contact@leclam.eu', 50, iy + 10, { align: 'center', width: W });
     doc.moveTo(50, iy + 24).lineTo(545, iy + 24).lineWidth(0.3).strokeColor(BEIGE).stroke();
-    doc.text('Le Clam — Entreprise individuelle — France  ·  leclam.eu', 50, iy + 28, { align: 'center', width: W });
+    doc.text(
+      `${SELLER.name} — Entreprise individuelle — ${SELLER.address}, ${SELLER.zip} ${SELLER.city}, ${SELLER.country}`,
+      50, iy + 28, { align: 'center', width: W }
+    );
+    doc.text(
+      `SIRET : ${SELLER.siret}  ·  N° TVA intracommunautaire : ${SELLER.tvaIntra}  ·  leclam.eu`,
+      50, iy + 40, { align: 'center', width: W }
+    );
 
     doc.end();
     stream.on('finish', () => resolve(pdfPath));
@@ -3990,7 +4143,10 @@ async function generateAvoirPDF(avoir) {
     /* En-tête */
     doc.rect(50, 50, W, 70).fill(BROWN);
     doc.fontSize(22).fillColor(BEIGE).font('Helvetica-Bold').text('LE CLAM', 65, 65);
-    doc.fontSize(9).fillColor(BEIGE).font('Helvetica').text('contact@leclam.eu  ·  leclam.eu', 65, 92).text('France', 65, 105);
+    doc.fontSize(9).fillColor(BEIGE).font('Helvetica')
+       .text('contact@leclam.eu  ·  leclam.eu', 65, 82)
+       .text(SELLER.address, 65, 94)
+       .text(`${SELLER.zip} ${SELLER.city}  ·  ${SELLER.country}`, 65, 106);
     doc.fontSize(18).fillColor(BEIGE).font('Helvetica-Bold').text('AVOIR', 300, 72, { width: 230, align: 'right' });
     doc.fontSize(11).fillColor(BEIGE).font('Helvetica').text(avoir.avoirNumber, 300, 96, { width: 230, align: 'right' });
 
@@ -4041,7 +4197,14 @@ async function generateAvoirPDF(avoir) {
     doc.fontSize(8).fillColor(GRAY).font('Helvetica')
        .text('Des questions ? contact@leclam.eu', 50, FY, { align: 'center', width: W });
     doc.moveTo(50, FY + 14).lineTo(545, FY + 14).lineWidth(0.3).strokeColor(BEIGE).stroke();
-    doc.text('Le Clam — Entreprise individuelle — France  ·  leclam.eu', 50, FY + 18, { align: 'center', width: W });
+    doc.text(
+      `${SELLER.name} — Entreprise individuelle — ${SELLER.address}, ${SELLER.zip} ${SELLER.city}, ${SELLER.country}`,
+      50, FY + 18, { align: 'center', width: W }
+    );
+    doc.text(
+      `SIRET : ${SELLER.siret}  ·  N° TVA intracommunautaire : ${SELLER.tvaIntra}  ·  leclam.eu`,
+      50, FY + 30, { align: 'center', width: W }
+    );
 
     doc.end();
     stream.on('finish', () => resolve(pdfPath));

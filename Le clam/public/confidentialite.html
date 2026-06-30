@@ -6,7 +6,7 @@
   <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Politique de confidentialité — Le Clam</title>
-<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +21,12 @@
     @media (max-width: 360px) { .legal-page { padding: 4.5rem .9rem 2rem; font-size: .93rem; } }
     .legal-page li { margin-bottom: .3rem; }
     .legal-page a { color: var(--dark); text-decoration: underline; }
-  </style></head>
+    .placeholder { background: #fff3cd; padding: 0 4px; border-radius: 3px; font-weight: 600; color: #856404; }
+    table.legal-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .93rem; }
+    table.legal-table th { background: #f5f5f5; text-align: left; padding: .5rem .8rem; font-weight: 600; border: 1px solid #e0e0e0; color: var(--dark); }
+    table.legal-table td { padding: .5rem .8rem; border: 1px solid #e0e0e0; color: #444; vertical-align: top; }
+  </style>
+</head>
 <body class="page-neutre">
 
   <nav class="navbar scrolled" id="navbar">
@@ -46,58 +51,200 @@
   </nav>
 
   <main class="legal-page">
-    <h1 data-i18n="legal.confidentialite">Politique de confidentialité</h1>
-    <p class="legal-date" data-i18n="legal.updated">Dernière mise à jour : avril 2025</p>
+    <h1>Politique de confidentialité</h1>
+    <p class="legal-date">Dernière mise à jour : juin 2026</p>
 
-    <h2 data-i18n="privacy.s1_title">1. Responsable du traitement</h2>
-    <p data-i18n-html="privacy.s1_body">Le Clam, entreprise individuelle, est responsable du traitement de vos données personnelles collectées via le site <strong>leclam.eu</strong>. Contact : <a href="mailto:contact@leclam.eu">contact@leclam.eu</a></p>
+    <p>La présente politique de confidentialité explique comment <span class="placeholder">[NOM DE L'ENTREPRISE]</span> (ci-après « Le Clam »), exploitant le site <strong>leclam.eu</strong>, collecte, utilise et protège vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679) et à la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés (loi « Informatique et Libertés »).</p>
 
-    <h2 data-i18n="privacy.s2_title">2. Données collectées</h2>
-    <p data-i18n="privacy.s2_intro">Dans le cadre de vos achats et de votre navigation, nous pouvons collecter :</p>
+    <h2>1. Identité du responsable de traitement</h2>
+    <p>
+      <strong>Responsable du traitement :</strong> <span class="placeholder">[NOM DE L'ENTREPRISE]</span><br>
+      <strong>Représentant légal :</strong> <span class="placeholder">[PRÉNOM NOM]</span><br>
+      <strong>Siège social :</strong> <span class="placeholder">[ADRESSE COMPLÈTE]</span><br>
+      <strong>SIRET :</strong> <span class="placeholder">[XXX XXX XXX XXXXX]</span><br>
+      <strong>E-mail :</strong> <a href="mailto:contact@leclam.eu">contact@leclam.eu</a>
+    </p>
+    <p>
+      <strong>Délégué à la Protection des Données (DPO) :</strong><br>
+      <span class="placeholder">[NOM DU DPO ou indication « Non désigné — structure de moins de 250 salariés sans traitement à grande échelle » si applicable]</span><br>
+      Contact DPO : <span class="placeholder">[dpo@leclam.eu ou contact@leclam.eu]</span>
+    </p>
+
+    <h2>2. Données personnelles collectées</h2>
+    <p>Dans le cadre de votre navigation et de vos achats sur leclam.eu, Le Clam peut être amené à collecter les données suivantes :</p>
+
+    <table class="legal-table">
+      <thead>
+        <tr>
+          <th>Catégorie de données</th>
+          <th>Données collectées</th>
+          <th>Moment de la collecte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Données d'identification</td>
+          <td>Nom, prénom, adresse e-mail</td>
+          <td>Création de compte, commande, contact</td>
+        </tr>
+        <tr>
+          <td>Données de contact</td>
+          <td>Adresse postale, numéro de téléphone</td>
+          <td>Commande, livraison</td>
+        </tr>
+        <tr>
+          <td>Données de paiement</td>
+          <td>Traitées directement par Stripe (nous n'avons pas accès aux numéros de carte)</td>
+          <td>Paiement d'une commande</td>
+        </tr>
+        <tr>
+          <td>Données de commande</td>
+          <td>Historique des achats, montants, produits commandés, statut de livraison</td>
+          <td>Validation d'une commande</td>
+        </tr>
+        <tr>
+          <td>Données de navigation</td>
+          <td>Adresse IP, pages visitées, durée de session, type de navigateur, données cookies (si consentement)</td>
+          <td>Navigation sur le site</td>
+        </tr>
+        <tr>
+          <td>Données de panier</td>
+          <td>Produits ajoutés au panier (stockés dans le localStorage de votre navigateur)</td>
+          <td>Navigation et ajouts au panier</td>
+        </tr>
+        <tr>
+          <td>Données de communication</td>
+          <td>Contenu des messages envoyés via le formulaire de contact</td>
+          <td>Prise de contact</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Le Clam ne collecte aucune donnée sensible au sens de l'article 9 du RGPD (données de santé, opinions politiques, etc.). Le site propose des articles pour adultes (catégorie Plaisir) : aucune donnée relative à la vie sexuelle n'est collectée ou traitée.</p>
+
+    <h2>3. Finalités et bases légales du traitement</h2>
+
+    <table class="legal-table">
+      <thead>
+        <tr>
+          <th>Finalité</th>
+          <th>Base légale (art. 6 RGPD)</th>
+          <th>Durée de conservation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Traitement, gestion et suivi des commandes</td>
+          <td>Exécution du contrat</td>
+          <td>3 ans après la dernière commande</td>
+        </tr>
+        <tr>
+          <td>Gestion de la relation client (SAV, litiges, retours)</td>
+          <td>Exécution du contrat / Intérêt légitime</td>
+          <td>3 ans après la résolution</td>
+        </tr>
+        <tr>
+          <td>Envoi des confirmations et notifications de commande</td>
+          <td>Exécution du contrat</td>
+          <td>Durée de la relation commerciale</td>
+        </tr>
+        <tr>
+          <td>Lutte contre la fraude et sécurité</td>
+          <td>Intérêt légitime / Obligation légale</td>
+          <td>1 an maximum</td>
+        </tr>
+        <tr>
+          <td>Respect des obligations comptables et fiscales</td>
+          <td>Obligation légale</td>
+          <td>10 ans (durée légale de conservation des pièces comptables)</td>
+        </tr>
+        <tr>
+          <td>Envoi de newsletters et communications marketing</td>
+          <td>Consentement</td>
+          <td>Jusqu'au retrait du consentement, puis 3 ans d'inactivité</td>
+        </tr>
+        <tr>
+          <td>Analyse statistique de la navigation (cookies analytiques)</td>
+          <td>Consentement</td>
+          <td>13 mois maximum</td>
+        </tr>
+        <tr>
+          <td>Amélioration du site et de l'expérience utilisateur</td>
+          <td>Intérêt légitime</td>
+          <td>13 mois maximum (données anonymisées)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Destinataires des données</h2>
+    <p>Vos données personnelles sont destinées aux équipes internes de Le Clam. Elles peuvent être transmises à des tiers uniquement dans les cas suivants :</p>
     <ul>
-      <li data-i18n="privacy.s2_li1">Nom, prénom, adresse e-mail, adresse postale, numéro de téléphone (lors d'une commande)</li>
-      <li data-i18n="privacy.s2_li2">Données de paiement (traitées directement par Stripe, nous n'y avons pas accès)</li>
-      <li data-i18n="privacy.s2_li3">Données de navigation (pages visitées, durée de session, via cookies analytiques)</li>
-      <li data-i18n="privacy.s2_li4">Contenu du panier (stocké dans votre navigateur via localStorage)</li>
+      <li><strong>Stripe (prestataire de paiement) :</strong> pour le traitement sécurisé des paiements. Stripe est certifié PCI-DSS. Politique de confidentialité : <a href="https://stripe.com/fr/privacy" target="_blank" rel="noopener noreferrer">stripe.com/fr/privacy</a></li>
+      <li><strong>Fournisseurs dropshipping partenaires</strong> (en Europe et en Asie) : nom, prénom et adresse de livraison, nécessaires à l'expédition des commandes</li>
+      <li><strong>Transporteurs et opérateurs logistiques :</strong> données de livraison (nom, adresse, téléphone) strictement nécessaires à la remise du colis</li>
+      <li><strong>Hébergeur (Vercel Inc.) :</strong> les données transitent via les serveurs Vercel dans le cadre de l'hébergement du site</li>
+      <li><strong>Autorités compétentes :</strong> sur réquisition judiciaire ou légale</li>
+    </ul>
+    <p>Aucune donnée personnelle n'est vendue à des tiers ni cédée à des fins de prospection commerciale par des tiers.</p>
+
+    <h2>5. Transferts de données hors Union européenne</h2>
+    <p>Certains de nos fournisseurs dropshipping sont situés en dehors de l'Union européenne, notamment en Chine et en Asie du Sud-Est. Dans ce cadre, seules les données strictement nécessaires à l'expédition (nom, prénom, adresse de livraison) sont transmises. Ces transferts s'effectuent sur la base des <strong>clauses contractuelles types</strong> adoptées par la Commission européenne, conformément à l'article 46 du RGPD.</p>
+    <p>Les serveurs de Vercel Inc. (hébergeur) sont situés aux États-Unis et en Europe. Les données peuvent transiter par des serveurs américains dans le cadre du Data Privacy Framework UE-États-Unis, auquel Vercel adhère.</p>
+
+    <h2>6. Cookies et traceurs</h2>
+    <p>Le site leclam.eu utilise des cookies et traceurs. Pour une information complète sur les cookies déposés, leur finalité et la manière de les paramétrer, consultez notre <a href="cookies.html">Politique de cookies</a>.</p>
+    <p>En résumé :</p>
+    <ul>
+      <li><strong>Cookies essentiels au fonctionnement :</strong> session, panier (localStorage), préférences de langue — aucun consentement requis</li>
+      <li><strong>Cookies analytiques</strong> (mesure d'audience) — soumis à votre consentement</li>
+      <li><strong>Cookies publicitaires</strong> — <span class="placeholder">[à compléter selon les outils utilisés, ou indiquer « non utilisés »]</span></li>
     </ul>
 
-    <h2 data-i18n="privacy.s3_title">3. Finalités du traitement</h2>
-    <p data-i18n="privacy.s3_intro">Vos données sont utilisées pour :</p>
+    <h2>7. Vos droits (RGPD)</h2>
+    <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits suivants sur vos données personnelles :</p>
     <ul>
-      <li data-i18n="privacy.s3_li1">Traiter et livrer vos commandes</li>
-      <li data-i18n="privacy.s3_li2">Vous envoyer des confirmations et informations liées à votre commande</li>
-      <li data-i18n="privacy.s3_li3">Améliorer notre site et nos services</li>
-      <li data-i18n="privacy.s3_li4">Respecter nos obligations légales</li>
+      <li><strong>Droit d'accès (art. 15 RGPD) :</strong> obtenir la confirmation que des données vous concernant sont traitées, et en recevoir une copie</li>
+      <li><strong>Droit de rectification (art. 16 RGPD) :</strong> faire corriger des données inexactes ou incomplètes</li>
+      <li><strong>Droit à l'effacement / « droit à l'oubli » (art. 17 RGPD) :</strong> demander la suppression de vos données, sous réserve des obligations légales de conservation</li>
+      <li><strong>Droit à la limitation du traitement (art. 18 RGPD) :</strong> demander la suspension temporaire du traitement de vos données</li>
+      <li><strong>Droit à la portabilité (art. 20 RGPD) :</strong> recevoir vos données dans un format structuré, lisible par machine, et les transmettre à un autre responsable de traitement</li>
+      <li><strong>Droit d'opposition (art. 21 RGPD) :</strong> vous opposer au traitement de vos données, notamment à des fins de prospection commerciale</li>
+      <li><strong>Droit de retirer votre consentement</strong> à tout moment, sans que cela n'affecte la licéité du traitement fondé sur le consentement effectué avant ce retrait</li>
+      <li><strong>Droit de définir des directives post-mortem :</strong> instructions relatives à la conservation, l'effacement et la communication de vos données après votre décès</li>
     </ul>
-
-    <h2 data-i18n="privacy.s4_title">4. Base légale</h2>
-    <p data-i18n="privacy.s4_body">Le traitement est fondé sur : l'exécution du contrat de vente (commandes), votre consentement (newsletter, cookies analytiques) et nos obligations légales.</p>
-
-    <h2 data-i18n="privacy.s5_title">5. Conservation des données</h2>
-    <p data-i18n-html="privacy.s5_body">Vos données de commande sont conservées pendant <strong>3 ans</strong> à compter de la dernière relation commerciale. Les données de navigation sont conservées <strong>13 mois</strong> maximum.</p>
-
-    <h2 data-i18n="privacy.s6_title">6. Partage des données</h2>
-    <p data-i18n="privacy.s6_intro">Vos données peuvent être transmises à :</p>
+    <p>Pour exercer ces droits, contactez-nous :</p>
     <ul>
-      <li data-i18n-html="privacy.s6_li1"><strong>Stripe</strong> : traitement sécurisé des paiements</li>
-      <li data-i18n-html="privacy.s6_li2"><strong>Transporteurs</strong> : pour la livraison de vos commandes</li>
-      <li data-i18n-html="privacy.s6_li3"><strong>Fournisseurs dropshipping</strong> : pour la préparation et l'expédition</li>
+      <li>Par e-mail : <a href="mailto:contact@leclam.eu">contact@leclam.eu</a></li>
+      <li>Par courrier postal : <span class="placeholder">[NOM DE L'ENTREPRISE], [ADRESSE COMPLÈTE]</span></li>
     </ul>
-    <p data-i18n="privacy.s6_end">Aucune donnée n'est vendue à des tiers à des fins commerciales.</p>
+    <p>Nous nous engageons à répondre à votre demande dans un délai d'un mois (pouvant être prolongé à 3 mois en cas de demande complexe, avec information préalable). Une pièce d'identité peut vous être demandée pour vérifier votre identité.</p>
+    <p>En cas de réponse insatisfaisante ou d'absence de réponse, vous pouvez introduire une réclamation auprès de la <strong>Commission Nationale de l'Informatique et des Libertés (CNIL)</strong> :<br>
+    3 Place de Fontenoy, 75007 Paris — <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">cnil.fr</a></p>
 
-    <h2 data-i18n="privacy.s7_title">7. Vos droits (RGPD)</h2>
-    <p data-i18n="privacy.s7_intro">Conformément au RGPD, vous disposez des droits suivants :</p>
+    <h2>8. Sécurité des données</h2>
+    <p>Le Clam met en œuvre des mesures techniques et organisationnelles appropriées pour assurer la sécurité et la confidentialité de vos données, notamment :</p>
     <ul>
-      <li data-i18n-html="privacy.s7_li1"><strong>Accès</strong> : consulter les données que nous détenons sur vous</li>
-      <li data-i18n-html="privacy.s7_li2"><strong>Rectification</strong> : corriger des données inexactes</li>
-      <li data-i18n-html="privacy.s7_li3"><strong>Suppression</strong> : demander l'effacement de vos données</li>
-      <li data-i18n-html="privacy.s7_li4"><strong>Opposition</strong> : vous opposer à certains traitements</li>
-      <li data-i18n-html="privacy.s7_li5"><strong>Portabilité</strong> : recevoir vos données dans un format structuré</li>
+      <li>Chiffrement des communications via le protocole HTTPS (TLS)</li>
+      <li>Traitement des paiements externalisé à Stripe (certifié PCI-DSS niveau 1)</li>
+      <li>Accès aux données limité aux seuls collaborateurs ayant besoin d'en connaître</li>
+      <li>Hébergement sur infrastructure Vercel avec redondance et surveillance 24h/24</li>
+      <li>Panier stocké localement dans votre navigateur (localStorage), non transmis à nos serveurs avant validation de commande</li>
     </ul>
-    <p data-i18n-html="privacy.s7_end">Pour exercer ces droits : <a href="mailto:contact@leclam.eu">contact@leclam.eu</a>. Vous pouvez également déposer une réclamation auprès de la <strong>CNIL</strong> (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+    <p>En cas de violation de données à caractère personnel susceptible d'engendrer un risque élevé pour vos droits et libertés, Le Clam s'engage à vous en informer dans les meilleurs délais, conformément à l'article 34 du RGPD.</p>
 
-    <h2 data-i18n="privacy.s8_title">8. Sécurité</h2>
-    <p data-i18n="privacy.s8_body">Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, perte ou divulgation.</p>
+    <h2>9. Mineurs</h2>
+    <p>Le site leclam.eu est accessible à toute personne majeure (18 ans et plus) pour la catégorie Plaisir. Les autres catégories (Malin, Bébé) ne sont pas destinées aux mineurs pour tout achat. Le Clam ne collecte pas sciemment de données relatives à des mineurs. Si vous pensez qu'un mineur nous a communiqué des données, contactez-nous à <a href="mailto:contact@leclam.eu">contact@leclam.eu</a>.</p>
+
+    <h2>10. Modifications de la politique de confidentialité</h2>
+    <p>Le Clam se réserve le droit de modifier la présente politique à tout moment pour se conformer aux évolutions légales, réglementaires ou à des changements dans ses pratiques. La date de dernière mise à jour est indiquée en haut de cette page. En cas de modification substantielle, Le Clam s'engage à en informer les utilisateurs par e-mail ou par une notification sur le site.</p>
+
+    <h2>11. Contact</h2>
+    <p>
+      Pour toute question relative au traitement de vos données personnelles :<br>
+      <strong>E-mail :</strong> <a href="mailto:contact@leclam.eu">contact@leclam.eu</a><br>
+      <strong>Formulaire de contact :</strong> <a href="contact.html">leclam.eu/contact</a><br>
+      <strong>Courrier :</strong> <span class="placeholder">[NOM DE L'ENTREPRISE], [ADRESSE COMPLÈTE]</span>
+    </p>
   </main>
 
   <footer class="footer">

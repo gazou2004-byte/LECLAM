@@ -30,7 +30,7 @@
 
     /* ── Galerie images ── */
     var imgs = p.images.map(function (src) {
-      return '<img src="' + escAttr(src) + '" alt="' + escAttr(p.name_fr || '') + '" loading="lazy">';
+      return '<img src="' + escAttr(src) + '" alt="' + escAttr(p.name_fr || p.name || '') + '" loading="lazy" onerror="_imgError(this)">';
     }).join('');
 
     var multi = p.images.length > 1;
@@ -46,27 +46,50 @@
       + '<div class="p-gal-dots">' + dots + '</div>'
       : '';
 
-    /* ── Textes (fallback FR, I18n remplace au chargement) ── */
-    var name = p.name_fr || '';
+    /* ── Badge promo (position absolute sur l'image) ── */
+    var badge = p.badge ? '<span class="p-badge b-deal">' + escAttr(p.badge) + '</span>' : '';
+    /* Rupture de stock : bouton désactivé + badge */
+    var outOfStock = (p.stock != null && p.stock <= 0);
+    if (outOfStock && !p.badge) badge = '<span class="p-badge" style="background:#888">Épuisé</span>';
+
+    /* ── Textes (fallback FR → name, I18n remplace au chargement) ── */
+    var name = p.name_fr || p.name || '';
     var sub  = p.sub_fr  || '';
+
+    /* ── Prix barré si oldPrice > price ── */
+    var oldPriceHtml = (p.oldPrice != null && p.oldPrice > p.price)
+      ? '<span class="p-old">' + fmtPrice(p.oldPrice) + '</span>'
+      : '';
 
     return '<div class="p-card" ' + attrs + '>'
       + '<div class="p-img"><div class="p-gallery">'
       + '<div class="p-gallery-track">' + imgs + '</div>'
       + nav
       + '</div>'
+      + badge
       + '<button class="p-wish">' + SVG_HEART + '</button>'
       + '</div>'
       + '<div class="p-info">'
       + '<div class="p-name" data-i18n="products.' + p.id + '_name">' + escAttr(name) + '</div>'
       + '<div class="p-sub"  data-i18n="products.' + p.id + '_sub">'  + escAttr(sub)  + '</div>'
-      + '<div class="p-foot"><div><span class="p-price">' + fmtPrice(p.price) + '</span></div>'
-      + '<button class="atc-btn" onclick="addToCart(this)" data-i18n="product.add">Ajouter</button>'
+      + '<div class="p-foot"><div>' + oldPriceHtml + '<span class="p-price">' + fmtPrice(p.price) + '</span></div>'
+      + '<button class="atc-btn" onclick="addToCart(this)" data-i18n="product.add"' + (outOfStock ? ' disabled style="opacity:.45;cursor:not-allowed"' : '') + '>Ajouter</button>'
       + '</div></div></div>';
   }
 
+  function applyOverrides(data, overrides) {
+    if (!overrides || typeof overrides !== 'object') return data;
+    var result = {};
+    Object.keys(data).forEach(function (cat) {
+      result[cat] = data[cat].map(function (p) {
+        return overrides[p.id] ? Object.assign({}, p, overrides[p.id]) : p;
+      });
+    });
+    return result;
+  }
+
   function renderCategory(category, gridId) {
-    var data = window.PRODUCTS_DATA;
+    var data = window.PRODUCTS_DATA_FINAL || window.PRODUCTS_DATA;
     if (!data || !data[category] || !data[category].length) return;
     var grid = document.getElementById(gridId) || document.querySelector('.products-grid');
     if (!grid) return;
@@ -77,12 +100,66 @@
 
   window.renderCategory = renderCategory;
 
-  /* Auto-détection et rendu immédiat (scripts en bas du body = DOM disponible) */
+  /* Supprime une image cassée de la galerie + son point de navigation */
+  window._imgError = function (img) {
+    var track = img.parentNode;
+    if (!track || !track.classList.contains('p-gallery-track')) {
+      img.style.display = 'none';
+      return;
+    }
+    var gallery = track.parentNode;
+    // Index de cet img parmi ses frères
+    var idx = Array.prototype.indexOf.call(track.children, img);
+    track.removeChild(img);
+    if (gallery) {
+      // Supprimer le dot correspondant
+      var allDots = gallery.querySelectorAll('.p-gal-dot');
+      if (idx >= 0 && allDots[idx]) allDots[idx].parentNode.removeChild(allDots[idx]);
+      // Masquer la nav si ≤ 1 image restante
+      var remaining = track.getElementsByTagName('img').length;
+      if (remaining <= 1) {
+        Array.prototype.forEach.call(
+          gallery.querySelectorAll('.p-gal-btn, .p-gal-dots'),
+          function (el) { el.style.display = 'none'; }
+        );
+      }
+      // Revenir à la position 0 pour éviter un slot vide actif
+      track.style.transform = 'translateX(0%)';
+      var newDots = gallery.querySelectorAll('.p-gal-dot');
+      Array.prototype.forEach.call(newDots, function (d, i) {
+        d.classList.toggle('active', i === 0);
+      });
+    }
+  };
+
+  /* Auto-détection de la catégorie */
   var cls = document.body ? document.body.className : '';
   var cat = cls.indexOf('page-plaisir') >= 0 ? 'plaisir'
           : cls.indexOf('page-malin')   >= 0 ? 'malin'
           : cls.indexOf('page-bebe')    >= 0 ? 'bebe'
           : null;
-  if (cat) renderCategory(cat, 'productsGrid');
+
+  /* Charge les overrides admin puis rend la grille */
+  if (cat) {
+    fetch('/api/products/overrides')
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .catch(function () { return {}; })
+      .then(function (overrides) {
+        window.PRODUCTS_DATA_FINAL = applyOverrides(window.PRODUCTS_DATA, overrides);
+        renderCategory(cat, 'productsGrid');
+
+        /* Re-init après rendu asynchrone des cartes :
+           DOMContentLoaded a déjà tourné avant que les cartes existent */
+        if (typeof initProductGalleries  === 'function') initProductGalleries();
+        if (typeof initProductModals     === 'function') initProductModals();
+        if (typeof initProductTags       === 'function') initProductTags();
+        if (typeof initStockBadges       === 'function') initStockBadges();
+        if (typeof initNewBadges         === 'function') initNewBadges();
+        if (typeof initWishlist          === 'function') initWishlist();
+        if (typeof initStarRatings       === 'function') initStarRatings();
+        if (typeof cachePageProducts     === 'function') cachePageProducts();
+        if (typeof applyProductOverrides === 'function') applyProductOverrides();
+      });
+  }
 
 })();
