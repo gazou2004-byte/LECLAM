@@ -2860,6 +2860,41 @@ app.get('/api/threads', (req, res) => {
   res.json({ ok: true, threads: mine });
 });
 
+/* ── CLIENT : POST /api/threads/upload ── joindre une photo (demande sur mesure, etc.) */
+app.post('/api/threads/upload', requireCsrf, (req, res) => {
+  const session = getSession(req);
+  if (!session) return res.status(401).json({ ok: false, error: 'Non connecté' });
+
+  const { data, mimeType } = req.body;
+  if (!data || typeof data !== 'string')
+    return res.status(400).json({ ok: false, error: 'Image manquante (base64)' });
+
+  const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  const mime = mimeType || 'image/jpeg';
+  if (!allowed.includes(mime))
+    return res.status(400).json({ ok: false, error: 'Type non autorisé' });
+
+  const ext = mime === 'image/png' ? '.png' : mime === 'image/webp' ? '.webp' : mime === 'image/gif' ? '.gif' : '.jpg';
+  const base64Data = data.replace(/^data:image\/[a-z+]+;base64,/, '');
+  let buffer;
+  try { buffer = Buffer.from(base64Data, 'base64'); } catch {
+    return res.status(400).json({ ok: false, error: 'Données base64 invalides' });
+  }
+  if (buffer.length > 8 * 1024 * 1024)
+    return res.status(400).json({ ok: false, error: 'Image trop grande (max 8 Mo)' });
+
+  const uploadsDir = path.join(__dirname, 'public', 'uploads', 'threads');
+  if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+
+  const safeName = `thread_${Date.now()}_${Math.random().toString(36).slice(2, 8)}${ext}`;
+  try { fs.writeFileSync(path.join(uploadsDir, safeName), buffer); } catch {
+    return res.status(500).json({ ok: false, error: 'Erreur sauvegarde fichier' });
+  }
+
+  writeLog('access', { event: 'thread_photo_uploaded', user: session.email, file: safeName, size: buffer.length });
+  res.json({ ok: true, url: `/uploads/threads/${safeName}` });
+});
+
 /* ── CLIENT : POST /api/threads ── ouvrir un nouveau thread */
 app.post('/api/threads', requireCsrf, (req, res) => {
   const session = getSession(req);

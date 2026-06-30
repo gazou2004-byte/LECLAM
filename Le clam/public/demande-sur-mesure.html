@@ -78,6 +78,30 @@
     }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
+    /* ── Photo ── */
+    .dsm-photo-zone {
+      border: 1.5px dashed #e0d8cc; border-radius: 12px; padding: 1rem;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      transition: border-color .15s, background .15s; min-height: 84px; position: relative;
+    }
+    .dsm-photo-zone:hover { border-color: #c8a87a; background: #fafaf8; }
+    .photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: .4rem; color: #9c8570; font-size: .8rem; font-weight: 600; }
+    .photo-preview-wrap { position: relative; display: inline-block; }
+    .photo-remove {
+      position: absolute; top: -8px; right: -8px; width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(20,10,5,.75); color: #fff; border: none; cursor: pointer; display: none;
+      align-items: center; justify-content: center;
+    }
+
+    /* ── Disclaimer délai ── */
+    .dsm-disclaimer {
+      display: flex; gap: .6rem; align-items: flex-start;
+      background: #fbf6ec; border: 1px solid #ede0c8; border-radius: 11px;
+      padding: .75rem .9rem; margin-bottom: 1.25rem;
+    }
+    .dsm-disclaimer svg { flex-shrink: 0; margin-top: .1rem; }
+    .dsm-disclaimer p { font-size: .76rem; color: #8a6d3a; line-height: 1.5; }
+
     /* ── Submit ── */
     .dsm-footer { margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .6rem; }
     .dsm-submit {
@@ -196,6 +220,41 @@
     const _catLabels = { plaisir: 'Plaisir', malin: 'Malin', bebe: 'Bébé' };
     const _catEmoji  = { plaisir: '💜', malin: '✨', bebe: '🍼' };
 
+    let _photoData = null; // { base64, mime }
+
+    window._onPhotoChange = function (input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { _toast('Veuillez choisir une image'); return; }
+      if (file.size > 8 * 1024 * 1024) { _toast('Image trop grande (max 8 Mo)'); return; }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        _photoData = { base64: e.target.result, mime: file.type };
+        const preview     = document.getElementById('photoPreview');
+        const placeholder = document.getElementById('photoPlaceholder');
+        const wrap        = document.getElementById('photoPreviewWrap');
+        const removeBtn   = document.getElementById('photoRemoveBtn');
+        if (preview)     preview.src = e.target.result;
+        if (wrap)         wrap.style.display = 'inline-block';
+        if (placeholder)  placeholder.style.display = 'none';
+        if (removeBtn)    removeBtn.style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window._removePhoto = function (e) {
+      e.stopPropagation();
+      _photoData = null;
+      const input = document.getElementById('fPhoto');
+      if (input) input.value = '';
+      const wrap        = document.getElementById('photoPreviewWrap');
+      const placeholder = document.getElementById('photoPlaceholder');
+      const removeBtn   = document.getElementById('photoRemoveBtn');
+      if (wrap)        wrap.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'flex';
+      if (removeBtn)   removeBtn.style.display = 'none';
+    };
+
     function _toast(msg) {
       const el = document.createElement('div');
       el.textContent = msg;
@@ -242,13 +301,33 @@
           </div>
 
           <div class="cfield">
+            <label>Photo du produit souhaité <span class="opt">(facultatif)</span></label>
+            <div class="dsm-photo-zone" id="photoZone" onclick="document.getElementById('fPhoto').click()">
+              <input type="file" id="fPhoto" accept="image/*" style="display:none" onchange="_onPhotoChange(this)">
+              <div id="photoPlaceholder" class="photo-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9c8570" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>Ajouter une photo</span>
+              </div>
+              <div class="photo-preview-wrap" id="photoPreviewWrap" style="display:none">
+                <img id="photoPreview" style="max-width:100%;max-height:150px;border-radius:10px;object-fit:cover;display:block">
+                <button type="button" class="photo-remove" id="photoRemoveBtn" onclick="_removePhoto(event)">✕</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cfield">
             <label>Lien de référence <span class="opt">(facultatif)</span></label>
-            <input type="text" id="fRef" placeholder="https://amazon.fr/… ou lien AliExpress, photo, etc.">
+            <input type="text" id="fRef" placeholder="https://amazon.fr/… ou lien AliExpress, etc.">
           </div>
 
           <div class="cfield">
             <label>Informations complémentaires <span class="opt">(facultatif)</span></label>
             <textarea id="fNotes" placeholder="Cadeau ? Délai souhaité ? Contraintes particulières…" rows="3"></textarea>
+          </div>
+
+          <div class="dsm-disclaimer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a8842f" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p>Le délai de recherche et de livraison peut varier selon le produit demandé et son prix. Nous vous donnerons une estimation précise dans notre réponse.</p>
           </div>
 
           <div class="dsm-footer">
@@ -309,13 +388,33 @@
       const catLabel = _catLabels[cat] || cat;
       const subject  = 'Demande sur mesure — ' + catLabel;
 
+      const btn = document.getElementById('dsmSubmit');
+
+      let photoUrl = '';
+      if (_photoData) {
+        if (btn) { btn.disabled = true; btn.innerHTML = 'Envoi de la photo…'; }
+        try {
+          const upRes  = await fetch('/api/threads/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', ...authHeaders() },
+            body: JSON.stringify({ data: _photoData.base64, mimeType: _photoData.mime })
+          });
+          const upData = await upRes.json();
+          if (upData.ok) photoUrl = upData.url;
+          else if (upData.error === 'Non connecté') { _renderLogin('Votre session a expiré. Reconnectez-vous pour envoyer votre demande.'); return; }
+          else _toast('Photo non envoyée : ' + (upData.error || 'erreur inconnue'));
+        } catch {
+          _toast('Photo non envoyée (serveur inaccessible)');
+        }
+      }
+
       let text = `Catégorie : ${catLabel}\n`;
       text += `\nCe que je cherche :\n${desc}`;
+      if (photoUrl) text += `\n\nPhoto jointe : ${photoUrl}`;
       if (ref)   text += `\n\nLien de référence : ${ref}`;
       text += `\n\nBudget indicatif : ${budget}`;
       if (notes) text += `\n\nInformations complémentaires :\n${notes}`;
 
-      const btn = document.getElementById('dsmSubmit');
       if (btn) { btn.disabled = true; btn.innerHTML = 'Envoi en cours…'; }
 
       try {

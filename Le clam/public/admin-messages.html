@@ -541,10 +541,14 @@
         const check=isAdmin?(m.readByClient?`<span class="bcheck">✓✓</span>`:`<span style="color:#bbb;font-size:.65rem">✓</span>`):'';
         const avStyle=isAdmin?'background:#1e293b;color:#94a3b8':_avStyle(clientStr);
         const inits=isAdmin?'Adm':_initials('',clientStr);
+        const bodyHtml = _esc(m.text||'').replace(/\n/g,'<br>').replace(
+          /(\/uploads\/threads\/[a-zA-Z0-9_\-.]+)/g,
+          '<br><a href="$1" target="_blank" rel="noopener"><img src="$1" style="max-width:200px;border-radius:10px;margin-top:.4rem;display:block;border:1px solid rgba(0,0,0,.08)"></a>'
+        );
         html+=`<div class="brow${isAdmin?' self':''}">
           <div class="bav-sm" style="${avStyle}">${inits}</div>
           <div class="binner">
-            <div class="bubble ${isAdmin?'bubble-admin':'bubble-client'}">${_esc(m.text||'').replace(/\n/g,'<br>')}</div>
+            <div class="bubble ${isAdmin?'bubble-admin':'bubble-client'}">${bodyHtml}</div>
             <div class="btime">${ts?_full(ts):''} ${check}</div>
           </div>
         </div>`;

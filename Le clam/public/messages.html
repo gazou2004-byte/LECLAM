@@ -384,10 +384,14 @@
         const day = ts ? new Date(ts).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}) : '';
         if (day && day!==lastDay) { html+=`<div class="day-sep"><span>${day}</span></div>`; lastDay=day; }
         const isMe = m.from==='client';
+        const bodyHtml = _esc(m.text||'').replace(/\n/g,'<br>').replace(
+          /(\/uploads\/threads\/[a-zA-Z0-9_\-.]+)/g,
+          '<br><a href="$1" target="_blank" rel="noopener"><img src="$1" style="max-width:180px;border-radius:10px;margin-top:.4rem;display:block;border:1px solid rgba(0,0,0,.08)"></a>'
+        );
         html += `<div class="brow${isMe?' self':''}">
           <div class="bav-sm ${isMe?'bav-me':'bav-lc'}">${isMe?I18n.t('messages.you'):'LC'}</div>
           <div class="binner">
-            <div class="bubble ${isMe?'bubble-me':'bubble-lc'}">${_esc(m.text||'').replace(/\n/g,'<br>')}</div>
+            <div class="bubble ${isMe?'bubble-me':'bubble-lc'}">${bodyHtml}</div>
             <div class="btime">${ts?_full(ts):''}</div>
           </div>
         </div>`;
