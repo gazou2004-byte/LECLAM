@@ -2318,6 +2318,13 @@ function applyFiltersAndSearch() {
 
   let visible = 0;
   cards.forEach(card => {
+    /* La carte "Demande sur mesure" est toujours visible */
+    if (card.classList.contains('p-card-request')) {
+      card.style.display = '';
+      visible++;
+      return;
+    }
+
     const tags     = (card.dataset.filter    || '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
     const familles = (card.dataset.famille   || '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
     const subfams  = (card.dataset.subfamille|| '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);

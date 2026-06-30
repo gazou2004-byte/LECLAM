@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demande sur mesure — Le Clam</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .dsm-page { max-width: 640px; margin: 0 auto; padding: 6rem 1.5rem 5rem; }
+
+    /* ── Hero ── */
+    .dsm-hero { text-align: center; margin-bottom: 2.5rem; }
+    .dsm-hero-icon {
+      width: 68px; height: 68px; border-radius: 50%;
+      background: linear-gradient(135deg, #f5ede0, #dfc8a0);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem; box-shadow: 0 6px 24px rgba(62,42,20,.14);
+    }
+    .dsm-hero h1 {
+      font-family: 'Playfair Display', serif; font-size: 1.75rem;
+      color: #1a1a1a; margin-bottom: .5rem; line-height: 1.25;
+    }
+    .dsm-hero p { color: #9c8570; font-size: .92rem; line-height: 1.65; max-width: 420px; margin: 0 auto; }
+    .dsm-badges {
+      display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;
+    }
+    .dsm-badge {
+      font-size: .72rem; font-weight: 700; padding: .28rem .8rem; border-radius: 20px;
+      background: #f5f0e8; color: #9c8570; border: 1px solid #ede8e0; letter-spacing: .03em;
+    }
+
+    /* ── Card ── */
+    .dsm-card {
+      background: #fff; border: 1.5px solid #ede8e0;
+      border-radius: 20px; padding: 2rem 2rem 1.75rem;
+      box-shadow: 0 4px 32px rgba(62,42,20,.07);
+    }
+
+    /* ── Steps ── */
+    .dsm-steps {
+      display: flex; gap: .4rem; margin-bottom: 1.75rem;
+      padding-bottom: 1.25rem; border-bottom: 1.5px solid #f5f0e8;
+    }
+    .dsm-step {
+      flex: 1; text-align: center; font-size: .72rem; font-weight: 700;
+      padding: .35rem .5rem; border-radius: 8px; color: #c0b0a0;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .dsm-step.active { background: #3e2a14; color: #d9c4a0; }
+
+    /* ── Fields ── */
+    .cfield { display: flex; flex-direction: column; gap: .32rem; margin-bottom: 1.15rem; }
+    .cfield label {
+      font-size: .7rem; font-weight: 800; color: #9c8570;
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+    .cfield label .opt { font-weight: 500; text-transform: none; letter-spacing: 0; color: #c0b0a0; }
+    .cfield input[type="text"],
+    .cfield input[type="url"],
+    .cfield select,
+    .cfield textarea {
+      padding: .7rem 1rem; border: 1.5px solid #e0d8cc; border-radius: 11px;
+      font-size: .875rem; font-family: inherit; color: #222; background: #fff;
+      outline: none; transition: border-color .15s, box-shadow .15s; line-height: 1.5;
+      appearance: none;
+    }
+    .cfield input:focus, .cfield select:focus, .cfield textarea:focus {
+      border-color: #3e2a14; box-shadow: 0 0 0 3px rgba(62,42,20,.06);
+    }
+    .cfield textarea { min-height: 110px; resize: vertical; }
+    .cfield select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right .95rem center; padding-right: 2.4rem;
+    }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ── Submit ── */
+    .dsm-footer { margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+    .dsm-submit {
+      width: 100%; padding: .85rem 2rem; background: #3e2a14; color: #d9c4a0;
+      border: none; border-radius: 12px; font-size: .95rem; font-weight: 700;
+      font-family: inherit; cursor: pointer; transition: background .15s, transform .12s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .dsm-submit:hover { background: #2a1c0d; }
+    .dsm-submit:active { transform: scale(.98); }
+    .dsm-submit:disabled { opacity: .6; cursor: default; transform: none; }
+    .dsm-hint { font-size: .73rem; color: #c0b0a0; text-align: center; }
+
+    /* ── Login wall ── */
+    .login-wall { text-align: center; padding: 3rem 1.5rem; }
+    .login-wall h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #3e2a14; margin: 1rem 0 .5rem; }
+    .login-wall p { font-size: .88rem; color: #9c8570; margin-bottom: 1.5rem; }
+    .btn-login {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .75rem 2rem; background: #3e2a14; color: #d9c4a0;
+      border-radius: 10px; text-decoration: none; font-size: .9rem; font-weight: 700;
+      font-family: inherit; border: none; cursor: pointer;
+    }
+    .btn-login:hover { background: #2a1c0d; }
+
+    /* ── Success ── */
+    .dsm-success { text-align: center; padding: 2.5rem 1.5rem; }
+    .success-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 6px 24px rgba(16,185,129,.15);
+    }
+    .dsm-success h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #1a1a1a; margin-bottom: .6rem; }
+    .dsm-success p { color: #9c8570; font-size: .9rem; line-height: 1.7; margin-bottom: 1.75rem; max-width: 340px; margin-left: auto; margin-right: auto; }
+    .btn-msgs {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 2rem; background: #3e2a14; color: #d9c4a0;
+      border-radius: 10px; text-decoration: none; font-size: .9rem; font-weight: 700;
+    }
+    .btn-msgs:hover { background: #2a1c0d; }
+
+    @media (max-width: 640px) {
+      .dsm-page { padding: 5rem 1rem 4rem; }
+      .dsm-hero h1 { font-size: 1.4rem; }
+      .dsm-card { padding: 1.5rem 1.2rem; border-radius: 16px; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
+</head>
+<body class="page-neutre">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html" class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span data-i18n="nav.plaisir">Plaisir</span></a>
+        <a href="malin.html"   class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span data-i18n="nav.malin">Malin</span></a>
+        <a href="bebe.html"    class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span data-i18n="nav.bebe">Bébé</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="dsm-page">
+
+    <div class="dsm-hero">
+      <div class="dsm-hero-icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3e2a14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+          <line x1="11" y1="8" x2="11" y2="14"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+      </div>
+      <h1>Vous ne trouvez pas ce que vous cherchez&nbsp;?</h1>
+      <p>Décrivez-nous le produit idéal — modèle, lien, budget. On le source pour vous et on revient sous 48h.</p>
+      <div class="dsm-badges">
+        <span class="dsm-badge">Gratuit</span>
+        <span class="dsm-badge">Réponse sous 48h</span>
+        <span class="dsm-badge">Sans engagement</span>
+      </div>
+    </div>
+
+    <div id="dsmContent"></div>
+
+  </main>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier">
+    <div class="cart-head">
+      <h3>Mon panier</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fermer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot" id="cartFoot" style="display:none"></div>
+  </aside>
+
+  <script src="js/app.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Catégorie depuis l'URL ── */
+    const _urlCat = new URLSearchParams(location.search).get('cat') || '';
+    const _catLabels = { plaisir: 'Plaisir', malin: 'Malin', bebe: 'Bébé' };
+    const _catEmoji  = { plaisir: '💜', malin: '✨', bebe: '🍼' };
+
+    function _toast(msg) {
+      const el = document.createElement('div');
+      el.textContent = msg;
+      el.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:.6rem 1.3rem;border-radius:9px;font-size:.83rem;font-weight:600;z-index:9999;white-space:nowrap;pointer-events:none;';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+
+    /* ── Rendu formulaire ── */
+    function _renderForm() {
+      const el = document.getElementById('dsmContent');
+      el.innerHTML = `
+        <div class="dsm-card">
+          <div class="dsm-steps">
+            <div class="dsm-step active">1 · Votre demande</div>
+            <div class="dsm-step">2 · Confirmation</div>
+          </div>
+
+          <div class="field-row">
+            <div class="cfield">
+              <label>Catégorie</label>
+              <select id="fCat">
+                <option value="">Choisir…</option>
+                <option value="plaisir"${_urlCat==='plaisir'?' selected':''}>💜 Plaisir</option>
+                <option value="malin"${_urlCat==='malin'?' selected':''}>✨ Malin</option>
+                <option value="bebe"${_urlCat==='bebe'?' selected':''}>🍼 Bébé</option>
+              </select>
+            </div>
+            <div class="cfield">
+              <label>Budget indicatif</label>
+              <select id="fBudget">
+                <option value="Pas de limite">Pas de limite</option>
+                <option value="Moins de 20€">Moins de 20€</option>
+                <option value="20–50€">20–50€</option>
+                <option value="50–100€">50–100€</option>
+                <option value="100€+">100€ et plus</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cfield">
+            <label>Ce que vous cherchez <span style="color:#c0304e">*</span></label>
+            <textarea id="fDesc" placeholder="Décrivez le produit : modèle, couleur, fonctionnalités, taille, usage…" rows="4"></textarea>
+          </div>
+
+          <div class="cfield">
+            <label>Lien de référence <span class="opt">(facultatif)</span></label>
+            <input type="text" id="fRef" placeholder="https://amazon.fr/… ou lien AliExpress, photo, etc.">
+          </div>
+
+          <div class="cfield">
+            <label>Informations complémentaires <span class="opt">(facultatif)</span></label>
+            <textarea id="fNotes" placeholder="Cadeau ? Délai souhaité ? Contraintes particulières…" rows="3"></textarea>
+          </div>
+
+          <div class="dsm-footer">
+            <button class="dsm-submit" id="dsmSubmit" onclick="_submitDsm()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Envoyer ma demande
+            </button>
+            <p class="dsm-hint">Réponse sous 48h · Service gratuit · Sans engagement</p>
+          </div>
+        </div>`;
+    }
+
+    /* ── Login wall ── */
+    function _renderLogin(msg) {
+      document.getElementById('dsmContent').innerHTML = `
+        <div class="dsm-card">
+          <div class="login-wall">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d9c4a0" stroke-width="1.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h2>Connectez-vous pour continuer</h2>
+            <p>${msg || 'Nous avons besoin de votre adresse e-mail pour vous répondre. La création d\'un compte est rapide et gratuite.'}</p>
+            <a href="login.html?next=${encodeURIComponent(location.pathname+location.search)}" class="btn-login">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Se connecter
+            </a>
+          </div>
+        </div>`;
+    }
+
+    /* ── Success ── */
+    function _renderSuccess(threadId) {
+      document.getElementById('dsmContent').innerHTML = `
+        <div class="dsm-card">
+          <div class="dsm-success">
+            <div class="success-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2>Demande envoyée !</h2>
+            <p>Notre équipe a bien reçu votre demande et reviendra vers vous sous 48h directement dans votre messagerie Le Clam.</p>
+            <a href="messages.html" class="btn-msgs">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Voir ma conversation
+            </a>
+          </div>
+        </div>`;
+    }
+
+    /* ── Submit ── */
+    window._submitDsm = async function () {
+      const cat    = (document.getElementById('fCat')?.value    || '').trim();
+      const desc   = (document.getElementById('fDesc')?.value   || '').trim();
+      const ref    = (document.getElementById('fRef')?.value    || '').trim();
+      const budget = (document.getElementById('fBudget')?.value || 'Pas de limite');
+      const notes  = (document.getElementById('fNotes')?.value  || '').trim();
+
+      if (!cat)  { _toast('Veuillez choisir une catégorie'); return; }
+      if (!desc) { _toast('Veuillez décrire le produit recherché'); return; }
+
+      const catLabel = _catLabels[cat] || cat;
+      const subject  = 'Demande sur mesure — ' + catLabel;
+
+      let text = `Catégorie : ${catLabel}\n`;
+      text += `\nCe que je cherche :\n${desc}`;
+      if (ref)   text += `\n\nLien de référence : ${ref}`;
+      text += `\n\nBudget indicatif : ${budget}`;
+      if (notes) text += `\n\nInformations complémentaires :\n${notes}`;
+
+      const btn = document.getElementById('dsmSubmit');
+      if (btn) { btn.disabled = true; btn.innerHTML = 'Envoi en cours…'; }
+
+      try {
+        const r = await fetch('/api/threads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeaders() },
+          body: JSON.stringify({ subject, text })
+        });
+        const d = await r.json();
+
+        if (d.ok) {
+          _renderSuccess(d.thread?.id);
+        } else if (d.error === 'Non connecté') {
+          _renderLogin('Votre session a expiré. Reconnectez-vous pour envoyer votre demande.');
+        } else {
+          if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer ma demande'; }
+          _toast(d.error || 'Erreur lors de l\'envoi');
+        }
+      } catch {
+        if (btn) { btn.disabled = false; btn.innerHTML = 'Envoyer ma demande'; }
+        _toast('Serveur inaccessible. Réessayez dans un instant.');
+      }
+    };
+
+    /* ── Init ── */
+    let _initDone = false;
+    async function init() {
+      if (_initDone) return;
+      _initDone = true;
+      const raw = localStorage.getItem('leclam_user');
+      if (!raw) { _renderLogin(); return; }
+      if (typeof syncCsrfToken === 'function') await syncCsrfToken();
+      _renderForm();
+    }
+
+    document.addEventListener('i18nApplied', () => init(), { once: true });
+    setTimeout(() => { if (!_initDone) init(); }, 600);
+
+  })();
+  </script>
+</body>
+</html>
