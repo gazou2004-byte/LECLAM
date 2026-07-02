@@ -14,9 +14,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 217,
       "weight": 280,
-      "desc": "L'ensemble Easy Choice combine un vibrateur de couple et un lubrifiant pour une découverte complète du plaisir partagé. Tout est réuni pour une première expérience sensuelle à deux : intimité amplifiée, glisse assurée, désir décuplé.",
+      "desc": "Tout ce qu'il faut pour une première nuit électrique à deux — en un seul geste, le désir prend une nouvelle dimension.",
       "name_fr": "Easy Choice — Ensemble vibrateurs de couple + lubrifiant",
-      "sub_fr": "Kit couple · Vibrateur duo · Lubrifiant inclus",
+      "sub_fr": "Duo · Complicité · Prêt à vivre",
       "subfamille": "duo"
     },
     {
@@ -30,9 +30,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 196,
       "weight": 165,
-      "desc": "Ce vibromasseur double action pour couples est conçu pour renforcer le lien intime. Doux et flexible, il s'adapte à tous les corps et stimule simultanément les deux partenaires pour un plaisir partagé inoubliable.",
+      "desc": "Porté pendant le rapport, il rapproche les corps et synchronise le plaisir des deux partenaires — une fusion intime que rien d'autre ne reproduit.",
       "name_fr": "TIANI DUO — Sextoys pour couple",
-      "sub_fr": "Plaisir en couple · Double action · Flexible LELO",
+      "sub_fr": "Fusion · Plaisir partagé · LELO",
       "subfamille": "duo"
     },
     {
@@ -46,9 +46,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 149,
       "weight": 120,
-      "desc": "Ce cockring flexible et résistant lui permet de rester plus dur plus longtemps, tout en intensifiant son plaisir à elle. Il permet aux couples d'atteindre plus facilement l'orgasme au même moment.",
+      "desc": "Il dure plus longtemps, elle ressent davantage — le petit accessoire qui change tout dans l'intimité du couple.",
       "name_fr": "MIO — Anneau pénien vibrant par Je Joue",
-      "sub_fr": "Anneau vibrant · Plaisir en couple · Orgasme simultané",
+      "sub_fr": "Intensité · Partage · Je Joue",
       "subfamille": "duo"
     },
     {
@@ -61,9 +61,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 120,
-      "desc": "Cet oeuf vibrant est pensé pour le jeu en couple : double stimulation interne et externe, télécommande intuitive et silicone premium. Offrez-vous l'ivresse de confier le contrôle à l'autre.",
+      "desc": "Confiez le contrôle à l'autre — et laissez l'inattendu vous surprendre, où que vous soyez.",
       "name_fr": "Wonderlove — Oeuf Vibrant Double Stimulation",
-      "sub_fr": "Oeuf vibrant · Double stimulation · Télécommandé · Love to Love",
+      "sub_fr": "Abandon · Jeu · Love to Love",
       "subfamille": "duo"
     },
     {
@@ -76,9 +76,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 280,
-      "desc": "Ce vibromasseur pour couples est conçu pour vibrer à l'unisson : porté pendant le rapport, il stimule simultanément les deux partenaires pour une communion intime totale. Élégant, silencieux et rechargeable.",
+      "desc": "Deux corps, une seule vibration — cette communion intime silencieuse et élégante redéfinit ce que vous croyiez connaître.",
       "name_fr": "JUNO — Vibromasseur pour Couples",
-      "sub_fr": "Vibromasseur pour couples · Stimulation simultanée · Soft Paris",
+      "sub_fr": "Intimité · Vibration partagée · Soft Paris",
       "subfamille": "duo"
     },
     {
@@ -91,9 +91,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 175,
-      "desc": "Ce stimulateur 2-en-1 est malin dans sa conception : stimulateur clitoridien d'un côté, vibromasseur polyvalent de l'autre. Échangez les embouts selon votre humeur et laissez-vous surprendre par la richesse des sensations offertes.",
+      "desc": "Une humeur, un embout — et si le plaisir s'adaptait vraiment à l'instant plutôt que l'inverse ?",
       "name_fr": "Swap — Stimulateur Clitoridien & Vibromasseur",
-      "sub_fr": "Stimulateur clitoridien · Vibromasseur · 2-en-1 · Love to Love",
+      "sub_fr": "Versatile · Sur mesure · Love to Love",
       "subfamille": "duo"
     },
     {
@@ -106,9 +106,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 195,
-      "desc": "Ce vibromasseur joue la carte de l'audace avec sa double stimulation repensée pour des orgasmes plus profonds. Son ergonomie intuitive et sa flexibilité lui permettent de s'adapter parfaitement à chaque corps — un plaisir sur mesure.",
+      "desc": "Il s'adapte à vous, pas l'inverse — une flexibilité pensée pour des sensations plus profondes et un plaisir vraiment à votre mesure.",
       "name_fr": "Witty — Vibromasseur Double Stimulation",
-      "sub_fr": "Vibromasseur double stimulation · Unique · Love to Love",
+      "sub_fr": "Profondeur · Audace · Love to Love",
       "subfamille": "duo"
     },
     {
@@ -121,9 +121,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 130,
-      "desc": "Cette culotte vibrante se porte comme un secret et se ressent comme une promesse. Ses 10 modes pilotés à distance transforment chaque sortie en jeu complice — le frisson de l'inattendu, à portée de télécommande.",
+      "desc": "Portée sous les vêtements, pilotée par l'autre — chaque sortie devient un secret qui n'appartient qu'à vous deux.",
       "name_fr": "Secret Panty 2 — Culotte Vibrante",
-      "sub_fr": "Culotte vibrante · Télécommande · 10 modes · Love to Love",
+      "sub_fr": "Secret · Frisson · Love to Love",
       "subfamille": "duo"
     },
     {
@@ -136,9 +136,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 145,
-      "desc": "Ce jouet est un chef-d'oeuvre d'ingéniosité : masturbateur et vibromasseur en un, animé par 3 moteurs indépendants. Conçu pour une expérience masculine complète et raffinée, ou pour explorer le plaisir en couple avec une générosité rare.",
+      "desc": "Solo ou à deux, il offre une générosité rare — le plaisir masculin réinventé avec une intensité qu'on n'oublie pas.",
       "name_fr": "Please Me — Masturbateur & Vibromasseur",
-      "sub_fr": "Masturbateur · Vibromasseur · 3 moteurs · Love to Love",
+      "sub_fr": "Générosité · Intensité · Love to Love",
       "subfamille": "duo"
     },
     {
@@ -151,9 +151,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 2263,
       "weight": 350,
-      "desc": "Ce vibromasseur iconique a été plébiscité par plus de 200 000 femmes en France. Sa puissance exceptionnelle, son design épuré et son silicone médical doux en font le compagnon intime de référence — une révolution signée made in France.",
+      "desc": "Plus de 200 000 femmes en France l'ont adopté — et elles savent pourquoi. La référence du vibromasseur français, tout simplement.",
       "name_fr": "Coco — Vibromasseur Puissante",
-      "sub_fr": "Vibromasseur · Bestseller · +200 000 femmes · Puissante",
+      "sub_fr": "Référence · Made in France · Puissante",
       "subfamille": "soloclub"
     },
     {
@@ -168,9 +168,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 678,
       "weight": 220,
-      "desc": "Conçu pour une double stimulation ciblée, ce vibrateur clitoridien en silicone ultra-doux enveloppe et éveille avec précision. Ses 678 avis enthousiastes parlent d'eux-mêmes : une expérience à la fois douce et décisive.",
+      "desc": "Doux à l'extérieur, décisif dans l'effet — il enveloppe et éveille avec une précision que 678 avis confirment à voix haute.",
       "name_fr": "Stimulation Clitoridienne",
-      "sub_fr": "Double stimulation · Silicone doux · USB",
+      "sub_fr": "Douceur · Précision · Désir",
       "subfamille": "soloclub"
     },
     {
@@ -185,9 +185,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 541,
       "weight": 450,
-      "desc": "Le masseur baguette puissant délivre des vibrations profondes sur 10 vitesses pour un plaisir externe irrésistible. Son silicone médical ultra-doux épouse chaque courbe du corps, et sa recharge USB vous garantit une autonomie à la hauteur de vos désirs.",
+      "desc": "Une puissance qui se ressent jusqu'au bout des doigts — le masseur baguette qui ne transige pas avec l'intensité.",
       "name_fr": "Masseur Baguette Puissant",
-      "sub_fr": "10 vitesses · Silicone · USB rechargeable",
+      "sub_fr": "Puissance · Profondeur · Classique",
       "subfamille": "soloclub"
     },
     {
@@ -201,9 +201,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 461,
       "weight": 170,
-      "desc": "Ce stimulateur bestseller utilise des ondes de pression sans contact direct avec le clitoris pour des orgasmes intenses et répétés. Simple à utiliser, discret et ultra-efficace.",
+      "desc": "Sans contact direct, une onde de pression enveloppe et libère — une sensation que beaucoup découvrent ici et ne veulent plus lâcher.",
       "name_fr": "Womanizer Pro — Vibrateur à ondes de pression",
-      "sub_fr": "Meilleure vente · Ondes pression · Sans contact",
+      "sub_fr": "Révélation · Onde de plaisir · Bestseller",
       "subfamille": "soloclub"
     },
     {
@@ -218,9 +218,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 452,
       "weight": 280,
-      "desc": "Ce vibrateur lapin à double moteur stimule simultanément le point G et le clitoris pour des orgasmes d'une intensité rare. Ses 12 modes de vibration et son silicone médical premium offrent une expérience raffinée qui ne laisse rien au hasard.",
+      "desc": "Deux zones à la fois, une seule vague de plaisir — l'orgasme simultané que le classique vibrateur lapin rend à la portée de toutes.",
       "name_fr": "Vibrateur Tête de Lapin",
-      "sub_fr": "Double moteur · 12 modes · Silicone médical",
+      "sub_fr": "Interne · Externe · Intensité rare",
       "subfamille": "soloclub"
     },
     {
@@ -234,9 +234,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 397,
       "weight": 185,
-      "desc": "Ce vibrateur lapin a été récompensé par un test indépendant de consommateurs (note GUT 1,9). Il offre des vibrations intenses et un design ergonomique pour atteindre l'apogée du plaisir naturellement.",
+      "desc": "Noté par des tests indépendants comme l'un des meilleurs — parce qu'il tient vraiment ses promesses, sans détour.",
       "name_fr": "AMORELIE Joy Shake Vibrateur lapin",
-      "sub_fr": "Vibrateur lapin · Primé · Orgasme sans effort",
+      "sub_fr": "Primé · Efficace · Sans effort",
       "subfamille": "soloclub"
     },
     {
@@ -251,9 +251,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 394,
       "weight": 900,
-      "desc": "Ce stimulateur en forme de rose combine aspiration et vibration pour une double stimulation clitoridienne inoubliable. Ses 10 modes et son silicone peau-douce en font un indispensable apprécié par des milliers de femmes — l'orgasme à portée de main.",
+      "desc": "Aussi joli qu'une fleur, aussi efficace qu'une révélation — des milliers de femmes ont compris pourquoi il est devenu indispensable.",
       "name_fr": "Stimulateur Sexuel Rose",
-      "sub_fr": "Aspiration + vibration · 10 modes · USB",
+      "sub_fr": "Aspiration · Douceur · Désir",
       "subfamille": "soloclub"
     },
     {
@@ -267,9 +267,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 384,
       "weight": 155,
-      "desc": "Ce mini vibrateur mural offre de puissantes vibrations dans un format compact et maniable. Idéal pour la stimulation externe, il se recharge via USB et propose plusieurs intensités ajustables.",
+      "desc": "Compact, discret, redoutablement efficace — la preuve que la taille ne fait pas tout, surtout ici.",
       "name_fr": "EasyToys Mini Vibrateur Mural — Noir",
-      "sub_fr": "Mini wand puissant · USB rechargeable · Compact",
+      "sub_fr": "Discret · Efficace · Toujours prêt",
       "subfamille": "soloclub"
     },
     {
@@ -283,9 +283,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 383,
       "weight": 110,
-      "desc": "Cet œuf vibrant rechargeable se contrôle à distance pour des sensations intenses et discrètes où que vous soyez. Parfait pour les jeux en solo ou en couple, il se porte en toute liberté.",
+      "desc": "Porté en liberté totale, ressenti en secret — solo ou en duo, c'est vous qui choisissez l'intensité du moment.",
       "name_fr": "Love Nest Pink Remote Rechargeable Love Egg",
-      "sub_fr": "Oeuf vibrant · Télécommande · Rechargeable",
+      "sub_fr": "Liberté · Secret · Désir à distance",
       "subfamille": "soloclub"
     },
     {
@@ -299,9 +299,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 373,
       "weight": 115,
-      "desc": "Les boules Shimmer se contrôlent via l'application pour des jeux en solo ou en couple, à portée de smartphone. Leurs vibrations douces et rythmées éveillent les sens de l'intérieur — une connexion intime, partout où vous vous trouvez.",
+      "desc": "Une vibration douce qui vient de l'intérieur, pilotée depuis un smartphone — l'intimité connectée qui traverse les distances.",
       "name_fr": "AMORELIE Joy Shimmer — Boules d'amour connectées",
-      "sub_fr": "Boules d'amour · App connectée · Jeux couple",
+      "sub_fr": "Connexion · Subtilité · Partout avec vous",
       "subfamille": "soloclub"
     },
     {
@@ -315,9 +315,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 401,
       "weight": 190,
-      "desc": "Ce masseur personnel contribue à la reconnexion corps-esprit. En le déplaçant sur vos zones intimes, il procure des sensations variées et profondes. Un outil dédié à l'exploration sensorielle et à l'épanouissement intime.",
+      "desc": "Prenez le temps de vous retrouver — ce masseur personnel guide une exploration sensorielle intime, à votre propre rythme.",
       "name_fr": "Personal Massager",
-      "sub_fr": "Masseur personnel · Reconnexion · Sensations uniques",
+      "sub_fr": "Exploration · Soi · Bien-être intime",
       "subfamille": "soloclub"
     },
     {
@@ -331,9 +331,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 335,
       "weight": 100,
-      "desc": "Cet oeuf vibrant en silicone premium se contrôle à distance pour des sensations continues et variées. Élégant et puissant, il accompagne vos moments intimes en solo ou en couple avec une discrétion absolue.",
+      "desc": "Élégant en apparence, décisif en sensation — il accompagne vos moments intimes avec une discrétion absolue et une présence qu'on n'oublie pas.",
       "name_fr": "SVAKOM Evil Elva — Oeuf vibrant avec télécommande",
-      "sub_fr": "Oeuf vibrant · Télécommande · Silicone premium",
+      "sub_fr": "Élégance · Discrétion · SVAKOM",
       "subfamille": "soloclub"
     },
     {
@@ -347,9 +347,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 362,
       "weight": 430,
-      "desc": "Ce gode vibrant chauffant combine un design ultra-réaliste avec vibrations intégrées et effet chaleur pour une expérience sensorielle immersive. Sa ventouse pour les mains libres et sa télécommande incluse complètent l'ensemble.",
+      "desc": "La chaleur, la vibration, et les mains libres pour savourer — une immersion sensorielle qui brouille délicieusement les frontières du réel.",
       "name_fr": "Real Fantasy — Mason Gode vibrant, chaud",
-      "sub_fr": "Gode chauffant · Vibrant · Réaliste mains libres",
+      "sub_fr": "Chaleur · Réalisme · Liberté totale",
       "subfamille": "soloclub"
     },
     {
@@ -364,9 +364,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 289,
       "weight": 150,
-      "desc": "Discret et terriblement excitant, ce vibrateur portable se porte sous les vêtements et se pilote à distance jusqu'à 10 mètres. Parfait pour pimenter une soirée en amoureux ou explorer le frisson de l'inattendu hors de chez vous.",
+      "desc": "Invisible sous les vêtements, terriblement présent sous la peau — il transforme chaque sortie en complicité secrète à deux.",
       "name_fr": "Vibrateur Portable Télécommande",
-      "sub_fr": "Télécommande 10 m · Discret · USB rechargeable",
+      "sub_fr": "Secret · Frisson · Complicité",
       "subfamille": "soloclub"
     },
     {
@@ -380,9 +380,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 332,
       "weight": 310,
-      "desc": "Ce plug anal vibrant télécommandé est compatible pour toutes les identités et propose des vibrations graves et aiguës distinctes. Personnalisable et rechargeable, il offre un plaisir profond et varié selon vos envies.",
+      "desc": "Grave ou aigu, profond ou subtil — ce plug vibre selon ce que vous ressentez, pas selon ce qu'on vous impose.",
       "name_fr": "PleX with Flex — Plug anal vibrant télécommandé",
-      "sub_fr": "Plug anal · Technologie Treble & Bass · Télécommande",
+      "sub_fr": "Profondeur · Personnalisable · Pour tous",
       "subfamille": "soloclub"
     },
     {
@@ -396,9 +396,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 256,
       "weight": 220,
-      "desc": "Ce vibrateur réaliste combine un design lifelike en matériau jelly souple avec des vibrations intégrées. Disponible en rose et transparent pour un plaisir visuel et tactile complet.",
+      "desc": "Doux comme une seconde peau, vibrant comme un désir longtemps contenu — le réalisme au service du plaisir, sans compromis.",
       "name_fr": "EasyToys Jelly Passion Vibrateur réaliste",
-      "sub_fr": "Réaliste · Jelly souple · Vibrant",
+      "sub_fr": "Réalisme · Douceur · Envie",
       "subfamille": "soloclub"
     },
     {
@@ -413,9 +413,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 247,
       "weight": 380,
-      "desc": "Ce masturbateur électrique reproduit des sensations réalistes grâce à son système d'aspiration automatique et ses 10 modes de plaisir. Rechargeable via USB, il offre une expérience masculine complète et raffinée, à savourer à son propre rythme.",
+      "desc": "Il s'occupe de tout — laissez-vous porter par des sensations qui imitent le réel avec une précision troublante, à votre propre rythme.",
       "name_fr": "Masturbateur Masculin Électrique",
-      "sub_fr": "Aspiration automatique · 10 modes · USB",
+      "sub_fr": "Abandon · Plaisir masculin · Autonomie",
       "subfamille": "soloclub"
     },
     {
@@ -431,9 +431,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.2,
       "reviews": 228,
       "weight": 180,
-      "desc": "Compacte mais étonnamment puissante, cette mini baguette de massage s'emporte partout et s'utilise en toute discrétion. Son moteur silencieux et son grip agréable en font la complice idéale des moments intimes improvisés.",
+      "desc": "La complice que vous glissez dans votre sac et dont personne ne connaît l'existence — silencieuse, discrète, inoubliable.",
       "name_fr": "Mini Baguette de Massage",
-      "sub_fr": "Compact · Silencieux · Piles incluses",
+      "sub_fr": "Portable · Discrète · Toujours là",
       "subfamille": "soloclub"
     },
     {
@@ -447,9 +447,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 210,
       "weight": 310,
-      "desc": "Ce dildo réaliste de 23 cm s'accompagne d'une ventouse pour les mains libres. Son design anatomique et son matériau ultra-doux offrent une expérience immersive et authentique à savourer à son propre rythme.",
+      "desc": "Les mains libres, le plaisir entier — une présence généreuse et authentique, à savourer exactement comme vous en avez envie.",
       "name_fr": "Real Fantasy Dylan — Dildo réaliste 23cm",
-      "sub_fr": "Dildo réaliste · 23 cm · Ventouse intégrée",
+      "sub_fr": "Générosité · Liberté · Réalisme",
       "subfamille": "soloclub"
     },
     {
@@ -463,9 +463,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 218,
       "weight": 200,
-      "desc": "Ce stimulateur clitoridien émet de douces ondes soniques plutôt que des vibrations habituelles, stimulant le clitoris tout entier — même les parties invisibles à l'œil nu. Une révolution dans la stimulation clitoridienne.",
+      "desc": "Il touche là où personne ne touche d'habitude — une onde douce qui réveille le clitoris en entier, même ses parties cachées.",
       "name_fr": "SONA — Stimulateur clitoridien",
-      "sub_fr": "Ondes soniques · Sans contact · Clitoris total LELO",
+      "sub_fr": "Révolution · Onde douce · LELO",
       "subfamille": "soloclub"
     },
     {
@@ -479,9 +479,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 205,
       "weight": 245,
-      "desc": "Ce gode réaliste en silicone noir ultra-doux offre une expérience polyvalente et immersive. Sa ventouse intégrée libère les mains pour une jouissance totale, et sa texture souple répond naturellement à chaque mouvement du corps.",
+      "desc": "Sa texture répond à chaque mouvement du corps comme une évidence — et une fois les mains libres, vous savez exactement pourquoi.",
       "name_fr": "Gode EasyToys Realist",
-      "sub_fr": "Gode réaliste · Silicone souple · Ventouse",
+      "sub_fr": "Douceur · Liberté · Authenticité",
       "subfamille": "soloclub"
     },
     {
@@ -496,9 +496,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.3,
       "reviews": 176,
       "weight": 130,
-      "desc": "Ce vibromasseur culotte ciblant le point G se glisse discrètement sous vos vêtements pour un plaisir invisible mais irrésistible. Ultra-léger et silencieux, il transforme chaque moment de la journée en délicieuse complicité avec vous-même.",
+      "desc": "Invisible aux autres, inoubliable pour vous — il transforme les moments ordinaires de la journée en délicieuse complicité avec vous-même.",
       "name_fr": "Vibromasseur Culotte Point G",
-      "sub_fr": "Portable · Invisible sous vêtements · USB",
+      "sub_fr": "Invisible · Intime · Délice quotidien",
       "subfamille": "soloclub"
     },
     {
@@ -513,9 +513,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 163,
       "weight": 350,
-      "desc": "Ce plug anal vibrant combine la douceur enveloppante du silicone médical avec 7 modes de vibration distincts pour une exploration sensorielle progressive. Rechargeable via USB, il s'offre à vous pour des sensations intenses, seul ou à deux.",
+      "desc": "Doux à l'entrée, profond dans l'effet — il ouvre une exploration sensorielle que vous choisissez de vivre seul ou à deux.",
       "name_fr": "Plug Anal Électrique Silicone",
-      "sub_fr": "7 modes vibration · Silicone médical · USB",
+      "sub_fr": "Exploration · Douceur · Intensité",
       "subfamille": "soloclub"
     },
     {
@@ -529,9 +529,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 174,
       "weight": 105,
-      "desc": "Ce plug anal vibrant est parfait pour les découvertes sensuelles en solo ou en couple. Design élégant, vibrations douces et silicone corps-compatible pour un maximum de plaisir.",
+      "desc": "Une première exploration ou un plaisir que vous approfondissez — dans les deux cas, il est là pour rendre chaque instant doux et sûr.",
       "name_fr": "AMORELIE Joy Fly — Plug anal avec vibration",
-      "sub_fr": "Plug anal vibrant · Couple & solo · Silicone",
+      "sub_fr": "Découverte · Douceur · AMORELIE",
       "subfamille": "soloclub"
     },
     {
@@ -545,9 +545,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 172,
       "weight": 125,
-      "desc": "L'oeuf vibrant Oh to Go 2.0 offre 10 modes de vibrations et forces variées pour des expériences intenses. Télécommandé et ultra-discret, il est le complice idéal des jeux en couple ou des frissons solitaires, en toute liberté.",
+      "desc": "Discret dans votre poche, électrisant dans votre corps — un frisson à la demande, seul ou sous le regard complice de l'autre.",
       "name_fr": "AMORELIE Oh to Go 2.0 — Oeuf vibro avec télécommande",
-      "sub_fr": "Oeuf vibrant · 10 modes · Télécommande",
+      "sub_fr": "Frisson · Liberté · À emporter",
       "subfamille": "soloclub"
     },
     {
@@ -561,9 +561,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 160,
       "weight": 520,
-      "desc": "Ce masturbateur interactif ultra-réaliste s'adapte en temps réel grâce à sa technologie intelligente. Sa texture intérieure lifelike et ses modes de stimulation synchronisés redéfinissent le plaisir masculin solo.",
+      "desc": "Il s'adapte à vous en temps réel — une présence si réaliste qu'elle redéfinit ce que vous pensiez possible en solo.",
       "name_fr": "SVAKOM Sam Neo 2 — Masturbateur interactif",
-      "sub_fr": "Masturbateur interactif · Lifelike · Ultra-réaliste",
+      "sub_fr": "Intelligence · Réalisme · SVAKOM",
       "subfamille": "soloclub"
     },
     {
@@ -577,9 +577,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 159,
       "weight": 580,
-      "desc": "Ce masturbateur premium offre une expérience immersive unique grâce à quatorze modes de plaisir puissants. Son silicone liquide luxueux à l'intérieur et son coach d'endurance intégré guidant les exercices de Kegel en font un objet d'exception.",
+      "desc": "Un plaisir qui fait aussi travailler votre endurance — pour les hommes qui veulent tout : l'intensité du moment et la maîtrise de demain.",
       "name_fr": "F2S — Masturbateur Homme",
-      "sub_fr": "Masturbateur · 14 modes · Coach Kegel LELO",
+      "sub_fr": "Endurance · Intensité · LELO",
       "subfamille": "soloclub"
     },
     {
@@ -592,9 +592,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 141,
       "weight": 185,
-      "desc": "Tout le caractère d'un grand vibromasseur dans un format qui se glisse dans un sac à main. Ce stimulateur clitoridien compact délivre une stimulation précise et puissante, sans compromis, à emporter partout où l'envie se présente.",
+      "desc": "Toute la puissance du Coco dans un format poche — parce que l'envie n'attend pas, et vous non plus.",
       "name_fr": "Mini Coco — Stimulateur Clitoridien",
-      "sub_fr": "Stimulateur clitoridien · Compact · Sans fil · Puissante",
+      "sub_fr": "Pocket · Puissante · Made in France",
       "subfamille": "soloclub"
     },
     {
@@ -608,9 +608,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 135,
       "weight": 490,
-      "desc": "Ce masturbateur vibrant stimule le frein sans les mains pour une expérience masculine spectaculaire. Son design ouvert et ses vibrations puissantes révolutionnent le plaisir solo, plébiscité par des centaines d'avis positifs.",
+      "desc": "Les mains posées, les sens en éveil — il cible exactement le bon endroit avec une intensité qui ne ressemble à rien d'autre.",
       "name_fr": "PULSE SOLO ESSENTIAL — Masturbateur vibrant pour pénis",
-      "sub_fr": "Stimulation frein · Sans les mains · Vibration intense",
+      "sub_fr": "Unique · Mains libres · Plaisir masculin",
       "subfamille": "soloclub"
     },
     {
@@ -625,9 +625,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 125,
       "weight": 85,
-      "desc": "Ce stimulateur clitoridien propose 10 niveaux d'intensité de pulsations pour une stimulation précise et puissante. Compact, discret et rechargeable, il s'adapte parfaitement à tous les désirs.",
+      "desc": "Petit prix, grand effet — dix niveaux d'intensité pour trouver exactement ce que vous cherchez, sans jamais vous fier aux apparences.",
       "name_fr": "Pucker Up Purple 10 Strength Pulsating Clitoral Stimulator",
-      "sub_fr": "10 intensités · Aspiration · Ultra-compact",
+      "sub_fr": "Bon plan · Précision · Plaisir sûr",
       "subfamille": "soloclub"
     },
     {
@@ -641,9 +641,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 105,
       "weight": 160,
-      "desc": "Les stimulateurs en forme de rose font fureur pour leurs orgasmes puissants et leur esthétique élégante. En version noire mate, celui-ci procure une aspiration clitoridienne luxueuse et profonde — une expérience sensorielle hors du commun.",
+      "desc": "La rose noire du plaisir — élégante en apparence, irrésistible dans l'effet, pour une aspiration clitoridienne qui vous laisse sans mots.",
       "name_fr": "Fifty Shades of Grey Black Rose — Clitoral Suction Stimulato",
-      "sub_fr": "Rose noire · Aspiration luxe · Orgasme intense",
+      "sub_fr": "Luxe · Aspiration profonde · Élégance noire",
       "subfamille": "soloclub"
     },
     {
@@ -657,9 +657,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 87,
       "weight": 135,
-      "desc": "Ce vibrateur à ondes de pression enveloppe le clitoris pour des sensations uniques et ciblées. Discret, rechargeable et d'une efficacité remarquable, il fait partie des stimulateurs les plus appréciés du moment.",
+      "desc": "Il enveloppe sans toucher et offre des sensations que vous n'attendiez pas — l'un des stimulateurs les plus appréciés, et on comprend vite pourquoi.",
       "name_fr": "AMORELIE Joy x Satisfyer Flicker — Vibrateur à ondes de pres",
-      "sub_fr": "Ondes de pression · Flicker · Satisfyer x AMORELIE",
+      "sub_fr": "Enveloppant · Discret · Satisfyer x AMORELIE",
       "subfamille": "soloclub"
     },
     {
@@ -673,9 +673,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 68,
       "weight": 260,
-      "desc": "Ce vibrateur double action combine vibrations G-spot intenses et aspiration clitoridienne puissante. Conçu pour stimuler simultanément de l'intérieur et de l'extérieur, il offre une expérience profonde, intense et inoubliable.",
+      "desc": "Dedans et dehors en même temps — cette double vague de plaisir simultané est du genre à rester longtemps en mémoire.",
       "name_fr": "KAI  The Dual Dildo & Clitoral Vibrator",
-      "sub_fr": "Double stimulation · Point G · Aspiration clitoris",
+      "sub_fr": "Double vague · Intime · Inoubliable",
       "subfamille": "soloclub"
     },
     {
@@ -688,9 +688,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 75,
       "weight": 160,
-      "desc": "Ce vibromasseur clitoridien virevolte avec une précision désarmante. Ses 10 niveaux d'intensité progressifs, sa résistance à l'eau et sa recharge USB en font un accessoire aussi fiable que jouissif, en toutes circonstances.",
+      "desc": "Dans l'eau, hors de l'eau, à toute heure — fiable comme un allié de confiance et jouissif comme une bonne surprise.",
       "name_fr": "Toupie — Vibromasseur Clitoridien Puissante",
-      "sub_fr": "Waterproof · USB · 10 niveaux d'intensité · Puissante",
+      "sub_fr": "Partout · Fiable · Puissante",
       "subfamille": "soloclub"
     },
     {
@@ -704,9 +704,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 40,
       "weight": 210,
-      "desc": "Ce vibrateur à aspiration clitoridienne est conçu pour des orgasmes intenses et répétés. Ses modes de vibration et d'aspiration indépendants offrent une gamme unique de sensations ciblées qui s'adaptent à chaque désir.",
+      "desc": "Il aspire, il vibre, et il répond à chaque désir séparément — pour les plaisirs qui savent exactement ce qu'ils veulent.",
       "name_fr": "JESSE  Clitoral Suction Vibrator",
-      "sub_fr": "Aspiration clitoris · 10 modes · Orgasme puissant",
+      "sub_fr": "Précision · Aspiration · Sur mesure",
       "subfamille": "soloclub"
     },
     {
@@ -720,9 +720,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 27,
       "weight": 145,
-      "desc": "Ce mini wand en silicone rouge offre de puissantes vibrations dans un format compact. Accompagné d'une garantie satisfaction 100 jours, il invite à explorer le massage corporel ou la stimulation intime selon vos envies.",
+      "desc": "Essayez-le 100 jours — Lovehoney vous le garantit, parce que certains plaisirs méritent qu'on prenne le temps de vraiment les connaître.",
       "name_fr": "Lovehoney Red Silicone Mini Wand Vibrator",
-      "sub_fr": "Mini wand · Silicone souple · Garantie 100 jours",
+      "sub_fr": "Confiance · Garantie 100 jours · Lovehoney",
       "subfamille": "soloclub"
     },
     {
@@ -735,9 +735,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 140,
-      "desc": "Cet oeuf vibrant affine l'art de la double stimulation en solo : il cible avec précision le plaisir interne et externe. Son design raffiné et son silicone velouté en font un objet de plaisir aussi élégant qu'efficace.",
+      "desc": "Aussi raffiné qu'efficace — il prend soin de vous de l'intérieur et de l'extérieur, avec une élégance qui ne se justifie pas, elle se ressent.",
       "name_fr": "Wonderlover — Oeuf Vibrant",
-      "sub_fr": "Oeuf vibrant · Double stimulation · Love to Love",
+      "sub_fr": "Raffinement · Double plaisir · Love to Love",
       "subfamille": "soloclub"
     },
     {
@@ -750,9 +750,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 230,
-      "desc": "Ce vibromasseur ose la triple stimulation : point G, clitoris par succion et vibrations externes simultanées. Un concentré de plaisir au design singulier, pour celles qui n'ont plus envie de choisir entre profondeur et intensité.",
+      "desc": "Pour celles qui refusent de choisir — il répond à tout en même temps, avec une générosité qui désarme.",
       "name_fr": "DINO — Vibromasseur Point G avec Succion",
-      "sub_fr": "Point G · Succion clitoridienne · Triple satisfaction · Soft Paris",
+      "sub_fr": "Triple plaisir · Sans compromis · Soft Paris",
       "subfamille": "soloclub"
     },
     {
@@ -765,9 +765,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 290,
-      "desc": "Ce vibromasseur chauffant ajoute la chaleur au plaisir : sa fonction chauffante diffuse une douce tiédeur qui détend et amplifie chaque sensation. Un accessoire hors normes pour des moments d'abandon sensoriels et profondément enveloppants.",
+      "desc": "La chaleur qui détend, les vibrations qui éveillent — un enveloppement sensoriel total pour des moments d'abandon que vous ne voulez plus interrompre.",
       "name_fr": "SEXTRA — Vibromasseur Chauffant",
-      "sub_fr": "Vibromasseur chauffant · Sensations thermiques · Soft Paris",
+      "sub_fr": "Chaleur · Abandon · Soft Paris",
       "subfamille": "soloclub"
     },
     {
@@ -780,9 +780,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 95,
-      "desc": "Ce vibromasseur joue la carte de la délicatesse : compact, discret et revêtu d'un silicone aux reflets profonds comme la soie du corbeau. Son design poétique cache une puissance surprenante pour une stimulation clitoridienne douce et ciblée.",
+      "desc": "Son allure poétique cache une puissance qui surprend — doux au toucher, décisif là où vous en avez besoin.",
       "name_fr": "SELENE — Vibromasseur Soie du Corbeau",
-      "sub_fr": "Vibromasseur · Compact · Silicone · Soft Paris",
+      "sub_fr": "Douceur · Surprise · Soft Paris",
       "subfamille": "soloclub"
     },
     {
@@ -795,9 +795,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 110,
-      "desc": "Ces boules de geisha allient bien-être intime et sensualité : portées au quotidien, elles tonifient le périnée en douceur tout en éveillant des sensations subtiles. Plaisir et soin du corps, réunis en un accessoire élégant.",
+      "desc": "Portées en secret, elles tonifient, éveillent et prennent soin de vous — le bien-être intime qui n'attend pas d'occasion particulière.",
       "name_fr": "Gesha Therapy — Boules de Geisha",
-      "sub_fr": "Boules de geisha · Rééducation périnéale · Soft Paris",
+      "sub_fr": "Bien-être · Tonicité · Soft Paris",
       "subfamille": "soloclub"
     },
     {
@@ -810,9 +810,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 80,
-      "desc": "Ce stimulateur clitoridien porte bien son nom : compact, instinctif et immédiatement efficace. Posez-le simplement là où vous en avez envie et laissez ses vibrations précises opérer — aussi simple qu'irrésistible.",
+      "desc": "Posez-le, fermez les yeux — il fait le reste avec une simplicité désarmante et une efficacité qui ne laisse aucun doute.",
       "name_fr": "Touch Me — Stimulateur Clitoridien",
-      "sub_fr": "Stimulateur clitoridien · Vibromasseur · Love to Love",
+      "sub_fr": "Instinctif · Simple · Love to Love",
       "subfamille": "soloclub"
     },
     {
@@ -825,9 +825,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 175,
-      "desc": "Ce mini wand 2-en-1 prouve que les meilleures choses se présentent en petit format. Ses deux têtes interchangeables offrent une stimulation externe variée — toute la puissance d'un wand, dans la paume de la main.",
+      "desc": "Toute la puissance d'un wand dans la paume de la main — la preuve que les meilleures surprises se cachent dans les petits formats.",
       "name_fr": "Itsy Bitsy — Mini Wand",
-      "sub_fr": "Mini wand · Stimulateur · 2-en-1 · Love to Love",
+      "sub_fr": "Grand plaisir · Petit format · Love to Love",
       "subfamille": "soloclub"
     },
     {
@@ -840,9 +840,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 90,
-      "desc": "Ce plug anal vibrant est pensé pour les curieux et les connaisseurs. Sa forme douce et sa vibration discrète en silicone premium en font un accessoire idéal pour éveiller de nouvelles sensations en solo ou en duo.",
+      "desc": "Pour les curieux comme pour les initiés — il éveille des zones oubliées avec une discrétion et une douceur qui mettent à l'aise.",
       "name_fr": "Twinny Bud — Plug Anal Vibrant",
-      "sub_fr": "Plug anal vibrant · Silicone · Discret · Love to Love",
+      "sub_fr": "Curiosité · Douceur · Love to Love",
       "subfamille": "soloclub"
     },
     {
@@ -855,9 +855,9 @@ window.PRODUCTS_DATA = {
       "rating": 0,
       "reviews": 0,
       "weight": 60,
-      "desc": "Ce chapelet anal invite à une exploration progressive grâce à ses perles graduées en silicone soyeux. Chaque perle amplifie doucement les sensations et la stimulation à l'extraction procure un frisson inégalé.",
+      "desc": "Chaque perle amplifie la suivante — une montée progressive qui culmine sur un frisson que peu de choses égalent.",
       "name_fr": "Bing Bang — Chapelet Anal",
-      "sub_fr": "Chapelet anal · Perles graduées · Silicone · Love to Love",
+      "sub_fr": "Progression · Frisson · Love to Love",
       "subfamille": "soloclub"
     },
     {
@@ -869,9 +869,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 0,
       "reviews": 0,
-      "desc": "Ce stimulateur clitoridien combine la technologie Air Pulse — ondes de pression sans contact direct — avec des vibrations pour une double stimulation décisive. En silicone corps-compatible et rechargeable, il porte bien son nom.",
+      "desc": "Une onde qui enveloppe et des vibrations qui s'ajoutent — deux effets simultanés qui justifient pleinement ce qu'il promet dans son nom.",
       "name_fr": "Satisfyer INTENSE — Air Pulse Vibrator",
-      "sub_fr": "Air Pulse · Stimulation clitoridienne · Silicone · Satisfyer",
+      "sub_fr": "Onde + vibration · Double effet · Satisfyer",
       "subfamille": "soloclub"
     },
     {
@@ -883,9 +883,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 0,
       "reviews": 0,
-      "desc": "Ce plug anal est conçu spécifiquement pour la morphologie féminine : sa forme douce et sa queue ergonomique assurent un maintien parfait et un confort tout au long de l'expérience. Silicone premium, 3 coloris au choix.",
+      "desc": "Conçu pour votre morphologie, il tient en place et se fait oublier — jusqu'à ce que vous décidiez de ne plus l'oublier.",
       "name_fr": "BOOTIE FEM — Analplug pour Femme",
-      "sub_fr": "Analplug · Silicone · 3 coloris · Fun Factory",
+      "sub_fr": "Confort · Adapté · Fun Factory",
       "subfamille": "soloclub"
     },
     {
@@ -897,9 +897,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 0,
       "reviews": 0,
-      "desc": "Ce stimulateur clitoridien à poser arbore une tête plate et flexible qui épouse parfaitement la zone externe pour une stimulation douce et précise. Son silicone médical et sa conception allemande soignée garantissent plaisir et longévité.",
+      "desc": "Posé là où vous voulez, il épouse votre corps avec une précision allemande et une douceur qui inspire confiance dès la première fois.",
       "name_fr": "CHARME — Stimulateur Clitoridien",
-      "sub_fr": "Vibromasseur · Clitoris · Silicone · Fun Factory",
+      "sub_fr": "Précision · Qualité · Fun Factory",
       "subfamille": "soloclub"
     },
     {
@@ -911,9 +911,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 0,
       "reviews": 0,
-      "desc": "Ce wand flexible est un bestseller reconnu pour sa puissance et sa polyvalence. Sa tête pivotante s'adapte instinctivement à chaque morphologie pour une stimulation externe ultra-précise, là où vous en avez le plus envie.",
+      "desc": "Sa tête pivote, s'adapte, et trouve sans effort exactement là où vous en avez envie — c'est pour ça qu'il est bestseller.",
       "name_fr": "VIM — Wand Vibrant Flexible",
-      "sub_fr": "Wand · Tête flexible · Bestseller · Fun Factory",
+      "sub_fr": "S'adapte à vous · Bestseller · Fun Factory",
       "subfamille": "soloclub"
     },
     {
@@ -925,9 +925,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 0,
       "reviews": 0,
-      "desc": "Ce vibrateur pénien révolutionne le plaisir masculin avec ses ailes flexibles qui enveloppent le pénis pour des vibrations qui se propagent sur toute la longueur. Bestseller incontesté, il se porte seul ou en couple pour une intensité partagée.",
+      "desc": "Ses ailes enveloppent, les vibrations se propagent de bas en haut — seul ou avec l'autre, une intensité que rien ne prépare vraiment.",
       "name_fr": "MANTA — Vibrateur Pénis Premium",
-      "sub_fr": "Vibrateur pénis · Premium · Bestseller · Fun Factory",
+      "sub_fr": "Enveloppant · Intense · Fun Factory",
       "subfamille": "soloclub"
     },
     {
@@ -939,9 +939,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 0,
       "reviews": 0,
-      "desc": "Ce dildo en silicone premium au design généreux est conçu pour ceux qui aiment les sensations profondes et pleines. Sa base large garantit une sécurité totale et sa compatibilité harnais en fait un jouet d'une polyvalence rare.",
+      "desc": "Pour ceux qui aiment les sensations profondes et généreuses — une présence assumée, une sécurité totale, une liberté d'usage rare.",
       "name_fr": "MAGNUM — Dildo Silicone",
-      "sub_fr": "Dildo · Silicone · Polyvalent · Fun Factory",
+      "sub_fr": "Généreux · Polyvalent · Fun Factory",
       "subfamille": "soloclub"
     },
     {
@@ -953,9 +953,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 4.4,
       "reviews": 654,
-      "desc": "Ce chargeur universel 8 slots recharge simultanément vos piles AA et AAA en toute sécurité via USB. Compact, intelligent et universel, c'est le compagnon de recharge parfait pour ne jamais être pris de court.",
+      "desc": "Rechargez tout d'un coup et oubliez ce problème pour de bon — parce que l'envie ne devrait jamais attendre une pile morte.",
       "name_fr": "BONAI Chargeur Piles Universel 8 Slots",
-      "sub_fr": "8 slots · 4AA + 4AAA · USB · Charge rapide",
+      "sub_fr": "8 piles à la fois · Pratique · Toujours prêt",
       "subfamille": "indispensable"
     },
     {
@@ -969,9 +969,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 457,
       "weight": 320,
-      "desc": "Avec une puissance majorée de 30 % et dix modes de vibrations, ce rabbit haut de gamme stimule simultanément le point G et le clitoris. Il vous invite à redécouvrir votre corps et le plaisir charnel sous toutes ses formes.",
+      "desc": "Le rabbit qui redéfinit ce que votre corps peut ressentir — une double vague intérieure et extérieure pour des orgasmes dont on se souvient.",
       "name_fr": "INA 3 — Sextoy Rabbit",
-      "sub_fr": "Rabbit · Point G + clitoris · 10 modes LELO",
+      "sub_fr": "Double révélation · Puissance · LELO",
       "subfamille": "indispensable"
     },
     {
@@ -985,9 +985,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 403,
       "weight": 75,
-      "desc": "Ce diamant vibrant en édition limitée célèbre dix ans d'émancipation féminine dans le plaisir. Finition noir mat luxueuse, vibrations subtiles et design joaillier : un objet de plaisir assumé, élégant à porter ou à offrir.",
+      "desc": "Il se porte, il s'offre, il se ressent — un bijou vibrant en édition limitée qui assume avec élégance ce qu'il représente.",
       "name_fr": "Vibrating Diamond Noir — Édition 10e anniversaire",
-      "sub_fr": "Édition limitée · Diamant vibrant · Design luxe",
+      "sub_fr": "Bijou · Édition limitée · À offrir",
       "subfamille": "indispensable"
     },
     {
@@ -1001,9 +1001,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 198,
       "weight": 295,
-      "desc": "Ce stimulateur clitoridien de haute technologie délivre des ondes soniques profondes qui enveloppent le clitoris sans contact direct. Sa montée en puissance fluide entre les modes permet une progression douce et continue vers l'orgasme.",
+      "desc": "Une montée douce, progressive, inévitable — comme une vague qui prend son temps pour mieux vous emporter.",
       "name_fr": "SONA 3 CRUISE — Stimulateur clitoridien",
-      "sub_fr": "Ondes soniques · SenSonic · SmoothRise LELO",
+      "sub_fr": "Montée en puissance · Onde profonde · LELO",
       "subfamille": "indispensable"
     },
     {
@@ -1017,9 +1017,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 166,
       "weight": 240,
-      "desc": "Ce vibrateur externe rechargeable est recommandé par les experts du bien-être intime. Polyvalent et puissant, il s'utilise sur toutes les zones sensibles — périnée, clitoris, cuisses internes — pour une exploration totale du plaisir.",
+      "desc": "Il suit vos envies, pas l'inverse — recommandé par les experts du bien-être intime pour une raison simple : il marche, et vous le sentez.",
       "name_fr": "We-Vibe Touch X — Rechargeable Clitoral Vibrator",
-      "sub_fr": "Polyvalent · Plaisir externe · Ultra-puissant",
+      "sub_fr": "Recommandé · Polyvalent · We-Vibe",
       "subfamille": "indispensable"
     },
     {
@@ -1033,9 +1033,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 136,
       "weight": 175,
-      "desc": "Ce stimulateur clitoridien enveloppe le clitoris de douces pulsations sans contact direct grâce à sa technologie d'ondes de pression. Ses 8 niveaux d'intensité permettent une expérience totalement personnalisée et des orgasmes intenses.",
+      "desc": "Sans contact mais intensément présent — une enveloppe de plaisir que vous dosez selon ce que vous voulez ressentir ce soir.",
       "name_fr": "Womanizer Pro Lilac — Clitoral Suction Stimulator",
-      "sub_fr": "Aspiration clitoris · Technologie PleasureAir · 8 niveaux",
+      "sub_fr": "Enveloppant · Sur mesure · Womanizer",
       "subfamille": "indispensable"
     },
     {
@@ -1049,9 +1049,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 134,
       "weight": 380,
-      "desc": "Ce sextoy double sonique cible le point A, une zone érogène souvent oubliée. Grâce à ses ondes soniques profondes, il délivre des sensations inédites et des orgasmes d'une intensité rare — une exploration au-delà du plaisir ordinaire.",
+      "desc": "Il va chercher là où peu d'autres osent — une zone oubliée, des sensations inédites, et des orgasmes qui redéfinissent ce que vous croyiez connaître.",
       "name_fr": "ENIGMA DOUBLE SONIC — Sextoy Point G",
-      "sub_fr": "Point A · Double sonique · DeepSonic LELO",
+      "sub_fr": "Zones inexplorées · Inédit · LELO",
       "subfamille": "indispensable"
     },
     {
@@ -1063,9 +1063,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 4.4,
       "reviews": 64,
-      "desc": "Le kit de démarrage idéal : 2 piles AA et 2 piles AAA haute capacité, plus leur chargeur USB inclus. Tout ce qu'il faut pour alimenter vos jouets dès la première utilisation — et recharger en toute simplicité.",
+      "desc": "Tout ce qu'il faut pour commencer dès ce soir et recharger sans se poser de questions — le kit indispensable du plaisir prêt à l'emploi.",
       "name_fr": "BONAI Lot 2 Piles AA + 2 AAA avec Chargeur",
-      "sub_fr": "2 AA + 2 AAA · 2800/1100 mAh · Chargeur USB inclus",
+      "sub_fr": "Kit complet · Prêt à l'emploi · Pratique",
       "subfamille": "indispensable"
     },
     {
@@ -1079,9 +1079,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 36,
       "weight": 95,
-      "desc": "Ce vibrateur bullet à surfaces multiples propose des petites pointes arrondies d'un côté et une surface lisse de l'autre, pour des sensations variées sur tout le corps. Élégant et rechargeable, il s'adapte à chaque désir.",
+      "desc": "Retournez-le selon votre humeur — d'un côté la douceur, de l'autre l'éveil — un seul objet, deux façons de se faire du bien.",
       "name_fr": "Duet Bullet Vibrator by Je Joue",
-      "sub_fr": "Bullet vibrant · Surfaces multiples · Silicone",
+      "sub_fr": "Deux humeurs · Un accessoire · Je Joue",
       "subfamille": "indispensable"
     },
     {
@@ -1095,9 +1095,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 340,
       "weight": 65,
-      "desc": "Ce plug bijou ajoute une touche de luxe à vos moments intimes avec sa base ornée d'un cristal brillant. Silicone soyeux, confort optimal et esthétique joaillière pour un plaisir aussi élégant que sensuel.",
+      "desc": "Un bijou qui se porte là où personne ne le verra — sauf vous, et c'est exactement ce qui le rend si délicieux.",
       "name_fr": "EasyToys Diamant S Analplug",
-      "sub_fr": "Plug diamant · Bijou anal · Cristal décoratif",
+      "sub_fr": "Secret luxueux · Bijou · Petit prix",
       "subfamille": "petitprix"
     },
     {
@@ -1111,9 +1111,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 209,
       "weight": 95,
-      "desc": "Ce plug anal en métal argenté offre une sensation de poids sensuel unique. Poli à la perfection, facile à nettoyer, compatible avec tous les lubrifiants. Un accessoire premium pour une stimulation raffinée.",
+      "desc": "Ce poids subtil, cette froideur qui se réchauffe à votre contact — le métal poli a une façon bien à lui de raviver les sens.",
       "name_fr": "EasyToys Argent S Plug anal en métal",
-      "sub_fr": "Métal poli · Poids sensuel · Premium anal",
+      "sub_fr": "Poids sensuel · Métal · Raffinement",
       "subfamille": "petitprix"
     },
     {
@@ -1127,9 +1127,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 75,
       "weight": 80,
-      "desc": "Ce plug anal est conçu pour les explorateurs. Sa forme conique progressive et son anneau de récupération ergonomique en font l'accessoire idéal pour débuter en toute sécurité et en toute confiance.",
+      "desc": "Le premier pas vers une exploration sereine — une forme qui guide en douceur et une prise en main rassurante, pour commencer sans appréhension.",
       "name_fr": "EasyToys Spitzer S Plug anal",
-      "sub_fr": "Plug débutant · Anneau ergonomique · Silicone",
+      "sub_fr": "Premier pas · Douceur · Confiance",
       "subfamille": "petitprix"
     },
     {
@@ -1145,9 +1145,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 312,
       "weight": 750,
-      "desc": "Ce pack de trois plugs en acier inoxydable poli vous invite à explorer les plaisirs anaux en toute progressivité. La qualité premium du métal offre une sensation de poids unique, une hygiène irréprochable et une durabilité sans compromis — du débutant à l'initié.",
+      "desc": "Du premier frisson à l'expérience affirmée — ce trio en métal vous accompagne à votre rythme, avec un poids et une qualité qu'on ne discute pas.",
       "name_fr": "3 Plug Anal Acier Inoxydable",
-      "sub_fr": "Acier inoxydable · Pack de 3 tailles",
+      "sub_fr": "Trio progressif · Métal premium · Pour tous",
       "subfamille": "lots"
     },
     {
@@ -1162,9 +1162,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.3,
       "reviews": 187,
       "weight": 280,
-      "desc": "Ce kit de contrainte BDSM réunit l'essentiel pour une première exploration du jeu de pouvoir : menottes, bandeau et liens souples pensés pour la découverte mutuelle. Cédez au désir de confiance et d'abandon, à deux, en toute douceur.",
+      "desc": "L'abandon et la confiance dans un même kit — pour les couples qui veulent explorer le jeu de pouvoir, en douceur, à leur propre rythme.",
       "name_fr": "Kit de Contrainte BDSM",
-      "sub_fr": "Menottes · Bandeau · Liens · 4 pièces",
+      "sub_fr": "Abandon · Confiance · Jeu à deux",
       "subfamille": "lots"
     },
     {
@@ -1176,9 +1176,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 4.4,
       "reviews": 19878,
-      "desc": "Avec 2800 mAh par pile et jusqu'à 1200 cycles de recharge, ce lot de 8 piles AA garantit une longévité exceptionnelle. La solution économique et écologique pour que le plaisir ne s'arrête jamais faute d'énergie.",
+      "desc": "Finies les interruptions pour chercher des piles — ce lot de 8 rechargeables s'occupe de l'énergie pour que vous vous occupiez du reste.",
       "name_fr": "BONAI 8 Piles AA Rechargeables 2800 mAh",
-      "sub_fr": "8 piles AA · 2800 mAh · Ni-MH · 1200 cycles",
+      "sub_fr": "Toujours chargé · Écologique · Longue durée",
       "subfamille": "accessoire"
     },
     {
@@ -1190,9 +1190,9 @@ window.PRODUCTS_DATA = {
       ],
       "rating": 4.4,
       "reviews": 10914,
-      "desc": "Ne laissez jamais le plaisir s'arrêter par manque de piles. Ce lot de 8 piles AAA rechargeables offre jusqu'à 1200 cycles de recharge et une capacité de 1100 mAh — l'indispensable discret pour alimenter tous vos accessoires.",
+      "desc": "L'accessoire dont vous ne parlerez à personne mais sans lequel tout s'arrête — 8 piles rechargables pour que le plaisir ne soit jamais en panne.",
       "name_fr": "BONAI 8 Piles AAA Rechargeables 1100 mAh",
-      "sub_fr": "8 piles AAA · 1100 mAh · Ni-MH · 1200 cycles",
+      "sub_fr": "Toujours chargé · Écologique · L'essentiel",
       "subfamille": "accessoire"
     }
   ],
@@ -1213,9 +1213,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.1,
       "reviews": 356,
       "weight": 450,
-      "desc": "Ce mixeur portable se recharge en USB et se glisse dans un sac à main — smoothie frais à portée partout, bureau compris. Ses 10 lames inox et ses 3 vitesses écrasent fruits et légumes en quelques secondes pour un plein d'énergie sans détour.",
+      "desc": "Un smoothie frais en 20 secondes, au bureau, en déplacement ou dans votre cuisine — glissez-le dans votre sac et oubliez le blender.",
       "name_fr": "Presse-Fruits Portable — 10 lames USB",
-      "sub_fr": "Capacité 450ml · 3 vitesses · Rechargeable USB · Smoothies & shakes"
+      "sub_fr": "Partout · Rapide · Plein d'énergie"
     },
     {
       "id": "malin-26",
@@ -1232,9 +1232,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.3,
       "reviews": 48,
       "weight": 320,
-      "desc": "Ce balai et cette pelle s'accrochent magnétiquement d'un geste — plus besoin de chercher l'un sans l'autre. Légers, pliables et pivotants à 360°, ils atteignent chaque recoin sans se tordre le dos.",
+      "desc": "Ils s'accrochent magnétiquement l'un à l'autre — fini de chercher la pelle sous l'évier quand vous avez déjà le balai en main.",
       "name_fr": "Ensemble Balai & Pelle Magnétique 2-en-1",
-      "sub_fr": "Pliables et rotatifs · Outils de nettoyage légers · Pour la maison"
+      "sub_fr": "Toujours ensemble · Gain de temps · Malin"
     },
     {
       "id": "malin-25",
@@ -1251,9 +1251,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 28,
       "weight": 1200,
-      "desc": "Ce fer vapeur 1500 W chauffe en moins d'une minute et défroisse même les tissus les plus récalcitrants en un seul passage. Compact et léger, il est aussi à l'aise dans un appartement qu'en déplacement.",
+      "desc": "Chaud en moins d'une minute, impeccable en un passage — le fer qui vous fait gagner du temps même sur les tâches que vous aimez le moins.",
       "name_fr": "Fer à Repasser Vapeur — 1500W",
-      "sub_fr": "Vapeur domestique · Chaleur rapide · Pour tissus · Maison & voyages"
+      "sub_fr": "Rapide · Efficace · Partout"
     },
     {
       "id": "malin-27",
@@ -1266,9 +1266,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 24,
       "weight": 85,
-      "desc": "Ces 16 petits flacons en silicone souple se remplissent en deux secondes et passent en cabine avion sans tracas. Idéal pour ranger shampoing, gel douche ou crème de voyage — fini les bouteilles qui fuient dans la valise.",
+      "desc": "Remplissez-les en 2 secondes, glissez-les en cabine — fini les flacons qui fuient et les bouteilles entières qu'on confisque à l'aéroport.",
       "name_fr": "16 Flacons de Voyage Silicone Rechargeables",
-      "sub_fr": "Shampooing · Gel douche · Lotion · Cosmétiques voyage · Souples & rechargeables"
+      "sub_fr": "Voyage malin · Cabine avion · Anti-galère"
     }
   ],
   "bebe": [
@@ -1283,9 +1283,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 55367,
       "weight": 65,
-      "desc": "Cette balle flexible multicolore aux alvéoles ouvertes est conçue pour les petits doigts qui apprennent à attraper dès la naissance. Ultra-légère, indestructible et facile à saisir sous tous les angles, elle est l'un des jouets les plus populaires du monde.",
+      "desc": "Dès les premières semaines, ses petits doigts la saisissent, la lâchent, recommencent — un jouet d'une simplicité parfaite qui captive bébé pendant des heures.",
       "name_fr": "Oball Balle Flexible Bright Starts",
-      "sub_fr": "Balle flexible multicolore · Sensoriel · Dès la naissance",
+      "sub_fr": "Dès la naissance · Indestructible · Monde entier",
       "subfamille": "jouets"
     },
     {
@@ -1300,9 +1300,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 2916,
       "weight": 80,
-      "desc": "Cette balle hochet en silicone doux aux textures variées stimule les sens de bébé dès 3 mois. Facile à attraper, à agiter et à mordiller, elle favorise la motricité fine et la dentition dans une approche Montessori naturelle.",
+      "desc": "Bébé l'attrape, la secoue, la mordille — en jouant, il renforce ses mains et apaise ses gencives sans même s'en rendre compte.",
       "name_fr": "Hochet Sensoriel Balle Loyzico",
-      "sub_fr": "Silicone · Motricité Montessori · Dentition · Dès 3 mois",
+      "sub_fr": "Éveil · Dentition · Dès 3 mois",
       "subfamille": "jouets"
     },
     {
@@ -1318,9 +1318,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.3,
       "reviews": 2621,
       "weight": 130,
-      "desc": "Ce livre en tissu doux intègre un miroir pliable inoffensif qui fascine bébé dès les premières semaines : il découvre son reflet et développe sa conscience de soi. Froissable, lavable et sensoriel, il stimule l'éveil de 0 à 12 mois.",
+      "desc": "Il découvre son reflet et ne se lasse pas — un livre en tissu tout doux qui éveille bébé tout en vous offrant quelques minutes de sourires partagés.",
       "name_fr": "Livre Miroir Bébé Vicloon",
-      "sub_fr": "Livre pétrissant · Miroir pliable · Tissu doux · 0–12 mois",
+      "sub_fr": "Éveil · Sourires · Dès la naissance",
       "subfamille": "jouets"
     },
     {
@@ -1333,9 +1333,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 1483,
       "weight": 260,
-      "desc": "Cette boîte à histoires et méditations sans écran accompagne les enfants vers un endormissement serein grâce à des récits apaisants et des exercices de relaxation adaptés. Plébiscitée par plus de 1 400 familles, elle transforme l'heure du coucher.",
+      "desc": "L'heure du coucher sans bataille — des histoires et méditations apaisantes qui endorment les enfants en douceur, plébiscitées par plus de 1 400 familles.",
       "name_fr": "Mon Petit Morphée Boîte Histoires",
-      "sub_fr": "Histoires et méditations · Sans écran · Dès 3 ans",
+      "sub_fr": "Sérénité · Sans écran · Dès 3 ans",
       "subfamille": "jouets"
     },
     {
@@ -1350,9 +1350,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 1543,
       "weight": 240,
-      "desc": "Ce trieur de formes sensoriel propose des boules aux textures variées à glisser dans les bons orifices, stimulant la logique et la coordination de bébé de 12 à 24 mois. Un classique intemporel qui occupe et développe à la fois.",
+      "desc": "Il s'obstine, recommence, et finit par réussir tout seul — ce trieur de formes développe la logique de bébé avec une satisfaction immédiate à chaque victoire.",
       "name_fr": "Trieur Formes Sensoriel Bébé",
-      "sub_fr": "Boules texturées · Tri de formes · Balles sensorielles · 12–24 mois",
+      "sub_fr": "Logique · Autonomie · 12–24 mois",
       "subfamille": "jouets"
     },
     {
@@ -1365,9 +1365,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 1167,
       "weight": 420,
-      "desc": "Ce lot de 8 assiettes et bols en silicone souple est idéal pour accompagner toutes les étapes du sevrage alimentaire. Sans BPA, lavables au lave-vaisselle et aux bords arrondis, ils sont conçus pour les petits mangeurs qui apprennent en toute sécurité.",
+      "desc": "Bébé renverse, tâtonne, apprend — et vous n'avez qu'à passer les 8 pièces au lave-vaisselle sans vous inquiéter du reste.",
       "name_fr": "Lot 8 Assiettes Bol Silicone Sevrage",
-      "sub_fr": "Silicone · Sans BPA · 8 pièces · Sevrage alimentaire",
+      "sub_fr": "Sécurité · Facile · Sevrage serein",
       "subfamille": "jouets"
     },
     {
@@ -1382,9 +1382,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 950,
       "weight": 350,
-      "desc": "Ce bus en bois 4 en 1 cache un xylophone, un jeu de marteau et un espace voiture pour des heures de découverte musicale et sensorielle. Solide et bien fini, il accompagne l'enfant dans ses premières explorations motrices et sonores dès 12 mois.",
+      "desc": "Un bus qui cache bien son jeu — musique, marteau, voitures — des heures d'exploration sonore et motrice dans un seul jouet solide et beau.",
       "name_fr": "Jouet 4en1 Bus Montessori Sundaymot",
-      "sub_fr": "Marteau · Xylophone · Voiture · Bus en bois · Dès 12 mois",
+      "sub_fr": "4 jeux · Bois · Éveil musical · Dès 12 mois",
       "subfamille": "jouets"
     },
     {
@@ -1398,9 +1398,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 901,
       "weight": 310,
-      "desc": "Ce jeu du crocodile dentiste fait rire aux éclats les enfants dès l'âge préscolaire : appuie sur les dents et espère que le croco ne claque pas ! Sans piles, pour 2 à 4 joueurs, il favorise le tour de rôle et gère les émotions avec humour.",
+      "desc": "Les fous rires sont garantis — et le jour où il claque, tout le monde crie en même temps, parents compris.",
       "name_fr": "Croc Dentiste Hasbro",
-      "sub_fr": "Jeu plateau mordant · 2–4 joueurs · Âge préscolaire · Sans piles",
+      "sub_fr": "Fous rires · Sans piles · Dès 4 ans",
       "subfamille": "jouets"
     },
     {
@@ -1414,9 +1414,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 529,
       "weight": 270,
-      "desc": "Ce cube de manipulation propose 12 balles colorées à trier, enfiler et faire rouler avec des sons à la clé. Il entraîne la réflexion et la motricité fine de bébé dès 10 mois, en alliant plaisir immédiat et apprentissage progressif.",
+      "desc": "Bébé enfonce, trie, écoute les sons et recommence — un cube qui occupe, développe et donne envie de recommencer encore.",
       "name_fr": "Cube Manipulation Bébé Ludi",
-      "sub_fr": "12 balles colorées · Réflexion & motricité fine · Sons · Dès 10 mois",
+      "sub_fr": "Sons · Motricité · Dès 10 mois",
       "subfamille": "jouets"
     },
     {
@@ -1432,9 +1432,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 477,
       "weight": 20,
-      "desc": "Cette sucette en silicone alimentaire permet d'introduire fruits et légumes mixés en douceur dès les premières semaines. Sans BPA, facile à presser et à nettoyer, elle rend la diversification alimentaire simple et sécurisée pour les parents.",
+      "desc": "Un peu de purée, un coup de presse, bébé découvre de nouveaux goûts en toute sécurité — la diversification alimentaire enfin sans stress.",
       "name_fr": "BiSantos — Sucette Silicone Nouveau-Né",
-      "sub_fr": "À presser · Complément alimentaire · Sans BPA · Ustensiles bébé",
+      "sub_fr": "Diversification facile · Sûre · Sans BPA",
       "subfamille": "jouets"
     },
     {
@@ -1450,9 +1450,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 450,
       "weight": 280,
-      "desc": "Ce petit pingouin qui rampe et danse attire l'attention de bébé avec ses lumières et ses mélodies entraînantes. Il l'encourage à ramper pour le suivre, stimulant ainsi sa motricité globale et sa curiosité dès 12 mois.",
+      "desc": "Il rampe et danse, bébé veut le suivre — sans même s'en rendre compte, il se met en mouvement et développe sa motricité en s'amusant.",
       "name_fr": "Pingouin Musical Rampant",
-      "sub_fr": "Jouets de danse · Lumière & sons · Développement interactif · Dès 12 mois",
+      "sub_fr": "Mouvement · Rires · Dès 12 mois",
       "subfamille": "jouets"
     },
     {
@@ -1466,9 +1466,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 364,
       "weight": 60,
-      "desc": "Cette tasse d'apprentissage en silicone souple est conçue pour les petites mains qui apprennent à boire seules. Sans BPA, avec deux couvercles interchangeables et une paille sécurisée, elle accompagne bébé des premiers essais jusqu'aux sorties.",
+      "desc": "Il boit seul, il est fier de lui — et vous êtes soulagé de savoir que c'est sûr, facile à nettoyer et pas cher.",
       "name_fr": "Tasse de Paille en Silicone Bébé",
-      "sub_fr": "Sans BPA · Deux couvercles · Tasse d'apprentissage · Portable",
+      "sub_fr": "Autonomie · Sécurité · Partout",
       "subfamille": "jouets"
     },
     {
@@ -1481,9 +1481,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 342,
       "weight": 120,
-      "desc": "Ce puzzle magnétique en bois naturel invite les enfants à composer et recomposer des figures sur un tableau double face. Les pièces aimantées tiennent en place et développent la logique spatiale, la créativité et la patience dès 3 ans.",
+      "desc": "Il compose, efface, recommence et ne se lasse pas — ce puzzle magnétique en bois laisse l'imagination de l'enfant s'exprimer sans limite.",
       "name_fr": "Puzzle Magnétique Bois",
-      "sub_fr": "Pièces magnétiques · Tableau double face · Dès 3 ans",
+      "sub_fr": "Créativité · Bois naturel · Dès 3 ans",
       "subfamille": "jouets"
     },
     {
@@ -1496,9 +1496,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 349,
       "weight": 55,
-      "desc": "Cet anneau de dentition réfrigérant en silicone souple apaise instantanément les gencives de bébé lorsqu'il est passé quelques minutes au réfrigérateur. Sans BPA et facile à saisir, il offre un soulagement naturel et sécurisé.",
+      "desc": "Quelques minutes au frigo, et bébé retrouve le sourire — un soulagement naturel, doux et immédiat pour les nuits de poussée dentaire.",
       "name_fr": "Anneau Dentition Réfrigérant Suavinex",
-      "sub_fr": "Silicone · Réfrigérant · Sans BPA · Apaise les gencives",
+      "sub_fr": "Froid apaisant · Sûr · Gencives soulagées",
       "subfamille": "jouets"
     },
     {
@@ -1514,9 +1514,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 276,
       "weight": 350,
-      "desc": "Ce livre en tissu doux propose des activités sensorielles variées — à toucher, à manipuler, à écouter — pour éveiller bébé en douceur. Idéal pour les moments calmes ou les trajets, il stimule l'éveil et l'attention dès 18 mois.",
+      "desc": "Dans la poussette, sur le tapis ou dans vos bras — ce livre en tissu occupe bébé en douceur et vous offre un moment de calme bien mérité.",
       "name_fr": "Livre Calme Tout-Petits",
-      "sub_fr": "Activités sensorielles · Tissu doux · Dès 18 mois",
+      "sub_fr": "Calme · Éveil · Dès 18 mois",
       "subfamille": "jouets"
     },
     {
@@ -1529,9 +1529,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 262,
       "weight": 50,
-      "desc": "Ce set de cuillères et fourchettes en silicone souple est pensé pour les premières bouchées en autonomie. Les bords arrondis et la matière douce protègent les gencives et les dents fragiles de bébé, sans BPA ni matériaux toxiques.",
+      "desc": "Bébé mange seul, les gencives protégées, et vous pouvez souffler — des couverts pensés pour ses premières bouchées en toute sérénité.",
       "name_fr": "Set Alimentation Silicone BPA Free",
-      "sub_fr": "Silicone · Sans BPA · Cuillères et fourchettes",
+      "sub_fr": "Premières bouchées · Sûr · Autonomie",
       "subfamille": "jouets"
     },
     {
@@ -1548,9 +1548,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 249,
       "weight": 350,
-      "desc": "Ce moniteur bébé WiFi en 4MP surveille la chambre à 360° depuis votre smartphone, de jour comme de nuit grâce à sa vision nocturne HD. Sa détection automatique des pleurs vous alerte immédiatement, pour une tranquillité d'esprit totale.",
+      "desc": "Bébé dort, vous aussi — la caméra veille à 360° et vous alerte dès les premiers pleurs, pour que votre sérénité soit aussi complète que la sienne.",
       "name_fr": "Moniteur Bébé WiFi 4MP — 360°",
-      "sub_fr": "Détection de pleurs · Vision nocturne · Caméra rotative · HD",
+      "sub_fr": "Tranquillité · Vision nocturne · 360°",
       "subfamille": "jouets"
     },
     {
@@ -1565,9 +1565,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 245,
       "weight": 200,
-      "desc": "Ce jouet ventouse Montessori en silicone et bois se fixe à n'importe quelle surface lisse pour laisser bébé explorer en toute sécurité de 6 à 12 mois. Ses textures variées et ses pièces à manipuler développent la motricité fine et la curiosité.",
+      "desc": "Collé à la table, à la chaise haute ou aux carreaux du bain — bébé explore en toute sécurité pendant que vous avez enfin les deux mains libres.",
       "name_fr": "Jouet Ventouse Montessori AiTuiTui",
-      "sub_fr": "Silicone & bois · Sans BPA · Motricité · 6–12 mois",
+      "sub_fr": "Mains libres · Sécurisé · 6–12 mois",
       "subfamille": "jouets"
     },
     {
@@ -1584,9 +1584,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 194,
       "weight": 650,
-      "desc": "Cet ensemble Montessori de 5 formes géométriques en bois apprend à l'enfant à associer, trier et empiler en toute autonomie. Les pièces colorées et bien finies stimulent la coordination œil-main et la reconnaissance des formes dès 18 mois.",
+      "desc": "Il cherche la bonne forme, essaie, réussit — et cette fierté dans ses yeux vaut tous les jouets connectés du monde.",
       "name_fr": "Formes géométriques en bois Montessori",
-      "sub_fr": "5 formes · Plateau bois · Tri & empilement · Dès 18 mois",
+      "sub_fr": "Fierté · Bois naturel · Dès 18 mois",
       "subfamille": "jouets"
     },
     {
@@ -1601,9 +1601,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 187,
       "weight": 420,
-      "desc": "Ce jouet 5 en 1 Montessori rassemble tri de formes, xylophone, empilage et gobelets gigognes dans un seul coffret compact. Il couvre toutes les étapes du développement de 6 à 12 mois avec des activités adaptées à chaque semaine qui passe.",
+      "desc": "Un seul coffret pour accompagner chaque semaine de la première année — bébé grandit, l'activité évolue, et vous n'avez pas besoin de racheter quoi que ce soit.",
       "name_fr": "Jouet 5en1 Montessori Almaxi",
-      "sub_fr": "Tri de formes · Xylophone · Empilage · Gobelets · 6–12 mois",
+      "sub_fr": "Tout en un · 6–12 mois · Évolutif",
       "subfamille": "jouets"
     },
     {
@@ -1617,9 +1617,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 183,
       "weight": 80,
-      "desc": "Ce jouet 3 en 1 réunit labyrinthe à billes, tri de formes et encastrement dans un seul objet compact et coloré. Chaque activité entraîne la logique, la concentration et la motricité fine des enfants dès 2 ans.",
+      "desc": "Trois jeux dans un seul jouet — labyrinthe, tri de formes, encastrement — pour que les 2 ans ne s'ennuient jamais longtemps.",
       "name_fr": "Jouet Éducatif 3 en 1",
-      "sub_fr": "Labyrinthe · Tri · Encastrement · Dès 2 ans",
+      "sub_fr": "3 jeux · Concentration · Dès 2 ans",
       "subfamille": "jouets"
     },
     {
@@ -1634,9 +1634,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.8,
       "reviews": 162,
       "weight": 450,
-      "desc": "Ce grille-pain en bois reproduit fidèlement le rituel du petit-déjeuner pour éveiller l'imaginaire des tout-petits. Les aliments aimantés s'assemblent et se démontent facilement, développant la motricité fine et le sens de l'imitation.",
+      "desc": "Il prépare le petit-déjeuner, tout seul, avec une concentration adorable — et vous voyez déjà qu'il sera du genre à se débrouiller.",
       "name_fr": "Jouet Grille-Pain en Bois",
-      "sub_fr": "Kit Machine à Pain · Simulation cuisine · Petit déjeuner · Filles et garçons",
+      "sub_fr": "Jeu d'imitation · Bois · Dès 2 ans",
       "subfamille": "jouets"
     },
     {
@@ -1651,9 +1651,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 168,
       "weight": 480,
-      "desc": "Avec 59 pièces colorées — casseroles, ustensiles, aliments factices — cet ensemble de cuisine stimule l'imagination et les jeux de rôle. Un coffret complet pour jouer au chef cuisinier dès le plus jeune âge, garçon ou fille.",
+      "desc": "59 pièces pour un restaurant imaginaire où votre enfant est chef, serveur et critique — et les plats sont toujours délicieux.",
       "name_fr": "Ensemble Jouets Cuisine — 59 pièces",
-      "sub_fr": "Kit accessoires cuisine · Pots de jeu · Pour tout-petits · Filles et garçons",
+      "sub_fr": "Imagination · 59 pièces · Jeu de rôle",
       "subfamille": "jouets"
     },
     {
@@ -1666,9 +1666,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 156,
       "weight": 120,
-      "desc": "Ces cartes cognitives en noir et blanc aux contrastes forts sont spécialement conçues pour stimuler la vision et le développement neurologique des nouveau-nés. Quelques minutes chaque jour suffisent pour éveiller bébé et renforcer le lien parent-enfant.",
+      "desc": "Quelques minutes devant ces cartes contrastées, et bébé fixe, cherche, réagit — un éveil visuel précieux pour ses premières semaines de vie.",
       "name_fr": "Cartes Cognitives Françaises Enfants",
-      "sub_fr": "Stimulation visuelle · Noir & blanc · Développement cognitif",
+      "sub_fr": "Éveil visuel · Lien parent-enfant · Dès la naissance",
       "subfamille": "jouets"
     },
     {
@@ -1683,9 +1683,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.3,
       "reviews": 163,
       "weight": 180,
-      "desc": "Ce jeu de pêche magnétique en bois fait travailler la patience, la concentration et la motricité fine dès 2 ans. Ses 10 poissons numérotés permettent d'apprendre les chiffres en jouant — un apprentissage en douceur qui fait toujours mouche.",
+      "desc": "La canne en main, les yeux rivés sur les poissons — il apprend les chiffres sans s'en rendre compte, et vous observez en souriant.",
       "name_fr": "Jeu Pêche Magnétique Bois",
-      "sub_fr": "Bois naturel · 10 poissons · Motricité · Chiffres · Dès 2 ans",
+      "sub_fr": "Chiffres · Patience · Dès 2 ans",
       "subfamille": "jouets"
     },
     {
@@ -1698,9 +1698,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 142,
       "weight": 35,
-      "desc": "Ce petit dinosaure en silicone souple devient le meilleur ami de bébé durant la poussée dentaire. Sa forme rigolote et ses textures variées à mordre soulagent les gencives en douceur, en toute sécurité grâce à son silicone sans BPA.",
+      "desc": "Mordre un dinosaure pour soulager ses gencives — bébé adopte son meilleur ami des premières dents, et vous dormez enfin un peu mieux.",
       "name_fr": "Jouet Dentition Dinosaure Silicone",
-      "sub_fr": "Silicone · Sans BPA · Dinosaure · Apaise les gencives",
+      "sub_fr": "Soulagement · Rigolo · Sûr",
       "subfamille": "jouets"
     },
     {
@@ -1717,9 +1717,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 126,
       "weight": 200,
-      "desc": "Cet ensemble de simulation cuisine invite les enfants à préparer de délicieux desserts imaginaires. Le jeu de rôle développe leur créativité, leur sens du partage et leur langage dès 3 ans, en toute sécurité.",
+      "desc": "Des gâteaux imaginaires qui font de vrais sourires — une cuisine créative pour les petits chefs pâtissiers en herbe dès 3 ans.",
       "name_fr": "Jouets Cuisine — Simulation Dessert",
-      "sub_fr": "Pain, aliments, maison de jeu · Activités de fête · Pour filles · Dès 36 mois",
+      "sub_fr": "Créativité · Partage · Dès 3 ans",
       "subfamille": "jouets"
     },
     {
@@ -1732,9 +1732,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 113,
       "weight": 45,
-      "desc": "Cet anneau de dentition en forme de fleur est taillé dans du bois naturel non traité, doux sur les gencives douloureuses de bébé. Sans BPA ni vernis chimique, il est sécurisé et facile à tenir dès les premiers mois.",
+      "desc": "Joli comme un bijou, sûr comme un geste naturel — ce petit anneau en bois brut apaise bébé sans aucun produit chimique.",
       "name_fr": "Anneau Dentition Fleur Bois CAJA",
-      "sub_fr": "Bois naturel · Sans BPA · Fleur · Apaise les gencives",
+      "sub_fr": "Nature · Pureté · Soulagement doux",
       "subfamille": "jouets"
     },
     {
@@ -1748,9 +1748,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 95,
       "weight": 130,
-      "desc": "Ce coffret de 9 crayons de cire ergonomiques est spécialement conçu pour les mains de bébé dès 12 mois : leur forme épaisse facilite la prise en main et les couleurs lavables partent sans effort des murs et des vêtements.",
+      "desc": "Il gribouille partout, et ça part tout seul au lavage — les premiers vrais crayons pensés pour les mains maladroites et les murs innocents.",
       "name_fr": "Premiers Crayons Coffret Crea lign",
-      "sub_fr": "9 crayons ergonomiques · Lavables · Cire sécurité · Dès 12 mois",
+      "sub_fr": "Lavable · Premiers traits · Dès 12 mois",
       "subfamille": "jouets"
     },
     {
@@ -1763,9 +1763,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.9,
       "reviews": 89,
       "weight": 30,
-      "desc": "Cet anneau de dentition en étoile de silicone alimentaire offre à bébé plusieurs surfaces à mordre pour soulager ses gencives en poussée. Ultraléger, sans BPA et lavable au lave-vaisselle, il accompagne bébé partout.",
+      "desc": "Une petite étoile ultra-légère qui va partout et soulage vraiment — le compagnon de poche des parents au bout du rouleau pendant la dentition.",
       "name_fr": "Anneau Dentition Étoile Silicone",
-      "sub_fr": "Silicone · Sans BPA · Étoile · Apaise les gencives",
+      "sub_fr": "Léger · Partout · Soulage vite",
       "subfamille": "jouets"
     },
     {
@@ -1779,9 +1779,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 97,
       "weight": 280,
-      "desc": "Ce tableau d'activités sur le thème de la ferme propose 10 jeux de manipulation — fermetures, lacets, boutons, cadenas — pour entraîner la motricité fine et l'autonomie dès 2 ans. Un jouet qui occupe vraiment, et qui prépare au quotidien.",
+      "desc": "Il boutonne, laçe, ouvre et ferme pendant des dizaines de minutes — et le jour où il fait ses lacets tout seul, vous vous souviendrez de ce jouet.",
       "name_fr": "Busy Board Ferme Montessori Almaxi",
-      "sub_fr": "10 activités · Thème ferme français · Motricité fine · Dès 2 ans",
+      "sub_fr": "Autonomie · 10 activités · Dès 2 ans",
       "subfamille": "jouets"
     },
     {
@@ -1798,9 +1798,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 76,
       "weight": 1400,
-      "desc": "Ce coffret de 130 grands blocs colorés offre aux tout-petits tout ce qu'il faut pour construire, empiler et inventer. Les roues incluses permettent de créer des véhicules, et le sac de rangement facilite le rangement dès 18 mois.",
+      "desc": "Une tour, un camion, une maison — 130 blocs pour bâtir tout ce que son imagination invente, et un sac pour tout ranger en deux minutes.",
       "name_fr": "Blocs de construction éducatifs — 130 pièces",
-      "sub_fr": "Grands blocs colorés avec roues · Sac de rangement · Dès 18 mois",
+      "sub_fr": "Construction · Créativité · Dès 18 mois",
       "subfamille": "jouets"
     },
     {
@@ -1813,9 +1813,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 74,
       "weight": 380,
-      "desc": "Cette fabrique à histoires sans écran permet à l'enfant de créer lui-même ses contes en combinant personnages, lieux et objets. Elle développe le langage, l'imagination et l'autonomie dès 3 ans — et les parents adorent l'heure du coucher.",
+      "desc": "Il invente lui-même son histoire ce soir — et demain il en veut une autre, encore différente, encore meilleure que la veille.",
       "name_fr": "Lunii Ma Fabrique à Histoires",
-      "sub_fr": "Histoires personnalisées · Sans écran · Dès 3 ans",
+      "sub_fr": "Imaginaire · Sans écran · Dès 3 ans",
       "subfamille": "jouets"
     },
     {
@@ -1832,9 +1832,9 @@ window.PRODUCTS_DATA = {
       "rating": 5,
       "reviews": 57,
       "weight": 180,
-      "desc": "Ce petit crabe électronique qui marche, évite les obstacles et joue de la musique fascine les enfants dès les premiers instants. Un compagnon interactif qui développe l'attention et la réactivité des tout-petits tout en les faisant rire.",
+      "desc": "Il marche, il évite les meubles, il fait de la musique — et bébé le suit partout dans la maison en riant sans s'arrêter.",
       "name_fr": "Jouet Crabe Électronique",
-      "sub_fr": "Évite les obstacles · Musique · Animal de compagnie · Interactif",
+      "sub_fr": "Rires garantis · Interactif · Bébé adore",
       "subfamille": "jouets"
     },
     {
@@ -1847,9 +1847,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 62,
       "weight": 90,
-      "desc": "Ces crayons à saisir avec toute la main sont pensés pour les petits doigts dès 18 mois : leur forme ergonomique 3D garantit une bonne prise en main sans effort. Lavables et non toxiques, ils laissent l'enfant dessiner librement sans souci.",
+      "desc": "Faits pour être saisis à pleine main, faciles à laver partout — les premiers crayons qui laissent bébé dessiner librement sans que vous ayez à stresser.",
       "name_fr": "Crayons Doigts 3D Sécurité Maternelle",
-      "sub_fr": "Ergonomiques · Lavables · 8 couleurs · Dès 18 mois",
+      "sub_fr": "Liberté de dessiner · Lavable · Dès 18 mois",
       "subfamille": "jouets"
     },
     {
@@ -1864,9 +1864,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.2,
       "reviews": 55,
       "weight": 150,
-      "desc": "Cette minuterie visuelle permet aux enfants de visualiser concrètement le temps qui passe grâce à son cadran coloré qui se vide progressivement. Silencieuse et intuitive, elle aide à cadrer le temps d'écran, les devoirs ou les transitions sans tension.",
+      "desc": "Finies les négociations sans fin — l'enfant voit lui-même le temps qui se vide, et accepte la fin du jeu sans crise.",
       "name_fr": "Minuterie Visuelle GeeRic",
-      "sub_fr": "Compte à rebours silencieux · Cadran couleur · Lumière clignotante · 60 min",
+      "sub_fr": "Transitions sans crise · Silencieuse · Visuelle",
       "subfamille": "jouets"
     },
     {
@@ -1880,9 +1880,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.9,
       "reviews": 39,
       "weight": 320,
-      "desc": "Cet élégant service à thé en bois naturel initie les enfants au plaisir du jeu de rôle et de la sociabilité. Théière, tasses et petits gâteaux en bois poli sont conçus pour des mains de 3 ans, solides et sans bords coupants.",
+      "desc": "Le goûter imaginaire où il vous sert le thé avec une solennité attendrissante — un moment de jeu doux qui développe la sociabilité en toute simplicité.",
       "name_fr": "Ensemble de Thé Après-Midi en Bois",
-      "sub_fr": "Jeu de rôle · Apprentissage des aliments · Jouets éducatifs · Dès 36 mois",
+      "sub_fr": "Partage · Bois poli · Dès 3 ans",
       "subfamille": "jouets"
     },
     {
@@ -1896,9 +1896,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 23,
       "weight": 3200,
-      "desc": "Ces grands blocs en mousse certifiée EN71 s'assemblent en parcours de motricité, rampes à grimper ou piscine à balles selon l'imagination de l'enfant. Doux, indestructibles et facilement nettoyables, ils transforment la maison en espace de jeu actif dès 4 ans.",
+      "desc": "Votre salon devient un terrain de jeu — et pendant qu'il grimpe, rampe et saute, vous le regardez dépenser son énergie sans quitter la maison.",
       "name_fr": "Blocs Mousse Motricité Banasuper",
-      "sub_fr": "Mousse certifiée EN71 · Blocs à grimper · Piscine à balles · Dès 4 ans",
+      "sub_fr": "Motricité à la maison · Doux · Dès 4 ans",
       "subfamille": "jouets"
     },
     {
@@ -1915,9 +1915,9 @@ window.PRODUCTS_DATA = {
       "rating": 4,
       "reviews": 21,
       "weight": 380,
-      "desc": "Ce service à thé de 15 pièces en bois offre tout l'attirail pour jouer à l'hôte parfait : théière, sucrier, tasses, plateau. Les pièces solides et colorées résistent aux jeux enthousiastes des 3–5 ans.",
+      "desc": "Quinze pièces pour jouer à l'hôte avec tout le sérieux du monde — théière, tasses, sucrier, plateau et beaucoup d'imagination.",
       "name_fr": "Service à Thé en Bois — Wooden Tea Set 15 pcs",
-      "sub_fr": "Accessoires cuisine · Jeux de rôle · 3–5 ans · Filles et garçons",
+      "sub_fr": "15 pièces · Bois solide · 3–5 ans",
       "subfamille": "jouets"
     },
     {
@@ -1930,9 +1930,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.2,
       "reviews": 11,
       "weight": 480,
-      "desc": "Cette veilleuse baleine projette un spectacle lumineux apaisants sur le plafond et diffuse des sons naturels doux pour accompagner bébé vers le sommeil. Une présence rassurante qui transforme la chambre en univers aquatique enchanteur.",
+      "desc": "Des lumières douces sur le plafond, des sons de la mer — bébé s'endort dans son petit univers aquatique, et vous soufflez enfin.",
       "name_fr": "Veilleuse Baleine Pabobo Aqua Dream",
-      "sub_fr": "Veilleuse projecteur · Sons naturels · Baleine",
+      "sub_fr": "Endormissement serein · Lumières douces · Pabobo",
       "subfamille": "jouets"
     },
     {
@@ -1946,9 +1946,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.6,
       "reviews": 57778,
       "weight": 220,
-      "desc": "Cette pieuvre flottante et ses 3 anneaux à lancer transforment le bain en moment de jeu éducatif dès 4 mois. Elle développe la coordination main-œil et rend les soins du soir bien plus agréables pour toute la famille.",
+      "desc": "Le bain était une bataille — maintenant c'est le moment préféré de la journée, grâce à cette pieuvre et ses trois anneaux à lancer.",
       "name_fr": "Jouet Bain Pieuvre Nuby",
-      "sub_fr": "Flottant · 3 anneaux à lancer · Développement sensoriel · Dès 4 mois",
+      "sub_fr": "Bain sans pleurs · Jeu · Dès 4 mois",
       "subfamille": "bain"
     },
     {
@@ -1962,9 +1962,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 297,
       "weight": 290,
-      "desc": "Ce coffret de 13 jouets de bain transforme l'heure du bain en moment de jeu et d'éveil dès 1 an. Ses animaux rigolos, son arroseur et ses accessoires colorés rendent les soins du soir bien plus agréables, pour bébé comme pour les parents.",
+      "desc": "Treize jouets pour transformer le bain en fête chaque soir — et des parents qui n'ont plus besoin d'argumenter pour l'heure des soins.",
       "name_fr": "Coffret Bain VTech Empilo Rigol'Eau",
-      "sub_fr": "13 jouets de bain · Animaux rigolos · Arroseur · Dès 1 an",
+      "sub_fr": "Bain en fête · 13 jouets · Dès 1 an",
       "subfamille": "bain"
     },
     {
@@ -1979,9 +1979,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 265,
       "weight": 500,
-      "desc": "Cette bouée siège pour bébé offre une sécurité maximale grâce à son double airbag et son toit solaire UPF50+ qui protège des rayons UV. Idéale pour les premiers bains en piscine de 6 à 36 mois, elle laisse bébé profiter de l'eau en toute sérénité.",
+      "desc": "Bébé barbote en sécurité, protégé du soleil, pendant que vous profitez de l'eau à côté — les premières fois à la piscine sans angoisser.",
       "name_fr": "Bouée Natation Bébé Thedttoy",
-      "sub_fr": "Double airbag · Toit solaire UPF50+ · Siège gonflable · 6–36 mois",
+      "sub_fr": "Sécurité · Soleil · Premiers bains",
       "subfamille": "bain"
     },
     {
@@ -1995,9 +1995,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.2,
       "reviews": 96,
       "weight": 160,
-      "desc": "Cette bouteille sensorielle flottante fascine bébé au bain et en piscine grâce à ses éléments colorés en suspension qui tourbillonnent à chaque mouvement. Elle stimule la vision et la curiosité en douceur, dans un objet sécurisé et agréable à tenir.",
+      "desc": "Bébé la tient, la retourne, regarde les éléments tourbillonner — une fascination simple et apaisante, dans l'eau comme en dehors.",
       "name_fr": "Bouteille Flottante Sensorielle Petit Boum",
-      "sub_fr": "Float bottle · Sensoriel · Bain & piscine · Turquoise",
+      "sub_fr": "Fascination · Bain & piscine · Douceur",
       "subfamille": "bain"
     },
     {
@@ -2011,9 +2011,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.4,
       "reviews": 846,
       "weight": 480,
-      "desc": "Ce porte-bébé ergonomique soutient la hanche de l'enfant en position physiologique de 3,2 à 20 kg, protégeant son développement osseux. Léger et facile à enfiler seul, il libère les mains des parents tout en gardant bébé au chaud contre soi.",
+      "desc": "Bébé contre vous, mains libres — ce porte-bébé léger s'enfile seul et vous accompagne partout de la naissance jusqu'aux grandes balades.",
       "name_fr": "Porte-bébé Ergonomique Momcozy",
-      "sub_fr": "Ergonomique · Léger · 3,2–20 kg · Facile à enfiler",
+      "sub_fr": "Mains libres · Confort · De 0 à 20 kg",
       "subfamille": "mobilite"
     },
     {
@@ -2027,9 +2027,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.7,
       "reviews": 767,
       "weight": 110,
-      "desc": "Cette spirale d'activités se fixe en quelques secondes sur la poussette ou le siège auto pour occuper bébé en déplacement dès la naissance. Son koala à sons et ses éléments à manipuler stimulent l'éveil sensoriel pendant les trajets.",
+      "desc": "Bébé s'occupe tout seul pendant le trajet — la spirale se fixe en secondes sur la poussette ou le siège auto et les trajets deviennent enfin plus calmes.",
       "name_fr": "Spirale Activités Poussette Nuby",
-      "sub_fr": "Fixation universelle · Koala & sons · Poussette/siège auto · Dès naissance",
+      "sub_fr": "Trajets sereins · Poussette/siège auto · Dès la naissance",
       "subfamille": "mobilite"
     },
     {
@@ -2045,9 +2045,9 @@ window.PRODUCTS_DATA = {
       "rating": 4.5,
       "reviews": 61,
       "weight": 4800,
-      "desc": "Ce vélo d'équilibre en aluminium léger prépare les tout-petits à faire du vélo en apprenant à se propulser et à se stabiliser naturellement. Sans pédales ni risque de chute brutale, il est la première grande aventure à deux roues dès 1 an.",
+      "desc": "Sa première grande aventure sur deux roues — il apprend à se stabiliser naturellement, et un jour vous retirez les roulettes d'un vrai vélo avec un sourire complice.",
       "name_fr": "Vélo d'équilibre Boso — Aluminium",
-      "sub_fr": "3 roues · Cadre alu léger · Sans pédales · 1–3 ans",
+      "sub_fr": "Premiers pas · Équilibre · Dès 1 an",
       "subfamille": "mobilite"
     }
   ],
