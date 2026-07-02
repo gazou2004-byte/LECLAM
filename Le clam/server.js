@@ -3394,6 +3394,69 @@ app.get('/api/admin/logs/files', (req, res) => {
 });
 
 /* ─────────────────────────────────────────
+   PROPOSITIONS SOURCING
+   ───────────────────────────────────────── */
+const SOURCING_FILE     = path.join(__dirname, 'data/sourcing-proposals.json');
+const PRODUCTS_DATA_FILE = path.join(__dirname, 'public/js/products-data.js');
+let _sourcingData = JSON.parse(fs.readFileSync(SOURCING_FILE, 'utf8'));
+const getSourcing   = () => _sourcingData.proposals;
+const persistSourcing = () => fs.writeFileSync(SOURCING_FILE, JSON.stringify(_sourcingData, null, 2));
+
+/* Synchronise un produit validé dans products-data.js (ou le retire) */
+function syncProductsData(proposal) {
+  const raw = fs.readFileSync(PRODUCTS_DATA_FILE, 'utf8');
+  const start = raw.indexOf('window.PRODUCTS_DATA = ') + 'window.PRODUCTS_DATA = '.length;
+  const end   = raw.lastIndexOf('};') + 1;
+  const header = raw.slice(0, start);
+  let data;
+  try { data = JSON.parse(raw.slice(start, end)); } catch { return; }
+
+  const cat = proposal.categorie;
+  if (!data[cat]) return;
+
+  /* Toujours retirer l'ancienne entrée (si elle existait) */
+  data[cat] = data[cat].filter(p => p.id !== proposal.id);
+
+  /* Si validé → insérer en tête de catégorie */
+  if (proposal.status === 'validated') {
+    const entry = {
+      id:         proposal.id,
+      price:      proposal.prixVente,
+      filter:     (proposal.filtres || []).join(','),
+      images:     proposal.images || [],
+      desc:       proposal.description || '',
+      name_fr:    proposal.nom,
+      sub_fr:     [proposal.subfamille, proposal.fournisseur].filter(Boolean).join(' · '),
+      subfamille: proposal.subfamille || '',
+    };
+    if (proposal.prixFournisseur) entry.oldPrice = null;
+    data[cat].unshift(entry);
+  }
+
+  fs.writeFileSync(PRODUCTS_DATA_FILE, header + JSON.stringify(data, null, 2) + ';');
+}
+
+app.get('/api/admin/sourcing-proposals', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
+  const { status, categorie } = req.query;
+  let proposals = getSourcing();
+  if (status) proposals = proposals.filter(p => p.status === status);
+  if (categorie) proposals = proposals.filter(p => p.categorie === categorie);
+  res.json({ ok: true, proposals });
+});
+
+app.patch('/api/admin/sourcing-proposals/:id', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
+  const p = getSourcing().find(p => p.id === req.params.id);
+  if (!p) return res.status(404).json({ ok: false, error: 'Proposition introuvable' });
+  const allowed = ['status', 'rejectReason', 'validatedAt', 'rejectedAt'];
+  allowed.forEach(key => { if (req.body[key] !== undefined) p[key] = req.body[key]; });
+  persistSourcing();
+  try { syncProductsData(p); } catch (e) { console.error('[sourcing sync]', e.message); }
+  res.json({ ok: true, proposal: p });
+});
+
+/* ─────────────────────────────────────────
    Fallback → index.html (SPA-like)
    ───────────────────────────────────────── */
 app.get('*', (req, res) => {

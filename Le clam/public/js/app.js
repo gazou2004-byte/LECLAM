@@ -791,6 +791,8 @@ function initNavbar() {
       /* Cacher le panier pour l'admin (hors vue client) */
       if ((user.role === 'admin' || user.role === 'owner') && !isClientView()) {
         document.querySelectorAll('.cart-toggle').forEach(el => el.style.display = 'none');
+        /* Afficher le lien Sourcing (admin uniquement) */
+        document.querySelectorAll('.nav-sourcing').forEach(el => el.style.display = '');
       }
       /* Badge notifications */
       updateNavBadge();

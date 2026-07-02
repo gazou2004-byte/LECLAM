@@ -24,27 +24,41 @@
   --gray-600: #525252;
   --gray-800: #262626;
 
-  /* ─── Plaisir (tricolore + or) ─── */
-  --plaisir-1: #002395;
-  --plaisir-2: #ED2939;
-  --plaisir-g: #D4AF37;
-  --plaisir-light: #EEF2FF;
-  --plaisir-grad: linear-gradient(135deg, #1a0010 0%, #d357fe 100%);
+  /* ─── Plaisir ─── */
+  /* IDÉE 2 — nuit velours (sauvegarde)
+  --plaisir-1: #1a0828;
+  --plaisir-2: #c4175a;
+  --plaisir-g: #e8a0b4;
+  --plaisir-light: #fdf0f5;
+  --plaisir-grad: linear-gradient(135deg, #0d0412 0%, #2a0a3a 45%, #1a0020 100%);
+  */
 
-  /* ─── Malin (dark + neon) ─── */
-  --malin-1: #FF0050;
-  --malin-2: #00F2EA;
-  --malin-3: #6E00FF;
-  --malin-light: #FFF0F5;
-  --malin-grad: linear-gradient(135deg, #08081a 0%, #0061ff 100%);
+  /* IDÉE 3 — or & ivoire */
+  --plaisir-1: #8b1a2a;
+  --plaisir-2: #b8860b;
+  --plaisir-g: #d4a017;
+  --plaisir-light: #faf7f2;
+  --plaisir-grad: linear-gradient(135deg, #1a0a0a 0%, #2e0f18 45%, #3d1520 100%);
 
-  /* ─── Bébé (pastel doux) ─── */
-  --bebe-1: #FF85A2;
-  --bebe-2: #87CEEB;
-  --bebe-3: #98FF98;
-  --bebe-light: #FFF5F8;
-  --bebe-grad: linear-gradient(135deg, #ffcbd1 0%, #ffffff 100%);
-  --bebe-dark: #3a3a5c;
+  /* ─── Malin (Bleu & Jaune Vif — concept Plaisir) ─── */
+  /* MALIN TIKTOK ORIGINAL (sauvegarde) --malin-1: #FF0050; --malin-2: #00F2EA; --malin-3: #6E00FF; --malin-light: #FFF0F5; --malin-grad: linear-gradient(135deg, #08081a 0%, #0061ff 100%); */
+  /* MALIN BLEU & OR (sauvegarde) --malin-1: #f5d000; --malin-2: #f5d000; --malin-3: #f5d000; --malin-light: #f0f5ff; --malin-grad: linear-gradient(135deg, #071e3d 0%, #0f2d5a 100%); */
+  /* MALIN TECH NOIR (sauvegarde) --malin-1: #00d4ff; --malin-2: #00d4ff; --malin-3: #7c3aed; --malin-light: #e8f4ff; --malin-grad: linear-gradient(135deg, #050a14 0%, #0a1628 100%); */
+  --malin-1: #f5d000;
+  --malin-2: #f5d000;
+  --malin-3: #071e3d;
+  --malin-light: #f0f5ff;
+  --malin-grad: linear-gradient(135deg, #071e3d 0%, #0f2d5a 100%);
+
+  /* ─── Bébé (Rose Vif — concept Plaisir) ─── */
+  /* BEBE PASTEL ORIGINAL (sauvegarde) --bebe-1: #FF85A2; --bebe-2: #87CEEB; --bebe-3: #98FF98; --bebe-light: #FFF5F8; --bebe-grad: linear-gradient(135deg, #ffcbd1 0%, #ffffff 100%); --bebe-dark: #3a3a5c; */
+  /* BEBE ROSE & SOMBRE (sauvegarde) --bebe-1: #e0527a; --bebe-2: #f4a0c0; --bebe-3: #fff5f8; --bebe-light: #fff5f8; --bebe-grad: linear-gradient(135deg, #2d0818 0%, #1a0510 100%); --bebe-dark: #2d0818; */
+  --bebe-1: #e0527a;
+  --bebe-2: #f4a0c0;
+  --bebe-3: #2d0818;
+  --bebe-light: #fff5f8;
+  --bebe-grad: linear-gradient(135deg, #2d0818 0%, #1a0510 100%);
+  --bebe-dark: #2d0818;
 
   /* ─── Typo ─── */
   --serif: 'Playfair Display', Georgia, serif;
@@ -149,24 +163,56 @@ ul {
 }
 
 /* Couleur navbar selon la page active */
-.page-plaisir .mobile-menu-btn span,
-.page-malin .mobile-menu-btn span,
-.page-bebe .mobile-menu-btn span { background: #fff; }
+/* IDÉE 2 — nuit velours (sauvegarde) : .page-plaisir .mobile-menu-btn span { background: #fff; } */
+/* IDÉE 3 — or & ivoire : hamburger sombre sur fond clair */
+.page-plaisir .mobile-menu-btn span { background: #2c1810; }
+.page-malin .mobile-menu-btn span { background: #071e3d; }
+.page-bebe .mobile-menu-btn span { background: #2d0818; }
+/* BEBE ROSE & SOMBRE (sauvegarde) .page-bebe .mobile-menu-btn span { background: #2d0818; } */
 
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir .navbar,
 .page-plaisir .navbar.scrolled {
-  background: #b00804;
+  background: rgba(13,4,18,.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(196,23,90,.18);
+  box-shadow: 0 2px 24px rgba(0,0,0,.4);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .navbar,
+.page-plaisir .navbar.scrolled {
+  background: rgba(250,247,242,.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(184,134,11,.4);
+  box-shadow: 0 2px 24px rgba(139,26,42,.12);
 }
 
+/* MALIN BLEU & OR (sauvegarde) .page-malin .navbar, .page-malin .navbar.scrolled { background: rgba(240, 245, 255, .97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 2px solid rgba(245, 208, 0, .4); box-shadow: 0 2px 20px rgba(3, 13, 31, .08); } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .navbar, .page-malin .navbar.scrolled { background: rgba(5,10,20,.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(0,212,255,.15); box-shadow: 0 2px 24px rgba(0,0,0,.5); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .navbar, .page-malin .navbar.scrolled { background: rgba(255,255,255,.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 2px solid rgba(245,166,35,.45); box-shadow: 0 2px 20px rgba(232,52,10,.08); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .navbar, .page-malin .navbar.scrolled { background: rgba(26,5,51,.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(184,244,0,.35); box-shadow: 0 2px 24px rgba(0,0,0,.55); } */
 .page-malin .navbar,
 .page-malin .navbar.scrolled {
-  background: #1a1a2e;
+  background: rgba(240,245,255,.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245,208,0,.4);
+  box-shadow: 0 2px 24px rgba(7,30,61,.12);
 }
 
 .page-bebe .navbar,
 .page-bebe .navbar.scrolled {
-  background: #d36e87;
+  background: rgba(255,245,248,.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(224,82,122,.4);
+  box-shadow: 0 2px 24px rgba(45,8,24,.12);
 }
+/* BEBE ROSE & SOMBRE (sauvegarde) .page-bebe .navbar, .page-bebe .navbar.scrolled { background: rgba(255,245,248,.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(224,82,122,.35); box-shadow: 0 2px 24px rgba(45,8,24,.1); } */
 
 /* Pages neutres + accueil : navbar couleur brand */
 .page-neutre .navbar,
@@ -285,92 +331,151 @@ ul {
 }
 
 /* ── Sur chaque page : même teinte que le bandeau recherche ── */
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir .nav-link,
 .page-plaisir .cart-toggle,
 .page-plaisir .nav-msg-btn,
 .page-plaisir .lang-btn,
 .page-plaisir .nav-identify {
-  background: #ddc8f0;
-  border-color: #ddc8f0;
-  color: #5a0010;
+  background: rgba(196,23,90,.12);
+  border-color: rgba(196,23,90,.28);
+  color: rgba(232,160,180,.85);
 }
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .nav-link,
+.page-plaisir .cart-toggle,
+.page-plaisir .nav-msg-btn,
+.page-plaisir .lang-btn,
+.page-plaisir .nav-identify {
+  background: rgba(184,134,11,.08);
+  border-color: rgba(184,134,11,.35);
+  color: #8b1a2a;
+}
+/* MALIN BLEU & OR (sauvegarde) .page-malin .nav-link, .page-malin .cart-toggle, .page-malin .nav-msg-btn, .page-malin .lang-btn, .page-malin .nav-identify { background: rgba(245, 208, 0, .1); border-color: rgba(245, 208, 0, .45); color: #0d1b35; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .nav-link, .page-malin .cart-toggle, ... { background: rgba(0,212,255,.1); border-color: rgba(0,212,255,.35); color: #00d4ff; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .nav-link, .page-malin .cart-toggle, .page-malin .nav-msg-btn, .page-malin .lang-btn, .page-malin .nav-identify { background: rgba(245,166,35,.1); border-color: rgba(245,166,35,.45); color: #1a1a1a; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .nav-link, .page-malin .cart-toggle, .page-malin .nav-msg-btn, .page-malin .lang-btn, .page-malin .nav-identify { background: rgba(184,244,0,.1); border-color: rgba(184,244,0,.4); color: #f0e8ff; } */
 .page-malin .nav-link,
 .page-malin .cart-toggle,
 .page-malin .nav-msg-btn,
 .page-malin .lang-btn,
 .page-malin .nav-identify {
-  background: #fef3b0;
-  border-color: #fef3b0;
-  color: #0a0a1a;
+  background: rgba(245,208,0,.08);
+  border-color: rgba(245,208,0,.38);
+  color: #071e3d;
 }
 .page-bebe .nav-link,
 .page-bebe .cart-toggle,
 .page-bebe .nav-msg-btn,
 .page-bebe .lang-btn,
 .page-bebe .nav-identify {
-  background: #f9bdd0;
-  border-color: #f9bdd0;
-  color: #6b1030;
+  background: rgba(224,82,122,.08);
+  border-color: rgba(224,82,122,.38);
+  color: #2d0818;
 }
+/* BEBE ROSE & SOMBRE (sauvegarde) .page-bebe .nav-link, .page-bebe .cart-toggle, .page-bebe .nav-msg-btn, .page-bebe .lang-btn, .page-bebe .nav-identify { background: rgba(224,82,122,.08); border-color: rgba(224,82,122,.35); color: #2d0818; } */
 
 /* ── Hover nav-links : couleur propre au lien ── */
+/* IDÉE 2 — nuit velours (sauvegarde)
 [data-cat="plaisir"].nav-link:hover {
-  background: #cc0000 !important;
-  border-color: #cc0000 !important;
+  background: rgba(196,23,90,.3) !important;
+  border-color: rgba(196,23,90,.7) !important;
   color: #fff !important;
 }
+*/
+/* IDÉE 3 — or & ivoire */
+[data-cat="plaisir"].nav-link:hover {
+  background: rgba(184,134,11,.18) !important;
+  border-color: #b8860b !important;
+  color: #6b1020 !important;
+}
+/* MALIN ORIGINAL [data-cat="malin"].nav-link:hover { background: #FFE500 !important; border-color: #FFE500 !important; color: #0a0a1a !important; } */
+/* MALIN TECH NOIR (sauvegarde) [data-cat="malin"].nav-link:hover { background: rgba(0,212,255,.22) !important; border-color: #00d4ff !important; color: #fff !important; } */
+/* MALIN POP SOLAIRE (sauvegarde) [data-cat="malin"].nav-link:hover { background: rgba(245,166,35,.18) !important; border-color: #f5a623 !important; color: #1a1a1a !important; } */
+/* MALIN VIOLET FLASH (sauvegarde) [data-cat="malin"].nav-link:hover { background: rgba(184,244,0,.2) !important; border-color: #b8f400 !important; color: #1a0533 !important; } */
 [data-cat="malin"].nav-link:hover {
-  background: #FFE500 !important;
-  border-color: #FFE500 !important;
-  color: #0a0a1a !important;
+  background: rgba(245,208,0,.18) !important;
+  border-color: #f5d000 !important;
+  color: #071e3d !important;
 }
+/* BEBE ORIGINAL (sauvegarde) [data-cat="bebe"].nav-link:hover { background: #e8608a !important; border-color: #e8608a !important; color: #fff !important; } */
 [data-cat="bebe"].nav-link:hover {
-  background: #e8608a !important;
-  border-color: #e8608a !important;
-  color: #fff !important;
+  background: rgba(224,82,122,.18) !important;
+  border-color: #e0527a !important;
+  color: #2d0818 !important;
 }
 
 /* ── Lien actif (page courante) : couleur pleine ── */
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir [data-cat="plaisir"].nav-link {
-  background: #cc0000 !important;
-  border-color: #cc0000 !important;
+  background: rgba(196,23,90,.3) !important;
+  border-color: rgba(196,23,90,.7) !important;
   color: #fff !important;
 }
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir [data-cat="plaisir"].nav-link {
+  background: rgba(184,134,11,.2) !important;
+  border-color: #b8860b !important;
+  color: #6b1020 !important;
+}
+/* MALIN ORIGINAL .page-malin [data-cat="malin"].nav-link { background: #FFE500 !important; border-color: #FFE500 !important; color: #0a0a1a !important; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin [data-cat="malin"].nav-link { background: rgba(0,212,255,.18) !important; border-color: #00d4ff !important; color: #00d4ff !important; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin [data-cat="malin"].nav-link { background: #f5a623 !important; border-color: #f5a623 !important; color: #1a1a1a !important; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin [data-cat="malin"].nav-link { background: #b8f400 !important; border-color: #b8f400 !important; color: #1a0533 !important; } */
 .page-malin [data-cat="malin"].nav-link {
-  background: #FFE500 !important;
-  border-color: #FFE500 !important;
-  color: #0a0a1a !important;
+  background: rgba(245,208,0,.2) !important;
+  border-color: #f5d000 !important;
+  color: #071e3d !important;
 }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe [data-cat="bebe"].nav-link { background: #e8608a !important; border-color: #e8608a !important; color: #fff !important; } */
 .page-bebe [data-cat="bebe"].nav-link {
-  background: #e8608a !important;
-  border-color: #e8608a !important;
-  color: #fff !important;
+  background: rgba(224,82,122,.2) !important;
+  border-color: #e0527a !important;
+  color: #2d0818 !important;
 }
 
 /* ── Cart, identify, lang : hover = couleur de la page ── */
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir .cart-toggle:hover,
 .page-plaisir .nav-msg-btn:hover,
 .page-plaisir .nav-identify:hover,
 .page-plaisir .lang-btn:hover {
-  background: #cc0000;
-  border-color: #cc0000;
+  background: rgba(196,23,90,.25);
+  border-color: rgba(196,23,90,.55);
   color: #fff;
 }
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .cart-toggle:hover,
+.page-plaisir .nav-msg-btn:hover,
+.page-plaisir .nav-identify:hover,
+.page-plaisir .lang-btn:hover {
+  background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+  border-color: #b8860b;
+  color: #faf7f2;
+}
+/* MALIN ORIGINAL .page-malin .cart-toggle:hover, .page-malin .nav-msg-btn:hover, .page-malin .nav-identify:hover, .page-malin .lang-btn:hover { background: #FFE500; border-color: #FFE500; color: #0a0a1a; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .cart-toggle:hover, ... { background: rgba(0,212,255,.22); border-color: #00d4ff; color: #fff; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .cart-toggle:hover, .page-malin .nav-msg-btn:hover, .page-malin .nav-identify:hover, .page-malin .lang-btn:hover { background: linear-gradient(135deg,#f5a623 0%,#e8340a 100%); border-color: transparent; color: #fff; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .cart-toggle:hover, .page-malin .nav-msg-btn:hover, .page-malin .nav-identify:hover, .page-malin .lang-btn:hover { background: #b8f400; border-color: #b8f400; color: #1a0533; } */
 .page-malin .cart-toggle:hover,
 .page-malin .nav-msg-btn:hover,
 .page-malin .nav-identify:hover,
 .page-malin .lang-btn:hover {
-  background: #FFE500;
-  border-color: #FFE500;
-  color: #0a0a1a;
+  background: linear-gradient(135deg, #f5d000 0%, #f0c800 100%);
+  border-color: #f5d000;
+  color: #071e3d;
 }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .cart-toggle:hover, .page-bebe .nav-msg-btn:hover, .page-bebe .nav-identify:hover, .page-bebe .lang-btn:hover { background: #e8608a; border-color: #e8608a; color: #fff; } */
 .page-bebe .cart-toggle:hover,
 .page-bebe .nav-msg-btn:hover,
 .page-bebe .nav-identify:hover,
 .page-bebe .lang-btn:hover {
-  background: #e8608a;
-  border-color: #e8608a;
-  color: #fff;
+  background: linear-gradient(135deg, #e0527a 0%, #c4345c 100%);
+  border-color: #e0527a;
+  color: #fff5f8;
 }
 
 .nav-dot {
@@ -384,12 +489,17 @@ ul {
   background: #e8002a;
 }
 
+/* MALIN ORIGINAL [data-cat="malin"] .nav-dot { background: #1a2f6b; } */
+/* MALIN TECH NOIR (sauvegarde) [data-cat="malin"] .nav-dot { background: #00d4ff; } */
+/* MALIN POP SOLAIRE (sauvegarde) [data-cat="malin"] .nav-dot { background: #f5a623; } */
+/* MALIN VIOLET FLASH (sauvegarde) [data-cat="malin"] .nav-dot { background: #b8f400; } */
 [data-cat="malin"] .nav-dot {
-  background: #1a2f6b;
+  background: #f5d000;
 }
 
+/* BEBE ORIGINAL (sauvegarde) [data-cat="bebe"] .nav-dot { background: #ff85a2; } */
 [data-cat="bebe"] .nav-dot {
-  background: #ff85a2;
+  background: #e0527a;
 }
 
 .nav-actions {
@@ -585,15 +695,20 @@ ul {
   -webkit-text-fill-color: #c10e09;
   color: #c10e09;
 }
+/* MALIN ORIGINAL .slide-malin .slide-title { -webkit-text-fill-color: #fdc01f; color: #fdc01f; } */
+/* MALIN TECH NOIR (sauvegarde) .slide-malin .slide-title { -webkit-text-fill-color: #00d4ff; color: #00d4ff; } */
+/* MALIN POP SOLAIRE (sauvegarde) .slide-malin .slide-title { -webkit-text-fill-color: #f5a623; color: #f5a623; } */
+/* MALIN VIOLET FLASH (sauvegarde) .slide-malin .slide-title { -webkit-text-fill-color: #b8f400; color: #b8f400; } */
 .slide-malin .slide-title {
   background: none;
-  -webkit-text-fill-color: #fdc01f;
-  color: #fdc01f;
+  -webkit-text-fill-color: #f5d000;
+  color: #f5d000;
 }
+/* BEBE ORIGINAL (sauvegarde) .slide-bebe .slide-title { -webkit-text-fill-color: #d36e87; color: #d36e87; } */
 .slide-bebe .slide-title {
   background: none;
-  -webkit-text-fill-color: #d36e87;
-  color: #d36e87;
+  -webkit-text-fill-color: #e0527a;
+  color: #e0527a;
 }
 
 /* Desktop — image flottante à droite avec fondu (style original) */
@@ -703,12 +818,26 @@ ul {
 }
 
 
-/* Particules Plaisir */
+/* IDÉE 2 — nuit velours (sauvegarde)
 .slide-plaisir .slide-particles .p,
 .cat-hero-plaisir .slide-particles .p {
-  font-size: 2.8rem;
+  font-size: 1.2rem;
+  opacity: .12;
+  color: #e8a0b4;
+}
+*/
+/* IDÉE 3 — or & ivoire : particules dorées sur fond bordeaux sombre */
+.slide-plaisir .slide-particles .p,
+.cat-hero-plaisir .slide-particles .p {
+  font-size: 1.2rem;
   opacity: .18;
-  color: #cc0000;
+  color: #d4a017;
+}
+/* Rose & Sombre : particules rose clair sur fond bordeaux sombre */
+.cat-hero-bebe .slide-particles .p {
+  font-size: 1.2rem;
+  opacity: .2;
+  color: #f4a0c0;
 }
 
 .slide-particles .p:nth-child(1) {
@@ -847,13 +976,18 @@ ul {
 }
 
 .slide-plaisir .slide-cta {
-  background: #cc0000;
+  background: linear-gradient(135deg, #c4175a 0%, #8b0030 100%);
   color: #fff;
 }
 
+/* MALIN ORIGINAL .slide-malin .slide-cta { background: #FFE500; color: #0a0a1a; } */
+/* MALIN TECH NOIR (sauvegarde) .slide-malin .slide-cta { background: linear-gradient(135deg,#00d4ff 0%,#0099cc 100%); color: #050a14; } */
+/* MALIN POP SOLAIRE (sauvegarde) .slide-malin .slide-cta { background: linear-gradient(135deg,#f5a623 0%,#e8340a 100%); color: #fff; } */
+/* MALIN VIOLET FLASH (sauvegarde) .slide-malin .slide-cta { background: #b8f400; color: #1a0533; font-weight: 800; } */
 .slide-malin .slide-cta {
-  background: #FFE500;
-  color: #0a0a1a;
+  background: linear-gradient(135deg, #f5d000 0%, #f5d000 100%);
+  color: #030d1f;
+  font-weight: 800;
 }
 
 .slide-cta-bebe {
@@ -1271,9 +1405,27 @@ html body { margin-top: 0 !important; }
 
 .page-accueil .footer { background: #d9c4a0; color: #3e2a14; }
 
-.page-plaisir .footer { background: #b00804; color: #fff; }
-.page-malin   .footer { background: #1a1a2e; color: #e8e8f0; }
-.page-bebe    .footer { background: #d36e87; color: #fff; }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .footer {
+  background: linear-gradient(180deg, #1a0828 0%, #0d0412 100%);
+  color: rgba(232,160,180,.75);
+  border-top: 1px solid rgba(196,23,90,.2);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .footer {
+  background: linear-gradient(180deg, #2e0f18 0%, #1a0a0a 100%);
+  color: rgba(212,160,23,.8);
+  border-top: 1px solid rgba(184,134,11,.25);
+}
+/* MALIN ORIGINAL .page-malin .footer { background: #1a1a2e; color: #e8e8f0; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .footer { background: #020609; color: rgba(0,212,255,.7); border-top: 1px solid rgba(0,212,255,.12); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .footer { background: #1a1a1a; color: rgba(255,255,255,.7); border-top: 2px solid rgba(245,166,35,.3); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .footer { background: #120228; color: rgba(240,232,255,.7); border-top: 1px solid rgba(184,244,0,.25); } */
+.page-malin   .footer { background: linear-gradient(180deg, #0f2d5a 0%, #071e3d 100%); color: rgba(240,245,255,.8); border-top: 1px solid rgba(245,208,0,.25); }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .footer { background: #d36e87; color: #fff; } */
+.page-bebe    .footer { background: linear-gradient(180deg, #3d1520 0%, #2d0818 100%); color: rgba(255,240,245,.8); border-top: 1px solid rgba(224,82,122,.25); }
 
 .footer-inner {
   max-width: var(--max-w);
@@ -1318,11 +1470,22 @@ html body { margin-top: 0 !important; }
 
 .footer-links-flat a:hover { color: #fff; }
 
-.page-plaisir .footer-links-flat a,
-.page-malin   .footer-links-flat a { color: rgba(255,255,255,.75); }
-
-.page-plaisir .footer-links-flat a:hover,
-.page-malin   .footer-links-flat a:hover { color: #fff; }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .footer-links-flat a { color: rgba(232,160,180,.5); }
+.page-plaisir .footer-links-flat a:hover { color: rgba(232,160,180,.9); }
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .footer-links-flat a { color: rgba(212,160,23,.55); }
+.page-plaisir .footer-links-flat a:hover { color: rgba(212,160,23,.9); }
+/* MALIN ORIGINAL .page-malin .footer-links-flat a { color: rgba(255,255,255,.75); } .page-malin .footer-links-flat a:hover { color: #fff; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .footer-links-flat a { color: rgba(0,212,255,.5); } .page-malin .footer-links-flat a:hover { color: #00d4ff; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .footer-links-flat a { color: rgba(255,255,255,.5); } .page-malin .footer-links-flat a:hover { color: #f5a623; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .footer-links-flat a { color: rgba(184,244,0,.5); } .page-malin .footer-links-flat a:hover { color: #b8f400; } */
+.page-malin   .footer-links-flat a { color: rgba(245,208,0,.6); }
+.page-malin   .footer-links-flat a:hover { color: #f5d000; }
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .footer-links-flat */
+.page-bebe    .footer-links-flat a { color: rgba(224,82,122,.6); }
+.page-bebe    .footer-links-flat a:hover { color: #e0527a; }
 
 
 .footer-sep {
@@ -2015,8 +2178,23 @@ html body { margin-top: 0 !important; }
   padding-top: var(--nav-h);
 }
 
+/* IDÉE 2 — nuit velours (sauvegarde)
 .cat-hero-plaisir {
   background: var(--plaisir-grad);
+  background-image:
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(196,23,90,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(232,160,180,.08) 0%, transparent 60%),
+    var(--plaisir-grad);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.cat-hero-plaisir {
+  background: var(--plaisir-grad);
+  background-image:
+    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(184,134,11,.2) 0%, transparent 65%),
+    radial-gradient(ellipse 38% 55% at 18% 75%, rgba(212,160,23,.1) 0%, transparent 55%),
+    var(--plaisir-grad);
 }
 
 .cat-hero-malin,
@@ -2029,12 +2207,24 @@ html body { margin-top: 0 !important; }
 }
 
 
+/* MALIN TECH NOIR (sauvegarde) .cat-hero-malin { background: linear-gradient(135deg, #050a14 0%, #0a1628 100%); } */
+/* MALIN POP SOLAIRE (sauvegarde) .cat-hero-malin { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); } */
+/* MALIN VIOLET FLASH (sauvegarde) .cat-hero-malin { background: var(--malin-grad); } */
 .cat-hero-malin {
   background: var(--malin-grad);
+  background-image:
+    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(245,208,0,.15) 0%, transparent 65%),
+    radial-gradient(ellipse 38% 55% at 18% 75%, rgba(245,208,0,.07) 0%, transparent 55%),
+    var(--malin-grad);
 }
 
+/* BEBE ORIGINAL (sauvegarde) .cat-hero-bebe { background: var(--bebe-grad); } */
 .cat-hero-bebe {
   background: var(--bebe-grad);
+  background-image:
+    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(224,82,122,.15) 0%, transparent 65%),
+    radial-gradient(ellipse 38% 55% at 18% 75%, rgba(224,82,122,.07) 0%, transparent 55%),
+    var(--bebe-grad);
 }
 
 .cat-hero-particles {
@@ -2162,20 +2352,85 @@ html body { margin-top: 0 !important; }
   mask-image: linear-gradient(to right, transparent 0%, black 6%);
 }
 
+/* IDÉE 2 — nuit velours (sauvegarde)
 .cat-hero h1.slide-title-plaisir {
-  background: linear-gradient(135deg, #ff80aa 0%, #f01258 40%, #bf003a 75%, #6b0025 100%);
+  background: linear-gradient(135deg, #fff0f5 0%, #f8c8d8 30%, #e8749a 65%, #c4175a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: none;
+  letter-spacing: -.04em;
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.cat-hero h1.slide-title-plaisir {
+  background: linear-gradient(135deg, #fdf5e0 0%, #e8c875 30%, #b8860b 65%, #8b5e08 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  letter-spacing: -.04em;
+  font-style: italic;
 }
 
+/* Bébé — rose vif (concept Plaisir) */
+.cat-hero h1.slide-title-bebe {
+  background: linear-gradient(135deg, #fff0f5 0%, #f4a0c0 30%, #e0527a 65%, #b8345a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  letter-spacing: -.04em;
+  font-style: italic;
+}
+.page-bebe .cat-hero-content h1::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #e0527a 0%, rgba(224,82,122,0) 100%);
+  margin-top: .8rem;
+  margin-bottom: .4rem;
+}
+.page-bebe .cat-hero-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(224,82,122,.75);
+}
+
+/* Malin — bleu & jaune vif (concept Plaisir) */
+.cat-hero h1.slide-title-malin {
+  background: linear-gradient(135deg, #e8f4ff 0%, #f5e060 30%, #f5d000 65%, #c8a800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  letter-spacing: -.04em;
+  font-style: italic;
+}
+.page-malin .cat-hero-content h1::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #f5d000 0%, rgba(245,208,0,0) 100%);
+  margin-top: .8rem;
+  margin-bottom: .4rem;
+}
+.page-malin .cat-hero-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(245,208,0,.75);
+}
+
+/* BEBE ORIGINAL (sauvegarde) .cat-hero-bebe h1 { color: var(--bebe-dark); font-size: clamp(2rem, 5.5vw, 4rem); } .cat-hero-bebe .cat-hero-desc { color: rgba(58,58,92,.75); } */
 .cat-hero-bebe h1 {
-  color: var(--bebe-dark);
   font-size: clamp(2rem, 5.5vw, 4rem);
-}
-
-.cat-hero-bebe .cat-hero-desc {
-  color: rgba(58, 58, 92, .75);
 }
 
 .cat-hero-desc {
@@ -2209,6 +2464,52 @@ html body { margin-top: 0 !important; }
   padding-right: 44%;
 }
 
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .cat-hero-content h1::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(232,160,180,.9) 0%, transparent 100%);
+  margin-top: .8rem;
+  margin-bottom: .4rem;
+}
+*/
+
+/* IDÉE 3 — or & ivoire : ligne dorée sous le titre */
+.page-plaisir .cat-hero-content h1::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #b8860b 0%, rgba(184,134,11,.0) 100%);
+  margin-top: .8rem;
+  margin-bottom: .4rem;
+}
+
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .cat-hero-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(232,160,180,.8);
+  letter-spacing: .01em;
+  max-width: 380px;
+}
+*/
+
+/* IDÉE 3 — or & ivoire : sous-titre ivoire chaud */
+.page-plaisir .cat-hero-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(250,235,195,.82);
+  letter-spacing: .02em;
+  max-width: 380px;
+}
+
 @media (max-width: 640px) {
   .cat-hero-img-bebe { display: none; }
   .page-bebe .cat-hero-content,
@@ -2227,6 +2528,36 @@ html body { margin-top: 0 !important; }
   top: var(--nav-h);
   z-index: 100;
   box-shadow: 0 3px 14px rgba(62,42,20,.1);
+}
+
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .filters-bar {
+  background: linear-gradient(180deg, #1a0828 0%, #130520 100%);
+  border-bottom: 1px solid rgba(196,23,90,.25);
+  box-shadow: 0 4px 24px rgba(0,0,0,.35);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .filters-bar {
+  background: linear-gradient(180deg, #faf7f2 0%, #f4ede0 100%);
+  border-bottom: 1px solid rgba(184,134,11,.35);
+  box-shadow: 0 4px 24px rgba(139,26,42,.07);
+}
+
+/* MALIN TECH NOIR (sauvegarde) .page-malin .filters-bar { background: linear-gradient(180deg,#0a1628 0%,#0d1520 100%); border-bottom: 1px solid rgba(0,212,255,.2); box-shadow: 0 4px 24px rgba(0,0,0,.45); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .filters-bar { background: #f7f7f7; border-bottom: 2px solid rgba(245,166,35,.3); box-shadow: 0 4px 16px rgba(232,52,10,.05); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .filters-bar { background: linear-gradient(180deg,#1e0a3c 0%,#1a0533 100%); border-bottom: 1px solid rgba(184,244,0,.2); box-shadow: 0 4px 24px rgba(0,0,0,.5); } */
+.page-malin .filters-bar {
+  background: linear-gradient(180deg, #f0f5ff 0%, #e8eeff 100%);
+  border-bottom: 1px solid rgba(245,208,0,.35);
+  box-shadow: 0 4px 24px rgba(7,30,61,.07);
+}
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .filters-bar spécifique, héritait du global */
+.page-bebe .filters-bar {
+  background: linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%);
+  border-bottom: 1px solid rgba(224,82,122,.35);
+  box-shadow: 0 4px 24px rgba(45,8,24,.07);
 }
 
 .filters-inner {
@@ -2277,42 +2608,90 @@ html body { margin-top: 0 !important; }
   color: #fff;
 }
 
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .f-btn {
+  color: rgba(232,160,180,.7);
+  border-color: rgba(196,23,90,.3);
+  font-family: var(--serif);
+  font-style: italic;
+  letter-spacing: .02em;
+}
+.page-plaisir .f-btn:hover {
+  background: rgba(196,23,90,.15);
+  border-color: rgba(196,23,90,.6);
+  color: #e8a0b4;
+}
 .page-plaisir .f-btn.active {
-  background: var(--plaisir-2);
-  border-color: var(--plaisir-2);
+  background: linear-gradient(135deg, #c4175a 0%, #8b0030 100%);
+  border-color: transparent;
   color: #fff;
+  box-shadow: 0 2px 12px rgba(196,23,90,.4);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .f-btn {
+  color: #8b1a2a;
+  border-color: rgba(184,134,11,.4);
+  font-family: var(--serif);
+  font-style: italic;
+  letter-spacing: .02em;
 }
 
+.page-plaisir .f-btn:hover {
+  background: rgba(184,134,11,.12);
+  border-color: #b8860b;
+  color: #6b1020;
+}
+
+.page-plaisir .f-btn.active {
+  background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+  border-color: transparent;
+  color: #faf7f2;
+  box-shadow: 0 2px 12px rgba(184,134,11,.35);
+}
+
+/* MALIN ORIGINAL .page-malin .f-btn { background: transparent; border-color: rgba(62,42,20,.35); color: #3e2a14; } .page-malin .f-btn:hover { background: #FFE500; border-color: #FFE500; color: #0a0a1a; } .page-malin .f-btn.active { background: #FFE500; border-color: #FFE500; color: #0a0a1a; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .f-btn { background: transparent; border-color: rgba(0,212,255,.25); color: rgba(232,244,255,.7); } .page-malin .f-btn:hover { background: rgba(0,212,255,.12); border-color: #00d4ff; color: #e8f4ff; } .page-malin .f-btn.active { background: linear-gradient(135deg,#00d4ff 0%,#0099cc 100%); border-color: transparent; color: #050a14; box-shadow: 0 2px 14px rgba(0,212,255,.4); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .f-btn { background: #fff; border-color: rgba(245,166,35,.35); color: #1a1a1a; } .page-malin .f-btn:hover { background: rgba(245,166,35,.12); border-color: #f5a623; color: #1a1a1a; } .page-malin .f-btn.active { background: linear-gradient(135deg,#f5a623 0%,#e8340a 100%); border-color: transparent; color: #fff; box-shadow: 0 2px 14px rgba(245,166,35,.4); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .f-btn { background: transparent; border-color: rgba(184,244,0,.3); color: rgba(240,232,255,.75); } .page-malin .f-btn:hover { background: rgba(184,244,0,.1); border-color: #b8f400; color: #f0e8ff; } .page-malin .f-btn.active { background: #b8f400; border-color: transparent; color: #1a0533; font-weight: 800; box-shadow: 0 2px 14px rgba(184,244,0,.4); } */
 .page-malin .f-btn {
-  background: transparent;
-  border-color: rgba(62,42,20,.35);
-  color: #3e2a14;
+  color: #0d1b35;
+  border-color: rgba(245,208,0,.4);
+  font-family: var(--serif);
+  font-style: italic;
+  letter-spacing: .02em;
 }
 .page-malin .f-btn:hover {
-  background: #FFE500;
-  border-color: #FFE500;
-  color: #0a0a1a;
+  background: rgba(245,208,0,.12);
+  border-color: #f5d000;
+  color: #071e3d;
 }
 .page-malin .f-btn.active {
-  background: #FFE500;
-  border-color: #FFE500;
-  color: #0a0a1a;
+  background: linear-gradient(135deg, #f5d000 0%, #f0c800 100%);
+  border-color: transparent;
+  color: #071e3d;
+  box-shadow: 0 2px 12px rgba(245,208,0,.35);
 }
 
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .f-btn { background: transparent; border-color: rgba(62,42,20,.35); color: #9b3a5a; } .page-bebe .f-btn:hover { background: #e8608a; border-color: #e8608a; color: #fff; } .page-bebe .f-btn.active { background: #e8608a; border-color: #e8608a; color: #fff; } */
 .page-bebe .f-btn {
-  background: transparent;
-  border-color: rgba(62,42,20,.35);
-  color: #9b3a5a;
+  color: #2d0818;
+  border-color: rgba(224,82,122,.4);
+  font-family: var(--serif);
+  font-style: italic;
+  letter-spacing: .02em;
 }
 .page-bebe .f-btn:hover {
-  background: #e8608a;
-  border-color: #e8608a;
-  color: #fff;
+  background: rgba(224,82,122,.12);
+  border-color: #e0527a;
+  color: #2d0818;
 }
 .page-bebe .f-btn.active {
-  background: #e8608a;
-  border-color: #e8608a;
-  color: #fff;
+  background: linear-gradient(135deg, #e0527a 0%, #c4345c 100%);
+  border-color: transparent;
+  color: #fff5f8;
+  box-shadow: 0 2px 12px rgba(224,82,122,.35);
 }
 
 
@@ -2392,16 +2771,27 @@ html body { margin-top: 0 !important; }
   color: #d9c4a0;
 }
 
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir .sf-btn.active { background: var(--plaisir-2); border-color: var(--plaisir-2); color: #fff; }
 .page-plaisir .f-btn.subfam-open { background: var(--plaisir-2); border-color: var(--plaisir-2); color: #fff; }
+*/
 
-.page-malin .sf-btn.active { background: #FFE500; color: #0a0a1a; }
-.page-malin .sf-btn:hover  { background: rgba(255,229,0,.18); }
-.page-malin .f-btn.subfam-open { background: #FFE500; border-color: #FFE500; color: #0a0a1a; }
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .sf-btn.active { background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%); border-color: transparent; color: #faf7f2; }
+.page-plaisir .f-btn.subfam-open { background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%); border-color: transparent; color: #faf7f2; }
 
-.page-bebe .sf-btn.active { background: #e8608a; color: #fff; }
-.page-bebe .sf-btn:hover  { background: rgba(211,110,135,.12); }
-.page-bebe .f-btn.subfam-open { background: #e8608a; border-color: #e8608a; color: #fff; }
+/* MALIN ORIGINAL .page-malin .sf-btn.active { background: #FFE500; color: #0a0a1a; } .page-malin .sf-btn:hover { background: rgba(255,229,0,.18); } .page-malin .f-btn.subfam-open { background: #FFE500; border-color: #FFE500; color: #0a0a1a; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .sf-btn.active { background: linear-gradient(135deg,#00d4ff 0%,#0099cc 100%); color: #050a14; } .page-malin .sf-btn:hover { background: rgba(0,212,255,.12); } .page-malin .f-btn.subfam-open { background: rgba(0,212,255,.18); border-color: #00d4ff; color: #e8f4ff; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .sf-btn.active { background: linear-gradient(135deg,#f5a623 0%,#e8340a 100%); color: #fff; } .page-malin .sf-btn:hover { background: rgba(245,166,35,.12); } .page-malin .f-btn.subfam-open { background: rgba(245,166,35,.15); border-color: #f5a623; color: #1a1a1a; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .sf-btn.active { background: #b8f400; color: #1a0533; font-weight: 700; } .page-malin .sf-btn:hover { background: rgba(184,244,0,.12); } .page-malin .f-btn.subfam-open { background: rgba(184,244,0,.15); border-color: #b8f400; color: #f0e8ff; } */
+.page-malin .sf-btn.active { background: linear-gradient(135deg, #f5d000 0%, #f0c800 100%); color: #071e3d; }
+.page-malin .sf-btn:hover  { background: rgba(245,208,0,.12); }
+.page-malin .f-btn.subfam-open { background: linear-gradient(135deg, #f5d000 0%, #f0c800 100%); border-color: transparent; color: #071e3d; }
+
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .sf-btn.active { background: #e8608a; color: #fff; } .page-bebe .sf-btn:hover { background: rgba(211,110,135,.12); } .page-bebe .f-btn.subfam-open { background: #e8608a; border-color: #e8608a; color: #fff; } */
+.page-bebe .sf-btn.active { background: linear-gradient(135deg, #e0527a 0%, #c4345c 100%); color: #fff5f8; }
+.page-bebe .sf-btn:hover  { background: rgba(224,82,122,.12); }
+.page-bebe .f-btn.subfam-open { background: linear-gradient(135deg, #e0527a 0%, #c4345c 100%); border-color: transparent; color: #fff5f8; }
 
 /* Sous-label dans les boutons de filtre */
 .f-sub {
@@ -2420,9 +2810,65 @@ html body { margin-top: 0 !important; }
   border-bottom: 2px solid rgba(62,42,20,.45);
 }
 
-.page-plaisir .search-bar-wrap { background: #b00804; }
-.page-malin   .search-bar-wrap { background: #1a1a2e; }
-.page-bebe    .search-bar-wrap { background: #d36e87; }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .search-bar-wrap {
+  background: linear-gradient(180deg, #130520 0%, #0d0412 100%);
+  border-bottom: 1px solid rgba(196,23,90,.2);
+}
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .search-bar-wrap {
+  background: linear-gradient(180deg, #f4ede0 0%, #ede2d0 100%);
+  border-bottom: 1px solid rgba(184,134,11,.28);
+}
+/* MALIN ORIGINAL .page-malin .search-bar-wrap { background: #1a1a2e; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .search-bar-wrap { background: #0d1520; border-bottom: 1px solid rgba(0,212,255,.15); } .page-malin .search-inner { background: rgba(232,244,255,.05); border-color: rgba(0,212,255,.25); } ... */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .search-bar-wrap { background: #f7f7f7; border-bottom: 1px solid rgba(245,166,35,.2); } .page-malin .search-inner { background: #fff; border-color: rgba(245,166,35,.35); } .page-malin .search-inner .search-icon, .page-malin .search-inner .search-input { color: #1a1a1a; } .page-malin .search-inner:focus-within { border-color: #f5a623; box-shadow: 0 4px 20px rgba(245,166,35,.18); } .page-malin .sort-inner { background: #fff; border-color: rgba(245,166,35,.35); color: #1a1a1a; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .search-bar-wrap { background: #1a0533; border-bottom: 1px solid rgba(184,244,0,.15); } .page-malin .search-inner { background: rgba(240,232,255,.06); border-color: rgba(184,244,0,.25); } .page-malin .search-inner .search-icon, .page-malin .search-inner .search-input { color: #f0e8ff; } .page-malin .search-inner:focus-within { background: rgba(184,244,0,.06); border-color: #b8f400; box-shadow: 0 4px 20px rgba(184,244,0,.15); } .page-malin .sort-inner { background: rgba(240,232,255,.06); border-color: rgba(184,244,0,.25); color: #f0e8ff; } */
+.page-malin   .search-bar-wrap { background: linear-gradient(180deg, #e8eeff 0%, #e0e8ff 100%); border-bottom: 1px solid rgba(245,208,0,.28); }
+.page-malin   .search-inner {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(245,208,0,.4);
+}
+.page-malin   .search-inner .search-icon,
+.page-malin   .search-inner .search-input { color: #0d1b35; }
+.page-malin   .search-inner .search-input::placeholder { color: rgba(13,27,53,.38); }
+.page-malin   .search-inner:focus-within {
+  background: #fff;
+  border-color: #f5d000;
+  box-shadow: 0 4px 20px rgba(245,208,0,.18);
+}
+.page-malin   .sort-inner {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(245,208,0,.4);
+  color: #0d1b35;
+}
+.page-malin   .sort-inner .sort-icon,
+.page-malin   .sort-inner-select { color: #0d1b35; }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .search-bar-wrap { background: #d36e87; } */
+.page-bebe    .search-bar-wrap {
+  background: linear-gradient(180deg, #ffe8f0 0%, #ffe0ea 100%);
+  border-bottom: 1px solid rgba(224,82,122,.28);
+}
+.page-bebe .search-inner {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(224,82,122,.4);
+}
+.page-bebe .search-inner .search-icon,
+.page-bebe .search-inner .search-input { color: #2d0818; }
+.page-bebe .search-inner .search-input::placeholder { color: rgba(45,8,24,.38); }
+.page-bebe .search-inner:focus-within {
+  background: #fff;
+  border-color: #e0527a;
+  box-shadow: 0 4px 20px rgba(224,82,122,.18);
+}
+.page-bebe .sort-inner {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(224,82,122,.4);
+  color: #2d0818;
+}
+.page-bebe .sort-inner .sort-icon,
+.page-bebe .sort-inner-select { color: #2d0818; }
 
 /* Ligne recherche + tri */
 .search-row {
@@ -2466,9 +2912,16 @@ html body { margin-top: 0 !important; }
   background: rgba(62,42,20,.05);
 }
 
-.page-plaisir .sort-inner:focus-within { border-color: #cc0000; background: rgba(204,0,0,.06); }
-.page-malin   .sort-inner:focus-within { border-color: #FFE500; background: rgba(255,229,0,.06); }
-.page-bebe    .sort-inner:focus-within { border-color: var(--bebe-1);    background: rgba(255,133,162,.06); }
+/* IDÉE 2 — nuit velours (sauvegarde) : .page-plaisir .sort-inner:focus-within { border-color: rgba(196,23,90,.7); background: rgba(196,23,90,.08); } */
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .sort-inner:focus-within { border-color: #b8860b; background: rgba(184,134,11,.06); }
+/* MALIN ORIGINAL .page-malin .sort-inner:focus-within { border-color: #FFE500; background: rgba(255,229,0,.06); } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .sort-inner:focus-within { border-color: #00d4ff; background: rgba(0,212,255,.06); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .sort-inner:focus-within { border-color: #f5a623; background: rgba(245,166,35,.06); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .sort-inner:focus-within { border-color: #b8f400; background: rgba(184,244,0,.06); } */
+.page-malin   .sort-inner:focus-within { border-color: #f5d000; background: rgba(245, 208, 0, .06); }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .sort-inner:focus-within { border-color: var(--bebe-1); background: rgba(255,133,162,.06); } */
+.page-bebe    .sort-inner:focus-within { border-color: #e0527a; background: rgba(224,82,122,.06); }
 
 .sort-icon {
   flex-shrink: 0;
@@ -2528,9 +2981,62 @@ html body { margin-top: 0 !important; }
   background: transparent;
 }
 
-.page-plaisir .search-inner:focus-within { box-shadow: 0 4px 20px rgba(237,41,57,.15); }
-.page-malin   .search-inner:focus-within { box-shadow: 0 4px 20px rgba(110,0,255,.15); }
-.page-bebe    .search-inner:focus-within { box-shadow: 0 4px 20px rgba(255,133,162,.15); }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .search-inner {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(196,23,90,.35);
+}
+.page-plaisir .search-inner .search-icon,
+.page-plaisir .search-inner .search-input {
+  color: rgba(232,160,180,.75);
+}
+.page-plaisir .search-inner .search-input::placeholder {
+  color: rgba(232,160,180,.4);
+}
+.page-plaisir .search-inner:focus-within {
+  background: rgba(255,255,255,.09);
+  border-color: rgba(196,23,90,.7);
+  box-shadow: 0 4px 20px rgba(196,23,90,.2);
+}
+.page-plaisir .sort-inner {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(196,23,90,.35);
+  color: rgba(232,160,180,.75);
+}
+.page-plaisir .sort-inner .sort-icon,
+.page-plaisir .sort-inner-select {
+  color: rgba(232,160,180,.75);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .search-inner {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(184,134,11,.4);
+}
+.page-plaisir .search-inner .search-icon,
+.page-plaisir .search-inner .search-input {
+  color: #2c1810;
+}
+.page-plaisir .search-inner .search-input::placeholder {
+  color: rgba(44,24,16,.38);
+}
+.page-plaisir .search-inner:focus-within {
+  background: #fff;
+  border-color: #b8860b;
+  box-shadow: 0 4px 20px rgba(184,134,11,.18);
+}
+.page-plaisir .sort-inner {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(184,134,11,.4);
+  color: #2c1810;
+}
+.page-plaisir .sort-inner .sort-icon,
+.page-plaisir .sort-inner-select {
+  color: #2c1810;
+}
+/* MALIN ORIGINAL .page-malin .search-inner:focus-within { box-shadow: 0 4px 20px rgba(110,0,255,.15); } — remplacé ci-dessus */
+/* BEBE ORIGINAL (sauvegarde) — remplacé par le bloc complet .page-bebe .search-inner:focus-within ci-dessus */
 
 .search-input::placeholder {
   color: var(--gray-400);
@@ -2561,11 +3067,99 @@ html body { margin-top: 0 !important; }
   font-size: .95rem;
   display: none;
 }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .search-no-results {
+  color: rgba(232,160,180,.35);
+  font-family: var(--serif);
+  font-style: italic;
+}
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .search-no-results {
+  color: rgba(139,26,42,.45);
+  font-family: var(--serif);
+  font-style: italic;
+}
 
 /* Grille produits */
 .products-wrap {
   padding: 3rem 0 6rem;
   background: var(--white);
+}
+
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .products-wrap {
+  background: linear-gradient(180deg, #0d0412 0%, #130218 4rem, #1c0a2a 100%);
+}
+.page-plaisir .products-top h2 {
+  color: rgba(232,160,180,.9);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+.page-plaisir .prod-count {
+  color: rgba(196,23,90,.6);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .products-wrap {
+  background: linear-gradient(180deg, #ede2d0 0%, #f0e8d8 3rem, #faf7f2 100%);
+}
+
+/* MALIN TECH NOIR (sauvegarde) .page-malin .products-wrap { background: linear-gradient(180deg,#0d1520 0%,#0a1120 4rem,#050a14 100%); } .page-malin .products-top h2 { color: #e8f4ff; } .page-malin .prod-count { color: rgba(0,212,255,.6); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .products-wrap { background: linear-gradient(180deg,#f2f2f2 0%,#f7f7f7 4rem,#ffffff 100%); } .page-malin .products-top h2 { color: #1a1a1a; } .page-malin .prod-count { color: rgba(232,52,10,.6); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .products-wrap { background: linear-gradient(180deg,#1e0a3c 0%,#1a0533 4rem,#120228 100%); } .page-malin .products-top h2 { color: #f0e8ff; letter-spacing: .01em; font-weight: 800; } .page-malin .prod-count { color: rgba(184,244,0,.65); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; } */
+.page-malin .products-wrap {
+  background: linear-gradient(180deg, #e0e8ff 0%, #e8eeff 3rem, #f0f5ff 100%);
+}
+.page-bebe .products-wrap {
+  background: linear-gradient(180deg, #ffe0ea 0%, #ffe8f0 3rem, #fff5f8 100%);
+}
+.page-bebe .products-top h2 {
+  color: #2d0818;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+.page-bebe .prod-count {
+  color: rgba(224,82,122,.8);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.page-malin .products-top h2 {
+  color: #0d1b35;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+.page-malin .prod-count {
+  color: rgba(245,208,0,.8);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.page-plaisir .products-top h2 {
+  color: #2c1810;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+
+.page-plaisir .prod-count {
+  color: rgba(184,134,11,.7);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
 
 .products-top {
@@ -2603,14 +3197,79 @@ html body { margin-top: 0 !important; }
   flex-direction: column;
 }
 
-.page-plaisir .p-card { background: #ddc8f0; }
-.page-malin   .p-card { background: #e4e7fe; }
-.page-bebe    .p-card { background: #f9bdd0; }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .p-card {
+  background: #1e0a2e;
+  border: 1px solid rgba(196,23,90,.2);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.04);
+}
+*/
+
+/* IDÉE 3 — or & ivoire (sauvegarde) .page-plaisir .p-card { background: #faf7f2; border: 1px solid rgba(184,134,11,.25); box-shadow: 0 4px 20px rgba(139,26,42,.06), inset 0 1px 0 rgba(255,255,255,.9); } */
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-card {
+  background: linear-gradient(135deg, #4a1828 0%, #5e2038 45%, #6b2540 100%);
+  border: 1px solid rgba(184,134,11,.35);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(26,10,10,.4), 0 0 0 0 transparent;
+}
+
+/* MALIN ORIGINAL .page-malin .p-card { background: #e4e7fe; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-card { background: #0d1520; border: 1px solid rgba(0,212,255,.12); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.04); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-card { background: #ffffff; border: 1px solid rgba(245,166,35,.18); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.9); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-card { background: #1e0a3c; border: 1px solid rgba(184,244,0,.12); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04); } */
+/* MALIN CLAIR (sauvegarde) .page-malin .p-card { background: #f0f5ff; border: 1px solid rgba(245,208,0,.25); box-shadow: 0 4px 20px rgba(7,30,61,.06), inset 0 1px 0 rgba(255,255,255,.9); } */
+.page-malin   .p-card {
+  background: linear-gradient(135deg, #112a55 0%, #1d3d72 100%);
+  border: 1px solid rgba(245,208,0,.3);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(7,30,61,.4), 0 0 0 0 transparent;
+}
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .p-card { background: #f9bdd0; } */
+/* BEBE CLAIR (sauvegarde) .page-bebe .p-card { background: #fff5f8; border: 1px solid rgba(224,82,122,.25); box-shadow: 0 4px 20px rgba(45,8,24,.06), inset 0 1px 0 rgba(255,255,255,.9); } */
+.page-bebe    .p-card {
+  background: linear-gradient(135deg, #4a1030 0%, #5c1a40 100%);
+  border: 1px solid rgba(224,82,122,.3);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(45,8,24,.4), 0 0 0 0 transparent;
+}
 
 .p-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--sh-md);
   border-color: transparent;
+}
+
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .p-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(196,23,90,.55);
+  box-shadow: 0 12px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(196,23,90,.3), inset 0 1px 0 rgba(255,255,255,.06);
+}
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(184,134,11,.7);
+  box-shadow: 0 12px 40px rgba(26,10,10,.6), 0 0 0 1px rgba(184,134,11,.4), 0 0 24px rgba(184,134,11,.14);
+}
+
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,.5); box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(0,212,255,.25), 0 0 24px rgba(0,212,255,.08); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-card:hover { transform: translateY(-6px); border-color: rgba(245,166,35,.55); box-shadow: 0 12px 36px rgba(232,52,10,.1), 0 0 0 1px rgba(245,166,35,.3); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-card:hover { transform: translateY(-6px); border-color: rgba(184,244,0,.55); box-shadow: 0 12px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(184,244,0,.3), 0 0 28px rgba(184,244,0,.08); } */
+.page-malin .p-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(245,208,0,.65);
+  box-shadow: 0 12px 40px rgba(7,30,61,.55), 0 0 0 1px rgba(245,208,0,.35), 0 0 24px rgba(245,208,0,.12);
+}
+
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .p-card:hover spécifique */
+.page-bebe .p-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(224,82,122,.65);
+  box-shadow: 0 12px 40px rgba(45,8,24,.55), 0 0 0 1px rgba(224,82,122,.35), 0 0 24px rgba(224,82,122,.15);
 }
 
 .p-img {
@@ -2622,6 +3281,30 @@ html body { margin-top: 0 !important; }
   font-size: 4rem;
   position: relative;
   overflow: hidden;
+}
+
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .p-img {
+  background: linear-gradient(160deg, #2a0a3a 0%, #160622 100%);
+}
+*/
+/* IDÉE 3 — or & ivoire (sauvegarde) .page-plaisir .p-img { background: linear-gradient(160deg, #f4ede0 0%, #ece0ce 100%); } */
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-img {
+  background: linear-gradient(160deg, #5e2038 0%, #4a1828 100%);
+}
+
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-img { background: linear-gradient(160deg,#0a1628 0%,#050a14 100%); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-img { background: linear-gradient(160deg,#fff8f0 0%,#fff3e0 100%); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-img { background: linear-gradient(160deg,#2d0a55 0%,#1a0533 100%); } */
+.page-malin .p-img {
+  background: linear-gradient(160deg, #1d3d72 0%, #112a55 100%);
+}
+
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .p-img spécifique, héritait du global */
+/* BEBE CLAIR (sauvegarde) .page-bebe .p-img { background: linear-gradient(160deg, #fff0f5 0%, #ffe4ef 100%); } */
+.page-bebe .p-img {
+  background: linear-gradient(160deg, #5c1a40 0%, #4a1030 100%);
 }
 
 .p-img img {
@@ -2775,6 +3458,18 @@ html body { margin-top: 0 !important; }
   flex: 1;
 }
 
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .p-info {
+  padding: 1rem 1.1rem 1rem;
+  border-top: 1px solid rgba(196,23,90,.12);
+}
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-info {
+  padding: 1rem 1.1rem 1rem;
+  border-top: 1px solid rgba(184,134,11,.28);
+}
+
 
 .p-name {
   font-weight: 600;
@@ -2788,9 +3483,28 @@ html body { margin-top: 0 !important; }
   overflow: hidden;
 }
 
-.page-plaisir .p-name { color: #8b0030; font-weight: 700; }
-.page-malin   .p-name { color: #0a1a8a; font-weight: 700; }
-.page-bebe    .p-name { color: #d46080; font-weight: 700; }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .p-name {
+  color: #f0d0e0;
+  font-weight: 500;
+  font-family: var(--serif);
+  letter-spacing: .01em;
+}
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-name {
+  color: rgba(250,235,215,.92);
+  font-weight: 500;
+  font-family: var(--serif);
+  letter-spacing: .01em;
+}
+/* MALIN ORIGINAL .page-malin .p-name { color: #0a1a8a; font-weight: 700; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-name { color: #e8f4ff; font-weight: 600; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-name { color: #1a1a1a; font-weight: 700; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-name { color: #f0e8ff; font-weight: 700; } */
+.page-malin   .p-name { color: rgba(225,240,255,.92); font-weight: 500; font-family: var(--serif); letter-spacing: .01em; }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .p-name { color: #d46080; font-weight: 700; } */
+.page-bebe    .p-name { color: rgba(255,230,240,.92); font-weight: 500; font-family: var(--serif); letter-spacing: .01em; font-style: italic; }
 
 
 .p-sub {
@@ -2814,14 +3528,37 @@ html body { margin-top: 0 !important; }
   white-space: nowrap;
   line-height: 1.4;
 }
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir .p-tag {
-  background: linear-gradient(90deg, #8b0030 0%, #cc0050 60%, #ff3d8a 100%);
+  background: rgba(196,23,90,.2);
+  border: 1px solid rgba(196,23,90,.4);
+  color: #e8a0b4;
+  font-style: italic;
 }
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-tag {
+  background: rgba(184,134,11,.18);
+  border: 1px solid rgba(184,134,11,.45);
+  color: rgba(255,220,120,.9);
+  font-style: italic;
+}
+/* MALIN ORIGINAL .page-malin .p-tag { background: linear-gradient(90deg, #0a0a0a 0%, #1a0030 60%, #2d0050 100%); } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-tag { background: linear-gradient(90deg,#00d4ff 0%,#0099cc 100%); color: #050a14; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-tag { background: linear-gradient(90deg,#f5a623 0%,#e8340a 100%); color: #fff; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-tag { background: rgba(184,244,0,.15); border: 1px solid rgba(184,244,0,.35); color: #b8f400; } */
 .page-malin .p-tag {
-  background: linear-gradient(90deg, #0a0a0a 0%, #1a0030 60%, #2d0050 100%);
+  background: rgba(245,208,0,.15);
+  border: 1px solid rgba(245,208,0,.4);
+  color: rgba(255,235,120,.9);
+  font-style: italic;
 }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .p-tag { background: linear-gradient(90deg, #a83055 0%, #c84d6a 60%, #e07085 100%); } */
 .page-bebe .p-tag {
-  background: linear-gradient(90deg, #a83055 0%, #c84d6a 60%, #e07085 100%);
+  background: rgba(224,82,122,.18);
+  border: 1px solid rgba(224,82,122,.4);
+  color: rgba(255,200,220,.9);
+  font-style: italic;
 }
 
 /* Note cliquable sur la carte */
@@ -2872,6 +3609,36 @@ html body { margin-top: 0 !important; }
   font-weight: 600;
   font-family: var(--serif);
 }
+/* IDÉE 2 — nuit velours (sauvegarde)
+.page-plaisir .p-stars-count {
+  color: rgba(232,160,180,.5);
+  font-weight: 400;
+}
+*/
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-stars-count {
+  color: rgba(250,220,180,.55);
+  font-weight: 400;
+}
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-stars-count { color: rgba(232,244,255,.45); } .page-malin .p-info { border-top: 1px solid rgba(0,212,255,.1); } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-stars-count { color: rgba(26,26,26,.45); font-weight: 400; } .page-malin .p-info { border-top: 1px solid rgba(245,166,35,.15); } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-stars-count { color: rgba(26,26,26,.45); } .page-malin .p-info { border-top: 1px solid rgba(245,166,35,.15); } */
+.page-malin .p-stars-count {
+  color: rgba(200,225,255,.55);
+  font-weight: 400;
+}
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .p-stars-count */
+.page-bebe .p-stars-count {
+  color: rgba(255,200,220,.55);
+  font-weight: 400;
+}
+.page-malin .p-info {
+  border-top: 1px solid rgba(245,208,0,.25);
+}
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .p-info spécifique */
+.page-bebe .p-info {
+  border-top: 1px solid rgba(224,82,122,.25);
+}
 
 .p-foot {
   display: flex;
@@ -2891,11 +3658,26 @@ html body { margin-top: 0 !important; }
   margin-left: .3rem;
 }
 
-.page-plaisir .p-old { color: #a0304e; opacity: .55; }
-.page-malin   .p-old { color: #3448b0; opacity: .55; }
-.page-bebe    .p-old { color: #b04068; opacity: .55; }
+/* IDÉE 2 — nuit velours (sauvegarde) .page-plaisir .p-old { color: rgba(232,160,180,.35); text-decoration: line-through; } */
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-old { color: rgba(250,220,180,.4); text-decoration: line-through; }
+/* MALIN ORIGINAL .page-malin .p-old { color: #3448b0; opacity: .55; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-old { color: rgba(232,244,255,.35); text-decoration: line-through; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-old { color: rgba(26,26,26,.35); text-decoration: line-through; } */
+.page-malin   .p-old { color: rgba(200,225,255,.4); text-decoration: line-through; }
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .p-old { color: #b04068; opacity: .55; } */
+.page-bebe    .p-old { color: rgba(255,200,220,.4); text-decoration: line-through; }
 
 .p-price { color: #3e2a14; }
+/* IDÉE 2 — nuit velours (sauvegarde) .page-plaisir .p-price { color: #e8a0b4; font-weight: 600; } */
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .p-price { color: #d4a017; font-weight: 700; }
+/* MALIN TECH NOIR (sauvegarde) .page-malin .p-price { color: #00d4ff; font-weight: 700; } */
+/* MALIN POP SOLAIRE (sauvegarde) .page-malin .p-price { color: #e8340a; font-weight: 800; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .p-price { color: #e8340a; font-weight: 800; } */
+.page-malin   .p-price { color: #f5d000; font-weight: 700; }
+/* BEBE ORIGINAL (sauvegarde) — pas de règle .page-bebe .p-price, héritait de #3e2a14 */
+.page-bebe    .p-price { color: #e0527a; font-weight: 700; }
 
 .atc-btn {
   padding: .42rem .95rem;
@@ -2914,35 +3696,117 @@ html body { margin-top: 0 !important; }
   transform: scale(1.03);
 }
 
+/* MALIN ORIGINAL .page-malin .atc-btn { background: #FFE500; color: #0a0a1a; } .page-malin .p-wish { background: #FFE500; } .page-malin .search-clear { color: #FFE500; } */
+/* MALIN TECH NOIR (sauvegarde) .page-malin .atc-btn { background: linear-gradient(135deg,#00d4ff 0%,#0099cc 100%); color: #050a14; box-shadow: 0 2px 12px rgba(0,212,255,.35); } .page-malin .p-wish { background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.3); color: #00d4ff; } .page-malin .search-clear { color: #00d4ff; } */
+/* MALIN VIOLET FLASH (sauvegarde) .page-malin .atc-btn { background: linear-gradient(135deg,#f5a623 0%,#e8340a 100%); color: #fff; font-weight: 700; box-shadow: 0 2px 12px rgba(232,52,10,.3); } .page-malin .p-wish { background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.35); color: #e8340a; } .page-malin .search-clear { color: #f5a623; } */
 .page-malin .atc-btn {
-  background: #FFE500;
-  color: #0a0a1a;
+  background: linear-gradient(135deg, #f5d000 0%, #f0c800 100%);
+  color: #071e3d;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  padding: .48rem 1.1rem;
+  border-radius: var(--r-full);
+  box-shadow: 0 2px 10px rgba(245,208,0,.28);
+  transition: all .2s ease;
+}
+.page-malin .atc-btn:hover {
+  background: linear-gradient(135deg, #f0c800 0%, #f5d000 100%);
+  box-shadow: 0 4px 18px rgba(245,208,0,.42);
+  transform: scale(1.04);
 }
 .page-malin .p-wish {
-  background: #FFE500;
+  background: rgba(17,42,85,.8);
+  border: 1px solid rgba(245,208,0,.35);
+  color: rgba(255,235,120,.85);
 }
 .page-malin .search-clear {
-  color: #FFE500;
+  color: #f5d000;
 }
+/* IDÉE 2 — nuit velours (sauvegarde)
 .page-plaisir .atc-btn {
-  background: #cc0000;
+  background: linear-gradient(135deg, #c4175a 0%, #8b0030 100%);
   color: #fff;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  padding: .48rem 1.1rem;
+  border-radius: var(--r-full);
+  box-shadow: 0 2px 10px rgba(196,23,90,.3);
+  transition: all .2s ease;
+}
+.page-plaisir .atc-btn:hover {
+  background: linear-gradient(135deg, #e01a68 0%, #a0003a 100%);
+  box-shadow: 0 4px 18px rgba(196,23,90,.5);
+  transform: scale(1.04);
 }
 .page-plaisir .p-wish {
-  background: #cc0000;
+  background: rgba(196,23,90,.15);
+  border: 1px solid rgba(196,23,90,.3);
+  color: #e8a0b4;
 }
 .page-plaisir .search-clear {
-  color: #cc0000;
+  color: #e8a0b4;
 }
+*/
+
+/* IDÉE 3 — or & ivoire */
+.page-plaisir .atc-btn {
+  background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+  color: #faf7f2;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  padding: .48rem 1.1rem;
+  border-radius: var(--r-full);
+  box-shadow: 0 2px 10px rgba(184,134,11,.28);
+  transition: all .2s ease;
+}
+.page-plaisir .atc-btn:hover {
+  background: linear-gradient(135deg, #d4a017 0%, #b8860b 100%);
+  box-shadow: 0 4px 18px rgba(184,134,11,.42);
+  transform: scale(1.04);
+}
+.page-plaisir .p-wish {
+  background: rgba(74,24,40,.8);
+  border: 1px solid rgba(184,134,11,.4);
+  color: rgba(255,220,120,.85);
+}
+.page-plaisir .search-clear {
+  color: #b8860b;
+}
+/* BEBE ORIGINAL (sauvegarde) .page-bebe .atc-btn { background: #e8608a; color: #fff; } .page-bebe .p-wish { background: #e8608a; } .page-bebe .search-clear { color: #e8608a; } */
 .page-bebe .atc-btn {
-  background: #e8608a;
-  color: #fff;
+  background: linear-gradient(135deg, #e0527a 0%, #c4345c 100%);
+  color: #fff5f8;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  padding: .48rem 1.1rem;
+  border-radius: var(--r-full);
+  box-shadow: 0 2px 10px rgba(224,82,122,.28);
+  transition: all .2s ease;
+}
+.page-bebe .atc-btn:hover {
+  background: linear-gradient(135deg, #c4345c 0%, #e0527a 100%);
+  box-shadow: 0 4px 18px rgba(224,82,122,.42);
+  transform: scale(1.04);
 }
 .page-bebe .p-wish {
-  background: #e8608a;
+  background: rgba(74,16,48,.8);
+  border: 1px solid rgba(224,82,122,.35);
+  color: rgba(255,200,220,.85);
 }
 .page-bebe .search-clear {
-  color: #e8608a;
+  color: #e0527a;
 }
 
 /* ============================================================
@@ -3093,7 +3957,7 @@ html body { margin-top: 0 !important; }
     display: block; content: '';
     position: absolute; inset: 0; z-index: 1;
   }
-  .slide-malin.slide-has-img::before   { background: linear-gradient(to right, rgba(4,0,18,.92) 0%, rgba(18,0,42,.68) 48%, rgba(4,0,18,.18) 100%); }
+  .slide-malin.slide-has-img::before   { background: linear-gradient(to right, rgba(3,13,31,.92) 0%, rgba(7,20,40,.68) 48%, rgba(3,13,31,.18) 100%); }
   .slide-bebe.slide-has-img::before    { background: linear-gradient(to right, rgba(160,50,75,.85) 0%, rgba(160,50,75,.55) 48%, rgba(160,50,75,.1) 100%); }
   .slide-plaisir.slide-has-img::before { display: none; }
   .slide-has-img .slide-content { padding-right: 1.2rem !important; }
@@ -3192,7 +4056,7 @@ html body { margin-top: 0 !important; }
     display: block; content: '';
     position: absolute; inset: 0; z-index: 1;
   }
-  .slide-malin.slide-has-img::before   { background: linear-gradient(to right, rgba(4,0,18,.92) 0%, rgba(18,0,42,.68) 48%, rgba(4,0,18,.18) 100%); }
+  .slide-malin.slide-has-img::before   { background: linear-gradient(to right, rgba(3,13,31,.92) 0%, rgba(7,20,40,.68) 48%, rgba(3,13,31,.18) 100%); }
   .slide-bebe.slide-has-img::before    { background: linear-gradient(to right, rgba(160,50,75,.85) 0%, rgba(160,50,75,.55) 48%, rgba(160,50,75,.1) 100%); }
   .slide-plaisir.slide-has-img::before { display: none; }
   .slide-has-img .slide-content { padding-right: 1.2rem !important; }

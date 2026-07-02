@@ -1,0 +1,1404 @@
+{
+  "proposals": [
+    {
+      "id": "src-m02",
+      "code": "M-2",
+      "categorie": "malin",
+      "subfamille": "maison",
+      "nom": "Lampe Coucher de Soleil — Sunset Lamp",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 7,
+      "prixVente": 24.99,
+      "marge": 65,
+      "filtres": [
+        "tech",
+        "maison"
+      ],
+      "description": "Projette un halo ambré qui reproduit la lumière chaude d'un coucher de soleil sur vos murs. Un effet photo et vidéo garanti — l'accessoire incontournable pour les Reels et la déco chambre.",
+      "tags": [
+        "sunsetlamp",
+        "aesthetic",
+        "ambiance"
+      ],
+      "raisonVente": "Phénomène TikTok validé depuis 2021, toujours viral en 2026 car très shareable. Démo visuelle parfaite en 3 secondes. Prix d'achat impulsion idéal.",
+      "vigilance": "Vérifier transformateur EU (220V ou USB). Marché saturé — différencier par description soignée et bundle possible.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-sunset-lamp.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=sunset+lamp+dropshipping+EU&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m02.jpg"
+      ]
+    },
+    {
+      "id": "src-m04",
+      "code": "M-4",
+      "categorie": "malin",
+      "subfamille": "bien-etre",
+      "nom": "Masque Sommeil Bluetooth — Sleep Mask Headphones",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 11,
+      "prixVente": 29.99,
+      "marge": 60,
+      "filtres": [
+        "tech",
+        "voyage"
+      ],
+      "description": "Masque de nuit intégrant des écouteurs Bluetooth plats pour écouter méditations, podcasts ou playlists sans déranger. Doux, lavable, rechargeable USB.",
+      "tags": [
+        "sleeptech",
+        "masquenuit",
+        "wellnesstech"
+      ],
+      "raisonVente": "Croisement de deux tendances fortes : bien-être du sommeil + tech nomade. Viral sur TikTok dans les vidéos sleep routine. Prix accessible, usage quotidien.",
+      "vigilance": "Qualité audio très variable selon modèles. Vérifier autonomie batterie réelle (>8h). Sélectionner fournisseur avec démo audio dans les avis.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-sleep-mask-bluetooth-headphones.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=sleep+mask+bluetooth+headphones+dropshipping&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m04.jpg"
+      ]
+    },
+    {
+      "id": "src-m01",
+      "code": "M-1",
+      "categorie": "malin",
+      "subfamille": "tech",
+      "nom": "Mini Projecteur Portable LED — Bedroom Cinema",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 22,
+      "prixVente": 49.99,
+      "marge": 52,
+      "filtres": [
+        "tech",
+        "maison"
+      ],
+      "description": "Transforme n'importe quel mur en écran de cinéma en 30 secondes. Rechargeable USB-C, compatible smartphone via câble, projette jusqu'à 120 pouces.",
+      "tags": [
+        "projector",
+        "bedroomcinema",
+        "gadgettiktok"
+      ],
+      "raisonVente": "Produit phare TikTok 2025-2026, bedroom cinema est un format de contenu massif. Démo ultra-visuelle, effet wow immédiat, prix accessible.",
+      "vigilance": "Marquage CE obligatoire. Certains modèles ont des lumens très en dessous des annonces. Sélectionner fournisseur >4,5 étoiles avec photos réelles.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-mini-portable-projector-eu-warehouse.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=mini+projecteur+portable+bedroom+cinema+tiktok&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m01.jpg"
+      ]
+    },
+    {
+      "id": "src-m11",
+      "code": "M-11",
+      "categorie": "malin",
+      "subfamille": "voyage",
+      "nom": "Ventilateur Portable Col — Neck Fan Mains Libres",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 9,
+      "prixVente": 24.99,
+      "marge": 57,
+      "filtres": [
+        "voyage",
+        "tech",
+        "maison"
+      ],
+      "description": "Se porte autour du cou et libère les mains tout en soufflant de l'air frais en continu. Silencieux, rechargeable USB-C et pliable. Compagnon incontournable des étés en ville.",
+      "tags": [
+        "neckfan",
+        "été",
+        "gadgetvoyage"
+      ],
+      "raisonVente": "Produit saisonnier ultra-viral en été, avec des pics de tendance TikTok dès juin. Timing parfait pour juillet 2026. La canicule urbaine amplifie le besoin réel.",
+      "vigilance": "Produit très saisonnier — rentabilité mai–septembre uniquement. Vérifier niveau sonore annoncé vs réel. CE obligatoire.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-neck-fan-portable-usb.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=ventilateur+portable+col+cou+2026&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m11.jpg"
+      ]
+    },
+    {
+      "id": "src-m06",
+      "code": "M-6",
+      "categorie": "malin",
+      "subfamille": "beaute",
+      "nom": "Rouleau Facial Glaçons — Ice Roller Visage",
+      "fournisseur": "DSers EU Espagne",
+      "prixFournisseur": 6,
+      "prixVente": 19.99,
+      "marge": 65,
+      "filtres": [
+        "beaute",
+        "maison"
+      ],
+      "description": "Se glisse au congélateur puis masse le visage pour dégonfler les poches, resserrer les pores et revigorer le teint en 2 minutes. Le skincare hack TikTok le plus partagé de l'année.",
+      "tags": [
+        "iceroller",
+        "skincaretiktok",
+        "glowup"
+      ],
+      "raisonVente": "Tendance glass skin + skincare routines omniprésente sur TikTok. Produit très photographiable, prix d'impulsion parfait (<20€), pas de consommable.",
+      "vigilance": "Produit hygiénique — vérifier matériaux sans BPA. Pas de promesse médicale. Concurrence très forte sur Amazon.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-ice-roller-face-massage.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=ice+roller+visage+skincare+tiktok&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m06.jpg"
+      ]
+    },
+    {
+      "id": "src-m05",
+      "code": "M-5",
+      "categorie": "malin",
+      "subfamille": "bureau",
+      "nom": "Station de Charge Sans Fil 3-en-1 — MagSafe Compatible",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 13,
+      "prixVente": 34.99,
+      "marge": 57,
+      "filtres": [
+        "tech",
+        "bureau",
+        "maison"
+      ],
+      "description": "Recharge simultanément smartphone, montre connectée et écouteurs Qi sans aucun câble apparent. Compatible iPhone MagSafe et Android.",
+      "tags": [
+        "desksetup",
+        "chargeur3en1",
+        "techgadget"
+      ],
+      "raisonVente": "Le desk setup aesthetic est massif sur TikTok et Instagram. Produit photogénique, démo en 5 secondes, usage quotidien = besoin réel. Fort en cadeau.",
+      "vigilance": "Vérifier certification Qi et puissance de charge réelle (5W/7.5W/10W). Attention aux annonces MagSafe compatible sans certification.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-3-in-1-wireless-charger-magsafe.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=station+charge+sans+fil+3+en+1+magsafe+desk+setup&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m05.jpg"
+      ]
+    },
+    {
+      "id": "src-m03",
+      "code": "M-3",
+      "categorie": "malin",
+      "subfamille": "tech",
+      "nom": "Imprimante Photo Thermique de Poche — Mini Printer",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 24,
+      "prixVente": 49.99,
+      "marge": 48,
+      "filtres": [
+        "tech",
+        "bureau"
+      ],
+      "description": "Se connecte en Bluetooth à votre smartphone et imprime vos photos en 30 secondes au format carte — sans cartouche, sans câble. Idéal pour les souvenirs instantanés.",
+      "tags": [
+        "miniprinter",
+        "photoportable",
+        "zink"
+      ],
+      "raisonVente": "Produit viral constant sur TikTok depuis 3 ans. Achat cadeau fort. Démo vidéo ultra-satisfaisante. Vente de papiers ZINK en recharge = revente récurrente.",
+      "vigilance": "Vérifier compatibilité iOS et Android. S'assurer que les papiers ZINK sont disponibles en recharge. Priorité entrepôt EU si disponible.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-mini-photo-printer-bluetooth-pocket.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=mini+imprimante+photo+thermique+poche+bluetooth&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m03.jpg"
+      ]
+    },
+    {
+      "id": "src-m09",
+      "code": "M-9",
+      "categorie": "malin",
+      "subfamille": "maison",
+      "nom": "Humidificateur USB Nuage — Mini Cloud Humidifier",
+      "fournisseur": "DSers EU Allemagne",
+      "prixFournisseur": 7,
+      "prixVente": 22.99,
+      "marge": 62,
+      "filtres": [
+        "maison",
+        "bureau",
+        "tech"
+      ],
+      "description": "Diffuseur de brume en forme de nuage branché en USB. Ultra-silencieux, améliore l'humidité et l'ambiance sur bureau ou table de chevet.",
+      "tags": [
+        "humidificateur",
+        "aesthetic",
+        "aircare"
+      ],
+      "raisonVente": "Design très aesthetic = forte performance organique sur TikTok et Pinterest. Utile en été (air sec climatisé) et en hiver (chauffage). Prix d'impulsion, facile à offrir.",
+      "vigilance": "Vérifier sécurité électrique CE. Certains modèles fuient — fournisseur avec >100 avis. Incompatible avec huiles essentielles non diluées sur certains modèles.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-cloud-humidifier-usb-mini.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=humidificateur+nuage+usb+aesthetic+tiktok&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m09.jpg"
+      ]
+    },
+    {
+      "id": "src-m07",
+      "code": "M-7",
+      "categorie": "malin",
+      "subfamille": "cuisine",
+      "nom": "Éplucheur Spiraliseur Légumes 3-en-1",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 5,
+      "prixVente": 14.99,
+      "marge": 60,
+      "filtres": [
+        "cuisine",
+        "maison"
+      ],
+      "description": "Épluche, spiralise et coupe en julienne en un seul outil compact. Courgettes en spaghettis, carottes en rubans — la cuisine healthy et créative en un geste.",
+      "tags": [
+        "spiraliseur",
+        "cuisinehealthy",
+        "gadgetcuisine"
+      ],
+      "raisonVente": "Les vidéos food prep et healthy meal sur TikTok génèrent des millions de vues. Accessoire à fort effet visuel (transformation en direct). Prix très accessible.",
+      "vigilance": "Vérifier la qualité des lames inox (pas de lames en plastique). Normes alimentaires EU CE/LFGB. Peut casser rapidement avec matériaux bas de gamme.",
+      "priorite": "C",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-vegetable-spiralizer-3-in-1.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=spiraliseur+legumes+3+en+1+gadget+cuisine+tiktok&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m07.jpg"
+      ]
+    },
+    {
+      "id": "src-m12",
+      "code": "M-12",
+      "categorie": "malin",
+      "subfamille": "maison",
+      "nom": "Lampe Lune 3D Rechargeable — Moon Lamp",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 11,
+      "prixVente": 29.99,
+      "marge": 57,
+      "filtres": [
+        "maison",
+        "tech"
+      ],
+      "description": "Reproduit fidèlement la surface de la Lune en impression 3D. Change de couleur au toucher, se recharge sans fil. Cadeau inoubliable.",
+      "tags": [
+        "moonlamp",
+        "cadeau",
+        "homedecor"
+      ],
+      "raisonVente": "Produit cadeau phénomène, stable dans le temps. Fort potentiel cadeau anniversaire / Saint-Valentin. Facilement marketable avec des photos nocturnes.",
+      "vigilance": "Vérifier câbles non fragiles. CE obligatoire. Différencier du catalogue Amazon sur la taille 15cm et la qualité de cartographie lunaire.",
+      "priorite": "C",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-moon-lamp-3d-print-led.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=lampe+lune+3d+led+cadeau&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m12.jpg"
+      ]
+    },
+    {
+      "id": "src-m08",
+      "code": "M-8",
+      "categorie": "malin",
+      "subfamille": "bureau",
+      "nom": "Organiseur de Câbles Magnétique — Lot de 5",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 3,
+      "prixVente": 12.99,
+      "marge": 72,
+      "filtres": [
+        "bureau",
+        "maison",
+        "tech"
+      ],
+      "description": "Clips magnétiques qui maintiennent câbles USB, chargeurs et écouteurs rangés et accessibles. Adhésif repositionnable, compatible tous supports, lot de 5 coloris.",
+      "tags": [
+        "desksetup",
+        "organisation",
+        "minimaliste"
+      ],
+      "raisonVente": "Contenu desk setup et room organisation toujours massif sur TikTok. Prix très bas = sans friction d'achat. Excellent produit premier achat pour fidéliser.",
+      "vigilance": "Produit très générique. Marge correcte mais positionnement lot pour augmenter panier moyen. Vérifier solidité de l'adhésif.",
+      "priorite": "C",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-magnetic-cable-organizer-clips.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=organiseur+cable+magnetique+desk+setup+aesthetic&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m08.jpg"
+      ]
+    },
+    {
+      "id": "src-m10",
+      "code": "M-10",
+      "categorie": "malin",
+      "subfamille": "bien-etre",
+      "nom": "Grattoir à Langue Acier Inox — Lot de 2",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 1.5,
+      "prixVente": 9.99,
+      "marge": 80,
+      "filtres": [
+        "beaute",
+        "maison"
+      ],
+      "description": "Élimine les bactéries de la langue en 10 secondes pour une haleine fraîche. Le geste d'hygiène plébiscité par l'Ayurveda et les routines clean girl TikTok.",
+      "tags": [
+        "cleangirl",
+        "tonguescraper",
+        "hygieneoral"
+      ],
+      "raisonVente": "Tendance clean girl routine et rituels d'hygiène toujours forts sur TikTok. Très forte marge. Idéal en cross-sell avec humidificateur ou masque sommeil.",
+      "vigilance": "Produit hygiénique — emballage individuel indispensable. Vérifier inox 304 food grade. Pas de promesses médicales. Idéal en upsell uniquement.",
+      "priorite": "D",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-tongue-scraper-stainless-steel.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=grattoir+langue+inox+clean+girl+tiktok&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m10.jpg"
+      ]
+    },
+    {
+      "id": "src-m13",
+      "code": "M-13",
+      "categorie": "malin",
+      "subfamille": "bureau",
+      "nom": "Stylo Lumière UV — Détecteur Faux Billets (lot 2)",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 1.8,
+      "prixVente": 7.99,
+      "marge": 75,
+      "filtres": [
+        "bureau",
+        "maison"
+      ],
+      "description": "Détecte en une seconde les faux billets, l'encre invisible et les taches UV. Gadget minimaliste à avoir dans son tiroir ou sa caisse.",
+      "tags": [
+        "uvlight",
+        "utilitaire",
+        "astuce"
+      ],
+      "raisonVente": "Très forte marge. Excellent produit d'entrée à prix cassé pour attirer de nouveaux clients. Idéal en cross-sell ou en ajouter à la commande pour X€.",
+      "vigilance": "Prix de vente bas — idéal en bundle ou upsell uniquement, pas en produit principal. Vérifier durée des ampoules UV.",
+      "priorite": "D",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-uv-pen-light-counterfeit-detector.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=stylo+UV+detecteur+faux+billets+gadget&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m13.jpg"
+      ]
+    },
+    {
+      "id": "src-m14",
+      "code": "M-14",
+      "categorie": "malin",
+      "subfamille": "voyage",
+      "nom": "Brumisateur Portable Silencieux — Mist Fan USB",
+      "fournisseur": "DSers EU Espagne",
+      "prixFournisseur": 8,
+      "prixVente": 22.99,
+      "marge": 62,
+      "filtres": [
+        "voyage",
+        "tech",
+        "maison"
+      ],
+      "description": "Mini ventilateur à brumisation qui projette un nuage d'eau fraîche jusqu'à 2 mètres. Réservoir 300 ml, 3 vitesses, rechargeable USB-C, silencieux <35 dB. Parfait bureau, festival, plage.",
+      "tags": [
+        "brumisateur",
+        "été",
+        "canicule"
+      ],
+      "raisonVente": "Complément direct du neck fan M-11 avec un usage différent (bureau, terrasse, festival). Viral chaque été sur TikTok dès les premières canicules. Tendance fraîcheur nomade confirmée France 2026 avec forte demande grande surface.",
+      "vigilance": "Vérifier que le réservoir est étanche et sans fuite. CE obligatoire. Produit saisonnier mai–septembre. Ne pas superposer avec M-11 dans les ads — angles distincts (main vs col).",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-portable-mist-fan-usb-rechargeable.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=brumisateur+portable+usb+rechargeable+été+2026&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m14.jpg"
+      ]
+    },
+    {
+      "id": "src-m15",
+      "code": "M-15",
+      "categorie": "malin",
+      "subfamille": "voyage",
+      "nom": "Sacs Compresseurs Sous-Vide Voyage — Lot de 6",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 7,
+      "prixVente": 19.99,
+      "marge": 62,
+      "filtres": [
+        "voyage",
+        "maison"
+      ],
+      "description": "Compressent vêtements et linge en roulant pour diviser le volume par 3, sans aspirateur. Six tailles assorties, réutilisables, fermoir étanche. Le hack valise TikTok de l'été.",
+      "tags": [
+        "packinghack",
+        "voyage",
+        "organisation"
+      ],
+      "raisonVente": "Les packing hacks sont parmi les contenus les plus viraux de l'été sur TikTok et Reels. Démo ultra-satisfaisante en 10 secondes (avant/après). Timing parfait pour juillet : saison voyages. Aucun produit de voyage organisationnel dans le catalogue actuel.",
+      "vigilance": "Vérifier étanchéité à l'air après 3–4 utilisations. Produit générique très concurrencé — se différencier sur le lot complet 6 tailles. Pas de fragile dans les sacs.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-vacuum-compression-bags-travel-roll.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=sac+compresseur+sous+vide+voyage+packing+hack+tiktok&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m15.jpg"
+      ]
+    },
+    {
+      "id": "src-m16",
+      "code": "M-16",
+      "categorie": "malin",
+      "subfamille": "maison",
+      "nom": "Gourde Isotherme Paille Intégrée 1L — Tumbler Stanley Style",
+      "fournisseur": "DSers EU Allemagne",
+      "prixFournisseur": 12,
+      "prixVente": 29.99,
+      "marge": 58,
+      "filtres": [
+        "maison",
+        "voyage",
+        "indispensable"
+      ],
+      "description": "Gourde double paroi inox qui garde vos boissons froides 24h et chaudes 12h. Paille intégrée et rabattable, poignée nomade, 8 coloris pastels. Le tumbler viral qui remplace Stanley à moitié prix.",
+      "tags": [
+        "tumbler",
+        "hydration",
+        "aesthetic"
+      ],
+      "raisonVente": "Le Stanley Cup est le produit lifestyle le plus copié depuis 2023, mais à 45–55€ il freine l'achat impulsion. Un dupe aesthetique à 29,99€ est le sweet spot parfait. Trending sur TikTok #WaterTok et #HydrationTok avec des millions de vues hebdomadaires.",
+      "vigilance": "Ne pas mentionner 'Stanley' dans les visuels ou textes (contrefaçon). Vérifier acier inox 304 food grade sans BPA. Vérifier étanchéité du couvercle et de la paille. Angle marketing : alternative éco-responsable aux bouteilles jetables.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-tumbler-insulated-straw-lid-stainless.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=tumbler+gourde+paille+isotherme+aesthetic+pastel&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m16.jpg"
+      ]
+    },
+    {
+      "id": "src-m17",
+      "code": "M-17",
+      "categorie": "malin",
+      "subfamille": "tech",
+      "nom": "Support Téléphone Bras Articulé Lit & Bureau",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 9,
+      "prixVente": 24.99,
+      "marge": 62,
+      "filtres": [
+        "tech",
+        "bureau",
+        "maison"
+      ],
+      "description": "Bras articulé à 360° fixé en pince sur bureau ou lit pour tenir le téléphone mains libres. Réglage hauteur/angle en 2 secondes, compatible tous smartphones et tablettes jusqu'à 13 pouces.",
+      "tags": [
+        "lazygadget",
+        "desksetup",
+        "bedsetup"
+      ],
+      "raisonVente": "Le lazy phone holder est un classique viral TikTok régénéré à chaque nouvelle génération d'utilisateurs. Usage quotidien réel (Netflix lit, visio bureau), effet 'pourquoi j'ai pas ça' immédiat. Excellent produit premier achat low-risk.",
+      "vigilance": "Vérifier stabilité du système de fixation en pince (pas de glissement). Certains modèles fléchissent avec tablettes lourdes — mentionner compatibilité poids max. Produit générique : miser sur la photo lifestyle.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-flexible-arm-phone-holder-bed-desk-clamp.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=support+telephone+bras+articule+lit+bureau+mains+libres&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-m17.jpg"
+      ]
+    },
+    {
+      "id": "src-p01",
+      "code": "P-1",
+      "categorie": "plaisir",
+      "subfamille": "indispensable",
+      "nom": "Goliate — Lubrifiant Naturel Bio Long Lasting",
+      "fournisseur": "Goliate (grossiste direct)",
+      "prixFournisseur": 14,
+      "prixVente": 28,
+      "marge": 45,
+      "filtres": [
+        "indispensable",
+        "petitprix"
+      ],
+      "description": "Certifié bio Ecocert, fabriqué en France. Formule 100% naturelle et vegan, sans paraben ni perturbateur endocrinien. Compatible préservatifs.",
+      "tags": [
+        "madeinfrance",
+        "lubrifiant",
+        "bioclean"
+      ],
+      "raisonVente": "Goliate est la référence française des lubrifiants bio. La tendance clean intimate explose en 2026. Aucun lubrifiant solo dans le catalogue actuel. Achat de complément idéal.",
+      "vigilance": "Vérifier conditions grossiste Goliate (MOQ minimum). Pas de promesse médicale. Jean Charles : TVA applicable 5,5% ou 20% à confirmer.",
+      "priorite": "A",
+      "validation_requise": "Jean Charles (TVA), Charlène (réglementation cosmétique intime)",
+      "liens": [
+        {
+          "label": "Site Goliate",
+          "url": "https://goliate.com"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=goliate+lubrifiant+bio+made+in+france&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p01.jpg"
+      ]
+    },
+    {
+      "id": "src-p05",
+      "code": "P-5",
+      "categorie": "plaisir",
+      "subfamille": "indispensable",
+      "nom": "Goliate — Soin Vulvaire Régénérant Bio",
+      "fournisseur": "Goliate (grossiste direct)",
+      "prixFournisseur": 13,
+      "prixVente": 27,
+      "marge": 44,
+      "filtres": [
+        "indispensable"
+      ],
+      "description": "Baume soin certifié bio Ecocert, fabriqué en France. Formule apaisante et nourrissante pour les zones sensibles au quotidien. 100% naturel et vegan.",
+      "tags": [
+        "madeinfrance",
+        "soinintime",
+        "vegan"
+      ],
+      "raisonVente": "La catégorie clean intimate care est le segment le plus dynamique du bien-être féminin en 2026. Aucun produit de soin pur dans le catalogue. Fort potentiel de fidélisation.",
+      "vigilance": "TVA 5,5% potentielle (avantage prix compétitif). Pas de terme traitement ou guérison dans la fiche produit. Goliate déjà chez Nature & Découvertes = crédibilité.",
+      "priorite": "A",
+      "validation_requise": "Jean Charles (TVA 5,5% à confirmer)",
+      "liens": [
+        {
+          "label": "Site Goliate",
+          "url": "https://goliate.com"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=goliate+soin+vulvaire+bio+france&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p05.jpg"
+      ]
+    },
+    {
+      "id": "src-p03",
+      "code": "P-3",
+      "categorie": "plaisir",
+      "subfamille": "soloclub",
+      "nom": "Tenga Egg — Kit Masturbateurs x6 Textures Variées",
+      "fournisseur": "Distributeur Tenga EU",
+      "prixFournisseur": 17,
+      "prixVente": 34.99,
+      "marge": 46,
+      "filtres": [
+        "soloclub",
+        "lots",
+        "petitprix"
+      ],
+      "description": "Coffret de 6 œufs Tenga avec six textures internes différentes pour explorer le plaisir masculin. Design neutre et élégant, usage unique, livraison discrète.",
+      "tags": [
+        "tenga",
+        "masculin",
+        "decouverte"
+      ],
+      "raisonVente": "Tenga est la marque masculine la plus connue mondialement pour son design neutre. Le catalogue manque de produits masculins accessibles (<35€). Déstigmatisation du plaisir masculin en forte hausse.",
+      "vigilance": "Produit à usage unique — mentionner clairement dans la fiche. Vérifier disponibilité distributeur EU. Charlène : valider légalité des dispositifs pour pénis en France.",
+      "priorite": "B",
+      "validation_requise": "Charlène (légalité France)",
+      "liens": [
+        {
+          "label": "Tenga EU",
+          "url": "https://www.tenga.co/eu/"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=tenga+egg+kit+6+textures&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p03.jpg"
+      ]
+    },
+    {
+      "id": "src-p02",
+      "code": "P-2",
+      "categorie": "plaisir",
+      "subfamille": "indispensable",
+      "nom": "Goliate — Huile de Massage Aphrodisiaque Bio",
+      "fournisseur": "Goliate (grossiste direct)",
+      "prixFournisseur": 12,
+      "prixVente": 24.99,
+      "marge": 46,
+      "filtres": [
+        "indispensable",
+        "duo"
+      ],
+      "description": "Formulée avec des actifs bio aphrodisiaques d'origine végétale. Réchauffe, nourrit la peau et invite au toucher — le bien-être intime commence avant le jeu.",
+      "tags": [
+        "massage",
+        "aphrodisiaque",
+        "madeinfrance"
+      ],
+      "raisonVente": "Comble un vrai vide dans le catalogue (aucune huile de massage). La catégorie massage intime est en forte croissance. Compatible avec l'identité bien-être de l'univers Plaisir.",
+      "vigilance": "Incompatible préservatifs latex — mentionner obligatoirement dans la fiche. Pas de promesse physiologique aphrodisiaque.",
+      "priorite": "C",
+      "liens": [
+        {
+          "label": "Site Goliate",
+          "url": "https://goliate.com"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=goliate+huile+massage+bio+aphrodisiaque&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p02.jpg"
+      ]
+    },
+    {
+      "id": "src-p04",
+      "code": "P-4",
+      "categorie": "plaisir",
+      "subfamille": "lots",
+      "nom": "Kit Initiation BDSM Sensoriel — Plumes & Satin",
+      "fournisseur": "DSers EU ou EasyToys",
+      "prixFournisseur": 11,
+      "prixVente": 29.99,
+      "marge": 55,
+      "filtres": [
+        "lots",
+        "duo"
+      ],
+      "description": "Bandeau satin, plumes de stimulation et menottes souples pour un premier jeu de séduction complice. Doux, non menaçant, très photogénique. Parfait pour couples curieux.",
+      "tags": [
+        "bdsm",
+        "couple",
+        "sensorial"
+      ],
+      "raisonVente": "Complément du Kit BDSM existant (plaisir-2) avec focus sensoriel/douceur. Les kits BDSM débutant se vendent très bien en ligne — achat en boutique physique encore tabou.",
+      "vigilance": "Charlène : valider les menottes à lacets souples (contrainte physique forte = à vérifier). Emballage discret obligatoire.",
+      "priorite": "C",
+      "validation_requise": "Charlène (légalité menottes)",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-bdsm-beginner-kit-feather-satin.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=kit+bdsm+debutant+plumes+satin+menottes+douces&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p04.jpg"
+      ]
+    },
+    {
+      "id": "src-p06",
+      "code": "P-6",
+      "categorie": "plaisir",
+      "subfamille": "beaute",
+      "nom": "Masque LED Visage 7 Couleurs — Photothérapie Maison",
+      "fournisseur": "DSers EU Allemagne",
+      "prixFournisseur": 18,
+      "prixVente": 44.99,
+      "marge": 58,
+      "filtres": [
+        "beaute",
+        "bien-etre"
+      ],
+      "description": "7 longueurs d'onde LED pour cibler l'acné (bleu), les ridules (rouge) et l'éclat du teint (jaune). 10 minutes par séance, rechargeable USB. Le soin haute technologie enfin à prix accessible.",
+      "tags": [
+        "ledmask",
+        "skincare",
+        "antiage"
+      ],
+      "raisonVente": "Tendance beauté tech numéro 1 de 2026 confirmée par toutes les sources. Les masques LED pro coûtent 200–600€ — le segment entrée de gamme <50€ explose. Produit très photogénique, wow effect en selfie avant/après. Catégorie beauté tech absente du catalogue Plaisir.",
+      "vigilance": "Ne pas formuler de promesses médicales (traitement acné, anti-rides). Vérifier certification CE appareil électrique visage. Déconseillé en cas d'épilepsie photosensible — mentionner dans la fiche. Charlène à consulter sur la réglementation appareil cosmétique.",
+      "priorite": "A",
+      "validation_requise": "Charlène (réglementation appareils cosmétiques EU)",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-led-face-mask-7-color-phototherapy.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=masque+led+visage+7+couleurs+phototherapie+2026&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p06.jpg"
+      ]
+    },
+    {
+      "id": "src-p07",
+      "code": "P-7",
+      "categorie": "plaisir",
+      "subfamille": "beaute",
+      "nom": "Sérum Vitamine C 20% — Éclat & Anti-Taches Made in France",
+      "fournisseur": "Marque française indépendante (ex: Typology, Oh My Cream)",
+      "prixFournisseur": 11,
+      "prixVente": 27.99,
+      "marge": 58,
+      "filtres": [
+        "beaute",
+        "indispensable"
+      ],
+      "description": "Sérum concentré vitamine C 20% + acide férulique, formulé et fabriqué en France. Estompe les taches, unifie le teint et booste l'éclat en 4 semaines. Sans parfum, vegan, packaging éco-responsable.",
+      "tags": [
+        "madeinfrance",
+        "vitamineC",
+        "skinimalisme"
+      ],
+      "raisonVente": "La vitamine C est l'ingrédient skincare le plus recherché en 2026. Le skinimalisme pousse à investir sur 1–2 sérums efficaces plutôt que 10 produits. 'Made in France' + composition clean = argument différenciant fort vs concurrents Amazon. Aucun sérum visage dans le catalogue Plaisir.",
+      "vigilance": "Vérifier stabilité de la formule vitamine C (oxydation rapide = packaging opaque obligatoire). Sourcer une marque française sérieuse avec INCI lisible. Pas de promesse médicale dépigmentante. DLC à surveiller pour la rotation de stock.",
+      "priorite": "B",
+      "validation_requise": "Charlène (réglementation cosmétique — allégations)",
+      "liens": [
+        {
+          "label": "Typology",
+          "url": "https://www.typology.com/fr/products/serum-vitamine-c"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=serum+vitamine+c+20+made+in+france+clean+2026&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p07.jpg"
+      ]
+    },
+    {
+      "id": "src-p08",
+      "code": "P-8",
+      "categorie": "plaisir",
+      "subfamille": "bijoux",
+      "nom": "Bracelet Acier Doré Personnalisable — Gravure Prénom",
+      "fournisseur": "DSers EU ou fournisseur bijou FR",
+      "prixFournisseur": 6,
+      "prixVente": 19.99,
+      "marge": 67,
+      "filtres": [
+        "bijoux",
+        "accessoire"
+      ],
+      "description": "Bracelet jonc fin en acier inoxydable doré 18 carats, personnalisable avec un prénom ou une date. Livré dans un écrin kraft naturel, idéal pour s'offrir ou offrir.",
+      "tags": [
+        "bijoux",
+        "cadeau",
+        "personnalise"
+      ],
+      "raisonVente": "Le bijou personnalisé est le cadeau féminin numéro 1 toutes occasions confondues. L'acier inoxydable dorée ne s'oxyde pas et résiste à l'eau = argument qualité fort vs plaqué or bas de gamme. Aucun bijou dans le catalogue Plaisir — lacune évidente pour capter les cadeaux anniversaire / Fête des Mères.",
+      "vigilance": "Vérifier résistance dorure au quotidien (minimum 18 carats, 2 microns). Pas d'allergie nickel (EU : norme EN 1811 < 0,2 µg/cm²/semaine). Délai de personnalisation à intégrer dans le workflow commande. Confirmer avec Rachel la gestion des commandes personnalisées.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-personalized-name-bracelet-gold-stainless.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=bracelet+acier+dore+gravure+prenom+personnalise&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-p08.jpg"
+      ]
+    },
+    {
+      "id": "src-b01",
+      "code": "B-1",
+      "categorie": "bebe",
+      "subfamille": "jouets",
+      "nom": "Tapis d'Éveil avec Arche Musicale 5-en-1",
+      "fournisseur": "DSers EU Pologne",
+      "prixFournisseur": 22,
+      "prixVente": 49.99,
+      "marge": 48,
+      "filtres": [
+        "jouets",
+        "mobilite"
+      ],
+      "description": "Tapis pliable avec arche musicale, 15 activités : hochets suspendus, miroir, piano à pieds, sons et lumières. Stimule tous les sens de bébé de la naissance à 12 mois.",
+      "tags": [
+        "tapiseveil",
+        "arche",
+        "montessori"
+      ],
+      "raisonVente": "Produit le plus recherché en seconde main sur Vinted pour les 0-12 mois. Must-have de la naissance, totalement absent du catalogue. Fort potentiel de recherche directe.",
+      "vigilance": "CE jouet EN 71 + normes électriques. Vérifier poids (peut être volumineux). Fournisseur >4,5 étoiles / >200 commandes.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-baby-play-mat-activity-arch-music.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=tapis+eveil+bebe+arche+musicale+5+en+1&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b01.jpg"
+      ]
+    },
+    {
+      "id": "src-b02",
+      "code": "B-2",
+      "categorie": "bebe",
+      "subfamille": "jouets",
+      "nom": "Veilleuse Musicale Nomade — Peluche Projecteur",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 12,
+      "prixVente": 29.99,
+      "marge": 52,
+      "filtres": [
+        "jouets",
+        "mobilite"
+      ],
+      "description": "Peluche veilleuse qui projette des étoiles au plafond et joue des berceuses avec minuterie automatique. Rechargeable USB, nomade dès la naissance.",
+      "tags": [
+        "veilleuse",
+        "berceuse",
+        "dodolab"
+      ],
+      "raisonVente": "La veilleuse projecteur est le cadeau naissance numéro 1 en France. La version nomade (rechargeable, portable) est différenciante vs la baleine Pabobo déjà au catalogue. Prix plus accessible.",
+      "vigilance": "Son <65 dB (réglementation jouets EU). Pas de piles boutons accessibles (risque ingestion). CE électrique obligatoire.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-baby-projector-night-light-musical-plush.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=veilleuse+musicale+nomade+peluche+projecteur+bebe&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b02.jpg"
+      ]
+    },
+    {
+      "id": "src-b03",
+      "code": "B-3",
+      "categorie": "bebe",
+      "subfamille": "jouets",
+      "nom": "Arche d'Éveil Grande Marque — Occasion Sélectionnée",
+      "fournisseur": "Vinted / Leboncoin",
+      "prixFournisseur": 15,
+      "prixVente": 34.99,
+      "marge": 50,
+      "filtres": [
+        "jouets",
+        "2eme-main"
+      ],
+      "description": "Arche d'éveil Tiny Love ou Fisher-Price en parfait état, nettoyée et vérifiée. Toutes les pièces présentes, piles neuves fournies. Qualité premium à prix seconde main.",
+      "tags": [
+        "occasion",
+        "archeeveil",
+        "tinylove"
+      ],
+      "raisonVente": "Les parents cherchent massivement les arches Tiny Love et Fisher-Price d'occasion (neuves : 60-120€). Revendre à ~35€ = sweet spot parfait. Angle différenciant fort.",
+      "vigilance": "Vérifier rappels RAPEX avant achat. Inspecter toutes les pièces (hochets sans fissures, pas de petits éléments détachés). Nettoyer rigoureusement à 60°. Mentionner produit nettoyé et vérifié.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=arche+eveil+tiny+love"
+        },
+        {
+          "label": "Leboncoin",
+          "url": "https://www.leboncoin.fr/recherche?text=arche+eveil+tiny+love&category=59"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b03.jpg"
+      ]
+    },
+    {
+      "id": "src-b04",
+      "code": "B-4",
+      "categorie": "bebe",
+      "subfamille": "vetements",
+      "nom": "Lot Vêtements Bébé 0-3 mois — Sélectionnés Vinted",
+      "fournisseur": "Vinted",
+      "prixFournisseur": 13,
+      "prixVente": 24.99,
+      "marge": 40,
+      "filtres": [
+        "2eme-main",
+        "vetements"
+      ],
+      "description": "Lot de 8 vêtements 0-3 mois soigneusement sélectionnés — bodys, pyjamas, grenouillères. Chaque pièce vérifiée, lavée à 60°, en parfait état.",
+      "tags": [
+        "layette",
+        "occasion",
+        "0-3mois"
+      ],
+      "raisonVente": "La layette 0-3 mois est la catégorie seconde main numéro 1 sur Vinted en France. Le travail de sélection et lavage est la vraie valeur ajoutée que les parents pressés paient.",
+      "vigilance": "Laver à 60° lessive hypoallergénique. Pas de cordon au niveau du cou (norme EN 14682). Pas de boutons cassés. Jean Charles : TVA sur marge pour biens d'occasion.",
+      "priorite": "C",
+      "validation_requise": "Jean Charles (TVA sur marge biens d'occasion)",
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=lot+vetements+bebe+0+3+mois"
+        },
+        {
+          "label": "Leboncoin",
+          "url": "https://www.leboncoin.fr/recherche?text=lot+vetements+bebe+0-3+mois&category=59"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b04.jpg"
+      ]
+    },
+    {
+      "id": "src-b05",
+      "code": "B-5",
+      "categorie": "bebe",
+      "subfamille": "mobilite",
+      "nom": "Transat Bébé Ergonomique 5 Positions — Newborn",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 28,
+      "prixVente": 59.99,
+      "marge": 42,
+      "filtres": [
+        "mobilite",
+        "jouets"
+      ],
+      "description": "Transat ajustable 5 positions de 0 à 9 kg. Structure légère, assise inclinée qui soutient naturellement la colonne vertébrale. Le premier espace à soi de bébé.",
+      "tags": [
+        "transat",
+        "newborn",
+        "ergonomique"
+      ],
+      "raisonVente": "Le transat est un achat systématique pour tous les nouveau-nés, totalement absent du catalogue. Lacune la plus visible de la page Bébé. Prix de vente élevé = marge absolue correcte.",
+      "vigilance": "Norme CE EN 12790 (transats bébé). Attention poids volumétrique pour les frais de port. Pas de cordon au niveau du cou. Pas de vibration sans certification électrique EU.",
+      "priorite": "C",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-baby-bouncer-newborn-ergonomic.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=transat+bebe+ergonomique+5+positions+newborn&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b05.jpg"
+      ]
+    },
+    {
+      "id": "src-b06",
+      "code": "B-6",
+      "categorie": "bebe",
+      "subfamille": "jouets",
+      "nom": "Cube Sensoriel Bois Montessori 6-en-1",
+      "fournisseur": "DSers EU Pologne",
+      "prixFournisseur": 10,
+      "prixVente": 27.99,
+      "marge": 61,
+      "filtres": [
+        "jouets",
+        "montessori"
+      ],
+      "description": "Cube en bois naturel avec 6 faces d'activités différentes : boulier, engrenages, miroir, labyrinthe, horloge et clavier musical. Stimule motricité fine, concentration et sens dès 12 mois.",
+      "tags": [
+        "montessori",
+        "eveil",
+        "bois"
+      ],
+      "raisonVente": "Le jouet Montessori en bois est la tendance bébé numéro 1 depuis 2024 et s'accélère en 2026 : les parents cherchent des alternatives durables aux jouets plastique. Le cube d'activités bois est le cadeau 1 an le plus offert. Marge excellente pour le segment Bébé.",
+      "vigilance": "CE jouet EN 71 obligatoire. Vérifier peintures non toxiques et sans plomb. Pas de petites pièces détachables (risque avant 3 ans — mentionner sur la fiche). Vérifier solidité des chevilles et engrenages bois.",
+      "priorite": "A",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-wooden-activity-cube-montessori-baby.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=cube+activites+bois+montessori+bebe+12+mois&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b06.jpg"
+      ]
+    },
+    {
+      "id": "src-b07",
+      "code": "B-7",
+      "categorie": "bebe",
+      "subfamille": "accessoire",
+      "nom": "Coussin d'Allaitement Multi-Positions C-Shape",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 14,
+      "prixVente": 34.99,
+      "marge": 57,
+      "filtres": [
+        "accessoire",
+        "maison"
+      ],
+      "description": "Coussin ergonomique en C pour allaitement, biberon et tummy time. Housse déhoussable lavable en machine, rembourrage ferme anti-affaissement. Accompagne mère et bébé de 0 à 12 mois.",
+      "tags": [
+        "allaitement",
+        "maternite",
+        "ergonomique"
+      ],
+      "raisonVente": "Le coussin d'allaitement est un achat systématique à la maternité, totalement absent du catalogue Bébé. Les mamans recherchent activement ce produit sur Vinted et en neuf. La housse lavable est l'argument décisif. Fort potentiel cadeau naissance en liste.",
+      "vigilance": "Vérifier CE textile (housse sans substances nocives REACH). Rembourrage doit rester ferme après lavage — fournisseur >4,5 étoiles avec photos réelles. Préciser poids max bébé recommandé sur la fiche.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-nursing-pillow-breastfeeding-c-shape.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=coussin+allaitement+c+shape+ergonomique+bebe&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b07.jpg"
+      ]
+    },
+    {
+      "id": "src-b08",
+      "code": "B-8",
+      "categorie": "bebe",
+      "subfamille": "jouets",
+      "nom": "Set Jouets de Bain Bébé — Lot 12 Pièces",
+      "fournisseur": "DSers EU",
+      "prixFournisseur": 8,
+      "prixVente": 19.99,
+      "marge": 58,
+      "filtres": [
+        "jouets",
+        "petitprix"
+      ],
+      "description": "12 jouets de bain en plastique sans BPA : tasses gigognes, animaux gicleurs, filet de rangement inclus. Rendent le bain fun et pédagogique dès 6 mois.",
+      "tags": [
+        "jouetbain",
+        "eveil",
+        "petitprix"
+      ],
+      "raisonVente": "Le jouet de bain est un achat récurrent tout au long de l'enfance (6 mois–4 ans) et un cadeau accessible apprécié. Lot 12 pièces avec filet = valeur perçue très forte au prix de vente. Produit coup de coeur des parents pressés.",
+      "vigilance": "Vérifier sans BPA, phtalates et PVC (réglementation EU jouets). CE EN 71 obligatoire. Vérifier absence de moisissures dans les jouets gicleurs (trous de nettoyage). Sélectionner fournisseur avec certification explicite sans BPA visible sur les photos.",
+      "priorite": "B",
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/w/wholesale-baby-bath-toys-set-12-pieces.html"
+        },
+        {
+          "label": "Google Images",
+          "url": "https://www.google.com/search?q=jouets+bain+bebe+lot+12+pieces+sans+bpa&tbm=isch"
+        }
+      ],
+      "status": "pending",
+      "createdAt": "2026-07-02",
+      "validatedAt": null,
+      "rejectedAt": null,
+      "rejectReason": null,
+      "images": [
+        "/img/sourcing/src-b08.jpg"
+      ]
+    }
+  ]
+}

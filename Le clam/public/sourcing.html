@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sourcing — Le Clam</title>
+  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Navbar page sourcing ── */
+  .page-sourcing .navbar,
+  .page-sourcing .navbar.scrolled {
+    background: rgba(12,8,3,.96);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(212,160,23,.18);
+    box-shadow: 0 2px 20px rgba(0,0,0,.5);
+  }
+  .page-sourcing .nav-link,
+  .page-sourcing .cart-toggle,
+  .page-sourcing .nav-msg-btn,
+  .page-sourcing .lang-btn,
+  .page-sourcing .nav-identify {
+    background: rgba(212,160,23,.1);
+    border-color: rgba(212,160,23,.35);
+    color: #d4a017;
+  }
+  .page-sourcing [data-cat="sourcing"].nav-link {
+    background: #d4a017 !important;
+    border-color: #d4a017 !important;
+    color: #0f0a05 !important;
+  }
+  .page-sourcing .mobile-menu-btn span { background: #d4a017; }
+
+  /* ── Hero sourcing ── */
+  .cat-hero-sourcing {
+    background: linear-gradient(155deg, #0d0804 0%, #1a1008 50%, #0a0704 100%);
+    min-height: 320px;
+    position: relative; overflow: hidden;
+  }
+  .cat-hero-sourcing::before {
+    content: 'SOURCING';
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 4vw;
+    font-family: var(--serif, serif); font-size: clamp(4.5rem, 14vw, 13rem);
+    font-weight: 300; color: rgba(212,160,23,.04); pointer-events: none;
+    letter-spacing: .12em; white-space: nowrap;
+  }
+  .cat-hero-sourcing .slide-badges {
+    display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.2rem;
+  }
+  .src-hero-chip {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: rgba(212,160,23,.12); color: #c49010;
+    border: 1px solid rgba(212,160,23,.25); border-radius: 20px;
+    padding: .3rem .8rem; font-size: .7rem; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .slide-title-sourcing {
+    font-family: var(--serif, serif); font-style: italic; font-weight: 300;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    color: #d9c4a0; line-height: 1.1;
+    letter-spacing: .01em; margin-bottom: .5rem;
+  }
+  .cat-hero-sourcing .cat-hero-desc { color: rgba(217,196,160,.42); font-size: .9rem; }
+  .cat-hero-sourcing .slide-particles .p { color: rgba(212,160,23,.25); }
+
+  /* ── Stats hero ── */
+  .src-hero-stats {
+    display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.8rem;
+  }
+  .src-hstat {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(217,196,160,.08);
+    border-radius: 10px; padding: .6rem .9rem; min-width: 72px;
+  }
+  .src-hstat-n { font-size: 1.5rem; font-weight: 800; color: #d9c4a0; line-height: 1; }
+  .src-hstat-n.pend { color: #f5d000; }
+  .src-hstat-n.vali { color: #6ee7b7; }
+  .src-hstat-n.reje { color: #fca5a5; }
+  .src-hstat-l { font-size: .58rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: rgba(217,196,160,.3); margin-top: .2rem; }
+
+  /* ── Filtres destination (remplace filters-bar standard) ── */
+  .src-filters-bar {
+    background: rgba(12,8,3,.97);
+    border-bottom: 1px solid rgba(212,160,23,.15);
+    padding: .6rem clamp(1rem,4vw,2rem);
+    position: sticky; top: var(--nav-h, 64px); z-index: 900;
+    display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+  }
+  .src-flbl {
+    font-size: .67rem; font-weight: 700; color: rgba(212,160,23,.45);
+    text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; margin-right: .15rem;
+  }
+  .src-fbtn {
+    padding: .28rem .7rem; border-radius: 20px; font-size: .73rem; font-weight: 700;
+    border: 1.5px solid rgba(212,160,23,.2); background: rgba(212,160,23,.07); color: rgba(212,160,23,.55);
+    cursor: pointer; transition: all .13s; white-space: nowrap; user-select: none; font-family: inherit;
+  }
+  .src-fbtn:hover { border-color: rgba(212,160,23,.5); color: #d4a017; }
+  .src-fbtn.on { background: #d4a017; border-color: #d4a017; color: #0f0a05; }
+
+  /* ── Séparateur de destination ── */
+  .src-dest-head {
+    display: flex; align-items: center; gap: .75rem;
+    padding: 2.25rem clamp(1rem,4vw,2rem) .5rem;
+    font-size: 1rem; font-weight: 800;
+  }
+  .src-dest-head::before {
+    content: ''; flex: 0 0 28px; height: 2px;
+    border-radius: 2px;
+  }
+  .src-dest-head-malin   { color: #1d3d72; }
+  .src-dest-head-plaisir { color: #6b2538; }
+  .src-dest-head-bebe    { color: #5c1a40; }
+  .src-dest-head-malin::before   { background: #1d3d72; }
+  .src-dest-head-plaisir::before { background: #6b2538; }
+  .src-dest-head-bebe::before    { background: #5c1a40; }
+  .src-dest-count {
+    background: #f0f0f0; color: #888; border-radius: 20px;
+    padding: .13rem .55rem; font-size: .7rem; font-weight: 700; font-family: system-ui,sans-serif;
+  }
+
+  /* ── Sections destination avec leur thème ── */
+  .src-dest-section { transition: opacity .2s; }
+  .src-dest-section.hidden { display: none; }
+
+  /* ── Placeholder image (structure identique à p-gallery-track > img) ── */
+  .src-placeholder {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem;
+  }
+  .src-emoji { font-size: 2.8rem; filter: drop-shadow(0 3px 10px rgba(0,0,0,.3)); }
+  .src-subfam-lbl {
+    font-size: .58rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; color: rgba(255,255,255,.3);
+  }
+
+  /* ── Boutons action (remplacent atc-btn, même forme pill) ── */
+  .src-btn {
+    padding: .42rem .9rem; border: none; border-radius: var(--r-full, 50px);
+    font-size: .78rem; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: filter .13s, transform .13s; white-space: nowrap; line-height: 1;
+  }
+  .src-btn:hover   { filter: brightness(1.1); transform: scale(1.03); }
+  .src-btn:disabled { cursor: default; transform: none; filter: none; }
+  .btn-val { background: linear-gradient(135deg,#059669,#047857); color: #fff; }
+  .btn-val:disabled { background: rgba(5,150,105,.4); color: #6ee7b7; }
+  .btn-rej { background: transparent; color: #dc2626; border: 1.5px solid rgba(220,38,38,.28) !important; padding: .38rem .6rem !important; }
+  .btn-rej:hover { background: rgba(220,38,38,.08); }
+  .btn-rej:disabled { opacity: .45; transform: none; filter: none; }
+  .btn-rst { background: rgba(0,0,0,.07); color: #888; border: 1.5px solid rgba(0,0,0,.1) !important; font-size: .7rem; padding: .36rem .5rem !important; }
+  .btn-rst:hover { background: rgba(0,0,0,.12); color: #555; }
+
+  /* Input rejet inline ── */
+  .src-rr {
+    display: none; align-items: center; gap: .3rem;
+    padding: 0 .9rem .75rem;
+  }
+  .src-rr.open { display: flex; }
+  .src-ri {
+    flex: 1; padding: .32rem .55rem;
+    border: 1.5px solid rgba(220,38,38,.28); border-radius: 8px;
+    font-size: .74rem; font-family: inherit; outline: none;
+    background: #fef2f2; color: #333; transition: border-color .13s;
+  }
+  .src-ri:focus { border-color: #dc2626; }
+  .src-rc {
+    padding: .32rem .6rem; border: none; border-radius: 8px;
+    background: #dc2626; color: #fff; font-size: .71rem; font-weight: 700;
+    cursor: pointer; font-family: inherit; white-space: nowrap;
+  }
+  .src-reject-reason {
+    font-size: .7rem; color: #dc2626; padding: .3rem .9rem .75rem; font-style: italic;
+  }
+
+  /* ── Products wrap sourcing ── */
+  .src-products-section { background: #f8f5f0; }
+
+  /* ── Toast ── */
+  #src-toast {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+    background: #1a1a1a; color: #fff; border-radius: 10px;
+    padding: .6rem 1.1rem; font-size: .82rem; font-weight: 600;
+    font-family: system-ui, sans-serif; box-shadow: 0 6px 24px rgba(0,0,0,.25);
+    transform: translateY(16px); opacity: 0; transition: all .22s; pointer-events: none;
+  }
+  #src-toast.show { transform: translateY(0); opacity: 1; }
+  #src-toast.ok  { background: #065f46; }
+  #src-toast.err { background: #7f1d1d; }
+
+  /* ── Auth gate (si pas admin) ── */
+  #srcGate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0a0704; display: none;
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  #srcGate.show { display: flex; }
+  .src-gate-msg {
+    font-family: system-ui, sans-serif; text-align: center;
+    color: rgba(217,196,160,.5); font-size: .9rem;
+  }
+  .src-gate-msg a {
+    color: #d4a017; text-decoration: none; font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    .src-hero-stats { gap: .35rem; }
+    .src-hstat { padding: .5rem .65rem; min-width: 60px; }
+    .src-hstat-n { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body class="page-sourcing">
+
+  <!-- ── AUTH GATE ── -->
+  <div id="srcGate">
+    <div class="src-gate-msg">
+      <div style="font-size:2rem;margin-bottom:1rem">🔒</div>
+      <p>Cette page est réservée aux administrateurs.</p>
+      <p style="margin-top:.75rem"><a href="admin.html">Accéder à l'espace admin →</a></p>
+    </div>
+  </div>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html"  class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span>Plaisir</span></a>
+        <a href="malin.html"    class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span>Malin</span></a>
+        <a href="bebe.html"     class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span>Bébé</span></a>
+        <a href="sourcing.html" class="nav-link" data-cat="sourcing"><span class="nav-dot"></span><span>Sourcing</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="cat-hero cat-hero-sourcing">
+    <div class="slide-particles">
+      <span class="p" style="top:12%;left:6%;--dur:8s;--delay:0s">◆</span>
+      <span class="p" style="top:58%;left:8%;--dur:10s;--delay:-2s">◇</span>
+      <span class="p" style="top:25%;left:22%;--dur:7s;--delay:-1s">◆</span>
+      <span class="p" style="top:65%;left:35%;--dur:9s;--delay:-3s">◇</span>
+      <span class="p" style="top:15%;right:10%;--dur:8s;--delay:-1.5s">◆</span>
+      <span class="p" style="top:55%;right:8%;--dur:11s;--delay:-2.5s">◇</span>
+      <span class="p" style="top:38%;right:22%;--dur:7s;--delay:-.5s">◆</span>
+    </div>
+    <div class="cat-hero-content">
+      <div class="slide-badges">
+        <span class="src-hero-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Sourcing · Antoine
+        </span>
+        <span class="src-hero-chip" id="srcDateChip" style="display:none"></span>
+      </div>
+      <h1 class="slide-title-sourcing">Catalogue<br>en construction</h1>
+      <p class="cat-hero-desc">Validez les produits à ajouter aux univers Malin, Plaisir et Bébé.</p>
+      <div class="src-hero-stats" id="srcStats" style="display:none">
+        <div class="src-hstat"><span class="src-hstat-n" id="sAll">—</span><span class="src-hstat-l">Total</span></div>
+        <div class="src-hstat"><span class="src-hstat-n pend" id="sPend">—</span><span class="src-hstat-l">En attente</span></div>
+        <div class="src-hstat"><span class="src-hstat-n vali" id="sVali">—</span><span class="src-hstat-l">Validés</span></div>
+        <div class="src-hstat"><span class="src-hstat-n reje" id="sReje">—</span><span class="src-hstat-l">Rejetés</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FILTRES DESTINATION ── -->
+  <div class="src-filters-bar" id="srcFiltersBar" style="display:none">
+    <span class="src-flbl">Destination</span>
+    <button class="src-fbtn on" data-dest="">Toutes</button>
+    <button class="src-fbtn" data-dest="malin">Malin</button>
+    <button class="src-fbtn" data-dest="plaisir">Plaisir</button>
+    <button class="src-fbtn" data-dest="bebe">Bébé</button>
+    <span class="src-flbl" style="margin-left:.5rem">Statut</span>
+    <button class="src-fbtn on" data-st="">Tous</button>
+    <button class="src-fbtn" data-st="pending">En attente</button>
+    <button class="src-fbtn" data-st="validated">Validés</button>
+    <button class="src-fbtn" data-st="rejected">Rejetés</button>
+  </div>
+
+  <!-- ── PRODUITS ── -->
+  <div class="src-products-section" id="srcProducts" style="display:none">
+    <div class="container" style="padding-bottom:4rem">
+
+      <!-- MALIN -->
+      <div class="src-dest-section" id="sect-malin">
+        <div class="src-dest-head src-dest-head-malin">
+          Malin <span class="src-dest-count" id="cnt-malin">0</span>
+        </div>
+        <div class="page-malin">
+          <section class="products-wrap" style="padding:1rem 0 2rem">
+            <div class="container" style="padding:0">
+              <div class="products-grid" id="grid-malin"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- PLAISIR -->
+      <div class="src-dest-section" id="sect-plaisir">
+        <div class="src-dest-head src-dest-head-plaisir">
+          Plaisir <span class="src-dest-count" id="cnt-plaisir">0</span>
+        </div>
+        <div class="page-plaisir">
+          <section class="products-wrap" style="padding:1rem 0 2rem">
+            <div class="container" style="padding:0">
+              <div class="products-grid" id="grid-plaisir"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- BÉBÉ -->
+      <div class="src-dest-section" id="sect-bebe">
+        <div class="src-dest-head src-dest-head-bebe">
+          Bébé <span class="src-dest-count" id="cnt-bebe">0</span>
+        </div>
+        <div class="page-bebe">
+          <section class="products-wrap" style="padding:1rem 0 2rem">
+            <div class="container" style="padding:0">
+              <div class="products-grid" id="grid-bebe"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo-link"><svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <nav class="footer-links-flat">
+        <a href="faq.html">FAQ</a>
+        <a href="livraison.html">Livraison</a>
+        <a href="retours.html">Retours</a>
+        <a href="contact.html">Contact</a>
+        <span class="footer-sep">|</span>
+        <a href="cgv.html">CGV</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cookies.html">Cookies</a>
+      </nav>
+      <div class="footer-end">
+        <div class="socials">
+          <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 000 12.68 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+        <span class="footer-copy">© 2026 Le Clam. Tous droits réservés.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-head">
+      <h3>Mon panier</h3>
+      <button class="cart-close" id="cartClose">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div></div>
+    <div class="cart-foot" id="cartFoot" style="display:none">
+      <div class="cart-total"><span>Total</span><span class="total-price" id="totalPrice">0,00 €</span></div>
+      <button class="checkout-btn" id="checkoutBtn">Commander →</button>
+    </div>
+  </aside>
+
+  <div id="src-toast"></div>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+
+<script>
+'use strict';
+
+const EMOJIS = {
+  tech:'⚡', maison:'🏠', 'bien-etre':'🌿', beaute:'✨', voyage:'✈️',
+  bureau:'💻', cuisine:'🍳', indispensable:'💎', soloclub:'🔮',
+  duo:'👫', lots:'📦', petitprix:'💸', accessoire:'🔌',
+  jouets:'🧸', vetements:'👕', mobilite:'🌙',
+};
+
+let _all   = [];
+let _token = '';
+let _dest  = '';
+let _st    = '';
+
+/* ── Auth ── */
+(async () => {
+  const token = localStorage.getItem('leclam_token');
+  if (token) {
+    try {
+      const r = await fetch('/api/auth/me', { headers:{'Authorization':'Bearer '+token}, credentials:'same-origin' });
+      const d = await r.json();
+      if (d.ok && (d.user?.role==='admin' || d.user?.role==='owner')) {
+        _token = token;
+        const chip = document.getElementById('srcDateChip');
+        if (chip) { chip.textContent = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}); chip.style.display='inline-flex'; }
+        document.getElementById('srcStats').style.display       = 'flex';
+        document.getElementById('srcFiltersBar').style.display  = '';
+        document.getElementById('srcProducts').style.display    = '';
+        await load();
+        return;
+      }
+    } catch {}
+  }
+  document.getElementById('srcGate').classList.add('show');
+})();
+
+/* ── Load ── */
+async function load() {
+  try {
+    const r = await fetch('/api/admin/sourcing-proposals',{headers:{'Authorization':'Bearer '+_token},credentials:'same-origin'});
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error||'Erreur');
+    _all = d.proposals;
+    updateStats();
+    render();
+  } catch(e) { toast('Erreur chargement : '+e.message,'err'); }
+}
+
+function updateStats() {
+  document.getElementById('sAll').textContent  = _all.length;
+  document.getElementById('sPend').textContent = _all.filter(p=>p.status==='pending').length;
+  document.getElementById('sVali').textContent = _all.filter(p=>p.status==='validated').length;
+  document.getElementById('sReje').textContent = _all.filter(p=>p.status==='rejected').length;
+}
+
+/* ── Render ── */
+function render() {
+  ['malin','plaisir','bebe'].forEach(cat => {
+    let list = _all.filter(p=>p.categorie===cat);
+    if (_st)   list = list.filter(p=>p.status===_st);
+    const hide = _dest && _dest!==cat;
+    document.getElementById('sect-'+cat).classList.toggle('hidden', hide);
+    document.getElementById('cnt-'+cat).textContent = list.length;
+    document.getElementById('grid-'+cat).innerHTML  = list.length
+      ? list.map(buildCard).join('')
+      : `<div style="font-family:system-ui,sans-serif;font-size:.85rem;color:#bbb;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit.</div>`;
+  });
+}
+
+/* ── Carte (même structure que products-render.js buildCard) ── */
+const SVG_HEART = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+function buildCard(p) {
+  const id    = p.id;
+  const emoji = EMOJIS[p.subfamille] || EMOJIS[(p.filtres||[])[0]] || '📦';
+  const imgSrc = p.images && p.images[0];
+  const imgEl = imgSrc
+    ? `<img src="${imgSrc}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block">`
+    : `<div class="src-placeholder"><span class="src-emoji">${emoji}</span><span class="src-subfam-lbl">${x(p.subfamille||'')}</span></div>`;
+  const mg    = parseFloat(p.marge)||0;
+  const mgColor = mg>=40 ? '#6ee7b7' : mg>=25 ? '#fcd34d' : '#fca5a5';
+  const price = p.prixVente!=null
+    ? Number(p.prixVente).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'
+    : '— €';
+  const costStr = p.prixFournisseur!=null
+    ? Number(p.prixFournisseur).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'
+    : '';
+  const iP=p.status==='pending', iV=p.status==='validated', iR=p.status==='rejected';
+
+  /* Badge (position abs sur l'image, via p-badge) */
+  const badge = iV
+    ? `<span class="p-badge" style="background:#059669">Validé ✓</span>`
+    : iR
+    ? `<span class="p-badge" style="background:#dc2626">Rejeté ✗</span>`
+    : `<span class="p-badge b-deal">Prio ${x(p.priorite||'?')}</span>`;
+
+  /* Boutons action (remplacent atc-btn, même forme pill) */
+  let actionBtns;
+  if (iP) {
+    actionBtns=`<div style="display:flex;gap:.25rem">
+      <button class="src-btn btn-val" onclick="doVal('${id}')">Valider</button>
+      <button class="src-btn btn-rej" id="btnR-${id}" onclick="openRej('${id}')">✗</button>
+    </div>`;
+  } else if (iV) {
+    actionBtns=`<div style="display:flex;gap:.25rem">
+      <button class="src-btn btn-val" disabled>Validé ✓</button>
+      <button class="src-btn btn-rst" onclick="doReset('${id}')">↩</button>
+    </div>`;
+  } else {
+    actionBtns=`<div style="display:flex;gap:.25rem">
+      <button class="src-btn btn-rej" disabled>Rejeté</button>
+      <button class="src-btn btn-rst" onclick="doReset('${id}')">↩</button>
+    </div>`;
+  }
+
+  return `<div class="p-card" data-id="${id}" data-price="${p.prixVente||0}" data-filter="${x((p.filtres||[]).join(','))}" data-subfamille="${x(p.subfamille||'')}">
+  <div class="p-img">
+    <div class="p-gallery">
+      <div class="p-gallery-track">
+        ${imgEl}
+      </div>
+    </div>
+    ${badge}
+    <button class="p-wish" style="pointer-events:none;opacity:.35">${SVG_HEART}</button>
+  </div>
+  <div class="p-info">
+    <div class="p-name">${x(p.nom)}</div>
+    <div class="p-sub" style="display:flex;align-items:center;gap:.3rem;font-size:.68rem;padding:.1rem 0 .35rem">
+      <span style="font-weight:800;color:${mgColor}">${mg}%</span>
+      <span style="opacity:.35">·</span>
+      <span style="opacity:.55">${x(p.fournisseur||'')}${costStr?' · coût '+costStr:''}</span>
+    </div>
+    <div class="p-foot">
+      <div><span class="p-price">${price}</span></div>
+      ${actionBtns}
+    </div>
+    ${iP?`<div class="src-rr" id="rr-${id}"><input class="src-ri" id="ri-${id}" placeholder="Raison du rejet…" onkeydown="if(event.key==='Enter')doRej('${id}')"><button class="src-rc" onclick="doRej('${id}')">Confirmer</button></div>`:''}
+    ${iR&&p.rejectReason?`<div class="src-reject-reason">« ${x(p.rejectReason)} »</div>`:''}
+  </div>
+</div>`;
+}
+/* ── Actions ── */
+async function doVal(id)   { await patch(id,{status:'validated',validatedAt:now(),rejectReason:null}); }
+async function doReset(id) { await patch(id,{status:'pending',rejectReason:null,validatedAt:null,rejectedAt:null}); }
+async function doRej(id) {
+  const reason=(document.getElementById('ri-'+id)?.value||'').trim();
+  await patch(id,{status:'rejected',rejectReason:reason||null,rejectedAt:now()});
+}
+function openRej(id) {
+  const rr=document.getElementById('rr-'+id);
+  const b=document.getElementById('btnR-'+id);
+  if(!rr) return;
+  rr.classList.toggle('open');
+  if(rr.classList.contains('open')){ document.getElementById('ri-'+id)?.focus(); if(b)b.textContent='↑'; }
+  else if(b) b.textContent='✗';
+}
+async function patch(id, body) {
+  try {
+    const r=await fetch('/api/admin/sourcing-proposals/'+id,{
+      method:'PATCH',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+_token},
+      credentials:'same-origin', body:JSON.stringify(body),
+    });
+    const d=await r.json();
+    if(!d.ok) throw new Error(d.error||'Erreur');
+    const i=_all.findIndex(p=>p.id===id);
+    if(i>-1) _all[i]=d.proposal;
+    updateStats(); render();
+    const m={validated:'Produit validé !',rejected:'Rejeté.',pending:'Remis en attente.'};
+    toast(m[body.status]||'OK', body.status==='validated'?'ok':'');
+  } catch(e){ toast('Erreur : '+e.message,'err'); }
+}
+
+/* ── Filtres ── */
+document.getElementById('srcFiltersBar').addEventListener('click', e => {
+  const b = e.target.closest('.src-fbtn');
+  if (!b) return;
+  if ('dest' in b.dataset) {
+    document.querySelectorAll('[data-dest]').forEach(el=>el.classList.remove('on'));
+    b.classList.add('on'); _dest=b.dataset.dest; render();
+  }
+  if ('st' in b.dataset) {
+    document.querySelectorAll('[data-st]').forEach(el=>el.classList.remove('on'));
+    b.classList.add('on'); _st=b.dataset.st; render();
+  }
+});
+
+/* ── Utils ── */
+function now(){ return new Date().toISOString().slice(0,10); }
+function x(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+let _tt;
+function toast(msg,type){
+  const t=document.getElementById('src-toast');
+  t.textContent=msg; t.className='show '+(type||'');
+  clearTimeout(_tt); _tt=setTimeout(()=>t.className='',3000);
+}
+</script>
+</body>
+</html>
