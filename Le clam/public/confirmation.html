@@ -217,6 +217,103 @@
 
     /* ── Séparateur entre sections et steps ── */
     .confirm-divider { height: .8rem; }
+
+    /* ── Recommandations ── */
+    .conf-reco {
+      padding: 3rem 1.5rem 5rem;
+      background: #f5f3ef;
+    }
+    .conf-reco-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .conf-reco-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: .35rem;
+    }
+    .conf-reco-sub {
+      text-align: center;
+      font-size: .82rem;
+      color: #999;
+      margin-bottom: 2rem;
+    }
+    .conf-reco-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .conf-reco-track {
+        display: flex;
+        overflow-x: auto;
+        gap: .75rem;
+        padding-bottom: .75rem;
+        scrollbar-width: none;
+      }
+      .conf-reco-track::-webkit-scrollbar { display: none; }
+      .reco-card { min-width: 155px; flex-shrink: 0; }
+    }
+    .reco-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .reco-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .reco-thumb {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: #ede9e2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+    }
+    .reco-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .reco-info { padding: .8rem .85rem; flex: 1; display: flex; flex-direction: column; gap: .25rem; }
+    .reco-stars { font-size: .72rem; color: #e8a000; }
+    .reco-stars span { color: #bbb; }
+    .reco-name {
+      font-size: .78rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .reco-price {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: auto;
+      padding-top: .3rem;
+    }
+    .reco-cat-badge {
+      font-size: .62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: .15rem .5rem;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: .15rem;
+      width: fit-content;
+    }
+    .reco-cat-plaisir { background: #fce7f0; color: #9b1c4a; }
+    .reco-cat-malin   { background: #ede9f8; color: #5b21b6; }
+    .reco-cat-bebe    { background: #fce7ef; color: #9d174d; }
+    .reco-cat-poppers { background: #fef3c7; color: #92400e; }
   </style></head>
 <body class="page-neutre">
 
@@ -294,9 +391,24 @@
     </div>
   </main>
 
+  <!-- Section recommandations (insérée après le footer si besoin) -->
+  <section class="conf-reco" id="confReco" style="display:none">
+    <div class="conf-reco-inner">
+      <h2 class="conf-reco-title">Vous aimerez aussi</h2>
+      <p class="conf-reco-sub">Les plus appréciés dans vos univers</p>
+      <div class="conf-reco-track" id="confRecoTrack"></div>
+    </div>
+  </section>
+
+  <script src="js/products-data.js"></script>
   <script src="js/app.js?v=11"></script>
   <script src="js/features.js"></script>
   <script>
+    /* ── Sauvegarde le panier AVANT qu'il soit effacé ── */
+    const _savedCart = (() => {
+      try { return JSON.parse(localStorage.getItem('leclam_cart') || '[]'); } catch { return []; }
+    })();
+
     const params  = new URLSearchParams(location.search);
     const userObj = JSON.parse(localStorage.getItem('leclam_user') || '{}');
 
@@ -368,6 +480,63 @@
 
     let _lastOrder = null;
 
+    /* ── Recommandations post-achat ── */
+    function getCatOfProduct(id) {
+      if (!window.PRODUCTS_DATA) return null;
+      for (const [cat, prods] of Object.entries(window.PRODUCTS_DATA)) {
+        if (prods.some(p => p.id === id)) return cat;
+      }
+      const prefix = id.split('-')[0];
+      return ['plaisir','malin','bebe','poppers'].includes(prefix) ? prefix : null;
+    }
+
+    function renderRecommendations(orderItems) {
+      if (!window.PRODUCTS_DATA) return;
+      const srcItems = (orderItems && orderItems.length) ? orderItems : _savedCart;
+      if (!srcItems.length) return;
+
+      const purchasedIds = new Set(srcItems.map(i => i.id).filter(Boolean));
+      const cats = [...new Set(srcItems.map(i => i.id ? getCatOfProduct(i.id) : null).filter(Boolean))];
+      if (!cats.length) return;
+
+      let candidates = [];
+      for (const cat of cats) {
+        const prods = window.PRODUCTS_DATA[cat] || [];
+        candidates.push(...prods.filter(p => !purchasedIds.has(p.id)));
+      }
+
+      candidates.sort((a, b) => ((b.reviews || 0) * (b.rating || 5)) - ((a.reviews || 0) * (a.rating || 5)));
+      const picks = candidates.slice(0, 6);
+      if (!picks.length) return;
+
+      const CAT_URL   = { plaisir:'plaisir.html', malin:'malin.html', bebe:'bebe.html', poppers:'poppers.html' };
+      const CAT_LABEL = { plaisir:'Plaisir', malin:'Malin', bebe:'Bébé', poppers:'Poppers' };
+
+      const track = document.getElementById('confRecoTrack');
+      track.innerHTML = picks.map(p => {
+        const cat    = getCatOfProduct(p.id) || 'malin';
+        const url    = CAT_URL[cat] || 'index.html';
+        const imgSrc = p.images && p.images[0];
+        const imgHtml = imgSrc
+          ? `<img src="${imgSrc}" alt="" loading="lazy">`
+          : `<span>${p.emoji || '📦'}</span>`;
+        const price  = Number(p.price).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+        const stars  = p.reviews ? `<div class="reco-stars">★ ${p.rating||5} <span>(${p.reviews})</span></div>` : '';
+        const badge  = `<span class="reco-cat-badge reco-cat-${cat}">${CAT_LABEL[cat]||cat}</span>`;
+        return `<a href="${url}" class="reco-card">
+          <div class="reco-thumb">${imgHtml}</div>
+          <div class="reco-info">
+            ${badge}
+            ${stars}
+            <div class="reco-name">${p.name_fr || p.name || ''}</div>
+            <div class="reco-price">${price}</div>
+          </div>
+        </a>`;
+      }).join('');
+
+      document.getElementById('confReco').style.display = '';
+    }
+
     function renderConfirm(order) {
       _lastOrder = order;
       renderItems(order.items);
@@ -378,6 +547,8 @@
         const email = order.email || userObj.email;
         document.getElementById('emailNote').textContent = I18n.t('checkout.email_sent').replace('{{email}}', email);
       }
+
+      renderRecommendations(order.items);
     }
 
     /* Re-render les labels traduits une fois que I18n a chargé */
