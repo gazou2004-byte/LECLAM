@@ -3360,6 +3360,20 @@ window._saveFournisseurEdit = function(id) {
   _closeAdminPanel();
 };
 
+/* ── Sync photos → serveur (products-overrides.json) ── */
+async function _patchProductImages(id, images) {
+  const tok  = localStorage.getItem('leclam_token') || '';
+  const csrf = localStorage.getItem('leclam_csrf')  || '';
+  try {
+    await fetch('/api/admin/products/' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok, 'X-CSRF-Token': csrf },
+      body: JSON.stringify({ images }),
+      credentials: 'same-origin',
+    });
+  } catch(e) { console.warn('[photo sync]', e); }
+}
+
 /* ── Panel photos ── */
 window._openPhotoPanel = function(id) {
   _closeAdminPanel();
@@ -3407,10 +3421,12 @@ window._movePhoto = function(id, idx, dir) {
   else           track.insertBefore(imgs[idx+1], imgs[idx]);
 
   /* Sauvegarder l'ordre */
-  const newImgs = Array.from(track.querySelectorAll('img'));
-  const edits   = JSON.parse(localStorage.getItem('leclam_prod_edits') || '{}');
-  edits[id] = { ...(edits[id]||{}), photoOrder: newImgs.map(i => i.getAttribute('src')) };
+  const newImgs  = Array.from(track.querySelectorAll('img'));
+  const newOrder = newImgs.map(i => i.getAttribute('src'));
+  const edits    = JSON.parse(localStorage.getItem('leclam_prod_edits') || '{}');
+  edits[id] = { ...(edits[id]||{}), photoOrder: newOrder };
   localStorage.setItem('leclam_prod_edits', JSON.stringify(edits));
+  _patchProductImages(id, newOrder);
 
   /* Réinitialiser la galerie (clone pour supprimer les vieux listeners) */
   const gallery = card.querySelector('.p-gallery');
@@ -3605,11 +3621,12 @@ window._trashPhoto = function(prodId, src) {
     const img = Array.from(track.querySelectorAll('img')).find(i => i.getAttribute('src') === src);
     if (img) img.remove();
   }
-  /* Mettre à jour l'ordre sauvegardé */
+  /* Mettre à jour l'ordre sauvegardé + sync serveur */
   const edits = JSON.parse(localStorage.getItem('leclam_prod_edits')||'{}');
   const remaining = card ? Array.from(card.querySelectorAll('.p-gallery-track img')).map(i => i.getAttribute('src')) : [];
   edits[prodId] = { ...(edits[prodId]||{}), photoOrder: remaining };
   localStorage.setItem('leclam_prod_edits', JSON.stringify(edits));
+  _patchProductImages(prodId, remaining);
   /* Rafraîchir */
   const listEl = document.getElementById('adminPhotoList');
   if (listEl && window._buildPhotoList) listEl.innerHTML = window._buildPhotoList();
@@ -3617,7 +3634,7 @@ window._trashPhoto = function(prodId, src) {
 };
 
 /* Restaurer une photo depuis la corbeille */
-window._restorePhoto = function(prodId, src) {
+window._restorePhoto = async function(prodId, src) {
   let trash = _getPhotoTrash();
   trash = trash.filter(t => !(t.prodId === prodId && t.src === src));
   _savePhotoTrash(trash);
@@ -3627,6 +3644,7 @@ window._restorePhoto = function(prodId, src) {
   if (!edits[prodId].photoOrder) edits[prodId].photoOrder = [];
   if (!edits[prodId].photoOrder.includes(src)) edits[prodId].photoOrder.push(src);
   localStorage.setItem('leclam_prod_edits', JSON.stringify(edits));
+  await _patchProductImages(prodId, edits[prodId].photoOrder);
   _closeAdminPanel();
   window._refreshCorbeilleBtn?.();
   location.reload();
