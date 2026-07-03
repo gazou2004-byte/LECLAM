@@ -30,8 +30,12 @@ const BCRYPT_ROUNDS = 12;
 
 /* ── VAPID (Web Push) ── */
 const VAPID_PUBLIC  = process.env.VAPID_PUBLIC  || 'BA-ReC5q3TOvyb7q4KVA7F89s-5_YQDBmIcBwp0DjVxc-Gnt_w15vchE3dWgdVD5CVseHmyUB4ZFONrXHoFm2sY';
-const VAPID_PRIVATE = process.env.VAPID_PRIVATE || '550QinlGC5MH1xXIYnCpWMlKYh2yGvI5syfFFuChBck';
-webpush.setVapidDetails('mailto:contact@leclam.eu', VAPID_PUBLIC, VAPID_PRIVATE);
+const VAPID_PRIVATE = process.env.VAPID_PRIVATE || null;
+if (VAPID_PUBLIC && VAPID_PRIVATE) {
+  webpush.setVapidDetails('mailto:contact@leclam.eu', VAPID_PUBLIC, VAPID_PRIVATE);
+} else {
+  console.warn('[VAPID] VAPID_PRIVATE non configuré — notifications push désactivées');
+}
 
 /* Informations légales du vendeur — utilisées sur les factures PDF */
 const SELLER = {
@@ -141,7 +145,7 @@ let USERS     = loadJSON(USERS_FILE);   // { email -> { name, email, hash, salt,
 if (process.env.ADMIN_PASSWORD) {
   (async () => {
     const hash = await bcrypt.hash(process.env.ADMIN_PASSWORD, BCRYPT_ROUNDS);
-    const ownerEmail = process.env.OWNER_EMAIL || 'gazou2004@gmail.com';
+    const ownerEmail = process.env.OWNER_EMAIL || 'admin@leclam.fr';
     /* Met à jour ou crée le compte owner */
     if (!USERS[ownerEmail]) {
       USERS[ownerEmail] = { name: 'Antoine', email: ownerEmail, role: 'owner', createdAt: new Date().toISOString() };
@@ -394,8 +398,8 @@ L'équipe Le Clam
    OWNER_EMAIL = gazou2004@gmail.com (ou variable d'env)
    ───────────────────────────────────────── */
 async function notifyOwner(order) {
-  const ownerEmail = process.env.OWNER_EMAIL || 'gazou2004@gmail.com';
-  if (!process.env.GMAIL_USER) return;
+  const ownerEmail = process.env.OWNER_EMAIL || '';
+  if (!process.env.GMAIL_USER || !ownerEmail) return;
 
   const lignes = order.items.map(i =>
     `  ${i.emoji || '📦'} ${i.name} x${i.qty}  →  ${(i.price * i.qty).toFixed(2)} €`
@@ -647,7 +651,7 @@ function trackFailedAuth(ip) {
     if (process.env.GMAIL_USER) {
       mailer.sendMail({
         from:    `"Le Clam Security" <${process.env.GMAIL_USER}>`,
-        to:      process.env.OWNER_EMAIL || 'gazou2004@gmail.com',
+        to:      process.env.OWNER_EMAIL || '',
         subject: `${severity} Alerte sécurité — ${count} tentatives suspectes`,
         text:    msg
           + `\n\nPremière tentative : ${new Date(FAIL_COUNTER[ip].firstAt).toLocaleString('fr-FR')}`
@@ -763,8 +767,9 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
   const sig           = req.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!webhookSecret) {
-    /* En développement sans secret configuré : ignorer silencieusement */
-    return res.json({ received: true });
+    console.error('[STRIPE WEBHOOK] STRIPE_WEBHOOK_SECRET manquant — webhook refusé');
+    writeLog('security', { event: 'webhook_no_secret' });
+    return res.status(500).json({ error: 'Configuration webhook manquante' });
   }
 
   let event;
@@ -1598,6 +1603,7 @@ app.get(['/lc-icon.svg', '/lc-favicon.svg'], (req, res) => {
   res.setHeader('Content-Type', 'image/svg+xml');
   res.sendFile(path.join(__dirname, 'public', 'lc-favicon.svg'));
 });
+app.use('/data', (req, res) => res.status(403).json({ error: 'Interdit' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ─────────────────────────────────────────
@@ -1897,7 +1903,7 @@ app.post('/api/orders', requireCsrfIfAuthenticated, (req, res) => {
     }
     if (!found) return res.status(400).json({ ok: false, error: `Produit introuvable: ${item.id}` });
     const qty = Math.max(1, Math.min(Math.floor(Number(item.qty) || 1), 99, found.stock));
-    total += found.price * qty;
+    total += _effectivePrice(found.id, found.price) * qty;
     validatedItems.push({ ...found, qty });
   }
 
@@ -2015,8 +2021,9 @@ app.post('/api/auth/login', authLimiter, async (req, res) => {
   res.json({ ok: true, token, csrfToken, expiresIn: ACCESS_TOKEN_TTL, user: { name: user.name, email: user.email, role: user.role || 'user' } });
 });
 
-/** GET /api/auth/localhost — auto-login sans mot de passe (localhost uniquement) */
+/** GET /api/auth/localhost — auto-login sans mot de passe (localhost uniquement, désactivé en prod) */
 app.get('/api/auth/localhost', (req, res) => {
+  if (process.env.NODE_ENV === 'production') return res.status(404).json({ ok: false, error: 'Non disponible.' });
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
              || req.socket?.remoteAddress || '';
   const isLocal = ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1' || ip === '';
@@ -2107,7 +2114,7 @@ app.post('/api/auth/admin-login', authLimiter, async (req, res) => {
     return res.status(401).json({ ok: false, error: 'Clé incorrecte.' });
   }
 
-  const adminUser = { name: 'Admin', email: process.env.OWNER_EMAIL || 'gazou2004@gmail.com', role: 'admin' };
+  const adminUser = { name: 'Admin', email: process.env.OWNER_EMAIL || 'admin@leclam.fr', role: 'admin' };
   const { token, csrfToken } = createSession(adminUser);
   const refreshToken = createRefreshToken(adminUser.email);
   res.cookie('leclam_session', token, COOKIE_OPTS);

@@ -583,13 +583,11 @@ function sortProposals(list) {
 
 /* ── Auth ── */
 (async () => {
-  const token = localStorage.getItem('leclam_token');
-  if (token) {
-    try {
-      const r = await fetch('/api/auth/me', { headers:{'Authorization':'Bearer '+token}, credentials:'same-origin' });
-      const d = await r.json();
-      if (d.ok && (d.user?.role==='admin' || d.user?.role==='owner')) {
-        _token = token;
+  try {
+    const r = await fetch('/api/auth/me', { credentials:'same-origin' });
+    const d = await r.json();
+    if (d.ok && (d.user?.role==='admin' || d.user?.role==='owner')) {
+      _token = null; /* cookie httpOnly — pas de token JS */
         const chip = document.getElementById('srcDateChip');
         if (chip) { chip.textContent = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}); chip.style.display='inline-flex'; }
         document.getElementById('srcStats').style.display       = 'flex';
@@ -597,16 +595,15 @@ function sortProposals(list) {
         document.getElementById('srcProducts').style.display    = '';
         await load();
         return;
-      }
-    } catch {}
-  }
+    }
+  } catch {}
   document.getElementById('srcGate').classList.add('show');
 })();
 
 /* ── Load ── */
 async function load() {
   try {
-    const r = await fetch('/api/admin/sourcing-proposals',{headers:{'Authorization':'Bearer '+_token},credentials:'same-origin'});
+    const r = await fetch('/api/admin/sourcing-proposals',{credentials:'same-origin'});
     const d = await r.json();
     if (!d.ok) throw new Error(d.error||'Erreur');
     _all = d.proposals;
@@ -740,7 +737,7 @@ async function patch(id, body) {
   try {
     const r=await fetch('/api/admin/sourcing-proposals/'+id,{
       method:'PATCH',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+_token},
+      headers:{'Content-Type':'application/json'},
       credentials:'same-origin', body:JSON.stringify(body),
     });
     const d=await r.json();
@@ -822,7 +819,7 @@ function openFiche(id) {
   const liensHtml = liens.length
     ? `<div class="src-fiche-section">
         <div class="src-fiche-section-lbl">Où trouver le produit</div>
-        <div class="src-fiche-links">${liens.map(l=>`<a class="src-fiche-link" href="${x(l.url||'#')}" target="_blank" rel="noopener">
+        <div class="src-fiche-links">${liens.map(l=>`<a class="src-fiche-link" href="${safeUrl(l.url)}" target="_blank" rel="noopener">
           <span class="src-fiche-link-icon">${linkIcon(l.url)}</span>
           <span>${x(l.label||l.url)}</span>
           <span class="src-fiche-link-arrow">↗</span>
@@ -882,6 +879,7 @@ document.addEventListener('keydown', e => { if (e.key==='Escape') closeFiche(); 
 /* ── Utils ── */
 function now(){ return new Date().toISOString().slice(0,10); }
 function x(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function safeUrl(u){ return u && /^https?:\/\//i.test(u) ? u : '#'; }
 let _tt;
 function toast(msg,type){
   const t=document.getElementById('src-toast');

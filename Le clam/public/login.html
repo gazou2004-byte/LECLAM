@@ -243,7 +243,6 @@
         const r = await fetch('/api/auth/localhost', { credentials: 'same-origin' });
         const d = await r.json();
         if (d.ok && ['admin','owner'].includes(d.user.role)) {
-          localStorage.setItem('leclam_token', d.token);
           localStorage.setItem('leclam_csrf',  d.csrfToken);
           localStorage.setItem('leclam_user',  JSON.stringify(d.user));
           location.href = redirect || 'admin.html';
@@ -252,14 +251,12 @@
       } catch { /* serveur injoignable, continue vers le formulaire */ }
     }
 
-    /* Déjà connecté ? Rediriger directement */
-    const token = localStorage.getItem('leclam_token');
-    if (!token) return;
-    fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token }, credentials: 'same-origin' })
+    /* Déjà connecté ? Rediriger directement (cookie httpOnly, pas besoin de token) */
+    fetch('/api/auth/me', { credentials: 'same-origin' })
       .then(function(r) { return r.json(); })
       .then(function(d) {
         if (d.ok) location.href = redirect || 'index.html';
-        else { localStorage.removeItem('leclam_token'); localStorage.removeItem('leclam_csrf'); }
+        else { localStorage.removeItem('leclam_csrf'); }
       })
       .catch(function() { /* serveur injoignable, reste sur login */ });
   })();
@@ -280,7 +277,6 @@
 
   /* Stocke le token et le csrfToken après authentification réussie */
   function connectUser(user, token, csrfToken, defaultRedirect, extraData) {
-    if (token)     localStorage.setItem('leclam_token',    token);
     if (csrfToken) localStorage.setItem('leclam_csrf',     csrfToken);
     localStorage.setItem('leclam_user', JSON.stringify({
       name: user.name, email: user.email, role: user.role || 'user',
