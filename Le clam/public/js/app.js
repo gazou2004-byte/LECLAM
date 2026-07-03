@@ -2228,76 +2228,78 @@ let _origCardOrder = null;
 /* ── Sous-familles ── */
 const SUB_FILTERS = {
   duo:      [{ v:'coquin',       l:'Coquin' }, { v:'telecommande', l:'Télécommandé' }],
-  soloclub: [{ v:'homme',        l:'Homme'   }, { v:'femme',        l:'Femme'         }, { v:'anal', l:'Anal' }],
+  soloclub: [{ v:'femme', l:'Femme', mode:'groupe' }, { v:'homme', l:'Homme', mode:'groupe' }, { v:'mixte', l:'Mixte', mode:'groupe' }],
   maison:   [{ v:'cuisine',      l:'Cuisine' }, { v:'chambre',      l:'Chambre'       }, { v:'sdb',  l:'Salle de bain' }],
 };
 let _activeSubFam = '';
+let _activeGroupe = '';
 
 function closeSubDropdown() {
-  document.querySelectorAll('.subfam-dropdown').forEach(d => d.remove());
+  const row = document.getElementById('subfamRow');
+  if (row) { row.classList.remove('open'); row.innerHTML = ''; }
   document.querySelectorAll('.f-btn.subfam-open').forEach(b => b.classList.remove('subfam-open'));
 }
 
-function positionDropdown(drop, anchor) {
-  const r = anchor.getBoundingClientRect();
-  drop.style.top  = (r.bottom + window.scrollY + 6) + 'px';
-  drop.style.left = (r.left + window.scrollX + r.width / 2) + 'px';
+function _getSubfamRow() {
+  let row = document.getElementById('subfamRow');
+  if (!row) {
+    const bar = document.querySelector('.filters-bar');
+    if (!bar) return null;
+    row = document.createElement('div');
+    row.className = 'subfam-row';
+    row.id = 'subfamRow';
+    bar.appendChild(row);
+  }
+  return row;
 }
 
 function renderSubFilters(filter) {
   closeSubDropdown();
   _activeSubFam = '';
+  _activeGroupe = '';
 
   const subs = SUB_FILTERS[filter];
   if (!subs) return;
 
-  const anchor = document.querySelector(`.f-btn[data-filter="${filter}"]`);
-  if (!anchor) return;
+  const row = _getSubfamRow();
+  if (!row) return;
 
-  const drop = document.createElement('div');
-  drop.className = 'subfam-dropdown';
-  drop.innerHTML = `<button class="sf-btn active" data-sf="">Tout</button>`
+  const anchor = document.querySelector(`.f-btn[data-filter="${filter}"]`);
+  if (anchor) anchor.classList.add('subfam-open');
+
+  const useGroupe = subs.length > 0 && subs[0].mode === 'groupe';
+
+  const inner = document.createElement('div');
+  inner.className = 'subfam-row-inner';
+  inner.innerHTML = `<button class="sf-btn active" data-sf="">Tout</button>`
     + subs.map(s => `<button class="sf-btn" data-sf="${s.v}">${s.l}</button>`).join('');
 
-  anchor.classList.add('subfam-open');
-  document.body.appendChild(drop);
-  positionDropdown(drop, anchor);
+  row.appendChild(inner);
+  row.classList.add('open');
 
-  drop.querySelectorAll('.sf-btn').forEach(btn => {
+  inner.querySelectorAll('.sf-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
+      inner.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
       if (btn.dataset.sf === '') {
-        /* "Tout" → réinitialise tout (famille + sous-famille) */
-        closeSubDropdown();
+        /* "Tout" dans le défileur → tous les produits de la famille active, sans sous-filtre */
         _activeSubFam = '';
-        const toutBtn = document.querySelector('.f-btn-tout');
-        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
-        if (toutBtn) toutBtn.classList.add('active');
+        _activeGroupe = '';
         applyFiltersAndSearch();
       } else {
-        _activeSubFam = btn.dataset.sf;
-        closeSubDropdown();
+        if (useGroupe) {
+          _activeGroupe = btn.dataset.sf;
+          _activeSubFam = '';
+        } else {
+          _activeSubFam = btn.dataset.sf;
+          _activeGroupe = '';
+        }
         applyFiltersAndSearch();
       }
     });
   });
-
-  /* Repositionner au scroll/resize */
-  const repos = () => positionDropdown(drop, anchor);
-  window.addEventListener('scroll', repos, { passive: true });
-  window.addEventListener('resize', repos, { passive: true });
-
-  /* Fermer en cliquant ailleurs */
-  setTimeout(() => {
-    document.addEventListener('click', function handler(e) {
-      if (!drop.contains(e.target) && e.target !== anchor) {
-        closeSubDropdown();
-        window.removeEventListener('scroll', repos);
-        window.removeEventListener('resize', repos);
-        document.removeEventListener('click', handler);
-      }
-    });
-  }, 0);
 }
 
 function applyFiltersAndSearch() {
@@ -2313,7 +2315,8 @@ function applyFiltersAndSearch() {
   const filterAll = activeFilters.length === 0;
 
   const grid  = document.querySelector('.products-grid');
-  const cards = Array.from(document.querySelectorAll('.p-card'));
+  /* Exclure les cartes gérées par la page sourcing (data-src-card) */
+  const cards = Array.from(document.querySelectorAll('.p-card:not([data-src-card])'));
 
   /* Mémoriser l'ordre HTML d'origine une seule fois */
   if (!_origCardOrder) _origCardOrder = [...cards];
@@ -2330,13 +2333,15 @@ function applyFiltersAndSearch() {
     const tags     = (card.dataset.filter    || '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
     const familles = (card.dataset.famille   || '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
     const subfams  = (card.dataset.subfamille|| '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+    const groupes  = (card.dataset.groupe    || '').split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
     const name  = (card.querySelector('.p-name')?.textContent || '').toLowerCase();
     const sub   = (card.querySelector('.p-sub')?.textContent  || '').toLowerCase();
 
     /* Filtres combinables : la carte doit matcher N'IMPORTE LEQUEL des filtres actifs */
-    const matchMain = filterAll || activeFilters.some(f => tags.includes(f) || familles.includes(f));
-    const matchSub  = !_activeSubFam || subfams.includes(_activeSubFam);
-    const match = matchMain && matchSub && (!query || name.includes(query) || sub.includes(query));
+    const matchMain   = filterAll || activeFilters.some(f => tags.includes(f) || familles.includes(f));
+    const matchSub    = !_activeSubFam || subfams.includes(_activeSubFam);
+    const matchGroupe = !_activeGroupe || groupes.includes(_activeGroupe);
+    const match = matchMain && matchSub && matchGroupe && (!query || name.includes(query) || sub.includes(query));
     card.style.display = match ? '' : 'none';
     if (match) visible++;
   });
@@ -2391,13 +2396,17 @@ function initFilters() {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       _activeSubFam = '';
+      _activeGroupe = '';
       applyFiltersAndSearch();
       return;
     }
 
-    /* Toggle dropdown si même famille recliquée (déselectionne) */
+    /* Toggle défileur si même famille recliquée (ferme le défileur, garde le filtre principal) */
     if (btn.classList.contains('subfam-open')) {
       closeSubDropdown();
+      _activeSubFam = '';
+      _activeGroupe = '';
+      applyFiltersAndSearch();
       return;
     }
     closeSubDropdown();
@@ -2414,6 +2423,7 @@ function initFilters() {
     } else {
       /* Recliqué → retour à "Tout" */
       _activeSubFam = '';
+      _activeGroupe = '';
       if (toutBtn) toutBtn.classList.add('active');
     }
     applyFiltersAndSearch();

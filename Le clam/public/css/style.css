@@ -2695,58 +2695,53 @@ html body { margin-top: 0 !important; }
 }
 
 
-/* ── Dropdown sous-familles ── */
-.subfam-dropdown {
-  position: absolute;
-  transform: translateX(-50%);
-  background: #fff;
-  border: 1.5px solid rgba(62,42,20,.2);
-  border-radius: 12px;
-  box-shadow: 0 8px 28px rgba(0,0,0,.14);
-  padding: .4rem .3rem;
-  z-index: 200;
+/* ── Défileur sous-familles (barre inline) ── */
+.subfam-row {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .28s ease, padding .28s ease;
+  padding: 0;
+}
+.subfam-row.open {
+  max-height: 56px;
+  padding-top: .45rem;
+}
+.subfam-row-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
   display: flex;
-  flex-direction: column;
-  gap: .15rem;
-  min-width: 150px;
+  align-items: center;
+  gap: .45rem;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
-
-.subfam-dropdown::before {
-  content: '';
-  position: absolute;
-  top: -.45rem;
-  left: 50%;
-  transform: translateX(-50%);
-  border: .45rem solid transparent;
-  border-bottom-color: rgba(62,42,20,.2);
-}
-.subfam-dropdown::after {
-  content: '';
-  position: absolute;
-  top: -.35rem;
-  left: 50%;
-  transform: translateX(-50%);
-  border: .4rem solid transparent;
-  border-bottom-color: #fff;
-}
+.subfam-row-inner::-webkit-scrollbar { display: none; }
 
 .sf-btn {
-  padding: .45rem .9rem;
-  border-radius: 8px;
-  font-size: .85rem;
+  padding: .3rem 1rem;
+  border-radius: var(--r-full);
+  font-size: .82rem;
   font-weight: 600;
   font-family: var(--serif);
   white-space: nowrap;
-  border: none;
+  border: 1.5px solid rgba(62,42,20,.3);
   color: #3e2a14;
   background: transparent;
   cursor: pointer;
-  text-align: left;
-  transition: background var(--t-fast);
+  flex-shrink: 0;
+  transition: all var(--t-fast);
 }
+.sf-btn:hover  { background: rgba(62,42,20,.08); border-color: rgba(62,42,20,.5); }
+.sf-btn.active { background: #3e2a14; border-color: #3e2a14; color: #d9c4a0; }
 
-.sf-btn:hover   { background: rgba(62,42,20,.08); }
-.sf-btn.active  { background: var(--plaisir-2); color: #fff; border-radius: 8px; }
+/* Thème Plaisir pour le défileur */
+.page-plaisir .sf-btn {
+  border-color: rgba(184,134,11,.35);
+  color: #6b3a1f;
+}
+.page-plaisir .sf-btn:hover  { background: rgba(184,134,11,.1); border-color: rgba(184,134,11,.6); }
+.page-plaisir .sf-btn.active { background: var(--plaisir-2); border-color: var(--plaisir-2); color: #fff; }
 
 /* Flèche sur les familles avec sous-familles */
 .f-arrow {
@@ -2763,12 +2758,10 @@ html body { margin-top: 0 !important; }
   border-color: #3e2a14;
   color: #d9c4a0;
 }
-
-.sf-btn:hover { background: rgba(62,42,20,.1); }
-.sf-btn.active {
-  background: #3e2a14;
-  border-color: #3e2a14;
-  color: #d9c4a0;
+.page-plaisir .f-btn.subfam-open {
+  background: var(--plaisir-2);
+  border-color: var(--plaisir-2);
+  color: #fff;
 }
 
 /* IDÉE 2 — nuit velours (sauvegarde)

@@ -212,6 +212,166 @@
     .src-hstat { padding: .5rem .65rem; min-width: 60px; }
     .src-hstat-n { font-size: 1.25rem; }
   }
+
+  /* ── Séparateurs de sous-famille dans la grille ── */
+  .src-subfam-sep {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: .6rem;
+    padding: 1.2rem 0 .5rem;
+  }
+  .src-subfam-sep:first-child { padding-top: .25rem; }
+  .src-subfam-sep-name {
+    font-size: .68rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .1em; color: #999; white-space: nowrap;
+    font-family: system-ui, sans-serif;
+  }
+  .src-subfam-sep-count {
+    background: #f0ede7; color: #bbb; border-radius: 20px;
+    padding: .1rem .48rem; font-size: .63rem; font-weight: 700;
+    font-family: system-ui, sans-serif; flex-shrink: 0;
+  }
+  .src-subfam-sep::after {
+    content: ''; flex: 1; height: 1px; background: #ede8e0;
+  }
+  .src-subfam-sep { cursor: pointer; }
+  .src-subfam-sep:hover .src-subfam-sep-name { color: #b07d10; }
+  .src-subfam-sep.src-subfam-active .src-subfam-sep-name { color: #d4a017; font-weight: 900; }
+  .src-subfam-sep.src-subfam-active .src-subfam-sep-count { background: #fef3c7; color: #b45309; }
+  /* ── Séparateurs de groupe (à l'intérieur d'une sous-famille) ── */
+  .src-groupe-sep {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: .5rem;
+    padding: .65rem 0 .25rem 1.25rem;
+  }
+  .src-groupe-sep-name {
+    font-size: .62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .09em; color: #c0b8ae; white-space: nowrap;
+    font-family: system-ui, sans-serif;
+  }
+  .src-groupe-sep-count {
+    background: #f5f2ef; color: #ccc; border-radius: 20px;
+    padding: .08rem .42rem; font-size: .6rem; font-weight: 700;
+    font-family: system-ui, sans-serif; flex-shrink: 0;
+  }
+  .src-groupe-sep::after { content: ''; flex: 1; height: 1px; background: #f0ece5; }
+
+  /* Badge multi-famille dans les cartes */
+  .src-multicats {
+    display: flex; gap: .25rem; flex-wrap: wrap;
+    padding: .25rem .9rem .5rem;
+  }
+  .src-multicat-chip {
+    font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+    padding: .15rem .45rem; border-radius: 20px; line-height: 1.4;
+    font-family: system-ui, sans-serif;
+  }
+  .src-multicat-chip.malin   { background: #dbeafe; color: #1d4ed8; }
+  .src-multicat-chip.plaisir { background: #fce7f3; color: #be185d; }
+  .src-multicat-chip.bebe    { background: #fdf2f8; color: #9d174d; }
+
+  /* ── Fiche complète (panneau latéral) ── */
+  #srcFiche {
+    position: fixed; inset: 0; z-index: 9990;
+    display: flex; align-items: stretch; justify-content: flex-end;
+    pointer-events: none; opacity: 0; transition: opacity .25s;
+  }
+  #srcFiche.open { pointer-events: all; opacity: 1; }
+  .src-fiche-overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,.5); cursor: pointer;
+  }
+  .src-fiche-panel {
+    position: relative; width: min(540px, 96vw); height: 100%;
+    background: #fff; overflow-y: auto;
+    transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+    box-shadow: -8px 0 48px rgba(0,0,0,.3);
+  }
+  #srcFiche.open .src-fiche-panel { transform: translateX(0); }
+  .src-fiche-head {
+    position: sticky; top: 0; z-index: 10;
+    background: #fff; border-bottom: 1px solid #f0ebe3;
+    display: flex; align-items: center; gap: .75rem;
+    padding: .9rem 1.1rem;
+  }
+  .src-fiche-close {
+    flex: 0 0 36px; height: 36px; border: none; background: #f4f1ec;
+    border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: #555; font-size: 1.1rem; line-height: 1; transition: background .12s;
+  }
+  .src-fiche-close:hover { background: #e8e3da; }
+  .src-fiche-title { font-weight: 800; font-size: 1rem; color: #1a1208; flex: 1; line-height: 1.2; font-family: system-ui,sans-serif; }
+  .src-fiche-cat {
+    padding: .25rem .6rem; border-radius: 20px; font-size: .65rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .src-fiche-cat.malin   { background: #dbeafe; color: #1d4ed8; }
+  .src-fiche-cat.plaisir { background: #fce7f3; color: #be185d; }
+  .src-fiche-cat.bebe    { background: #fdf2f8; color: #9d174d; }
+  .src-fiche-img {
+    width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #f5f0e8;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .src-fiche-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .src-fiche-img-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  }
+  .src-fiche-img-placeholder span:first-child { font-size: 4rem; }
+  .src-fiche-img-placeholder span:last-child {
+    font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #bbb;
+  }
+  .src-fiche-body { padding: 1.25rem 1.25rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  /* Bloc prix ── */
+  .src-fiche-prices {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .6rem;
+  }
+  .src-fiche-price-box {
+    border-radius: 12px; padding: .8rem .9rem; text-align: center;
+    display: flex; flex-direction: column; gap: .2rem;
+  }
+  .sfpb-achat  { background: #fef9ec; border: 1.5px solid #fde68a; }
+  .sfpb-vente  { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+  .sfpb-marge  { background: #f9fafb; border: 1.5px solid #e5e7eb; }
+  .src-fiche-price-lbl { font-size: .63rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #888; }
+  .src-fiche-price-val { font-size: 1.3rem; font-weight: 900; line-height: 1; font-family: system-ui,sans-serif; }
+  .sfpb-achat  .src-fiche-price-val { color: #b45309; }
+  .sfpb-vente  .src-fiche-price-val { color: #065f46; }
+  .sfpb-marge  .src-fiche-price-val { color: #374151; }
+  /* Section générique ── */
+  .src-fiche-section { display: flex; flex-direction: column; gap: .4rem; }
+  .src-fiche-section-lbl {
+    font-size: .65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .08em; color: #aaa; border-bottom: 1px solid #f0ebe3; padding-bottom: .3rem;
+  }
+  .src-fiche-section-val { font-size: .88rem; color: #333; line-height: 1.55; font-family: system-ui,sans-serif; }
+  /* Liens fournisseur ── */
+  .src-fiche-links { display: flex; flex-direction: column; gap: .4rem; }
+  .src-fiche-link {
+    display: flex; align-items: center; gap: .55rem;
+    padding: .55rem .8rem; border-radius: 9px;
+    background: #f8f5f0; border: 1px solid #e8e1d5;
+    text-decoration: none; color: #1a1208;
+    font-size: .83rem; font-weight: 600; font-family: system-ui,sans-serif;
+    transition: background .12s, border-color .12s;
+  }
+  .src-fiche-link:hover { background: #f0ebe3; border-color: #d4a017; }
+  .src-fiche-link-icon { font-size: 1rem; flex-shrink: 0; }
+  .src-fiche-link-arrow { margin-left: auto; color: #bbb; font-size: .8rem; }
+  /* Tags ── */
+  .src-fiche-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .src-fiche-tag {
+    padding: .2rem .55rem; background: #f4f1ec; border-radius: 20px;
+    font-size: .7rem; font-weight: 600; color: #666; font-family: system-ui,sans-serif;
+  }
+  /* Vigilance ── */
+  .src-fiche-alert {
+    background: #fef9ec; border: 1.5px solid #fde68a; border-radius: 10px;
+    padding: .7rem .9rem; font-size: .85rem; color: #92400e; font-family: system-ui,sans-serif;
+    line-height: 1.5; display: flex; gap: .5rem;
+  }
+  /* Boutons action dans la fiche ── */
+  .src-fiche-actions { display: flex; gap: .5rem; padding-top: .25rem; }
+  .src-fiche-actions .src-btn { flex: 1; padding: .6rem 1rem; font-size: .85rem; }
 </style>
 </head>
 <body class="page-sourcing">
@@ -276,7 +436,7 @@
     </div>
   </section>
 
-  <!-- ── FILTRES DESTINATION ── -->
+  <!-- ── FILTRES ── -->
   <div class="src-filters-bar" id="srcFiltersBar" style="display:none">
     <span class="src-flbl">Destination</span>
     <button class="src-fbtn on" data-dest="">Toutes</button>
@@ -288,6 +448,8 @@
     <button class="src-fbtn" data-st="pending">En attente</button>
     <button class="src-fbtn" data-st="validated">Validés</button>
     <button class="src-fbtn" data-st="rejected">Rejetés</button>
+    <!-- Ligne sous-familles — injectée dynamiquement après chargement -->
+    <div id="srcSfRow" style="display:contents"></div>
   </div>
 
   <!-- ── PRODUITS ── -->
@@ -380,6 +542,20 @@
     </div>
   </aside>
 
+  <!-- ── FICHE COMPLÈTE ── -->
+  <div id="srcFiche">
+    <div class="src-fiche-overlay" onclick="closeFiche()"></div>
+    <div class="src-fiche-panel" id="srcFichePanel">
+      <div class="src-fiche-head">
+        <button class="src-fiche-close" onclick="closeFiche()">✕</button>
+        <div class="src-fiche-title" id="sfTitle">—</div>
+        <span class="src-fiche-cat" id="sfCat"></span>
+      </div>
+      <div class="src-fiche-img" id="sfImg"></div>
+      <div class="src-fiche-body" id="sfBody"></div>
+    </div>
+  </div>
+
   <div id="src-toast"></div>
 
   <script src="js/app.js?v=11"></script>
@@ -392,13 +568,62 @@ const EMOJIS = {
   tech:'⚡', maison:'🏠', 'bien-etre':'🌿', beaute:'✨', voyage:'✈️',
   bureau:'💻', cuisine:'🍳', indispensable:'💎', soloclub:'🔮',
   duo:'👫', lots:'📦', petitprix:'💸', accessoire:'🔌',
-  jouets:'🧸', vetements:'👕', mobilite:'🌙',
+  jouets:'🧸', vetements:'👕', mobilite:'🌙', bijoux:'💍',
 };
+
+const SF_LABELS = {
+  /* Malin */
+  tech:'⚡ Tech', maison:'🏠 Maison', 'bien-etre':'🌿 Bien-être',
+  beaute:'✨ Beauté', voyage:'✈️ Voyage', bureau:'💻 Bureau',
+  cuisine:'🍳 Cuisine', petitprix:'💸 Petit Prix', accessoire:'🔌 Accessoire',
+  /* Plaisir */
+  wellness:'💊 Wellness', soloclub:'🔮 Solo', duo:'👫 Duo',
+  'soin-corps':'🫧 Soin Corps', bijoux:'💍 Bijoux',
+  /* Bébé */
+  jouets:'🧸 Jouets', vetements:'👕 Vêtements', mobilite:'🛏️ Mobilité',
+  maternite:'🤱 Maternité',
+  /* Générique */
+  lots:'📦 Lots', indispensable:'💎 Indispensable',
+};
+
+const CAT_LABELS = { malin:'Malin', plaisir:'Plaisir', bebe:'Bébé' };
+const PRIO_ORDER = { A:0, B:1, C:2 };
+
+const GROUPE_LABELS = {
+  homme:'👨 Homme', femme:'👩 Femme', mixte:'👥 Mixte',
+  garcon:'👦 Garçon', fille:'👧 Fille',
+  adulte:'🧑 Adulte', enfant:'🧒 Enfant', bebe:'👶 Bébé',
+  '0-3ans':'👶 0-3 ans', '3-6ans':'🧒 3-6 ans', '6-12ans':'🧒 6-12 ans',
+  newborn:'🍼 Nouveau-né', junior:'🏃 Junior',
+};
+/* Ordre d'affichage des groupes connus */
+const GROUPE_ORDER = ['homme','garcon','femme','fille','mixte','adulte','junior','enfant','bebe','newborn','0-3ans','3-6ans','6-12ans'];
 
 let _all   = [];
 let _token = '';
 let _dest  = '';
 let _st    = '';
+let _sf    = '';   /* filtre sous-famille actif */
+
+/* String ou tableau → tableau */
+function catList(cat) { return Array.isArray(cat) ? cat : (cat ? [cat] : []); }
+function sfList(sf)   { return Array.isArray(sf)  ? sf  : (sf  ? [sf]  : []); }
+
+/* true si le produit est dans la catégorie cible */
+function catMatch(cat, target) { return catList(cat).includes(target); }
+/* true si le produit est dans la sous-famille cible */
+function sfMatch(sf, target)   { return !target || sfList(sf).includes(target); }
+
+/* Tri : priorité A→B→C, puis marge desc, puis nom */
+function sortProposals(list) {
+  return [...list].sort((a, b) => {
+    const pa = PRIO_ORDER[a.priorite] ?? 99, pb = PRIO_ORDER[b.priorite] ?? 99;
+    if (pa !== pb) return pa - pb;
+    const ma = parseFloat(a.marge)||0, mb = parseFloat(b.marge)||0;
+    if (ma !== mb) return mb - ma;
+    return (a.nom||'').localeCompare(b.nom||'', 'fr');
+  });
+}
 
 /* ── Auth ── */
 (async () => {
@@ -430,6 +655,7 @@ async function load() {
     if (!d.ok) throw new Error(d.error||'Erreur');
     _all = d.proposals;
     updateStats();
+    renderSfFilters();
     render();
   } catch(e) { toast('Erreur chargement : '+e.message,'err'); }
 }
@@ -444,23 +670,89 @@ function updateStats() {
 /* ── Render ── */
 function render() {
   ['malin','plaisir','bebe'].forEach(cat => {
-    let list = _all.filter(p=>p.categorie===cat);
-    if (_st)   list = list.filter(p=>p.status===_st);
-    const hide = _dest && _dest!==cat;
+    let list = _all.filter(p => catMatch(p.categorie, cat));
+    if (_st) list = list.filter(p => p.status === _st);
+    const hide = _dest && _dest !== cat;
     document.getElementById('sect-'+cat).classList.toggle('hidden', hide);
     document.getElementById('cnt-'+cat).textContent = list.length;
-    document.getElementById('grid-'+cat).innerHTML  = list.length
-      ? list.map(buildCard).join('')
-      : `<div style="font-family:system-ui,sans-serif;font-size:.85rem;color:#bbb;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit.</div>`;
+
+    /* Filtre sous-famille */
+    if (_sf) list = list.filter(p => sfMatch(p.subfamille, _sf));
+
+    if (!list.length) {
+      document.getElementById('grid-'+cat).innerHTML =
+        `<div style="font-family:system-ui,sans-serif;font-size:.85rem;color:#bbb;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit.</div>`;
+      return;
+    }
+
+    /* Niveau 1 : grouper par sous-famille (un produit multi-sf apparaît dans chaque groupe) */
+    const sfMap = {};
+    for (const p of list) {
+      const sfs = sfList(p.subfamille);
+      const keys = sfs.length ? sfs : ['autre'];
+      for (const sf of keys) {
+        if (!sfMap[sf]) sfMap[sf] = [];
+        sfMap[sf].push(p);
+      }
+    }
+    /* Ordre : plus grand effectif d'abord, puis alpha */
+    const sfKeys = Object.keys(sfMap).sort((a,b) =>
+      sfMap[b].length - sfMap[a].length || a.localeCompare(b,'fr')
+    );
+
+    let html = '';
+    for (const sf of sfKeys) {
+      const sfLabel  = SF_LABELS[sf] || (sf.charAt(0).toUpperCase()+sf.slice(1));
+      const sfSorted = sortProposals(sfMap[sf]);
+      const isActive = _sf === sf;
+
+      html += `<div class="src-subfam-sep${isActive?' src-subfam-active':''}" onclick="setSf('${sf}')" title="Filtrer par ${sfLabel}">
+        <span class="src-subfam-sep-name">${sfLabel}</span>
+        <span class="src-subfam-sep-count">${sfSorted.length}</span>
+      </div>`;
+
+      /* Niveau 2 : sous-groupes — dès qu'au moins 1 produit a un groupe assigné */
+      const groupeSet = new Set(sfSorted.map(p => p.groupe||'').filter(Boolean));
+      if (groupeSet.size >= 1) {
+        /* Produits sans groupe → affichés en dernier sans séparateur */
+        const withG  = sfSorted.filter(p => p.groupe);
+        const noG    = sfSorted.filter(p => !p.groupe);
+        const grpMap = {};
+        for (const p of withG) {
+          if (!grpMap[p.groupe]) grpMap[p.groupe] = [];
+          grpMap[p.groupe].push(p);
+        }
+        const gKeys = Object.keys(grpMap).sort((a,b) => {
+          const ia = GROUPE_ORDER.indexOf(a), ib = GROUPE_ORDER.indexOf(b);
+          if (ia>=0 && ib>=0) return ia-ib;
+          if (ia>=0) return -1; if (ib>=0) return 1;
+          return a.localeCompare(b,'fr');
+        });
+        for (const g of gKeys) {
+          const glabel = GROUPE_LABELS[g] || (g.charAt(0).toUpperCase()+g.slice(1));
+          html += `<div class="src-groupe-sep">
+            <span class="src-groupe-sep-name">${glabel}</span>
+            <span class="src-groupe-sep-count">${grpMap[g].length}</span>
+          </div>`;
+          html += grpMap[g].map(p => buildCard(p, cat)).join('');
+        }
+        if (noG.length) html += noG.map(p => buildCard(p, cat)).join('');
+      } else {
+        html += sfSorted.map(p => buildCard(p, cat)).join('');
+      }
+    }
+    document.getElementById('grid-'+cat).innerHTML = html;
   });
 }
 
 /* ── Carte (même structure que products-render.js buildCard) ── */
 const SVG_HEART = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
 
-function buildCard(p) {
+function buildCard(p, currentCat) {
   const id    = p.id;
   const emoji = EMOJIS[p.subfamille] || EMOJIS[(p.filtres||[])[0]] || '📦';
+  /* Autres familles que la section courante (multi-famille) */
+  const otherCats = catList(p.categorie).filter(c => c !== currentCat);
   const imgSrc = p.images && p.images[0];
   const imgEl = imgSrc
     ? `<img src="${imgSrc}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block">`
@@ -501,8 +793,9 @@ function buildCard(p) {
     </div>`;
   }
 
-  return `<div class="p-card" data-id="${id}" data-price="${p.prixVente||0}" data-filter="${x((p.filtres||[]).join(','))}" data-subfamille="${x(p.subfamille||'')}">
-  <div class="p-img">
+  const sfStr = x(sfList(p.subfamille).join(','));
+  return `<div class="p-card" data-src-card data-id="${id}" data-price="${p.prixVente||0}" data-filter="${x((p.filtres||[]).join(','))}" data-subfamille="${sfStr}">
+  <div class="p-img" onclick="openFiche('${id}')" style="cursor:pointer">
     <div class="p-gallery">
       <div class="p-gallery-track">
         ${imgEl}
@@ -512,18 +805,23 @@ function buildCard(p) {
     <button class="p-wish" style="pointer-events:none;opacity:.35">${SVG_HEART}</button>
   </div>
   <div class="p-info">
-    <div class="p-name">${x(p.nom)}</div>
-    <div class="p-sub" style="display:flex;align-items:center;gap:.3rem;font-size:.68rem;padding:.1rem 0 .35rem">
+    <div class="p-name" onclick="openFiche('${id}')" style="cursor:pointer">${x(p.nom)}</div>
+    <div class="p-sub" style="display:flex;align-items:center;gap:.3rem;font-size:.68rem;padding:.1rem 0 .35rem;flex-wrap:wrap">
       <span style="font-weight:800;color:${mgColor}">${mg}%</span>
       <span style="opacity:.35">·</span>
       <span style="opacity:.55">${x(p.fournisseur||'')}${costStr?' · coût '+costStr:''}</span>
+      ${p.groupe?`<span style="opacity:.35">·</span><span style="font-weight:700;color:#888">${x(GROUPE_LABELS[p.groupe]||p.groupe)}</span>`:''}
     </div>
     <div class="p-foot">
       <div><span class="p-price">${price}</span></div>
-      ${actionBtns}
+      <div style="display:flex;gap:.25rem;align-items:center">
+        <button class="src-btn" onclick="openFiche('${id}')" style="background:rgba(212,160,23,.1);color:#b07d10;border:1.5px solid rgba(212,160,23,.25)!important;padding:.38rem .6rem!important;font-size:.72rem">📋</button>
+        ${actionBtns}
+      </div>
     </div>
     ${iP?`<div class="src-rr" id="rr-${id}"><input class="src-ri" id="ri-${id}" placeholder="Raison du rejet…" onkeydown="if(event.key==='Enter')doRej('${id}')"><button class="src-rc" onclick="doRej('${id}')">Confirmer</button></div>`:''}
     ${iR&&p.rejectReason?`<div class="src-reject-reason">« ${x(p.rejectReason)} »</div>`:''}
+    ${otherCats.length?`<div class="src-multicats">${otherCats.map(c=>`<span class="src-multicat-chip ${c}">aussi en ${x(CAT_LABELS[c]||c)}</span>`).join('')}</div>`:''}
   </div>
 </div>`;
 }
@@ -571,7 +869,148 @@ document.getElementById('srcFiltersBar').addEventListener('click', e => {
     document.querySelectorAll('[data-st]').forEach(el=>el.classList.remove('on'));
     b.classList.add('on'); _st=b.dataset.st; render();
   }
+  if ('sf' in b.dataset) {
+    document.querySelectorAll('[data-sf]').forEach(el=>el.classList.remove('on'));
+    b.classList.add('on'); _sf=b.dataset.sf; render();
+  }
 });
+
+/* Clic sur un séparateur de sous-famille → filtre toggle */
+function setSf(sf) {
+  _sf = (_sf === sf) ? '' : sf;   /* re-clic → désactive */
+  /* Sync boutons dans la barre */
+  document.querySelectorAll('[data-sf]').forEach(b => {
+    b.classList.toggle('on', b.dataset.sf === _sf);
+  });
+  render();
+}
+
+/* Génère dynamiquement les boutons de sous-famille dans la barre */
+function renderSfFilters() {
+  const allSfs = new Set();
+  for (const p of _all) sfList(p.subfamille).forEach(s => s && allSfs.add(s));
+  const sorted = [...allSfs].sort((a,b) => a.localeCompare(b,'fr'));
+  const row = document.getElementById('srcSfRow');
+  if (!row || !sorted.length) return;
+  row.innerHTML = `<span class="src-flbl" style="margin-left:.5rem;width:100%;padding-top:.3rem">Sous-famille</span>`
+    + `<button class="src-fbtn on" data-sf="">Toutes</button>`
+    + sorted.map(sf => {
+        const label = SF_LABELS[sf] || (sf.charAt(0).toUpperCase()+sf.slice(1));
+        return `<button class="src-fbtn" data-sf="${sf}">${label}</button>`;
+      }).join('');
+}
+
+/* ── Fiche complète ── */
+const LINK_ICONS = { aliexpress:'🛒', google:'🔍', amazon:'📦', alibaba:'🏭', temu:'🛍️', vinted:'♻️', leboncoin:'🟠' };
+function linkIcon(url='') {
+  const u = url.toLowerCase();
+  for (const [k,v] of Object.entries(LINK_ICONS)) if (u.includes(k)) return v;
+  return '🔗';
+}
+function openFiche(id) {
+  const p = _all.find(p=>p.id===id);
+  if (!p) return;
+  const mg = parseFloat(p.marge)||0;
+  const mgColor = mg>=40 ? '#059669' : mg>=25 ? '#d97706' : '#dc2626';
+  const fmtPrice = v => v!=null ? Number(v).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' €' : '—';
+  const emoji = EMOJIS[p.subfamille] || EMOJIS[(p.filtres||[])[0]] || '📦';
+  const imgSrc = p.images && p.images[0];
+
+  document.getElementById('sfTitle').textContent = p.nom || '—';
+  const cats = catList(p.categorie);
+  const catEl = document.getElementById('sfCat');
+  if (cats.length > 1) {
+    catEl.innerHTML = cats.map(c=>`<span class="src-fiche-cat ${c}" style="margin-left:.2rem">${x(CAT_LABELS[c]||c)}</span>`).join('');
+    catEl.className = '';
+  } else {
+    const c = cats[0]||'';
+    catEl.textContent = CAT_LABELS[c] || (c.charAt(0).toUpperCase()+c.slice(1));
+    catEl.className = 'src-fiche-cat ' + c;
+  }
+
+  document.getElementById('sfImg').innerHTML = imgSrc
+    ? `<img src="${x(imgSrc)}" alt="${x(p.nom)}">`
+    : `<div class="src-fiche-img-placeholder"><span>${emoji}</span><span>${x(p.subfamille||'')}</span></div>`;
+
+  const iP=p.status==='pending', iV=p.status==='validated';
+  let actionHtml = '';
+  if (iP) {
+    actionHtml = `<div class="src-fiche-actions">
+      <button class="src-btn btn-val" onclick="doVal('${id}');closeFiche()">Valider</button>
+      <button class="src-btn btn-rej" onclick="closeFiche();setTimeout(()=>openRej('${id}'),100)">Rejeter</button>
+    </div>`;
+  } else if (iV) {
+    actionHtml = `<div class="src-fiche-actions">
+      <button class="src-btn btn-val" disabled>Validé ✓</button>
+      <button class="src-btn btn-rst" onclick="doReset('${id}');closeFiche()">↩ Remettre en attente</button>
+    </div>`;
+  } else {
+    actionHtml = `<div class="src-fiche-actions">
+      <button class="src-btn btn-rej" disabled>Rejeté</button>
+      <button class="src-btn btn-rst" onclick="doReset('${id}');closeFiche()">↩ Remettre en attente</button>
+    </div>`;
+  }
+
+  const liens = Array.isArray(p.liens) ? p.liens : [];
+  const liensHtml = liens.length
+    ? `<div class="src-fiche-section">
+        <div class="src-fiche-section-lbl">Où trouver le produit</div>
+        <div class="src-fiche-links">${liens.map(l=>`<a class="src-fiche-link" href="${x(l.url||'#')}" target="_blank" rel="noopener">
+          <span class="src-fiche-link-icon">${linkIcon(l.url)}</span>
+          <span>${x(l.label||l.url)}</span>
+          <span class="src-fiche-link-arrow">↗</span>
+        </a>`).join('')}</div>
+      </div>`
+    : '';
+
+  const descHtml = p.description
+    ? `<div class="src-fiche-section"><div class="src-fiche-section-lbl">Description</div><div class="src-fiche-section-val">${x(p.description)}</div></div>`
+    : '';
+  const raisonHtml = p.raisonVente
+    ? `<div class="src-fiche-section"><div class="src-fiche-section-lbl">Pourquoi ce produit</div><div class="src-fiche-section-val">${x(p.raisonVente)}</div></div>`
+    : '';
+  const vigilanceHtml = p.vigilance
+    ? `<div class="src-fiche-alert"><span>⚠️</span><span>${x(p.vigilance)}</span></div>`
+    : '';
+  const tagsHtml = (p.tags&&p.tags.length)
+    ? `<div class="src-fiche-section"><div class="src-fiche-section-lbl">Tags</div><div class="src-fiche-tags">${p.tags.map(t=>`<span class="src-fiche-tag">${x(t)}</span>`).join('')}</div></div>`
+    : '';
+  const groupeLabel = p.groupe ? (GROUPE_LABELS[p.groupe]||p.groupe) : null;
+  const infoHtml = [groupeLabel,p.fournisseur,p.subfamille,p.priorite?'Priorité '+p.priorite:null].filter(Boolean).join(' · ');
+  const metaHtml = infoHtml
+    ? `<div class="src-fiche-section"><div class="src-fiche-section-lbl">Infos</div><div class="src-fiche-section-val">${x(infoHtml)}</div></div>`
+    : '';
+
+  document.getElementById('sfBody').innerHTML = `
+    <div class="src-fiche-prices">
+      <div class="src-fiche-price-box sfpb-achat">
+        <div class="src-fiche-price-lbl">Prix achat</div>
+        <div class="src-fiche-price-val">${fmtPrice(p.prixFournisseur)}</div>
+      </div>
+      <div class="src-fiche-price-box sfpb-vente">
+        <div class="src-fiche-price-lbl">Prix vente</div>
+        <div class="src-fiche-price-val">${fmtPrice(p.prixVente)}</div>
+      </div>
+      <div class="src-fiche-price-box sfpb-marge">
+        <div class="src-fiche-price-lbl">Marge</div>
+        <div class="src-fiche-price-val" style="color:${mgColor}">${mg}%</div>
+      </div>
+    </div>
+    ${liensHtml}
+    ${vigilanceHtml}
+    ${raisonHtml}
+    ${descHtml}
+    ${tagsHtml}
+    ${metaHtml}
+    ${actionHtml}
+  `;
+  document.getElementById('srcFiche').classList.add('open');
+  document.getElementById('srcFichePanel').scrollTop = 0;
+}
+function closeFiche() {
+  document.getElementById('srcFiche').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeFiche(); });
 
 /* ── Utils ── */
 function now(){ return new Date().toISOString().slice(0,10); }

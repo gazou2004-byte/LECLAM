@@ -23,6 +23,7 @@
     attrs += ' data-filter="' + escAttr(p.filter) + '"';
     if (p.famille)           attrs += ' data-famille="'    + escAttr(p.famille)    + '"';
     if (p.subfamille)        attrs += ' data-subfamille="' + escAttr(p.subfamille) + '"';
+    if (p.groupe)            attrs += ' data-groupe="'     + escAttr(p.groupe)     + '"';
     if (p.rating  != null)   attrs += ' data-rating="'    + p.rating    + '"';
     if (p.reviews != null)   attrs += ' data-reviews="'   + p.reviews   + '"';
     if (p.weight  != null)   attrs += ' data-weight="'    + p.weight    + '"';

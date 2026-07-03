@@ -40,7 +40,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m02.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m04",
@@ -75,14 +76,15 @@
           "url": "https://www.google.com/search?q=sleep+mask+bluetooth+headphones+dropshipping&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m04.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m01",
@@ -117,14 +119,15 @@
           "url": "https://www.google.com/search?q=mini+projecteur+portable+bedroom+cinema+tiktok&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m01.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m11",
@@ -160,14 +163,15 @@
           "url": "https://www.google.com/search?q=ventilateur+portable+col+cou+2026&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m11.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m06",
@@ -209,7 +213,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m06.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m05",
@@ -252,7 +257,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m05.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m03",
@@ -287,14 +293,15 @@
           "url": "https://www.google.com/search?q=mini+imprimante+photo+thermique+poche+bluetooth&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m03.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m09",
@@ -337,7 +344,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m09.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m07",
@@ -372,14 +380,15 @@
           "url": "https://www.google.com/search?q=spiraliseur+legumes+3+en+1+gadget+cuisine+tiktok&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m07.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m12",
@@ -421,7 +430,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m12.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m08",
@@ -464,7 +474,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m08.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m10",
@@ -506,7 +517,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m10.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m13",
@@ -548,7 +560,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m13.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m14",
@@ -591,7 +604,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m14.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m15",
@@ -633,7 +647,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m15.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m16",
@@ -669,14 +684,15 @@
           "url": "https://www.google.com/search?q=tumbler+gourde+paille+isotherme+aesthetic+pastel&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m16.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-m17",
@@ -712,20 +728,21 @@
           "url": "https://www.google.com/search?q=support+telephone+bras+articule+lit+bureau+mains+libres&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-m17.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-p01",
       "code": "P-1",
       "categorie": "plaisir",
-      "subfamille": "indispensable",
+      "subfamille": "wellness",
       "nom": "Goliate — Lubrifiant Naturel Bio Long Lasting",
       "fournisseur": "Goliate (grossiste direct)",
       "prixFournisseur": 14,
@@ -755,20 +772,21 @@
           "url": "https://www.google.com/search?q=goliate+lubrifiant+bio+made+in+france&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p01.jpg"
-      ]
+      ],
+      "groupe": "mixte"
     },
     {
       "id": "src-p05",
       "code": "P-5",
       "categorie": "plaisir",
-      "subfamille": "indispensable",
+      "subfamille": "wellness",
       "nom": "Goliate — Soin Vulvaire Régénérant Bio",
       "fournisseur": "Goliate (grossiste direct)",
       "prixFournisseur": 13,
@@ -797,14 +815,15 @@
           "url": "https://www.google.com/search?q=goliate+soin+vulvaire+bio+france&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p05.jpg"
-      ]
+      ],
+      "groupe": "femme"
     },
     {
       "id": "src-p03",
@@ -841,20 +860,21 @@
           "url": "https://www.google.com/search?q=tenga+egg+kit+6+textures&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p03.jpg"
-      ]
+      ],
+      "groupe": "homme"
     },
     {
       "id": "src-p02",
       "code": "P-2",
       "categorie": "plaisir",
-      "subfamille": "indispensable",
+      "subfamille": "wellness",
       "nom": "Goliate — Huile de Massage Aphrodisiaque Bio",
       "fournisseur": "Goliate (grossiste direct)",
       "prixFournisseur": 12,
@@ -890,13 +910,14 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p02.jpg"
-      ]
+      ],
+      "groupe": "mixte"
     },
     {
       "id": "src-p04",
       "code": "P-4",
       "categorie": "plaisir",
-      "subfamille": "lots",
+      "subfamille": "duo",
       "nom": "Kit Initiation BDSM Sensoriel — Plumes & Satin",
       "fournisseur": "DSers EU ou EasyToys",
       "prixFournisseur": 11,
@@ -933,21 +954,21 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p04.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-p06",
       "code": "P-6",
       "categorie": "plaisir",
-      "subfamille": "beaute",
+      "subfamille": "soin-corps",
       "nom": "Masque LED Visage 7 Couleurs — Photothérapie Maison",
       "fournisseur": "DSers EU Allemagne",
       "prixFournisseur": 18,
       "prixVente": 44.99,
       "marge": 58,
       "filtres": [
-        "beaute",
-        "bien-etre"
+        "indispensable"
       ],
       "description": "7 longueurs d'onde LED pour cibler l'acné (bleu), les ridules (rouge) et l'éclat du teint (jaune). 10 minutes par séance, rechargeable USB. Le soin haute technologie enfin à prix accessible.",
       "tags": [
@@ -976,13 +997,14 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p06.jpg"
-      ]
+      ],
+      "groupe": "femme"
     },
     {
       "id": "src-p07",
       "code": "P-7",
       "categorie": "plaisir",
-      "subfamille": "beaute",
+      "subfamille": "soin-corps",
       "nom": "Sérum Vitamine C 20% — Éclat & Anti-Taches Made in France",
       "fournisseur": "Marque française indépendante (ex: Typology, Oh My Cream)",
       "prixFournisseur": 11,
@@ -1019,7 +1041,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p07.jpg"
-      ]
+      ],
+      "groupe": "femme"
     },
     {
       "id": "src-p08",
@@ -1032,8 +1055,7 @@
       "prixVente": 19.99,
       "marge": 67,
       "filtres": [
-        "bijoux",
-        "accessoire"
+        "autre"
       ],
       "description": "Bracelet jonc fin en acier inoxydable doré 18 carats, personnalisable avec un prénom ou une date. Livré dans un écrin kraft naturel, idéal pour s'offrir ou offrir.",
       "tags": [
@@ -1061,7 +1083,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-p08.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b01",
@@ -1103,7 +1126,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b01.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b02",
@@ -1145,7 +1169,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b02.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b03",
@@ -1187,7 +1212,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b03.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b04",
@@ -1223,14 +1249,15 @@
           "url": "https://www.leboncoin.fr/recherche?text=lot+vetements+bebe+0-3+mois&category=59"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b04.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b05",
@@ -1272,7 +1299,8 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b05.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b06",
@@ -1314,13 +1342,14 @@
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b06.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b07",
       "code": "B-7",
       "categorie": "bebe",
-      "subfamille": "accessoire",
+      "subfamille": "maternite",
       "nom": "Coussin d'Allaitement Multi-Positions C-Shape",
       "fournisseur": "DSers EU",
       "prixFournisseur": 14,
@@ -1349,14 +1378,15 @@
           "url": "https://www.google.com/search?q=coussin+allaitement+c+shape+ergonomique+bebe&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b07.jpg"
-      ]
+      ],
+      "groupe": null
     },
     {
       "id": "src-b08",
@@ -1391,14 +1421,15 @@
           "url": "https://www.google.com/search?q=jouets+bain+bebe+lot+12+pieces+sans+bpa&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-02",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
         "/img/sourcing/src-b08.jpg"
-      ]
+      ],
+      "groupe": null
     }
   ]
 }

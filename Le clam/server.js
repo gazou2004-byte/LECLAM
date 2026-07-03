@@ -3411,26 +3411,30 @@ function syncProductsData(proposal) {
   let data;
   try { data = JSON.parse(raw.slice(start, end)); } catch { return; }
 
-  const cat = proposal.categorie;
-  if (!data[cat]) return;
+  /* categorie peut être une string ou un tableau pour le multi-famille */
+  const cats = Array.isArray(proposal.categorie) ? proposal.categorie : [proposal.categorie];
 
-  /* Toujours retirer l'ancienne entrée (si elle existait) */
-  data[cat] = data[cat].filter(p => p.id !== proposal.id);
+  for (const cat of cats) {
+    if (!data[cat]) continue;
 
-  /* Si validé → insérer en tête de catégorie */
-  if (proposal.status === 'validated') {
-    const entry = {
-      id:         proposal.id,
-      price:      proposal.prixVente,
-      filter:     (proposal.filtres || []).join(','),
-      images:     proposal.images || [],
-      desc:       proposal.description || '',
-      name_fr:    proposal.nom,
-      sub_fr:     [proposal.subfamille, proposal.fournisseur].filter(Boolean).join(' · '),
-      subfamille: proposal.subfamille || '',
-    };
-    if (proposal.prixFournisseur) entry.oldPrice = null;
-    data[cat].unshift(entry);
+    /* Toujours retirer l'ancienne entrée (si elle existait) */
+    data[cat] = data[cat].filter(p => p.id !== proposal.id);
+
+    /* Si validé → insérer en tête de catégorie */
+    if (proposal.status === 'validated') {
+      const entry = {
+        id:         proposal.id,
+        price:      proposal.prixVente,
+        filter:     (proposal.filtres || []).join(','),
+        images:     proposal.images || [],
+        desc:       proposal.description || '',
+        name_fr:    proposal.nom,
+        sub_fr:     [proposal.subfamille, proposal.fournisseur].filter(Boolean).join(' · '),
+        subfamille: proposal.subfamille || '',
+      };
+      if (proposal.prixFournisseur) entry.oldPrice = null;
+      data[cat].unshift(entry);
+    }
   }
 
   fs.writeFileSync(PRODUCTS_DATA_FILE, header + JSON.stringify(data, null, 2) + ';');
@@ -3441,7 +3445,10 @@ app.get('/api/admin/sourcing-proposals', (req, res) => {
   const { status, categorie } = req.query;
   let proposals = getSourcing();
   if (status) proposals = proposals.filter(p => p.status === status);
-  if (categorie) proposals = proposals.filter(p => p.categorie === categorie);
+  if (categorie) proposals = proposals.filter(p => {
+    const cats = Array.isArray(p.categorie) ? p.categorie : [p.categorie];
+    return cats.includes(categorie);
+  });
   res.json({ ok: true, proposals });
 });
 

@@ -4,6 +4,46 @@
 window.PRODUCTS_DATA = {
   "plaisir": [
     {
+      "id": "src-p03",
+      "price": 34.99,
+      "filter": "soloclub,lots,petitprix",
+      "images": [
+        "/img/sourcing/src-p03.jpg"
+      ],
+      "desc": "Coffret de 6 œufs Tenga avec six textures internes différentes pour explorer le plaisir masculin. Design neutre et élégant, usage unique, livraison discrète.",
+      "name_fr": "Tenga Egg — Kit Masturbateurs x6 Textures Variées",
+      "sub_fr": "soloclub · Distributeur Tenga EU",
+      "subfamille": "soloclub",
+      "groupe": "homme",
+      "oldPrice": null
+    },
+    {
+      "id": "src-p01",
+      "price": 28,
+      "filter": "indispensable,petitprix",
+      "images": [
+        "/img/sourcing/src-p01.jpg"
+      ],
+      "desc": "Certifié bio Ecocert, fabriqué en France. Formule 100% naturelle et vegan, sans paraben ni perturbateur endocrinien. Compatible préservatifs.",
+      "name_fr": "Goliate — Lubrifiant Naturel Bio Long Lasting",
+      "sub_fr": "wellness · Goliate (grossiste direct)",
+      "subfamille": "wellness",
+      "oldPrice": null
+    },
+    {
+      "id": "src-p05",
+      "price": 27,
+      "filter": "indispensable",
+      "images": [
+        "/img/sourcing/src-p05.jpg"
+      ],
+      "desc": "Baume soin certifié bio Ecocert, fabriqué en France. Formule apaisante et nourrissante pour les zones sensibles au quotidien. 100% naturel et vegan.",
+      "name_fr": "Goliate — Soin Vulvaire Régénérant Bio",
+      "sub_fr": "wellness · Goliate (grossiste direct)",
+      "subfamille": "wellness",
+      "oldPrice": null
+    },
+    {
       "id": "plaisir-44",
       "price": 44.99,
       "filter": "duo,lots",
@@ -154,7 +194,8 @@ window.PRODUCTS_DATA = {
       "desc": "Plus de 200 000 femmes en France l'ont adopté — et elles savent pourquoi. La référence du vibromasseur français, tout simplement.",
       "name_fr": "Coco — Vibromasseur Puissante",
       "sub_fr": "Référence · Made in France · Puissante",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-7",
@@ -171,7 +212,8 @@ window.PRODUCTS_DATA = {
       "desc": "Doux à l'extérieur, décisif dans l'effet — il enveloppe et éveille avec une précision que 678 avis confirment à voix haute.",
       "name_fr": "Stimulation Clitoridienne",
       "sub_fr": "Douceur · Précision · Désir",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-3",
@@ -188,7 +230,8 @@ window.PRODUCTS_DATA = {
       "desc": "Une puissance qui se ressent jusqu'au bout des doigts — le masseur baguette qui ne transige pas avec l'intensité.",
       "name_fr": "Masseur Baguette Puissant",
       "sub_fr": "Puissance · Profondeur · Classique",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-51",
@@ -204,7 +247,8 @@ window.PRODUCTS_DATA = {
       "desc": "Sans contact direct, une onde de pression enveloppe et libère — une sensation que beaucoup découvrent ici et ne veulent plus lâcher.",
       "name_fr": "Womanizer Pro — Vibrateur à ondes de pression",
       "sub_fr": "Révélation · Onde de plaisir · Bestseller",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-8",
@@ -221,7 +265,8 @@ window.PRODUCTS_DATA = {
       "desc": "Deux zones à la fois, une seule vague de plaisir — l'orgasme simultané que le classique vibrateur lapin rend à la portée de toutes.",
       "name_fr": "Vibrateur Tête de Lapin",
       "sub_fr": "Interne · Externe · Intensité rare",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-42",
@@ -237,7 +282,8 @@ window.PRODUCTS_DATA = {
       "desc": "Noté par des tests indépendants comme l'un des meilleurs — parce qu'il tient vraiment ses promesses, sans détour.",
       "name_fr": "AMORELIE Joy Shake Vibrateur lapin",
       "sub_fr": "Primé · Efficace · Sans effort",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-6",
@@ -254,7 +300,8 @@ window.PRODUCTS_DATA = {
       "desc": "Aussi joli qu'une fleur, aussi efficace qu'une révélation — des milliers de femmes ont compris pourquoi il est devenu indispensable.",
       "name_fr": "Stimulateur Sexuel Rose",
       "sub_fr": "Aspiration · Douceur · Désir",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-48",
@@ -270,7 +317,8 @@ window.PRODUCTS_DATA = {
       "desc": "Compact, discret, redoutablement efficace — la preuve que la taille ne fait pas tout, surtout ici.",
       "name_fr": "EasyToys Mini Vibrateur Mural — Noir",
       "sub_fr": "Discret · Efficace · Toujours prêt",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-31",
@@ -286,7 +334,8 @@ window.PRODUCTS_DATA = {
       "desc": "Porté en liberté totale, ressenti en secret — solo ou en duo, c'est vous qui choisissez l'intensité du moment.",
       "name_fr": "Love Nest Pink Remote Rechargeable Love Egg",
       "sub_fr": "Liberté · Secret · Désir à distance",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-57",
@@ -302,7 +351,8 @@ window.PRODUCTS_DATA = {
       "desc": "Une vibration douce qui vient de l'intérieur, pilotée depuis un smartphone — l'intimité connectée qui traverse les distances.",
       "name_fr": "AMORELIE Joy Shimmer — Boules d'amour connectées",
       "sub_fr": "Connexion · Subtilité · Partout avec vous",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-24",
@@ -318,7 +368,8 @@ window.PRODUCTS_DATA = {
       "desc": "Prenez le temps de vous retrouver — ce masseur personnel guide une exploration sensorielle intime, à votre propre rythme.",
       "name_fr": "Personal Massager",
       "sub_fr": "Exploration · Soi · Bien-être intime",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-58",
@@ -334,7 +385,8 @@ window.PRODUCTS_DATA = {
       "desc": "Élégant en apparence, décisif en sensation — il accompagne vos moments intimes avec une discrétion absolue et une présence qu'on n'oublie pas.",
       "name_fr": "SVAKOM Evil Elva — Oeuf vibrant avec télécommande",
       "sub_fr": "Élégance · Discrétion · SVAKOM",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-49",
@@ -350,7 +402,8 @@ window.PRODUCTS_DATA = {
       "desc": "La chaleur, la vibration, et les mains libres pour savourer — une immersion sensorielle qui brouille délicieusement les frontières du réel.",
       "name_fr": "Real Fantasy — Mason Gode vibrant, chaud",
       "sub_fr": "Chaleur · Réalisme · Liberté totale",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-9",
@@ -367,7 +420,8 @@ window.PRODUCTS_DATA = {
       "desc": "Invisible sous les vêtements, terriblement présent sous la peau — il transforme chaque sortie en complicité secrète à deux.",
       "name_fr": "Vibrateur Portable Télécommande",
       "sub_fr": "Secret · Frisson · Complicité",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-29",
@@ -383,7 +437,8 @@ window.PRODUCTS_DATA = {
       "desc": "Grave ou aigu, profond ou subtil — ce plug vibre selon ce que vous ressentez, pas selon ce qu'on vous impose.",
       "name_fr": "PleX with Flex — Plug anal vibrant télécommandé",
       "sub_fr": "Profondeur · Personnalisable · Pour tous",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "mixte"
     },
     {
       "id": "plaisir-53",
@@ -399,7 +454,8 @@ window.PRODUCTS_DATA = {
       "desc": "Doux comme une seconde peau, vibrant comme un désir longtemps contenu — le réalisme au service du plaisir, sans compromis.",
       "name_fr": "EasyToys Jelly Passion Vibrateur réaliste",
       "sub_fr": "Réalisme · Douceur · Envie",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-11",
@@ -416,7 +472,8 @@ window.PRODUCTS_DATA = {
       "desc": "Il s'occupe de tout — laissez-vous porter par des sensations qui imitent le réel avec une précision troublante, à votre propre rythme.",
       "name_fr": "Masturbateur Masculin Électrique",
       "sub_fr": "Abandon · Plaisir masculin · Autonomie",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "homme"
     },
     {
       "id": "plaisir-4",
@@ -434,7 +491,8 @@ window.PRODUCTS_DATA = {
       "desc": "La complice que vous glissez dans votre sac et dont personne ne connaît l'existence — silencieuse, discrète, inoubliable.",
       "name_fr": "Mini Baguette de Massage",
       "sub_fr": "Portable · Discrète · Toujours là",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-54",
@@ -450,7 +508,8 @@ window.PRODUCTS_DATA = {
       "desc": "Les mains libres, le plaisir entier — une présence généreuse et authentique, à savourer exactement comme vous en avez envie.",
       "name_fr": "Real Fantasy Dylan — Dildo réaliste 23cm",
       "sub_fr": "Générosité · Liberté · Réalisme",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-39",
@@ -466,7 +525,8 @@ window.PRODUCTS_DATA = {
       "desc": "Il touche là où personne ne touche d'habitude — une onde douce qui réveille le clitoris en entier, même ses parties cachées.",
       "name_fr": "SONA — Stimulateur clitoridien",
       "sub_fr": "Révolution · Onde douce · LELO",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-55",
@@ -482,7 +542,8 @@ window.PRODUCTS_DATA = {
       "desc": "Sa texture répond à chaque mouvement du corps comme une évidence — et une fois les mains libres, vous savez exactement pourquoi.",
       "name_fr": "Gode EasyToys Realist",
       "sub_fr": "Douceur · Liberté · Authenticité",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-10",
@@ -499,7 +560,8 @@ window.PRODUCTS_DATA = {
       "desc": "Invisible aux autres, inoubliable pour vous — il transforme les moments ordinaires de la journée en délicieuse complicité avec vous-même.",
       "name_fr": "Vibromasseur Culotte Point G",
       "sub_fr": "Invisible · Intime · Délice quotidien",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-5",
@@ -516,7 +578,8 @@ window.PRODUCTS_DATA = {
       "desc": "Doux à l'entrée, profond dans l'effet — il ouvre une exploration sensorielle que vous choisissez de vivre seul ou à deux.",
       "name_fr": "Plug Anal Électrique Silicone",
       "sub_fr": "Exploration · Douceur · Intensité",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "mixte"
     },
     {
       "id": "plaisir-45",
@@ -532,7 +595,8 @@ window.PRODUCTS_DATA = {
       "desc": "Une première exploration ou un plaisir que vous approfondissez — dans les deux cas, il est là pour rendre chaque instant doux et sûr.",
       "name_fr": "AMORELIE Joy Fly — Plug anal avec vibration",
       "sub_fr": "Découverte · Douceur · AMORELIE",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "mixte"
     },
     {
       "id": "plaisir-50",
@@ -548,7 +612,8 @@ window.PRODUCTS_DATA = {
       "desc": "Discret dans votre poche, électrisant dans votre corps — un frisson à la demande, seul ou sous le regard complice de l'autre.",
       "name_fr": "AMORELIE Oh to Go 2.0 — Oeuf vibro avec télécommande",
       "sub_fr": "Frisson · Liberté · À emporter",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-56",
@@ -564,7 +629,8 @@ window.PRODUCTS_DATA = {
       "desc": "Il s'adapte à vous en temps réel — une présence si réaliste qu'elle redéfinit ce que vous pensiez possible en solo.",
       "name_fr": "SVAKOM Sam Neo 2 — Masturbateur interactif",
       "sub_fr": "Intelligence · Réalisme · SVAKOM",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "homme"
     },
     {
       "id": "plaisir-41",
@@ -580,7 +646,8 @@ window.PRODUCTS_DATA = {
       "desc": "Un plaisir qui fait aussi travailler votre endurance — pour les hommes qui veulent tout : l'intensité du moment et la maîtrise de demain.",
       "name_fr": "F2S — Masturbateur Homme",
       "sub_fr": "Endurance · Intensité · LELO",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "homme"
     },
     {
       "id": "plaisir-62",
@@ -595,7 +662,8 @@ window.PRODUCTS_DATA = {
       "desc": "Toute la puissance du Coco dans un format poche — parce que l'envie n'attend pas, et vous non plus.",
       "name_fr": "Mini Coco — Stimulateur Clitoridien",
       "sub_fr": "Pocket · Puissante · Made in France",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-28",
@@ -611,7 +679,8 @@ window.PRODUCTS_DATA = {
       "desc": "Les mains posées, les sens en éveil — il cible exactement le bon endroit avec une intensité qui ne ressemble à rien d'autre.",
       "name_fr": "PULSE SOLO ESSENTIAL — Masturbateur vibrant pour pénis",
       "sub_fr": "Unique · Mains libres · Plaisir masculin",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "homme"
     },
     {
       "id": "plaisir-30",
@@ -628,7 +697,8 @@ window.PRODUCTS_DATA = {
       "desc": "Petit prix, grand effet — dix niveaux d'intensité pour trouver exactement ce que vous cherchez, sans jamais vous fier aux apparences.",
       "name_fr": "Pucker Up Purple 10 Strength Pulsating Clitoral Stimulator",
       "sub_fr": "Bon plan · Précision · Plaisir sûr",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-35",
@@ -644,7 +714,8 @@ window.PRODUCTS_DATA = {
       "desc": "La rose noire du plaisir — élégante en apparence, irrésistible dans l'effet, pour une aspiration clitoridienne qui vous laisse sans mots.",
       "name_fr": "Fifty Shades of Grey Black Rose — Clitoral Suction Stimulato",
       "sub_fr": "Luxe · Aspiration profonde · Élégance noire",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-43",
@@ -660,7 +731,8 @@ window.PRODUCTS_DATA = {
       "desc": "Il enveloppe sans toucher et offre des sensations que vous n'attendiez pas — l'un des stimulateurs les plus appréciés, et on comprend vite pourquoi.",
       "name_fr": "AMORELIE Joy x Satisfyer Flicker — Vibrateur à ondes de pres",
       "sub_fr": "Enveloppant · Discret · Satisfyer x AMORELIE",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-26",
@@ -676,7 +748,8 @@ window.PRODUCTS_DATA = {
       "desc": "Dedans et dehors en même temps — cette double vague de plaisir simultané est du genre à rester longtemps en mémoire.",
       "name_fr": "KAI  The Dual Dildo & Clitoral Vibrator",
       "sub_fr": "Double vague · Intime · Inoubliable",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-63",
@@ -691,7 +764,8 @@ window.PRODUCTS_DATA = {
       "desc": "Dans l'eau, hors de l'eau, à toute heure — fiable comme un allié de confiance et jouissif comme une bonne surprise.",
       "name_fr": "Toupie — Vibromasseur Clitoridien Puissante",
       "sub_fr": "Partout · Fiable · Puissante",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-27",
@@ -707,7 +781,8 @@ window.PRODUCTS_DATA = {
       "desc": "Il aspire, il vibre, et il répond à chaque désir séparément — pour les plaisirs qui savent exactement ce qu'ils veulent.",
       "name_fr": "JESSE  Clitoral Suction Vibrator",
       "sub_fr": "Précision · Aspiration · Sur mesure",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-34",
@@ -723,7 +798,8 @@ window.PRODUCTS_DATA = {
       "desc": "Essayez-le 100 jours — Lovehoney vous le garantit, parce que certains plaisirs méritent qu'on prenne le temps de vraiment les connaître.",
       "name_fr": "Lovehoney Red Silicone Mini Wand Vibrator",
       "sub_fr": "Confiance · Garantie 100 jours · Lovehoney",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-60",
@@ -738,7 +814,8 @@ window.PRODUCTS_DATA = {
       "desc": "Aussi raffiné qu'efficace — il prend soin de vous de l'intérieur et de l'extérieur, avec une élégance qui ne se justifie pas, elle se ressent.",
       "name_fr": "Wonderlover — Oeuf Vibrant",
       "sub_fr": "Raffinement · Double plaisir · Love to Love",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-64",
@@ -753,7 +830,8 @@ window.PRODUCTS_DATA = {
       "desc": "Pour celles qui refusent de choisir — il répond à tout en même temps, avec une générosité qui désarme.",
       "name_fr": "DINO — Vibromasseur Point G avec Succion",
       "sub_fr": "Triple plaisir · Sans compromis · Soft Paris",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-66",
@@ -768,7 +846,8 @@ window.PRODUCTS_DATA = {
       "desc": "La chaleur qui détend, les vibrations qui éveillent — un enveloppement sensoriel total pour des moments d'abandon que vous ne voulez plus interrompre.",
       "name_fr": "SEXTRA — Vibromasseur Chauffant",
       "sub_fr": "Chaleur · Abandon · Soft Paris",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-67",
@@ -783,7 +862,8 @@ window.PRODUCTS_DATA = {
       "desc": "Son allure poétique cache une puissance qui surprend — doux au toucher, décisif là où vous en avez besoin.",
       "name_fr": "SELENE — Vibromasseur Soie du Corbeau",
       "sub_fr": "Douceur · Surprise · Soft Paris",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-68",
@@ -798,7 +878,8 @@ window.PRODUCTS_DATA = {
       "desc": "Portées en secret, elles tonifient, éveillent et prennent soin de vous — le bien-être intime qui n'attend pas d'occasion particulière.",
       "name_fr": "Gesha Therapy — Boules de Geisha",
       "sub_fr": "Bien-être · Tonicité · Soft Paris",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-71",
@@ -813,7 +894,8 @@ window.PRODUCTS_DATA = {
       "desc": "Posez-le, fermez les yeux — il fait le reste avec une simplicité désarmante et une efficacité qui ne laisse aucun doute.",
       "name_fr": "Touch Me — Stimulateur Clitoridien",
       "sub_fr": "Instinctif · Simple · Love to Love",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-72",
@@ -828,7 +910,8 @@ window.PRODUCTS_DATA = {
       "desc": "Toute la puissance d'un wand dans la paume de la main — la preuve que les meilleures surprises se cachent dans les petits formats.",
       "name_fr": "Itsy Bitsy — Mini Wand",
       "sub_fr": "Grand plaisir · Petit format · Love to Love",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-75",
@@ -843,7 +926,8 @@ window.PRODUCTS_DATA = {
       "desc": "Pour les curieux comme pour les initiés — il éveille des zones oubliées avec une discrétion et une douceur qui mettent à l'aise.",
       "name_fr": "Twinny Bud — Plug Anal Vibrant",
       "sub_fr": "Curiosité · Douceur · Love to Love",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "mixte"
     },
     {
       "id": "plaisir-76",
@@ -858,7 +942,8 @@ window.PRODUCTS_DATA = {
       "desc": "Chaque perle amplifie la suivante — une montée progressive qui culmine sur un frisson que peu de choses égalent.",
       "name_fr": "Bing Bang — Chapelet Anal",
       "sub_fr": "Progression · Frisson · Love to Love",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "mixte"
     },
     {
       "id": "plaisir-81",
@@ -872,7 +957,8 @@ window.PRODUCTS_DATA = {
       "desc": "Une onde qui enveloppe et des vibrations qui s'ajoutent — deux effets simultanés qui justifient pleinement ce qu'il promet dans son nom.",
       "name_fr": "Satisfyer INTENSE — Air Pulse Vibrator",
       "sub_fr": "Onde + vibration · Double effet · Satisfyer",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-82",
@@ -886,7 +972,8 @@ window.PRODUCTS_DATA = {
       "desc": "Conçu pour votre morphologie, il tient en place et se fait oublier — jusqu'à ce que vous décidiez de ne plus l'oublier.",
       "name_fr": "BOOTIE FEM — Analplug pour Femme",
       "sub_fr": "Confort · Adapté · Fun Factory",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-83",
@@ -900,7 +987,8 @@ window.PRODUCTS_DATA = {
       "desc": "Posé là où vous voulez, il épouse votre corps avec une précision allemande et une douceur qui inspire confiance dès la première fois.",
       "name_fr": "CHARME — Stimulateur Clitoridien",
       "sub_fr": "Précision · Qualité · Fun Factory",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-84",
@@ -914,7 +1002,8 @@ window.PRODUCTS_DATA = {
       "desc": "Sa tête pivote, s'adapte, et trouve sans effort exactement là où vous en avez envie — c'est pour ça qu'il est bestseller.",
       "name_fr": "VIM — Wand Vibrant Flexible",
       "sub_fr": "S'adapte à vous · Bestseller · Fun Factory",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-85",
@@ -928,7 +1017,8 @@ window.PRODUCTS_DATA = {
       "desc": "Ses ailes enveloppent, les vibrations se propagent de bas en haut — seul ou avec l'autre, une intensité que rien ne prépare vraiment.",
       "name_fr": "MANTA — Vibrateur Pénis Premium",
       "sub_fr": "Enveloppant · Intense · Fun Factory",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "homme"
     },
     {
       "id": "plaisir-86",
@@ -942,7 +1032,8 @@ window.PRODUCTS_DATA = {
       "desc": "Pour ceux qui aiment les sensations profondes et généreuses — une présence assumée, une sécurité totale, une liberté d'usage rare.",
       "name_fr": "MAGNUM — Dildo Silicone",
       "sub_fr": "Généreux · Polyvalent · Fun Factory",
-      "subfamille": "soloclub"
+      "subfamille": "soloclub",
+      "groupe": "femme"
     },
     {
       "id": "plaisir-78",
@@ -1198,6 +1289,97 @@ window.PRODUCTS_DATA = {
   ],
   "malin": [
     {
+      "id": "src-m17",
+      "price": 24.99,
+      "filter": "tech,bureau,maison",
+      "images": [
+        "/img/sourcing/src-m17.jpg"
+      ],
+      "desc": "Bras articulé à 360° fixé en pince sur bureau ou lit pour tenir le téléphone mains libres. Réglage hauteur/angle en 2 secondes, compatible tous smartphones et tablettes jusqu'à 13 pouces.",
+      "name_fr": "Support Téléphone Bras Articulé Lit & Bureau",
+      "sub_fr": "tech · DSers EU",
+      "subfamille": "tech",
+      "oldPrice": null
+    },
+    {
+      "id": "src-m16",
+      "price": 29.99,
+      "filter": "maison,voyage,indispensable",
+      "images": [
+        "/img/sourcing/src-m16.jpg"
+      ],
+      "desc": "Gourde double paroi inox qui garde vos boissons froides 24h et chaudes 12h. Paille intégrée et rabattable, poignée nomade, 8 coloris pastels. Le tumbler viral qui remplace Stanley à moitié prix.",
+      "name_fr": "Gourde Isotherme Paille Intégrée 1L — Tumbler Stanley Style",
+      "sub_fr": "maison · DSers EU Allemagne",
+      "subfamille": "maison",
+      "oldPrice": null
+    },
+    {
+      "id": "src-m07",
+      "price": 14.99,
+      "filter": "cuisine,maison",
+      "images": [
+        "/img/sourcing/src-m07.jpg"
+      ],
+      "desc": "Épluche, spiralise et coupe en julienne en un seul outil compact. Courgettes en spaghettis, carottes en rubans — la cuisine healthy et créative en un geste.",
+      "name_fr": "Éplucheur Spiraliseur Légumes 3-en-1",
+      "sub_fr": "cuisine · DSers EU",
+      "subfamille": "cuisine",
+      "oldPrice": null
+    },
+    {
+      "id": "src-m03",
+      "price": 49.99,
+      "filter": "tech,bureau",
+      "images": [
+        "/img/sourcing/src-m03.jpg"
+      ],
+      "desc": "Se connecte en Bluetooth à votre smartphone et imprime vos photos en 30 secondes au format carte — sans cartouche, sans câble. Idéal pour les souvenirs instantanés.",
+      "name_fr": "Imprimante Photo Thermique de Poche — Mini Printer",
+      "sub_fr": "tech · DSers EU",
+      "subfamille": "tech",
+      "oldPrice": null
+    },
+    {
+      "id": "src-m04",
+      "price": 29.99,
+      "filter": "tech,voyage",
+      "images": [
+        "/img/sourcing/src-m04.jpg"
+      ],
+      "desc": "Masque de nuit intégrant des écouteurs Bluetooth plats pour écouter méditations, podcasts ou playlists sans déranger. Doux, lavable, rechargeable USB.",
+      "name_fr": "Masque Sommeil Bluetooth — Sleep Mask Headphones",
+      "sub_fr": "bien-etre · DSers EU",
+      "subfamille": "bien-etre",
+      "oldPrice": null
+    },
+    {
+      "id": "src-m11",
+      "price": 24.99,
+      "filter": "voyage,tech,maison",
+      "images": [
+        "/img/sourcing/src-m11.jpg"
+      ],
+      "desc": "Se porte autour du cou et libère les mains tout en soufflant de l'air frais en continu. Silencieux, rechargeable USB-C et pliable. Compagnon incontournable des étés en ville.",
+      "name_fr": "Ventilateur Portable Col — Neck Fan Mains Libres",
+      "sub_fr": "voyage · DSers EU",
+      "subfamille": "voyage",
+      "oldPrice": null
+    },
+    {
+      "id": "src-m01",
+      "price": 49.99,
+      "filter": "tech,maison",
+      "images": [
+        "/img/sourcing/src-m01.jpg"
+      ],
+      "desc": "Transforme n'importe quel mur en écran de cinéma en 30 secondes. Rechargeable USB-C, compatible smartphone via câble, projette jusqu'à 120 pouces.",
+      "name_fr": "Mini Projecteur Portable LED — Bedroom Cinema",
+      "sub_fr": "tech · DSers EU",
+      "subfamille": "tech",
+      "oldPrice": null
+    },
+    {
       "id": "malin-24",
       "price": 9.79,
       "filter": "maison",
@@ -1272,6 +1454,45 @@ window.PRODUCTS_DATA = {
     }
   ],
   "bebe": [
+    {
+      "id": "src-b08",
+      "price": 19.99,
+      "filter": "jouets,petitprix",
+      "images": [
+        "/img/sourcing/src-b08.jpg"
+      ],
+      "desc": "12 jouets de bain en plastique sans BPA : tasses gigognes, animaux gicleurs, filet de rangement inclus. Rendent le bain fun et pédagogique dès 6 mois.",
+      "name_fr": "Set Jouets de Bain Bébé — Lot 12 Pièces",
+      "sub_fr": "jouets · DSers EU",
+      "subfamille": "jouets",
+      "oldPrice": null
+    },
+    {
+      "id": "src-b07",
+      "price": 34.99,
+      "filter": "accessoire,maison",
+      "images": [
+        "/img/sourcing/src-b07.jpg"
+      ],
+      "desc": "Coussin ergonomique en C pour allaitement, biberon et tummy time. Housse déhoussable lavable en machine, rembourrage ferme anti-affaissement. Accompagne mère et bébé de 0 à 12 mois.",
+      "name_fr": "Coussin d'Allaitement Multi-Positions C-Shape",
+      "sub_fr": "accessoire · DSers EU",
+      "subfamille": "accessoire",
+      "oldPrice": null
+    },
+    {
+      "id": "src-b04",
+      "price": 24.99,
+      "filter": "2eme-main,vetements",
+      "images": [
+        "/img/sourcing/src-b04.jpg"
+      ],
+      "desc": "Lot de 8 vêtements 0-3 mois soigneusement sélectionnés — bodys, pyjamas, grenouillères. Chaque pièce vérifiée, lavée à 60°, en parfait état.",
+      "name_fr": "Lot Vêtements Bébé 0-3 mois — Sélectionnés Vinted",
+      "sub_fr": "vetements · Vinted",
+      "subfamille": "vetements",
+      "oldPrice": null
+    },
     {
       "id": "bebe-71",
       "price": 7.09,
