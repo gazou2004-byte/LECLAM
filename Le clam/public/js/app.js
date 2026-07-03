@@ -4316,3 +4316,53 @@ function initSupportBubble() {
   window.addEventListener('storage', _refresh);
   setInterval(_refresh, 10000);
 }
+
+/* ── Bandeau cookies CNIL ── */
+(function () {
+  const KEY = 'leclam_cookies_consent';
+  if (localStorage.getItem(KEY)) return; /* choix déjà enregistré */
+
+  const banner = document.createElement('div');
+  banner.id = 'cookie-banner';
+  banner.innerHTML = `
+    <div id="cookie-banner-inner">
+      <p id="cookie-banner-txt">🍪 Nous utilisons des cookies strictement nécessaires au fonctionnement du site. Aucun cookie analytique n'est déposé sans votre accord. <a href="cookies.html" id="cookie-banner-link">En savoir plus</a></p>
+      <div id="cookie-banner-btns">
+        <button id="cookie-accept">Accepter</button>
+        <button id="cookie-refuse">Refuser</button>
+      </div>
+    </div>`;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #cookie-banner { position:fixed; bottom:0; left:0; right:0; z-index:9998;
+      background:#1a1a1a; color:#e8e0d0; font-family:system-ui,sans-serif;
+      font-size:.82rem; padding:.75rem 1rem; box-shadow:0 -2px 16px rgba(0,0,0,.35); }
+    #cookie-banner-inner { max-width:900px; margin:0 auto; display:flex;
+      align-items:center; gap:1rem; flex-wrap:wrap; }
+    #cookie-banner-txt { margin:0; flex:1; min-width:200px; line-height:1.5; }
+    #cookie-banner-link { color:#d4a017; text-underline-offset:2px; }
+    #cookie-banner-btns { display:flex; gap:.5rem; flex-shrink:0; }
+    #cookie-accept, #cookie-refuse {
+      padding:.38rem 1rem; border:none; border-radius:6px; font-size:.8rem;
+      font-weight:700; cursor:pointer; font-family:inherit; }
+    #cookie-accept { background:#d4a017; color:#1a1a1a; }
+    #cookie-refuse { background:transparent; color:#aaa; border:1.5px solid #444 !important; }
+    #cookie-accept:hover { background:#e6b520; }
+    #cookie-refuse:hover { background:rgba(255,255,255,.06); color:#ccc; }`;
+
+  document.head.appendChild(style);
+  document.body.appendChild(banner);
+
+  function accept() {
+    localStorage.setItem(KEY, 'accepted');
+    banner.remove();
+  }
+  function refuse() {
+    localStorage.setItem(KEY, 'refused');
+    banner.remove();
+  }
+
+  document.getElementById('cookie-accept').addEventListener('click', accept);
+  document.getElementById('cookie-refuse').addEventListener('click', refuse);
+})();

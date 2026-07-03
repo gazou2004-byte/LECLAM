@@ -255,8 +255,7 @@
     'ko-KR': { age: 19, pays: 'Corée du Sud' },
   };
 
-  const KEY     = 'leclam_age_ok';
-  const EXPIRES = 60 * 60 * 1000; /* 1 heure */
+  const KEY     = 'leclam_age_ok'; /* sessionStorage — expire à la fermeture de l'onglet */
   const gate    = document.getElementById('age-gate');
 
   /* Détecter l'âge légal selon la locale */
@@ -285,9 +284,9 @@
     }
   } catch {}
 
-  /* Non connecté : cache 1h */
-  const stored = localStorage.getItem(KEY);
-  if (stored && Date.now() - parseInt(stored, 10) < EXPIRES) return;
+  /* Non connecté : vérification par session (expire à la fermeture de l'onglet) */
+  const stored = sessionStorage.getItem(KEY);
+  if (stored) return;
 
   /* Remplir les textes */
   document.getElementById('age-msg').innerHTML =
@@ -307,7 +306,7 @@
   document.body.style.overflow = 'hidden';
 
   document.getElementById('age-yes').addEventListener('click', function() {
-    localStorage.setItem(KEY, Date.now().toString());
+    sessionStorage.setItem(KEY, '1');
     gate.style.display = 'none';
     document.body.style.overflow = '';
     document.querySelectorAll('body > *:not(#age-gate)').forEach(el => el.style.visibility = '');
