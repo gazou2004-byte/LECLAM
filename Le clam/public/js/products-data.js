@@ -19,7 +19,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "src-p01",
-      "price": 28,
+      "price": 29.90,
       "filter": "indispensable,petitprix",
       "images": [
         "/img/sourcing/src-p01.jpg"
@@ -32,7 +32,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "src-p05",
-      "price": 27,
+      "price": 28.90,
       "filter": "indispensable",
       "images": [
         "/img/sourcing/src-p05.jpg"
@@ -1289,6 +1289,19 @@ window.PRODUCTS_DATA = {
   ],
   "malin": [
     {
+      "id": "src-m14",
+      "price": 22.99,
+      "filter": "voyage,tech,maison",
+      "images": [
+        "/img/sourcing/src-m14.jpg"
+      ],
+      "desc": "Mini ventilateur à brumisation qui projette un nuage d'eau fraîche jusqu'à 2 mètres. Réservoir 300 ml, 3 vitesses, rechargeable USB-C, silencieux <35 dB. Parfait bureau, festival, plage.",
+      "name_fr": "Brumisateur Portable Silencieux — Mist Fan USB",
+      "sub_fr": "voyage · DSers EU Espagne",
+      "subfamille": "voyage",
+      "oldPrice": null
+    },
+    {
       "id": "src-m17",
       "price": 24.99,
       "filter": "tech,bureau,maison",
@@ -1454,6 +1467,71 @@ window.PRODUCTS_DATA = {
     }
   ],
   "bebe": [
+    {
+      "id": "src-b05",
+      "price": 59.99,
+      "filter": "mobilite,jouets",
+      "images": [
+        "/img/sourcing/src-b05.jpg"
+      ],
+      "desc": "Transat ajustable 5 positions de 0 à 9 kg. Structure légère, assise inclinée qui soutient naturellement la colonne vertébrale. Le premier espace à soi de bébé.",
+      "name_fr": "Transat Bébé Ergonomique 5 Positions — Newborn",
+      "sub_fr": "mobilite · DSers EU",
+      "subfamille": "mobilite",
+      "oldPrice": null
+    },
+    {
+      "id": "src-b03",
+      "price": 34.99,
+      "filter": "jouets,2eme-main",
+      "images": [
+        "/img/sourcing/src-b03.jpg"
+      ],
+      "desc": "Arche d'éveil Tiny Love ou Fisher-Price en parfait état, nettoyée et vérifiée. Toutes les pièces présentes, piles neuves fournies. Qualité premium à prix seconde main.",
+      "name_fr": "Arche d'Éveil Grande Marque — Occasion Sélectionnée",
+      "sub_fr": "jouets · Vinted / Leboncoin",
+      "subfamille": "jouets",
+      "oldPrice": null
+    },
+    {
+      "id": "src-b02",
+      "price": 29.99,
+      "filter": "jouets,mobilite",
+      "images": [
+        "/img/sourcing/src-b02.jpg"
+      ],
+      "desc": "Peluche veilleuse qui projette des étoiles au plafond et joue des berceuses avec minuterie automatique. Rechargeable USB, nomade dès la naissance.",
+      "name_fr": "Veilleuse Musicale Nomade — Peluche Projecteur",
+      "sub_fr": "jouets · DSers EU",
+      "subfamille": "jouets",
+      "oldPrice": null
+    },
+    {
+      "id": "src-b01",
+      "price": 49.99,
+      "filter": "jouets,mobilite",
+      "images": [
+        "/img/sourcing/src-b01.jpg"
+      ],
+      "desc": "Tapis pliable avec arche musicale, 15 activités : hochets suspendus, miroir, piano à pieds, sons et lumières. Stimule tous les sens de bébé de la naissance à 12 mois.",
+      "name_fr": "Tapis d'Éveil avec Arche Musicale 5-en-1",
+      "sub_fr": "jouets · DSers EU Pologne",
+      "subfamille": "jouets",
+      "oldPrice": null
+    },
+    {
+      "id": "src-b06",
+      "price": 27.99,
+      "filter": "jouets,montessori",
+      "images": [
+        "/img/sourcing/src-b06.jpg"
+      ],
+      "desc": "Cube en bois naturel avec 6 faces d'activités différentes : boulier, engrenages, miroir, labyrinthe, horloge et clavier musical. Stimule motricité fine, concentration et sens dès 12 mois.",
+      "name_fr": "Cube Sensoriel Bois Montessori 6-en-1",
+      "sub_fr": "jouets · DSers EU Pologne",
+      "subfamille": "jouets",
+      "oldPrice": null
+    },
     {
       "id": "src-b08",
       "price": 19.99,
