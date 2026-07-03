@@ -213,47 +213,6 @@
     .src-hstat-n { font-size: 1.25rem; }
   }
 
-  /* ── Séparateurs de sous-famille dans la grille ── */
-  .src-subfam-sep {
-    grid-column: 1 / -1;
-    display: flex; align-items: center; gap: .6rem;
-    padding: 1.2rem 0 .5rem;
-  }
-  .src-subfam-sep:first-child { padding-top: .25rem; }
-  .src-subfam-sep-name {
-    font-size: .68rem; font-weight: 800; text-transform: uppercase;
-    letter-spacing: .1em; color: #999; white-space: nowrap;
-    font-family: system-ui, sans-serif;
-  }
-  .src-subfam-sep-count {
-    background: #f0ede7; color: #bbb; border-radius: 20px;
-    padding: .1rem .48rem; font-size: .63rem; font-weight: 700;
-    font-family: system-ui, sans-serif; flex-shrink: 0;
-  }
-  .src-subfam-sep::after {
-    content: ''; flex: 1; height: 1px; background: #ede8e0;
-  }
-  .src-subfam-sep { cursor: pointer; }
-  .src-subfam-sep:hover .src-subfam-sep-name { color: #b07d10; }
-  .src-subfam-sep.src-subfam-active .src-subfam-sep-name { color: #d4a017; font-weight: 900; }
-  .src-subfam-sep.src-subfam-active .src-subfam-sep-count { background: #fef3c7; color: #b45309; }
-  /* ── Séparateurs de groupe (à l'intérieur d'une sous-famille) ── */
-  .src-groupe-sep {
-    grid-column: 1 / -1;
-    display: flex; align-items: center; gap: .5rem;
-    padding: .65rem 0 .25rem 1.25rem;
-  }
-  .src-groupe-sep-name {
-    font-size: .62rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .09em; color: #c0b8ae; white-space: nowrap;
-    font-family: system-ui, sans-serif;
-  }
-  .src-groupe-sep-count {
-    background: #f5f2ef; color: #ccc; border-radius: 20px;
-    padding: .08rem .42rem; font-size: .6rem; font-weight: 700;
-    font-family: system-ui, sans-serif; flex-shrink: 0;
-  }
-  .src-groupe-sep::after { content: ''; flex: 1; height: 1px; background: #f0ece5; }
 
   /* Badge multi-famille dans les cartes */
   .src-multicats {
@@ -448,8 +407,6 @@
     <button class="src-fbtn" data-st="pending">En attente</button>
     <button class="src-fbtn" data-st="validated">Validés</button>
     <button class="src-fbtn" data-st="rejected">Rejetés</button>
-    <!-- Ligne sous-familles — injectée dynamiquement après chargement -->
-    <div id="srcSfRow" style="display:contents"></div>
   </div>
 
   <!-- ── PRODUITS ── -->
@@ -603,7 +560,6 @@ let _all   = [];
 let _token = '';
 let _dest  = '';
 let _st    = '';
-let _sf    = '';   /* filtre sous-famille actif */
 
 /* String ou tableau → tableau */
 function catList(cat) { return Array.isArray(cat) ? cat : (cat ? [cat] : []); }
@@ -655,7 +611,6 @@ async function load() {
     if (!d.ok) throw new Error(d.error||'Erreur');
     _all = d.proposals;
     updateStats();
-    renderSfFilters();
     render();
   } catch(e) { toast('Erreur chargement : '+e.message,'err'); }
 }
@@ -676,72 +631,13 @@ function render() {
     document.getElementById('sect-'+cat).classList.toggle('hidden', hide);
     document.getElementById('cnt-'+cat).textContent = list.length;
 
-    /* Filtre sous-famille */
-    if (_sf) list = list.filter(p => sfMatch(p.subfamille, _sf));
-
     if (!list.length) {
       document.getElementById('grid-'+cat).innerHTML =
         `<div style="font-family:system-ui,sans-serif;font-size:.85rem;color:#bbb;text-align:center;padding:2rem;grid-column:1/-1">Aucun produit.</div>`;
       return;
     }
 
-    /* Niveau 1 : grouper par sous-famille (un produit multi-sf apparaît dans chaque groupe) */
-    const sfMap = {};
-    for (const p of list) {
-      const sfs = sfList(p.subfamille);
-      const keys = sfs.length ? sfs : ['autre'];
-      for (const sf of keys) {
-        if (!sfMap[sf]) sfMap[sf] = [];
-        sfMap[sf].push(p);
-      }
-    }
-    /* Ordre : plus grand effectif d'abord, puis alpha */
-    const sfKeys = Object.keys(sfMap).sort((a,b) =>
-      sfMap[b].length - sfMap[a].length || a.localeCompare(b,'fr')
-    );
-
-    let html = '';
-    for (const sf of sfKeys) {
-      const sfLabel  = SF_LABELS[sf] || (sf.charAt(0).toUpperCase()+sf.slice(1));
-      const sfSorted = sortProposals(sfMap[sf]);
-      const isActive = _sf === sf;
-
-      html += `<div class="src-subfam-sep${isActive?' src-subfam-active':''}" onclick="setSf('${sf}')" title="Filtrer par ${sfLabel}">
-        <span class="src-subfam-sep-name">${sfLabel}</span>
-        <span class="src-subfam-sep-count">${sfSorted.length}</span>
-      </div>`;
-
-      /* Niveau 2 : sous-groupes — dès qu'au moins 1 produit a un groupe assigné */
-      const groupeSet = new Set(sfSorted.map(p => p.groupe||'').filter(Boolean));
-      if (groupeSet.size >= 1) {
-        /* Produits sans groupe → affichés en dernier sans séparateur */
-        const withG  = sfSorted.filter(p => p.groupe);
-        const noG    = sfSorted.filter(p => !p.groupe);
-        const grpMap = {};
-        for (const p of withG) {
-          if (!grpMap[p.groupe]) grpMap[p.groupe] = [];
-          grpMap[p.groupe].push(p);
-        }
-        const gKeys = Object.keys(grpMap).sort((a,b) => {
-          const ia = GROUPE_ORDER.indexOf(a), ib = GROUPE_ORDER.indexOf(b);
-          if (ia>=0 && ib>=0) return ia-ib;
-          if (ia>=0) return -1; if (ib>=0) return 1;
-          return a.localeCompare(b,'fr');
-        });
-        for (const g of gKeys) {
-          const glabel = GROUPE_LABELS[g] || (g.charAt(0).toUpperCase()+g.slice(1));
-          html += `<div class="src-groupe-sep">
-            <span class="src-groupe-sep-name">${glabel}</span>
-            <span class="src-groupe-sep-count">${grpMap[g].length}</span>
-          </div>`;
-          html += grpMap[g].map(p => buildCard(p, cat)).join('');
-        }
-        if (noG.length) html += noG.map(p => buildCard(p, cat)).join('');
-      } else {
-        html += sfSorted.map(p => buildCard(p, cat)).join('');
-      }
-    }
-    document.getElementById('grid-'+cat).innerHTML = html;
+    document.getElementById('grid-'+cat).innerHTML = sortProposals(list).map(p => buildCard(p, cat)).join('');
   });
 }
 
@@ -869,36 +765,7 @@ document.getElementById('srcFiltersBar').addEventListener('click', e => {
     document.querySelectorAll('[data-st]').forEach(el=>el.classList.remove('on'));
     b.classList.add('on'); _st=b.dataset.st; render();
   }
-  if ('sf' in b.dataset) {
-    document.querySelectorAll('[data-sf]').forEach(el=>el.classList.remove('on'));
-    b.classList.add('on'); _sf=b.dataset.sf; render();
-  }
 });
-
-/* Clic sur un séparateur de sous-famille → filtre toggle */
-function setSf(sf) {
-  _sf = (_sf === sf) ? '' : sf;   /* re-clic → désactive */
-  /* Sync boutons dans la barre */
-  document.querySelectorAll('[data-sf]').forEach(b => {
-    b.classList.toggle('on', b.dataset.sf === _sf);
-  });
-  render();
-}
-
-/* Génère dynamiquement les boutons de sous-famille dans la barre */
-function renderSfFilters() {
-  const allSfs = new Set();
-  for (const p of _all) sfList(p.subfamille).forEach(s => s && allSfs.add(s));
-  const sorted = [...allSfs].sort((a,b) => a.localeCompare(b,'fr'));
-  const row = document.getElementById('srcSfRow');
-  if (!row || !sorted.length) return;
-  row.innerHTML = `<span class="src-flbl" style="margin-left:.5rem;width:100%;padding-top:.3rem">Sous-famille</span>`
-    + `<button class="src-fbtn on" data-sf="">Toutes</button>`
-    + sorted.map(sf => {
-        const label = SF_LABELS[sf] || (sf.charAt(0).toUpperCase()+sf.slice(1));
-        return `<button class="src-fbtn" data-sf="${sf}">${label}</button>`;
-      }).join('');
-}
 
 /* ── Fiche complète ── */
 const LINK_ICONS = { aliexpress:'🛒', google:'🔍', amazon:'📦', alibaba:'🏭', temu:'🛍️', vinted:'♻️', leboncoin:'🟠' };
