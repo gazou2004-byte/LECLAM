@@ -1778,6 +1778,72 @@
         }
       ],
       "dateAjout": "2026-07-04 14:27"
+    },
+    {
+      "id": "src-p18",
+      "nom": "Kit de Yoga Étendu",
+      "description": "Un kit de yoga complet pour les débutants et les professionnels, comprenant un tapis, des blocs, une ceinture et un sac de transport.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les kits de yoga sont très tendance en ce moment, comme le montre les données de Google Trends et les ventes sur AliExpress.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf846c2fbaa5e4b9a9f5b5c2c3d4e5f6c/Kit-de-Yoga-Complet-Tapis-Blocs-Ceinture-Sac.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga"
+        }
+      ],
+      "dateAjout": "2026-07-04 16:00"
+    },
+    {
+      "id": "src-m27",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable et léger, compatible avec la plupart des téléphones et des jeux.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les contrôleurs de jeu mobile sont très tendance en ce moment, comme le montre les données de DSers et les ventes sur AliExpress.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/contrôleur-de-jeu-mobile.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+mobile"
+        }
+      ],
+      "dateAjout": "2026-07-04 16:00"
+    },
+    {
+      "id": "src-b18",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé, composé de blocs de construction colorés et amusants, pour développer la créativité et la motricité de l'enfant.",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très tendance en ce moment, et les blocs de construction sont un classique qui plaît toujours aux enfants, comme le montre les données de Vinted et les ventes sur AliExpress.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/blocs-de-construction-pour-bebe.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=blocs+de+construction+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-04 16:00"
     }
   ]
 }
