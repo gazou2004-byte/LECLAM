@@ -1,0 +1,46 @@
+name: Matthieu — Audit sécurité
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: npm audit
+        working-directory: "Le clam"
+        run: |
+          npm install --ignore-scripts 2>/dev/null || true
+          npm audit --audit-level=high || true
+
+      - name: Vérifier secrets dans le diff
+        run: |
+          git diff HEAD~1 HEAD -- '*.js' '*.html' '*.json' '*.env' > /tmp/diff.txt 2>/dev/null || git show HEAD -- '*.js' '*.html' '*.json' > /tmp/diff.txt
+          echo "=== Recherche de patterns sensibles ==="
+          grep -nE "(password|secret|api_key|apikey|token|private_key)\s*=\s*['\"][^'\"]{6,}" /tmp/diff.txt || echo "Aucun secret détecté"
+
+      - name: Analyse sécurité IA (Matthieu)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: node scripts/securite-auto.js
+
+      - name: Upload rapport
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rapport-securite-${{ github.run_number }}
+          path: .securite-rapport.md
+          retention-days: 30
