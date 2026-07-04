@@ -1484,6 +1484,60 @@
         }
       ],
       "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-p11",
+      "nom": "Bougie Aromatique Relaxante",
+      "description": "Découvrez notre bougie aromatique pour un moment de détente et de relaxation en toute intimité, avec des huiles essentielles pour vous aider à vous ressourcer.",
+      "prixVente": 19.9,
+      "prixFournisseur": 10.5,
+      "marge": 47.2,
+      "categorie": "plaisir",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-m20",
+      "nom": "Chargeur Sans Fil 15W avec Support",
+      "description": "Un chargeur sans fil puissant et pratique pour vos déplacements, compatible avec la plupart des téléphones et équipé d'un support pour une charge verticale ou horizontale.",
+      "prixVente": 14.9,
+      "prixFournisseur": 7.8,
+      "marge": 47.7,
+      "categorie": "malin",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-b11",
+      "nom": "Jeu d'Eveil Sensiciel pour Bébé",
+      "description": "Un jeu d'éveil coloré et interactif pour stimuler les sens de votre bébé, avec des textures variées et des sons amusants pour une découverte ludique.",
+      "prixVente": 24.9,
+      "prixFournisseur": 13.2,
+      "marge": 47,
+      "categorie": "bebe",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr"
+        }
+      ],
+      "dateAjout": "2026-07-04"
     }
   ]
 }
