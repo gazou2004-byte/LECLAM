@@ -3319,13 +3319,13 @@ html body { margin-top: 0 !important; }
   letter-spacing: .03em;
 }
 
-.b-deal {
-  background: #E53E3E;
-}
-
-.b-france {
-  background: var(--plaisir-1);
-}
+.b-deal   { background: #E53E3E; }
+.b-france { background: var(--plaisir-1); }
+.b-fr     { background: #0057b7; }
+.b-tiktok { background: #010101; }
+.b-best   { background: #b8860b; }
+.b-second { background: #6b7280; }
+.b-new    { background: #059669; }
 
 .b-star {
   background: #f5a623;
@@ -4813,3 +4813,107 @@ html body { margin-top: 0 !important; }
   .price-filter-wrap { margin: .4rem .5rem; }
   .pwa-install-btn   { font-size: .68rem; padding: .28rem .65rem; }
 }
+
+/* ── Section 3 univers (index.html) ── */
+.univers-section {
+  padding: 3.5rem clamp(1rem, 5vw, 4rem) 2.5rem;
+  background: var(--bg);
+}
+.univers-title {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--ink);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.univers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.univers-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: 2rem 1.6rem 1.6rem;
+  border-radius: var(--r-xl);
+  text-decoration: none;
+  color: inherit;
+  border: 1.5px solid rgba(62,42,20,.12);
+  background: #fff;
+  transition: transform .2s, box-shadow .2s;
+}
+.univers-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.09); }
+.u-emoji  { font-size: 2rem; }
+.univers-card h3 { font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--ink); }
+.univers-card p  { font-size: .88rem; color: #666; margin: 0; line-height: 1.5; }
+.u-cta { font-size: .82rem; font-weight: 600; margin-top: auto; padding-top: .6rem; }
+.u-plaisir .u-cta { color: var(--plaisir-2); }
+.u-malin  .u-cta { color: var(--malin-1); }
+.u-bebe   .u-cta { color: var(--bebe-1); }
+.u-plaisir:hover { border-color: var(--plaisir-2); }
+.u-malin:hover   { border-color: var(--malin-1); }
+.u-bebe:hover    { border-color: var(--bebe-1); }
+
+/* ── Popup capture email ── */
+.email-popup-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  z-index: 9000; display: flex; align-items: center; justify-content: center;
+  opacity: 0; animation: ep-in .3s .1s ease forwards;
+}
+@keyframes ep-in { to { opacity: 1; } }
+.email-popup {
+  background: #fff; border-radius: 18px; padding: 2.4rem 2rem 2rem;
+  max-width: 420px; width: calc(100% - 2rem); text-align: center;
+  position: relative; transform: translateY(20px);
+  animation: ep-slide .3s .1s ease forwards;
+}
+@keyframes ep-slide { to { transform: translateY(0); } }
+.ep-close {
+  position: absolute; top: .9rem; right: 1rem;
+  background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #999;
+  line-height: 1;
+}
+.ep-close:hover { color: #333; }
+.ep-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin: 0 0 .5rem; color: var(--ink); }
+.ep-sub   { font-size: .9rem; color: #666; margin: 0 0 1.4rem; line-height: 1.5; }
+.ep-form  { display: flex; gap: .5rem; }
+.ep-input {
+  flex: 1; border: 1.5px solid #ddd; border-radius: 50px;
+  padding: .65rem 1.1rem; font-size: .88rem; font-family: inherit; outline: none;
+  transition: border-color .2s;
+}
+.ep-input:focus { border-color: var(--ink); }
+.ep-btn {
+  padding: .65rem 1.3rem; border-radius: 50px; border: none;
+  background: var(--ink); color: #fff; font-weight: 600;
+  font-size: .85rem; cursor: pointer; white-space: nowrap;
+  transition: opacity .2s;
+}
+.ep-btn:hover { opacity: .85; }
+.ep-legal { font-size: .7rem; color: #bbb; margin: .8rem 0 0; }
+@media (max-width: 480px) {
+  .ep-form { flex-direction: column; }
+  .ep-btn  { width: 100%; }
+}
+
+/* ── Cross-sell chips ── */
+.crosssell-bar {
+  margin-top: .8rem; padding: .8rem 1rem;
+  background: rgba(255,255,255,.06);
+  border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
+}
+.crosssell-label { font-size: .7rem; color: rgba(255,255,255,.6); margin-bottom: .5rem; letter-spacing: .04em; text-transform: uppercase; }
+.crosssell-chips { display: flex; gap: .4rem; flex-wrap: wrap; }
+.crosssell-chip {
+  display: flex; align-items: center; gap: .35rem;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50px; padding: .3rem .7rem; cursor: pointer;
+  font-size: .72rem; color: #fff; transition: background .15s;
+}
+.crosssell-chip:hover { background: rgba(255,255,255,.2); }
+.crosssell-chip-img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }

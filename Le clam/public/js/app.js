@@ -4366,3 +4366,119 @@ function initSupportBubble() {
   document.getElementById('cookie-accept').addEventListener('click', accept);
   document.getElementById('cookie-refuse').addEventListener('click', refuse);
 })();
+
+/* ── Popup capture email (15s après chargement) ── */
+(function () {
+  const EP_KEY = 'leclam_ep_shown';
+  if (localStorage.getItem(EP_KEY)) return;
+  if (location.pathname.includes('admin') || location.pathname.includes('sourcing') || location.pathname.includes('login')) return;
+
+  setTimeout(function () {
+    if (localStorage.getItem(EP_KEY)) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'email-popup-overlay';
+    overlay.id = 'emailPopup';
+    overlay.innerHTML = `<div class="email-popup" role="dialog" aria-modal="true" aria-label="Offre de bienvenue">
+      <button class="ep-close" id="epClose" aria-label="Fermer">✕</button>
+      <div class="ep-title">−10% sur votre première commande</div>
+      <p class="ep-sub">Rejoignez la communauté Le Clam et recevez votre code de bienvenue immédiatement.</p>
+      <form class="ep-form" id="epForm" novalidate>
+        <input class="ep-input" type="email" placeholder="votre@email.fr" required aria-label="Adresse email">
+        <button class="ep-btn" type="submit">J'en profite</button>
+      </form>
+      <p class="ep-legal">En vous inscrivant, vous acceptez de recevoir nos offres. Désabonnement à tout moment.</p>
+    </div>`;
+    document.body.appendChild(overlay);
+
+    function close() {
+      overlay.remove();
+      localStorage.setItem(EP_KEY, '1');
+    }
+    document.getElementById('epClose').addEventListener('click', close);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    document.getElementById('epForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = this.querySelector('input').value.trim();
+      if (!email) return;
+      /* TODO: envoyer à /api/newsletter ou service email */
+      this.innerHTML = '<p style="font-size:.95rem;color:#059669;font-weight:600;margin:0">✓ Code BIENVENUE10 envoyé sur ' + email.replace(/</g,'&lt;') + ' !</p>';
+      setTimeout(close, 3000);
+    });
+  }, 15000);
+})();
+
+/* ── Cross-sell dans le panier ── */
+(function () {
+  const origRender = typeof Cart !== 'undefined' && Cart._renderDrawer ? Cart._renderDrawer.bind(Cart) : null;
+
+  function injectCrossSell(items) {
+    const bar = document.querySelector('.crosssell-bar');
+    if (bar) bar.remove();
+    if (!items || !items.length || typeof window.PRODUCTS_DATA === 'undefined') return;
+
+    const allProds = [].concat(
+      window.PRODUCTS_DATA.plaisir || [],
+      window.PRODUCTS_DATA.malin   || [],
+      window.PRODUCTS_DATA.bebe    || []
+    );
+    const inCart = new Set(items.map(function(i) { return i.id; }));
+    const suggested = [];
+
+    items.forEach(function (item) {
+      const prod = allProds.find(function(p) { return p.id === item.id; });
+      if (prod && prod.crossSell) {
+        prod.crossSell.forEach(function (sid) {
+          if (!inCart.has(sid) && !suggested.find(function(s){ return s.id === sid; })) {
+            const sp = allProds.find(function(p){ return p.id === sid; });
+            if (sp) suggested.push(sp);
+          }
+        });
+      }
+    });
+
+    if (!suggested.length) return;
+
+    const drawer = document.querySelector('.cart-items') || document.querySelector('.cart-drawer');
+    if (!drawer) return;
+
+    const bar = document.createElement('div');
+    bar.className = 'crosssell-bar';
+    bar.innerHTML = '<div class="crosssell-label">Recommandé avec votre sélection</div>'
+      + '<div class="crosssell-chips">'
+      + suggested.slice(0, 3).map(function (sp) {
+          const img = sp.images && sp.images[0] ? sp.images[0] : '';
+          const price = sp.price ? (sp.price.toFixed(2) + ' €') : '';
+          return '<div class="crosssell-chip" data-cs-id="' + sp.id + '" title="' + (sp.name_fr || '') + '">'
+            + (img ? '<img class="crosssell-chip-img" src="' + img + '" alt="" loading="lazy">' : '')
+            + '<span>' + (sp.name_fr || sp.id).slice(0, 28) + (sp.name_fr && sp.name_fr.length > 28 ? '…' : '') + '</span>'
+            + '<span style="opacity:.7">' + price + '</span>'
+            + '</div>';
+        }).join('')
+      + '</div>';
+
+    drawer.after(bar);
+
+    bar.querySelectorAll('.crosssell-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const sid = this.dataset.csId;
+        const sp = allProds.find(function(p){ return p.id === sid; });
+        if (sp && typeof addToCart === 'function') {
+          addToCart(null, sp);
+          chip.style.opacity = '.4';
+          chip.style.pointerEvents = 'none';
+        }
+      });
+    });
+  }
+
+  /* Observer: se déclenche quand le drawer du panier est mis à jour */
+  const observer = new MutationObserver(function () {
+    const items = typeof Cart !== 'undefined' ? Cart.items() : [];
+    injectCrossSell(items);
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const drawer = document.querySelector('.cart-drawer') || document.getElementById('cartDrawer');
+    if (drawer) observer.observe(drawer, { childList: true, subtree: true });
+  });
+})();

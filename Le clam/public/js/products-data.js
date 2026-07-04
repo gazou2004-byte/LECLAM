@@ -1,6 +1,3 @@
-/* products-data.js — Source unique des produits Le Clam
-   Pour ajouter un produit : ajouter un objet dans le tableau de sa catégorie.
-   Noms/sous-titres traduits via locales/*.json (clé: products.{id}_name / _sub) */
 window.PRODUCTS_DATA = {
   "plaisir": [
     {
@@ -19,7 +16,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "src-p01",
-      "price": 29.90,
+      "price": 29.9,
       "filter": "indispensable,petitprix",
       "images": [
         "/img/sourcing/src-p01.jpg"
@@ -28,11 +25,12 @@ window.PRODUCTS_DATA = {
       "name_fr": "Goliate — Lubrifiant Naturel Bio Long Lasting",
       "sub_fr": "wellness · Goliate (grossiste direct)",
       "subfamille": "wellness",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "Made in France"
     },
     {
       "id": "src-p05",
-      "price": 28.90,
+      "price": 28.9,
       "filter": "indispensable",
       "images": [
         "/img/sourcing/src-p05.jpg"
@@ -41,7 +39,8 @@ window.PRODUCTS_DATA = {
       "name_fr": "Goliate — Soin Vulvaire Régénérant Bio",
       "sub_fr": "wellness · Goliate (grossiste direct)",
       "subfamille": "wellness",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "Made in France"
     },
     {
       "id": "plaisir-44",
@@ -57,7 +56,10 @@ window.PRODUCTS_DATA = {
       "desc": "Tout ce qu'il faut pour une première nuit électrique à deux — en un seul geste, le désir prend une nouvelle dimension.",
       "name_fr": "Easy Choice — Ensemble vibrateurs de couple + lubrifiant",
       "sub_fr": "Duo · Complicité · Prêt à vivre",
-      "subfamille": "duo"
+      "subfamille": "duo",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-38",
@@ -77,7 +79,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-23",
-      "price": 132,
+      "price": 131.9,
       "filter": "duo",
       "images": [
         "plaisir/articles/MIO%20%E2%80%94%20Anneau%20p%C3%A9nien%20vibrant%20par%20Je%20Joue/photo_produit.jpg",
@@ -108,7 +110,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-65",
-      "price": 109,
+      "price": 108.9,
       "filter": "duo",
       "images": [
         "plaisir/articles/JUNO — Vibromasseur pour Couples/photo_produit.jpg"
@@ -183,7 +185,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-61",
-      "price": 119,
+      "price": 118.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Coco — Vibromasseur Puissante/photo_produit.jpg"
@@ -195,7 +197,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Coco — Vibromasseur Puissante",
       "sub_fr": "Référence · Made in France · Puissante",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "badge": "Bestseller",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-7",
@@ -213,7 +219,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Stimulation Clitoridienne",
       "sub_fr": "Douceur · Précision · Désir",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "badge": "Bestseller",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-3",
@@ -231,7 +241,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Masseur Baguette Puissant",
       "sub_fr": "Puissance · Profondeur · Classique",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "badge": "Bestseller",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-51",
@@ -248,7 +262,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Womanizer Pro — Vibrateur à ondes de pression",
       "sub_fr": "Révélation · Onde de plaisir · Bestseller",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "badge": "Bestseller",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-8",
@@ -266,7 +284,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Vibrateur Tête de Lapin",
       "sub_fr": "Interne · Externe · Intensité rare",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "badge": "Bestseller",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-42",
@@ -301,7 +323,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Stimulateur Sexuel Rose",
       "sub_fr": "Aspiration · Douceur · Désir",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-48",
@@ -322,7 +347,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-31",
-      "price": 47,
+      "price": 46.9,
       "filter": "soloclub,duo",
       "images": [
         "plaisir/articles/Love%20Nest%20Pink%20Remote%20Rechargeable%20Love%20Egg/photo_produit.jpg",
@@ -352,11 +377,14 @@ window.PRODUCTS_DATA = {
       "name_fr": "AMORELIE Joy Shimmer — Boules d'amour connectées",
       "sub_fr": "Connexion · Subtilité · Partout avec vous",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-24",
-      "price": 50,
+      "price": 49.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Personal%20Massager/photo_produit.jpg",
@@ -386,7 +414,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "SVAKOM Evil Elva — Oeuf vibrant avec télécommande",
       "sub_fr": "Élégance · Discrétion · SVAKOM",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-49",
@@ -421,7 +452,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Vibrateur Portable Télécommande",
       "sub_fr": "Secret · Frisson · Complicité",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-29",
@@ -455,7 +489,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "EasyToys Jelly Passion Vibrateur réaliste",
       "sub_fr": "Réalisme · Douceur · Envie",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "plaisir-80",
+        "plaisir-77"
+      ]
     },
     {
       "id": "plaisir-11",
@@ -492,7 +530,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Mini Baguette de Massage",
       "sub_fr": "Portable · Discrète · Toujours là",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "plaisir-80",
+        "plaisir-77"
+      ]
     },
     {
       "id": "plaisir-54",
@@ -513,7 +555,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-39",
-      "price": 89,
+      "price": 88.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/SONA%20%E2%80%94%20Stimulateur%20clitoridien/photo_produit.jpg",
@@ -526,7 +568,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "SONA — Stimulateur clitoridien",
       "sub_fr": "Révolution · Onde douce · LELO",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-55",
@@ -543,7 +588,11 @@ window.PRODUCTS_DATA = {
       "name_fr": "Gode EasyToys Realist",
       "sub_fr": "Douceur · Liberté · Authenticité",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "plaisir-80",
+        "plaisir-77"
+      ]
     },
     {
       "id": "plaisir-10",
@@ -561,7 +610,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Vibromasseur Culotte Point G",
       "sub_fr": "Invisible · Intime · Délice quotidien",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-5",
@@ -651,7 +703,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-62",
-      "price": 89,
+      "price": 88.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Mini%20Coco%20%E2%80%94%20Stimulateur%20Clitoridien/photo_produit.jpg"
@@ -663,7 +715,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Mini Coco — Stimulateur Clitoridien",
       "sub_fr": "Pocket · Puissante · Made in France",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-28",
@@ -684,13 +739,13 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-30",
-      "price": 12,
+      "price": 11.9,
       "filter": "soloclub,petitprix",
       "images": [
         "plaisir/articles/Pucker%20Up%20Purple%2010%20Strength%20Pulsating%20Clitoral%20Stimulator/photo_produit.jpg",
         "plaisir/articles/Pucker%20Up%20Purple%2010%20Strength%20Pulsating%20Clitoral%20Stimulator/product-1.png"
       ],
-      "oldPrice": 18,
+      "oldPrice": 17.9,
       "rating": 4,
       "reviews": 125,
       "weight": 85,
@@ -698,11 +753,15 @@ window.PRODUCTS_DATA = {
       "name_fr": "Pucker Up Purple 10 Strength Pulsating Clitoral Stimulator",
       "sub_fr": "Bon plan · Précision · Plaisir sûr",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "plaisir-80",
+        "plaisir-77"
+      ]
     },
     {
       "id": "plaisir-35",
-      "price": 55,
+      "price": 54.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Fifty%20Shades%20of%20Grey%20Black%20Rose%20%E2%80%94%20Clitoral%20Suction%20Stimulato/photo_produit.jpg",
@@ -715,7 +774,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Fifty Shades of Grey Black Rose — Clitoral Suction Stimulato",
       "sub_fr": "Luxe · Aspiration profonde · Élégance noire",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-43",
@@ -732,7 +794,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "AMORELIE Joy x Satisfyer Flicker — Vibrateur à ondes de pres",
       "sub_fr": "Enveloppant · Discret · Satisfyer x AMORELIE",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-26",
@@ -753,7 +818,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-63",
-      "price": 59,
+      "price": 58.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Toupie%20%E2%80%94%20Vibromasseur%20Clitoridien%20Puissante/photo_produit.jpg"
@@ -765,7 +830,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Toupie — Vibromasseur Clitoridien Puissante",
       "sub_fr": "Partout · Fiable · Puissante",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-27",
@@ -786,7 +854,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-34",
-      "price": 37,
+      "price": 36.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Lovehoney%20Red%20Silicone%20Mini%20Wand%20Vibrator/photo_produit.jpg",
@@ -799,7 +867,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Lovehoney Red Silicone Mini Wand Vibrator",
       "sub_fr": "Confiance · Garantie 100 jours · Lovehoney",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-60",
@@ -819,7 +890,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-64",
-      "price": 99,
+      "price": 98.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/DINO%20%E2%80%94%20Vibromasseur%20Point%20G%20avec%20Succion/photo_produit.jpg"
@@ -831,11 +902,14 @@ window.PRODUCTS_DATA = {
       "name_fr": "DINO — Vibromasseur Point G avec Succion",
       "sub_fr": "Triple plaisir · Sans compromis · Soft Paris",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-66",
-      "price": 79,
+      "price": 78.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/SEXTRA — Vibromasseur Chauffant/photo_produit.jpg"
@@ -847,11 +921,14 @@ window.PRODUCTS_DATA = {
       "name_fr": "SEXTRA — Vibromasseur Chauffant",
       "sub_fr": "Chaleur · Abandon · Soft Paris",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-67",
-      "price": 44,
+      "price": 43.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/SELENE — Vibromasseur Soie du Corbeau/photo_produit.jpg"
@@ -863,11 +940,14 @@ window.PRODUCTS_DATA = {
       "name_fr": "SELENE — Vibromasseur Soie du Corbeau",
       "sub_fr": "Douceur · Surprise · Soft Paris",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-68",
-      "price": 39,
+      "price": 38.9,
       "filter": "soloclub",
       "images": [
         "plaisir/articles/Gesha Therapy — Boules de Geisha/photo_produit.jpg"
@@ -879,7 +959,10 @@ window.PRODUCTS_DATA = {
       "name_fr": "Gesha Therapy — Boules de Geisha",
       "sub_fr": "Bien-être · Tonicité · Soft Paris",
       "subfamille": "soloclub",
-      "groupe": "femme"
+      "groupe": "femme",
+      "crossSell": [
+        "src-p01"
+      ]
     },
     {
       "id": "plaisir-71",
@@ -1047,11 +1130,12 @@ window.PRODUCTS_DATA = {
       "desc": "Rechargez tout d'un coup et oubliez ce problème pour de bon — parce que l'envie ne devrait jamais attendre une pile morte.",
       "name_fr": "BONAI Chargeur Piles Universel 8 Slots",
       "sub_fr": "8 piles à la fois · Pratique · Toujours prêt",
-      "subfamille": "indispensable"
+      "subfamille": "indispensable",
+      "badge": "Bestseller"
     },
     {
       "id": "plaisir-40",
-      "price": 179,
+      "price": 178.9,
       "filter": "indispensable",
       "images": [
         "plaisir/articles/INA%203%20%E2%80%94%20Sextoy%20Rabbit/photo_produit.jpg",
@@ -1063,11 +1147,12 @@ window.PRODUCTS_DATA = {
       "desc": "Le rabbit qui redéfinit ce que votre corps peut ressentir — une double vague intérieure et extérieure pour des orgasmes dont on se souvient.",
       "name_fr": "INA 3 — Sextoy Rabbit",
       "sub_fr": "Double révélation · Puissance · LELO",
-      "subfamille": "indispensable"
+      "subfamille": "indispensable",
+      "badge": "Bestseller"
     },
     {
       "id": "plaisir-25",
-      "price": 50,
+      "price": 49.9,
       "filter": "indispensable",
       "images": [
         "plaisir/articles/Vibrating%20Diamond%20Noir%20%E2%80%94%20%C3%89dition%2010e%20anniversaire/photo_produit.jpg",
@@ -1099,7 +1184,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-33",
-      "price": 100,
+      "price": 99.9,
       "filter": "indispensable",
       "images": [
         "plaisir/articles/We-Vibe%20Touch%20X%20%E2%80%94%20Rechargeable%20Clitoral%20Vibrator/photo_produit.jpg",
@@ -1115,7 +1200,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-32",
-      "price": 45,
+      "price": 44.9,
       "filter": "indispensable",
       "images": [
         "plaisir/articles/Womanizer%20Pro%20Lilac%20%E2%80%94%20Clitoral%20Suction%20Stimulator/photo_produit.jpg",
@@ -1161,7 +1246,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "plaisir-22",
-      "price": 85,
+      "price": 84.9,
       "filter": "indispensable",
       "images": [
         "plaisir/articles/Duet%20Bullet%20Vibrator%20by%20Je%20Joue/photo_produit.jpg",
@@ -1270,7 +1355,8 @@ window.PRODUCTS_DATA = {
       "desc": "Finies les interruptions pour chercher des piles — ce lot de 8 rechargeables s'occupe de l'énergie pour que vous vous occupiez du reste.",
       "name_fr": "BONAI 8 Piles AA Rechargeables 2800 mAh",
       "sub_fr": "Toujours chargé · Écologique · Longue durée",
-      "subfamille": "accessoire"
+      "subfamille": "accessoire",
+      "badge": "Bestseller"
     },
     {
       "id": "plaisir-77",
@@ -1284,7 +1370,8 @@ window.PRODUCTS_DATA = {
       "desc": "L'accessoire dont vous ne parlerez à personne mais sans lequel tout s'arrête — 8 piles rechargables pour que le plaisir ne soit jamais en panne.",
       "name_fr": "BONAI 8 Piles AAA Rechargeables 1100 mAh",
       "sub_fr": "Toujours chargé · Écologique · L'essentiel",
-      "subfamille": "accessoire"
+      "subfamille": "accessoire",
+      "badge": "Bestseller"
     }
   ],
   "malin": [
@@ -1295,7 +1382,7 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m14.jpg"
       ],
-      "desc": "Mini ventilateur à brumisation qui projette un nuage d'eau fraîche jusqu'à 2 mètres. Réservoir 300 ml, 3 vitesses, rechargeable USB-C, silencieux <35 dB. Parfait bureau, festival, plage.",
+      "desc": "Un nuage d'eau fraîche à la demande, où que vous soyez — festival, bureau, terrasse. Rechargeable USB-C, silencieux, et vous arrêtez enfin de transpirer.",
       "name_fr": "Brumisateur Portable Silencieux — Mist Fan USB",
       "sub_fr": "voyage · DSers EU Espagne",
       "subfamille": "voyage",
@@ -1308,7 +1395,7 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m17.jpg"
       ],
-      "desc": "Bras articulé à 360° fixé en pince sur bureau ou lit pour tenir le téléphone mains libres. Réglage hauteur/angle en 2 secondes, compatible tous smartphones et tablettes jusqu'à 13 pouces.",
+      "desc": "Installez votre téléphone en 2 secondes et lisez, regardez une série ou suivez une recette les mains libres — au lit, au bureau, sans jamais le tenir.",
       "name_fr": "Support Téléphone Bras Articulé Lit & Bureau",
       "sub_fr": "tech · DSers EU",
       "subfamille": "tech",
@@ -1321,11 +1408,12 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m16.jpg"
       ],
-      "desc": "Gourde double paroi inox qui garde vos boissons froides 24h et chaudes 12h. Paille intégrée et rabattable, poignée nomade, 8 coloris pastels. Le tumbler viral qui remplace Stanley à moitié prix.",
+      "desc": "Votre café reste chaud 12 heures. Votre eau fraîche 24 heures. Et tout le monde autour de vous finit par vous demander où vous l'avez trouvée.",
       "name_fr": "Gourde Isotherme Paille Intégrée 1L — Tumbler Stanley Style",
       "sub_fr": "maison · DSers EU Allemagne",
       "subfamille": "maison",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "Viral TikTok"
     },
     {
       "id": "src-m07",
@@ -1334,7 +1422,7 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m07.jpg"
       ],
-      "desc": "Épluche, spiralise et coupe en julienne en un seul outil compact. Courgettes en spaghettis, carottes en rubans — la cuisine healthy et créative en un geste.",
+      "desc": "En 10 secondes, votre courgette devient des spaghettis et votre carotte une julienne. Healthy, rapide, et le format s'intègre dans le tiroir sans prendre de place.",
       "name_fr": "Éplucheur Spiraliseur Légumes 3-en-1",
       "sub_fr": "cuisine · DSers EU",
       "subfamille": "cuisine",
@@ -1347,7 +1435,7 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m03.jpg"
       ],
-      "desc": "Se connecte en Bluetooth à votre smartphone et imprime vos photos en 30 secondes au format carte — sans cartouche, sans câble. Idéal pour les souvenirs instantanés.",
+      "desc": "Imprimez un souvenir en 30 secondes depuis votre téléphone — sans cartouche, sans câble. La photo que vous recevez sur papier a une valeur que le numérique n'a pas.",
       "name_fr": "Imprimante Photo Thermique de Poche — Mini Printer",
       "sub_fr": "tech · DSers EU",
       "subfamille": "tech",
@@ -1360,11 +1448,12 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m04.jpg"
       ],
-      "desc": "Masque de nuit intégrant des écouteurs Bluetooth plats pour écouter méditations, podcasts ou playlists sans déranger. Doux, lavable, rechargeable USB.",
+      "desc": "Endormez-vous avec votre playlist, votre podcast ou votre méditation sans déranger personne — le masque cache la lumière, les écouteurs plats laissent le confort intakt.",
       "name_fr": "Masque Sommeil Bluetooth — Sleep Mask Headphones",
       "sub_fr": "bien-etre · DSers EU",
       "subfamille": "bien-etre",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "Viral TikTok"
     },
     {
       "id": "src-m11",
@@ -1373,11 +1462,12 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m11.jpg"
       ],
-      "desc": "Se porte autour du cou et libère les mains tout en soufflant de l'air frais en continu. Silencieux, rechargeable USB-C et pliable. Compagnon incontournable des étés en ville.",
+      "desc": "Vous passez l'été sans jamais souffrir de la chaleur : il souffle en continu sur votre cou, en silence, pendant que vos mains restent libres pour tout le reste.",
       "name_fr": "Ventilateur Portable Col — Neck Fan Mains Libres",
       "sub_fr": "voyage · DSers EU",
       "subfamille": "voyage",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "Viral TikTok"
     },
     {
       "id": "src-m01",
@@ -1386,11 +1476,12 @@ window.PRODUCTS_DATA = {
       "images": [
         "/img/sourcing/src-m01.jpg"
       ],
-      "desc": "Transforme n'importe quel mur en écran de cinéma en 30 secondes. Rechargeable USB-C, compatible smartphone via câble, projette jusqu'à 120 pouces.",
+      "desc": "Posez-le sur votre table de nuit, pointez-le vers le mur, et regardez votre chambre se transformer en salle de cinéma en 30 secondes — sans câble, sans abonnement, sans prise.",
       "name_fr": "Mini Projecteur Portable LED — Bedroom Cinema",
       "sub_fr": "tech · DSers EU",
       "subfamille": "tech",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "Viral TikTok"
     },
     {
       "id": "malin-24",
@@ -1491,7 +1582,8 @@ window.PRODUCTS_DATA = {
       "name_fr": "Arche d'Éveil Grande Marque — Occasion Sélectionnée",
       "sub_fr": "jouets · Vinted / Leboncoin",
       "subfamille": "jouets",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "2ème main"
     },
     {
       "id": "src-b02",
@@ -1569,7 +1661,8 @@ window.PRODUCTS_DATA = {
       "name_fr": "Lot Vêtements Bébé 0-3 mois — Sélectionnés Vinted",
       "sub_fr": "vetements · Vinted",
       "subfamille": "vetements",
-      "oldPrice": null
+      "oldPrice": null,
+      "badge": "2ème main"
     },
     {
       "id": "bebe-71",
@@ -1585,7 +1678,8 @@ window.PRODUCTS_DATA = {
       "desc": "Dès les premières semaines, ses petits doigts la saisissent, la lâchent, recommencent — un jouet d'une simplicité parfaite qui captive bébé pendant des heures.",
       "name_fr": "Oball Balle Flexible Bright Starts",
       "sub_fr": "Dès la naissance · Indestructible · Monde entier",
-      "subfamille": "jouets"
+      "subfamille": "jouets",
+      "badge": "Bestseller"
     },
     {
       "id": "bebe-70",
@@ -1602,7 +1696,8 @@ window.PRODUCTS_DATA = {
       "desc": "Bébé l'attrape, la secoue, la mordille — en jouant, il renforce ses mains et apaise ses gencives sans même s'en rendre compte.",
       "name_fr": "Hochet Sensoriel Balle Loyzico",
       "sub_fr": "Éveil · Dentition · Dès 3 mois",
-      "subfamille": "jouets"
+      "subfamille": "jouets",
+      "badge": "Bestseller"
     },
     {
       "id": "bebe-76",
@@ -1620,7 +1715,8 @@ window.PRODUCTS_DATA = {
       "desc": "Il découvre son reflet et ne se lasse pas — un livre en tissu tout doux qui éveille bébé tout en vous offrant quelques minutes de sourires partagés.",
       "name_fr": "Livre Miroir Bébé Vicloon",
       "sub_fr": "Éveil · Sourires · Dès la naissance",
-      "subfamille": "jouets"
+      "subfamille": "jouets",
+      "badge": "Bestseller"
     },
     {
       "id": "bebe-46",
@@ -1635,7 +1731,8 @@ window.PRODUCTS_DATA = {
       "desc": "L'heure du coucher sans bataille — des histoires et méditations apaisantes qui endorment les enfants en douceur, plébiscitées par plus de 1 400 familles.",
       "name_fr": "Mon Petit Morphée Boîte Histoires",
       "sub_fr": "Sérénité · Sans écran · Dès 3 ans",
-      "subfamille": "jouets"
+      "subfamille": "jouets",
+      "badge": "Bestseller"
     },
     {
       "id": "bebe-79",
@@ -2023,7 +2120,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "bebe-38",
-      "price": 8,
+      "price": 7.9,
       "filter": "jouets",
       "images": [
         "bebe/produits/Anneau Dentition Fleur Bois CAJA/photo_produit.jpg"
@@ -2301,7 +2398,7 @@ window.PRODUCTS_DATA = {
     },
     {
       "id": "bebe-86",
-      "price": 61,
+      "price": 60.9,
       "filter": "mobilite",
       "images": [
         "bebe/produits/Porte-bébé Ergonomique Momcozy/photo_produit.jpg",

@@ -47,8 +47,14 @@
       + '<div class="p-gal-dots">' + dots + '</div>'
       : '';
 
-    /* ── Badge promo (position absolute sur l'image) ── */
-    var badge = p.badge ? '<span class="p-badge b-deal">' + escAttr(p.badge) + '</span>' : '';
+    /* ── Badge (position absolute sur l'image) ── */
+    var badgeCls = 'b-deal';
+    if (p.badge === 'Made in France') badgeCls = 'b-fr';
+    else if (p.badge === 'Viral TikTok') badgeCls = 'b-tiktok';
+    else if (p.badge === 'Bestseller') badgeCls = 'b-best';
+    else if (p.badge === '2ème main') badgeCls = 'b-second';
+    else if (p.badge === 'Nouveau') badgeCls = 'b-new';
+    var badge = p.badge ? '<span class="p-badge ' + badgeCls + '">' + escAttr(p.badge) + '</span>' : '';
     /* Rupture de stock : bouton désactivé + badge */
     var outOfStock = (p.stock != null && p.stock <= 0);
     if (outOfStock && !p.badge) badge = '<span class="p-badge" style="background:#888">Épuisé</span>';
