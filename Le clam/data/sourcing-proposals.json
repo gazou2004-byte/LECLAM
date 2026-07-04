@@ -1844,6 +1844,72 @@
         }
       ],
       "dateAjout": "2026-07-04 16:00"
+    },
+    {
+      "id": "src-p19",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amoureux de la nature et du bien-être, conçu pour offrir une pratique de yoga confortable et durable.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la croissance de la pratique du yoga et de la prise de conscience environnementale, comme le montrent les données de Google Trends et les tendances de vente sur les plateformes de commerce électronique.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://image.aliexpress.com/img_533x533/2022/05/25/32/62/5f/65e6d5e4f7.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-04 17:16"
+    },
+    {
+      "id": "src-m28",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone, conçu pour être compact et facile à utiliser.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la recherche de produits pour améliorer l'expérience de jeu, comme le montrent les tendances de vente sur les plateformes de commerce électronique et les données de Google Trends.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://image.aliexpress.com/img_533x533/2022/06/15/15/41/31/4f/4c5f4e414f.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-04 17:16"
+    },
+    {
+      "id": "src-b19",
+      "nom": "Kit de Création Artistique pour Enfants",
+      "description": "Un kit de création artistique pour enfants pour encourager la créativité et l'expression artistique, conçu pour être coloré et amusant.",
+      "raisonVente": "Les kits de création artistique pour enfants sont très populaires en ce moment en raison de la recherche de produits pour stimuler la créativité et l'imagination des enfants, comme le montrent les tendances de vente sur les plateformes de commerce électronique et les données de Google Trends.",
+      "prixVente": 24.9,
+      "prixFournisseur": 12,
+      "marge": 51.8,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://image.aliexpress.com/img_533x533/2022/05/25/32/62/5f/65e6d5e4f7.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+création+artistique+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-04 17:16"
     }
   ]
 }
