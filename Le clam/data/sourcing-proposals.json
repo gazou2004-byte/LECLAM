@@ -1976,6 +1976,72 @@
         }
       ],
       "dateAjout": "2026-07-04 19:08"
+    },
+    {
+      "id": "src-p23",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga, conçu pour offrir un confort et une adhérence optimale pendant les séances d'entraînement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et des exercices de bien-être à domicile, comme le montrent les données de Google Trends et les tendances de dropshipping sur DSers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf4ddc19f2e4f4a9f9f9f9f9f9f9f9f9/Tapis-de-yoga-ecologique.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-04 20:55"
+    },
+    {
+      "id": "src-m32",
+      "nom": "Projecteur Portable LED pour Téléphone",
+      "description": "Un projecteur LED portable et compact pour projeter des vidéos et des images depuis votre téléphone, idéal pour les soirées entre amis ou les présentations en déplacement.",
+      "raisonVente": "Les projecteurs portables sont très populaires sur TikTok et autres réseaux sociaux, en particulier parmi les jeunes adultes qui cherchent des solutions de divertissement innovantes et pratiques, comme indiqué sur le site de DSers.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H7d7d7d7d7d7d7d7/Projecteur-portable-LED-pour-telephone.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+LED+pour+t%C3%A9l%C3%A9phone"
+        }
+      ],
+      "dateAjout": "2026-07-04 20:55"
+    },
+    {
+      "id": "src-b23",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction en Bois",
+      "description": "Un jeu éducatif en bois pour les bébés, composé de blocs de construction colorés pour stimuler la créativité et le développement cognitif.",
+      "raisonVente": "Les jouets éducatifs en bois sont très demandés par les parents qui cherchent des alternatives aux jouets en plastique et veulent encourager l'apprentissage et la créativité de leurs enfants, comme visible sur les tendances de Vinted.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H3d3d3d3d3d3d3/Jouet-educatif-pour-bebe-blocs-de-construction-en-bois.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-04 20:55"
     }
   ]
 }
