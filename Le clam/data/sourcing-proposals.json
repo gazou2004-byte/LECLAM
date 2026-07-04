@@ -1712,6 +1712,72 @@
         }
       ],
       "dateAjout": "2026-07-04 12:10"
+    },
+    {
+      "id": "src-p16",
+      "nom": "Contrôleur de Jeu Mobile",
+      "description": "Améliorez votre expérience de jeu mobile avec ce contrôleur ergonomique et pratique.",
+      "raisonVente": "La popularité croissante des jeux mobiles et la recherche de produits pour améliorer l'expérience de jeu.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb4d414a2f2b34e9b9f9f9f9f9f9f9f9f9.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+mobile"
+        }
+      ],
+      "dateAjout": "2026-07-04 14:27"
+    },
+    {
+      "id": "src-m25",
+      "nom": "Kit d'Art et de Création",
+      "description": "Débloquez votre créativité avec ce kit d'art et de création complet et amusant.",
+      "raisonVente": "La tendance actuelle vers les activités créatives et le développement personnel.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/art-supplies.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+d%27art+et+de+cr%C3%A9ation"
+        }
+      ],
+      "dateAjout": "2026-07-04 14:27"
+    },
+    {
+      "id": "src-b16",
+      "nom": "Tapis de Jeu pour Bébé",
+      "description": "Offrez à votre bébé un espace de jeu stimulant et sûr avec ce tapis de jeu coloré et interactif.",
+      "raisonVente": "La recherche de produits pour stimuler le développement des bébés et offrir un environnement de jeu sûr.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://images.vinted.net/thumbs/800x800/2022/02/15/20220215144433-4c5a3e7e3c4a4c5a3e7e3c4a4c5a3e7e.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+de+jeu+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-04 14:27"
     }
   ]
 }
