@@ -3467,8 +3467,82 @@ app.patch('/api/admin/sourcing-proposals/:id', (req, res) => {
   allowed.forEach(key => { if (req.body[key] !== undefined) p[key] = req.body[key]; });
   persistSourcing();
   try { syncProductsData(p); } catch (e) { console.error('[sourcing sync]', e.message); }
+  if (req.body.status === 'validated') {
+    lauraGenerate(p).catch(e => console.error('[Laura] Erreur génération:', e.message));
+  }
   res.json({ ok: true, proposal: p });
 });
+
+/* ─────────────────────────────────────────
+   LAURA — Génération automatique quand produit validé
+   ───────────────────────────────────────── */
+
+async function lauraGenerate(proposal) {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) { console.log('[Laura] GROQ_API_KEY absent — génération ignorée'); return; }
+
+  const univers   = Array.isArray(proposal.categorie) ? proposal.categorie[0] : proposal.categorie;
+  const univLbl   = { plaisir: 'Plaisir (bien-être intime)', malin: 'Malin (gadgets tendance)', bebe: 'Bébé (jouets & seconde main)' }[univers] || univers;
+  const now       = new Date().toISOString().replace('T', ' ').slice(0, 16);
+  const posts     = getSocialPosts();
+  const nextNum   = (posts.filter(p => p.univers === univers).length + 1).toString().padStart(2, '0');
+  const postId    = `post-${univers[0]}${nextNum}-val`;
+
+  const prompt = `Tu es Laura, responsable marketing de Le Clam (e-commerce français).
+Antoine vient de valider ce produit pour l'univers ${univLbl} :
+- Nom : ${proposal.nom}
+- Description sourcing : ${proposal.description || ''}
+- Prix de vente : ${proposal.prixVente}€
+- Raison du choix : ${proposal.raisonVente || ''}
+
+Génère en une seule réponse JSON avec DEUX parties :
+
+{
+  "descriptionSite": "Description marketing du produit pour la page web — 2-3 phrases, bénéfice-first, ton Le Clam (chaleureux, direct, pas trop commercial). NE PAS mentionner de prix.",
+  "post": {
+    "id": "${postId}",
+    "univers": "${univers}",
+    "plateforme": "TikTok ou Instagram ou Les deux",
+    "titre": "Titre accrocheur du post",
+    "concept": "Ce qu'on filme ou photographie en 1-2 phrases concrètes",
+    "legende": "Légende complète avec emojis et hashtags prête à copier-coller${univers === 'plaisir' ? ' — JAMAIS les mots sextoy/vibromasseur, utiliser masseur personnel/bien-être intime' : ''}",
+    "cta": "Call-to-action",
+    "dateCreation": "${now}",
+    "statut": "pending",
+    "source": "validation-antoine"
+  }
+}
+
+Réponds UNIQUEMENT avec ce JSON valide, rien d'autre.`;
+
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: 1024, temperature: 0.6, messages: [{ role: 'user', content: prompt }] }),
+  });
+  if (!res.ok) throw new Error(`Groq ${res.status}`);
+  const data  = await res.json();
+  const text  = data.choices[0].message.content.trim();
+
+  let parsed;
+  try { parsed = JSON.parse(text); }
+  catch { const m = text.match(/\{[\s\S]*\}/); if (!m) throw new Error('JSON invalide'); parsed = JSON.parse(m[0]); }
+
+  /* Mettre à jour la description du produit sur le site */
+  if (parsed.descriptionSite) {
+    proposal.description = parsed.descriptionSite;
+    persistSourcing();
+    try { syncProductsData(proposal); } catch {}
+    console.log(`[Laura] Description site mise à jour pour ${proposal.id}`);
+  }
+
+  /* Ajouter le post social */
+  if (parsed.post) {
+    _socialData.posts.push(parsed.post);
+    persistSocial();
+    console.log(`[Laura] Post ${parsed.post.id} créé pour ${proposal.nom}`);
+  }
+}
 
 /* ─────────────────────────────────────────
    LAURA — Posts TikTok/Instagram
