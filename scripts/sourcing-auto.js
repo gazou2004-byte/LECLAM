@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Antoine — Sourcing automatique horaire
-   Appelle Gemini Flash (gratuit) pour générer 3 nouveaux produits (1 par univers)
+   Appelle Groq (gratuit, Llama 3.3) pour générer 3 nouveaux produits (1 par univers)
    et les ajoute directement dans sourcing-proposals.json */
 
 const fs   = require('fs');
@@ -9,20 +9,23 @@ const path = require('path');
 const SOURCING_PATH = path.join(__dirname, '../Le clam/data/sourcing-proposals.json');
 const SUMMARY_PATH  = path.join(__dirname, '../.sourcing-summary');
 
-async function callGemini(prompt) {
-  const key = process.env.GEMINI_API_KEY;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
-  const res = await fetch(url, {
+async function callGroq(prompt) {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type':  'application/json',
+      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+    },
     body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { maxOutputTokens: 2048, temperature: 0.7 },
+      model:       'llama-3.3-70b-versatile',
+      max_tokens:  2048,
+      temperature: 0.7,
+      messages:    [{ role: 'user', content: prompt }],
     }),
   });
-  if (!res.ok) throw new Error(`API Gemini ${res.status}: ${await res.text()}`);
+  if (!res.ok) throw new Error(`API Groq ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  return data.candidates[0].content.parts[0].text.trim();
+  return data.choices[0].message.content.trim();
 }
 
 function nextId(proposals, prefix) {
@@ -40,7 +43,7 @@ function fixMarge(p) {
 }
 
 async function main() {
-  if (!process.env.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY manquant');
+  if (!process.env.GROQ_API_KEY) throw new Error('GROQ_API_KEY manquant');
 
   const raw  = JSON.parse(fs.readFileSync(SOURCING_PATH, 'utf8'));
   const proposals = raw.proposals;
@@ -110,7 +113,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide (pas d'explication, pas de markd
 ]`;
 
   console.log(`[Antoine] Recherche de nouveaux produits (IDs : ${idP}, ${idM}, ${idB})…`);
-  const text = await callGemini(prompt);
+  const text = await callGroq(prompt);
 
   let newProducts;
   try {

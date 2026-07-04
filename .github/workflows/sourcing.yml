@@ -22,7 +22,7 @@ jobs:
 
       - name: Lancer Antoine
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: node scripts/sourcing-auto.js
 
       - name: Commit et push si nouveaux produits
