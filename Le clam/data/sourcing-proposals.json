@@ -1910,6 +1910,72 @@
         }
       ],
       "dateAjout": "2026-07-04 17:16"
+    },
+    {
+      "id": "src-p21",
+      "nom": "Kit de Peinture pour Adultes",
+      "description": "Découvrez le plaisir de la peinture avec ce kit complet pour adultes, idéal pour se détendre et exprimer sa créativité",
+      "raisonVente": "Le kit de peinture pour adultes est un produit tendance en ce moment, comme le montre les données de DSers, avec une forte demande pour les produits liés à l'art et à la créativité",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb4fbd5fbd5fbd5fbd5fbd5fbd5f.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+peinture+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-04 19:08"
+    },
+    {
+      "id": "src-m30",
+      "nom": "Mini Projecteur LED Portable",
+      "description": "Un mini projecteur LED portable et léger, idéal pour les présentations et les divertissements en déplacement",
+      "raisonVente": "Le mini projecteur LED portable est un produit viral sur TikTok France en juillet 2026, avec une forte demande pour les produits liés à la technologie et à la mobilité",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/mini-projector.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=mini+projecteur+led+portable"
+        }
+      ],
+      "dateAjout": "2026-07-04 19:08"
+    },
+    {
+      "id": "src-b21",
+      "nom": "Poussette Tout-Terrain pour Bébé",
+      "description": "Une poussette tout-terrain robuste et confortable pour les promenades avec votre bébé",
+      "raisonVente": "La poussette tout-terrain pour bébé est un produit tendance en ce moment, comme le montre les données de Google Trends, avec une forte demande pour les produits liés aux bébés et aux enfants",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/2021/07/poussette-tout-terrain.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-04 19:08"
     }
   ]
 }
