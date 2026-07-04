@@ -126,7 +126,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide :
     "categorie": "plaisir",
     "priorite": "A",
     "statut": "pending",
-    "images": ["https://url-image-produit.jpg"],
+    "images": [],
     "liens": [{"label": "DSers", "url": "https://www.dsers.com/search/?q=nom+produit"}],
     "dateAjout": "${now}"
   },
@@ -141,7 +141,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide :
     "categorie": "malin",
     "priorite": "A",
     "statut": "pending",
-    "images": ["https://url-image-produit.jpg"],
+    "images": [],
     "liens": [{"label": "AliExpress", "url": "https://fr.aliexpress.com/wholesale?SearchText=nom+produit"}],
     "dateAjout": "${now}"
   },
@@ -156,7 +156,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide :
     "categorie": "bebe",
     "priorite": "A",
     "statut": "pending",
-    "images": ["https://url-image-produit.jpg"],
+    "images": [],
     "liens": [{"label": "Vinted", "url": "https://www.vinted.fr/catalog?search_text=nom+produit"}],
     "dateAjout": "${now}"
   }
