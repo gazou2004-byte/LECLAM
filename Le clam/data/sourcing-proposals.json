@@ -1592,6 +1592,60 @@
         }
       ],
       "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-p14",
+      "nom": "Vibromasseur Intime Réchargeable",
+      "description": "Découvrez un plaisir intense avec ce vibromasseur intime réchargeable, conçu pour offrir des moments de détente et de plaisir ultime. Parfait pour une expérience personnelle ou partagée.",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "plaisir",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04 12:05"
+    },
+    {
+      "id": "src-m23",
+      "nom": "Lampe de Poche LED Portative avec Power Bank",
+      "description": "Cette lampe de poche LED portative avec power bank intégré est l'accessoire high-tech idéal pour vos sorties nocturnes ou vos aventures en plein air, offrant lumière et charge pour votre téléphone.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "malin",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04 12:05"
+    },
+    {
+      "id": "src-b14",
+      "nom": "Jeu d'Eveil Sensuel Textures et Formes pour Bébé",
+      "description": "Stimulez les sens de votre bébé avec ce jeu d'éveil aux textures et formes variées, conçu pour encourager la découverte et le développement sensoriel de votre petit.",
+      "prixVente": 24.9,
+      "prixFournisseur": 12,
+      "marge": 51.8,
+      "categorie": "bebe",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr"
+        }
+      ],
+      "dateAjout": "2026-07-04 12:05"
     }
   ]
 }
