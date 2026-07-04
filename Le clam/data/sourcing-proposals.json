@@ -2108,6 +2108,72 @@
         }
       ],
       "dateAjout": "2026-07-04 21:57"
+    },
+    {
+      "id": "src-p26",
+      "nom": "Kit de Peinture pour Adultes",
+      "description": "Découvrez votre côté artistique avec ce kit de peinture pour adultes, idéal pour se détendre et créer quelque chose de beau.",
+      "raisonVente": "Les kits de peinture pour adultes sont très tendance en ce moment, notamment avec la popularité des activités de loisirs créatifs et de détente.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf462cf5f7b124edf8f4cfc9b7b7c45f5a/Kit-de-peinture-pour-adultes.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+peinture+pour+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-04 23:00"
+    },
+    {
+      "id": "src-m35",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Jouez à vos jeux mobiles préférés avec ce contrôleur de jeu portable, conçu pour améliorer votre expérience de jeu.",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphones sont très populaires en ce moment, notamment avec la croissance du marché des jeux mobiles.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-04 23:00"
+    },
+    {
+      "id": "src-b26",
+      "nom": "Tapis de Jeu Éducatif pour Bébés",
+      "description": "Aidez votre bébé à apprendre et à se développer avec ce tapis de jeu éducatif, conçu pour stimuler ses sens et son intelligence.",
+      "raisonVente": "Les tapis de jeu éducatifs pour bébés sont très populaires en ce moment, notamment avec la croissance du marché des produits pour bébés.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/tapis-de-jeu-educatif-pour-bebes.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+de+jeu+educatif+pour+bebes"
+        }
+      ],
+      "dateAjout": "2026-07-04 23:00"
     }
   ]
 }
