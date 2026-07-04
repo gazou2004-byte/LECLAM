@@ -526,6 +526,12 @@ function srcImgFail(img, emoji, sub) {
   img.parentNode.innerHTML = '<div class="src-placeholder"><span class="src-emoji">' + emoji + '</span><span class="src-subfam-lbl">' + sub + '</span></div>';
 }
 
+function proxyImg(url) {
+  if (!url) return '';
+  if (url.startsWith('/') || url.startsWith('http://localhost') || url.startsWith('https://localhost')) return url;
+  return '/api/img-proxy?url=' + encodeURIComponent(url);
+}
+
 const EMOJIS = {
   tech:'⚡', maison:'🏠', 'bien-etre':'🌿', beaute:'✨', voyage:'✈️',
   bureau:'💻', cuisine:'🍳', indispensable:'💎', soloclub:'🔮',
@@ -654,7 +660,7 @@ function buildCard(p, currentCat) {
   const imgSrc = p.images && p.images[0];
   const sub = x(p.subfamille || p.nom?.split(' ')[0] || '');
   const imgEl = imgSrc
-    ? `<img src="${imgSrc}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block" onerror="srcImgFail(this,'${emoji}','${sub}')">`
+    ? `<img src="${proxyImg(imgSrc)}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block" onerror="srcImgFail(this,'${emoji}','${sub}')">`
     : `<div class="src-placeholder"><span class="src-emoji">${emoji}</span><span class="src-subfam-lbl">${sub}</span></div>`;
   const mg    = parseFloat(p.marge)||0;
   const mgColor = mg>=40 ? '#6ee7b7' : mg>=25 ? '#fcd34d' : '#fca5a5';
@@ -799,7 +805,7 @@ function openFiche(id) {
   }
 
   document.getElementById('sfImg').innerHTML = imgSrc
-    ? `<img src="${x(imgSrc)}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=src-fiche-img-placeholder><span style=font-size:4rem>${emoji}</span></div>')">`
+    ? `<img src="${proxyImg(imgSrc)}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=src-fiche-img-placeholder><span style=font-size:4rem>${emoji}</span></div>')">`
     : `<div class="src-fiche-img-placeholder"><span>${emoji}</span><span>${x(p.subfamille||'')}</span></div>`;
 
   const iP=p.status==='pending', iV=p.status==='validated';

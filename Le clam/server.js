@@ -3459,6 +3459,30 @@ app.get('/api/admin/sourcing-proposals', (req, res) => {
   res.json({ ok: true, proposals });
 });
 
+/* ── Proxy image (contourne hotlink protection AliExpress/CDN) ── */
+app.get('/api/img-proxy', async (req, res) => {
+  const url = req.query.url;
+  if (!url || !/^https?:\/\//i.test(url)) return res.status(400).end();
+  try {
+    const r = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Referer': 'https://www.aliexpress.com/',
+        'Accept': 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+      },
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!r.ok) return res.status(r.status).end();
+    const ct = r.headers.get('content-type') || 'image/jpeg';
+    res.set('Content-Type', ct);
+    res.set('Cache-Control', 'public, max-age=86400');
+    const buf = await r.arrayBuffer();
+    res.send(Buffer.from(buf));
+  } catch (e) {
+    res.status(502).end();
+  }
+});
+
 app.patch('/api/admin/sourcing-proposals/:id', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
   const p = getSourcing().find(p => p.id === req.params.id);
