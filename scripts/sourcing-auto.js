@@ -47,7 +47,8 @@ async function main() {
 
   const raw  = JSON.parse(fs.readFileSync(SOURCING_PATH, 'utf8'));
   const proposals = raw.proposals;
-  const today = new Date().toISOString().split('T')[0];
+  const now = new Date();
+  const today = now.toISOString().replace('T', ' ').slice(0, 16);
 
   const idP = nextId(proposals, 'src-p');
   const idM = nextId(proposals, 'src-m');
