@@ -1,0 +1,39 @@
+name: Antoine — Sourcing automatique
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # toutes les heures
+  workflow_dispatch:        # déclenchement manuel possible depuis GitHub
+
+jobs:
+  sourcing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Lancer Antoine
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/sourcing-auto.js
+
+      - name: Commit et push si nouveaux produits
+        run: |
+          git config user.name "Antoine — Le Clam"
+          git config user.email "sourcing@leclam.fr"
+          git add "Le clam/data/sourcing-proposals.json"
+          if git diff --staged --quiet; then
+            echo "Aucun changement à committer."
+          else
+            SUMMARY=$(cat .sourcing-summary 2>/dev/null || echo "nouveaux produits")
+            git commit -m "sourcing auto $(date '+%Y-%m-%d %H:%M') — $SUMMARY"
+            git push
+          fi
