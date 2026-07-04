@@ -1646,6 +1646,72 @@
         }
       ],
       "dateAjout": "2026-07-04 12:05"
+    },
+    {
+      "id": "src-p15",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et les personnes soucieuses de l'environnement.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs sont à la recherche de produits écologiques et durables.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb4e5befe4c744eb8a2c7f2a3f4d94f7eX.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-04 12:10"
+    },
+    {
+      "id": "src-m24",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs sont à la recherche de produits pour améliorer leur expérience de jeu.",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H97c3bfaa94e44e9a9f7f2f3f4d94f7eY.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-04 12:10"
+    },
+    {
+      "id": "src-b15",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences motrices et cognitives.",
+      "raisonVente": "Les parents sont à la recherche de jouets éducatifs pour aider à développer les compétences de leurs enfants.",
+      "prixVente": 19.99,
+      "prixFournisseur": 8,
+      "marge": 60,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H4a4f5f5f5f5f5f5f5f5f5f5f5f5f5eX.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-04 12:10"
     }
   ]
 }
