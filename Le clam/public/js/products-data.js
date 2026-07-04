@@ -1376,6 +1376,19 @@ window.PRODUCTS_DATA = {
   ],
   "malin": [
     {
+      "id": "src-m02",
+      "price": 24.99,
+      "filter": "tech,maison",
+      "images": [
+        "/img/sourcing/src-m02.jpg"
+      ],
+      "desc": "Projette un halo ambré qui reproduit la lumière chaude d'un coucher de soleil sur vos murs. Un effet photo et vidéo garanti — l'accessoire incontournable pour les Reels et la déco chambre.",
+      "name_fr": "Lampe Coucher de Soleil — Sunset Lamp",
+      "sub_fr": "maison · DSers EU",
+      "subfamille": "maison",
+      "oldPrice": null
+    },
+    {
       "id": "src-m14",
       "price": 22.99,
       "filter": "voyage,tech,maison",

@@ -33,13 +33,13 @@
           "url": "https://www.google.com/search?q=sunset+lamp+dropshipping+EU&tbm=isch"
         }
       ],
-      "status": "pending",
+      "status": "validated",
       "createdAt": "2026-07-02",
-      "validatedAt": null,
+      "validatedAt": "2026-07-04",
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m02.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/Se287f9f682d842298d9da776b70111d8z.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -52,7 +52,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 11,
       "prixVente": 29.99,
-      "marge": 63,
+      "marge": 63.3,
       "filtres": [
         "tech",
         "voyage"
@@ -82,7 +82,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m04.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S1f42f1b4d91a44a7936ed06e06c5f0dbT.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -125,7 +125,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m01.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S2a3f35c9cf6244fb81cb7190cba16c41P.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -169,7 +169,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m11.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S38ae55f73653480d85b5f9e005fdf310Q.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -212,7 +212,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m06.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sdb72f5d71c7147118a6162efe2d0ccact.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -225,7 +225,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 13,
       "prixVente": 34.99,
-      "marge": 63,
+      "marge": 62.8,
       "filtres": [
         "tech",
         "bureau",
@@ -256,7 +256,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m05.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S83837c9976de4fc2b7d6e505594de9cb1.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -299,7 +299,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m03.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sc77e28100f5e4190adb7667b04674284c.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -312,7 +312,7 @@
       "fournisseur": "DSers EU Allemagne",
       "prixFournisseur": 7,
       "prixVente": 22.99,
-      "marge": 70,
+      "marge": 69.6,
       "filtres": [
         "maison",
         "bureau",
@@ -343,7 +343,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m09.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S7e50687dd6514ff9969974525e879439p.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -356,7 +356,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 5,
       "prixVente": 14.99,
-      "marge": 67,
+      "marge": 66.6,
       "filtres": [
         "cuisine",
         "maison"
@@ -386,7 +386,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m07.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sc111246f32934d739bfb7e6ce0e54c4e8.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -399,7 +399,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 11,
       "prixVente": 29.99,
-      "marge": 63,
+      "marge": 63.3,
       "filtres": [
         "maison",
         "tech"
@@ -429,7 +429,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m12.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S6bf6534f92f14694829e9d32b84034e4q.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -442,7 +442,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 3,
       "prixVente": 12.99,
-      "marge": 77,
+      "marge": 76.9,
       "filtres": [
         "bureau",
         "maison",
@@ -473,7 +473,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m08.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S51deb00138e340e8ba907952d5699dd30.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -516,7 +516,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m10.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sba0f12738e1a443caef76575c6a46e1cU.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -529,7 +529,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 1.8,
       "prixVente": 7.99,
-      "marge": 77,
+      "marge": 77.5,
       "filtres": [
         "bureau",
         "maison"
@@ -559,7 +559,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m13.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S91a1387cecf2414da897562af6354d91R.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -572,7 +572,7 @@
       "fournisseur": "DSers EU Espagne",
       "prixFournisseur": 8,
       "prixVente": 22.99,
-      "marge": 65,
+      "marge": 65.2,
       "filtres": [
         "voyage",
         "tech",
@@ -603,7 +603,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m14.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sc305c244d2424093ae7d03d0d927c04fA.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -646,7 +646,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m15.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S706bab00c79745ca85a35e584d0a2c93y.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -690,7 +690,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m16.jpg"
+        "https://m.media-amazon.com/images/I/51-dRHSwB4L._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -734,7 +734,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-m17.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S1aaa2708726c4aeb803f2213528c2edf5.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -747,7 +747,7 @@
       "fournisseur": "Goliate (grossiste direct)",
       "prixFournisseur": 14,
       "prixVente": 29.9,
-      "marge": 53,
+      "marge": 53.2,
       "filtres": [
         "indispensable",
         "petitprix"
@@ -778,7 +778,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p01.jpg"
+        "https://goliate.com/cdn/shop/files/lubrifiant_intime_naturel_bio_goliate-min-optimized.webp?v=1761905044&width=1600"
       ],
       "groupe": "mixte"
     },
@@ -821,7 +821,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p05.jpg"
+        "https://goliate.com/cdn/shop/files/baume_vulve_goliate_-_meilleur_produit_bio_2026-min-optimized.webp?v=1763625076&width=1600"
       ],
       "groupe": "femme"
     },
@@ -834,7 +834,7 @@
       "fournisseur": "Distributeur Tenga EU",
       "prixFournisseur": 17,
       "prixVente": 34.99,
-      "marge": 51,
+      "marge": 51.4,
       "filtres": [
         "soloclub",
         "lots",
@@ -866,7 +866,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p03.jpg"
+        "https://eustore.tenga.co/cdn/shop/files/bundle_01_7c883dda-e6dc-4205-8e9c-bdcec2e760d5.jpg?v=1748738581&width=2000"
       ],
       "groupe": "homme"
     },
@@ -879,7 +879,7 @@
       "fournisseur": "Goliate (grossiste direct)",
       "prixFournisseur": 12,
       "prixVente": 26.9,
-      "marge": 55,
+      "marge": 55.4,
       "filtres": [
         "indispensable",
         "duo"
@@ -909,7 +909,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p02.jpg"
+        "https://goliate.com/cdn/shop/files/huile_de_massage_aphrodisiaque_bio_goliate.webp?v=1731075768&width=1600"
       ],
       "groupe": "mixte"
     },
@@ -922,7 +922,7 @@
       "fournisseur": "DSers EU ou EasyToys",
       "prixFournisseur": 11,
       "prixVente": 29.99,
-      "marge": 63,
+      "marge": 63.3,
       "filtres": [
         "lots",
         "duo"
@@ -953,7 +953,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p04.jpg"
+        "https://m.media-amazon.com/images/I/51-6XE1XktL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -996,7 +996,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p06.jpg"
+        "https://m.media-amazon.com/images/I/31O3ET2a5dL._SL500_.jpg"
       ],
       "groupe": "femme"
     },
@@ -1009,7 +1009,7 @@
       "fournisseur": "Marque française indépendante (ex: Typology, Oh My Cream)",
       "prixFournisseur": 11,
       "prixVente": 27.99,
-      "marge": 61,
+      "marge": 60.7,
       "filtres": [
         "beaute",
         "indispensable"
@@ -1040,7 +1040,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p07.jpg"
+        "https://m.media-amazon.com/images/I/31CUtAH-cQL._SL500_.jpg"
       ],
       "groupe": "femme"
     },
@@ -1082,7 +1082,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-p08.jpg"
+        "https://m.media-amazon.com/images/I/41n9WU4UXGL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1125,7 +1125,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b01.jpg"
+        "https://ae-pic-a1.aliexpress-media.com/kf/S8cbd286d5ed04afba43f98e9d9f8a911S.jpg_480x480q75.jpg_.avif"
       ],
       "groupe": null
     },
@@ -1168,7 +1168,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b02.jpg"
+        "https://m.media-amazon.com/images/I/41XIttkVV5L._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1181,7 +1181,7 @@
       "fournisseur": "Vinted / Leboncoin",
       "prixFournisseur": 15,
       "prixVente": 34.99,
-      "marge": 57,
+      "marge": 57.1,
       "filtres": [
         "jouets",
         "2eme-main"
@@ -1211,7 +1211,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b03.jpg"
+        "https://m.media-amazon.com/images/I/41T1bsuyJcL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1255,7 +1255,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b04.jpg"
+        "https://m.media-amazon.com/images/I/31rgKVqWPFL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1268,7 +1268,7 @@
       "fournisseur": "DSers EU",
       "prixFournisseur": 28,
       "prixVente": 59.99,
-      "marge": 53,
+      "marge": 53.3,
       "filtres": [
         "mobilite",
         "jouets"
@@ -1298,7 +1298,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b05.jpg"
+        "https://m.media-amazon.com/images/I/31F1hg3DnJL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1311,7 +1311,7 @@
       "fournisseur": "DSers EU Pologne",
       "prixFournisseur": 10,
       "prixVente": 27.99,
-      "marge": 64,
+      "marge": 64.3,
       "filtres": [
         "jouets",
         "montessori"
@@ -1341,7 +1341,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b06.jpg"
+        "https://m.media-amazon.com/images/I/61vzqGkqUjL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1384,7 +1384,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b07.jpg"
+        "https://m.media-amazon.com/images/I/411ExrwlfXL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1427,7 +1427,7 @@
       "rejectedAt": null,
       "rejectReason": null,
       "images": [
-        "/img/sourcing/src-b08.jpg"
+        "https://m.media-amazon.com/images/I/5102P79QvAL._SL500_.jpg"
       ],
       "groupe": null
     },
@@ -1447,7 +1447,10 @@
           "url": "https://www.dsers.com"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://goliate.com/cdn/shop/files/bougie_de_massage_naturel_Goliate_-_love_apple.webp?v=1771314550&width=1600"
+      ]
     },
     {
       "id": "src-m19",
@@ -1465,7 +1468,10 @@
           "url": "https://www.dsers.com"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/51bkPDf8dUL._SL500_.jpg"
+      ]
     },
     {
       "id": "src-b10",
@@ -1483,7 +1489,10 @@
           "url": "https://www.vinted.fr"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/41zjhYECpeL._SL500_.jpg"
+      ]
     },
     {
       "id": "src-p11",
@@ -1501,7 +1510,10 @@
           "url": "https://www.dsers.com"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/41D7EEMCGEL._SL500_.jpg"
+      ]
     },
     {
       "id": "src-m20",
@@ -1519,7 +1531,10 @@
           "url": "https://www.dsers.com"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/51FXbU8TSFL._SL500_.jpg"
+      ]
     },
     {
       "id": "src-b11",
@@ -1537,7 +1552,10 @@
           "url": "https://www.vinted.fr"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/51WDMFTKAML._SL500_.jpg"
+      ]
     },
     {
       "id": "src-p13",
@@ -1555,7 +1573,10 @@
           "url": "https://www.dsers.com"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/41Gyx23nuVL._SL500_.jpg"
+      ]
     },
     {
       "id": "src-m22",
@@ -1573,7 +1594,10 @@
           "url": "https://www.dsers.com"
         }
       ],
-      "dateAjout": "2026-07-04"
+      "dateAjout": "2026-07-04",
+      "images": [
+        "https://m.media-amazon.com/images/I/41YEnC5SpfL._SL500_.jpg"
+      ]
     },
     {
       "id": "src-b13",
@@ -1591,127 +1615,10 @@
           "url": "https://www.vinted.fr"
         }
       ],
-      "dateAjout": "2026-07-04"
-    },
-    {
-      "id": "src-p14",
-      "nom": "Vibromasseur Intime Réchargeable",
-      "description": "Découvrez un plaisir intense avec ce vibromasseur intime réchargeable, conçu pour offrir des moments de détente et de plaisir ultime. Parfait pour une expérience personnelle ou partagée.",
-      "prixVente": 49.9,
-      "prixFournisseur": 25,
-      "marge": 49.9,
-      "categorie": "plaisir",
-      "priorite": 2,
-      "statut": "pending",
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:05"
-    },
-    {
-      "id": "src-m23",
-      "nom": "Lampe de Poche LED Portative avec Power Bank",
-      "description": "Cette lampe de poche LED portative avec power bank intégré est l'accessoire high-tech idéal pour vos sorties nocturnes ou vos aventures en plein air, offrant lumière et charge pour votre téléphone.",
-      "prixVente": 29.9,
-      "prixFournisseur": 15,
-      "marge": 49.8,
-      "categorie": "malin",
-      "priorite": 2,
-      "statut": "pending",
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:05"
-    },
-    {
-      "id": "src-b14",
-      "nom": "Jeu d'Eveil Sensuel Textures et Formes pour Bébé",
-      "description": "Stimulez les sens de votre bébé avec ce jeu d'éveil aux textures et formes variées, conçu pour encourager la découverte et le développement sensoriel de votre petit.",
-      "prixVente": 24.9,
-      "prixFournisseur": 12,
-      "marge": 51.8,
-      "categorie": "bebe",
-      "priorite": 2,
-      "statut": "pending",
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:05"
-    },
-    {
-      "id": "src-p15",
-      "nom": "Tapis de Yoga Écologique",
-      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et les personnes soucieuses de l'environnement.",
-      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs sont à la recherche de produits écologiques et durables.",
-      "prixVente": 29.99,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "plaisir",
-      "priorite": "A",
-      "statut": "pending",
+      "dateAjout": "2026-07-04",
       "images": [
-        "https://ae01.alicdn.com/kf/Hb4e5befe4c744eb8a2c7f2a3f4d94f7eX.jpg"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:10"
-    },
-    {
-      "id": "src-m24",
-      "nom": "Contrôleur de Jeu Portable pour Smartphone",
-      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile.",
-      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs sont à la recherche de produits pour améliorer leur expérience de jeu.",
-      "prixVente": 24.99,
-      "prixFournisseur": 10,
-      "marge": 60,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae01.alicdn.com/kf/H97c3bfaa94e44e9a9f7f2f3f4d94f7eY.jpg"
-      ],
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:10"
-    },
-    {
-      "id": "src-b15",
-      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
-      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences motrices et cognitives.",
-      "raisonVente": "Les parents sont à la recherche de jouets éducatifs pour aider à développer les compétences de leurs enfants.",
-      "prixVente": 19.99,
-      "prixFournisseur": 8,
-      "marge": 60,
-      "categorie": "bebe",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae01.alicdn.com/kf/H4a4f5f5f5f5f5f5f5f5f5f5f5f5f5eX.jpg"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:10"
+        "https://m.media-amazon.com/images/I/513iKS6rQtL._SL500_.jpg"
+      ]
     }
   ]
 }
