@@ -1538,6 +1538,60 @@
         }
       ],
       "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-p13",
+      "nom": "Bougie Aromatique Relaxante",
+      "description": "Détendez-vous avec notre bougie aromatique, conçue pour vous apporter la relaxation et le bien-être intime dont vous avez besoin après une longue journée.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12.5,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-m22",
+      "nom": "Caméra de Surveillance Wi-Fi Mini",
+      "description": "Surveillez votre espace avec notre caméra de surveillance Wi-Fi mini, idéale pour une sécurité renforcée et une connexion facile.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-b13",
+      "nom": "Jeu d'Eveil Sensuel pour Bébé",
+      "description": "Stimulez les sens de votre bébé avec notre jeu d'éveil sensuel, conçu pour favoriser le développement et l'apprentissage.",
+      "prixVente": 19.99,
+      "prixFournisseur": 9.5,
+      "marge": 52.5,
+      "categorie": "bebe",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr"
+        }
+      ],
+      "dateAjout": "2026-07-04"
     }
   ]
 }
