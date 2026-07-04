@@ -2042,6 +2042,72 @@
         }
       ],
       "dateAjout": "2026-07-04 20:55"
+    },
+    {
+      "id": "src-p24",
+      "nom": "Kit de Yoga Étendu",
+      "description": "Découvrez notre kit de yoga étendu pour améliorer votre flexibilité et votre bien-être. Il comprend un tapis de yoga, des blocs de yoga et une ceinture de yoga.",
+      "raisonVente": "Le yoga est devenu très populaire ces dernières années, en particulier chez les personnes qui cherchent à améliorer leur santé mentale et physique. Les kits de yoga étendus sont très tendance en ce moment, car ils offrent tout ce dont vous avez besoin pour pratiquer le yoga chez vous.",
+      "prixVente": 49.99,
+      "prixFournisseur": 29.99,
+      "marge": 40,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf4f94c2b0f1e4e9b80e7f5f7f7f7f7f/Kit-de-yoga-tendu.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga+étendu"
+        }
+      ],
+      "dateAjout": "2026-07-04 21:57"
+    },
+    {
+      "id": "src-m33",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Découvrez notre contrôleur de jeu portable pour jouer à vos jeux mobiles préférés en déplacement. Il est léger, compact et compatible avec la plupart des appareils mobiles.",
+      "raisonVente": "Les jeux mobiles sont devenus très populaires ces dernières années, et les contrôleurs de jeu portables sont très tendance en ce moment, car ils offrent une expérience de jeu améliorée.",
+      "prixVente": 29.99,
+      "prixFournisseur": 17.99,
+      "marge": 40,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-04 21:57"
+    },
+    {
+      "id": "src-b24",
+      "nom": "Poussette pour Bébé",
+      "description": "Découvrez notre poussette pour bébé pour promener votre enfant en toute sécurité et confort. Elle est légère, compacte et équipée de roues pivotantes pour une maniabilité facile.",
+      "raisonVente": "Les poussettes pour bébé sont toujours très populaires, et les parents cherchent des produits de qualité et fiables pour leurs enfants. Les poussettes pour bébé sont très tendance en ce moment, car elles offrent une solution pratique et confortable pour les parents.",
+      "prixVente": 99.99,
+      "prixFournisseur": 59.99,
+      "marge": 40,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/2022/02/poussette-pour-bebe.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-04 21:57"
     }
   ]
 }
