@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/lc-favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura — Contenu Social — Le Clam</title>
+  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Navbar page laura ── */
+  .page-laura .navbar,
+  .page-laura .navbar.scrolled {
+    background: rgba(8,4,14,.96);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(195,90,220,.18);
+    box-shadow: 0 2px 20px rgba(0,0,0,.5);
+  }
+  .page-laura .nav-link,
+  .page-laura .cart-toggle,
+  .page-laura .nav-msg-btn,
+  .page-laura .lang-btn,
+  .page-laura .nav-identify {
+    background: rgba(195,90,220,.1);
+    border-color: rgba(195,90,220,.35);
+    color: #c35adc;
+  }
+  .page-laura .mobile-menu-btn span { background: #c35adc; }
+
+  /* ── Hero laura ── */
+  .cat-hero-laura {
+    background: linear-gradient(155deg, #0a0314 0%, #160826 50%, #060210 100%);
+    min-height: 320px;
+    position: relative; overflow: hidden;
+  }
+  .cat-hero-laura::before {
+    content: 'SOCIAL';
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 4vw;
+    font-family: var(--serif, serif); font-size: clamp(4.5rem, 14vw, 13rem);
+    font-weight: 300; color: rgba(195,90,220,.04); pointer-events: none;
+    letter-spacing: .12em; white-space: nowrap;
+  }
+  .laura-hero-chip {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: rgba(195,90,220,.12); color: #b050cc;
+    border: 1px solid rgba(195,90,220,.25); border-radius: 20px;
+    padding: .3rem .8rem; font-size: .7rem; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .slide-title-laura {
+    font-family: var(--serif, serif); font-style: italic; font-weight: 300;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    color: #e8d4f5; line-height: 1.1;
+    letter-spacing: .01em; margin-bottom: .5rem;
+  }
+  .cat-hero-laura .cat-hero-desc { color: rgba(232,212,245,.42); font-size: .9rem; }
+  .cat-hero-laura .slide-particles .p { color: rgba(195,90,220,.25); }
+
+  /* ── Stats hero ── */
+  .laura-hero-stats {
+    display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.8rem;
+  }
+  .laura-hstat {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(232,212,245,.08);
+    border-radius: 10px; padding: .6rem .9rem; min-width: 72px;
+  }
+  .laura-hstat-n { font-size: 1.5rem; font-weight: 800; color: #e8d4f5; line-height: 1; }
+  .laura-hstat-n.pend { color: #f5d000; }
+  .laura-hstat-n.done { color: #6ee7b7; }
+  .laura-hstat-n.skip { color: #fca5a5; }
+  .laura-hstat-l { font-size: .58rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: rgba(232,212,245,.3); margin-top: .2rem; }
+
+  /* ── Filtres ── */
+  .laura-filters-bar {
+    background: rgba(8,4,14,.97);
+    border-bottom: 1px solid rgba(195,90,220,.15);
+    padding: .6rem clamp(1rem,4vw,2rem);
+    position: sticky; top: var(--nav-h, 64px); z-index: 900;
+    display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+  }
+  .laura-flbl {
+    font-size: .67rem; font-weight: 700; color: rgba(195,90,220,.45);
+    text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; margin-right: .15rem;
+  }
+  .laura-fbtn {
+    padding: .28rem .7rem; border-radius: 20px; font-size: .73rem; font-weight: 700;
+    border: 1.5px solid rgba(195,90,220,.2); background: rgba(195,90,220,.07); color: rgba(195,90,220,.55);
+    cursor: pointer; transition: all .13s; white-space: nowrap; user-select: none; font-family: inherit;
+  }
+  .laura-fbtn:hover { border-color: rgba(195,90,220,.5); color: #c35adc; }
+  .laura-fbtn.on { background: #c35adc; border-color: #c35adc; color: #fff; }
+
+  /* ── Section univers ── */
+  .laura-univ-head {
+    display: flex; align-items: center; gap: .75rem;
+    padding: 2.25rem clamp(1rem,4vw,2rem) .5rem;
+    font-size: 1rem; font-weight: 800;
+  }
+  .laura-univ-head::before { content: ''; flex: 0 0 28px; height: 2px; border-radius: 2px; }
+  .laura-univ-head-plaisir { color: #6b2538; }
+  .laura-univ-head-malin   { color: #1d3d72; }
+  .laura-univ-head-bebe    { color: #5c1a40; }
+  .laura-univ-head-plaisir::before { background: #6b2538; }
+  .laura-univ-head-malin::before   { background: #1d3d72; }
+  .laura-univ-head-bebe::before    { background: #5c1a40; }
+  .laura-univ-count {
+    background: #f0f0f0; color: #888; border-radius: 20px;
+    padding: .13rem .55rem; font-size: .7rem; font-weight: 700; font-family: system-ui,sans-serif;
+  }
+  .laura-univ-section { transition: opacity .2s; }
+  .laura-univ-section.hidden { display: none; }
+
+  /* ── Grille posts ── */
+  .laura-posts-section { background: #f8f5fc; }
+  .laura-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0 2rem;
+  }
+
+  /* ── Carte post ── */
+  .laura-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(195,90,220,.07);
+    border: 1.5px solid rgba(195,90,220,.1);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .laura-card:hover { box-shadow: 0 6px 24px rgba(195,90,220,.14); border-color: rgba(195,90,220,.25); }
+  .laura-card.done { opacity: .65; }
+  .laura-card.skipped { opacity: .5; }
+
+  /* Header carte */
+  .laura-card-head {
+    display: flex; align-items: center; gap: .5rem;
+    padding: .75rem 1rem .5rem;
+  }
+  .laura-plat-badge {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .22rem .6rem; border-radius: 20px;
+    font-size: .65rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  }
+  .plat-tiktok   { background: #010101; color: #fff; }
+  .plat-instagram { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+  .plat-both     { background: linear-gradient(135deg,#010101 50%,#bc1888); color: #fff; }
+  .laura-univ-chip {
+    padding: .2rem .55rem; border-radius: 20px;
+    font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+    font-family: system-ui,sans-serif;
+  }
+  .chip-plaisir { background: #fce7f3; color: #be185d; }
+  .chip-malin   { background: #dbeafe; color: #1d4ed8; }
+  .chip-bebe    { background: #fdf2f8; color: #9d174d; }
+  .laura-statut-chip {
+    margin-left: auto;
+    padding: .2rem .55rem; border-radius: 20px;
+    font-size: .62rem; font-weight: 700; font-family: system-ui,sans-serif;
+  }
+  .st-pending  { background: #fef9ec; color: #92400e; border: 1px solid #fde68a; }
+  .st-done     { background: #f0fdf4; color: #065f46; border: 1px solid #bbf7d0; }
+  .st-skipped  { background: #f9fafb; color: #6b7280; border: 1px solid #e5e7eb; }
+
+  /* Corps carte */
+  .laura-card-body { padding: .5rem 1rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+  .laura-card-title { font-weight: 800; font-size: .95rem; color: #1a0a2e; line-height: 1.3; font-family: system-ui,sans-serif; }
+  .laura-card-concept {
+    font-size: .8rem; color: #555; line-height: 1.5;
+    background: #f8f5fc; border-radius: 8px; padding: .5rem .7rem;
+    border-left: 3px solid rgba(195,90,220,.3);
+  }
+  .laura-card-concept-lbl { font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: #c35adc; margin-bottom: .2rem; }
+
+  /* Légende copyable */
+  .laura-legende-wrap { position: relative; }
+  .laura-legende {
+    font-size: .78rem; color: #333; line-height: 1.55;
+    background: #faf8ff; border: 1px solid rgba(195,90,220,.15);
+    border-radius: 8px; padding: .55rem .7rem;
+    font-family: system-ui,sans-serif; white-space: pre-wrap; word-break: break-word;
+    max-height: 120px; overflow: hidden;
+    transition: max-height .2s;
+  }
+  .laura-legende.expanded { max-height: 600px; }
+  .laura-legende-lbl { font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: #888; margin-bottom: .2rem; display: flex; align-items: center; justify-content: space-between; }
+  .laura-copy-btn {
+    border: none; background: rgba(195,90,220,.1); color: #c35adc;
+    border-radius: 6px; padding: .18rem .45rem; font-size: .65rem; font-weight: 700;
+    cursor: pointer; font-family: inherit; transition: background .12s;
+  }
+  .laura-copy-btn:hover { background: rgba(195,90,220,.2); }
+  .laura-copy-btn.copied { background: #d1fae5; color: #065f46; }
+  .laura-expand-btn {
+    font-size: .68rem; color: #c35adc; background: none; border: none; cursor: pointer;
+    padding: .15rem 0; font-family: inherit; font-weight: 700;
+  }
+
+  /* Date suggérée */
+  .laura-date-suggest {
+    display: flex; align-items: center; gap: .4rem;
+    background: #fef9ec; border: 1px solid #fde68a; border-radius: 8px;
+    padding: .4rem .7rem; font-size: .78rem; font-weight: 600; color: #92400e;
+    font-family: system-ui,sans-serif;
+  }
+  .laura-date-lbl { font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: #b45309; margin-right: .15rem; }
+
+  /* CTA */
+  .laura-cta { font-size: .75rem; color: #555; font-style: italic; font-family: system-ui,sans-serif; }
+
+  /* Footer carte */
+  .laura-card-foot {
+    padding: .6rem 1rem .8rem;
+    display: flex; gap: .4rem; border-top: 1px solid #f3eefa; margin-top: .2rem;
+  }
+  .laura-btn {
+    flex: 1; padding: .42rem .7rem; border: none; border-radius: var(--r-full, 50px);
+    font-size: .78rem; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: filter .13s, transform .13s; white-space: nowrap; line-height: 1;
+  }
+  .laura-btn:hover { filter: brightness(1.1); transform: scale(1.02); }
+  .laura-btn:disabled { cursor: default; transform: none; filter: none; opacity: .6; }
+  .btn-posted { background: linear-gradient(135deg,#059669,#047857); color: #fff; }
+  .btn-skip   { background: transparent; color: #9ca3af; border: 1.5px solid rgba(156,163,175,.3) !important; }
+  .btn-reset  { background: rgba(0,0,0,.06); color: #888; border: 1.5px solid rgba(0,0,0,.1) !important; font-size: .7rem; flex: 0; padding: .4rem .6rem !important; }
+
+  /* ── Toast ── */
+  #laura-toast {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+    background: #1a1a1a; color: #fff; border-radius: 10px;
+    padding: .6rem 1.1rem; font-size: .82rem; font-weight: 600;
+    font-family: system-ui, sans-serif; box-shadow: 0 6px 24px rgba(0,0,0,.25);
+    transform: translateY(16px); opacity: 0; transition: all .22s; pointer-events: none;
+  }
+  #laura-toast.show { transform: translateY(0); opacity: 1; }
+  #laura-toast.ok  { background: #065f46; }
+  #laura-toast.err { background: #7f1d1d; }
+
+  /* ── Auth gate ── */
+  #lauraGate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #080412; display: none;
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  #lauraGate.show { display: flex; }
+  .laura-gate-msg {
+    font-family: system-ui, sans-serif; text-align: center;
+    color: rgba(232,212,245,.5); font-size: .9rem;
+  }
+  .laura-gate-msg a { color: #c35adc; text-decoration: none; font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .laura-hero-stats { gap: .35rem; }
+    .laura-hstat { padding: .5rem .65rem; min-width: 60px; }
+    .laura-hstat-n { font-size: 1.25rem; }
+    .laura-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="page-laura">
+
+  <!-- ── AUTH GATE ── -->
+  <div id="lauraGate">
+    <div class="laura-gate-msg">
+      <div style="font-size:2rem;margin-bottom:1rem">🔒</div>
+      <p>Cette page est réservée aux administrateurs.</p>
+      <p style="margin-top:.75rem"><a href="admin.html">Accéder à l'espace admin →</a></p>
+    </div>
+  </div>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <div class="nav-links" id="navLinks">
+        <a href="plaisir.html"  class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span>Plaisir</span></a>
+        <a href="malin.html"    class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span>Malin</span></a>
+        <a href="bebe.html"     class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span>Bébé</span></a>
+        <a href="sourcing.html" class="nav-link" data-cat="sourcing"><span class="nav-dot"></span><span>Sourcing</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-toggle" id="cartToggle" aria-label="Panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-label">Panier</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="nav-identify"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>S'identifier</span></a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="cat-hero cat-hero-laura">
+    <div class="slide-particles">
+      <span class="p" style="top:12%;left:6%;--dur:8s;--delay:0s">◆</span>
+      <span class="p" style="top:58%;left:8%;--dur:10s;--delay:-2s">◇</span>
+      <span class="p" style="top:25%;left:22%;--dur:7s;--delay:-1s">◆</span>
+      <span class="p" style="top:65%;left:35%;--dur:9s;--delay:-3s">◇</span>
+      <span class="p" style="top:15%;right:10%;--dur:8s;--delay:-1.5s">◆</span>
+      <span class="p" style="top:55%;right:8%;--dur:11s;--delay:-2.5s">◇</span>
+      <span class="p" style="top:38%;right:22%;--dur:7s;--delay:-.5s">◆</span>
+    </div>
+    <div class="cat-hero-content">
+      <div class="slide-badges">
+        <span class="laura-hero-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Contenu · Laura
+        </span>
+        <span class="laura-hero-chip" id="lauraDateChip" style="display:none"></span>
+      </div>
+      <h1 class="slide-title-laura">TikTok &<br>Instagram</h1>
+      <p class="cat-hero-desc">Posts générés par Laura — à publier sur <strong style="color:#e8d4f5">@leclam.fr</strong></p>
+      <div class="laura-hero-stats" id="lauraStats" style="display:none">
+        <div class="laura-hstat"><span class="laura-hstat-n" id="lAll">—</span><span class="laura-hstat-l">Total</span></div>
+        <div class="laura-hstat"><span class="laura-hstat-n pend" id="lPend">—</span><span class="laura-hstat-l">À poster</span></div>
+        <div class="laura-hstat"><span class="laura-hstat-n done" id="lDone">—</span><span class="laura-hstat-l">Postés</span></div>
+        <div class="laura-hstat"><span class="laura-hstat-n skip" id="lSkip">—</span><span class="laura-hstat-l">Ignorés</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FILTRES ── -->
+  <div class="laura-filters-bar" id="lauraFiltersBar" style="display:none">
+    <span class="laura-flbl">Plateforme</span>
+    <button class="laura-fbtn on" data-plat="">Toutes</button>
+    <button class="laura-fbtn" data-plat="TikTok">TikTok</button>
+    <button class="laura-fbtn" data-plat="Instagram">Instagram</button>
+    <button class="laura-fbtn" data-plat="Les deux">Les deux</button>
+    <span class="laura-flbl" style="margin-left:.5rem">Univers</span>
+    <button class="laura-fbtn on" data-univ="">Tous</button>
+    <button class="laura-fbtn" data-univ="plaisir">Plaisir</button>
+    <button class="laura-fbtn" data-univ="malin">Malin</button>
+    <button class="laura-fbtn" data-univ="bebe">Bébé</button>
+    <span class="laura-flbl" style="margin-left:.5rem">Statut</span>
+    <button class="laura-fbtn on" data-st="">Tous</button>
+    <button class="laura-fbtn" data-st="pending">À poster</button>
+    <button class="laura-fbtn" data-st="done">Postés</button>
+    <button class="laura-fbtn" data-st="skipped">Ignorés</button>
+  </div>
+
+  <!-- ── POSTS ── -->
+  <div class="laura-posts-section" id="lauraPosts" style="display:none">
+    <div class="container" style="padding-bottom:4rem">
+
+      <div class="laura-univ-section" id="sect-plaisir">
+        <div class="laura-univ-head laura-univ-head-plaisir">Plaisir <span class="laura-univ-count" id="cnt-plaisir">0</span></div>
+        <div class="laura-grid" id="grid-plaisir"></div>
+      </div>
+
+      <div class="laura-univ-section" id="sect-malin">
+        <div class="laura-univ-head laura-univ-head-malin">Malin <span class="laura-univ-count" id="cnt-malin">0</span></div>
+        <div class="laura-grid" id="grid-malin"></div>
+      </div>
+
+      <div class="laura-univ-section" id="sect-bebe">
+        <div class="laura-univ-head laura-univ-head-bebe">Bébé <span class="laura-univ-count" id="cnt-bebe">0</span></div>
+        <div class="laura-grid" id="grid-bebe"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo-link"><svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="96" fill="#d9c4a0"/><circle cx="100" cy="100" r="90" fill="none" stroke="#3e2a14" stroke-width="1"/><circle cx="100" cy="100" r="84" fill="none" stroke="#3e2a14" stroke-width="0.4" opacity="0.25"/><text x="118" y="130" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">M</text><text x="82" y="132" font-family="'EB Garamond',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">A</text><text x="116" y="104" font-family="'Spectral',serif" font-size="68" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="300" opacity="0.5">L</text><text x="84" y="106" font-family="'EB Garamond',serif" font-size="74" fill="none" stroke="#3e2a14" stroke-width="0.7" text-anchor="middle" font-weight="400" opacity="0.5">C</text><line x1="60" y1="153" x2="140" y2="153" stroke="#3e2a14" stroke-width="0.5" opacity="0.25"/><text x="100" y="165" font-family="'EB Garamond',serif" font-size="9.5" fill="#3e2a14" text-anchor="middle" letter-spacing="9" opacity="0.4">CLAM</text></svg></a>
+      <nav class="footer-links-flat">
+        <a href="faq.html">FAQ</a>
+        <a href="livraison.html">Livraison</a>
+        <a href="retours.html">Retours</a>
+        <a href="contact.html">Contact</a>
+        <span class="footer-sep">|</span>
+        <a href="cgv.html">CGV</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cookies.html">Cookies</a>
+      </nav>
+      <div class="footer-end">
+        <span class="footer-copy">© 2026 Le Clam. Tous droits réservés.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-head">
+      <h3>Mon panier</h3>
+      <button class="cart-close" id="cartClose">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div></div>
+    <div class="cart-foot" id="cartFoot" style="display:none">
+      <div class="cart-total"><span>Total</span><span class="total-price" id="totalPrice">0,00 €</span></div>
+      <button class="checkout-btn" id="checkoutBtn">Commander →</button>
+    </div>
+  </aside>
+
+  <div id="laura-toast"></div>
+
+  <script src="js/app.js?v=11"></script>
+  <script src="js/features.js"></script>
+
+<script>
+'use strict';
+
+let _all  = [];
+let _plat = '';
+let _univ = '';
+let _st   = '';
+
+/* ── Auth ── */
+(async () => {
+  try {
+    const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+    const d = await r.json();
+    if (d.ok && (d.user?.role === 'admin' || d.user?.role === 'owner')) {
+      const chip = document.getElementById('lauraDateChip');
+      if (chip) {
+        chip.textContent = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        chip.style.display = 'inline-flex';
+      }
+      document.getElementById('lauraStats').style.display      = 'flex';
+      document.getElementById('lauraFiltersBar').style.display = '';
+      document.getElementById('lauraPosts').style.display      = '';
+      await load();
+      return;
+    }
+  } catch {}
+  document.getElementById('lauraGate').classList.add('show');
+})();
+
+/* ── Load ── */
+async function load() {
+  try {
+    const r = await fetch('/api/admin/social-posts', { credentials: 'same-origin' });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Erreur');
+    _all = d.posts;
+    updateStats();
+    render();
+  } catch(e) { toast('Erreur chargement : ' + e.message, 'err'); }
+}
+
+function updateStats() {
+  document.getElementById('lAll').textContent  = _all.length;
+  document.getElementById('lPend').textContent = _all.filter(p => !p.statut || p.statut === 'pending').length;
+  document.getElementById('lDone').textContent = _all.filter(p => p.statut === 'done').length;
+  document.getElementById('lSkip').textContent = _all.filter(p => p.statut === 'skipped').length;
+}
+
+/* ── Prochaine heure de post recommandée ── */
+function nextPostTime(dateCreation, plateforme) {
+  const d = dateCreation ? new Date(dateCreation.replace(' ', 'T')) : new Date();
+  const jour = d.getDay(); // 0=dim, 6=sam
+  const isWeekend = (jour === 0 || jour === 6);
+  const slots = isWeekend ? [10, 12] : [18, 19, 20, 21];
+  const next = new Date(d);
+  next.setDate(next.getDate() + 1);
+  next.setHours(slots[0], 0, 0, 0);
+  const options = { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
+  return next.toLocaleDateString('fr-FR', options);
+}
+
+/* ── Render ── */
+function render() {
+  ['plaisir', 'malin', 'bebe'].forEach(univ => {
+    let list = _all.filter(p => p.univers === univ);
+    if (_plat) list = list.filter(p => (p.plateforme || '').includes(_plat));
+    if (_st)   list = list.filter(p => (_st === 'pending' ? (!p.statut || p.statut === 'pending') : p.statut === _st));
+
+    const hide = _univ && _univ !== univ;
+    document.getElementById('sect-' + univ).classList.toggle('hidden', hide);
+    document.getElementById('cnt-' + univ).textContent = list.length;
+
+    if (!list.length) {
+      document.getElementById('grid-' + univ).innerHTML =
+        `<div style="font-family:system-ui,sans-serif;font-size:.85rem;color:#bbb;text-align:center;padding:2rem;grid-column:1/-1">Aucun post.</div>`;
+      return;
+    }
+
+    document.getElementById('grid-' + univ).innerHTML =
+      [...list].reverse().map(p => buildCard(p)).join('');
+  });
+}
+
+/* ── Carte ── */
+function buildCard(p) {
+  const id      = p.id;
+  const statut  = p.statut || 'pending';
+  const plat    = p.plateforme || '';
+  const platCls = plat.toLowerCase().includes('tiktok') && plat.toLowerCase().includes('instagram')
+    ? 'plat-both' : plat.toLowerCase().includes('instagram') ? 'plat-instagram' : 'plat-tiktok';
+  const platIcon = plat.toLowerCase().includes('tiktok') ? '🎵' : plat.toLowerCase().includes('instagram') ? '📸' : '📱';
+  const univCls  = { plaisir: 'chip-plaisir', malin: 'chip-malin', bebe: 'chip-bebe' }[p.univers] || '';
+  const univLbl  = { plaisir: 'Plaisir', malin: 'Malin', bebe: 'Bébé' }[p.univers] || p.univers;
+  const statutCls = statut === 'done' ? 'st-done' : statut === 'skipped' ? 'st-skipped' : 'st-pending';
+  const statutLbl = statut === 'done' ? 'Posté ✓' : statut === 'skipped' ? 'Ignoré' : 'À poster';
+  const dateHeure = nextPostTime(p.dateCreation, plat);
+
+  const isDone = statut === 'done', isSkip = statut === 'skipped';
+  let actionBtns;
+  if (!isDone && !isSkip) {
+    actionBtns = `
+      <button class="laura-btn btn-posted" onclick="doPost('${x(id)}')">Posté ✓</button>
+      <button class="laura-btn btn-skip" onclick="doSkip('${x(id)}')">Ignorer</button>`;
+  } else {
+    actionBtns = `
+      <button class="laura-btn btn-posted" disabled>${isDone ? 'Posté ✓' : 'Ignoré'}</button>
+      <button class="laura-btn btn-reset" onclick="doReset('${x(id)}')">↩</button>`;
+  }
+
+  return `<div class="laura-card ${statut === 'done' ? 'done' : statut === 'skipped' ? 'skipped' : ''}">
+  <div class="laura-card-head">
+    <span class="laura-plat-badge ${platCls}">${platIcon} ${x(plat)}</span>
+    <span class="laura-univ-chip ${univCls}">${x(univLbl)}</span>
+    <span class="laura-statut-chip ${statutCls}">${statutLbl}</span>
+  </div>
+  <div class="laura-card-body">
+    <div class="laura-card-title">${x(p.titre || '—')}</div>
+    ${p.concept ? `<div class="laura-card-concept">
+      <div class="laura-card-concept-lbl">Comment filmer / photographier</div>
+      ${x(p.concept)}
+    </div>` : ''}
+    <div class="laura-legende-wrap">
+      <div class="laura-legende-lbl">
+        <span>Légende prête à copier</span>
+        <button class="laura-copy-btn" id="copy-${x(id)}" onclick="copyLegende('${x(id)}')">Copier</button>
+      </div>
+      <div class="laura-legende" id="leg-${x(id)}">${x(p.legende || '')}</div>
+      <button class="laura-expand-btn" onclick="toggleExpand('${x(id)}')">Voir plus ▾</button>
+    </div>
+    ${p.cta ? `<div class="laura-cta">→ ${x(p.cta)}</div>` : ''}
+    <div class="laura-date-suggest">
+      <span class="laura-date-lbl">Quand poster</span>
+      📅 ${x(dateHeure)}
+    </div>
+  </div>
+  <div class="laura-card-foot">
+    ${actionBtns}
+  </div>
+</div>`;
+}
+
+/* ── Actions ── */
+async function doPost(id) {
+  await patch(id, { statut: 'done', posteAt: new Date().toISOString().replace('T', ' ').slice(0, 16) });
+}
+async function doSkip(id) {
+  await patch(id, { statut: 'skipped' });
+}
+async function doReset(id) {
+  await patch(id, { statut: 'pending', posteAt: null });
+}
+
+async function patch(id, body) {
+  try {
+    const r = await fetch('/api/admin/social-posts/' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Erreur');
+    const i = _all.findIndex(p => p.id === id);
+    if (i > -1) _all[i] = d.post;
+    updateStats();
+    render();
+    const msgs = { done: 'Marqué comme posté !', skipped: 'Ignoré.', pending: 'Remis en attente.' };
+    toast(msgs[body.statut] || 'OK', body.statut === 'done' ? 'ok' : '');
+  } catch(e) { toast('Erreur : ' + e.message, 'err'); }
+}
+
+function copyLegende(id) {
+  const el = document.getElementById('leg-' + id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    const btn = document.getElementById('copy-' + id);
+    if (btn) { btn.textContent = 'Copié !'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000); }
+  });
+}
+
+function toggleExpand(id) {
+  const el = document.getElementById('leg-' + id);
+  if (el) el.classList.toggle('expanded');
+}
+
+/* ── Filtres ── */
+document.getElementById('lauraFiltersBar').addEventListener('click', e => {
+  const b = e.target.closest('.laura-fbtn');
+  if (!b) return;
+  if ('plat' in b.dataset) {
+    document.querySelectorAll('[data-plat]').forEach(el => el.classList.remove('on'));
+    b.classList.add('on'); _plat = b.dataset.plat; render();
+  }
+  if ('univ' in b.dataset) {
+    document.querySelectorAll('[data-univ]').forEach(el => el.classList.remove('on'));
+    b.classList.add('on'); _univ = b.dataset.univ; render();
+  }
+  if ('st' in b.dataset) {
+    document.querySelectorAll('[data-st]').forEach(el => el.classList.remove('on'));
+    b.classList.add('on'); _st = b.dataset.st; render();
+  }
+});
+
+/* ── Utils ── */
+function x(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+let _tt;
+function toast(msg, type) {
+  const t = document.getElementById('laura-toast');
+  t.textContent = msg; t.className = 'show ' + (type || '');
+  clearTimeout(_tt); _tt = setTimeout(() => t.className = '', 3000);
+}
+</script>
+</body>
+</html>

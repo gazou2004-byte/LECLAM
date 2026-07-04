@@ -3471,6 +3471,36 @@ app.patch('/api/admin/sourcing-proposals/:id', (req, res) => {
 });
 
 /* ─────────────────────────────────────────
+   LAURA — Posts TikTok/Instagram
+   ───────────────────────────────────────── */
+const SOCIAL_FILE = path.join(__dirname, 'data/social-posts.json');
+let _socialData = fs.existsSync(SOCIAL_FILE)
+  ? JSON.parse(fs.readFileSync(SOCIAL_FILE, 'utf8'))
+  : { posts: [] };
+const getSocialPosts   = () => _socialData.posts;
+const persistSocial    = () => fs.writeFileSync(SOCIAL_FILE, JSON.stringify(_socialData, null, 2));
+
+app.get('/api/admin/social-posts', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
+  const { statut, univers, plateforme } = req.query;
+  let posts = getSocialPosts();
+  if (statut)     posts = posts.filter(p => (p.statut||'pending') === statut);
+  if (univers)    posts = posts.filter(p => p.univers === univers);
+  if (plateforme) posts = posts.filter(p => p.plateforme === plateforme);
+  res.json({ ok: true, posts });
+});
+
+app.patch('/api/admin/social-posts/:id', (req, res) => {
+  if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
+  const p = getSocialPosts().find(p => p.id === req.params.id);
+  if (!p) return res.status(404).json({ ok: false, error: 'Post introuvable' });
+  const allowed = ['statut', 'posteAt', 'datePostSuggere'];
+  allowed.forEach(key => { if (req.body[key] !== undefined) p[key] = req.body[key]; });
+  persistSocial();
+  res.json({ ok: true, post: p });
+});
+
+/* ─────────────────────────────────────────
    Fallback → index.html (SPA-like)
    ───────────────────────────────────────── */
 app.get('*', (req, res) => {
