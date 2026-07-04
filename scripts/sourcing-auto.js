@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Antoine — Sourcing automatique horaire
-   Appelle Claude Haiku pour générer 3 nouveaux produits (1 par univers)
+   Appelle Gemini Flash (gratuit) pour générer 3 nouveaux produits (1 par univers)
    et les ajoute directement dans sourcing-proposals.json */
 
 const fs   = require('fs');
@@ -9,23 +9,20 @@ const path = require('path');
 const SOURCING_PATH = path.join(__dirname, '../Le clam/data/sourcing-proposals.json');
 const SUMMARY_PATH  = path.join(__dirname, '../.sourcing-summary');
 
-async function callClaude(prompt) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+async function callGemini(prompt) {
+  const key = process.env.GEMINI_API_KEY;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
+  const res = await fetch(url, {
     method:  'POST',
-    headers: {
-      'Content-Type':    'application/json',
-      'x-api-key':       process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model:      'claude-haiku-4-5-20251001',
-      max_tokens: 2048,
-      messages:   [{ role: 'user', content: prompt }],
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { maxOutputTokens: 2048, temperature: 0.7 },
     }),
   });
-  if (!res.ok) throw new Error(`API ${res.status}: ${await res.text()}`);
+  if (!res.ok) throw new Error(`API Gemini ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  return data.content[0].text.trim();
+  return data.candidates[0].content.parts[0].text.trim();
 }
 
 function nextId(proposals, prefix) {
@@ -43,7 +40,7 @@ function fixMarge(p) {
 }
 
 async function main() {
-  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY manquant');
+  if (!process.env.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY manquant');
 
   const raw  = JSON.parse(fs.readFileSync(SOURCING_PATH, 'utf8'));
   const proposals = raw.proposals;
@@ -113,7 +110,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide (pas d'explication, pas de markd
 ]`;
 
   console.log(`[Antoine] Recherche de nouveaux produits (IDs : ${idP}, ${idM}, ${idB})…`);
-  const text = await callClaude(prompt);
+  const text = await callGemini(prompt);
 
   let newProducts;
   try {
