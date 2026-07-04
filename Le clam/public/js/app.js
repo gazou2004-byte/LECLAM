@@ -4412,8 +4412,8 @@ function initSupportBubble() {
   const origRender = typeof Cart !== 'undefined' && Cart._renderDrawer ? Cart._renderDrawer.bind(Cart) : null;
 
   function injectCrossSell(items) {
-    const bar = document.querySelector('.crosssell-bar');
-    if (bar) bar.remove();
+    const existingBar = document.querySelector('.crosssell-bar');
+    if (existingBar) existingBar.remove();
     if (!items || !items.length || typeof window.PRODUCTS_DATA === 'undefined') return;
 
     const allProds = [].concat(
@@ -4441,8 +4441,9 @@ function initSupportBubble() {
     const drawer = document.querySelector('.cart-items') || document.querySelector('.cart-drawer');
     if (!drawer) return;
 
-    const bar = document.createElement('div');
-    bar.className = 'crosssell-bar';
+    const csBar = document.createElement('div');
+    csBar.className = 'crosssell-bar';
+    const bar = csBar;
     bar.innerHTML = '<div class="crosssell-label">Recommandé avec votre sélection</div>'
       + '<div class="crosssell-chips">'
       + suggested.slice(0, 3).map(function (sp) {
