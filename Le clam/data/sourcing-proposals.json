@@ -1430,6 +1430,60 @@
         "/img/sourcing/src-b08.jpg"
       ],
       "groupe": null
+    },
+    {
+      "id": "src-p10",
+      "nom": "Bougie Aphrodisiaque",
+      "description": "Créez une ambiance sensuelle avec cette bougie aphrodisiaque pour un moment d'intimité enflammé, parfumée à la vanille et au musc pour une expérience Unique",
+      "prixVente": 24.9,
+      "prixFournisseur": 12.5,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-m19",
+      "nom": "Montre Connectée Fitness",
+      "description": "Suivez vos performances sportives avec cette montre connectée, équipée d'un écran tactile, d'un capteur de fréquence cardiaque et d'une application mobile pour analyser vos données de fitness",
+      "prixVente": 69,
+      "prixFournisseur": 35,
+      "marge": 49.3,
+      "categorie": "malin",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com"
+        }
+      ],
+      "dateAjout": "2026-07-04"
+    },
+    {
+      "id": "src-b10",
+      "nom": "Pouponnière Portable",
+      "description": "Protégez votre bébé avec cette pouponnière portable, légère et compacte, idéale pour les voyages en voiture ou les sorties en plein air, équipée d'un matelas confortable et d'un filet anti-moustiques",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "bebe",
+      "priorite": 2,
+      "statut": "pending",
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr"
+        }
+      ],
+      "dateAjout": "2026-07-04"
     }
   ]
 }
