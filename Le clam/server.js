@@ -3463,7 +3463,7 @@ app.patch('/api/admin/sourcing-proposals/:id', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
   const p = getSourcing().find(p => p.id === req.params.id);
   if (!p) return res.status(404).json({ ok: false, error: 'Proposition introuvable' });
-  const allowed = ['status', 'rejectReason', 'validatedAt', 'rejectedAt'];
+  const allowed = ['status', 'rejectReason', 'validatedAt', 'rejectedAt', 'images'];
   allowed.forEach(key => { if (req.body[key] !== undefined) p[key] = req.body[key]; });
   persistSourcing();
   try { syncProductsData(p); } catch (e) { console.error('[sourcing sync]', e.message); }

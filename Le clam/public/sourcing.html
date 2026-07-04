@@ -352,7 +352,8 @@
         <a href="plaisir.html"  class="nav-link" data-cat="plaisir"><span class="nav-dot"></span><span>Plaisir</span></a>
         <a href="malin.html"    class="nav-link" data-cat="malin">  <span class="nav-dot"></span><span>Malin</span></a>
         <a href="bebe.html"     class="nav-link" data-cat="bebe">   <span class="nav-dot"></span><span>Bébé</span></a>
-        <a href="sourcing.html" class="nav-link" data-cat="sourcing"><span class="nav-dot"></span><span>Sourcing</span></a>
+        <a href="sourcing.html" class="nav-link" data-cat="sourcing"><span class="nav-dot"></span><span>Antoine</span></a>
+        <a href="laura.html" class="nav-link" data-cat="laura"><span class="nav-dot"></span><span>Laura</span></a>
       </div>
       <div class="nav-actions">
         <button class="cart-toggle" id="cartToggle" aria-label="Panier">
@@ -521,6 +522,10 @@
 <script>
 'use strict';
 
+function srcImgFail(img, emoji, sub) {
+  img.parentNode.innerHTML = '<div class="src-placeholder"><span class="src-emoji">' + emoji + '</span><span class="src-subfam-lbl">' + sub + '</span></div>';
+}
+
 const EMOJIS = {
   tech:'⚡', maison:'🏠', 'bien-etre':'🌿', beaute:'✨', voyage:'✈️',
   bureau:'💻', cuisine:'🍳', indispensable:'💎', soloclub:'🔮',
@@ -647,10 +652,10 @@ function buildCard(p, currentCat) {
   /* Autres familles que la section courante (multi-famille) */
   const otherCats = catList(p.categorie).filter(c => c !== currentCat);
   const imgSrc = p.images && p.images[0];
-  const placeholder = `<div class="src-placeholder"><span class="src-emoji">${emoji}</span><span class="src-subfam-lbl">${x(p.subfamille||p.nom?.split(' ')[0]||'')}</span></div>`;
+  const sub = x(p.subfamille || p.nom?.split(' ')[0] || '');
   const imgEl = imgSrc
-    ? `<img src="${imgSrc}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block" onerror="this.parentNode.innerHTML='${placeholder.replace(/'/g,"&#39;")}';">`
-    : placeholder;
+    ? `<img src="${imgSrc}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block" onerror="srcImgFail(this,'${emoji}','${sub}')">`
+    : `<div class="src-placeholder"><span class="src-emoji">${emoji}</span><span class="src-subfam-lbl">${sub}</span></div>`;
   const mg    = parseFloat(p.marge)||0;
   const mgColor = mg>=40 ? '#6ee7b7' : mg>=25 ? '#fcd34d' : '#fca5a5';
   const price = p.prixVente!=null
@@ -794,7 +799,7 @@ function openFiche(id) {
   }
 
   document.getElementById('sfImg').innerHTML = imgSrc
-    ? `<img src="${x(imgSrc)}" alt="${x(p.nom)}" onerror="this.parentNode.innerHTML='<div class=src-fiche-img-placeholder><span>${emoji}</span><span>${x(p.subfamille||'')}</span></div>'">`
+    ? `<img src="${x(imgSrc)}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=src-fiche-img-placeholder><span style=font-size:4rem>${emoji}</span></div>')">`
     : `<div class="src-fiche-img-placeholder"><span>${emoji}</span><span>${x(p.subfamille||'')}</span></div>`;
 
   const iP=p.status==='pending', iV=p.status==='validated';
@@ -861,6 +866,15 @@ function openFiche(id) {
         <div class="src-fiche-price-val" style="color:${mgColor}">${mg}%</div>
       </div>
     </div>
+    <div class="src-fiche-section">
+      <div class="src-fiche-section-lbl">Photo produit</div>
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <input id="sfImgInput" type="text" placeholder="Colle une URL d'image ici…" value="${x(imgSrc||'')}"
+          style="flex:1;padding:.4rem .6rem;border:1.5px solid #e8e1d5;border-radius:8px;font-size:.8rem;font-family:system-ui,sans-serif;outline:none">
+        <button onclick="saveImg('${x(id)}')" style="padding:.4rem .8rem;background:#d4a017;border:none;border-radius:8px;color:#fff;font-weight:700;font-size:.78rem;cursor:pointer;font-family:inherit;white-space:nowrap">Enregistrer</button>
+      </div>
+      <div style="font-size:.65rem;color:#aaa;margin-top:.25rem">Ex : colle l'URL depuis AliExpress, Amazon, Google Images…</div>
+    </div>
     ${liensHtml}
     ${vigilanceHtml}
     ${raisonHtml}
@@ -874,6 +888,26 @@ function openFiche(id) {
 }
 function closeFiche() {
   document.getElementById('srcFiche').classList.remove('open');
+}
+
+async function saveImg(id) {
+  const url = document.getElementById('sfImgInput')?.value.trim();
+  if (!url) return;
+  try {
+    const r = await fetch('/api/admin/sourcing-proposals/' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ images: [url] }),
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error);
+    const i = _all.findIndex(p => p.id === id);
+    if (i > -1) _all[i] = d.proposal;
+    render();
+    toast('Photo enregistrée !', 'ok');
+    closeFiche();
+  } catch(e) { toast('Erreur : ' + e.message, 'err'); }
 }
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeFiche(); });
 
