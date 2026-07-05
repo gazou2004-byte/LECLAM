@@ -2240,6 +2240,72 @@
         }
       ],
       "dateAjout": "2026-07-05 00:09"
+    },
+    {
+      "id": "src-p28",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Améliorez votre pratique de yoga avec notre tapis de yoga écologique, conçu pour offrir un meilleur grip et une meilleure durabilité.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, en particulier les modèles écologiques, car les gens cherchent à améliorer leur bien-être et à réduire leur impact sur l'environnement.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf4c95befe5f34c9ab5f7f3f934f3b5c9a/High-Quality-Eco-Friendly-Yoga-Mat-Non-Slip-Exercise-Mat.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 04:55"
+    },
+    {
+      "id": "src-m37",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Jouez à vos jeux préférés en déplacement avec notre contrôleur de jeu portable pour smartphone, conçu pour offrir une expérience de jeu plus immersive.",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très populaires en ce moment, en particulier chez les gamers qui cherchent à améliorer leur expérience de jeu sur leur téléphone.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb44f9fbaa6344cdbb5f7f3f934f3b5c9a/Portable-Game-Controller-for-Smartphone-Mobile-Phone-Gamepad.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-05 04:55"
+    },
+    {
+      "id": "src-b28",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensoir",
+      "description": "Stimulez le développement de votre bébé avec notre jouet éducatif - tapis sensior, conçu pour offrir une expérience de découverte sensorielle.",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en ce moment, en particulier les tapis sensiors qui aident à stimuler le développement sensoriel des enfants.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H4c95befe5f34c9ab5f7f3f934f3b5c9a/Sensory-Play-Mat-for-Baby-Educational-Toy.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé+tapis+sensior"
+        }
+      ],
+      "dateAjout": "2026-07-05 04:55"
     }
   ]
 }
