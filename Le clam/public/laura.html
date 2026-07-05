@@ -141,12 +141,21 @@
   /* Image produit */
   .laura-card-img {
     width: 100%; height: 180px; overflow: hidden; background: #f5f0fa;
+    position: relative;
   }
   .laura-card-img img {
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform .3s;
   }
   .laura-card:hover .laura-card-img img { transform: scale(1.04); }
+  .laura-dl-btn {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(0,0,0,.55); color: #fff; border-radius: 8px;
+    padding: .3rem .55rem; font-size: .85rem; text-decoration: none;
+    backdrop-filter: blur(4px); opacity: 0; transition: opacity .2s;
+    line-height: 1;
+  }
+  .laura-card-img:hover .laura-dl-btn { opacity: 1; }
 
   /* Header carte */
   .laura-card-head {
@@ -528,8 +537,14 @@ function buildCard(p) {
       <button class="laura-btn btn-reset" onclick="doReset('${x(id)}')">↩</button>`;
   }
 
-  const imgHtml = p.imageUrl
-    ? `<div class="laura-card-img"><img src="/api/img-proxy?url=${encodeURIComponent(p.imageUrl)}" alt="${x(p.produitNom||p.titre||'')}" onerror="this.parentNode.style.display='none'"></div>`
+  const imgSrc = p.imageUrl
+    ? (p.imageUrl.startsWith('/') ? p.imageUrl : '/api/img-proxy?url=' + encodeURIComponent(p.imageUrl))
+    : '';
+  const imgHtml = imgSrc
+    ? `<div class="laura-card-img">
+        <img src="${imgSrc}" alt="${x(p.produitNom||p.titre||'')}" onerror="this.parentNode.style.display='none'">
+        <a class="laura-dl-btn" href="/api/img-download?url=${encodeURIComponent(p.imageUrl || '')}&nom=${encodeURIComponent(p.produitNom||p.titre||'photo')}" download title="Télécharger la photo">⬇</a>
+       </div>`
     : '';
 
   return `<div class="laura-card ${statut === 'done' ? 'done' : statut === 'skipped' ? 'skipped' : ''}">

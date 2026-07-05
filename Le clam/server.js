@@ -3459,6 +3459,33 @@ app.get('/api/admin/sourcing-proposals', (req, res) => {
   res.json({ ok: true, proposals });
 });
 
+/* ── Téléchargement image produit (pour posts réseaux sociaux) ── */
+app.get('/api/img-download', async (req, res) => {
+  const url = req.query.url;
+  const nom = (req.query.nom || 'photo').replace(/[^a-z0-9_\-\. ]/gi, '_').slice(0, 60);
+  if (!url) return res.status(400).end();
+  try {
+    let buf, ct;
+    if (url.startsWith('/')) {
+      const filePath = path.join(__dirname, 'public', url);
+      buf = fs.readFileSync(filePath);
+      ct = url.endsWith('.png') ? 'image/png' : url.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
+    } else {
+      const r = await fetch(url, {
+        headers: { 'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.aliexpress.com/' },
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!r.ok) return res.status(r.status).end();
+      ct = r.headers.get('content-type') || 'image/jpeg';
+      buf = Buffer.from(await r.arrayBuffer());
+    }
+    const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : ct.includes('avif') ? 'avif' : 'jpg';
+    res.set('Content-Type', ct);
+    res.set('Content-Disposition', `attachment; filename="${nom}.${ext}"`);
+    res.send(buf);
+  } catch (e) { res.status(502).end(); }
+});
+
 /* ── Proxy image (contourne hotlink protection AliExpress/CDN) ── */
 app.get('/api/img-proxy', async (req, res) => {
   const url = req.query.url;
