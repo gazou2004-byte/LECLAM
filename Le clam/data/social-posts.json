@@ -8,7 +8,10 @@
       "concept": "Présentation d'un nouvel accessoire de soin intime Made in France, avec des conseils d'utilisation pour un moment de détente en toute intimité",
       "legende": "🌸 Découvrez notre sélection d'accessoires de bien-être intime pour un moment de détente en toute intimité 🧖‍♀️💆‍♀️. Notre nouveau masseur personnel est arrivé ! 🎁 Made in France pour une qualité exceptionnelle 🇫🇷. #bienetre #intime #madeinfrance #soinintime",
       "cta": "Lien en bio pour découvrir notre sélection",
-      "dateCreation": "2026-07-05 10:19"
+      "dateCreation": "2026-07-05 10:19",
+      "imageUrl": "/img/sourcing/src-p01.jpg",
+      "produitId": "src-p01",
+      "produitNom": "Goliate — Lubrifiant Naturel Bio Long Lasting"
     },
     {
       "id": "post-m01",
@@ -18,7 +21,10 @@
       "concept": "Présentation d'un nouveau gadget high-tech nomade qui facilite la vie quotidienne, avec des fonctionnalités innovantes",
       "legende": "🤖 Découvrez le dernier gadget qui va changer votre vie ! 📈 Cette montre connectée nomade est équipée de fonctionnalités innovantes pour vous aider à rester organisé et connecté en tout temps 📊. #gadget #innovation #high-tech #nomade",
       "cta": "Commenter votre gadget préféré 👇",
-      "dateCreation": "2026-07-05 10:19"
+      "dateCreation": "2026-07-05 10:19",
+      "imageUrl": "/img/sourcing/src-m02.jpg",
+      "produitId": "src-m02",
+      "produitNom": "Lampe Coucher de Soleil — Sunset Lamp"
     },
     {
       "id": "post-b01",
@@ -28,7 +34,10 @@
       "concept": "Présentation d'un jouet d'éveil sensoriel pour les bébés, avec des conseils pour stimuler leur développement",
       "legende": "👶 Découvrez notre sélection de jouets d'éveil sensoriel pour aider votre bébé à découvrir le monde qui l'entoure 🌎. Les textures, les couleurs et les sons sont essentiels pour stimuler son développement 🧠. #bebe #eveisensoriel #developpement",
       "cta": "Lien en bio pour découvrir notre sélection de jouets",
-      "dateCreation": "2026-07-05 10:19"
+      "dateCreation": "2026-07-05 10:19",
+      "imageUrl": "/img/sourcing/src-b01.jpg",
+      "produitId": "src-b01",
+      "produitNom": "Tapis d'Éveil avec Arche Musicale 5-en-1"
     }
   ]
 }

@@ -138,6 +138,16 @@
   .laura-card.done { opacity: .65; }
   .laura-card.skipped { opacity: .5; }
 
+  /* Image produit */
+  .laura-card-img {
+    width: 100%; height: 180px; overflow: hidden; background: #f5f0fa;
+  }
+  .laura-card-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .3s;
+  }
+  .laura-card:hover .laura-card-img img { transform: scale(1.04); }
+
   /* Header carte */
   .laura-card-head {
     display: flex; align-items: center; gap: .5rem;
@@ -518,7 +528,12 @@ function buildCard(p) {
       <button class="laura-btn btn-reset" onclick="doReset('${x(id)}')">↩</button>`;
   }
 
+  const imgHtml = p.imageUrl
+    ? `<div class="laura-card-img"><img src="/api/img-proxy?url=${encodeURIComponent(p.imageUrl)}" alt="${x(p.produitNom||p.titre||'')}" onerror="this.parentNode.style.display='none'"></div>`
+    : '';
+
   return `<div class="laura-card ${statut === 'done' ? 'done' : statut === 'skipped' ? 'skipped' : ''}">
+  ${imgHtml}
   <div class="laura-card-head">
     <span class="laura-plat-badge ${platCls}">${platIcon} ${x(plat)}</span>
     <span class="laura-univ-chip ${univCls}">${x(univLbl)}</span>

@@ -3563,7 +3563,8 @@ Réponds UNIQUEMENT avec ce JSON valide, rien d'autre.`;
   /* Ajouter le post social */
   if (parsed.post) {
     const sd = getSocialData();
-    sd.posts.push(parsed.post);
+    const imageUrl = proposal.images && proposal.images[0] ? proposal.images[0] : null;
+    sd.posts.push({ ...parsed.post, imageUrl, produitId: proposal.id, produitNom: proposal.nom });
     persistSocial(sd);
     console.log(`[Laura] Post ${parsed.post.id} créé pour ${proposal.nom}`);
   }
