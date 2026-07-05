@@ -1558,27 +1558,6 @@
       "dateAjout": "2026-07-04"
     },
     {
-      "id": "src-p13",
-      "nom": "Bougie Aromatique Relaxante",
-      "description": "Détendez-vous avec notre bougie aromatique, conçue pour vous apporter la relaxation et le bien-être intime dont vous avez besoin après une longue journée.",
-      "prixVente": 24.99,
-      "prixFournisseur": 12.5,
-      "marge": 50,
-      "categorie": "plaisir",
-      "priorite": 2,
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-p13.jpg"
-      ],
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com"
-        }
-      ],
-      "dateAjout": "2026-07-04"
-    },
-    {
       "id": "src-m22",
       "nom": "Caméra de Surveillance Wi-Fi Mini",
       "description": "Surveillez votre espace avec notre caméra de surveillance Wi-Fi mini, idéale pour une sécurité renforcée et une connexion facile.",
@@ -1595,27 +1574,6 @@
         {
           "label": "DSers",
           "url": "https://www.dsers.com"
-        }
-      ],
-      "dateAjout": "2026-07-04"
-    },
-    {
-      "id": "src-b13",
-      "nom": "Jeu d'Eveil Sensuel pour Bébé",
-      "description": "Stimulez les sens de votre bébé avec notre jeu d'éveil sensuel, conçu pour favoriser le développement et l'apprentissage.",
-      "prixVente": 19.99,
-      "prixFournisseur": 9.5,
-      "marge": 52.5,
-      "categorie": "bebe",
-      "priorite": 2,
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-b13.jpg"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr"
         }
       ],
       "dateAjout": "2026-07-04"
@@ -1658,27 +1616,6 @@
         {
           "label": "DSers",
           "url": "https://www.dsers.com"
-        }
-      ],
-      "dateAjout": "2026-07-04 12:05"
-    },
-    {
-      "id": "src-b14",
-      "nom": "Jeu d'Eveil Sensuel Textures et Formes pour Bébé",
-      "description": "Stimulez les sens de votre bébé avec ce jeu d'éveil aux textures et formes variées, conçu pour encourager la découverte et le développement sensoriel de votre petit.",
-      "prixVente": 24.9,
-      "prixFournisseur": 12,
-      "marge": 51.8,
-      "categorie": "bebe",
-      "priorite": 2,
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-b14.webp"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr"
         }
       ],
       "dateAjout": "2026-07-04 12:05"
@@ -1816,138 +1753,6 @@
       "dateAjout": "2026-07-04 14:27"
     },
     {
-      "id": "src-p17",
-      "nom": "Tapis de Yoga Écologique",
-      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être.",
-      "raisonVente": "Le tapis de yoga est un produit tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale.",
-      "prixVente": 29.99,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "plaisir",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-p17.jpg"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
-        }
-      ],
-      "dateAjout": "2026-07-05 14:41"
-    },
-    {
-      "id": "src-m26",
-      "nom": "Contrôleur de Jeu Portable",
-      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés en déplacement.",
-      "raisonVente": "Le contrôleur de jeu portable est un produit tendance en ce moment en raison de la popularité croissante des jeux mobiles et de la nécessité de jouer en déplacement.",
-      "prixVente": 49.99,
-      "prixFournisseur": 25,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-m26.jpg"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+portable"
-        }
-      ],
-      "dateAjout": "2026-07-05 14:41"
-    },
-    {
-      "id": "src-b17",
-      "nom": "Jouet Éducatif pour Bébé",
-      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences cognitives et motrices.",
-      "raisonVente": "Le jouet éducatif pour bébé est un produit tendance en ce moment en raison de la popularité croissante des produits éducatifs pour les enfants et de la nécessité de stimuler leur développement.",
-      "prixVente": 19.99,
-      "prixFournisseur": 10,
-      "marge": 50,
-      "categorie": "bebe",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-b17.webp"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
-        }
-      ],
-      "dateAjout": "2026-07-05 14:41"
-    },
-    {
-      "id": "src-p18",
-      "nom": "Tapis de Yoga Écologique",
-      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
-      "raisonVente": "Les tapis de yoga sont tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale.",
-      "prixVente": 29.99,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "plaisir",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-p17.jpg"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
-        }
-      ],
-      "dateAjout": "2026-07-05 16:06"
-    },
-    {
-      "id": "src-m27",
-      "nom": "Contrôleur de Jeu Mobile Portable",
-      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone.",
-      "raisonVente": "Les contrôleurs de jeu mobile sont tendance en ce moment en raison de la popularité croissante des jeux mobiles et de la nécessité d'une expérience de jeu améliorée.",
-      "prixVente": 39.99,
-      "prixFournisseur": 20,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-m27.jpg"
-      ],
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
-        }
-      ],
-      "dateAjout": "2026-07-05 16:06"
-    },
-    {
-      "id": "src-b18",
-      "nom": "Jouet Éducatif en Bois pour Bébé",
-      "description": "Un jouet éducatif en bois pour les bébés pour développer leurs compétences cognitives et motrices.",
-      "raisonVente": "Les jouets éducatifs en bois sont tendance en ce moment en raison de la popularité croissante des produits éducatifs et de la prise de conscience environnementale.",
-      "prixVente": 24.99,
-      "prixFournisseur": 12,
-      "marge": 52,
-      "categorie": "bebe",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-b18.webp"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+en+bois+pour+bebe"
-        }
-      ],
-      "dateAjout": "2026-07-05 16:06"
-    },
-    {
       "id": "src-p20",
       "nom": "Kit de Yoga Étendu",
       "description": "Découvrez notre kit de yoga étendu pour améliorer votre flexibilité et votre bien-être. Il comprend un tapis de yoga, des blocs de yoga, une ceinture de yoga et un sac de yoga.",
@@ -1965,28 +1770,6 @@
         {
           "label": "AliExpress",
           "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga+étendu"
-        }
-      ],
-      "dateAjout": "2026-07-05 18:01"
-    },
-    {
-      "id": "src-m29",
-      "nom": "Contrôleur de Jeu Mobile Portable",
-      "description": "Jouez à vos jeux mobiles préférés avec notre contrôleur de jeu mobile portable. Il est compatible avec la plupart des téléphones et offre une expérience de jeu améliorée.",
-      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment, notamment avec la tendance des jeux mobiles et la demande croissante de accessoires de jeu.",
-      "prixVente": 29.99,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "/img/sourcing/src-m29.jpg"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+mobile+portable"
         }
       ],
       "dateAjout": "2026-07-05 18:01"
