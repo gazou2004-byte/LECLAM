@@ -1927,6 +1927,72 @@
         }
       ],
       "dateAjout": "2026-07-05 21:59"
+    },
+    {
+      "id": "src-p25",
+      "nom": "Étagère de Rangement pour Jouets",
+      "description": "Optimisez l'espace de jeu de vos enfants avec cette étagère de rangement pour jouets, idéale pour les chambres d'enfants ou les salles de jeu.",
+      "raisonVente": "Les produits de décoration et d'organisation pour la maison sont très tendance en ce moment, notamment avec l'augmentation du temps passé à la maison due au travail à distance.",
+      "prixVente": 49.99,
+      "prixFournisseur": 29.99,
+      "marge": 40,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=etagere+de+rangement+pour+jouets"
+        }
+      ],
+      "dateAjout": "2026-07-05 23:10"
+    },
+    {
+      "id": "src-m30",
+      "nom": "Lampe de Bureau avec Prise USB",
+      "description": "Cette lampe de bureau avec prise USB est parfaite pour les travailleurs à distance ou les étudiants, offrant une lumière douce et un espace de charge pour vos appareils.",
+      "raisonVente": "Les produits liés à l'organisation et à l'équipement de bureau sont très demandés en ce moment, notamment avec l'augmentation du travail à distance.",
+      "prixVente": 29.99,
+      "prixFournisseur": 17.99,
+      "marge": 40,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+bureau+avec+prise+usb"
+        }
+      ],
+      "dateAjout": "2026-07-05 23:10"
+    },
+    {
+      "id": "src-p26",
+      "nom": "Coffret de Soins Personnels pour la Nuit",
+      "description": "Ce coffret de soins personnels pour la nuit est idéal pour une routine de soin douce et relaxante, comprenant un masque de nuit, un bain de bouche et une crème hydratante.",
+      "raisonVente": "Les produits de soins personnels et de bien-être sont très tendance en ce moment, notamment avec l'augmentation de la recherche de produits pour améliorer la qualité du sommeil.",
+      "prixVente": 39.99,
+      "prixFournisseur": 23.99,
+      "marge": 40,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=coffret+de+soins+personnels+pour+la+nuit"
+        }
+      ],
+      "dateAjout": "2026-07-05 23:10"
     }
   ]
 }
