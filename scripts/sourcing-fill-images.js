@@ -1,97 +1,139 @@
 #!/usr/bin/env node
 /* Remplit automatiquement les images manquantes dans sourcing-proposals.json
-   Trouve l'image via Jina AI et la TÉLÉCHARGE localement → /img/sourcing/
-   Plus de dépendance externe, plus d'URL à coller à la main */
+   Pipeline : AliExpress search → item ID → product page → vraie photo produit */
 
 const fs   = require('fs');
 const path = require('path');
 
-const SOURCING_PATH = path.join(__dirname, '../Le clam/data/sourcing-proposals.json');
-const IMG_DIR       = path.join(__dirname, '../Le clam/public/img/sourcing');
+const SOURCING_PATH    = path.join(__dirname, '../Le clam/data/sourcing-proposals.json');
+const IMG_DIR          = path.join(__dirname, '../Le clam/public/img/sourcing');
+const PLACEHOLDER_SIZE = 12420;
 
 if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
 
-/* ── Trouve une URL d'image via Jina AI ── */
-async function findImageUrl(nom, liens) {
-  const sources = [];
-  if (liens && liens.length) sources.push(...liens.map(l => l.url).filter(Boolean));
-  // Recherche Jina (moteur de recherche Jina, gratuit)
-  sources.push(`https://s.jina.ai/${encodeURIComponent(nom + ' produit')}`);
-  sources.push(`https://www.dsers.com/search/?q=${encodeURIComponent(nom)}`);
-  sources.push(`https://fr.aliexpress.com/wholesale?SearchText=${encodeURIComponent(nom)}`);
-
-  for (const src of sources) {
-    try {
-      const res = await fetch(`https://r.jina.ai/${src}`, {
-        headers: { 'Accept': 'text/plain', 'X-No-Cache': 'true' },
-        signal: AbortSignal.timeout(14000),
-      });
-      if (!res.ok) continue;
-      const text = await res.text();
-      const matches = [...text.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s"']+)\)/g)]
-        .map(m => m[1])
-        .filter(u => /\.(jpg|jpeg|png|webp|avif)(\?|$)/i.test(u))
-        .filter(u => !/logo|banner|avatar|placeholder|icon|flag|sprite|badge/i.test(u));
-      if (matches[0]) return matches[0];
-    } catch { /* continue */ }
-  }
-  return null;
+async function jina(url, timeout = 15000) {
+  try {
+    const res = await fetch(`https://r.jina.ai/${url}`, {
+      headers: { 'Accept': 'text/plain', 'X-No-Cache': 'true' },
+      signal: AbortSignal.timeout(timeout),
+    });
+    if (!res.ok) return '';
+    return await res.text();
+  } catch { return ''; }
 }
 
-/* ── Télécharge l'image et la sauvegarde localement ── */
+/* ── Étape 1 : trouve l'ID d'un vrai produit AliExpress ── */
+async function findAliexpressItemId(nom) {
+  const query = encodeURIComponent(nom.replace(/[éèêë]/g,'e').replace(/[àâ]/g,'a').replace(/[ùû]/g,'u').replace(/[îï]/g,'i').replace(/[ôö]/g,'o').replace(/ç/g,'c'));
+  const text = await jina(`https://fr.aliexpress.com/wholesale?SearchText=${query}`);
+  const ids = [...text.matchAll(/\/item\/(\d{10,})/g)].map(m => m[1]);
+  return ids[0] || null;
+}
+
+/* ── Étape 2 : visite la page produit et extrait la vraie image principale ── */
+async function getProductImageUrl(itemId) {
+  const text = await jina(`https://www.aliexpress.com/item/${itemId}.html`, 18000);
+  const urls = [...text.matchAll(/https?:\/\/[^\s)"']+\.(jpg|jpeg|png|webp|avif)/gi)]
+    .map(m => m[0])
+    .filter(u => u.includes('aliexpress-media.com') || u.includes('alicdn.com'))
+    .filter(u => !/\/\d+x\d+\./i.test(u))          // exclut les thumbnails (ex: /48x48.jpg)
+    .filter(u => !/logo|banner|icon|avatar/i.test(u));
+  return urls[0] || null;
+}
+
+/* ── Étape 3 : télécharge via proxy (contourne hotlink protection) ── */
 async function downloadImage(url, id) {
   try {
-    const res = await fetch(url, {
+    const r = await fetch(url, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': 'https://www.google.com/',
+        'Referer': 'https://www.aliexpress.com/',
+        'Accept': 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
       },
       signal: AbortSignal.timeout(15000),
     });
-    if (!res.ok) return null;
-    const ct = res.headers.get('content-type') || '';
-    const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : 'jpg';
-    const filename = `${id}.${ext}`;
-    const filePath = path.join(IMG_DIR, filename);
-    const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.length < 1000) return null; // image vide/erreur
+    if (!r.ok) return null;
+    const ct = r.headers.get('content-type') || '';
+    const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : ct.includes('avif') ? 'avif' : 'jpg';
+    const buf = Buffer.from(await r.arrayBuffer());
+    if (buf.length < 5000 || buf.length === PLACEHOLDER_SIZE) return null;
+    const filePath = path.join(IMG_DIR, `${id}.${ext}`);
     fs.writeFileSync(filePath, buf);
-    return `/img/sourcing/${filename}`;
-  } catch {
-    return null;
+    return `/img/sourcing/${id}.${ext}`;
+  } catch { return null; }
+}
+
+/* ── Amazon France : images produit fiables ── */
+async function findAmazonImage(nom) {
+  // Traduit les termes courants pour une meilleure recherche
+  const en = nom
+    .replace(/bougie/gi, 'candle').replace(/aphrodisiaque/gi, 'romantic')
+    .replace(/aromatique/gi, 'scented').replace(/relaxante/gi, 'relaxing')
+    .replace(/montre connectée/gi, 'smartwatch').replace(/fitness/gi, 'fitness tracker')
+    .replace(/chargeur sans fil/gi, 'wireless charger').replace(/support/gi, 'stand')
+    .replace(/caméra/gi, 'camera').replace(/surveillance/gi, 'security')
+    .replace(/tapis de yoga/gi, 'yoga mat').replace(/écologique/gi, 'eco')
+    .replace(/contrôleur/gi, 'game controller').replace(/portable/gi, 'portable')
+    .replace(/kit d'art/gi, 'art craft kit').replace(/création/gi, 'creative');
+  const q = encodeURIComponent(en);
+  const text = await jina(`https://www.amazon.fr/s?k=${q}`);
+  const urls = [...text.matchAll(/https?:\/\/m\.media-amazon\.com\/images\/I\/([A-Za-z0-9]+)\.[^"'\s)]+/g)]
+    .map(m => m[0])
+    .filter(u => /\.(jpg|jpeg|png)/i.test(u))
+    .filter(u => !/sprite|nav-|branding|logo/i.test(u))
+    // Préfère les images plus grandes
+    .map(u => u.replace(/_AC_SR\d+,\d+_QL\d+_/, '_AC_SL500_').replace(/_AC_UL\d+_/, '_AC_SL500_'));
+  return urls[0] || null;
+}
+
+async function findAndDownload(p) {
+  // 1. Essai AliExpress (vrai produit fournisseur)
+  const itemId = await findAliexpressItemId(p.nom);
+  if (itemId) {
+    const imgUrl = await getProductImageUrl(itemId);
+    if (imgUrl) {
+      const local = await downloadImage(imgUrl, p.id);
+      if (local) return local;
+      return imgUrl; // URL distante via proxy serveur
+    }
   }
+
+  // 2. Fallback Amazon France
+  const amazonUrl = await findAmazonImage(p.nom);
+  if (amazonUrl) {
+    const local = await downloadImage(amazonUrl, p.id);
+    if (local) return local;
+    return amazonUrl;
+  }
+
+  return null;
 }
 
 async function main() {
   const raw = JSON.parse(fs.readFileSync(SOURCING_PATH, 'utf8'));
   const missing = raw.proposals.filter(p => !p.images || !p.images.length || !p.images[0]);
 
-  if (!missing.length) { console.log('[Antoine] Tous les produits ont déjà une image.'); return; }
+  if (!missing.length) { console.log('[Antoine] Tous les produits ont une image.'); return; }
 
-  console.log(`[Antoine] ${missing.length} produits sans image à traiter…\n`);
+  console.log(`[Antoine] ${missing.length} produits sans image…\n`);
   let found = 0, notFound = 0;
 
   for (const p of missing) {
     process.stdout.write(`  ${p.id} — ${p.nom}… `);
-    const url = await findImageUrl(p.nom, p.liens);
-    if (!url) { console.log('✗ URL introuvable'); notFound++; continue; }
-
-    const localPath = await downloadImage(url, p.id);
-    if (localPath) {
-      p.images = [localPath];
-      console.log(`✓ sauvegardée → ${localPath}`);
+    const result = await findAndDownload(p);
+    if (result) {
+      p.images = [result];
+      console.log(`✓ ${result.slice(0, 70)}`);
       found++;
     } else {
-      // Garde l'URL distante si le téléchargement échoue
-      p.images = [url];
-      console.log(`~ URL distante (dl échoué) → ${url.slice(0, 60)}`);
-      found++;
+      console.log('✗ introuvable');
+      notFound++;
     }
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 800));
   }
 
   fs.writeFileSync(SOURCING_PATH, JSON.stringify(raw, null, 2), 'utf8');
-  console.log(`\n[Antoine] ✓ ${found} images traitées, ${notFound} introuvables.`);
+  console.log(`\n[Antoine] ✓ ${found} images trouvées, ${notFound} introuvables.`);
 }
 
 main().catch(err => { console.error('[Antoine] Erreur :', err.message); process.exit(1); });
