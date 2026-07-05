@@ -65,7 +65,8 @@ async function downloadImage(url, id) {
     const ct = r.headers.get('content-type') || '';
     const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : 'jpg';
     const buf = Buffer.from(await r.arrayBuffer());
-    if (buf.length < 1000) return null;
+    const BAD_SIZES = new Set([12420, 10046, 14542]);
+    if (buf.length < 5000 || BAD_SIZES.has(buf.length)) return null;
     const filePath = path.join(IMG_DIR, `${id}.${ext}`);
     fs.writeFileSync(filePath, buf);
     return `/img/sourcing/${id}.${ext}`;
