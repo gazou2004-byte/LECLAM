@@ -2306,6 +2306,72 @@
         }
       ],
       "dateAjout": "2026-07-05 04:55"
+    },
+    {
+      "id": "src-p29",
+      "nom": "Kit de Peinture pour Adultes",
+      "description": "Découvrez votre côté artistique avec ce kit de peinture pour adultes, idéal pour se détendre et créer quelque chose de beau.",
+      "raisonVente": "Le kit de peinture pour adultes est tendance en ce moment, car il permet aux gens de se détendre et d'exprimer leur créativité, comme le montre les tendances sur DSers et Google Trends.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hdaa3f7a2c1c34cb8b8c943f5bca3f9c2X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+de+peinture+pour+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-05 07:55"
+    },
+    {
+      "id": "src-m38",
+      "nom": "Mini Projecteur LED Portable",
+      "description": "Un mini projecteur LED portable pour regarder vos films et séries préférés n'importe où, avec une qualité d'image exceptionnelle.",
+      "raisonVente": "Le mini projecteur LED portable est viral sur TikTok en ce moment, car il est compact, léger et facile à utiliser, comme le montre les tendances sur TikTok et AliExpress.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb522a3c2c1c34cb8b8c943f5bca3f9c2X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=mini+projecteur+LED+portable"
+        }
+      ],
+      "dateAjout": "2026-07-05 07:55"
+    },
+    {
+      "id": "src-b29",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences cognitives et motrices de votre enfant, avec des couleurs vives et des textures variées.",
+      "raisonVente": "Le jouet éducatif pour bébé est tendance en ce moment, car il est conçu pour aider les bébés à apprendre et à grandir, comme le montre les tendances sur Vinted et Google Trends.",
+      "prixVente": 19.99,
+      "prixFournisseur": 10,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hdaa3f7a2c1c34cb8b8c943f5bca3f9c2X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-05 07:55"
     }
   ]
 }
