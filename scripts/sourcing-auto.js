@@ -25,6 +25,44 @@ async function readPage(url) {
   }
 }
 
+/* ── Cherche une vraie image produit via Jina AI ── */
+async function findProductImage(nom, lien) {
+  const sources = [];
+
+  // 1. Visite le lien fourni par Groq (DSers / AliExpress / Vinted)
+  if (lien) sources.push(lien);
+
+  // 2. Recherche DSers
+  sources.push(`https://www.dsers.com/search/?q=${encodeURIComponent(nom)}`);
+
+  // 3. Recherche AliExpress
+  sources.push(`https://fr.aliexpress.com/wholesale?SearchText=${encodeURIComponent(nom)}`);
+
+  for (const src of sources) {
+    try {
+      const res = await fetch(`https://r.jina.ai/${src}`, {
+        headers: { 'Accept': 'text/plain', 'X-No-Cache': 'true' },
+        signal: AbortSignal.timeout(12000),
+      });
+      if (!res.ok) continue;
+      const text = await res.text();
+
+      // Extraire les URLs d'images du markdown Jina (format ![alt](url))
+      const matches = [...text.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s]+)\)/g)]
+        .map(m => m[1])
+        .filter(u => /\.(jpg|jpeg|png|webp|avif)/i.test(u))
+        .filter(u => !u.includes('logo') && !u.includes('banner') && !u.includes('avatar')
+                  && !u.includes('placeholder') && !u.includes('icon'));
+
+      if (matches[0]) {
+        console.log(`  [image] ${nom} → ${matches[0].slice(0, 80)}`);
+        return matches[0];
+      }
+    } catch { /* continue */ }
+  }
+  return null;
+}
+
 /* ── Recherche marché : lit plusieurs sources de tendances ── */
 async function analyseMarche() {
   const mois = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
@@ -178,6 +216,14 @@ Réponds UNIQUEMENT avec un tableau JSON valide :
     throw new Error('Tableau vide reçu');
 
   newProducts = newProducts.map(fixMarge);
+
+  /* ── Recherche d'images réelles pour chaque produit ── */
+  console.log('[Antoine] Recherche des images produits…');
+  await Promise.all(newProducts.map(async p => {
+    const lienUrl = p.liens && p.liens[0] ? p.liens[0].url : null;
+    const imgUrl = await findProductImage(p.nom, lienUrl);
+    if (imgUrl) p.images = [imgUrl];
+  }));
 
   raw.proposals.push(...newProducts);
   fs.writeFileSync(SOURCING_PATH, JSON.stringify(raw, null, 2), 'utf8');
