@@ -1778,6 +1778,72 @@
         }
       ],
       "dateAjout": "2026-07-04 14:27"
+    },
+    {
+      "id": "src-p17",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le tapis de yoga est un produit tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb0c155a5d2444f9b80e5f4dcbf7c1f1e5/High-Quality-Eco-Friendly-Yoga-Mat-Non-Slip-Exercise-Mat-Gym-Mat-Fitness-Mat.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 14:41"
+    },
+    {
+      "id": "src-m26",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés en déplacement.",
+      "raisonVente": "Le contrôleur de jeu portable est un produit tendance en ce moment en raison de la popularité croissante des jeux mobiles et de la nécessité de jouer en déplacement.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf11b514fbaa94c9b96f5f4dcbf7c1f1e5/Wireless-Game-Controller-For-Mobile-Phone-Android-Gamepad-For-PC.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-05 14:41"
+    },
+    {
+      "id": "src-b17",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences cognitives et motrices.",
+      "raisonVente": "Le jouet éducatif pour bébé est un produit tendance en ce moment en raison de la popularité croissante des produits éducatifs pour les enfants et de la nécessité de stimuler leur développement.",
+      "prixVente": 19.99,
+      "prixFournisseur": 10,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb0c155a5d2444f9b80e5f4dcbf7c1f1e5/Baby-Educational-Toy-Set-For-Infants-And-Toddlers.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-05 14:41"
     }
   ]
 }
