@@ -3405,9 +3405,9 @@ app.get('/api/admin/logs/files', (req, res) => {
    ───────────────────────────────────────── */
 const SOURCING_FILE     = path.join(__dirname, 'data/sourcing-proposals.json');
 const PRODUCTS_DATA_FILE = path.join(__dirname, 'public/js/products-data.js');
-let _sourcingData = JSON.parse(fs.readFileSync(SOURCING_FILE, 'utf8'));
-const getSourcing   = () => _sourcingData.proposals;
-const persistSourcing = () => fs.writeFileSync(SOURCING_FILE, JSON.stringify(_sourcingData, null, 2));
+const getSourcingData   = () => JSON.parse(fs.readFileSync(SOURCING_FILE, 'utf8'));
+const getSourcing       = () => getSourcingData().proposals;
+const persistSourcing   = (data) => fs.writeFileSync(SOURCING_FILE, JSON.stringify(data, null, 2));
 
 /* Synchronise un produit validé dans products-data.js (ou le retire) */
 function syncProductsData(proposal) {
@@ -3512,11 +3512,12 @@ app.get('/api/img-proxy', async (req, res) => {
 
 app.patch('/api/admin/sourcing-proposals/:id', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
-  const p = getSourcing().find(p => p.id === req.params.id);
+  const sd = getSourcingData();
+  const p = sd.proposals.find(p => p.id === req.params.id);
   if (!p) return res.status(404).json({ ok: false, error: 'Proposition introuvable' });
   const allowed = ['status', 'rejectReason', 'validatedAt', 'rejectedAt', 'images'];
   allowed.forEach(key => { if (req.body[key] !== undefined) p[key] = req.body[key]; });
-  persistSourcing();
+  persistSourcing(sd);
   try { syncProductsData(p); } catch (e) { console.error('[sourcing sync]', e.message); }
   if (req.body.status === 'validated') {
     lauraGenerate(p).catch(e => console.error('[Laura] Erreur génération:', e.message));
@@ -3581,8 +3582,10 @@ Réponds UNIQUEMENT avec ce JSON valide, rien d'autre.`;
 
   /* Mettre à jour la description du produit sur le site */
   if (parsed.descriptionSite) {
-    proposal.description = parsed.descriptionSite;
-    persistSourcing();
+    const sd2 = getSourcingData();
+    const pp = sd2.proposals.find(x => x.id === proposal.id);
+    if (pp) { pp.description = parsed.descriptionSite; proposal.description = parsed.descriptionSite; }
+    persistSourcing(sd2);
     try { syncProductsData(proposal); } catch {}
     console.log(`[Laura] Description site mise à jour pour ${proposal.id}`);
   }
