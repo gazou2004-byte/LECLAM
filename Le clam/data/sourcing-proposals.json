@@ -1880,6 +1880,72 @@
         }
       ],
       "dateAjout": "2026-07-05 14:41"
+    },
+    {
+      "id": "src-p18",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Les tapis de yoga sont tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 16:06"
+    },
+    {
+      "id": "src-m27",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont tendance en ce moment en raison de la popularité croissante des jeux mobiles et de la nécessité d'une expérience de jeu améliorée.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-05 16:06"
+    },
+    {
+      "id": "src-b18",
+      "nom": "Jouet Éducatif en Bois pour Bébé",
+      "description": "Un jouet éducatif en bois pour les bébés pour développer leurs compétences cognitives et motrices.",
+      "raisonVente": "Les jouets éducatifs en bois sont tendance en ce moment en raison de la popularité croissante des produits éducatifs et de la prise de conscience environnementale.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b18.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+en+bois+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-05 16:06"
     }
   ]
 }
