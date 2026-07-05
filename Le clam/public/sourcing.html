@@ -138,6 +138,11 @@
     font-size: .58rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: .08em; color: rgba(255,255,255,.3);
   }
+  .src-add-photo-lbl {
+    font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    color: rgba(255,255,255,.45); background: rgba(255,255,255,.1);
+    border-radius: 6px; padding: .2rem .5rem; margin-top: .2rem;
+  }
 
   /* ── Boutons action (remplacent atc-btn, même forme pill) ── */
   .src-btn {
@@ -661,7 +666,7 @@ function buildCard(p, currentCat) {
   const sub = x(p.subfamille || p.nom?.split(' ')[0] || '');
   const imgEl = imgSrc
     ? `<img src="${proxyImg(imgSrc)}" alt="${x(p.nom)}" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block" onerror="srcImgFail(this,'${emoji}','${sub}')">`
-    : `<div class="src-placeholder"><span class="src-emoji">${emoji}</span><span class="src-subfam-lbl">${sub}</span></div>`;
+    : `<div class="src-placeholder"><span class="src-emoji">${emoji}</span><span class="src-subfam-lbl">${sub}</span><span class="src-add-photo-lbl">+ ajouter photo</span></div>`;
   const mg    = parseFloat(p.marge)||0;
   const mgColor = mg>=40 ? '#6ee7b7' : mg>=25 ? '#fcd34d' : '#fca5a5';
   const price = p.prixVente!=null
