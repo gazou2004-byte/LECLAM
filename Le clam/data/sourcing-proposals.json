@@ -2372,6 +2372,72 @@
         }
       ],
       "dateAjout": "2026-07-05 07:55"
+    },
+    {
+      "id": "src-p31",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique confortable et respectueuse de l'environnement.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hfd5bfaa5f3f34e8b9f95c5c5c5c5c5c5/Écologique-Tapis-de-Yoga-Antidérapant.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 10:10"
+    },
+    {
+      "id": "src-m40",
+      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
+      "description": "Une lampe de bureau LED avec chargeur sans fil pour un éclairage pratique et une charge de vos appareils en tout confort.",
+      "raisonVente": "Les lampes de bureau LED sont très populaires, et la fonction de chargeur sans fil est un atout majeur pour les consommateurs.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/lampe-de-bureau-led.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+led+chargeur+sans+fil"
+        }
+      ],
+      "dateAjout": "2026-07-05 10:10"
+    },
+    {
+      "id": "src-b31",
+      "nom": "Poussette Tout-Terrain pour Bébé",
+      "description": "Une poussette tout-terrain pour bébé, parfaite pour les parents qui aiment les activités de plein air.",
+      "raisonVente": "Les poussettes tout-terrain sont très populaires chez les parents qui aiment les activités de plein air, et les consommateurs recherchent des produits de qualité et durables.",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/photos/2021/07/poussette-tout-terrain-pour-bebe.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-05 10:10"
     }
   ]
 }
