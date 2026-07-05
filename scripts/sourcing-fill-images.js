@@ -7,7 +7,7 @@ const path = require('path');
 
 const SOURCING_PATH    = path.join(__dirname, '../Le clam/data/sourcing-proposals.json');
 const IMG_DIR          = path.join(__dirname, '../Le clam/public/img/sourcing');
-const PLACEHOLDER_SIZE = 12420;
+const BAD_SIZES = new Set([12420, 10046, 14542]); // placeholder AliExpress, logo AliExpress, image 404
 
 if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
 
@@ -37,7 +37,10 @@ async function getProductImageUrl(itemId) {
     .map(m => m[0])
     .filter(u => u.includes('aliexpress-media.com') || u.includes('alicdn.com'))
     .filter(u => !/\/\d+x\d+\./i.test(u))          // exclut les thumbnails (ex: /48x48.jpg)
-    .filter(u => !/logo|banner|icon|avatar/i.test(u));
+    .filter(u => !/logo|banner|icon|avatar/i.test(u))
+    // Hashes connus d'images génériques/logo AliExpress — pas des photos produits
+    .filter(u => !u.includes('Sa976459fb7724bf1bca6e153a42'))
+    .filter(u => !u.includes('O1CN01xDFBpV1GnX56f7OFF'));
   return urls[0] || null;
 }
 
@@ -56,7 +59,7 @@ async function downloadImage(url, id) {
     const ct = r.headers.get('content-type') || '';
     const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : ct.includes('avif') ? 'avif' : 'jpg';
     const buf = Buffer.from(await r.arrayBuffer());
-    if (buf.length < 5000 || buf.length === PLACEHOLDER_SIZE) return null;
+    if (buf.length < 5000 || BAD_SIZES.has(buf.length)) return null;
     const filePath = path.join(IMG_DIR, `${id}.${ext}`);
     fs.writeFileSync(filePath, buf);
     return `/img/sourcing/${id}.${ext}`;
@@ -82,7 +85,7 @@ async function findAmazonImage(nom) {
     .filter(u => /\.(jpg|jpeg|png)/i.test(u))
     .filter(u => !/sprite|nav-|branding|logo/i.test(u))
     // Préfère les images plus grandes
-    .map(u => u.replace(/_AC_SR\d+,\d+_QL\d+_/, '_AC_SL500_').replace(/_AC_UL\d+_/, '_AC_SL500_'));
+    .map(u => u.replace(/_AC_[^.]+/, '_AC_SL500_'));
   return urls[0] || null;
 }
 
@@ -94,7 +97,7 @@ async function findAndDownload(p) {
     if (imgUrl) {
       const local = await downloadImage(imgUrl, p.id);
       if (local) return local;
-      return imgUrl; // URL distante via proxy serveur
+      // Ne pas sauvegarder l'URL distante si le download a échoué — image probablement corrompue
     }
   }
 
@@ -103,7 +106,6 @@ async function findAndDownload(p) {
   if (amazonUrl) {
     const local = await downloadImage(amazonUrl, p.id);
     if (local) return local;
-    return amazonUrl;
   }
 
   return null;
