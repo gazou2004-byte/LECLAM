@@ -1861,6 +1861,72 @@
         }
       ],
       "dateAjout": "2026-07-05 20:11"
+    },
+    {
+      "id": "src-p23",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique plus sûre et plus confortable",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment en raison de la montée en puissance des pratiques de yoga et de méditation à domicile, comme le montrent les données de Google Trends et les tendances de vente sur AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 21:59"
+    },
+    {
+      "id": "src-m28",
+      "nom": "Lampe de Bureau LED avec Ventilateur",
+      "description": "Une lampe de bureau LED avec ventilateur intégré pour un éclairage et un refroidissement optimaux",
+      "raisonVente": "Les lampes de bureau avec ventilateur sont très populaires sur TikTok, notamment parmi les gamers et les utilisateurs de bureautique, comme le montrent les vidéos avec le hashtag #bidandwin",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-m28.jpg"
+      ],
+      "liens": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/tag/bidandwin"
+        }
+      ],
+      "dateAjout": "2026-07-05 21:59"
+    },
+    {
+      "id": "src-b23",
+      "nom": "Poussette pour Bébé avec Siège Auto",
+      "description": "Une poussette pour bébé avec siège auto intégré pour une sécurité et un confort maximaux",
+      "raisonVente": "Les poussettes pour bébé avec siège auto sont très demandées sur les plateformes de vente en ligne, notamment sur Vinted, en raison de leur praticité et de leur sécurité",
+      "prixVente": 129.99,
+      "prixFournisseur": 70,
+      "marge": 46.1,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/products/123456789.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bebe+avec+siège+auto"
+        }
+      ],
+      "dateAjout": "2026-07-05 21:59"
     }
   ]
 }
