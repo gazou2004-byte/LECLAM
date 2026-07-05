@@ -2174,6 +2174,72 @@
         }
       ],
       "dateAjout": "2026-07-04 23:00"
+    },
+    {
+      "id": "src-p27",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique de yoga saine et durable",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb0c95d7f5c744cdba6e5f3e2c9f9f6c7a/High-Quality-Eco-Friendly-Yoga-Mat-Non-Slip-TPE-Yoga-Mat-For-Yoga-Pilates.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=ecologique+yoga+mat"
+        }
+      ],
+      "dateAjout": "2026-07-05 00:09"
+    },
+    {
+      "id": "src-m36",
+      "nom": "Projecteur de Poche LED",
+      "description": "Un projecteur de poche LED portable et compact pour une utilisation facile et pratique",
+      "raisonVente": "Les projecteurs de poche sont très populaires en ce moment en raison de leur utilité et de leur portabilité, ce qui les rend parfaits pour les utilisateurs de TikTok",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/mini-projector.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+de+poche+led"
+        }
+      ],
+      "dateAjout": "2026-07-05 00:09"
+    },
+    {
+      "id": "src-b27",
+      "nom": "Jouet Éducatif de Construction en Bois",
+      "description": "Un jouet éducatif de construction en bois pour les enfants pour développer leur créativité et leurs compétences",
+      "raisonVente": "Les jouets éducatifs de construction en bois sont très tendance en ce moment en raison de leur capacité à stimuler la créativité et les compétences des enfants",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/photos/1234567890.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+construction+bois"
+        }
+      ],
+      "dateAjout": "2026-07-05 00:09"
     }
   ]
 }
