@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "Antoine — Le Clam"
           git config user.email "sourcing@leclam.fr"
-          git add "Le clam/data/sourcing-proposals.json"
+          git add "Le clam/data/sourcing-proposals.json" "Le clam/public/img/sourcing/"
           if git diff --staged --quiet; then
             echo "Aucun changement à committer."
           else

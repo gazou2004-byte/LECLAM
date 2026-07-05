@@ -25,17 +25,15 @@ async function readPage(url) {
   }
 }
 
-/* ── Cherche une vraie image produit via Jina AI ── */
-async function findProductImage(nom, lien) {
+const IMG_DIR = path.join(__dirname, '../Le clam/public/img/sourcing');
+if (!require('fs').existsSync(IMG_DIR)) require('fs').mkdirSync(IMG_DIR, { recursive: true });
+
+/* ── Trouve une URL d'image via Jina AI ── */
+async function findImageUrl(nom, lien) {
   const sources = [];
-
-  // 1. Visite le lien fourni par Groq (DSers / AliExpress / Vinted)
   if (lien) sources.push(lien);
-
-  // 2. Recherche DSers
+  sources.push(`https://s.jina.ai/${encodeURIComponent(nom + ' produit')}`);
   sources.push(`https://www.dsers.com/search/?q=${encodeURIComponent(nom)}`);
-
-  // 3. Recherche AliExpress
   sources.push(`https://fr.aliexpress.com/wholesale?SearchText=${encodeURIComponent(nom)}`);
 
   for (const src of sources) {
@@ -46,21 +44,41 @@ async function findProductImage(nom, lien) {
       });
       if (!res.ok) continue;
       const text = await res.text();
-
-      // Extraire les URLs d'images du markdown Jina (format ![alt](url))
-      const matches = [...text.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s]+)\)/g)]
+      const matches = [...text.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s"']+)\)/g)]
         .map(m => m[1])
-        .filter(u => /\.(jpg|jpeg|png|webp|avif)/i.test(u))
-        .filter(u => !u.includes('logo') && !u.includes('banner') && !u.includes('avatar')
-                  && !u.includes('placeholder') && !u.includes('icon'));
-
-      if (matches[0]) {
-        console.log(`  [image] ${nom} → ${matches[0].slice(0, 80)}`);
-        return matches[0];
-      }
+        .filter(u => /\.(jpg|jpeg|png|webp|avif)(\?|$)/i.test(u))
+        .filter(u => !/logo|banner|avatar|placeholder|icon|flag|sprite|badge/i.test(u));
+      if (matches[0]) return matches[0];
     } catch { /* continue */ }
   }
   return null;
+}
+
+/* ── Télécharge et sauvegarde localement ── */
+async function downloadImage(url, id) {
+  try {
+    const r = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.google.com/' },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!r.ok) return null;
+    const ct = r.headers.get('content-type') || '';
+    const ext = ct.includes('png') ? 'png' : ct.includes('webp') ? 'webp' : 'jpg';
+    const buf = Buffer.from(await r.arrayBuffer());
+    if (buf.length < 1000) return null;
+    const filePath = path.join(IMG_DIR, `${id}.${ext}`);
+    fs.writeFileSync(filePath, buf);
+    return `/img/sourcing/${id}.${ext}`;
+  } catch { return null; }
+}
+
+async function findProductImage(nom, lien, id) {
+  const url = await findImageUrl(nom, lien);
+  if (!url) return null;
+  const local = await downloadImage(url, id);
+  if (local) { console.log(`  [image] ${nom} → ${local}`); return local; }
+  console.log(`  [image] ${nom} → URL distante`);
+  return url;
 }
 
 /* ── Recherche marché : lit plusieurs sources de tendances ── */
@@ -221,7 +239,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide :
   console.log('[Antoine] Recherche des images produits…');
   await Promise.all(newProducts.map(async p => {
     const lienUrl = p.liens && p.liens[0] ? p.liens[0].url : null;
-    const imgUrl = await findProductImage(p.nom, lienUrl);
+    const imgUrl = await findProductImage(p.nom, lienUrl, p.id);
     if (imgUrl) p.images = [imgUrl];
   }));
 
