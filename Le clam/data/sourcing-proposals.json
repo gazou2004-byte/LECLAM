@@ -1946,6 +1946,72 @@
         }
       ],
       "dateAjout": "2026-07-05 16:06"
+    },
+    {
+      "id": "src-p20",
+      "nom": "Kit de Yoga Étendu",
+      "description": "Découvrez notre kit de yoga étendu pour améliorer votre flexibilité et votre bien-être. Il comprend un tapis de yoga, des blocs de yoga, une ceinture de yoga et un sac de yoga.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les kits de yoga étendu sont très demandés en ce moment, notamment avec la tendance du bien-être et de la santé.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-p20.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga+étendu"
+        }
+      ],
+      "dateAjout": "2026-07-05 18:01"
+    },
+    {
+      "id": "src-m29",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Jouez à vos jeux mobiles préférés avec notre contrôleur de jeu mobile portable. Il est compatible avec la plupart des téléphones et offre une expérience de jeu améliorée.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment, notamment avec la tendance des jeux mobiles et la demande croissante de accessoires de jeu.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-m29.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-05 18:01"
+    },
+    {
+      "id": "src-b20",
+      "nom": "Poussette de Jogging pour Bébé",
+      "description": "Sortez avec votre bébé et profitez de l'air frais avec notre poussette de jogging pour bébé. Elle est conçue pour les parents actifs et offre une sécurité et un confort maximum pour votre enfant.",
+      "raisonVente": "Les poussettes de jogging pour bébé sont très demandées en ce moment, notamment avec la tendance de la parentalité active et la demande croissante de produits de puériculture.",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b20.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+de+jogging+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-05 18:01"
     }
   ]
 }
