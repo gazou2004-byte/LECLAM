@@ -1462,7 +1462,9 @@
       "categorie": "malin",
       "priorite": 2,
       "statut": "pending",
-      "images": [],
+      "images": [
+        "/img/sourcing/src-m19.png"
+      ],
       "liens": [
         {
           "label": "DSers",
@@ -1524,7 +1526,7 @@
       "priorite": 2,
       "statut": "pending",
       "images": [
-        "/img/sourcing/src-m20.jpg"
+        "/img/sourcing/src-m20.png"
       ],
       "liens": [
         {
@@ -1629,7 +1631,7 @@
       "priorite": 2,
       "statut": "pending",
       "images": [
-        "/img/sourcing/src-p14.jpg"
+        "/img/sourcing/src-p14.png"
       ],
       "liens": [
         {
@@ -1825,7 +1827,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae01.alicdn.com/kf/Hb0c155a5d2444f9b80e5f4dcbf7c1f1e5/High-Quality-Eco-Friendly-Yoga-Mat-Non-Slip-Exercise-Mat-Gym-Mat-Fitness-Mat.jpg"
+        "/img/sourcing/src-p17.png"
       ],
       "liens": [
         {
@@ -1847,7 +1849,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae01.alicdn.com/kf/Hf11b514fbaa94c9b96f5f4dcbf7c1f1e5/Wireless-Game-Controller-For-Mobile-Phone-Android-Gamepad-For-PC.jpg"
+        "/img/sourcing/src-m26.png"
       ],
       "liens": [
         {
@@ -1869,7 +1871,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae01.alicdn.com/kf/Hb0c155a5d2444f9b80e5f4dcbf7c1f1e5/Baby-Educational-Toy-Set-For-Infants-And-Toddlers.jpg"
+        "/img/sourcing/src-b17.webp"
       ],
       "liens": [
         {
