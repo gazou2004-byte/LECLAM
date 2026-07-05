@@ -3562,8 +3562,9 @@ Réponds UNIQUEMENT avec ce JSON valide, rien d'autre.`;
 
   /* Ajouter le post social */
   if (parsed.post) {
-    _socialData.posts.push(parsed.post);
-    persistSocial();
+    const sd = getSocialData();
+    sd.posts.push(parsed.post);
+    persistSocial(sd);
     console.log(`[Laura] Post ${parsed.post.id} créé pour ${proposal.nom}`);
   }
 }
@@ -3572,11 +3573,9 @@ Réponds UNIQUEMENT avec ce JSON valide, rien d'autre.`;
    LAURA — Posts TikTok/Instagram
    ───────────────────────────────────────── */
 const SOCIAL_FILE = path.join(__dirname, 'data/social-posts.json');
-let _socialData = fs.existsSync(SOCIAL_FILE)
-  ? JSON.parse(fs.readFileSync(SOCIAL_FILE, 'utf8'))
-  : { posts: [] };
-const getSocialPosts   = () => _socialData.posts;
-const persistSocial    = () => fs.writeFileSync(SOCIAL_FILE, JSON.stringify(_socialData, null, 2));
+const getSocialData    = () => fs.existsSync(SOCIAL_FILE) ? JSON.parse(fs.readFileSync(SOCIAL_FILE, 'utf8')) : { posts: [] };
+const getSocialPosts   = () => getSocialData().posts;
+const persistSocial    = (data) => fs.writeFileSync(SOCIAL_FILE, JSON.stringify(data, null, 2));
 
 app.get('/api/admin/social-posts', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
@@ -3590,11 +3589,12 @@ app.get('/api/admin/social-posts', (req, res) => {
 
 app.patch('/api/admin/social-posts/:id', (req, res) => {
   if (!isAdmin(req)) return res.status(401).json({ ok: false, error: 'Non autorisé' });
-  const p = getSocialPosts().find(p => p.id === req.params.id);
+  const sd = getSocialData();
+  const p = sd.posts.find(p => p.id === req.params.id);
   if (!p) return res.status(404).json({ ok: false, error: 'Post introuvable' });
   const allowed = ['statut', 'posteAt', 'datePostSuggere'];
   allowed.forEach(key => { if (req.body[key] !== undefined) p[key] = req.body[key]; });
-  persistSocial();
+  persistSocial(sd);
   res.json({ ok: true, post: p });
 });
 
