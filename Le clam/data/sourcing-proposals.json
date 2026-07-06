@@ -1993,6 +1993,72 @@
         }
       ],
       "dateAjout": "2026-07-05 23:10"
+    },
+    {
+      "id": "src-p27",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et antidérapant pour améliorer votre pratique",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de la santé et du bien-être",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 02:59"
+    },
+    {
+      "id": "src-m31",
+      "nom": "Kit d'Art et de Création",
+      "description": "Un kit complet pour découvrir votre créativité et vous exprimer",
+      "raisonVente": "Les kits d'art et de création sont actuellement très populaires sur les réseaux sociaux, en particulier sur TikTok, où les utilisateurs partagent leurs créations",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+d%27art+et+de+cr%C3%A9ation"
+        }
+      ],
+      "dateAjout": "2026-07-06 02:59"
+    },
+    {
+      "id": "src-b24",
+      "nom": "Poussette Tout-Terrain pour Bébé",
+      "description": "Une poussette robuste et polyvalente pour les promenades en plein air",
+      "raisonVente": "Les poussettes tout-terrain sont très demandées en ce moment en raison de l'augmentation de la pratique des activités de plein air avec les enfants",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-06 02:59"
     }
   ]
 }
