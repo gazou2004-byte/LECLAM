@@ -2191,6 +2191,72 @@
         }
       ],
       "dateAjout": "2026-07-06 12:03"
+    },
+    {
+      "id": "src-p30",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique de yoga en toute sécurité et respect de l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement, comme le montrent les données de Google Trends et les tendances de dropshipping sur DSers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 16:19"
+    },
+    {
+      "id": "src-m34",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés en déplacement, compatible avec la plupart des smartphones et tablettes.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la tendance à jouer en déplacement, comme le montrent les données de DSers et les tendances de TikTok.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 16:19"
+    },
+    {
+      "id": "src-b27",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé conçu pour stimuler la curiosité et l'apprentissage, avec des couleurs vives et des formes amusantes.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très tendance en ce moment en raison de la croissance du marché des produits pour bébés et de la prise de conscience de l'importance de l'éducation précoce, comme le montrent les données de Vinted et les tendances de Google Trends.",
+      "prixVente": 19.99,
+      "prixFournisseur": 10,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b27.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-06 16:19"
     }
   ]
 }
