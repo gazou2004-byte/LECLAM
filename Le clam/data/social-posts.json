@@ -173,6 +173,36 @@
       "imageUrl": "/img/sourcing/src-b06.jpg",
       "produitId": "src-b06",
       "produitNom": "Cube Sensoriel Bois Montessori 6-en-1"
+    },
+    {
+      "id": "post-p05",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Bien-être intime pour une nuit parfaite",
+      "concept": "Présentation d'un masseur personnel et d'huiles essentielles pour une expérience de détente en soirée",
+      "legende": "Une nuit de repos bien méritée 🌙💆‍♀️ ! Découvrez comment notre sélection d'accessoires de bien-être intime peut vous aider à vous détendre et à vous ressourcer. 🌸💫 #bienetre #intime #détente #soin",
+      "cta": "Lien en bio pour découvrir notre sélection",
+      "dateCreation": "2026-07-06 12:08"
+    },
+    {
+      "id": "post-m05",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui charge votre téléphone en 10 minutes",
+      "concept": "Présentation d'un chargeur rapide innovant pour les appareils mobiles",
+      "legende": "Plus de batterie vide ! 🚀💻 Découvrez le chargeur rapide qui vous permet de charger votre téléphone en un éclair ⚡️ #gadget #tech #chargeurrapide",
+      "cta": "Commenter si vous en avez besoin !",
+      "dateCreation": "2026-07-06 12:08"
+    },
+    {
+      "id": "post-b05",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "Les 5 jouets d'éveil incontournables pour votre bébé",
+      "concept": "Présentation de jouets éducatifs pour les bébés, favorisant leur développement cognitif",
+      "legende": "Éveillez les sens de votre petit amour ! 🎀👶 Découvrez notre sélection de jouets d'éveil pour aider votre bébé à grandir et à apprendre. #jouets #bebe #eveil",
+      "cta": "Lien en bio pour découvrir notre sélection",
+      "dateCreation": "2026-07-06 12:08"
     }
   ]
 }
