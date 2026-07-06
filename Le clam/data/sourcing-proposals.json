@@ -2125,6 +2125,72 @@
         }
       ],
       "dateAjout": "2026-07-06 07:20"
+    },
+    {
+      "id": "src-p29",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour améliorer votre pratique de yoga à la maison ou en extérieur. Conçu avec des matériaux respectueux de l'environnement pour une expérience de yoga durable.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale. Les données de Google Trends montrent une augmentation significative de la recherche de tapis de yoga écologiques.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-tapis-yoga-ecologique.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 12:03"
+    },
+    {
+      "id": "src-m33",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable et léger pour améliorer votre expérience de jeu sur smartphone. Conçu pour les jeux les plus populaires et compatible avec la plupart des appareils mobiles.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la tendance à jouer en déplacement. Les données de DSers montrent une forte demande pour les contrôleurs de jeu mobile portables.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-contrôleur-jeu-mobile.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 12:03"
+    },
+    {
+      "id": "src-b26",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants pour encourager leur imagination et leur créativité. Contient une variété de matériaux et d'outils pour créer des œuvres d'art uniques.",
+      "raisonVente": "Les kits d'art et de création pour enfants sont très populaires en ce moment en raison de la tendance à encourager la créativité et l'imaginaire des enfants. Les données de Vinted montrent une forte demande pour les kits d'art et de création pour enfants.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-kit-art-création-enfants.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+d%27art+et+de+création+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-06 12:03"
     }
   ]
 }
