@@ -2389,6 +2389,72 @@
         }
       ],
       "dateAjout": "2026-07-06 20:51"
+    },
+    {
+      "id": "src-p33",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très demandés en ce moment en raison de la tendance vers la pratique du yoga et la prise de conscience de l'importance de la santé et du bien-être",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 22:12"
+    },
+    {
+      "id": "src-m37",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très demandés en ce moment en raison de la popularité des jeux mobiles et de la nécessité d'une meilleure expérience de jeu",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-06 22:12"
+    },
+    {
+      "id": "src-b30",
+      "nom": "Poussette pour Bébé avec Siège Reversible",
+      "description": "Une poussette pour bébé avec siège réversible pour les parents qui cherchent une solution pratique et confortable",
+      "raisonVente": "Les poussettes pour bébé avec siège réversible sont très demandées en ce moment en raison de la tendance vers les produits pour bébés pratiques et confortables",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b30.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bébé+avec+siège+réversible"
+        }
+      ],
+      "dateAjout": "2026-07-06 22:12"
     }
   ]
 }
