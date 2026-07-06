@@ -2059,6 +2059,72 @@
         }
       ],
       "dateAjout": "2026-07-06 02:59"
+    },
+    {
+      "id": "src-p28",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 07:20"
+    },
+    {
+      "id": "src-m32",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux mobiles préférés en déplacement.",
+      "raisonVente": "Les jeux mobiles sont très populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 07:20"
+    },
+    {
+      "id": "src-b25",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour aider à développer ses compétences cognitives et motrices.",
+      "raisonVente": "Les parents recherchent des jouets éducatifs pour aider à développer les compétences de leurs enfants, et les ventes de jouets pour bébés sont en augmentation.",
+      "prixVente": 24.9,
+      "prixFournisseur": 12,
+      "marge": 51.8,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b25.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-06 07:20"
     }
   ]
 }
