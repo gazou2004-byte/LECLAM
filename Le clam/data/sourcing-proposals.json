@@ -2917,6 +2917,72 @@
         }
       ],
       "dateAjout": "2026-07-07 19:52"
+    },
+    {
+      "id": "src-p42",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la popularité croissante du yoga et des pratiques de bien-être, comme le montrent les données de DSers et les tendances sur TikTok",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 22:58"
+    },
+    {
+      "id": "src-m46",
+      "nom": "Station de Charge Sans Fil pour Téléphone et Montre",
+      "description": "Une station de charge sans fil pratique et polyvalente pour charger votre téléphone et votre montre en même temps",
+      "raisonVente": "Les stations de charge sans fil sont très populaires en ce moment, notamment avec la tendance croissante des accessoires pour téléphones et montres intelligentes, comme le montrent les données de DSers et les tendances sur AliExpress",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H8d5b555f9f2c4e9fbf7f7f7f7f7f7f7f7.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=station+de+charge+sans+fil+telephone+montre"
+        }
+      ],
+      "dateAjout": "2026-07-07 22:58"
+    },
+    {
+      "id": "src-b39",
+      "nom": "Poussette pour Bébé avec Siège et Canne",
+      "description": "Une poussette polyvalente et pratique pour les parents avec un siège et une canne pour promener leur bébé en toute sécurité",
+      "raisonVente": "Les poussettes pour bébé sont très populaires en ce moment, notamment avec la tendance croissante des parents qui recherchent des produits de qualité et pratiques pour leurs enfants, comme le montrent les données de Vinted et les tendances sur Google Trends",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b39.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+bebe+siege+canne"
+        }
+      ],
+      "dateAjout": "2026-07-07 22:58"
     }
   ]
 }
