@@ -2455,6 +2455,72 @@
         }
       ],
       "dateAjout": "2026-07-06 22:12"
+    },
+    {
+      "id": "src-p34",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de fitness et de bien-être",
+      "raisonVente": "Le tapis de yoga est un produit tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 00:06"
+    },
+    {
+      "id": "src-m38",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone",
+      "raisonVente": "Le contrôleur de jeu mobile est un produit tendance en ce moment en raison de la popularité croissante des jeux mobiles",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 00:06"
+    },
+    {
+      "id": "src-b31",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants pour encourager la créativité et l'imagination",
+      "raisonVente": "Le kit d'art et de création pour enfants est un produit tendance en ce moment en raison de la popularité croissante des activités créatives pour les enfants",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b31.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+d%27art+et+de+cr%C3%A9ation+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-07 00:06"
     }
   ]
 }
