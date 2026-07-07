@@ -2851,6 +2851,72 @@
         }
       ],
       "dateAjout": "2026-07-07 17:12"
+    },
+    {
+      "id": "src-p41",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la hausse de la pratique du yoga à domicile, comme le montre les tendances sur Google Trends et les ventes sur AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 19:52"
+    },
+    {
+      "id": "src-m45",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés sur votre smartphone",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires sur TikTok, notamment avec la montée en puissance des jeux mobiles, comme le montre les tendances sur TikTok",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0oUTDzlIAStpoDE4DQE7eJhOEbRgmFwoNBKyf~tplv-tiktokx-origin.image"
+      ],
+      "liens": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/tag/contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 19:52"
+    },
+    {
+      "id": "src-b38",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé qui stimule la découverte et l'apprentissage",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très populaires sur les plateformes de vente en ligne, notamment avec la tendance vers l'éducation précoce, comme le montre les ventes sur Vinted",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b38.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-07 19:52"
     }
   ]
 }
