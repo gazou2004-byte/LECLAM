@@ -3181,6 +3181,72 @@
         }
       ],
       "dateAjout": "2026-07-08 07:26"
+    },
+    {
+      "id": "src-p46",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 10:14"
+    },
+    {
+      "id": "src-m50",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés sur votre smartphone",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 10:14"
+    },
+    {
+      "id": "src-b43",
+      "nom": "Poussette pour Bébé avec Siège Reversible",
+      "description": "Une poussette pour bébé avec siège réversible pour les parents qui recherchent un produit pratique et polyvalent",
+      "raisonVente": "Les poussettes pour bébé sont toujours en demande, et les consommateurs recherchent des produits avec des fonctionnalités pratiques et polyvalentes",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/2022/02/poussette-pour-bebe-avec-siege-reversible.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bébé+avec+siège+reversible"
+        }
+      ],
+      "dateAjout": "2026-07-08 10:14"
     }
   ]
 }
