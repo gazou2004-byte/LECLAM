@@ -3445,6 +3445,72 @@
         }
       ],
       "dateAjout": "2026-07-08 17:27"
+    },
+    {
+      "id": "src-p50",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga qui souhaitent pratiquer leur sport tout en respectant l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la popularité grandissante du yoga et de la pratique du bien-être. De plus, les consommateurs sont de plus en plus sensibles à l'écologie et aux produits respectueux de l'environnement.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 19:21"
+    },
+    {
+      "id": "src-m54",
+      "nom": "Contrôleur de Jeu Portable pour Mobile",
+      "description": "Un contrôleur de jeu portable pour mobile qui permet aux joueurs de profiter de leurs jeux préférés en déplacement.",
+      "raisonVente": "Les contrôleurs de jeu portables pour mobile sont très populaires en ce moment, notamment avec la croissance du marché des jeux mobiles. De plus, les consommateurs sont à la recherche de produits qui leur permettent de jouer à leurs jeux préférés en déplacement.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+portable+pour+mobile"
+        }
+      ],
+      "dateAjout": "2026-07-08 19:21"
+    },
+    {
+      "id": "src-b47",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants qui permet aux petits de développer leur imagination et leur créativité.",
+      "raisonVente": "Les kits d'art et de création pour enfants sont très populaires en ce moment, notamment avec la croissance du marché des produits éducatifs et créatifs pour les enfants. De plus, les parents sont à la recherche de produits qui permettent à leurs enfants de développer leur imagination et leur créativité.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b47.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+d%27art+et+de+cr%C3%A9ation+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-08 19:21"
     }
   ]
 }
