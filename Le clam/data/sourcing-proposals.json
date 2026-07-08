@@ -3049,6 +3049,72 @@
         }
       ],
       "dateAjout": "2026-07-08 00:06"
+    },
+    {
+      "id": "src-p44",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et les personnes soucieuses de l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment en raison de la popularité croissante du yoga et de la prise de conscience environnementale, comme le montre les données de Google Trends France et les tendances de DSers.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 04:12"
+    },
+    {
+      "id": "src-m48",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone idéal pour les gamers qui veulent améliorer leur expérience de jeu sur leur téléphone.",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très populaires en ce moment, notamment en raison de la croissance du marché des jeux mobiles et de la tendance du gaming sur TikTok, comme le montrent les données de DSers et les tendances de TikTok.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-08 04:12"
+    },
+    {
+      "id": "src-b41",
+      "nom": "Poussette pour Bébé avec Siège Réversible",
+      "description": "Une poussette pour bébé avec siège réversible idéale pour les parents qui cherchent une solution pratique et confortable pour leur enfant.",
+      "raisonVente": "Les poussettes pour bébé avec siège réversible sont très populaires en ce moment, notamment en raison de la tendance des parents à rechercher des produits de qualité et pratiques pour leur enfant, comme le montrent les données de Vinted et les tendances de Google Trends France.",
+      "prixVente": 149.9,
+      "prixFournisseur": 80,
+      "marge": 46.6,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b41.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+b%C3%A9b%C3%A9+avec+si%C3%A8ge+r%C3%A9versible"
+        }
+      ],
+      "dateAjout": "2026-07-08 04:12"
     }
   ]
 }
