@@ -3577,6 +3577,72 @@
         }
       ],
       "dateAjout": "2026-07-08 21:05"
+    },
+    {
+      "id": "src-p52",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour les pratiquants de yoga, conçu pour offrir un confort et une stabilité optimale.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de la santé et du bien-être.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 23:04"
+    },
+    {
+      "id": "src-m56",
+      "nom": "Projecteur Portable LED",
+      "description": "Un projecteur portable LED pour une projection de haute qualité, idéal pour les présentations, les films et les jeux.",
+      "raisonVente": "Les projecteurs portables LED sont très populaires en ce moment en raison de leur praticité et de leur polyvalence.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+led"
+        }
+      ],
+      "dateAjout": "2026-07-08 23:04"
+    },
+    {
+      "id": "src-b49",
+      "nom": "Poussette Tout-Terrain",
+      "description": "Une poussette tout-terrain pour les parents qui aiment les activités de plein air avec leur bébé.",
+      "raisonVente": "Les poussettes tout-terrain sont très tendance en ce moment en raison de l'augmentation de la pratique des activités de plein air avec les enfants.",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b49.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain"
+        }
+      ],
+      "dateAjout": "2026-07-08 23:04"
     }
   ]
 }
