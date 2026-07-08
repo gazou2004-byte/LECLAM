@@ -3511,6 +3511,72 @@
         }
       ],
       "dateAjout": "2026-07-08 19:21"
+    },
+    {
+      "id": "src-p51",
+      "nom": "Kit de Yoga Étanche et Léger",
+      "description": "Un kit de yoga complet pour les amateurs de sport et de bien-être, comprenant un tapis de yoga, un bloc de yoga et une sangle de yoga, tous étanches et légers pour une pratique confortable et hygiénique.",
+      "raisonVente": "La tendance actuelle vers la pratique du yoga et la recherche de produits de bien-être à la maison, ainsi que la popularité des kits de yoga sur les plateformes de vente en ligne, font de ce produit un excellent choix pour les consommateurs français.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga"
+        }
+      ],
+      "dateAjout": "2026-07-08 21:05"
+    },
+    {
+      "id": "src-m55",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable et léger pour smartphone, permettant aux joueurs de profiter de leurs jeux préférés en déplacement avec une expérience de jeu améliorée.",
+      "raisonVente": "La popularité croissante des jeux mobiles et la recherche de contrôleurs de jeu pour améliorer l'expérience de jeu font de ce produit un excellent choix pour les consommateurs français, notamment avec la tendance actuelle vers les jeux mobiles sur TikTok.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 21:05"
+    },
+    {
+      "id": "src-b48",
+      "nom": "Jouet Éducatif de Construction pour Bébé",
+      "description": "Un jouet éducatif de construction pour bébé, conçu pour stimuler la créativité et les capacités cognitives des enfants, avec des pièces colorées et faciles à manipuler.",
+      "raisonVente": "La recherche de jouets éducatifs pour les bébés et les enfants en bas âge, ainsi que la tendance actuelle vers les produits de seconde main et les jouets durables, font de ce produit un excellent choix pour les parents français.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b48.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+%C3%A9ducatif+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-08 21:05"
     }
   ]
 }
