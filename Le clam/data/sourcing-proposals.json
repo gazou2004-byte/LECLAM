@@ -3313,6 +3313,72 @@
         }
       ],
       "dateAjout": "2026-07-08 12:19"
+    },
+    {
+      "id": "src-p48",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga, conçu pour offrir un confort et une adhérence optimale pour vos séances de yoga.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les produits liés au yoga sont très tendance, comme le montre le site DSers.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 15:19"
+    },
+    {
+      "id": "src-m52",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer votre expérience de jeu sur votre smartphone.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les accessoires de jeu mobile sont très tendance, comme le montre le site DSers.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 15:19"
+    },
+    {
+      "id": "src-b45",
+      "nom": "Kit de Création de Jouets en Bois",
+      "description": "Un kit de création de jouets en bois pour les enfants, pour encourager leur créativité et leur imagination.",
+      "raisonVente": "Les jouets en bois sont très tendance, et les kits de création de jouets en bois sont très populaires chez les parents, comme le montre le site Vinted.",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b45.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-08 15:19"
     }
   ]
 }
