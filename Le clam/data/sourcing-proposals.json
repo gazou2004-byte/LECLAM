@@ -3115,6 +3115,72 @@
         }
       ],
       "dateAjout": "2026-07-08 04:12"
+    },
+    {
+      "id": "src-p45",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga, conçu pour offrir un meilleur confort et une meilleure adhérence.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables. Les données de DSers montrent que les tapis de yoga sont l'un des produits les plus tendance dans la catégorie des produits de fitness.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 07:26"
+    },
+    {
+      "id": "src-m49",
+      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
+      "description": "Une lampe de bureau LED moderne et fonctionnelle avec un chargeur sans fil intégré pour charger vos appareils en toute simplicité.",
+      "raisonVente": "Les lampes de bureau LED sont très populaires en France, et les consommateurs recherchent des produits qui offrent une fonctionnalité supplémentaire, telle que la charge sans fil. Les données de Google Trends montrent que les lampes de bureau LED sont l'un des produits les plus recherchés dans la catégorie des produits de bureau.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+led+chargeur+sans+fil"
+        }
+      ],
+      "dateAjout": "2026-07-08 07:26"
+    },
+    {
+      "id": "src-b42",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé conçu pour stimuler la curiosité et l'apprentissage, avec un tapis sensible qui réagit aux mouvements de l'enfant.",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en France, et les consommateurs recherchent des produits qui offrent une expérience d'apprentissage interactive et amusante. Les données de Vinted montrent que les jouets éducatifs pour bébé sont l'un des produits les plus recherchés dans la catégorie des jouets pour enfants.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b42.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+tapis+sensible"
+        }
+      ],
+      "dateAjout": "2026-07-08 07:26"
     }
   ]
 }
