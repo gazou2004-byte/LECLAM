@@ -3247,6 +3247,72 @@
         }
       ],
       "dateAjout": "2026-07-08 10:14"
+    },
+    {
+      "id": "src-p47",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique confortable et saine",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 12:19"
+    },
+    {
+      "id": "src-m51",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés partout et à tout moment",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 12:19"
+    },
+    {
+      "id": "src-b44",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour stimuler son développement cognitif et motor",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très tendance en ce moment en raison de la prise de conscience croissante de l'importance de l'éducation précoce",
+      "prixVente": 19.99,
+      "prixFournisseur": 10,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-08 12:19"
     }
   ]
 }
