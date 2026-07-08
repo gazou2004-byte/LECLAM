@@ -3379,6 +3379,72 @@
         }
       ],
       "dateAjout": "2026-07-08 15:19"
+    },
+    {
+      "id": "src-p49",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amoureux de la nature et du bien-être. Idéal pour les séances de yoga à la maison ou en extérieur.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale. Selon les données de Google Trends, les recherches pour 'tapis de yoga' ont augmenté de 20% ces derniers mois.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 17:27"
+    },
+    {
+      "id": "src-m53",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable et léger pour jouer partout et à tout moment. Compatible avec la plupart des téléphones mobiles et des jeux populaires.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles. Selon les données de DSers, les ventes de contrôleurs de jeu mobile ont augmenté de 30% ces derniers mois.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 17:27"
+    },
+    {
+      "id": "src-b46",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé qui stimule la curiosité et l'apprentissage. Ce tapis sensible est conçu pour les bébés de 6 à 24 mois.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très populaires en ce moment en raison de la prise de conscience de l'importance de l'éducation précoce. Selon les données de Vinted, les ventes de jouets éducatifs pour bébés ont augmenté de 25% ces derniers mois.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b46.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-08 17:27"
     }
   ]
 }
