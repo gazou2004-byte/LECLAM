@@ -233,6 +233,36 @@
       "legende": "👶 Découvrez nos jouets d'éveil sensoriel pour stimuler la curiosité de votre bébé 🌈👀 Nous vous proposons une sélection de jouets pour aider votre bébé à découvrir le monde qui l'entoure 🌎 #bebe #eveisensoriel #jouets",
       "cta": "Lien en bio pour découvrir notre sélection de jouets",
       "dateCreation": "2026-07-07 11:11"
+    },
+    {
+      "id": "post-p07",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Découvrez le secret du sommeil parfait",
+      "concept": "On présente un accessoire de bien-être intime pour améliorer la qualité du sommeil, avec des conseils de sommeil réparateur",
+      "legende": "😴 Découvrez le secret du sommeil parfait ! 🌙 Notre sélection d'accessoires de bien-être intime pour vous aider à dormir mieux 🛋️. Lien en bio pour découvrir notre collection ! 🛍️ #bienetre #sommeil #intime",
+      "cta": "Lien en bio",
+      "dateCreation": "2026-07-08 10:22"
+    },
+    {
+      "id": "post-m07",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui rend votre vie plus facile",
+      "concept": "On présente un gadget high-tech qui facilite la vie quotidienne, avec une démo de ses fonctionnalités",
+      "legende": "🤩 Le gadget qui rend votre vie plus facile ! 📈 Découvrez comment ce gadget révolutionnaire peut vous aider à gagner du temps et à améliorer votre productivité 🕒. Commenter 💬 si vous voulez en savoir plus ! #gadget #high-tech #productivite",
+      "cta": "Commenter 💬",
+      "dateCreation": "2026-07-08 10:22"
+    },
+    {
+      "id": "post-b07",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "Les meilleurs jouets pour les bébés curieux",
+      "concept": "On présente une sélection de jouets d'éveil pour les bébés, avec des conseils pour stimuler leur curiosité",
+      "legende": "👶 Les meilleurs jouets pour les bébés curieux ! 🤔 Découvrez notre sélection de jouets d'éveil pour stimuler la curiosité de votre petit 👀. Lien en bio pour découvrir notre collection ! 🛍️ #bebe #jouets #eveil",
+      "cta": "Lien en bio",
+      "dateCreation": "2026-07-08 10:22"
     }
   ]
 }
