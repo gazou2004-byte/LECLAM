@@ -2983,6 +2983,72 @@
         }
       ],
       "dateAjout": "2026-07-07 22:58"
+    },
+    {
+      "id": "src-p43",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 00:06"
+    },
+    {
+      "id": "src-m47",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés en déplacement.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 00:06"
+    },
+    {
+      "id": "src-b40",
+      "nom": "Poussette pour Bébé avec Siège Auto",
+      "description": "Une poussette pour bébé avec siège auto pour les parents qui cherchent une solution pratique et sûre pour transporter leur enfant.",
+      "raisonVente": "Les poussettes pour bébé sont toujours en demande, et les consommateurs recherchent des produits qui offrent une combinaison de sécurité et de praticité.",
+      "prixVente": 149.9,
+      "prixFournisseur": 80,
+      "marge": 46.6,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b40.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+b%C3%A9b%C3%A9+avec+si%C3%A8ge+auto"
+        }
+      ],
+      "dateAjout": "2026-07-08 00:06"
     }
   ]
 }
