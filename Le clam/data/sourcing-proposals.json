@@ -3643,6 +3643,72 @@
         }
       ],
       "dateAjout": "2026-07-08 23:04"
+    },
+    {
+      "id": "src-p53",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amoureux de la nature et du bien-être",
+      "raisonVente": "Les tapis de yoga sont tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 02:46"
+    },
+    {
+      "id": "src-m57",
+      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
+      "description": "Une lampe de bureau LED avec chargeur sans fil pour un espace de travail éclairé et organisé",
+      "raisonVente": "Les lampes de bureau LED avec chargeur sans fil sont tendance en ce moment en raison de l'augmentation de la demande de produits de bureau intelligents et pratiques",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb315c155cbe5c4d9f9f7c95f3e7c95f6e8/Lampe-de-bureau-LED-avec-chargeur-sans-fil.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+LED+avec+chargeur+sans+fil"
+        }
+      ],
+      "dateAjout": "2026-07-09 02:46"
+    },
+    {
+      "id": "src-b50",
+      "nom": "Jouet Éducatif de Construction en Bois",
+      "description": "Un jouet éducatif de construction en bois pour les enfants pour développer leur créativité et leur intelligence",
+      "raisonVente": "Les jouets éducatifs de construction en bois sont tendance en ce moment en raison de l'augmentation de la demande de produits éducatifs et durables pour les enfants",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b50.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+de+construction+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-09 02:46"
     }
   ]
 }
