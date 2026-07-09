@@ -3775,6 +3775,72 @@
         }
       ],
       "dateAjout": "2026-07-09 06:51"
+    },
+    {
+      "id": "src-p55",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement.",
+      "prixVente": 25,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 10:28"
+    },
+    {
+      "id": "src-m59",
+      "nom": "Lampe de Bureau LED avec Prise USB",
+      "description": "Une lampe de bureau fonctionnelle avec prise USB pour charger vos appareils.",
+      "raisonVente": "Les lampes de bureau avec prise USB sont très utiles et pratiques, ce qui les rend très attractives pour les consommateurs.",
+      "prixVente": 30,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb4fbd6f5f6444e9a94f9f4c9b9d94b3X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+bureau+led+avec+prise+usb"
+        }
+      ],
+      "dateAjout": "2026-07-09 10:28"
+    },
+    {
+      "id": "src-b52",
+      "nom": "Jouet Éducatif pour Bébé avec Sons et Lumières",
+      "description": "Un jouet éducatif pour bébé qui stimule l'apprentissage et la découverte.",
+      "raisonVente": "Les jouets éducatifs sont très populaires chez les parents qui cherchent à stimuler le développement de leur enfant.",
+      "prixVente": 40,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+avec+sons+et+lumieres"
+        }
+      ],
+      "dateAjout": "2026-07-09 10:28"
     }
   ]
 }
