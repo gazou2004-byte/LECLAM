@@ -263,6 +263,36 @@
       "legende": "👶 Les meilleurs jouets pour les bébés curieux ! 🤔 Découvrez notre sélection de jouets d'éveil pour stimuler la curiosité de votre petit 👀. Lien en bio pour découvrir notre collection ! 🛍️ #bebe #jouets #eveil",
       "cta": "Lien en bio",
       "dateCreation": "2026-07-08 10:22"
+    },
+    {
+      "id": "post-p08",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Découvrez le secret pour un sommeil réparateur",
+      "concept": "On présente un masseur personnel pour aider à détendre les muscles avant de dormir, avec une ambiance calme et des bougies",
+      "legende": "Un sommeil de qualité, c'est la clé pour une journée productive ! 🌙💤 Découvrez notre sélection d'accessoires de bien-être intime pour vous aider à vous détendre avant de dormir 😌. #bienetre #sommeil #detente #leclam",
+      "cta": "Lien en bio pour découvrir notre sélection",
+      "dateCreation": "2026-07-09 10:57"
+    },
+    {
+      "id": "post-m08",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui va vous rendre la vie plus facile",
+      "concept": "On présente un gadget high-tech pour nomades, comme une batterie portable ou un adaptateur universel, avec des situations de vie quotidienne où il est utile",
+      "legende": "Vous êtes toujours en déplacement et vous avez besoin de rester connecté ? 📈💻 Découvrez notre sélection de gadgets high-tech pour nomades ! 🚀 #gadget #high-tech #nomade #leclam",
+      "cta": "Commenter votre gadget préféré pour les nomades",
+      "dateCreation": "2026-07-09 10:57"
+    },
+    {
+      "id": "post-b08",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "Créez un espace de jeux stimulant pour votre bébé",
+      "concept": "On présente des jouets d'éveil colorés et des idées pour créer un espace de jeux amusant et éducatif pour les bébés, avec des conseils pour les parents",
+      "legende": "Un environnement stimulant, c'est la clé pour le développement de votre bébé ! 🌟👶 Découvrez nos conseils pour créer un espace de jeux éducatif et amusant pour votre petit ! 🎨 #bebe #eveil #jouets #leclam",
+      "cta": "Lien en bio pour découvrir nos jouets d'éveil",
+      "dateCreation": "2026-07-09 10:57"
     }
   ]
 }
