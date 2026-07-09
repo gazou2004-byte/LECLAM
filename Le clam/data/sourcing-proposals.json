@@ -4105,6 +4105,72 @@
         }
       ],
       "dateAjout": "2026-07-09 20:45"
+    },
+    {
+      "id": "src-p60",
+      "nom": "Kit de Peinture pour Adultes",
+      "description": "Découvrez votre côté artistique avec ce kit de peinture pour adultes, comprenant tout le nécessaire pour créer des œuvres uniques et relaxantes.",
+      "raisonVente": "Le kit de peinture pour adultes est tendance en ce moment en raison de la popularité croissante des activités de loisirs créatifs et de la recherche de détente et de relaxation.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+peinture+pour+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-09 22:20"
+    },
+    {
+      "id": "src-m64",
+      "nom": "Mini Projecteur LED Portable",
+      "description": "Un projecteur LED portable et compact pour diffuser vos contenus préférés partout et à tout moment.",
+      "raisonVente": "Le mini projecteur LED portable est très demandé actuellement en raison de son design compact, de sa facilité d'utilisation et de la tendance croissante des projections de contenu en plein air ou en intérieur.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/projector.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=mini+projecteur+led+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 22:20"
+    },
+    {
+      "id": "src-b57",
+      "nom": "Poussette pour Poupée",
+      "description": "Une poussette colorée et robuste pour les enfants qui aiment jouer avec leurs poupées, encourageant l'imagination et les jeux de rôle.",
+      "raisonVente": "La poussette pour poupée est un produit tendance en ce moment en raison de la popularité croissante des jouets éducatifs et des jeux de rôle qui favorisent le développement de l'enfant.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b57.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+poupée"
+        }
+      ],
+      "dateAjout": "2026-07-09 22:20"
     }
   ]
 }
