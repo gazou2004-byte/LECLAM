@@ -3841,6 +3841,72 @@
         }
       ],
       "dateAjout": "2026-07-09 10:28"
+    },
+    {
+      "id": "src-p56",
+      "nom": "Équipement de Yoga Étendu",
+      "description": "Améliorez votre pratique de yoga avec notre équipement de yoga étendu, conçu pour vous aider à atteindre de nouveaux niveaux de flexibilité et de bien-être.",
+      "raisonVente": "Les recherches sur les tapis de yoga et les accessoires de yoga sont en plein essor, avec plus de 130 000 recherches par mois, selon les données de Google Trends.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=equipement+yoga"
+        }
+      ],
+      "dateAjout": "2026-07-09 13:48"
+    },
+    {
+      "id": "src-m60",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Jouez à vos jeux mobiles préférés avec notre contrôleur de jeu mobile portable, conçu pour une expérience de jeu plus immersive et plus confortable.",
+      "raisonVente": "Les recherches sur les contrôleurs de jeu mobile sont en augmentation, avec plus de 10 000 recherches par mois, selon les données de Google Trends, et les jeux mobiles sont de plus en plus populaires sur TikTok.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 13:48"
+    },
+    {
+      "id": "src-b53",
+      "nom": "Kit de Création Artistique pour Enfants",
+      "description": "Encouragez la créativité de vos enfants avec notre kit de création artistique, conçu pour les aider à explorer leur imagination et à développer leurs compétences artistiques.",
+      "raisonVente": "Les recherches sur les kits de création artistique pour enfants sont en augmentation, avec plus de 5 000 recherches par mois, selon les données de Google Trends, et les produits de création artistique sont souvent partagés sur TikTok.",
+      "prixVente": 19.99,
+      "prixFournisseur": 9.5,
+      "marge": 52.5,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b53.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+artistique+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-09 13:48"
     }
   ]
 }
