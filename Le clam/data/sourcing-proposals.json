@@ -4039,6 +4039,72 @@
         }
       ],
       "dateAjout": "2026-07-09 18:49"
+    },
+    {
+      "id": "src-p59",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga, conçu pour offrir un meilleur confort et une meilleure adhérence pendant les séances de yoga.",
+      "raisonVente": "Le yoga est devenu très populaire ces dernières années, en particulier avec la tendance du bien-être et de la santé. Les tapis de yoga écologiques sont très demandés en raison de leur durabilité et de leur impact environnemental réduit.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 20:45"
+    },
+    {
+      "id": "src-m63",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur les appareils mobiles, conçu pour être compact et léger.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les contrôleurs de jeu mobile portables sont très demandés en raison de leur praticité et de leur compatibilité avec de nombreux appareils mobiles.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 20:45"
+    },
+    {
+      "id": "src-b56",
+      "nom": "Jouet Éducatif de Développement Cognitif pour Bébés",
+      "description": "Un jouet éducatif de développement cognitif pour les bébés, conçu pour stimuler leur curiosité et leur apprentissage.",
+      "raisonVente": "Les parents sont à la recherche de jouets éducatifs qui peuvent aider à développer les compétences cognitives de leurs bébés. Les jouets éducatifs de développement cognitif sont très demandés en raison de leur capacité à stimuler l'apprentissage et la créativité.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog?search_text=jouet+éducatif+de+développement+cognitif+pour+bébés"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+de+développement+cognitif+pour+bébés"
+        }
+      ],
+      "dateAjout": "2026-07-09 20:45"
     }
   ]
 }
