@@ -3973,6 +3973,72 @@
         }
       ],
       "dateAjout": "2026-07-09 16:26"
+    },
+    {
+      "id": "src-p58",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour les pratiquants de yoga à la maison ou au studio.",
+      "raisonVente": "Les tapis de yoga sont tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience de l'importance de la santé et du bien-être.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 18:49"
+    },
+    {
+      "id": "src-m62",
+      "nom": "Projecteur Portable LED pour Téléphone",
+      "description": "Un projecteur portable LED pour téléphones qui permet de projeter des vidéos et des images sur un grand écran.",
+      "raisonVente": "Les projecteurs portables LED pour téléphones sont tendance en ce moment en raison de la popularité croissante des contenus multimédias et de la nécessité de partager des expériences avec les autres.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+LED+pour+t%C3%A9l%C3%A9phone"
+        }
+      ],
+      "dateAjout": "2026-07-09 18:49"
+    },
+    {
+      "id": "src-b55",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé qui permet de développer les compétences motrices et cognitives grâce à des blocs de construction colorés et amusants.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont tendance en ce moment en raison de la popularité croissante de l'apprentissage précoce et de la nécessité de stimuler le développement cognitif des enfants.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b55.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-09 18:49"
     }
   ]
 }
