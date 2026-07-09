@@ -3907,6 +3907,72 @@
         }
       ],
       "dateAjout": "2026-07-09 13:48"
+    },
+    {
+      "id": "src-p57",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les pratiquants de yoga à la maison ou en studio",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les gens recherchent des produits écologiques et durables pour leur pratique",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 16:26"
+    },
+    {
+      "id": "src-m61",
+      "nom": "Projecteur Portable LED pour Téléphone",
+      "description": "Un projecteur portable LED pour téléphones pour regarder des vidéos ou jouer à des jeux en grand écran",
+      "raisonVente": "Les projecteurs portables sont de plus en plus populaires sur TikTok, et les gens recherchent des produits pour améliorer leur expérience de divertissement",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/projector.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+LED"
+        }
+      ],
+      "dateAjout": "2026-07-09 16:26"
+    },
+    {
+      "id": "src-b54",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un tapis sensible pour bébés pour les aider à développer leurs sens et leur coordination",
+      "raisonVente": "Les parents recherchent des jouets éducatifs pour leurs bébés, et les tapis sensibles sont de plus en plus populaires",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+tapis+sensible"
+        }
+      ],
+      "dateAjout": "2026-07-09 16:26"
     }
   ]
 }
