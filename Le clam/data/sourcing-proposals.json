@@ -4369,6 +4369,72 @@
         }
       ],
       "dateAjout": "2026-07-10 08:20"
+    },
+    {
+      "id": "src-p64",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Améliorez votre pratique de yoga avec notre tapis écologique, conçu pour une meilleure adhérence et un confort optimal.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, en particulier les modèles écologiques, en raison de la croissance de la pratique du yoga et de la prise de conscience environnementale.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=ecological+yoga+mat"
+        }
+      ],
+      "dateAjout": "2026-07-10 11:49"
+    },
+    {
+      "id": "src-m68",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Transformez votre smartphone en une console de jeu avec notre contrôleur portable, conçu pour une expérience de jeu améliorée.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment, en particulier sur les plateformes de jeux mobiles, en raison de la croissance du marché des jeux sur smartphone.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=portable+game+controller"
+        }
+      ],
+      "dateAjout": "2026-07-10 11:49"
+    },
+    {
+      "id": "src-b61",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Stimulez la curiosité et le développement de votre bébé avec notre tapis sensible, conçu pour une expérience éducative et amusante.",
+      "raisonVente": "Les jouets éducatifs sont très tendance en ce moment, en particulier les tapis sensibles, en raison de la croissance de la demande de produits éducatifs pour les bébés.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=sensory+play+mat"
+        }
+      ],
+      "dateAjout": "2026-07-10 11:49"
     }
   ]
 }
