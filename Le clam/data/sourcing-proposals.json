@@ -4633,6 +4633,72 @@
         }
       ],
       "dateAjout": "2026-07-10 18:21"
+    },
+    {
+      "id": "src-p68",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs sont à la recherche de produits écologiques et durables.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 20:21"
+    },
+    {
+      "id": "src-m72",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs sont à la recherche de produits pour améliorer leur expérience de jeu.",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 20:21"
+    },
+    {
+      "id": "src-b65",
+      "nom": "Kit de Création de Jouets en Bois",
+      "description": "Un kit de création de jouets en bois pour les enfants pour encourager la créativité et l'imagination.",
+      "raisonVente": "Les parents sont à la recherche de produits éducatifs et créatifs pour leurs enfants, et les kits de création de jouets en bois sont de plus en plus populaires.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-10 20:21"
     }
   ]
 }
