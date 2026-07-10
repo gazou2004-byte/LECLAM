@@ -4567,6 +4567,72 @@
         }
       ],
       "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-p67",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et les personnes soucieuses de l'environnement",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga à domicile, comme le montrent les données de DSers",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 18:21"
+    },
+    {
+      "id": "src-m71",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de l'augmentation de la pratique des jeux mobiles, comme le montrent les données de DSers",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 18:21"
+    },
+    {
+      "id": "src-b64",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé pour développer les compétences motrices et la créativité",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en ce moment en raison de l'importance accordée à l'éducation et au développement des enfants, comme le montrent les données de Vinted",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b64.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-10 18:21"
     }
   ]
 }
