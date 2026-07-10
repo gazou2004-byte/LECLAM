@@ -1795,6 +1795,2910 @@
         }
       ],
       "dateAjout": "2026-07-05 18:01"
+    },
+    {
+      "id": "src-p21",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et les personnes soucieuses de l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, en particulier les modèles écologiques, car les gens cherchent à améliorer leur santé et à réduire leur impact sur l'environnement.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 20:11"
+    },
+    {
+      "id": "src-m26",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu sur mobile.",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très populaires en ce moment, car les jeux mobiles sont de plus en plus sophistiqués et les joueurs cherchent à améliorer leur expérience de jeu.",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-05 20:11"
+    },
+    {
+      "id": "src-b21",
+      "nom": "Jouet Éducatif de Développement Cognitif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences cognitives et motrices.",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en ce moment, car les parents cherchent à stimuler le développement cognitif et moteur de leurs enfants.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b21.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+%C3%A9ducatif+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-05 20:11"
+    },
+    {
+      "id": "src-p23",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique plus sûre et plus confortable",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment en raison de la montée en puissance des pratiques de yoga et de méditation à domicile, comme le montrent les données de Google Trends et les tendances de vente sur AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-05 21:59"
+    },
+    {
+      "id": "src-m28",
+      "nom": "Lampe de Bureau LED avec Ventilateur",
+      "description": "Une lampe de bureau LED avec ventilateur intégré pour un éclairage et un refroidissement optimaux",
+      "raisonVente": "Les lampes de bureau avec ventilateur sont très populaires sur TikTok, notamment parmi les gamers et les utilisateurs de bureautique, comme le montrent les vidéos avec le hashtag #bidandwin",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-m28.jpg"
+      ],
+      "liens": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/tag/bidandwin"
+        }
+      ],
+      "dateAjout": "2026-07-05 21:59"
+    },
+    {
+      "id": "src-b23",
+      "nom": "Poussette pour Bébé avec Siège Auto",
+      "description": "Une poussette pour bébé avec siège auto intégré pour une sécurité et un confort maximaux",
+      "raisonVente": "Les poussettes pour bébé avec siège auto sont très demandées sur les plateformes de vente en ligne, notamment sur Vinted, en raison de leur praticité et de leur sécurité",
+      "prixVente": 129.99,
+      "prixFournisseur": 70,
+      "marge": 46.1,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/products/123456789.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bebe+avec+siège+auto"
+        }
+      ],
+      "dateAjout": "2026-07-05 21:59"
+    },
+    {
+      "id": "src-p25",
+      "nom": "Étagère de Rangement pour Jouets",
+      "description": "Optimisez l'espace de jeu de vos enfants avec cette étagère de rangement pour jouets, idéale pour les chambres d'enfants ou les salles de jeu.",
+      "raisonVente": "Les produits de décoration et d'organisation pour la maison sont très tendance en ce moment, notamment avec l'augmentation du temps passé à la maison due au travail à distance.",
+      "prixVente": 49.99,
+      "prixFournisseur": 29.99,
+      "marge": 40,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=etagere+de+rangement+pour+jouets"
+        }
+      ],
+      "dateAjout": "2026-07-05 23:10"
+    },
+    {
+      "id": "src-m30",
+      "nom": "Lampe de Bureau avec Prise USB",
+      "description": "Cette lampe de bureau avec prise USB est parfaite pour les travailleurs à distance ou les étudiants, offrant une lumière douce et un espace de charge pour vos appareils.",
+      "raisonVente": "Les produits liés à l'organisation et à l'équipement de bureau sont très demandés en ce moment, notamment avec l'augmentation du travail à distance.",
+      "prixVente": 29.99,
+      "prixFournisseur": 17.99,
+      "marge": 40,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+bureau+avec+prise+usb"
+        }
+      ],
+      "dateAjout": "2026-07-05 23:10"
+    },
+    {
+      "id": "src-p26",
+      "nom": "Coffret de Soins Personnels pour la Nuit",
+      "description": "Ce coffret de soins personnels pour la nuit est idéal pour une routine de soin douce et relaxante, comprenant un masque de nuit, un bain de bouche et une crème hydratante.",
+      "raisonVente": "Les produits de soins personnels et de bien-être sont très tendance en ce moment, notamment avec l'augmentation de la recherche de produits pour améliorer la qualité du sommeil.",
+      "prixVente": 39.99,
+      "prixFournisseur": 23.99,
+      "marge": 40,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=coffret+de+soins+personnels+pour+la+nuit"
+        }
+      ],
+      "dateAjout": "2026-07-05 23:10"
+    },
+    {
+      "id": "src-p27",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et antidérapant pour améliorer votre pratique",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de la santé et du bien-être",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 02:59"
+    },
+    {
+      "id": "src-m31",
+      "nom": "Kit d'Art et de Création",
+      "description": "Un kit complet pour découvrir votre créativité et vous exprimer",
+      "raisonVente": "Les kits d'art et de création sont actuellement très populaires sur les réseaux sociaux, en particulier sur TikTok, où les utilisateurs partagent leurs créations",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+d%27art+et+de+cr%C3%A9ation"
+        }
+      ],
+      "dateAjout": "2026-07-06 02:59"
+    },
+    {
+      "id": "src-b24",
+      "nom": "Poussette Tout-Terrain pour Bébé",
+      "description": "Une poussette robuste et polyvalente pour les promenades en plein air",
+      "raisonVente": "Les poussettes tout-terrain sont très demandées en ce moment en raison de l'augmentation de la pratique des activités de plein air avec les enfants",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-06 02:59"
+    },
+    {
+      "id": "src-p28",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 07:20"
+    },
+    {
+      "id": "src-m32",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux mobiles préférés en déplacement.",
+      "raisonVente": "Les jeux mobiles sont très populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 07:20"
+    },
+    {
+      "id": "src-b25",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour aider à développer ses compétences cognitives et motrices.",
+      "raisonVente": "Les parents recherchent des jouets éducatifs pour aider à développer les compétences de leurs enfants, et les ventes de jouets pour bébés sont en augmentation.",
+      "prixVente": 24.9,
+      "prixFournisseur": 12,
+      "marge": 51.8,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b25.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-06 07:20"
+    },
+    {
+      "id": "src-p29",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour améliorer votre pratique de yoga à la maison ou en extérieur. Conçu avec des matériaux respectueux de l'environnement pour une expérience de yoga durable.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale. Les données de Google Trends montrent une augmentation significative de la recherche de tapis de yoga écologiques.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-tapis-yoga-ecologique.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 12:03"
+    },
+    {
+      "id": "src-m33",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable et léger pour améliorer votre expérience de jeu sur smartphone. Conçu pour les jeux les plus populaires et compatible avec la plupart des appareils mobiles.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la tendance à jouer en déplacement. Les données de DSers montrent une forte demande pour les contrôleurs de jeu mobile portables.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-contrôleur-jeu-mobile.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 12:03"
+    },
+    {
+      "id": "src-b26",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants pour encourager leur imagination et leur créativité. Contient une variété de matériaux et d'outils pour créer des œuvres d'art uniques.",
+      "raisonVente": "Les kits d'art et de création pour enfants sont très populaires en ce moment en raison de la tendance à encourager la créativité et l'imaginaire des enfants. Les données de Vinted montrent une forte demande pour les kits d'art et de création pour enfants.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-kit-art-création-enfants.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+d%27art+et+de+création+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-06 12:03"
+    },
+    {
+      "id": "src-p30",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique de yoga en toute sécurité et respect de l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement, comme le montrent les données de Google Trends et les tendances de dropshipping sur DSers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 16:19"
+    },
+    {
+      "id": "src-m34",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés en déplacement, compatible avec la plupart des smartphones et tablettes.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la tendance à jouer en déplacement, comme le montrent les données de DSers et les tendances de TikTok.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 16:19"
+    },
+    {
+      "id": "src-b27",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé conçu pour stimuler la curiosité et l'apprentissage, avec des couleurs vives et des formes amusantes.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très tendance en ce moment en raison de la croissance du marché des produits pour bébés et de la prise de conscience de l'importance de l'éducation précoce, comme le montrent les données de Vinted et les tendances de Google Trends.",
+      "prixVente": 19.99,
+      "prixFournisseur": 10,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b27.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-06 16:19"
+    },
+    {
+      "id": "src-p31",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga, conçu pour offrir une meilleure adhérence et un confort optimal.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la hausse de la pratique du yoga à domicile, et les produits écologiques sont de plus en plus demandés.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=ecological+yoga+mat"
+        }
+      ],
+      "dateAjout": "2026-07-06 18:53"
+    },
+    {
+      "id": "src-m35",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone, idéal pour les gamers qui veulent améliorer leur expérience de jeu sur leur téléphone.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment, notamment avec la croissance du marché des jeux mobiles, et les produits portables sont très pratiques pour les utilisateurs.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=portable+game+controller"
+        }
+      ],
+      "dateAjout": "2026-07-06 18:53"
+    },
+    {
+      "id": "src-b28",
+      "nom": "Poussette pour Bébé avec Siège Réversible",
+      "description": "Une poussette pour bébé avec siège réversible, idéale pour les parents qui veulent une solution pratique et confortable pour leur enfant.",
+      "raisonVente": "Les poussettes pour bébé avec siège réversible sont très tendance en ce moment, notamment avec la demande croissante de produits pour bébé de qualité et de sécurité.",
+      "prixVente": 129.9,
+      "prixFournisseur": 70,
+      "marge": 46.1,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=baby+stroller+with+reversible+seat"
+        }
+      ],
+      "dateAjout": "2026-07-06 18:53"
+    },
+    {
+      "id": "src-p32",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga, conçu pour offrir un confort et une adhérence optimale pendant les séances d'entraînement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment en raison de l'augmentation de la pratique du yoga à domicile, comme le montrent les données de Google Trends et les tendances de DSers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 20:51"
+    },
+    {
+      "id": "src-m36",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone, conçu pour une utilisation confortable et pratique.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment, notamment en raison de l'augmentation de la pratique des jeux mobiles, comme le montrent les données de DSers et les tendances de TikTok.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-06 20:51"
+    },
+    {
+      "id": "src-b29",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé conçu pour stimuler la curiosité et l'apprentissage, avec des activités interactives et des textures variées.",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très tendance en ce moment, notamment en raison de l'importance accordée à l'éducation et au développement des enfants, comme le montrent les données de Vinted et les tendances de Google Trends.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b29.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-06 20:51"
+    },
+    {
+      "id": "src-p33",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très demandés en ce moment en raison de la tendance vers la pratique du yoga et la prise de conscience de l'importance de la santé et du bien-être",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-06 22:12"
+    },
+    {
+      "id": "src-m37",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très demandés en ce moment en raison de la popularité des jeux mobiles et de la nécessité d'une meilleure expérience de jeu",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contrôleur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-06 22:12"
+    },
+    {
+      "id": "src-b30",
+      "nom": "Poussette pour Bébé avec Siège Reversible",
+      "description": "Une poussette pour bébé avec siège réversible pour les parents qui cherchent une solution pratique et confortable",
+      "raisonVente": "Les poussettes pour bébé avec siège réversible sont très demandées en ce moment en raison de la tendance vers les produits pour bébés pratiques et confortables",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b30.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bébé+avec+siège+réversible"
+        }
+      ],
+      "dateAjout": "2026-07-06 22:12"
+    },
+    {
+      "id": "src-p34",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de fitness et de bien-être",
+      "raisonVente": "Le tapis de yoga est un produit tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 00:06"
+    },
+    {
+      "id": "src-m38",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone",
+      "raisonVente": "Le contrôleur de jeu mobile est un produit tendance en ce moment en raison de la popularité croissante des jeux mobiles",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 00:06"
+    },
+    {
+      "id": "src-b31",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants pour encourager la créativité et l'imagination",
+      "raisonVente": "Le kit d'art et de création pour enfants est un produit tendance en ce moment en raison de la popularité croissante des activités créatives pour les enfants",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b31.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+d%27art+et+de+cr%C3%A9ation+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-07 00:06"
+    },
+    {
+      "id": "src-p35",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et des pratiques de bien-être, comme le montre les données de DSers sur les produits à fort potentiel de vente",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 04:50"
+    },
+    {
+      "id": "src-m39",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la tendance à jouer en déplacement, comme le montre les données de DSers sur les produits à fort potentiel de vente",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 04:50"
+    },
+    {
+      "id": "src-b32",
+      "nom": "Jouet Éducatif en Bois pour Bébé",
+      "description": "Un jouet éducatif en bois pour bébé pour stimuler la créativité et l'apprentissage",
+      "raisonVente": "Les jouets éducatifs en bois pour bébé sont très populaires en ce moment en raison de la tendance à privilégier les produits écologiques et éducatifs pour les enfants, comme le montre les données de Vinted sur les produits à fort potentiel de vente",
+      "prixVente": 24.9,
+      "prixFournisseur": 12,
+      "marge": 51.8,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b32.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+en+bois+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-07 04:50"
+    },
+    {
+      "id": "src-p36",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 08:21"
+    },
+    {
+      "id": "src-m40",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés sur votre smartphone",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 08:21"
+    },
+    {
+      "id": "src-b33",
+      "nom": "Kit de Création Artistique pour Enfants",
+      "description": "Un kit de création artistique pour les enfants pour encourager leur créativité et leur imagination",
+      "raisonVente": "Les parents recherchent des activités éducatives et créatives pour leurs enfants, et les kits de création artistique sont très populaires",
+      "prixVente": 19.99,
+      "prixFournisseur": 9.5,
+      "marge": 52.5,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b33.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+création+artistique+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-07 08:21"
+    },
+    {
+      "id": "src-p37",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour améliorer votre pratique de yoga et votre bien-être.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la montée en popularité du yoga et de la prise de conscience de l'importance de la santé et du bien-être.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 11:48"
+    },
+    {
+      "id": "src-m41",
+      "nom": "Contrôleur de Jeu Mobile",
+      "description": "Un contrôleur de jeu mobile pour améliorer votre expérience de jeu sur votre smartphone.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la montée en popularité des jeux mobiles et de la nécessité d'une expérience de jeu plus immersive.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sdfe89ed46bdf4396a6bf0e9790d8b972v.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile"
+        }
+      ],
+      "dateAjout": "2026-07-07 11:48"
+    },
+    {
+      "id": "src-b34",
+      "nom": "Kit de Création Artistique pour Enfants",
+      "description": "Un kit de création artistique pour enfants pour encourager leur créativité et leur imagination.",
+      "raisonVente": "Les kits de création artistique pour enfants sont très populaires en ce moment en raison de la montée en popularité des activités créatives et de la nécessité de stimuler la créativité des enfants.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b34.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+artistique+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-07 11:48"
+    },
+    {
+      "id": "src-p38",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga, conçu pour offrir un confort et une adhérence optimale.",
+      "raisonVente": "Les tapis de yoga sont très demandés en ce moment en raison de la tendance croissante vers les exercices de yoga et la santé à domicile, comme le montrent les données de Google Trends et les tendances de vente sur AliExpress.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 14:28"
+    },
+    {
+      "id": "src-m42",
+      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
+      "description": "Une lampe de bureau LED moderne et fonctionnelle avec un chargeur sans fil intégré pour charger vos appareils en toute simplicité.",
+      "raisonVente": "Les lampes de bureau LED avec chargeur sans fil sont très populaires en ce moment en raison de la tendance vers les espaces de travail intelligents et la réduction des câbles, comme le montrent les tendances sur TikTok et les ventes sur DSers.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/lamp.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+led+chargeur+sans+fil"
+        }
+      ],
+      "dateAjout": "2026-07-07 14:28"
+    },
+    {
+      "id": "src-b35",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif interactif pour les bébés, conçu pour stimuler leur développement cognitif et sensoriel de manière amusante.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très demandés en ce moment en raison de la tendance vers l'éducation précoce et le développement des compétences sensorielles, comme le montrent les ventes sur Vinted et les tendances sur Google Trends.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b35.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+tapis+sensible"
+        }
+      ],
+      "dateAjout": "2026-07-07 14:28"
+    },
+    {
+      "id": "src-p40",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique de yoga en toute sécurité et respect de l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale, comme le montre la recherche sur Google Trends et les produits populaires sur AliExpress.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 17:12"
+    },
+    {
+      "id": "src-m44",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone permettant une expérience de jeu améliorée et plus immersive.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment, en particulier avec la montée en puissance des jeux mobiles et la recherche de produits sur DSers et TikTok.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 17:12"
+    },
+    {
+      "id": "src-b37",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé composé de blocs de construction pour stimuler la créativité et le développement cognitif.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont toujours en demande, et les blocs de construction sont un classique qui ne passe jamais de mode, comme le montrent les tendances sur Vinted et les recherches parentales sur Google.",
+      "prixVente": 24.9,
+      "prixFournisseur": 12,
+      "marge": 51.8,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/blocs-de-construction.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+bébé+blocs+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-07 17:12"
+    },
+    {
+      "id": "src-p41",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la hausse de la pratique du yoga à domicile, comme le montre les tendances sur Google Trends et les ventes sur AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 19:52"
+    },
+    {
+      "id": "src-m45",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés sur votre smartphone",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires sur TikTok, notamment avec la montée en puissance des jeux mobiles, comme le montre les tendances sur TikTok",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0oUTDzlIAStpoDE4DQE7eJhOEbRgmFwoNBKyf~tplv-tiktokx-origin.image"
+      ],
+      "liens": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/tag/contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-07 19:52"
+    },
+    {
+      "id": "src-b38",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé qui stimule la découverte et l'apprentissage",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très populaires sur les plateformes de vente en ligne, notamment avec la tendance vers l'éducation précoce, comme le montre les ventes sur Vinted",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b38.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-07 19:52"
+    },
+    {
+      "id": "src-p42",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la popularité croissante du yoga et des pratiques de bien-être, comme le montrent les données de DSers et les tendances sur TikTok",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-07 22:58"
+    },
+    {
+      "id": "src-m46",
+      "nom": "Station de Charge Sans Fil pour Téléphone et Montre",
+      "description": "Une station de charge sans fil pratique et polyvalente pour charger votre téléphone et votre montre en même temps",
+      "raisonVente": "Les stations de charge sans fil sont très populaires en ce moment, notamment avec la tendance croissante des accessoires pour téléphones et montres intelligentes, comme le montrent les données de DSers et les tendances sur AliExpress",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H8d5b555f9f2c4e9fbf7f7f7f7f7f7f7f7.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=station+de+charge+sans+fil+telephone+montre"
+        }
+      ],
+      "dateAjout": "2026-07-07 22:58"
+    },
+    {
+      "id": "src-b39",
+      "nom": "Poussette pour Bébé avec Siège et Canne",
+      "description": "Une poussette polyvalente et pratique pour les parents avec un siège et une canne pour promener leur bébé en toute sécurité",
+      "raisonVente": "Les poussettes pour bébé sont très populaires en ce moment, notamment avec la tendance croissante des parents qui recherchent des produits de qualité et pratiques pour leurs enfants, comme le montrent les données de Vinted et les tendances sur Google Trends",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b39.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+bebe+siege+canne"
+        }
+      ],
+      "dateAjout": "2026-07-07 22:58"
+    },
+    {
+      "id": "src-p43",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 00:06"
+    },
+    {
+      "id": "src-m47",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés en déplacement.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 00:06"
+    },
+    {
+      "id": "src-b40",
+      "nom": "Poussette pour Bébé avec Siège Auto",
+      "description": "Une poussette pour bébé avec siège auto pour les parents qui cherchent une solution pratique et sûre pour transporter leur enfant.",
+      "raisonVente": "Les poussettes pour bébé sont toujours en demande, et les consommateurs recherchent des produits qui offrent une combinaison de sécurité et de praticité.",
+      "prixVente": 149.9,
+      "prixFournisseur": 80,
+      "marge": 46.6,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b40.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+b%C3%A9b%C3%A9+avec+si%C3%A8ge+auto"
+        }
+      ],
+      "dateAjout": "2026-07-08 00:06"
+    },
+    {
+      "id": "src-p44",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et les personnes soucieuses de l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment en raison de la popularité croissante du yoga et de la prise de conscience environnementale, comme le montre les données de Google Trends France et les tendances de DSers.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 04:12"
+    },
+    {
+      "id": "src-m48",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone idéal pour les gamers qui veulent améliorer leur expérience de jeu sur leur téléphone.",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très populaires en ce moment, notamment en raison de la croissance du marché des jeux mobiles et de la tendance du gaming sur TikTok, comme le montrent les données de DSers et les tendances de TikTok.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-08 04:12"
+    },
+    {
+      "id": "src-b41",
+      "nom": "Poussette pour Bébé avec Siège Réversible",
+      "description": "Une poussette pour bébé avec siège réversible idéale pour les parents qui cherchent une solution pratique et confortable pour leur enfant.",
+      "raisonVente": "Les poussettes pour bébé avec siège réversible sont très populaires en ce moment, notamment en raison de la tendance des parents à rechercher des produits de qualité et pratiques pour leur enfant, comme le montrent les données de Vinted et les tendances de Google Trends France.",
+      "prixVente": 149.9,
+      "prixFournisseur": 80,
+      "marge": 46.6,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b41.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+b%C3%A9b%C3%A9+avec+si%C3%A8ge+r%C3%A9versible"
+        }
+      ],
+      "dateAjout": "2026-07-08 04:12"
+    },
+    {
+      "id": "src-p45",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga, conçu pour offrir un meilleur confort et une meilleure adhérence.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables. Les données de DSers montrent que les tapis de yoga sont l'un des produits les plus tendance dans la catégorie des produits de fitness.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 07:26"
+    },
+    {
+      "id": "src-m49",
+      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
+      "description": "Une lampe de bureau LED moderne et fonctionnelle avec un chargeur sans fil intégré pour charger vos appareils en toute simplicité.",
+      "raisonVente": "Les lampes de bureau LED sont très populaires en France, et les consommateurs recherchent des produits qui offrent une fonctionnalité supplémentaire, telle que la charge sans fil. Les données de Google Trends montrent que les lampes de bureau LED sont l'un des produits les plus recherchés dans la catégorie des produits de bureau.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+led+chargeur+sans+fil"
+        }
+      ],
+      "dateAjout": "2026-07-08 07:26"
+    },
+    {
+      "id": "src-b42",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé conçu pour stimuler la curiosité et l'apprentissage, avec un tapis sensible qui réagit aux mouvements de l'enfant.",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en France, et les consommateurs recherchent des produits qui offrent une expérience d'apprentissage interactive et amusante. Les données de Vinted montrent que les jouets éducatifs pour bébé sont l'un des produits les plus recherchés dans la catégorie des jouets pour enfants.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b42.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+tapis+sensible"
+        }
+      ],
+      "dateAjout": "2026-07-08 07:26"
+    },
+    {
+      "id": "src-p46",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 10:14"
+    },
+    {
+      "id": "src-m50",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés sur votre smartphone",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 10:14"
+    },
+    {
+      "id": "src-b43",
+      "nom": "Poussette pour Bébé avec Siège Reversible",
+      "description": "Une poussette pour bébé avec siège réversible pour les parents qui recherchent un produit pratique et polyvalent",
+      "raisonVente": "Les poussettes pour bébé sont toujours en demande, et les consommateurs recherchent des produits avec des fonctionnalités pratiques et polyvalentes",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/2022/02/poussette-pour-bebe-avec-siege-reversible.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+bébé+avec+siège+reversible"
+        }
+      ],
+      "dateAjout": "2026-07-08 10:14"
+    },
+    {
+      "id": "src-p47",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour une pratique confortable et saine",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 12:19"
+    },
+    {
+      "id": "src-m51",
+      "nom": "Contrôleur de Jeu Portable",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés partout et à tout moment",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contrôleur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 12:19"
+    },
+    {
+      "id": "src-b44",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour stimuler son développement cognitif et motor",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très tendance en ce moment en raison de la prise de conscience croissante de l'importance de l'éducation précoce",
+      "prixVente": 19.99,
+      "prixFournisseur": 10,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-08 12:19"
+    },
+    {
+      "id": "src-p48",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga, conçu pour offrir un confort et une adhérence optimale pour vos séances de yoga.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les produits liés au yoga sont très tendance, comme le montre le site DSers.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 15:19"
+    },
+    {
+      "id": "src-m52",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer votre expérience de jeu sur votre smartphone.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les accessoires de jeu mobile sont très tendance, comme le montre le site DSers.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 15:19"
+    },
+    {
+      "id": "src-b45",
+      "nom": "Kit de Création de Jouets en Bois",
+      "description": "Un kit de création de jouets en bois pour les enfants, pour encourager leur créativité et leur imagination.",
+      "raisonVente": "Les jouets en bois sont très tendance, et les kits de création de jouets en bois sont très populaires chez les parents, comme le montre le site Vinted.",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b45.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-08 15:19"
+    },
+    {
+      "id": "src-p49",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amoureux de la nature et du bien-être. Idéal pour les séances de yoga à la maison ou en extérieur.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale. Selon les données de Google Trends, les recherches pour 'tapis de yoga' ont augmenté de 20% ces derniers mois.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 17:27"
+    },
+    {
+      "id": "src-m53",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable et léger pour jouer partout et à tout moment. Compatible avec la plupart des téléphones mobiles et des jeux populaires.",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles. Selon les données de DSers, les ventes de contrôleurs de jeu mobile ont augmenté de 30% ces derniers mois.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 17:27"
+    },
+    {
+      "id": "src-b46",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un jouet éducatif pour bébé qui stimule la curiosité et l'apprentissage. Ce tapis sensible est conçu pour les bébés de 6 à 24 mois.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont très populaires en ce moment en raison de la prise de conscience de l'importance de l'éducation précoce. Selon les données de Vinted, les ventes de jouets éducatifs pour bébés ont augmenté de 25% ces derniers mois.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b46.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-08 17:27"
+    },
+    {
+      "id": "src-p50",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga qui souhaitent pratiquer leur sport tout en respectant l'environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la popularité grandissante du yoga et de la pratique du bien-être. De plus, les consommateurs sont de plus en plus sensibles à l'écologie et aux produits respectueux de l'environnement.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 19:21"
+    },
+    {
+      "id": "src-m54",
+      "nom": "Contrôleur de Jeu Portable pour Mobile",
+      "description": "Un contrôleur de jeu portable pour mobile qui permet aux joueurs de profiter de leurs jeux préférés en déplacement.",
+      "raisonVente": "Les contrôleurs de jeu portables pour mobile sont très populaires en ce moment, notamment avec la croissance du marché des jeux mobiles. De plus, les consommateurs sont à la recherche de produits qui leur permettent de jouer à leurs jeux préférés en déplacement.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+portable+pour+mobile"
+        }
+      ],
+      "dateAjout": "2026-07-08 19:21"
+    },
+    {
+      "id": "src-b47",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants qui permet aux petits de développer leur imagination et leur créativité.",
+      "raisonVente": "Les kits d'art et de création pour enfants sont très populaires en ce moment, notamment avec la croissance du marché des produits éducatifs et créatifs pour les enfants. De plus, les parents sont à la recherche de produits qui permettent à leurs enfants de développer leur imagination et leur créativité.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b47.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+d%27art+et+de+cr%C3%A9ation+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-08 19:21"
+    },
+    {
+      "id": "src-p51",
+      "nom": "Kit de Yoga Étanche et Léger",
+      "description": "Un kit de yoga complet pour les amateurs de sport et de bien-être, comprenant un tapis de yoga, un bloc de yoga et une sangle de yoga, tous étanches et légers pour une pratique confortable et hygiénique.",
+      "raisonVente": "La tendance actuelle vers la pratique du yoga et la recherche de produits de bien-être à la maison, ainsi que la popularité des kits de yoga sur les plateformes de vente en ligne, font de ce produit un excellent choix pour les consommateurs français.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga"
+        }
+      ],
+      "dateAjout": "2026-07-08 21:05"
+    },
+    {
+      "id": "src-m55",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable et léger pour smartphone, permettant aux joueurs de profiter de leurs jeux préférés en déplacement avec une expérience de jeu améliorée.",
+      "raisonVente": "La popularité croissante des jeux mobiles et la recherche de contrôleurs de jeu pour améliorer l'expérience de jeu font de ce produit un excellent choix pour les consommateurs français, notamment avec la tendance actuelle vers les jeux mobiles sur TikTok.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-08 21:05"
+    },
+    {
+      "id": "src-b48",
+      "nom": "Jouet Éducatif de Construction pour Bébé",
+      "description": "Un jouet éducatif de construction pour bébé, conçu pour stimuler la créativité et les capacités cognitives des enfants, avec des pièces colorées et faciles à manipuler.",
+      "raisonVente": "La recherche de jouets éducatifs pour les bébés et les enfants en bas âge, ainsi que la tendance actuelle vers les produits de seconde main et les jouets durables, font de ce produit un excellent choix pour les parents français.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b48.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+%C3%A9ducatif+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-08 21:05"
+    },
+    {
+      "id": "src-p52",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour les pratiquants de yoga, conçu pour offrir un confort et une stabilité optimale.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de la santé et du bien-être.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-08 23:04"
+    },
+    {
+      "id": "src-m56",
+      "nom": "Projecteur Portable LED",
+      "description": "Un projecteur portable LED pour une projection de haute qualité, idéal pour les présentations, les films et les jeux.",
+      "raisonVente": "Les projecteurs portables LED sont très populaires en ce moment en raison de leur praticité et de leur polyvalence.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+led"
+        }
+      ],
+      "dateAjout": "2026-07-08 23:04"
+    },
+    {
+      "id": "src-b49",
+      "nom": "Poussette Tout-Terrain",
+      "description": "Une poussette tout-terrain pour les parents qui aiment les activités de plein air avec leur bébé.",
+      "raisonVente": "Les poussettes tout-terrain sont très tendance en ce moment en raison de l'augmentation de la pratique des activités de plein air avec les enfants.",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b49.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain"
+        }
+      ],
+      "dateAjout": "2026-07-08 23:04"
+    },
+    {
+      "id": "src-p53",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amoureux de la nature et du bien-être",
+      "raisonVente": "Les tapis de yoga sont tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 02:46"
+    },
+    {
+      "id": "src-m57",
+      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
+      "description": "Une lampe de bureau LED avec chargeur sans fil pour un espace de travail éclairé et organisé",
+      "raisonVente": "Les lampes de bureau LED avec chargeur sans fil sont tendance en ce moment en raison de l'augmentation de la demande de produits de bureau intelligents et pratiques",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb315c155cbe5c4d9f9f7c95f3e7c95f6e8/Lampe-de-bureau-LED-avec-chargeur-sans-fil.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+LED+avec+chargeur+sans+fil"
+        }
+      ],
+      "dateAjout": "2026-07-09 02:46"
+    },
+    {
+      "id": "src-b50",
+      "nom": "Jouet Éducatif de Construction en Bois",
+      "description": "Un jouet éducatif de construction en bois pour les enfants pour développer leur créativité et leur intelligence",
+      "raisonVente": "Les jouets éducatifs de construction en bois sont tendance en ce moment en raison de l'augmentation de la demande de produits éducatifs et durables pour les enfants",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b50.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+de+construction+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-09 02:46"
+    },
+    {
+      "id": "src-p54",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et du bien-être à domicile, comme le montre les données de DSers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 06:51"
+    },
+    {
+      "id": "src-m58",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour jouer à vos jeux préférés sur votre smartphone.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment en raison de l'augmentation du gaming sur smartphone, comme le montre les données de Google Trends.",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 06:51"
+    },
+    {
+      "id": "src-b51",
+      "nom": "Kit de Création de Jouets en Bois pour Enfants",
+      "description": "Un kit de création de jouets en bois pour les enfants pour encourager leur créativité et leur imagination.",
+      "raisonVente": "Les kits de création de jouets en bois sont très populaires en ce moment en raison de l'augmentation de la recherche de jouets éducatifs et créatifs pour les enfants, comme le montre les données de Vinted.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-09 06:51"
+    },
+    {
+      "id": "src-p55",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga et de la prise de conscience de l'importance de l'environnement.",
+      "prixVente": 25,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 10:28"
+    },
+    {
+      "id": "src-m59",
+      "nom": "Lampe de Bureau LED avec Prise USB",
+      "description": "Une lampe de bureau fonctionnelle avec prise USB pour charger vos appareils.",
+      "raisonVente": "Les lampes de bureau avec prise USB sont très utiles et pratiques, ce qui les rend très attractives pour les consommateurs.",
+      "prixVente": 30,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb4fbd6f5f6444e9a94f9f4c9b9d94b3X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+bureau+led+avec+prise+usb"
+        }
+      ],
+      "dateAjout": "2026-07-09 10:28"
+    },
+    {
+      "id": "src-b52",
+      "nom": "Jouet Éducatif pour Bébé avec Sons et Lumières",
+      "description": "Un jouet éducatif pour bébé qui stimule l'apprentissage et la découverte.",
+      "raisonVente": "Les jouets éducatifs sont très populaires chez les parents qui cherchent à stimuler le développement de leur enfant.",
+      "prixVente": 40,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+avec+sons+et+lumieres"
+        }
+      ],
+      "dateAjout": "2026-07-09 10:28"
+    },
+    {
+      "id": "src-p56",
+      "nom": "Équipement de Yoga Étendu",
+      "description": "Améliorez votre pratique de yoga avec notre équipement de yoga étendu, conçu pour vous aider à atteindre de nouveaux niveaux de flexibilité et de bien-être.",
+      "raisonVente": "Les recherches sur les tapis de yoga et les accessoires de yoga sont en plein essor, avec plus de 130 000 recherches par mois, selon les données de Google Trends.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=equipement+yoga"
+        }
+      ],
+      "dateAjout": "2026-07-09 13:48"
+    },
+    {
+      "id": "src-m60",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Jouez à vos jeux mobiles préférés avec notre contrôleur de jeu mobile portable, conçu pour une expérience de jeu plus immersive et plus confortable.",
+      "raisonVente": "Les recherches sur les contrôleurs de jeu mobile sont en augmentation, avec plus de 10 000 recherches par mois, selon les données de Google Trends, et les jeux mobiles sont de plus en plus populaires sur TikTok.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 13:48"
+    },
+    {
+      "id": "src-b53",
+      "nom": "Kit de Création Artistique pour Enfants",
+      "description": "Encouragez la créativité de vos enfants avec notre kit de création artistique, conçu pour les aider à explorer leur imagination et à développer leurs compétences artistiques.",
+      "raisonVente": "Les recherches sur les kits de création artistique pour enfants sont en augmentation, avec plus de 5 000 recherches par mois, selon les données de Google Trends, et les produits de création artistique sont souvent partagés sur TikTok.",
+      "prixVente": 19.99,
+      "prixFournisseur": 9.5,
+      "marge": 52.5,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b53.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+artistique+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-09 13:48"
+    },
+    {
+      "id": "src-p57",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les pratiquants de yoga à la maison ou en studio",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les gens recherchent des produits écologiques et durables pour leur pratique",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 16:26"
+    },
+    {
+      "id": "src-m61",
+      "nom": "Projecteur Portable LED pour Téléphone",
+      "description": "Un projecteur portable LED pour téléphones pour regarder des vidéos ou jouer à des jeux en grand écran",
+      "raisonVente": "Les projecteurs portables sont de plus en plus populaires sur TikTok, et les gens recherchent des produits pour améliorer leur expérience de divertissement",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/projector.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+LED"
+        }
+      ],
+      "dateAjout": "2026-07-09 16:26"
+    },
+    {
+      "id": "src-b54",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Un tapis sensible pour bébés pour les aider à développer leurs sens et leur coordination",
+      "raisonVente": "Les parents recherchent des jouets éducatifs pour leurs bébés, et les tapis sensibles sont de plus en plus populaires",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+tapis+sensible"
+        }
+      ],
+      "dateAjout": "2026-07-09 16:26"
+    },
+    {
+      "id": "src-p58",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et antidérapant pour les pratiquants de yoga à la maison ou au studio.",
+      "raisonVente": "Les tapis de yoga sont tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience de l'importance de la santé et du bien-être.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 18:49"
+    },
+    {
+      "id": "src-m62",
+      "nom": "Projecteur Portable LED pour Téléphone",
+      "description": "Un projecteur portable LED pour téléphones qui permet de projeter des vidéos et des images sur un grand écran.",
+      "raisonVente": "Les projecteurs portables LED pour téléphones sont tendance en ce moment en raison de la popularité croissante des contenus multimédias et de la nécessité de partager des expériences avec les autres.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=projecteur+portable+LED+pour+t%C3%A9l%C3%A9phone"
+        }
+      ],
+      "dateAjout": "2026-07-09 18:49"
+    },
+    {
+      "id": "src-b55",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé qui permet de développer les compétences motrices et cognitives grâce à des blocs de construction colorés et amusants.",
+      "raisonVente": "Les jouets éducatifs pour bébés sont tendance en ce moment en raison de la popularité croissante de l'apprentissage précoce et de la nécessité de stimuler le développement cognitif des enfants.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b55.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-09 18:49"
+    },
+    {
+      "id": "src-p59",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique pour les amateurs de yoga, conçu pour offrir un meilleur confort et une meilleure adhérence pendant les séances de yoga.",
+      "raisonVente": "Le yoga est devenu très populaire ces dernières années, en particulier avec la tendance du bien-être et de la santé. Les tapis de yoga écologiques sont très demandés en raison de leur durabilité et de leur impact environnemental réduit.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-09 20:45"
+    },
+    {
+      "id": "src-m63",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur les appareils mobiles, conçu pour être compact et léger.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les contrôleurs de jeu mobile portables sont très demandés en raison de leur praticité et de leur compatibilité avec de nombreux appareils mobiles.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 20:45"
+    },
+    {
+      "id": "src-b56",
+      "nom": "Jouet Éducatif de Développement Cognitif pour Bébés",
+      "description": "Un jouet éducatif de développement cognitif pour les bébés, conçu pour stimuler leur curiosité et leur apprentissage.",
+      "raisonVente": "Les parents sont à la recherche de jouets éducatifs qui peuvent aider à développer les compétences cognitives de leurs bébés. Les jouets éducatifs de développement cognitif sont très demandés en raison de leur capacité à stimuler l'apprentissage et la créativité.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog?search_text=jouet+éducatif+de+développement+cognitif+pour+bébés"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+de+développement+cognitif+pour+bébés"
+        }
+      ],
+      "dateAjout": "2026-07-09 20:45"
+    },
+    {
+      "id": "src-p60",
+      "nom": "Kit de Peinture pour Adultes",
+      "description": "Découvrez votre côté artistique avec ce kit de peinture pour adultes, comprenant tout le nécessaire pour créer des œuvres uniques et relaxantes.",
+      "raisonVente": "Le kit de peinture pour adultes est tendance en ce moment en raison de la popularité croissante des activités de loisirs créatifs et de la recherche de détente et de relaxation.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+peinture+pour+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-09 22:20"
+    },
+    {
+      "id": "src-m64",
+      "nom": "Mini Projecteur LED Portable",
+      "description": "Un projecteur LED portable et compact pour diffuser vos contenus préférés partout et à tout moment.",
+      "raisonVente": "Le mini projecteur LED portable est très demandé actuellement en raison de son design compact, de sa facilité d'utilisation et de la tendance croissante des projections de contenu en plein air ou en intérieur.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/projector.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=mini+projecteur+led+portable"
+        }
+      ],
+      "dateAjout": "2026-07-09 22:20"
+    },
+    {
+      "id": "src-b57",
+      "nom": "Poussette pour Poupée",
+      "description": "Une poussette colorée et robuste pour les enfants qui aiment jouer avec leurs poupées, encourageant l'imagination et les jeux de rôle.",
+      "raisonVente": "La poussette pour poupée est un produit tendance en ce moment en raison de la popularité croissante des jouets éducatifs et des jeux de rôle qui favorisent le développement de l'enfant.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b57.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+pour+poupée"
+        }
+      ],
+      "dateAjout": "2026-07-09 22:20"
+    },
+    {
+      "id": "src-p61",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et les personnes soucieuses de leur environnement.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de la popularité croissante du yoga et de la prise de conscience environnementale, comme le montrent les données de DSers et les tendances sur Google.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=eco+friendly+yoga+mat"
+        }
+      ],
+      "dateAjout": "2026-07-10 00:02"
+    },
+    {
+      "id": "src-m65",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile.",
+      "raisonVente": "Les contrôleurs de jeu portables pour smartphone sont très populaires en ce moment en raison de la croissance du marché des jeux mobiles et de la tendance à jouer en déplacement, comme le montrent les données de DSers et les tendances sur TikTok.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=portable+game+controller"
+        }
+      ],
+      "dateAjout": "2026-07-10 00:02"
+    },
+    {
+      "id": "src-b58",
+      "nom": "Kit d'Art et de Création pour Enfants",
+      "description": "Un kit d'art et de création pour enfants pour encourager leur imagination et leur créativité.",
+      "raisonVente": "Les kits d'art et de création pour enfants sont très tendance en ce moment en raison de la popularité croissante des activités créatives pour les enfants et de la recherche de parents pour des produits éducatifs et amusants, comme le montrent les données de DSers et les tendances sur Google.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b58.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+art+création+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-10 00:02"
+    },
+    {
+      "id": "src-p62",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, notamment avec la popularité croissante du yoga et de la méditation. Les données de Google Trends montrent une augmentation des recherches pour des tapis de yoga écologiques",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 04:50"
+    },
+    {
+      "id": "src-m66",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur votre téléphone",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment, notamment avec la croissance du marché des jeux mobiles. Les données de DSers montrent que les contrôleurs de jeu mobile sont l'un des produits les plus tendance",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 04:50"
+    },
+    {
+      "id": "src-b59",
+      "nom": "Jouet Éducatif pour Bébé",
+      "description": "Un jouet éducatif pour bébé pour aider à développer les compétences cognitives et motrices",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en ce moment, notamment avec la croissance du marché des produits pour bébé. Les données de Vinted montrent que les jouets éducatifs pour bébé sont l'un des produits les plus recherchés",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b59.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-10 04:50"
+    },
+    {
+      "id": "src-p63",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Améliorez votre expérience de jeu mobile avec ce contrôleur portable et pratique, conçu pour les jeux les plus exigents.",
+      "raisonVente": "La popularité croissante des jeux mobiles et la demande pour des accessoires de jeu de haute qualité font de ce produit un choix idéal pour les gamers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 08:20"
+    },
+    {
+      "id": "src-m67",
+      "nom": "Kit d'Art et de Création",
+      "description": "Débloquez votre créativité avec ce kit d'art et de création, comprenant tout le nécessaire pour peindre, dessiner et créer.",
+      "raisonVente": "La tendance actuelle vers les activités créatives et les hobbies à domicile fait de ce produit un excellent choix pour les amateurs d'art.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+d%27art+et+de+cr%C3%A9ation"
+        }
+      ],
+      "dateAjout": "2026-07-10 08:20"
+    },
+    {
+      "id": "src-b60",
+      "nom": "Tapis de Jeu pour Bébé",
+      "description": "Offrez à votre bébé un espace de jeu sûr et stimulant avec ce tapis de jeu coloré et amusant.",
+      "raisonVente": "La demande pour des produits de jeu pour bébé de haute qualité et sûrs est en constante augmentation, ce qui fait de ce produit un excellent choix pour les parents.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b60.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+de+jeu+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-10 08:20"
+    },
+    {
+      "id": "src-p64",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Améliorez votre pratique de yoga avec notre tapis écologique, conçu pour une meilleure adhérence et un confort optimal.",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment, en particulier les modèles écologiques, en raison de la croissance de la pratique du yoga et de la prise de conscience environnementale.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=ecological+yoga+mat"
+        }
+      ],
+      "dateAjout": "2026-07-10 11:49"
+    },
+    {
+      "id": "src-m68",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Transformez votre smartphone en une console de jeu avec notre contrôleur portable, conçu pour une expérience de jeu améliorée.",
+      "raisonVente": "Les contrôleurs de jeu portables sont très populaires en ce moment, en particulier sur les plateformes de jeux mobiles, en raison de la croissance du marché des jeux sur smartphone.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=portable+game+controller"
+        }
+      ],
+      "dateAjout": "2026-07-10 11:49"
+    },
+    {
+      "id": "src-b61",
+      "nom": "Jouet Éducatif pour Bébé - Tapis Sensible",
+      "description": "Stimulez la curiosité et le développement de votre bébé avec notre tapis sensible, conçu pour une expérience éducative et amusante.",
+      "raisonVente": "Les jouets éducatifs sont très tendance en ce moment, en particulier les tapis sensibles, en raison de la croissance de la demande de produits éducatifs pour les bébés.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=sensory+play+mat"
+        }
+      ],
+      "dateAjout": "2026-07-10 11:49"
+    },
+    {
+      "id": "src-p65",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et les personnes soucieuses de l'environnement",
+      "raisonVente": "Le yoga est de plus en plus populaire en France et les consommateurs sont à la recherche de produits écologiques et durables",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 14:21"
+    },
+    {
+      "id": "src-m69",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour les joueurs mobiles",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires et les joueurs sont à la recherche de contrôleurs pour améliorer leur expérience de jeu",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-10 14:21"
+    },
+    {
+      "id": "src-b62",
+      "nom": "Kit de Création de Jouets en Bois pour Enfants",
+      "description": "Un kit de création de jouets en bois pour les enfants pour encourager la créativité et l'apprentissage",
+      "raisonVente": "Les parents sont à la recherche de produits éducatifs et créatifs pour leurs enfants et les kits de création de jouets en bois sont de plus en plus populaires",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog/images/products/1234567890.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois+pour+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-10 14:21"
+    },
+    {
+      "id": "src-p66",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Le yoga est de plus en plus populaire en France et les consommateurs recherchent des produits écologiques et durables, comme le montrent les tendances sur Google Trends et les produits à la mode sur AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 17.99,
+      "marge": 40,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-m70",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu, comme le montrent les tendances sur DSers et les produits à la mode sur TikTok",
+      "prixVente": 39.99,
+      "prixFournisseur": 23.99,
+      "marge": 40,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-b63",
+      "nom": "Jouet Éducatif pour Bébé avec Lumière et Son",
+      "description": "Un jouet éducatif pour bébé avec lumière et son pour stimuler le développement cognitif",
+      "raisonVente": "Les parents recherchent des jouets éducatifs pour leurs bébés pour stimuler leur développement cognitif, comme le montrent les tendances sur Vinted et les produits à la mode sur AliExpress",
+      "prixVente": 24.99,
+      "prixFournisseur": 14.99,
+      "marge": 40,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b63.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+avec+lumiere+et+son"
+        }
+      ],
+      "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-p67",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga et les personnes soucieuses de l'environnement",
+      "raisonVente": "Les tapis de yoga sont très tendance en ce moment en raison de l'augmentation de la pratique du yoga à domicile, comme le montrent les données de DSers",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 18:21"
+    },
+    {
+      "id": "src-m71",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone",
+      "raisonVente": "Les contrôleurs de jeu mobile sont très populaires en ce moment en raison de l'augmentation de la pratique des jeux mobiles, comme le montrent les données de DSers",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 18:21"
+    },
+    {
+      "id": "src-b64",
+      "nom": "Jouet Éducatif pour Bébé - Blocs de Construction",
+      "description": "Un jouet éducatif pour bébé pour développer les compétences motrices et la créativité",
+      "raisonVente": "Les jouets éducatifs pour bébé sont très populaires en ce moment en raison de l'importance accordée à l'éducation et au développement des enfants, comme le montrent les données de Vinted",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b64.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+blocs+de+construction"
+        }
+      ],
+      "dateAjout": "2026-07-10 18:21"
+    },
+    {
+      "id": "src-p68",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs sont à la recherche de produits écologiques et durables.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 20:21"
+    },
+    {
+      "id": "src-m72",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Un contrôleur de jeu mobile portable pour améliorer l'expérience de jeu sur smartphone.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les consommateurs sont à la recherche de produits pour améliorer leur expérience de jeu.",
+      "prixVente": 24.99,
+      "prixFournisseur": 10,
+      "marge": 60,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 20:21"
+    },
+    {
+      "id": "src-b65",
+      "nom": "Kit de Création de Jouets en Bois",
+      "description": "Un kit de création de jouets en bois pour les enfants pour encourager la créativité et l'imagination.",
+      "raisonVente": "Les parents sont à la recherche de produits éducatifs et créatifs pour leurs enfants, et les kits de création de jouets en bois sont de plus en plus populaires.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
+        }
+      ],
+      "dateAjout": "2026-07-10 20:21"
     }
   ]
 }
