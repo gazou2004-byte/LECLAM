@@ -4501,6 +4501,72 @@
         }
       ],
       "dateAjout": "2026-07-10 14:21"
+    },
+    {
+      "id": "src-p66",
+      "nom": "Tapis de Yoga Écologique",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga et de bien-être",
+      "raisonVente": "Le yoga est de plus en plus populaire en France et les consommateurs recherchent des produits écologiques et durables, comme le montrent les tendances sur Google Trends et les produits à la mode sur AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 17.99,
+      "marge": 40,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=tapis+de+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-m70",
+      "nom": "Contrôleur de Jeu Portable pour Smartphone",
+      "description": "Un contrôleur de jeu portable pour smartphone pour améliorer l'expérience de jeu mobile",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires et les consommateurs recherchent des accessoires pour améliorer leur expérience de jeu, comme le montrent les tendances sur DSers et les produits à la mode sur TikTok",
+      "prixVente": 39.99,
+      "prixFournisseur": 23.99,
+      "marge": 40,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+portable+pour+smartphone"
+        }
+      ],
+      "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-b63",
+      "nom": "Jouet Éducatif pour Bébé avec Lumière et Son",
+      "description": "Un jouet éducatif pour bébé avec lumière et son pour stimuler le développement cognitif",
+      "raisonVente": "Les parents recherchent des jouets éducatifs pour leurs bébés pour stimuler leur développement cognitif, comme le montrent les tendances sur Vinted et les produits à la mode sur AliExpress",
+      "prixVente": 24.99,
+      "prixFournisseur": 14.99,
+      "marge": 40,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b63.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=jouet+educatif+pour+bebe+avec+lumiere+et+son"
+        }
+      ],
+      "dateAjout": "2026-07-10 16:54"
     }
   ]
 }
