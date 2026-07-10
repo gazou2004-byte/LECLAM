@@ -7,7 +7,7 @@ const path = require('path');
 
 const SOURCING_PATH    = path.join(__dirname, '../Le clam/data/sourcing-proposals.json');
 const IMG_DIR          = path.join(__dirname, '../Le clam/public/img/sourcing');
-const BAD_SIZES = new Set([12420, 10046, 14542]); // placeholder AliExpress, logo AliExpress, image 404
+const BAD_SIZES = new Set([12420, 10046, 14542, 7467]); // placeholder AliExpress, logo AliExpress, image 404, avatar robot
 
 if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
 

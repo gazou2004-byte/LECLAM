@@ -1632,7 +1632,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "/img/sourcing/src-p17.jpg"
+        "/img/sourcing/src-p15.jpg"
       ],
       "liens": [
         {
@@ -1852,7 +1852,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://www.vinted.fr/catalog/images/products/123456789.jpg"
+        "/img/sourcing/src-b23.jpg"
       ],
       "liens": [
         {
@@ -1874,7 +1874,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+        "/img/sourcing/src-p25.jpg"
       ],
       "liens": [
         {
@@ -1896,7 +1896,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://img.dsers.com/webSite/integration/404.png"
+        "/img/sourcing/src-m30.jpg"
       ],
       "liens": [
         {
@@ -1905,50 +1905,6 @@
         }
       ],
       "dateAjout": "2026-07-05 23:10"
-    },
-    {
-      "id": "src-p26",
-      "nom": "Coffret de Soins Personnels pour la Nuit",
-      "description": "Ce coffret de soins personnels pour la nuit est idéal pour une routine de soin douce et relaxante, comprenant un masque de nuit, un bain de bouche et une crème hydratante.",
-      "raisonVente": "Les produits de soins personnels et de bien-être sont très tendance en ce moment, notamment avec l'augmentation de la recherche de produits pour améliorer la qualité du sommeil.",
-      "prixVente": 39.99,
-      "prixFournisseur": 23.99,
-      "marge": 40,
-      "categorie": "plaisir",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://img.dsers.com/webSite/integration/404.png"
-      ],
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com/search/?q=coffret+de+soins+personnels+pour+la+nuit"
-        }
-      ],
-      "dateAjout": "2026-07-05 23:10"
-    },
-    {
-      "id": "src-b24",
-      "nom": "Poussette Tout-Terrain pour Bébé",
-      "description": "Une poussette robuste et polyvalente pour les promenades en plein air",
-      "raisonVente": "Les poussettes tout-terrain sont très demandées en ce moment en raison de l'augmentation de la pratique des activités de plein air avec les enfants",
-      "prixVente": 149.99,
-      "prixFournisseur": 80,
-      "marge": 46.7,
-      "categorie": "bebe",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+pour+b%C3%A9b%C3%A9"
-        }
-      ],
-      "dateAjout": "2026-07-06 02:59"
     },
     {
       "id": "src-m32",
@@ -1962,7 +1918,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+        "/img/sourcing/src-m32.jpg"
       ],
       "liens": [
         {
@@ -2006,7 +1962,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://example.com/image-contrôleur-jeu-mobile.jpg"
+        "/img/sourcing/src-m33.jpg"
       ],
       "liens": [
         {
@@ -2028,7 +1984,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://example.com/image-kit-art-création-enfants.jpg"
+        "/img/sourcing/src-b26.jpg"
       ],
       "liens": [
         {
@@ -2050,7 +2006,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://img.dsers.com/webSite/integration/404.png"
+        "/img/sourcing/src-b28.jpg"
       ],
       "liens": [
         {
@@ -2149,28 +2105,6 @@
       "dateAjout": "2026-07-07 08:21"
     },
     {
-      "id": "src-m42",
-      "nom": "Lampe de Bureau LED avec Chargeur Sans Fil",
-      "description": "Une lampe de bureau LED moderne et fonctionnelle avec un chargeur sans fil intégré pour charger vos appareils en toute simplicité.",
-      "raisonVente": "Les lampes de bureau LED avec chargeur sans fil sont très populaires en ce moment en raison de la tendance vers les espaces de travail intelligents et la réduction des câbles, comme le montrent les tendances sur TikTok et les ventes sur DSers.",
-      "prixVente": 39.99,
-      "prixFournisseur": 20,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://www.dsers.com/blog/content/images/2021/07/lamp.jpg"
-      ],
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com/search/?q=lampe+de+bureau+led+chargeur+sans+fil"
-        }
-      ],
-      "dateAjout": "2026-07-07 14:28"
-    },
-    {
       "id": "src-m46",
       "nom": "Station de Charge Sans Fil pour Téléphone et Montre",
       "description": "Une station de charge sans fil pratique et polyvalente pour charger votre téléphone et votre montre en même temps",
@@ -2182,7 +2116,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae01.alicdn.com/kf/H8d5b555f9f2c4e9fbf7f7f7f7f7f7f7f7.jpg"
+        "/img/sourcing/src-m46.jpg"
       ],
       "liens": [
         {
@@ -2237,28 +2171,6 @@
       "dateAjout": "2026-07-08 15:19"
     },
     {
-      "id": "src-m54",
-      "nom": "Contrôleur de Jeu Portable pour Mobile",
-      "description": "Un contrôleur de jeu portable pour mobile qui permet aux joueurs de profiter de leurs jeux préférés en déplacement.",
-      "raisonVente": "Les contrôleurs de jeu portables pour mobile sont très populaires en ce moment, notamment avec la croissance du marché des jeux mobiles. De plus, les consommateurs sont à la recherche de produits qui leur permettent de jouer à leurs jeux préférés en déplacement.",
-      "prixVente": 49.99,
-      "prixFournisseur": 25,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+portable+pour+mobile"
-        }
-      ],
-      "dateAjout": "2026-07-08 19:21"
-    },
-    {
       "id": "src-p51",
       "nom": "Kit de Yoga Étanche et Léger",
       "description": "Un kit de yoga complet pour les amateurs de sport et de bien-être, comprenant un tapis de yoga, un bloc de yoga et une sangle de yoga, tous étanches et légers pour une pratique confortable et hygiénique.",
@@ -2270,7 +2182,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+        "/img/sourcing/src-p51.avif"
       ],
       "liens": [
         {
@@ -2314,7 +2226,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+        "/img/sourcing/src-m56.avif"
       ],
       "liens": [
         {
@@ -2369,50 +2281,6 @@
       "dateAjout": "2026-07-09 02:46"
     },
     {
-      "id": "src-b51",
-      "nom": "Kit de Création de Jouets en Bois pour Enfants",
-      "description": "Un kit de création de jouets en bois pour les enfants pour encourager leur créativité et leur imagination.",
-      "raisonVente": "Les kits de création de jouets en bois sont très populaires en ce moment en raison de l'augmentation de la recherche de jouets éducatifs et créatifs pour les enfants, comme le montre les données de Vinted.",
-      "prixVente": 39.99,
-      "prixFournisseur": 20,
-      "marge": 50,
-      "categorie": "bebe",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr/catalog?search_text=kit+de+cr%C3%A9ation+de+jouets+en+bois"
-        }
-      ],
-      "dateAjout": "2026-07-09 06:51"
-    },
-    {
-      "id": "src-m59",
-      "nom": "Lampe de Bureau LED avec Prise USB",
-      "description": "Une lampe de bureau fonctionnelle avec prise USB pour charger vos appareils.",
-      "raisonVente": "Les lampes de bureau avec prise USB sont très utiles et pratiques, ce qui les rend très attractives pour les consommateurs.",
-      "prixVente": 30,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae01.alicdn.com/kf/Hb4fbd6f5f6444e9a94f9f4c9b9d94b3X.jpg"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+bureau+led+avec+prise+usb"
-        }
-      ],
-      "dateAjout": "2026-07-09 10:28"
-    },
-    {
       "id": "src-b52",
       "nom": "Jouet Éducatif pour Bébé avec Sons et Lumières",
       "description": "Un jouet éducatif pour bébé qui stimule l'apprentissage et la découverte.",
@@ -2424,7 +2292,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://img.dsers.com/webSite/integration/404.png"
+        "/img/sourcing/src-b52.avif"
       ],
       "liens": [
         {
@@ -2433,94 +2301,6 @@
         }
       ],
       "dateAjout": "2026-07-09 10:28"
-    },
-    {
-      "id": "src-p56",
-      "nom": "Équipement de Yoga Étendu",
-      "description": "Améliorez votre pratique de yoga avec notre équipement de yoga étendu, conçu pour vous aider à atteindre de nouveaux niveaux de flexibilité et de bien-être.",
-      "raisonVente": "Les recherches sur les tapis de yoga et les accessoires de yoga sont en plein essor, avec plus de 130 000 recherches par mois, selon les données de Google Trends.",
-      "prixVente": 29.99,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "plaisir",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=equipement+yoga"
-        }
-      ],
-      "dateAjout": "2026-07-09 13:48"
-    },
-    {
-      "id": "src-m61",
-      "nom": "Projecteur Portable LED pour Téléphone",
-      "description": "Un projecteur portable LED pour téléphones pour regarder des vidéos ou jouer à des jeux en grand écran",
-      "raisonVente": "Les projecteurs portables sont de plus en plus populaires sur TikTok, et les gens recherchent des produits pour améliorer leur expérience de divertissement",
-      "prixVente": 49.99,
-      "prixFournisseur": 25,
-      "marge": 50,
-      "categorie": "malin",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://www.dsers.com/blog/content/images/2021/07/projector.jpg"
-      ],
-      "liens": [
-        {
-          "label": "DSers",
-          "url": "https://www.dsers.com/search/?q=projecteur+portable+LED"
-        }
-      ],
-      "dateAjout": "2026-07-09 16:26"
-    },
-    {
-      "id": "src-b56",
-      "nom": "Jouet Éducatif de Développement Cognitif pour Bébés",
-      "description": "Un jouet éducatif de développement cognitif pour les bébés, conçu pour stimuler leur curiosité et leur apprentissage.",
-      "raisonVente": "Les parents sont à la recherche de jouets éducatifs qui peuvent aider à développer les compétences cognitives de leurs bébés. Les jouets éducatifs de développement cognitif sont très demandés en raison de leur capacité à stimuler l'apprentissage et la créativité.",
-      "prixVente": 24.99,
-      "prixFournisseur": 12,
-      "marge": 52,
-      "categorie": "bebe",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://www.vinted.fr/catalog?search_text=jouet+éducatif+de+développement+cognitif+pour+bébés"
-      ],
-      "liens": [
-        {
-          "label": "Vinted",
-          "url": "https://www.vinted.fr/catalog?search_text=jouet+éducatif+de+développement+cognitif+pour+bébés"
-        }
-      ],
-      "dateAjout": "2026-07-09 20:45"
-    },
-    {
-      "id": "src-p60",
-      "nom": "Kit de Peinture pour Adultes",
-      "description": "Découvrez votre côté artistique avec ce kit de peinture pour adultes, comprenant tout le nécessaire pour créer des œuvres uniques et relaxantes.",
-      "raisonVente": "Le kit de peinture pour adultes est tendance en ce moment en raison de la popularité croissante des activités de loisirs créatifs et de la recherche de détente et de relaxation.",
-      "prixVente": 29.99,
-      "prixFournisseur": 15,
-      "marge": 50,
-      "categorie": "plaisir",
-      "priorite": "A",
-      "statut": "pending",
-      "images": [
-        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
-      ],
-      "liens": [
-        {
-          "label": "AliExpress",
-          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+peinture+pour+adultes"
-        }
-      ],
-      "dateAjout": "2026-07-09 22:20"
     },
     {
       "id": "src-m64",
@@ -2534,7 +2314,7 @@
       "priorite": "A",
       "statut": "pending",
       "images": [
-        "https://www.dsers.com/blog/content/images/2021/07/projector.jpg"
+        "/img/sourcing/src-m64.avif"
       ],
       "liens": [
         {
