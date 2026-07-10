@@ -139,6 +139,10 @@ function fixMarge(p) {
   return { ...p, marge };
 }
 
+function normaliseName(nom) {
+  return nom.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
 async function main() {
   if (!process.env.GROQ_API_KEY) throw new Error('GROQ_API_KEY manquant');
 
@@ -152,6 +156,7 @@ async function main() {
   const idB = nextId(proposals, 'src-b');
 
   const existingNames = proposals.map(p => p.nom).filter(Boolean).join(' | ');
+  const existingNamesNorm = new Set(proposals.map(p => normaliseName(p.nom)));
 
   /* Analyse du marché */
   const marcheData = await analyseMarche();
@@ -162,7 +167,7 @@ DONNÉES MARCHÉ ACTUELLES (${mois}) :
 ${marcheData}
 
 En te basant sur ces données de marché réelles, propose 3 produits à fort potentiel de vente en France maintenant (1 par univers).
-Produits déjà au catalogue à NE PAS répéter : ${existingNames.slice(0, 600)}
+Produits déjà au catalogue à NE PAS répéter : ${existingNames}
 
 Critères :
 - Marge ≥ 40% : (prixVente - prixFournisseur) / prixVente × 100
@@ -235,6 +240,17 @@ Réponds UNIQUEMENT avec un tableau JSON valide :
     throw new Error('Tableau vide reçu');
 
   newProducts = newProducts.map(fixMarge);
+
+  /* ── Filtre les doublons que Groq aurait quand même proposés ── */
+  const before = newProducts.length;
+  newProducts = newProducts.filter(p => !existingNamesNorm.has(normaliseName(p.nom)));
+  if (newProducts.length < before)
+    console.log(`[Antoine] ${before - newProducts.length} doublon(s) ignoré(s).`);
+
+  if (!newProducts.length) {
+    console.log('[Antoine] Aucun nouveau produit unique — arrêt.');
+    return;
+  }
 
   /* ── Recherche d'images réelles pour chaque produit ── */
   console.log('[Antoine] Recherche des images produits…');
