@@ -2411,6 +2411,28 @@
         }
       ],
       "dateAjout": "2026-07-10 21:59"
+    },
+    {
+      "id": "src-p67",
+      "nom": "Masque de Sommeil Avancé",
+      "description": "Un masque de sommeil innovant avec technologie de réduction de bruit pour un sommeil profond et réparateur",
+      "raisonVente": "Les tendances actuelles montrent une augmentation de la recherche de produits pour améliorer la qualité du sommeil, et ce masque de sommeil avancé répond à ce besoin en offrant une solution efficace pour réduire les distractions et favoriser un sommeil de qualité",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=masque+de+sommeil+avancé"
+        }
+      ],
+      "dateAjout": "2026-07-10 23:07"
     }
   ]
 }
