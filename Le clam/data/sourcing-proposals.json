@@ -2367,6 +2367,50 @@
         }
       ],
       "dateAjout": "2026-07-10 16:54"
+    },
+    {
+      "id": "src-p62",
+      "nom": "Lampe de Lecture LED Portable",
+      "description": "Lampe de lecture LED portable pour lire dans le noir sans déranger les autres, idéale pour les amateurs de lecture",
+      "raisonVente": "Le produit est tendance car il est pratique, léger et économe en énergie, parfait pour les lecteurs qui aiment lire avant de dormir sans déranger leur partenaire",
+      "prixVente": 25,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+led+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 21:59"
+    },
+    {
+      "id": "src-b65",
+      "nom": "Tapis d'Eveil Sensiciel pour Bébé",
+      "description": "Tapis d'éveil sensiciel pour bébé pour stimuler les sens et favoriser le développement cognitif",
+      "raisonVente": "Le produit est tendance car il est éducatif, interactif et stimule les sens du bébé, parfait pour les parents qui veulent favoriser le développement cognitif de leur enfant",
+      "prixVente": 40,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b65.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+d%27%C3%A9veil+sensiciel+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-10 21:59"
     }
   ]
 }
