@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourcing Le Clam — Juillet 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f13; color: #e8e8ec; min-height: 100vh; }
+
+  header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+  header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -.02em; }
+  header p { margin-top: .4rem; color: rgba(255,255,255,.45); font-size: .875rem; }
+
+  .tabs { display: flex; gap: .5rem; padding: 1.5rem 2rem .5rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .tab { padding: .5rem 1.1rem; border-radius: 999px; font-size: .82rem; font-weight: 600; cursor: pointer; border: none; transition: all .15s; }
+  .tab-all  { background: rgba(255,255,255,.12); color: #fff; }
+  .tab-malin  { background: rgba(245,208,0,.15); color: #f5d000; }
+  .tab-plaisir { background: rgba(184,134,11,.15); color: #d4a017; }
+  .tab-bebe { background: rgba(224,82,122,.15); color: #e0527a; }
+  .tab.active { background: #fff; color: #111; }
+  .tab-malin.active { background: #f5d000; color: #071e3d; }
+  .tab-plaisir.active { background: #d4a017; color: #1a0a0a; }
+  .tab-bebe.active { background: #e0527a; color: #fff; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; padding: 2rem; }
+
+  .card { background: #1a1a22; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.07); transition: transform .15s, box-shadow .15s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+
+  .card-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+  .card-img.malin  { background: linear-gradient(135deg, #071e3d, #1d3d72); }
+  .card-img.plaisir { background: linear-gradient(135deg, #1a0a0a, #4a1828); }
+  .card-img.bebe   { background: linear-gradient(135deg, #2d0818, #5c1a40); }
+  .card-img.occasion { background: linear-gradient(135deg, #1a1a10, #3a3a10); }
+
+  .rank { position: absolute; top: .7rem; left: .7rem; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 800; }
+  .rank-A { background: #22c55e; color: #fff; }
+  .rank-B { background: #3b82f6; color: #fff; }
+  .rank-C { background: #a855f7; color: #fff; }
+  .rank-D { background: #6b7280; color: #fff; }
+
+  .badge-occasion { position: absolute; top: .7rem; right: .7rem; background: rgba(255,200,0,.2); border: 1px solid rgba(255,200,0,.4); color: #ffd700; font-size: .62rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; }
+
+  .card-body { padding: 1rem 1.1rem 1.1rem; }
+  .card-univers { font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .4rem; }
+  .univers-malin   { color: #f5d000; }
+  .univers-plaisir { color: #d4a017; }
+  .univers-bebe    { color: #e0527a; }
+
+  .card-name { font-size: .92rem; font-weight: 700; line-height: 1.3; margin-bottom: .5rem; }
+  .card-desc { font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.5; margin-bottom: .9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  .card-meta { display: flex; gap: .5rem; margin-bottom: .9rem; flex-wrap: wrap; }
+  .meta-pill { font-size: .68rem; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; }
+  .pill-prix  { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); }
+  .pill-marge { background: rgba(34,197,94,.15); color: #22c55e; }
+  .pill-fournisseur { background: rgba(59,130,246,.12); color: #60a5fa; }
+
+  .card-links { display: flex; flex-direction: column; gap: .45rem; }
+  .link-btn { display: flex; align-items: center; gap: .5rem; padding: .5rem .8rem; border-radius: 8px; text-decoration: none; font-size: .75rem; font-weight: 600; transition: opacity .15s; }
+  .link-btn:hover { opacity: .8; }
+  .link-btn svg { flex-shrink: 0; }
+  .link-aliexpress { background: rgba(255,96,0,.15); color: #ff6000; border: 1px solid rgba(255,96,0,.25); }
+  .link-google     { background: rgba(66,133,244,.15); color: #4285f4; border: 1px solid rgba(66,133,244,.25); }
+  .link-dsers      { background: rgba(139,92,246,.15); color: #a78bfa; border: 1px solid rgba(139,92,246,.25); }
+  .link-vinted     { background: rgba(9,182,122,.15); color: #09b67a; border: 1px solid rgba(9,182,122,.25); }
+  .link-leboncoin  { background: rgba(255,165,0,.15); color: #ffa500; border: 1px solid rgba(255,165,0,.25); }
+  .link-marque     { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.12); }
+
+  .vigilance { margin-top: .9rem; padding: .65rem .8rem; background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.2); border-radius: 8px; font-size: .72rem; color: rgba(255,160,160,.8); line-height: 1.5; }
+  .vigilance strong { color: #f87171; }
+
+  .section-header { padding: 1rem 2rem .25rem; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sourcing Le Clam — Juillet 2026</h1>
+  <p>23 produits sélectionnés · Malin (13) · Plaisir (5) · Bébé (5) · Validé par Antoine</p>
+</header>
+
+<div class="tabs">
+  <button class="tab tab-all active" onclick="filter('all')">Tous (23)</button>
+  <button class="tab tab-malin" onclick="filter('malin')">⚡ Malin (13)</button>
+  <button class="tab tab-plaisir" onclick="filter('plaisir')">✨ Plaisir (5)</button>
+  <button class="tab tab-bebe" onclick="filter('bebe')">🌸 Bébé (5)</button>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- ======================== MALIN ======================== -->
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🌅
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-2</div>
+      <div class="card-name">Lampe Coucher de Soleil — Sunset Lamp</div>
+      <div class="card-desc">Projette un halo ambré qui reproduit la lumière d'un coucher de soleil sur vos murs. L'accessoire incontournable pour les Reels et la déco chambre.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 24,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 65%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-sunset-lamp.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=sunset+lamp+dropshipping+EU&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier transformateur EU (220V ou USB). Marché saturé — différencier par description.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      😴
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-4</div>
+      <div class="card-name">Masque Sommeil Bluetooth — Sleep Mask Headphones</div>
+      <div class="card-desc">Masque de nuit avec écouteurs Bluetooth intégrés pour écouter méditations et podcasts sans déranger l'entourage. Doux, lavable, rechargeable USB.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 29,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 60%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-sleep-mask-bluetooth-headphones.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=sleep+mask+bluetooth+headphones+dropshipping&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier autonomie batterie réelle (&gt;8h). Qualité audio variable selon modèles.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🎬
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-1</div>
+      <div class="card-name">Mini Projecteur Portable LED — Bedroom Cinema</div>
+      <div class="card-desc">Transforme n'importe quel mur en écran de cinéma en 30 secondes. Rechargeable USB-C, compatible smartphone, projette jusqu'à 120 pouces.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 49,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 52%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-mini-portable-projector-eu-warehouse.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=mini+projecteur+portable+bedroom+cinema+tiktok&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Marquage CE obligatoire. Vérifier lumens réels vs annoncés. Fournisseur &gt;4,5 étoiles.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      💨
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-11 · 🔥 Saisonnier juillet</div>
+      <div class="card-name">Ventilateur Portable Col — Neck Fan Mains Libres</div>
+      <div class="card-desc">Se porte autour du cou, libère les mains en soufflant de l'air frais en continu. Silencieux, rechargeable USB-C, pliable. Parfait pour les festivals et transports d'été.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 24,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 57%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-neck-fan-portable-usb.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=ventilateur+portable+col+cou+2026&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Saisonnier : rentabilité mai–septembre uniquement. Vérifier niveau sonore. CE obligatoire.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🖨️
+      <span class="rank rank-B">B</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-3</div>
+      <div class="card-name">Imprimante Photo Thermique de Poche — Mini Printer</div>
+      <div class="card-desc">Se connecte en Bluetooth, imprime vos photos en 30 secondes au format carte sans cartouche ni câble. Idéal pour les souvenirs instantanés.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 49,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 48%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-mini-photo-printer-bluetooth-pocket.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=mini+imprimante+photo+thermique+poche+bluetooth&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier compatibilité iOS + Android. Disponibilité papiers ZINK en recharge.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🧊
+      <span class="rank rank-B">B</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-6</div>
+      <div class="card-name">Rouleau Facial Glaçons — Ice Roller Visage</div>
+      <div class="card-desc">Se glisse au congélateur puis masse le visage pour dégonfler les poches et resserrer les pores en 2 minutes. Le skincare hack TikTok le plus partagé.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 19,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 65%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU Espagne</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-ice-roller-face-massage.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=ice+roller+visage+skincare+tiktok&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Produit hygiénique — matériaux sans BPA. Pas de promesse médicale. Concurrence Amazon forte.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      ⚡
+      <span class="rank rank-B">B</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-5</div>
+      <div class="card-name">Station de Charge Sans Fil 3-en-1 — MagSafe Compatible</div>
+      <div class="card-desc">Recharge simultanément smartphone, montre connectée et écouteurs Qi sans aucun câble apparent. Compatible iPhone MagSafe et Android.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 34,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 57%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-3-in-1-wireless-charger-magsafe.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=station+charge+sans+fil+3+en+1+magsafe+desk+setup&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier certification Qi et puissance réelle. Attention "MagSafe compatible" sans certification.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🌙
+      <span class="rank rank-C">C</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-12</div>
+      <div class="card-name">Lampe Lune 3D Rechargeable — Moon Lamp</div>
+      <div class="card-desc">Reproduit fidèlement la surface de la Lune en impression 3D. Change de couleur au toucher, se recharge sans fil. Cadeau inoubliable.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 29,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 57%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-moon-lamp-3d-print-led.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=lampe+lune+3d+led+cadeau&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier câbles non fragiles. CE obligatoire. Différencier sur taille 15cm et qualité cartographie.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      💧
+      <span class="rank rank-B">B</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-9</div>
+      <div class="card-name">Humidificateur USB Nuage — Mini Cloud Humidifier</div>
+      <div class="card-desc">Diffuseur de brume en forme de nuage branché en USB. Ultra-silencieux, améliore l'humidité et l'ambiance sur bureau ou table de chevet.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 22,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 62%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU Allemagne</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-cloud-humidifier-usb-mini.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=humidificateur+nuage+usb+aesthetic+tiktok&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Sécurité électrique CE. Certains modèles fuient — fournisseur avec &gt;100 avis. Incompatible huiles essentielles pures.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🥗
+      <span class="rank rank-C">C</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-7</div>
+      <div class="card-name">Éplucheur Spiraliseur Légumes 3-en-1</div>
+      <div class="card-desc">Épluche, spiralise et coupe en julienne en un seul outil compact. Courgettes en spaghettis, carottes en rubans — la cuisine healthy créative en un geste.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 14,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 60%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-vegetable-spiralizer-3-in-1.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=spiraliseur+legumes+3+en+1+gadget+cuisine+tiktok&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Lames inox (pas plastique). Normes alimentaires EU LFGB. Peut casser vite en bas de gamme.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🔌
+      <span class="rank rank-C">C</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-8</div>
+      <div class="card-name">Organiseur de Câbles Magnétique — Lot de 5</div>
+      <div class="card-desc">Clips magnétiques qui maintiennent câbles USB, chargeurs et écouteurs rangés et accessibles. Adhésif repositionnable, compatible tous supports.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 12,99 € (lot 5)</span>
+        <span class="meta-pill pill-marge">Marge : 72%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-magnetic-cable-organizer-clips.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=organiseur+cable+magnetique+desk+setup+aesthetic&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Produit très générique. Vendre en lot pour augmenter panier. Vérifier solidité adhésif.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      👅
+      <span class="rank rank-D">D</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-10</div>
+      <div class="card-name">Grattoir à Langue Acier Inox — Lot de 2</div>
+      <div class="card-desc">Élimine les bactéries de la langue en 10 secondes pour une haleine fraîche. Le geste d'hygiène plébiscité par l'Ayurveda et les routines "clean girl" TikTok.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 9,99 € (lot 2)</span>
+        <span class="meta-pill pill-marge">Marge : 80%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-tongue-scraper-stainless-steel.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=grattoir+langue+inox+clean+girl+tiktok&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Produit hygiénique — emballage individuel obligatoire. Inox 304 food grade. Idéal en upsell/cross-sell.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="malin">
+    <div class="card-img malin">
+      🔦
+      <span class="rank rank-D">D</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-malin">Malin · M-13</div>
+      <div class="card-name">Stylo Lumière UV — Détecteur Faux Billets (lot 2)</div>
+      <div class="card-desc">Détecte en une seconde les faux billets, l'encre invisible et les taches UV. Gadget minimaliste à avoir dans son tiroir, son sac ou sa caisse.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 7,99 € (lot 2)</span>
+        <span class="meta-pill pill-marge">Marge : 75%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-uv-pen-light-counterfeit-detector.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=stylo+UV+detecteur+faux+billets+gadget&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Prix bas — idéal en bundle ou upsell uniquement, pas en produit principal.</div>
+    </div>
+  </div>
+
+  <!-- ======================== PLAISIR ======================== -->
+
+  <div class="card" data-cat="plaisir">
+    <div class="card-img plaisir">
+      🌿
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-plaisir">Plaisir · P-1 · 🇫🇷 Made in France</div>
+      <div class="card-name">Goliate — Lubrifiant Naturel Bio Long Lasting</div>
+      <div class="card-desc">Certifié bio Ecocert, fabriqué en France. Formule 100% naturelle et vegan, sans paraben ni perturbateur endocrinien. Compatible préservatifs.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 28,00 €</span>
+        <span class="meta-pill pill-marge">Marge : 45%</span>
+        <span class="meta-pill pill-fournisseur">Goliate (grossiste)</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-marque" href="https://goliate.com" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Site Goliate — contacter pour grossiste
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=goliate+lubrifiant+bio+made+in+france&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier TVA : 5,5% (cosmétique soin) vs 20% (plaisir) — Jean Charles. MOQ grossiste à confirmer.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="plaisir">
+    <div class="card-img plaisir">
+      🌸
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-plaisir">Plaisir · P-5 · 🇫🇷 Made in France</div>
+      <div class="card-name">Goliate — Soin Vulvaire Régénérant Bio</div>
+      <div class="card-desc">Baume soin certifié bio Ecocert, fabriqué en France. Formule apaisante et nourrissante pour les zones sensibles au quotidien. 100% naturel et vegan.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 27,00 €</span>
+        <span class="meta-pill pill-marge">Marge : 44%</span>
+        <span class="meta-pill pill-fournisseur">Goliate (grossiste)</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-marque" href="https://goliate.com" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Site Goliate — contacter pour grossiste
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=goliate+soin+vulvaire+bio+france&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> TVA 5,5% potentielle (avantage prix). Pas de terme "traitement" ou "guérison" dans la fiche.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="plaisir">
+    <div class="card-img plaisir">
+      🥚
+      <span class="rank rank-B">B</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-plaisir">Plaisir · P-3 · 🇯🇵 Marque Tenga</div>
+      <div class="card-name">Tenga Egg — Kit Masturbateurs x6 Textures Variées</div>
+      <div class="card-desc">Coffret de 6 œufs Tenga avec six textures internes différentes pour explorer le plaisir masculin. Design neutre et élégant, usage unique, livraison discrète.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 34,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 46%</span>
+        <span class="meta-pill pill-fournisseur">Distributeur EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-marque" href="https://www.tenga.co/eu/" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Site Tenga EU — distributeur
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=tenga+egg+kit+6+textures&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Usage unique — mentionner clairement. Charlène : valider légalité en France. Vérifier dispo distributeur EU.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="plaisir">
+    <div class="card-img plaisir">
+      💆
+      <span class="rank rank-C">C</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-plaisir">Plaisir · P-2 · 🇫🇷 Made in France</div>
+      <div class="card-name">Goliate — Huile de Massage Aphrodisiaque Bio</div>
+      <div class="card-desc">Formulée avec des actifs bio aphrodisiaques d'origine végétale. Réchauffe, nourrit la peau et invite au toucher — le bien-être intime commence avant le jeu.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 24,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 46%</span>
+        <span class="meta-pill pill-fournisseur">Goliate (grossiste)</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-marque" href="https://goliate.com" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Site Goliate — contacter pour grossiste
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=goliate+huile+massage+bio+aphrodisiaque&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Incompatible préservatifs latex — mentionner obligatoirement. Pas de promesse physiologique aphrodisiaque.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="plaisir">
+    <div class="card-img plaisir">
+      🎀
+      <span class="rank rank-C">C</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-plaisir">Plaisir · P-4</div>
+      <div class="card-name">Kit Initiation BDSM Sensoriel — Plumes & Satin</div>
+      <div class="card-desc">Bandeau satin, plumes de stimulation et menottes souples pour un premier jeu de séduction complice. Doux, non menaçant, très photogénique. Parfait pour couples curieux.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 29,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 55%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU ou EasyToys</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-bdsm-beginner-kit-feather-satin.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=kit+bdsm+debutant+plumes+satin+menottes+douces&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Charlène : valider les menottes souples (lacets = OK, contrainte physique forte = à vérifier). Emballage discret obligatoire.</div>
+    </div>
+  </div>
+
+  <!-- ======================== BEBE ======================== -->
+
+  <div class="card" data-cat="bebe">
+    <div class="card-img bebe">
+      🏋️
+      <span class="rank rank-A">A</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-bebe">Bébé · B-1</div>
+      <div class="card-name">Tapis d'Éveil avec Arche Musicale 5-en-1</div>
+      <div class="card-desc">Tapis pliable avec arche musicale — 15 activités : hochets suspendus, miroir, piano à pieds, sons et lumières. Stimule tous les sens de 0 à 12 mois.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 49,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 48%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU Pologne</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-baby-play-mat-activity-arch-music.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=tapis+eveil+bebe+arche+musicale+5+en+1&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> CE jouet EN 71 + normes électriques. Vérifier poids (peut être volumineux). Fournisseur &gt;4,5 étoiles / &gt;200 commandes.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="bebe">
+    <div class="card-img bebe">
+      ⭐
+      <span class="rank rank-B">B</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-bebe">Bébé · B-2</div>
+      <div class="card-name">Veilleuse Musicale Nomade — Peluche Projecteur</div>
+      <div class="card-desc">Peluche veilleuse qui projette des étoiles au plafond et joue des berceuses avec minuterie automatique. Rechargeable USB, nomade dès la naissance.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 29,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 52%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-baby-projector-night-light-musical-plush.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=veilleuse+musicale+nomade+peluche+projecteur+bebe&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Son &lt;65 dB (norme EU jouets). Pas de piles boutons accessibles. CE électrique obligatoire.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="bebe">
+    <div class="card-img occasion">
+      ♻️
+      <span class="rank rank-B">B</span>
+      <span class="badge-occasion">2ème main</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-bebe">Bébé · B-3 · Seconde main</div>
+      <div class="card-name">Arche d'Éveil Tiny Love / Fisher-Price — Occasion</div>
+      <div class="card-desc">Arche d'éveil de grande marque en parfait état, nettoyée et vérifiée, toutes pièces présentes, piles neuves fournies. Qualité premium à prix seconde main.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 34,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 50%</span>
+        <span class="meta-pill pill-fournisseur">Vinted / Leboncoin</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-vinted" href="https://www.vinted.fr/catalog?search_text=arche+eveil+tiny+love" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur Vinted
+        </a>
+        <a class="link-btn link-leboncoin" href="https://www.leboncoin.fr/recherche?text=arche+eveil+tiny+love&category=59" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur Leboncoin
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Vérifier rappels RAPEX avant achat. Inspecter toutes les pièces. Laver à 60°. Pas de petits éléments détachés.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="bebe">
+    <div class="card-img occasion">
+      👶
+      <span class="rank rank-C">C</span>
+      <span class="badge-occasion">2ème main</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-bebe">Bébé · B-4 · Seconde main</div>
+      <div class="card-name">Lot Vêtements Bébé 0-3 mois — Sélectionnés Vinted</div>
+      <div class="card-desc">Lot de 8 vêtements 0-3 mois soigneusement sélectionnés — bodys, pyjamas, grenouillères. Chaque pièce vérifiée, lavée à 60°, en parfait état.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 24,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 40%</span>
+        <span class="meta-pill pill-fournisseur">Vinted</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-vinted" href="https://www.vinted.fr/catalog?search_text=lot+vetements+bebe+0+3+mois&size_id[]=85" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur Vinted
+        </a>
+        <a class="link-btn link-leboncoin" href="https://www.leboncoin.fr/recherche?text=lot+vetements+bebe+0-3+mois&category=59" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur Leboncoin
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Laver à 60° lessive hypoallergénique. Pas de cordon au niveau du cou (norme EN 14682). TVA sur marge — Jean Charles.</div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="bebe">
+    <div class="card-img bebe">
+      🪑
+      <span class="rank rank-C">C</span>
+    </div>
+    <div class="card-body">
+      <div class="card-univers univers-bebe">Bébé · B-5</div>
+      <div class="card-name">Transat Bébé Ergonomique 5 Positions — Newborn</div>
+      <div class="card-desc">Transat ajustable 5 positions de 0 à 9 kg. Structure légère, assise inclinée qui soutient la colonne vertébrale. Le premier "espace à soi" de bébé.</div>
+      <div class="card-meta">
+        <span class="meta-pill pill-prix">Vente : 59,99 €</span>
+        <span class="meta-pill pill-marge">Marge : 42%</span>
+        <span class="meta-pill pill-fournisseur">DSers EU</span>
+      </div>
+      <div class="card-links">
+        <a class="link-btn link-aliexpress" href="https://fr.aliexpress.com/w/wholesale-baby-bouncer-newborn-ergonomic.html" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Chercher sur AliExpress
+        </a>
+        <a class="link-btn link-google" href="https://www.google.com/search?q=transat+bebe+ergonomique+5+positions+newborn&tbm=isch" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Voir photos Google
+        </a>
+      </div>
+      <div class="vigilance"><strong>⚠</strong> Norme CE EN 12790 (transats bébé). Attention poids volumétrique pour port. Pas de cordon au niveau du cou.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function filter(cat) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
