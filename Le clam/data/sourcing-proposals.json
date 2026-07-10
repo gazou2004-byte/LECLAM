@@ -4303,6 +4303,72 @@
         }
       ],
       "dateAjout": "2026-07-10 04:50"
+    },
+    {
+      "id": "src-p63",
+      "nom": "Contrôleur de Jeu Mobile Portable",
+      "description": "Améliorez votre expérience de jeu mobile avec ce contrôleur portable et pratique, conçu pour les jeux les plus exigents.",
+      "raisonVente": "La popularité croissante des jeux mobiles et la demande pour des accessoires de jeu de haute qualité font de ce produit un choix idéal pour les gamers.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=contr%C3%B4leur+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-07-10 08:20"
+    },
+    {
+      "id": "src-m67",
+      "nom": "Kit d'Art et de Création",
+      "description": "Débloquez votre créativité avec ce kit d'art et de création, comprenant tout le nécessaire pour peindre, dessiner et créer.",
+      "raisonVente": "La tendance actuelle vers les activités créatives et les hobbies à domicile fait de ce produit un excellent choix pour les amateurs d'art.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+d%27art+et+de+cr%C3%A9ation"
+        }
+      ],
+      "dateAjout": "2026-07-10 08:20"
+    },
+    {
+      "id": "src-b60",
+      "nom": "Tapis de Jeu pour Bébé",
+      "description": "Offrez à votre bébé un espace de jeu sûr et stimulant avec ce tapis de jeu coloré et amusant.",
+      "raisonVente": "La demande pour des produits de jeu pour bébé de haute qualité et sûrs est en constante augmentation, ce qui fait de ce produit un excellent choix pour les parents.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b60.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+de+jeu+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-10 08:20"
     }
   ]
 }
