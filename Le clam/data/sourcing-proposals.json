@@ -2521,6 +2521,28 @@
         }
       ],
       "dateAjout": "2026-07-11 07:51"
+    },
+    {
+      "id": "src-p74",
+      "nom": "Kit de Yoga Étendu pour Adultes",
+      "description": "Découvrez le kit de yoga étendu pour adultes, conçu pour améliorer votre flexibilité et votre bien-être. Ce kit comprend un tapis de yoga, des blocs de yoga, une ceinture de yoga et un sac de transport.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les kits de yoga étendus sont très tendance en ce moment, notamment sur les réseaux sociaux tels que TikTok et Instagram.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga+tendu+pour+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-11 11:02"
     }
   ]
 }
