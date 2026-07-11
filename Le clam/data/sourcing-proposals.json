@@ -2609,6 +2609,28 @@
         }
       ],
       "dateAjout": "2026-07-11 13:13"
+    },
+    {
+      "id": "src-b67",
+      "nom": "Pouponnière Portable pour Bébé",
+      "description": "Pouponnière portable pour bébé pour un sommeil confortable et sécuritaire en déplacement.",
+      "raisonVente": "Ce produit est tendance en ce moment car il répond à la demande croissante de produits de sécurité et de confort pour les bébés, notamment avec l'augmentation des déplacements en famille.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b67.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=pouponni%C3%A8re+portable+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-11 17:54"
     }
   ]
 }
