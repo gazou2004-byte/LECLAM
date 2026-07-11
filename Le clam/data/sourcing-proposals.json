@@ -2653,6 +2653,50 @@
         }
       ],
       "dateAjout": "2026-07-11 18:59"
+    },
+    {
+      "id": "src-p88",
+      "nom": "Kit d'Art et de Création pour Adultes",
+      "description": "Développez votre créativité avec ce kit d'art et de création, idéal pour les adultes qui cherchent à se détendre et à exprimer leur imagination.",
+      "raisonVente": "Le kit d'art et de cration est tendance en ce moment, car il permet aux adultes de se détendre et de développer leur créativité, ce qui est très recherché dans le monde actuel.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+art+cr%C3%A9ation+adultes"
+        }
+      ],
+      "dateAjout": "2026-07-11 20:09"
+    },
+    {
+      "id": "src-b98",
+      "nom": "Poussette Tout-Terrain pour Bébé",
+      "description": "Sortez avec votre bébé en toute sécurité et en tout confort avec cette poussette tout-terrain, conçue pour les parents qui aiment l'aventure.",
+      "raisonVente": "La poussette tout-terrain est très tendance en ce moment, car elle permet aux parents de sortir avec leur bébé en toute sécurité et en tout confort, ce qui est très important pour les jeunes parents.",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b98.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-11 20:09"
     }
   ]
 }
