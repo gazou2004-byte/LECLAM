@@ -2697,6 +2697,50 @@
         }
       ],
       "dateAjout": "2026-07-11 20:09"
+    },
+    {
+      "id": "src-p90",
+      "nom": "Mobile Game Controller Pro",
+      "description": "Contrôleur de jeu mobile professionnel pour une expérience de jeu améliorée",
+      "raisonVente": "La popularité des jeux mobiles et la demande croissante pour des accessoires de jeu de haute qualité",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=mobile+game+controller"
+        }
+      ],
+      "dateAjout": "2026-07-11 21:46"
+    },
+    {
+      "id": "src-m69",
+      "nom": "Lampe de Bureau LED avec Prise USB",
+      "description": "Lampe de bureau LED économe en énergie avec prise USB pour charger vos appareils",
+      "raisonVente": "La demande croissante pour des produits de bureau intelligents et économes en énergie",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hc9c9c9c9c9c9c9c9/HUACAM-Led-Desk-Lamp-With-USB.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=led+desk+lamp+with+usb"
+        }
+      ],
+      "dateAjout": "2026-07-11 21:46"
     }
   ]
 }
