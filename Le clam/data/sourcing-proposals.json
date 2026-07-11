@@ -2477,6 +2477,50 @@
         }
       ],
       "dateAjout": "2026-07-11 05:38"
+    },
+    {
+      "id": "src-p72",
+      "nom": "Kit de Yoga Étendu pour Enfants",
+      "description": "Un kit de yoga pour enfants conçu pour favoriser la flexibilité et la relaxation, idéal pour les parents qui souhaitent encourager une vie saine et équilibrée pour leurs enfants.",
+      "raisonVente": "Les produits liés au yoga et à la relaxation sont très tendance en ce moment, notamment chez les parents qui cherchent à promouvoir une vie saine pour leurs enfants, comme le montrent les tendances sur Google Trends et les ventes sur AliExpress.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+yoga+enfants"
+        }
+      ],
+      "dateAjout": "2026-07-11 07:51"
+    },
+    {
+      "id": "src-m66",
+      "nom": "Montre Connectée Fitness pour Enfant",
+      "description": "Une montre connectée spécialement conçue pour les enfants, permettant de suivre leurs activités physiques et de promouvoir une vie active et saine.",
+      "raisonVente": "Les montres connectées pour enfants sont de plus en plus populaires, car elles offrent une façon amusante et interactive de suivre l'activité physique et de promouvoir une vie saine, comme le montrent les tendances sur DSers et les ventes sur AliExpress.",
+      "prixVente": 39.9,
+      "prixFournisseur": 20,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=montre+connectee+enfant"
+        }
+      ],
+      "dateAjout": "2026-07-11 07:51"
     }
   ]
 }
