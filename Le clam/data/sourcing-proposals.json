@@ -2455,6 +2455,28 @@
         }
       ],
       "dateAjout": "2026-07-11 02:27"
+    },
+    {
+      "id": "src-p70",
+      "nom": "Mobile Game Controller",
+      "description": "Contrôleur de jeu mobile pour améliorer votre expérience de jeu en déplacement",
+      "raisonVente": "Les jeux mobiles connaissent un succès grandissant, et les accessoires de jeu mobile sont de plus en plus demandés",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=mobile+game+controller"
+        }
+      ],
+      "dateAjout": "2026-07-11 05:38"
     }
   ]
 }
