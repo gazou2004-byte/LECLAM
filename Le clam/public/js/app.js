@@ -3990,6 +3990,34 @@ function initCookieWarning() {
   });
 }
 
+/* ── Favicon dynamique par section ── */
+function initFavicon() {
+  const cat = (document.body.className.match(/page-(\w+)/) || [])[1];
+
+  const themes = {
+    plaisir: { bg: '#8b1a2a', text: '#d4a017' },
+    malin:   { bg: '#071e3d', text: '#f5d000' },
+    bebe:    { bg: '#e0527a', text: '#fff5f8' },
+    default: { bg: '#d9c4a0', text: '#3e2a14' },
+  };
+  const { bg, text } = themes[cat] || themes.default;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="100" fill="${bg}"/>
+    <text x="100" y="138" font-family="Georgia,serif" font-size="96" fill="${text}" text-anchor="middle" font-weight="400" letter-spacing="-4">LC</text>
+  </svg>`;
+  const href = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+  let link = document.querySelector('link[rel="icon"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/svg+xml';
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
 /* ── Bandeau consentement cookies (RGPD) ── */
 function initCookieBanner() {
   if (localStorage.getItem('leclam_cookie_consent')) return;
@@ -4252,6 +4280,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLangSelector();
   applyProductOverrides();
   cachePageProducts();
+  initFavicon();
   initCookieBanner();
   initCookieWarning();
   initStockBadges();
