@@ -3990,24 +3990,28 @@ function initCookieWarning() {
   });
 }
 
-/* ── Favicon dynamique par section ── */
+/* ── Favicon dynamique par section — style logo Le Clam ── */
 function initFavicon() {
   const cat = (document.body.className.match(/page-(\w+)/) || [])[1];
 
   const themes = {
-    plaisir: { bg: '#8b1a2a', text: '#d4a017' },
-    malin:   { bg: '#071e3d', text: '#f5d000' },
-    bebe:    { bg: '#e0527a', text: '#fff5f8' },
-    default: { bg: '#d9c4a0', text: '#3e2a14' },
+    plaisir: { bg: '#8b1a2a', ink: '#d4a017' },
+    malin:   { bg: '#071e3d', ink: '#f5d000' },
+    bebe:    { bg: '#e0527a', ink: '#fff5f8' },
+    default: { bg: '#d9c4a0', ink: '#3e2a14' },
   };
-  const { bg, text } = themes[cat] || themes.default;
+  const { bg, ink } = themes[cat] || themes.default;
 
+  // Reproduit le style du logo : cercle + anneau fin + "C" et "L" en contour
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
     <circle cx="100" cy="100" r="100" fill="${bg}"/>
-    <text x="100" y="138" font-family="Georgia,serif" font-size="96" fill="${text}" text-anchor="middle" font-weight="400" letter-spacing="-4">LC</text>
+    <circle cx="100" cy="100" r="92" fill="none" stroke="${ink}" stroke-width="2.5"/>
+    <circle cx="100" cy="100" r="84" fill="none" stroke="${ink}" stroke-width="0.8" opacity="0.4"/>
+    <text x="84" y="122" font-family="Georgia,serif" font-size="90" fill="none" stroke="${ink}" stroke-width="3" text-anchor="middle" font-weight="400" opacity="0.9">C</text>
+    <text x="122" y="100" font-family="Georgia,serif" font-size="72" fill="none" stroke="${ink}" stroke-width="2.5" text-anchor="middle" font-weight="300" opacity="0.6">L</text>
   </svg>`;
-  const href = 'data:image/svg+xml,' + encodeURIComponent(svg);
 
+  const href = 'data:image/svg+xml,' + encodeURIComponent(svg);
   let link = document.querySelector('link[rel="icon"]');
   if (!link) {
     link = document.createElement('link');
