@@ -2631,6 +2631,28 @@
         }
       ],
       "dateAjout": "2026-07-11 17:54"
+    },
+    {
+      "id": "src-p76",
+      "nom": "Lampe de Lecture Réchargeable LED",
+      "description": "Lampe de lecture portable et réchargeable pour une lecture confortable partout",
+      "raisonVente": "Les produits de lecture et de travail à domicile sont tendance en ce moment, notamment avec l'augmentation du travail à distance et de la lecture en temps libre",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+rechargeable+led"
+        }
+      ],
+      "dateAjout": "2026-07-11 18:59"
     }
   ]
 }
