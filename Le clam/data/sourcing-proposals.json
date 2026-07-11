@@ -2543,6 +2543,72 @@
         }
       ],
       "dateAjout": "2026-07-11 11:02"
+    },
+    {
+      "id": "src-p75",
+      "nom": "Lampe de Lecture LED Portable avec Ventilateur Silencieux",
+      "description": "Lampe de lecture LED portable avec ventilateur silencieux pour une lecture confortable et rafraîchissante",
+      "raisonVente": "Ce produit est tendance en ce moment en raison de la popularité des lampes de lecture portables et des ventilateurs silencieux, comme visible sur les données de marché de DSers et AliExpress",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+portable+avec+ventilateur+silencieux"
+        }
+      ],
+      "dateAjout": "2026-07-11 13:13"
+    },
+    {
+      "id": "src-m67",
+      "nom": "Mobile Game Controller avec Joystick et Écran Tactile",
+      "description": "Mobile game controller avec joystick et écran tactile pour une expérience de jeu mobile améliorée",
+      "raisonVente": "Ce produit est tendance en ce moment en raison de la popularité des jeux mobiles et des accessoires de jeu, comme visible sur les données de marché de DSers et TikTok",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=mobile+game+controller+avec+joystick+et+ecran+tactile"
+        }
+      ],
+      "dateAjout": "2026-07-11 13:13"
+    },
+    {
+      "id": "src-b66",
+      "nom": "Tapis d'Eveil Sensiciel pour Bébé avec Arche Musicale",
+      "description": "Tapis d'eveil sensiciel pour bébé avec arche musicale pour stimuler le développement cognitif et sensoriel de votre enfant",
+      "raisonVente": "Ce produit est tendance en ce moment en raison de la popularité des tapis d'eveil et des jouets éducatifs pour bébés, comme visible sur les données de marché de Vinted et Google Trends",
+      "prixVente": 69.99,
+      "prixFournisseur": 35,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b66.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+eveil+sensiciel+bebe+avec+arche+musicale"
+        }
+      ],
+      "dateAjout": "2026-07-11 13:13"
     }
   ]
 }
