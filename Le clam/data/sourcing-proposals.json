@@ -2433,6 +2433,28 @@
         }
       ],
       "dateAjout": "2026-07-10 23:07"
+    },
+    {
+      "id": "src-p68",
+      "nom": "Lampe de Lecture LED Portable avec Ventilateur",
+      "description": "Lampe de lecture LED portable avec ventilateur pour une lecture confortable et fraîche",
+      "raisonVente": "Les lampes de lecture LED portables sont tendance en ce moment, en particulier celles avec ventilateur, car elles offrent un confort de lecture optimal et sont pratiques pour les déplacements",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+led+portable+avec+ventilateur"
+        }
+      ],
+      "dateAjout": "2026-07-11 02:27"
     }
   ]
 }
