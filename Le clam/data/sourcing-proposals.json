@@ -2763,6 +2763,28 @@
         }
       ],
       "dateAjout": "2026-07-11 22:44"
+    },
+    {
+      "id": "src-m70",
+      "nom": "Contrôleur de Jeu Mobile Pro",
+      "description": "Contrôleur de jeu mobile pro pour une expérience de jeu améliorée sur votre smartphone",
+      "raisonVente": "Ce produit est tendance en ce moment en raison de la popularité des jeux mobiles et de la recherche de produits pour améliorer l'expérience de jeu",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H73b15f24befe4c9b80c5f9d94e93c1c9y/Contr%C3%B4leur-de-Jeu-Mobile-Pro-Bluetooth-Gamepad-pour-Smartphone.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=contr%C3%B4leur+de+jeu+mobile+pro"
+        }
+      ],
+      "dateAjout": "2026-07-12 08:16"
     }
   ]
 }
