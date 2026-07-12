@@ -2785,6 +2785,28 @@
         }
       ],
       "dateAjout": "2026-07-12 08:16"
+    },
+    {
+      "id": "src-m71",
+      "nom": "Contrôleur de Jeu Mobile Pro avec Joystick et Écran Tactile",
+      "description": "Contrôleur de jeu mobile pro avec joystick et écran tactile pour une expérience de jeu améliorée.",
+      "raisonVente": "Le produit est tendance en ce moment en raison de la popularité des jeux mobiles et des contrôleurs de jeu sur les réseaux sociaux.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=Contr%C3%B4leur+de+Jeu+Mobile+Pro+avec+Joystick+et+%C3%89cran+Tactile"
+        }
+      ],
+      "dateAjout": "2026-07-12 11:57"
     }
   ]
 }
