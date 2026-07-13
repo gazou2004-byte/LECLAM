@@ -2851,6 +2851,50 @@
         }
       ],
       "dateAjout": "2026-07-13 10:23"
+    },
+    {
+      "id": "src-m72",
+      "nom": "Station de Travail Ergonomique",
+      "description": "Améliorez votre productivité et votre confort de travail avec une station de travail ergonomique",
+      "raisonVente": "Le travail à domicile est de plus en plus courant, et les stations de travail ergonomiques sont très demandées en ce moment pour améliorer la productivité et le confort de travail",
+      "prixVente": 99.99,
+      "prixFournisseur": 50,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/laptop.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=station+de+travail+ergonomique"
+        }
+      ],
+      "dateAjout": "2026-07-13 21:54"
+    },
+    {
+      "id": "src-b100",
+      "nom": "Tapis d'Éveil Sensiciel pour Bébé",
+      "description": "Stimulez le développement de votre bébé avec un tapis d'éveil sensiciel",
+      "raisonVente": "Les parents sont à la recherche de produits pour stimuler le développement de leurs bébés, et les tapis d'éveil sensiels sont très demandés en ce moment pour leur capacité à stimuler les sens et à favoriser l'apprentissage",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b100.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+%C3%A9veil+sensiel+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-13 21:54"
     }
   ]
 }
