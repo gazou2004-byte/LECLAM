@@ -2807,6 +2807,50 @@
         }
       ],
       "dateAjout": "2026-07-12 11:57"
+    },
+    {
+      "id": "src-p92",
+      "nom": "Lampe de Lecture Réchargeable LED avec Ventilateur Silencieux",
+      "description": "Lisez en toute quiétude avec cette lampe de lecture réchargeable LED équipée d'un ventilateur silencieux pour un confort optimal.",
+      "raisonVente": "Les produits de lecture et de travail à domicile sont très tendance en ce moment, notamment avec l'augmentation du télétravail et de la lecture en ligne.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+rechargeable+led+avec+ventilateur"
+        }
+      ],
+      "dateAjout": "2026-07-13 10:23"
+    },
+    {
+      "id": "src-b99",
+      "nom": "Pouponnière Portable pour Bébé avec Matelas et Sac de Transport",
+      "description": "Voyagez en toute sécurité avec votre bébé grâce à cette pouponnière portable équipée d'un matelas et d'un sac de transport pour un confort optimal.",
+      "raisonVente": "Les parents sont à la recherche de produits pratiques et sûrs pour leurs bébés, notamment les pouponnières portables qui sont très tendance sur les réseaux sociaux et les sites de vente en ligne.",
+      "prixVente": 69.99,
+      "prixFournisseur": 35,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.vinted.fr/photos/123456789.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=pouponniere+portable+pour+bebe"
+        }
+      ],
+      "dateAjout": "2026-07-13 10:23"
     }
   ]
 }
