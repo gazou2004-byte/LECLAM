@@ -2895,6 +2895,28 @@
         }
       ],
       "dateAjout": "2026-07-13 21:54"
+    },
+    {
+      "id": "src-m73",
+      "nom": "Yoga Mat Écologique",
+      "description": "Pratiquez le yoga en toute sérénité avec ce tapis de yoga écologique, conçu pour offrir un confort et une adhérence optimaux.",
+      "raisonVente": "Le yoga et les activités de bien-être sont très populaires, et les tapis de yoga écologiques sont particulièrement demandés en raison de leur durabilité et de leur impact environnemental positif, comme le montrent les tendances sur Google Trends et DSers.",
+      "prixVente": 24.99,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://www.dsers.com/blog/content/images/2021/07/yoga-mat.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=yoga+mat+%C3%A9cologique"
+        }
+      ],
+      "dateAjout": "2026-07-14 02:13"
     }
   ]
 }
