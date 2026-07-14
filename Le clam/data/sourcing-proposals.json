@@ -2917,6 +2917,50 @@
         }
       ],
       "dateAjout": "2026-07-14 02:13"
+    },
+    {
+      "id": "src-m74",
+      "nom": "Mobile Game Controller Pro avec Joystick et Écran Tactile",
+      "description": "Jouez à vos jeux mobiles préférés avec ce contrôleur de jeu mobile pro, équipé d'un joystick et d'un écran tactile pour une expérience de jeu ultime.",
+      "raisonVente": "Les jeux mobiles sont de plus en plus populaires, et les accessoires de jeu tels que les contrôleurs de jeu mobile sont très demandés, notamment avec la tendance du gaming sur TikTok.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H8b53c7f2b4c64f7a8f2f2cfc9befe45eX.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=mobile+game+controller+pro"
+        }
+      ],
+      "dateAjout": "2026-07-14 05:27"
+    },
+    {
+      "id": "src-b101",
+      "nom": "Tapis d'Éveil Sensiciel pour Bébé avec Arche Musicale",
+      "description": "Offrez à votre bébé un environnement stimulant et interactif avec ce tapis d'éveil sensiciel, équipé d'une arche musicale pour développer ses sens et son intelligence.",
+      "raisonVente": "Les parents sont à la recherche de produits qui stimulent le développement de leurs bébés, et les tapis d'éveil sensibilisés sont très populaires en ce moment, notamment avec la tendance du développement cognitif des enfants sur TikTok.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf449f7c19f514c6d9d2f2cfc9befe45eX.jpg"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+d%27%C3%A9veil+sensiciel+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-14 05:27"
     }
   ]
 }
