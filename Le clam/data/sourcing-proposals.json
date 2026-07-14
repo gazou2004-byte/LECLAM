@@ -2961,6 +2961,50 @@
         }
       ],
       "dateAjout": "2026-07-14 05:27"
+    },
+    {
+      "id": "src-p93",
+      "nom": "Lampe de Lecture Réchargeable LED Portable avec Ventilateur Silencieux",
+      "description": "Lampe de lecture portable et réchargeable avec ventilateur silencieux pour un confort optimal",
+      "raisonVente": "Le produit est tendance en raison de la demande croissante de produits portables et pratiques pour la maison, comme le montre la catégorie 'Home Workstation Setup' sur DSers",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+portable+avec+ventilateur"
+        }
+      ],
+      "dateAjout": "2026-07-14 14:48"
+    },
+    {
+      "id": "src-b102",
+      "nom": "Poussette Tout-Terrain pour Bébé avec Siège Réversible",
+      "description": "Poussette tout-terrain pour bébé avec siège réversible pour une sécurité et un confort optimal",
+      "raisonVente": "Le produit est tendance en raison de la demande croissante de poussettes tout-terrain de haute qualité et de la popularité des produits pour bébé sur les réseaux sociaux, comme le montre la catégorie 'Poussettes' sur Vinted",
+      "prixVente": 129.99,
+      "prixFournisseur": 70,
+      "marge": 46.1,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b102.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+pour+bébé"
+        }
+      ],
+      "dateAjout": "2026-07-14 14:48"
     }
   ]
 }
