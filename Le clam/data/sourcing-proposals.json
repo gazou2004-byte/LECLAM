@@ -3005,6 +3005,28 @@
         }
       ],
       "dateAjout": "2026-07-14 14:48"
+    },
+    {
+      "id": "src-p94",
+      "nom": "Lampe de Lecture Réchargeable LED Portative",
+      "description": "Lampe de lecture réchargeable LED portative pour une lecture confortable partout",
+      "raisonVente": "Les lampes de lecture réchargeables sont très tendance en ce moment en raison de leur praticité et de leur éco-friendliness, visible sur les tendances de Google Trends France",
+      "prixVente": 25,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hb487f2a6b2f34e9baa94b dee9f8a7a2X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+rechargeable+led"
+        }
+      ],
+      "dateAjout": "2026-07-17 05:40"
     }
   ]
 }
