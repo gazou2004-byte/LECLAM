@@ -3027,6 +3027,50 @@
         }
       ],
       "dateAjout": "2026-07-17 05:40"
+    },
+    {
+      "id": "src-p95",
+      "nom": "Vibromasseur Intime Réchargeable Waterproof",
+      "description": "Un vibromasseur intime réchargeable waterproof pour un plaisir intense et durable, conçu pour offrir une expérience de bien-être unique et discrète.",
+      "raisonVente": "Les produits de bien-être intime sont très tendance en ce moment, notamment les vibromasseurs réchargeables qui offrent une expérience de plaisir durable et discrète.",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i2/2211771483655/O1CN01bQpQhC1jKvD3V6p_!!2211771483655.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=vibromasseur+intime+r%C3%A9chargeable+waterproof"
+        }
+      ],
+      "dateAjout": "2026-07-18 16:55"
+    },
+    {
+      "id": "src-m75",
+      "nom": "Mini Projecteur LED Portable 1080p",
+      "description": "Un mini projecteur LED portable 1080p pour une expérience de divertissement ultime, idéal pour les soirées entre amis ou les projections de films en plein air.",
+      "raisonVente": "Les mini projecteurs LED portables sont très populaires en ce moment, notamment sur TikTok où les utilisateurs partagent leurs expériences de divertissement avec ces produits.",
+      "prixVente": 99.9,
+      "prixFournisseur": 50,
+      "marge": 49.9,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i4/2211771483655/O1CN01bQpQhC1jKvD3V6p_!!2211771483655.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=mini+projecteur+LED+portable+1080p"
+        }
+      ],
+      "dateAjout": "2026-07-18 16:55"
     }
   ]
 }
