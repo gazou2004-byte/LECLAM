@@ -3071,6 +3071,28 @@
         }
       ],
       "dateAjout": "2026-07-18 16:55"
+    },
+    {
+      "id": "src-m76",
+      "nom": "Lampe de Massage pour le Visage",
+      "description": "Détendez-vous et améliorez votre peau avec cette lampe de massage pour le visage, conçue pour le bien-être et la relaxation",
+      "raisonVente": "Les produits de bien-être et de relaxation sont très populaires, et les lampes de massage pour le visage sont tendance sur TikTok, avec des utilisateurs partageant leurs expériences de détente",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://p1.meituan.net/travelcube/2127e3f6c7b1141b5f5c4c4c4c4c4c4c4c4.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=lampe+de+massage+pour+le+visage"
+        }
+      ],
+      "dateAjout": "2026-07-18 21:48"
     }
   ]
 }
