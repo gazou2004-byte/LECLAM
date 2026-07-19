@@ -3115,6 +3115,28 @@
         }
       ],
       "dateAjout": "2026-07-19 08:12"
+    },
+    {
+      "id": "src-p96",
+      "nom": "Lampe de Massage LED pour le Visage",
+      "description": "Cette lampe de massage LED pour le visage offre une expérience de bien-être unique, avec des lumières colorées et des vibrations pour détendre les muscles du visage.",
+      "raisonVente": "Ce produit est tendance actuellement en raison de son apparition sur TikTok France, où les utilisateurs partagent leurs expériences de détente et de bien-être avec ce type de produits.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=LED+Massage+Lamp+Facial+Steaming"
+        }
+      ],
+      "dateAjout": "2026-07-19 13:16"
     }
   ]
 }
