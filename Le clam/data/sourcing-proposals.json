@@ -3093,6 +3093,28 @@
         }
       ],
       "dateAjout": "2026-07-18 21:48"
+    },
+    {
+      "id": "src-m77",
+      "nom": "Projecteur Portable LED 1080p",
+      "description": "Le projecteur portable LED 1080p est parfait pour les amateurs de cinéma en plein air ou pour les présentations professionnelles. Il est léger, compact et offre une qualité d'image exceptionnelle.",
+      "raisonVente": "Les projecteurs portables sont très populaires en ce moment, notamment avec l'augmentation de la demande de produits de divertissement à domicile.",
+      "prixVente": 129.99,
+      "prixFournisseur": 60,
+      "marge": 53.8,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/H4722241a94a34f9b8f7fbafe7b5c5f5fT/1080P-Portable-LED-Projector-Home-Cinema-Theater-Projector-For-Phone-Computer-Gaming-Console.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=projecteur+portable+LED+1080p"
+        }
+      ],
+      "dateAjout": "2026-07-19 08:12"
     }
   ]
 }
