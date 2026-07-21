@@ -3137,6 +3137,28 @@
         }
       ],
       "dateAjout": "2026-07-19 13:16"
+    },
+    {
+      "id": "src-p97",
+      "nom": "Kit de Yoga Écologique pour Débutants",
+      "description": "Un kit de yoga écologique pour débutants, comprenant un tapis de yoga en caoutchouc naturel, un bloc de yoga et une ceinture de yoga, pour vous aider à améliorer votre flexibilité et votre équilibre.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, notamment chez les jeunes adultes, et les produits écologiques sont très tendance en ce moment, selon les données de Google Trends et de DSers.",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga+écologique"
+        }
+      ],
+      "dateAjout": "2026-07-21 07:31"
     }
   ]
 }
