@@ -3159,6 +3159,28 @@
         }
       ],
       "dateAjout": "2026-07-21 07:31"
+    },
+    {
+      "id": "src-p98",
+      "nom": "Masque de Visage LED Avancé",
+      "description": "Découvrez le masque de visage LED avancé pour un soin de peau personnalisé et professionnel à domicile.",
+      "raisonVente": "Le masque de visage LED est actuellement très tendance en raison de ses bienfaits pour la peau et de son utilisation facile à la maison, comme le montrent les tendances sur Google Trends et les ventes sur AliExpress.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=masque+de+visage+LED"
+        }
+      ],
+      "dateAjout": "2026-07-21 12:22"
     }
   ]
 }
