@@ -623,6 +623,36 @@
       "legende": "👶 Créez un espace de découverte pour votre petit 👀 ! 🎀 Découvrez nos jouets d'éveil et accessoires pour aider votre bébé à grandir et à apprendre 📚. Lien en bio pour découvrir notre sélection 🛍️ #bebe #eveil #decoration",
       "cta": "Lien en bio",
       "dateCreation": "2026-07-20 10:56"
+    },
+    {
+      "id": "post-p20",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Découvrez le secret du bien-être intime",
+      "concept": "Présentation d'un nouvel accessoire de soin intime Made in France, avec démonstration de son utilisation",
+      "legende": "🌸 Vous cherchez à améliorer votre bien-être intime ? 🌸 Découvrez notre nouvel accessoire de soin intime, conçu pour vous offrir une expérience unique ! 🌸💆‍♀️ Lien en bio pour découvrir notre sélection d'accessoires de soin intime 🛍️ #bienetreintime #soinintime #madeinfrance",
+      "cta": "Lien en bio",
+      "dateCreation": "2026-07-21 10:27"
+    },
+    {
+      "id": "post-m20",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui vous simplifie la vie de nomade",
+      "concept": "Présentation d'un gadget high-tech pour les nomades, avec démonstration de ses fonctionnalités",
+      "legende": "📱 Vous êtes toujours en déplacement ? 📱 Découvrez notre dernier gadget high-tech qui vous simplifie la vie de nomade ! 📈❤️ Commenter vos gadgets préférés below ! 💬 #gadget #nomade #hightech",
+      "cta": "Commenter ❤️",
+      "dateCreation": "2026-07-21 10:27"
+    },
+    {
+      "id": "post-b20",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "L'éveil sensoriel pour les tout-petits",
+      "concept": "Présentation d'un jouet d'éveil sensoriel pour les bébés, avec explications sur ses bienfaits pour leur développement",
+      "legende": "👶 Vous cherchez à stimuler le développement de votre bébé ? 🤩 Découvrez notre sélection de jouets d'éveil sensoriel conçus pour les tout-petits ! 🌟💡 Lien en bio pour découvrir notre univers bébé 📚 #eveilsensoriel #jouets #bebe",
+      "cta": "Lien en bio",
+      "dateCreation": "2026-07-21 10:27"
     }
   ]
 }
