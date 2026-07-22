@@ -3181,6 +3181,28 @@
         }
       ],
       "dateAjout": "2026-07-21 12:22"
+    },
+    {
+      "id": "src-p99",
+      "nom": "Kit de Yoga Étendu pour Débutants",
+      "description": "Un kit de yoga complet pour les débutants, comprenant un tapis de yoga, des blocs de yoga et une ceinture de yoga.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les kits de yoga sont très tendance en ce moment, notamment sur TikTok.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf4b8c2d7d5144f4a9f7b9f7f7f7f7f7.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=kit+de+yoga+pour+d%C3%A9butants"
+        }
+      ],
+      "dateAjout": "2026-07-22 08:24"
     }
   ]
 }
