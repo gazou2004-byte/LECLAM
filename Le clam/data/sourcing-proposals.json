@@ -3203,6 +3203,28 @@
         }
       ],
       "dateAjout": "2026-07-22 08:24"
+    },
+    {
+      "id": "src-m79",
+      "nom": "Smartphone Projecteur LED 1080p",
+      "description": "Transformez votre téléphone en cinéma portable avec ce projecteur LED 1080p",
+      "raisonVente": "La popularité des contenus vidéos et la recherche de solutions pour améliorer l'expérience de visualisation",
+      "prixVente": 69.99,
+      "prixFournisseur": 35,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-m79.webp"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=Smartphone+Projector+LED+1080p"
+        }
+      ],
+      "dateAjout": "2026-07-24 09:19"
     }
   ]
 }
