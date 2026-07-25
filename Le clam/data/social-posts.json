@@ -743,6 +743,36 @@
       "legende": "🎀 Créez un espace de jeux éducatif pour votre petit avec nos jouets d'éveil et tapis de jeux ! 🧩👶 Découvrez notre sélection pour stimuler le développement de votre enfant 📚💡 #jouets #bebe #education",
       "cta": "Lien en bio pour découvrir notre sélection de jouets",
       "dateCreation": "2026-07-24 10:22"
+    },
+    {
+      "id": "post-p24",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Soins intimes pour une peau saine",
+      "concept": "Présentation d'un nouveau produit de soin intime Made in France, avec démonstration de son utilisation et de ses bienfaits pour la peau",
+      "legende": "Découvrez notre nouveau masseur personnel pour un bien-être intime optimal 💆‍♀️🌸! Les soins intimes sont essentiels pour une peau saine et éclatante. 👉 Lien en bio pour découvrir notre sélection de produits de soin intime Made in France 🇫🇷 #bienetre #soinintime #madeinfrance",
+      "cta": "Lien en bio",
+      "dateCreation": "2026-07-25 09:52"
+    },
+    {
+      "id": "post-m24",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui vous permet de projeter votre écran de téléphone partout",
+      "concept": "Présentation d'un nouveau gadget high-tech permettant de projeter l'écran de téléphone sur n'importe quelle surface, avec démonstration de son utilisation",
+      "legende": "Vous êtes prêts à prendre votre expérience de visualisation à un autre niveau ? 📱🔍 Découvrez notre nouveau gadget de projection qui vous permet de partager vos contenus favoris partout ! 🌟 #gadget #hightech #innovation",
+      "cta": "Commenter votre usage préféré de ce gadget",
+      "dateCreation": "2026-07-25 09:52"
+    },
+    {
+      "id": "post-b24",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "Créez un espace de découverte sensorielle pour votre bébé",
+      "concept": "Présentation d'un jouet d'éveil sensoriel pour bébés, avec conseils pour créer un environnement stimulant pour le développement de votre enfant",
+      "legende": "Offrez à votre petit ange un environnement stimulant pour son développement ! 🌈👶 Découvrez notre sélection de jouets d'éveil sensoriels pour créer un espace de découverte unique 🌟 #bebe #jouetsdeveil #developpement",
+      "cta": "Visitez notre site web pour découvrir plus de jouets éducatifs",
+      "dateCreation": "2026-07-25 09:52"
     }
   ]
 }
