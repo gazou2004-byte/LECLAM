@@ -3225,6 +3225,28 @@
         }
       ],
       "dateAjout": "2026-07-24 09:19"
+    },
+    {
+      "id": "src-p101",
+      "nom": "Yoga Mat Écologique Premium",
+      "description": "Un tapis de yoga écologique et durable pour les amateurs de yoga, conçu pour offrir une meilleure adhérence et un confort optimal.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables. Les tendances sur Google Trends et les ventes sur AliExpress montrent une forte demande pour les tapis de yoga de haute qualité.",
+      "prixVente": 29.9,
+      "prixFournisseur": 15,
+      "marge": 49.8,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-p101.webp"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=yoga+mat+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-25 21:53"
     }
   ]
 }
