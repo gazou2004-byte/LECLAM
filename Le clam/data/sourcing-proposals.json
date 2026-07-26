@@ -3247,6 +3247,28 @@
         }
       ],
       "dateAjout": "2026-07-25 21:53"
+    },
+    {
+      "id": "src-p102",
+      "nom": "Kit de Yoga Écologique Premium",
+      "description": "Un tapis de yoga écologique et léger pour les pratiquants de yoga débutants ou confirmés, conçu pour offrir une expérience de yoga confortable et durable.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les produits écologiques sont très tendance, ce qui fait de ce kit un excellent choix pour les consommateurs à la recherche d'un produit de qualité et respectueux de l'environnement.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://example.com/image-yoga-kit.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=kit+yoga+ecologique"
+        }
+      ],
+      "dateAjout": "2026-07-26 06:34"
     }
   ]
 }
