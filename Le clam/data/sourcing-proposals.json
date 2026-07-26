@@ -3269,6 +3269,28 @@
         }
       ],
       "dateAjout": "2026-07-26 06:34"
+    },
+    {
+      "id": "src-p104",
+      "nom": "Pyrocumulonimbus Détection Kit",
+      "description": "Détectez les feux de forêt et les pyrocumulonimbus avec ce kit de détection avancé",
+      "raisonVente": "Les incendies de forêt et les pyrocumulonimbus sont actuellement tendance sur Google Trends France, ce kit de détection peut aider les personnes à se préparer et à réagir en cas d'urgence",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-p104.webp"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=pyrocumulonimbus+d%C3%A9tection+kit"
+        }
+      ],
+      "dateAjout": "2026-07-26 11:17"
     }
   ]
 }
