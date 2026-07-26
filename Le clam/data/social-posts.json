@@ -773,6 +773,36 @@
       "legende": "Offrez à votre petit ange un environnement stimulant pour son développement ! 🌈👶 Découvrez notre sélection de jouets d'éveil sensoriels pour créer un espace de découverte unique 🌟 #bebe #jouetsdeveil #developpement",
       "cta": "Visitez notre site web pour découvrir plus de jouets éducatifs",
       "dateCreation": "2026-07-25 09:52"
+    },
+    {
+      "id": "post-p25",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Découvrez le pouvoir du massage",
+      "concept": "Présentation d'un masseur personnel pour un bien-être intime exceptionnel, avec des conseils d'utilisation et des bénéfices pour la santé",
+      "legende": "🧖‍♀️ Découvrez le secret d'un bien-être intime exceptionnel ! 🌸 Notre sélection de masseurs personnels vous aidera à vous détendre et à vous ressourcer. 🛍️ Découvrez-les maintenant et offrez-vous un moment de plaisir ! 😌 #bienetre #massages #plaisir",
+      "cta": "Lien en bio pour découvrir notre sélection",
+      "dateCreation": "2026-07-26 10:03"
+    },
+    {
+      "id": "post-m25",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui vous permet de projeter partout",
+      "concept": "Présentation d'un projecteur portable pour projeter des contenus multimédias n'importe où, avec des exemples d'utilisation",
+      "legende": "📽️ Découvrez le gadget qui vous permet de projeter partout ! 🌟 Projetez vos films, séries et jeux préférés n'importe où avec notre projecteur portable ! 🎮 #gadget #projecteur #portable",
+      "cta": "Commenter 👇 pour découvrir le prix",
+      "dateCreation": "2026-07-26 10:03"
+    },
+    {
+      "id": "post-b25",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "Créez un univers sensoriel pour votre bébé",
+      "concept": "Présentation d'un kit d'éveil sensoriel pour les tout-petits, avec des idées pour créer un environnement stimulant pour leur développement",
+      "legende": "👶 Découvrez comment créer un univers sensoriel pour votre bébé ! 🌈 Notre kit d'éveil sensoriel est conçu pour stimuler les sens de votre petit et favoriser son développement. 📚 #eveil #sensoriel #bebe",
+      "cta": "Lien en bio pour découvrir notre kit",
+      "dateCreation": "2026-07-26 10:03"
     }
   ]
 }
