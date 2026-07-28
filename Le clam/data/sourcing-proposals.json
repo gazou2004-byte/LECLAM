@@ -3313,6 +3313,28 @@
         }
       ],
       "dateAjout": "2026-07-28 09:35"
+    },
+    {
+      "id": "src-p107",
+      "nom": "Lampe de Massage pour le Visage avec LED",
+      "description": "Lampe de massage pour le visage avec LED pour une peau plus saine et plus lumineuse",
+      "raisonVente": "Le produit est en tendance sur AliExpress et répond aux besoins de beauté et de bien-être des consommateurs",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+massage+pour+le+visage+avec+LED"
+        }
+      ],
+      "dateAjout": "2026-07-28 18:12"
     }
   ]
 }
