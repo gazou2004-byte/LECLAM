@@ -863,6 +863,36 @@
       "legende": "🎨👶 Créez un univers de découverte pour votre petit ! 🎨 Notre sélection de jouets d'éveil est conçue pour stimuler leur curiosité et leur créativité. 📚 Découvrez nos conseils pour créer un espace de jeux stimulant. 🤩 #eveil #jouets #enfants #creativite",
       "cta": "Lien en bio pour découvrir notre sélection de jouets",
       "dateCreation": "2026-07-28 10:38"
+    },
+    {
+      "id": "post-p28",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Débloquez le secret du bien-être",
+      "concept": "Présentation d'un accessoire de soin intime innovant pour un bien-être optimal, avec démonstration de son utilisation et de ses bienfaits",
+      "legende": "Découvrez notre sélection d'accessoires de bien-être intime pour une vie plus épanouie 🌸💆‍♀️! #bienetre #soinintime #plaisir",
+      "cta": "Lien en bio pour découvrir notre collection",
+      "dateCreation": "2026-07-29 10:42"
+    },
+    {
+      "id": "post-m28",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le gadget qui vous rend plus productif",
+      "concept": "Présentation d'un gadget high-tech pour améliorer la productivité quotidienne, avec démonstration de ses fonctionnalités",
+      "legende": "Boostez votre productivité avec nos gadgets malins 📈💻! #gadget #productivite #malin",
+      "cta": "Commenter vos gadgets préférésBelow",
+      "dateCreation": "2026-07-29 10:42"
+    },
+    {
+      "id": "post-b28",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "L'éveil sensoriel pour les tout-petits",
+      "concept": "Présentation d'un jouet d'éveil sensoriel pour les bébés, avec explication de ses avantages pour leur développement",
+      "legende": "Stimulez les sens de votre petit avec nos jouets d'éveil 🎀👶! #bebe #eveisensoriel #developpement",
+      "cta": "Partagez vos moments de découverte avec nous",
+      "dateCreation": "2026-07-29 10:42"
     }
   ]
 }
