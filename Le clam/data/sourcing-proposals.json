@@ -3335,6 +3335,28 @@
         }
       ],
       "dateAjout": "2026-07-28 18:12"
+    },
+    {
+      "id": "src-p109",
+      "nom": "Lampe de Lecture LED Réchargeable Portative avec Ventilateur Silencieux",
+      "description": "Lampe de lecture LED réchargeable portative avec ventilateur silencieux, idéale pour lire sans fatiguer les yeux",
+      "raisonVente": "Ce produit se vend bien en ce moment en raison de la tendance actuelle de lecture en plein air et de la recherche de produits portables et pratiques",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+led+portable"
+        }
+      ],
+      "dateAjout": "2026-07-29 20:11"
     }
   ]
 }
