@@ -3379,6 +3379,50 @@
         }
       ],
       "dateAjout": "2026-07-29 21:58"
+    },
+    {
+      "id": "src-p113",
+      "nom": "Station de travail ergonomique pour ordinateur portable",
+      "description": "Améliorez votre productivité et votre confort avec cette station de travail ergonomique pour ordinateur portable, idéale pour les travailleurs à domicile.",
+      "raisonVente": "Les données de DSers montrent que les produits liés à l'amélioration de l'espace de travail à domicile sont très tendance, notamment en raison de l'augmentation du travail à distance.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-p113.webp"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=station+de+travail+ergonomique+pour+ordinateur+portable"
+        }
+      ],
+      "dateAjout": "2026-07-30 11:05"
+    },
+    {
+      "id": "src-b104",
+      "nom": "Tapis d'éveil sensoriel pour bébé",
+      "description": "Stimulez les sens de votre bébé avec ce tapis d'éveil sensoriel, conçu pour favoriser le développement cognitif et moteur.",
+      "raisonVente": "Les données de Google Trends et de Vinted montrent que les produits pour bébés liés à l'éveil et au développement sont très recherchés, notamment les tapis d'éveil sensoriels.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b104.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=tapis+d%27%C3%A9veil+sensoriel+pour+b%C3%A9b%C3%A9"
+        }
+      ],
+      "dateAjout": "2026-07-30 11:05"
     }
   ]
 }
