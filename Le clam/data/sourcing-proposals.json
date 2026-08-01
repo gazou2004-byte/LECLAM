@@ -3423,6 +3423,28 @@
         }
       ],
       "dateAjout": "2026-07-30 11:05"
+    },
+    {
+      "id": "src-m80",
+      "nom": "Lampe de Bureau LED avec Ventilateur Silencieux",
+      "description": "Éclairez votre espace de travail avec cette lampe de bureau LED équipée d'un ventilateur silencieux pour un confort optimal.",
+      "raisonVente": "Les produits de bureau tels que les lampes de bureau avec ventilateur sont actuellement tendance, comme le montrent les tendances sur Google Trends et les produits phares sur AliExpress.",
+      "prixVente": 39.99,
+      "prixFournisseur": 20,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf246c1f9fbd34c9bb3f94d9d94b1f3a5X.jpg"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+bureau+led+avec+ventilateur+silencieux"
+        }
+      ],
+      "dateAjout": "2026-08-01 17:58"
     }
   ]
 }
