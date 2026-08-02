@@ -3445,6 +3445,28 @@
         }
       ],
       "dateAjout": "2026-08-01 17:58"
+    },
+    {
+      "id": "src-m81",
+      "nom": "Tapis de Yoga Écologique Premium",
+      "description": "Un tapis de yoga durable et écologique pour les amateurs de yoga",
+      "raisonVente": "Le yoga est de plus en plus populaire, et les tapis de yoga écologiques sont très demandés, comme le montre le site DSers",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=tapis+de+yoga+%C3%A9cologique"
+        }
+      ],
+      "dateAjout": "2026-08-02 10:39"
     }
   ]
 }
