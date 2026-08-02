@@ -3467,6 +3467,28 @@
         }
       ],
       "dateAjout": "2026-08-02 10:39"
+    },
+    {
+      "id": "src-p115",
+      "nom": "Station de travail ergonomique portable",
+      "description": "Améliorez votre productivité avec cette station de travail ergonomique portable, idéale pour les travailleurs à distance.",
+      "raisonVente": "Les données de marché montrent une forte demande pour les produits de travail à distance, notamment les stations de travail ergonomiques, en raison de la croissance du travail à distance.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=station+de+travail+ergonomique+portable"
+        }
+      ],
+      "dateAjout": "2026-08-02 14:27"
     }
   ]
 }
