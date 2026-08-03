@@ -1013,6 +1013,36 @@
       "legende": "Stimulez les sens de votre petit avec notre sélection de jouets d'éveil sensoriel 🎀👶 ! Découvrez comment faciliter son développement cognitif 🧠💡 #eveil #sensoriel #bebe",
       "cta": "Lien en bio pour découvrir notre sélection de jouets",
       "dateCreation": "2026-08-02 10:00"
+    },
+    {
+      "id": "post-p33",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Décompresser avec élégance",
+      "concept": "Présentation d'un accessoire de bien-être intime design et high-tech pour un moment de détente",
+      "legende": "Prenez soin de vous ! 🌸💆‍♀️ Découvrez notre sélection d'accessoires de bien-être intime pour un moment de détente en toute intimité 🛀💫 #bienetre #detente #soinintime",
+      "cta": "Lien en bio pour découvrir nos accessoires",
+      "dateCreation": "2026-08-03 11:29"
+    },
+    {
+      "id": "post-m33",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Le power bank portatif",
+      "concept": "Présentation d'un power bank compact et léger pour charger votre téléphone en déplacement",
+      "legende": "Plus de batterie vide ! 📈💻 Découvrez notre power bank portatif pour charger votre téléphone partout 📍💫 #gadget #powerbank #nomade",
+      "cta": "Commenter ❤️ si vous en avez besoin",
+      "dateCreation": "2026-08-03 11:29"
+    },
+    {
+      "id": "post-b33",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "L'éveil sensoriel pour les petits",
+      "concept": "Présentation d'un jouet d'éveil sensoriel pour stimuler la curiosité et le développement des tout-petits",
+      "legende": "Stimulez la curiosité de votre petit ! 🧮👶 Découvrez notre sélection de jouets d'éveil sensoriel pour les tout-petits 🎨👀 #eveilsensoriel #jouets #developpement",
+      "cta": "Lien en bio pour découvrir nos jouets",
+      "dateCreation": "2026-08-03 11:29"
     }
   ]
 }
