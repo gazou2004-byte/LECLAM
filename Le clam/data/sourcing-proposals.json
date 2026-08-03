@@ -3489,6 +3489,28 @@
         }
       ],
       "dateAjout": "2026-08-02 14:27"
+    },
+    {
+      "id": "src-p116",
+      "nom": "Station de Travail Ergonomique Portative",
+      "description": "Améliorez votre productivité avec cette station de travail ergonomique portative, idéale pour les travailleurs en déplacement ou les étudiants.",
+      "raisonVente": "La tendance actuelle du travail à distance et l'importance de l'ergonomie pour la santé expliquent pourquoi ce produit se vend bien en ce moment.",
+      "prixVente": 49.99,
+      "prixFournisseur": 25,
+      "marge": 50,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.dsers.com/webSite/integration/404.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=station+de+travail+ergonomique"
+        }
+      ],
+      "dateAjout": "2026-08-03 20:25"
     }
   ]
 }
