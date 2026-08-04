@@ -3511,6 +3511,28 @@
         }
       ],
       "dateAjout": "2026-08-03 20:25"
+    },
+    {
+      "id": "src-p118",
+      "nom": "Kit de Yoga Écologique Premium pour Débutants",
+      "description": "Découvrez le yoga avec ce kit écologique conçu pour les débutants, comprenant un tapis de yoga en matériaux recyclés et une série de vidéos guidées pour vous aider à démarrer votre pratique.",
+      "raisonVente": "Le yoga est de plus en plus populaire en France, et les consommateurs recherchent des produits écologiques et durables. Ce kit répond à ces attentes tout en offrant une approche accessible pour les nouveaux pratiquants.",
+      "prixVente": 49.9,
+      "prixFournisseur": 25,
+      "marge": 49.9,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://img.alicdn.com/imgextra/i3/O1CN01oSZaoy1rcfT5pA6JR_!!6000000005652-2-tps-498-120.png"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=yoga+kit+ecologique"
+        }
+      ],
+      "dateAjout": "2026-08-04 10:35"
     }
   ]
 }
