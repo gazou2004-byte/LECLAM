@@ -1043,6 +1043,36 @@
       "legende": "Stimulez la curiosité de votre petit ! 🧮👶 Découvrez notre sélection de jouets d'éveil sensoriel pour les tout-petits 🎨👀 #eveilsensoriel #jouets #developpement",
       "cta": "Lien en bio pour découvrir nos jouets",
       "dateCreation": "2026-08-03 11:29"
+    },
+    {
+      "id": "post-p34",
+      "univers": "plaisir",
+      "plateforme": "Les deux",
+      "titre": "Bien-être intime avec élégance",
+      "concept": "Présentation d'un accessoire de soin intime design et Made in France, pour un moment de détente en toute intimité",
+      "legende": "Découvrez notre sélection d'accessoires de bien-être intime pour un moment de plaisir personnalisé 🌙💆‍♀️🛍️ #bienetre #intime #madeinfrance #leclam",
+      "cta": "Lien en bio pour découvrir notre collection",
+      "dateCreation": "2026-08-04 10:42"
+    },
+    {
+      "id": "post-m34",
+      "univers": "malin",
+      "plateforme": "TikTok",
+      "titre": "Gadget high-tech pour les nomades",
+      "concept": "Présentation d'un gadget innovant pour charger les appareils en déplacement, avec démo de son utilisation pratique",
+      "legende": "Ne jamais manquer de batterie avec notre gadget révolutionnaire pour nomades 📈💻🔋 #gadget #high-tech #nomade #leclam",
+      "cta": "Commenter avec un emoji si vous aimez ce gadget",
+      "dateCreation": "2026-08-04 10:42"
+    },
+    {
+      "id": "post-b34",
+      "univers": "bebe",
+      "plateforme": "Instagram",
+      "titre": "Éveil sensoriel pour les tout-petits",
+      "concept": "Présentation d'un jouet d'éveil coloré et interactif, montrant comment il stimule la curiosité et le développement des enfants",
+      "legende": "Stimulez l'éveil sensoriel de votre petit avec nos jouets colorés et interactifs 🎨👶🌈 #eveil #sensoriel #jouets #leclam",
+      "cta": "Partagez vos moments préférés avec vos petits dans les commentaires",
+      "dateCreation": "2026-08-04 10:42"
     }
   ]
 }
