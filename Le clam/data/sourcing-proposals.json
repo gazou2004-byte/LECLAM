@@ -3577,6 +3577,28 @@
         }
       ],
       "dateAjout": "2026-08-05 20:25"
+    },
+    {
+      "id": "src-m85",
+      "nom": "Manette de jeu mobile portable",
+      "description": "Jouez à vos jeux mobiles préférés avec une expérience de jeu console grâce à cette manette de jeu mobile portable et légère.",
+      "raisonVente": "Les données de DSers montrent que les manettes de jeu mobile sont des produits tendance, et les tendances sur TikTok mettent en avant les accessoires de jeu mobile.",
+      "prixVente": 29.99,
+      "prixFournisseur": 15,
+      "marge": 50,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae01.alicdn.com/kf/Hf45b5b5b5b5b5b5b5b5b/Portable-Mobile-Game-Controller.jpg"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=manette+de+jeu+mobile+portable"
+        }
+      ],
+      "dateAjout": "2026-08-05 23:58"
     }
   ]
 }
