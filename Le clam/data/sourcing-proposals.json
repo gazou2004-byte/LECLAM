@@ -3533,6 +3533,50 @@
         }
       ],
       "dateAjout": "2026-08-04 10:35"
+    },
+    {
+      "id": "src-m83",
+      "nom": "Montre Connectée Fitness pour Enfant avec Joystick et Écran Tactile",
+      "description": "Une montre connectée fitness pour enfant avec joystick et écran tactile pour encourager l'activité physique et la créativité.",
+      "raisonVente": "Ce produit est viral sur TikTok en ce moment en raison de sa popularité parmi les enfants et les parents qui cherchent des produits innovants et amusants pour encourager l'activité physique.",
+      "prixVente": 79.99,
+      "prixFournisseur": 35,
+      "marge": 56.2,
+      "categorie": "malin",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4tJ7IDUv1qAeqZudnEzBFbERDjDugoS3If5Ey~tplv-tiktokx-dmt-logom:tos-useast5-i-0068-tx/owfGAfjguDQxvAGpA7AgGdfve4GuqHRIOY8JAV.image"
+      ],
+      "liens": [
+        {
+          "label": "DSers",
+          "url": "https://www.dsers.com/search/?q=montre+connectee+fitness+enfant+joystick+ecran+tactile"
+        }
+      ],
+      "dateAjout": "2026-08-05 20:25"
+    },
+    {
+      "id": "src-b106",
+      "nom": "Poussette Tout-Terrain pour Bébé avec Siège Réversible et Canne",
+      "description": "Une poussette tout-terrain pour bébé avec siège réversible et canne pour une promenade confortable et sécurisée.",
+      "raisonVente": "Ce produit est tendance en ce moment en raison de la popularité des poussettes tout-terrain et des produits de sécurité pour bébé sur les réseaux sociaux, notamment sur Vinted.",
+      "prixVente": 149.99,
+      "prixFournisseur": 80,
+      "marge": 46.7,
+      "categorie": "bebe",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "/img/sourcing/src-b106.webp"
+      ],
+      "liens": [
+        {
+          "label": "Vinted",
+          "url": "https://www.vinted.fr/catalog?search_text=poussette+tout-terrain+bebe+siege+reversible+canne"
+        }
+      ],
+      "dateAjout": "2026-08-05 20:25"
     }
   ]
 }
