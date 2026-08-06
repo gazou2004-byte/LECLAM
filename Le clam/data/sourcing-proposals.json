@@ -3599,6 +3599,28 @@
         }
       ],
       "dateAjout": "2026-08-05 23:58"
+    },
+    {
+      "id": "src-p120",
+      "nom": "Lampe de lecture LED réchargeable",
+      "description": "Lampe de lecture LED réchargeable pour une lecture confortable et économe en énergie",
+      "raisonVente": "Les lampes de lecture LED réchargeables sont tendance en ce moment en raison de leur praticité et de leur impact environnemental positif",
+      "prixVente": 25,
+      "prixFournisseur": 12,
+      "marge": 52,
+      "categorie": "plaisir",
+      "priorite": "A",
+      "statut": "pending",
+      "images": [
+        "https://ae-pic-a1.aliexpress-media.com/kf/Sa976459fb7724bf1bca6e153a425a8ebg.png"
+      ],
+      "liens": [
+        {
+          "label": "AliExpress",
+          "url": "https://fr.aliexpress.com/wholesale?SearchText=lampe+de+lecture+led+rechargeable"
+        }
+      ],
+      "dateAjout": "2026-08-06 03:15"
     }
   ]
 }
